@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@plugin '@tailwindcss/typography';
 
 @theme {
   /* 🎨 우리 서고의 메인 테마 컬러 정의 */

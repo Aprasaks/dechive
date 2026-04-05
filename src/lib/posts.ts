@@ -28,7 +28,9 @@ function parsePost(filename: string): Post | null {
   return {
     slug: data.slug ?? filename.replace(/\.(ko|en)\.md$/, ''),
     title: data.title ?? '',
-    date: data.date ? String(data.date) : '',
+    date: data.date instanceof Date
+      ? data.date.toISOString().split('T')[0]
+      : String(data.date ?? ''),
     category: data.category ?? '',
     tags: Array.isArray(data.tags) ? data.tags : [],
     summary: data.summary ?? '',

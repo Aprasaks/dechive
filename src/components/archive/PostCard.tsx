@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import type { Post } from '@/types/archive';
 
 interface PostCardProps {
@@ -9,9 +10,10 @@ interface PostCardProps {
 
 export default function PostCard({ post, highlighted, dimmed }: PostCardProps) {
   return (
-    <article
+    <Link
+      href={`/archive/${post.slug}`}
       className={[
-        'group flex flex-col rounded-2xl border overflow-hidden transition-all duration-300 cursor-pointer',
+        'group flex flex-col rounded-2xl border overflow-hidden transition-all duration-300',
         highlighted
           ? 'border-zinc-100 ring-2 ring-zinc-100'
           : 'border-zinc-800 hover:border-zinc-600 hover:shadow-md',
@@ -57,6 +59,6 @@ export default function PostCard({ post, highlighted, dimmed }: PostCardProps) {
           ))}
         </div>
       </div>
-    </article>
+    </Link>
   );
 }
