@@ -3,8 +3,7 @@
 import * as React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ThemeToggle } from '../theme-toggle';
-import { Menu, X } from 'lucide-react'; // 👈 아이콘만 추가해줘
+import { Menu, X } from 'lucide-react';
 
 const NAV_ITEMS = [
   { name: 'Archive', href: '/archive' },
@@ -17,7 +16,7 @@ export default function Header() {
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
-    <header className="sticky top-0 z-50 h-16 w-full bg-transparent pt-4 transition-all duration-300">
+    <header className="sticky top-0 z-50 h-16 w-full pt-4 transition-all duration-300">
       <div className="mx-auto flex max-w-7xl items-start justify-between px-6 sm:px-8">
         {/* 🏠 좌측: 로고 (32px 영역) */}
         <Link href="/" className="group flex h-8 items-center gap-3">
@@ -53,8 +52,6 @@ export default function Header() {
 
         {/* 🌓 우측: 기능 & 햄버거 버튼 (32px 영역) */}
         <div className="flex h-8 items-center gap-3">
-          <ThemeToggle />
-
           {/* 모바일 햄버거 버튼 */}
           <button
             className="hover:text-foreground text-zinc-500 transition-colors md:hidden"

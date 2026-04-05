@@ -6,7 +6,7 @@ export default function TopicContainer() {
       {[1, 2, 3].map((i) => (
         <div
           key={i}
-          className="group cursor-pointer rounded-3xl border border-zinc-100 bg-white/50 p-6 transition-all hover:border-zinc-300 hover:shadow-lg dark:border-zinc-800 dark:bg-zinc-900/50 dark:hover:border-zinc-700"
+          className="group cursor-pointer rounded-3xl border border-white/20 bg-white/60 p-6 backdrop-blur-md transition-all hover:border-white/40 hover:shadow-lg dark:border-white/10 dark:bg-zinc-900/50 dark:hover:border-white/20"
         >
           <div className="mb-2 text-xs font-semibold tracking-widest text-zinc-400 uppercase dark:text-zinc-600">
             Topic 0{i}
