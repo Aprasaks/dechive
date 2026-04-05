@@ -1,15 +1,23 @@
-import { ThemeToggle } from '@/components/theme-toggle';
+import HeroSection from '@/components/home/hero-section';
+import TopicContainer from '@/components/home/topic-container';
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
-      <h1 className="mb-8 text-4xl font-bold tracking-tighter italic">
-        Dechive_
-      </h1>
-      <ThemeToggle />
-      <p className="mt-4 text-zinc-500">
-        테마를 클릭해서 배경과 글자색이 바뀌는지 확인해 보세요!
-      </p>
+    <main className="mx-auto max-w-7xl px-6 sm:px-8">
+      <div className="grid grid-cols-1 items-center gap-12 py-12 md:h-[calc(100vh-64px)] md:grid-cols-12 md:py-0">
+        <section className="md:col-span-8">
+          <HeroSection />
+        </section>
+
+        <aside className="flex flex-col md:col-span-4">
+          <div className="mb-6 flex items-center justify-between border-b border-zinc-200 pb-4 dark:border-zinc-800">
+            <h2 className="text-xs font-bold tracking-widest text-zinc-500 uppercase">
+              Featured Topics
+            </h2>
+          </div>
+          <TopicContainer />
+        </aside>
+      </div>
     </main>
   );
 }
