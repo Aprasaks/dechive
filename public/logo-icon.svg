@@ -1,0 +1,21 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gold_grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#CBB382"/>
+      <stop offset="50%" stop-color="#DDBF7A"/>
+      <stop offset="100%" stop-color="#B19463"/>
+    </linearGradient>
+  </defs>
+  
+  <g stroke="url(#gold_grad)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M40 160 H160 V175 C160 180, 155 185, 150 185 H50 C45 185, 40 180, 40 175 V160 Z" />
+    <path d="M40 170 H160" stroke-width="3" opacity="0.5"/>
+    
+    <path d="M60 160 V40 C60 35, 65 30, 70 30 H110 C140 30, 170 55, 170 95 C170 135, 140 160, 110 160 H60 Z" />
+    
+    <path d="M85 160 V35" stroke-width="4"/>
+    <path d="M105 160 V35" stroke-width="4"/>
+    
+    <path d="M110 55 C125 55, 145 65, 145 95 C145 125, 125 135, 110 135" stroke-width="4"/>
+  </g>
+</svg>
