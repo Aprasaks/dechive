@@ -8,13 +8,13 @@ import PostCard from './PostCard';
 interface PostGridProps {
   posts: Post[];
   categories: Category[];
-  highlightedIds: string[];
+  highlightedSlugs: string[];
 }
 
 export default function PostGrid({
   posts,
   categories,
-  highlightedIds,
+  highlightedSlugs,
 }: PostGridProps) {
   const [selectedCategory, setSelectedCategory] = useState('all');
 
@@ -23,7 +23,7 @@ export default function PostGrid({
       ? posts
       : posts.filter((p) => p.category === selectedCategory);
 
-  const hasHighlight = highlightedIds.length > 0;
+  const hasHighlight = highlightedSlugs.length > 0;
 
   return (
     <section className="flex flex-col gap-6">
@@ -35,11 +35,11 @@ export default function PostGrid({
 
       <div className="grid grid-cols-3 gap-4">
         {filtered.map((post) => {
-          const highlighted = hasHighlight && highlightedIds.includes(post.id);
-          const dimmed = hasHighlight && !highlightedIds.includes(post.id);
+          const highlighted = hasHighlight && highlightedSlugs.includes(post.slug);
+          const dimmed = hasHighlight && !highlightedSlugs.includes(post.slug);
           return (
             <PostCard
-              key={post.id}
+              key={post.slug}
               post={post}
               highlighted={highlighted}
               dimmed={dimmed}

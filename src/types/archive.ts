@@ -4,14 +4,23 @@ export interface Category {
   count: number;
 }
 
+export type PostStatus = 'draft' | 'published';
+export type PostLang = 'ko' | 'en';
+
 export interface Post {
-  id: string;
   slug: string;
   title: string;
-  summary: string;
+  date: string;           // ISO 8601 (e.g. "2026-04-05"), 정렬용
   category: string;
   tags: string[];
-  date: string; // ISO 8601 (e.g. "2026-03-15")
+  summary: string;        // 카드 표시용 짧은 요약
+  description: string;    // SEO / AdSense용 (150자 내외)
+  thumbnail: string;      // 파일명 (e.g. "next-app-router.webp")
+  status: PostStatus;
+  lang: PostLang;
+  series?: string;        // 연재글 묶음 이름 (없으면 빈 문자열)
+  readingTime: number;    // 파싱 시 자동 계산 (분 단위)
+  content: string;        // 마크다운 본문
 }
 
 export interface ChatMessage {
