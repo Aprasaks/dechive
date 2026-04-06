@@ -110,7 +110,7 @@ export default function ChatBot({ onHighlight, lang }: ChatBotProps) {
             <div key={msg.id} className="flex flex-col gap-2">
               <div
                 className={[
-                  'max-w-[90%] rounded-2xl px-3 py-2 text-xs leading-relaxed',
+                  'max-w-[90%] rounded-2xl px-3 py-2 text-sm leading-relaxed',
                   msg.role === 'user'
                     ? 'self-end bg-white/20 text-white'
                     : 'self-start bg-white/10 text-zinc-300',
@@ -136,7 +136,7 @@ export default function ChatBot({ onHighlight, lang }: ChatBotProps) {
                       ),
                     );
                   }}
-                  className="self-start ml-1 rounded-xl bg-white/20 px-3 py-1.5 text-xs font-medium text-white hover:bg-white/30 transition-colors cursor-pointer"
+                  className="self-start ml-1 rounded-xl bg-white/20 px-3 py-1.5 text-sm font-medium text-white hover:bg-white/30 transition-colors cursor-pointer"
                 >
                   포스트 요청하기
                 </button>
@@ -145,7 +145,7 @@ export default function ChatBot({ onHighlight, lang }: ChatBotProps) {
           );
         })}
         {loading && (
-          <div className="self-start rounded-2xl bg-white/10 px-3 py-2 text-xs text-zinc-400">
+          <div className="self-start rounded-2xl bg-white/10 px-3 py-2 text-sm text-zinc-400">
             검색 중...
           </div>
         )}
@@ -163,12 +163,12 @@ export default function ChatBot({ onHighlight, lang }: ChatBotProps) {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="키워드 입력..."
-            className="flex-1 rounded-xl bg-white/10 px-3 py-2 text-xs text-zinc-100 placeholder-zinc-500 outline-none"
+            className="flex-1 rounded-xl bg-white/10 px-3 py-2 text-sm text-zinc-100 placeholder-zinc-500 outline-none"
           />
           <button
             type="submit"
             disabled={loading || !input.trim()}
-            className="rounded-xl bg-white/20 px-3 py-2 text-xs font-medium text-white transition-opacity disabled:opacity-40 cursor-pointer hover:bg-white/30"
+            className="rounded-xl bg-white/20 px-3 py-2 text-sm font-medium text-white transition-opacity disabled:opacity-40 cursor-pointer hover:bg-white/30"
           >
             전송
           </button>
