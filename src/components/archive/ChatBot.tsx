@@ -28,7 +28,7 @@ export default function ChatBot({ onHighlight, lang }: ChatBotProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([
     createMessage(
       'assistant',
-      '안녕하세요! 찾고 싶은 글의 주제나 키워드를 입력하면 관련 포스트를 찾아드릴게요.',
+      '...왔군요. 무한서고에 오신 걸 환영해요. 찾는 기록이 있으면 말해줘요.',
     ),
   ]);
   const [input, setInput] = useState('');
@@ -37,7 +37,7 @@ export default function ChatBot({ onHighlight, lang }: ChatBotProps) {
 
   // 언어 바뀌면 대화 초기화
   useEffect(() => {
-    setMessages([createMessage('assistant', '안녕하세요! 찾고 싶은 글의 주제나 키워드를 입력하면 관련 포스트를 찾아드릴게요.')]);
+    setMessages([createMessage('assistant', '...왔군요. 무한서고에 오신 걸 환영해요. 찾는 기록이 있으면 말해줘요.')]);
     setLastRelatedSlugs([]);
     onHighlight([]);
   }, [lang]);
@@ -64,10 +64,14 @@ export default function ChatBot({ onHighlight, lang }: ChatBotProps) {
 
     setLoading(true);
 
+    const history = messages
+      .filter((m) => !m.content.startsWith('__REQUEST__:'))
+      .map((m) => ({ role: m.role, content: m.content }));
+
     const res = await fetch('/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ query: trimmed, lang }),
+      body: JSON.stringify({ query: trimmed, lang, history }),
     });
     const data = await res.json() as { answer?: string | null; relatedSlugs?: string[]; allSlugs?: string[]; notFound?: boolean; error?: string };
 

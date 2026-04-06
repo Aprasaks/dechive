@@ -1,14 +1,25 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { CohereClient } from 'cohere-ai';
-import Anthropic from '@anthropic-ai/sdk';
+import { GoogleGenerativeAI, SchemaType, type FunctionCall } from '@google/generative-ai';
 import fs from 'fs';
 import path from 'path';
 import type { Chunk } from '@/types/embeddings';
 
 const cohere = new CohereClient({ token: process.env.COHERE_API_KEY });
-const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GENERATIVE_AI_API_KEY ?? '');
 
 const EMBEDDINGS_FILE = path.join(process.cwd(), 'data', 'embeddings.json');
+
+const HAEGORI_SYSTEM = `너는 해고리야. 무한서고의 유일한 사서.
+살아있는 건지 죽은 건지 모를 해골 마스코트지만, 이 서고의 모든 것을 알고 있어.
+방문자들과 자연스럽게 대화하고, 서고 안 기록도 찾아줘.
+
+말투 규칙:
+- 짧고 건조하지만 은근히 다정한 구어체
+- 딱딱한 존댓말 NO, 자연스러운 반말/존댓말 섞기
+- 마크다운 금지, 이모지 가끔 허용
+- 서고 기록 찾았을 땐 "서고에서 찾았어요" 류로 자연스럽게 언급
+- 서고에 없는 내용은 솔직하게 "서고엔 없는 내용이지만" 하고 일반 지식으로 답변`;
 
 function cosineSimilarity(a: number[], b: number[]): number {
   const dot = a.reduce((sum, val, i) => sum + val * b[i], 0);
@@ -17,100 +28,127 @@ function cosineSimilarity(a: number[], b: number[]): number {
   return dot / (normA * normB);
 }
 
+async function searchBlog(query: string, lang: string): Promise<{ context: string; slugs: string[]; found: boolean }> {
+  if (!fs.existsSync(EMBEDDINGS_FILE)) {
+    return { context: '', slugs: [], found: false };
+  }
+
+  const chunks: Chunk[] = JSON.parse(fs.readFileSync(EMBEDDINGS_FILE, 'utf-8'));
+  const filtered = chunks.filter((c) => c.lang === lang);
+
+  const res = await cohere.embed({
+    texts: [query],
+    model: 'embed-multilingual-v3.0',
+    inputType: 'search_query',
+    embeddingTypes: ['float'],
+  });
+
+  const queryEmbedding = (res.embeddings as { float?: number[][] }).float?.[0];
+  if (!queryEmbedding) return { context: '', slugs: [], found: false };
+
+  const scored = filtered
+    .map((chunk) => ({ chunk, score: cosineSimilarity(queryEmbedding, chunk.embedding) }))
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 3);
+
+  const topScore = scored[0]?.score ?? 0;
+  if (topScore < 0.5) return { context: '', slugs: [], found: false };
+
+  const context = scored
+    .map((s) => `[${s.chunk.title} - ${s.chunk.section}]\n${s.chunk.content}`)
+    .join('\n\n---\n\n');
+
+  const slugs = [...new Set(scored.map((s) => s.chunk.slug))];
+  return { context, slugs, found: true };
+}
+
+interface HistoryMessage {
+  role: 'user' | 'assistant';
+  content: string;
+}
+
 export async function POST(req: NextRequest) {
   try {
-    const { query, lang = 'ko' } = await req.json() as { query: string; lang?: string };
+    const { query, lang = 'ko', history = [] } = await req.json() as {
+      query: string;
+      lang?: string;
+      history?: HistoryMessage[];
+    };
 
     if (!query?.trim()) {
       return NextResponse.json({ error: '질문을 입력해주세요.' }, { status: 400 });
     }
 
-    // 임베딩 파일 로드
-    if (!fs.existsSync(EMBEDDINGS_FILE)) {
-      return NextResponse.json({ error: '임베딩 데이터가 없습니다.' }, { status: 500 });
-    }
-    const chunks: Chunk[] = JSON.parse(fs.readFileSync(EMBEDDINGS_FILE, 'utf-8'));
-    const filtered = chunks.filter((c) => c.lang === lang);
-
-    // 질문 임베딩
-    const res = await cohere.embed({
-      texts: [query],
-      model: 'embed-multilingual-v3.0',
-      inputType: 'search_query',
-      embeddingTypes: ['float'],
-    });
-    const queryEmbedding = (res.embeddings as { float?: number[][] }).float?.[0];
-    if (!queryEmbedding) throw new Error('질문 임베딩 실패');
-
-    // 코사인 유사도로 top-3 청크 추출
-    const scored = filtered
-      .map((chunk) => ({ chunk, score: cosineSimilarity(queryEmbedding, chunk.embedding) }))
-      .sort((a, b) => b.score - a.score)
-      .slice(0, 3);
-
-    const topScore = scored[0]?.score ?? 0;
-
-    // 유사도가 낮으면 관련 포스트 없음 (인사말 등 일반 대화 제외)
-    const greetings = ['안녕', '하이', 'hi', 'hello', '반가', 'ㅎㅎ', 'ㅋㅋ'];
-    const isGreeting = greetings.some((g) => query.toLowerCase().includes(g));
-
-    if (topScore < 0.5 && !isGreeting) {
-      return NextResponse.json({ answer: null, relatedSlugs: [], notFound: true });
-    }
-    if (isGreeting) {
-      return NextResponse.json({ answer: '안녕하세요! 블로그 내용에 대해 궁금한 게 있으면 질문해주세요 😊', relatedSlugs: [], notFound: false });
-    }
-
-    const context = scored
-      .map((s) => `[${s.chunk.title} - ${s.chunk.section}]\n${s.chunk.content}`)
-      .join('\n\n---\n\n');
-
-    const relatedSlugs = [...new Set(scored.map((s) => s.chunk.slug))];
-
-    // 출처 요청 여부 감지
-    const sourceKeywords = ['어디', '출처', '포스트', '어떤 글', '몇 편'];
-    const wantsSource = sourceKeywords.some((k) => query.includes(k));
-
-    // Claude 답변 생성
-    const message = await anthropic.messages.create({
-      model: 'claude-haiku-4-5-20251001',
-      max_tokens: 200,
-      messages: [
+    const model = genAI.getGenerativeModel({
+      model: 'gemini-2.0-flash',
+      systemInstruction: HAEGORI_SYSTEM,
+      tools: [
         {
-          role: 'user',
-          content: `너는 Dechive 블로그 지식 검색 도우미야.
-아래 내용만 참고해서 질문에 답하고, 반드시 JSON으로만 응답해.
-
-JSON 형식:
-{"answer": "답변", "showSource": true/false}
-
-규칙:
-- answer: 1~2문장, 마크다운 금지, 자연스러운 구어체
-- showSource: 사용자가 출처/포스트/링크/어디서 읽는지 등을 묻고 있으면 true, 아니면 false
-
-[참고 내용]
-${context}
-
-[질문]
-${query}`,
+          functionDeclarations: [
+            {
+              name: 'search_blog',
+              description: '블로그 서고에서 관련 포스트를 검색합니다. 사용자가 블로그 글 내용, 특정 기술/주제에 대해 묻거나 포스트를 찾을 때 사용하세요.',
+              parameters: {
+                type: SchemaType.OBJECT,
+                properties: {
+                  query: {
+                    type: SchemaType.STRING,
+                    description: '검색할 키워드나 질문',
+                  },
+                },
+                required: ['query'],
+              },
+            },
+          ],
         },
       ],
     });
 
-    const raw = message.content[0].type === 'text' ? message.content[0].text : '{}';
-    // 코드블록 제거 후 파싱
-    const cleaned = raw.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
-    let answer = '';
-    let showSource = false;
-    try {
-      const parsed = JSON.parse(cleaned) as { answer?: string; showSource?: boolean };
-      answer = parsed.answer ?? '';
-      showSource = parsed.showSource ?? false;
-    } catch {
-      answer = cleaned;
+    const chatHistory = history.map((m) => ({
+      role: m.role === 'assistant' ? 'model' : 'user' as const,
+      parts: [{ text: m.content }],
+    }));
+
+    const chat = model.startChat({ history: chatHistory });
+
+    // 1차 응답 (function call 판단)
+    const firstResponse = await chat.sendMessage(query);
+    const firstCandidate = firstResponse.response.candidates?.[0];
+    const parts = firstCandidate?.content?.parts ?? [];
+
+    const functionCallPart = parts.find((p) => p.functionCall) as { functionCall: FunctionCall } | undefined;
+
+    if (functionCallPart) {
+      // 서고 검색 실행
+      const searchQuery = (functionCallPart.functionCall.args as { query: string }).query;
+      const { context, slugs, found } = await searchBlog(searchQuery, lang);
+
+      const functionResult = found
+        ? context
+        : '서고에 관련 기록이 없습니다.';
+
+      // 검색 결과로 최종 답변
+      const secondResponse = await chat.sendMessage([
+        {
+          functionResponse: {
+            name: 'search_blog',
+            response: { result: functionResult },
+          },
+        },
+      ]);
+
+      const answer = secondResponse.response.text();
+      return NextResponse.json({
+        answer,
+        relatedSlugs: slugs,
+        notFound: false,
+      });
     }
 
-    return NextResponse.json({ answer, relatedSlugs: showSource ? relatedSlugs : [], allSlugs: relatedSlugs, notFound: false });
+    // 일반 대화 (function call 없음)
+    const answer = parts.find((p) => p.text)?.text ?? '...';
+    return NextResponse.json({ answer, relatedSlugs: [], notFound: false });
+
   } catch (err) {
     console.error(err);
     return NextResponse.json({ error: '서버 오류가 발생했습니다.' }, { status: 500 });
