@@ -22,8 +22,6 @@ export default function HeroSection() {
             becomes permanent.
           </span>
         </h1>
-
-
       </div>
     </div>
   );

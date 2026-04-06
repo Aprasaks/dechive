@@ -9,10 +9,7 @@ export default function Home() {
           <HeroSection />
         </section>
 
-        <aside className="flex flex-col gap-4 md:col-span-5">
-          <h2 className="text-xs font-bold tracking-widest text-zinc-500 uppercase border-b border-zinc-800 pb-4">
-            Featured Topics
-          </h2>
+        <aside className="md:col-span-5 h-[420px]">
           <TopicContainer />
         </aside>
       </div>

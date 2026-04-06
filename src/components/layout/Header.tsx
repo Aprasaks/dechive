@@ -17,8 +17,8 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 h-16 w-full pt-4 transition-all duration-300">
-      <div className="mx-auto flex max-w-7xl items-start justify-between px-6 sm:px-8">
-        {/* 🏠 좌측: 로고 (32px 영역) */}
+      <div className="mx-auto relative flex max-w-7xl items-center justify-between px-6 sm:px-8">
+        {/* 🏠 좌측: 로고 */}
         <Link href="/" className="group flex h-8 items-center gap-3">
           <div className="relative h-8 w-8 transition-transform group-hover:scale-105">
             <Image
@@ -34,8 +34,8 @@ export default function Header() {
           </span>
         </Link>
 
-        {/* 📚 데스크톱 메뉴 (32px 영역) */}
-        <nav className="hidden h-8 items-center md:flex">
+        {/* 📚 데스크톱 메뉴 — 절대 중앙 배치 */}
+        <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center md:flex">
           <ul className="flex items-center gap-10">
             {NAV_ITEMS.map((item) => (
               <li key={item.name}>
@@ -50,7 +50,7 @@ export default function Header() {
           </ul>
         </nav>
 
-        {/* 🌓 우측: 기능 & 햄버거 버튼 (32px 영역) */}
+        {/* 🌓 우측: 햄버거 버튼 */}
         <div className="flex h-8 items-center gap-3">
           {/* 모바일 햄버거 버튼 */}
           <button
