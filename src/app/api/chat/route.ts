@@ -131,7 +131,11 @@ export async function POST(req: NextRequest) {
       ],
     });
 
-    const chatHistory = history.map((m) => ({
+    // Gemini는 히스토리 첫 항목이 반드시 user여야 함
+    const trimmed = [...history];
+    while (trimmed.length > 0 && trimmed[0].role !== 'user') trimmed.shift();
+
+    const chatHistory = trimmed.map((m) => ({
       role: m.role === 'assistant' ? 'model' : 'user' as const,
       parts: [{ text: m.content }],
     }));
