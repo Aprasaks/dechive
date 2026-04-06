@@ -37,7 +37,7 @@ export default function ArchiveClient({
       </div>
 
       <div className="col-span-4">
-        <ChatBot onHighlight={setHighlightedSlugs} />
+        <ChatBot onHighlight={setHighlightedSlugs} lang={lang} />
       </div>
     </div>
   );

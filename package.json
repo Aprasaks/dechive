@@ -7,7 +7,8 @@
     "build": "tsx scripts/sync-images.ts && next build",
     "start": "next start",
     "lint": "eslint",
-    "translate": "tsx scripts/translate.ts"
+    "translate": "tsx scripts/translate.ts",
+    "embeddings": "tsx scripts/generate-embeddings.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.82.0",
@@ -15,6 +16,7 @@
     "@tailwindcss/typography": "^0.5.19",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "cohere-ai": "^8.0.0",
     "dotenv": "^17.4.0",
     "gray-matter": "^4.0.3",
     "lucide-react": "^1.7.0",
