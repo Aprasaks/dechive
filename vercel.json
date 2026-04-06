@@ -1,3 +1,3 @@
 {
-  "buildCommand": "echo \"$GIT_SUBMODULE_DEPLOY_KEY\" | base64 -d > /tmp/deploy_key && chmod 600 /tmp/deploy_key && git config --global core.sshCommand 'ssh -i /tmp/deploy_key -o StrictHostKeyChecking=no' && git submodule update --init --recursive && npm run build"
+  "buildCommand": "git config --global url.\"https://${GITHUB_TOKEN}@github.com/\".insteadOf \"https://github.com/\" && git submodule update --init --recursive && npm run build"
 }
