@@ -64,9 +64,9 @@ export default function ChatBot({ onHighlight }: ChatBotProps) {
   };
 
   return (
-    <aside className="flex h-full flex-col rounded-2xl border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900">
+    <aside className="flex h-full flex-col rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md">
       {/* Header */}
-      <div className="border-b border-zinc-200 px-4 py-3 dark:border-zinc-800">
+      <div className="border-b border-white/10 px-4 py-3">
         <p className="text-xs font-semibold tracking-widest text-zinc-500 uppercase">
           Archive Search
         </p>
@@ -80,15 +80,15 @@ export default function ChatBot({ onHighlight }: ChatBotProps) {
             className={[
               'max-w-[90%] rounded-2xl px-3 py-2 text-xs leading-relaxed',
               msg.role === 'user'
-                ? 'self-end bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900'
-                : 'self-start bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300',
+                ? 'self-end bg-white/20 text-white'
+                : 'self-start bg-white/10 text-zinc-300',
             ].join(' ')}
           >
             {msg.content}
           </div>
         ))}
         {loading && (
-          <div className="self-start rounded-2xl bg-zinc-100 px-3 py-2 text-xs text-zinc-400 dark:bg-zinc-800">
+          <div className="self-start rounded-2xl bg-white/10 px-3 py-2 text-xs text-zinc-400">
             검색 중...
           </div>
         )}
@@ -98,7 +98,7 @@ export default function ChatBot({ onHighlight }: ChatBotProps) {
       {/* Input */}
       <form
         onSubmit={handleSubmit}
-        className="border-t border-zinc-200 p-3 dark:border-zinc-800"
+        className="border-t border-white/10 p-3"
       >
         <div className="flex items-center gap-2">
           <input
@@ -106,12 +106,12 @@ export default function ChatBot({ onHighlight }: ChatBotProps) {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="키워드 입력..."
-            className="flex-1 rounded-xl bg-zinc-100 px-3 py-2 text-xs text-zinc-900 placeholder-zinc-400 outline-none dark:bg-zinc-800 dark:text-zinc-100"
+            className="flex-1 rounded-xl bg-white/10 px-3 py-2 text-xs text-zinc-100 placeholder-zinc-500 outline-none"
           />
           <button
             type="submit"
             disabled={loading || !input.trim()}
-            className="rounded-xl bg-zinc-900 px-3 py-2 text-xs font-medium text-white transition-opacity disabled:opacity-40 dark:bg-zinc-100 dark:text-zinc-900 cursor-pointer"
+            className="rounded-xl bg-white/20 px-3 py-2 text-xs font-medium text-white transition-opacity disabled:opacity-40 cursor-pointer hover:bg-white/30"
           >
             전송
           </button>

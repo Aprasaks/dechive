@@ -6,7 +6,7 @@ export default function ArchivePage() {
   const categories = getCategories('ko');
 
   return (
-    <main className="h-[calc(100vh-64px)] overflow-hidden">
+    <main className="flex-1 min-h-0 overflow-hidden">
       <ArchiveClient posts={posts} categories={categories} />
     </main>
   );

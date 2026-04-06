@@ -14,7 +14,7 @@ export default function ArchiveClient({ posts, categories }: ArchiveClientProps)
   const [highlightedSlugs, setHighlightedSlugs] = useState<string[]>([]);
 
   return (
-    <div className="grid h-full grid-cols-10 gap-4 px-6 py-6">
+    <div className="grid h-full grid-cols-10 gap-4 px-6 py-6 max-w-7xl mx-auto w-full">
       <div className="col-span-6 overflow-y-auto pr-2">
         <PostGrid
           posts={posts}
