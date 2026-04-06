@@ -3,9 +3,11 @@ import type { Metadata } from 'next';
 import { getAllPosts, getPostBySlug } from '@/lib/posts';
 import PostHeader from '@/components/archive/PostHeader';
 import PostContent from '@/components/archive/PostContent';
+import type { PostLang } from '@/types/archive';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<{ lang?: string }>;
 }
 
 export async function generateStaticParams() {
@@ -13,9 +15,10 @@ export async function generateStaticParams() {
   return posts.map((post) => ({ slug: post.slug }));
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({ params, searchParams }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPostBySlug(slug, 'ko');
+  const { lang } = await searchParams;
+  const post = getPostBySlug(slug, (lang as PostLang) ?? 'ko');
   if (!post) return {};
 
   return {
@@ -29,9 +32,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default async function PostPage({ params }: PageProps) {
+export default async function PostPage({ params, searchParams }: PageProps) {
   const { slug } = await params;
-  const post = getPostBySlug(slug, 'ko');
+  const { lang } = await searchParams;
+  const post = getPostBySlug(slug, (lang as PostLang) ?? 'ko');
 
   if (!post) notFound();
 

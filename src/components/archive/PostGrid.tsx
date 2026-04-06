@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import type { Post, Category } from '@/types/archive';
+import type { Post, Category, PostLang } from '@/types/archive';
 import CategoryFilter from './CategoryFilter';
 import PostCard from './PostCard';
 
@@ -9,12 +9,16 @@ interface PostGridProps {
   posts: Post[];
   categories: Category[];
   highlightedSlugs: string[];
+  lang: PostLang;
+  onLangChange: (lang: PostLang) => void;
 }
 
 export default function PostGrid({
   posts,
   categories,
   highlightedSlugs,
+  lang,
+  onLangChange,
 }: PostGridProps) {
   const [selectedCategory, setSelectedCategory] = useState('all');
 
@@ -31,6 +35,8 @@ export default function PostGrid({
         categories={categories}
         selected={selectedCategory}
         onChange={setSelectedCategory}
+        lang={lang}
+        onLangChange={onLangChange}
       />
 
       <div className="grid grid-cols-3 gap-4">

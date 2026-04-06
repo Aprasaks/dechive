@@ -11,7 +11,7 @@ interface PostCardProps {
 export default function PostCard({ post, highlighted, dimmed }: PostCardProps) {
   return (
     <Link
-      href={`/archive/${post.slug}`}
+      href={`/archive/${post.slug}?lang=${post.lang}`}
       className={[
         'group flex flex-col rounded-2xl border overflow-hidden transition-all duration-300',
         highlighted
