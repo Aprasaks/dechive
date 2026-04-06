@@ -1,14 +1,6 @@
 'use client';
 
 import type { Category, PostLang } from '@/types/archive';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import { Globe } from 'lucide-react';
 
 interface CategoryFilterProps {
   categories: Category[];
@@ -45,19 +37,31 @@ export default function CategoryFilter({
         ))}
       </div>
 
-      <Select value={lang} onValueChange={(v) => onLangChange(v as PostLang)}>
-        <SelectTrigger
-          size="sm"
-          className="gap-1.5 border-zinc-200 text-zinc-500 dark:border-zinc-700"
+      <div className="flex items-center rounded-full border border-zinc-300 dark:border-zinc-600 overflow-hidden text-sm font-medium">
+        <button
+          onClick={() => onLangChange('ko')}
+          className={[
+            'px-3 py-1.5 transition-colors cursor-pointer',
+            lang === 'ko'
+              ? 'bg-zinc-900 text-white dark:bg-white dark:text-zinc-900'
+              : 'text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300',
+          ].join(' ')}
         >
-          <Globe className="size-3.5" />
-          <SelectValue />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="ko">한국어</SelectItem>
-          <SelectItem value="en">English</SelectItem>
-        </SelectContent>
-      </Select>
+          한국어
+        </button>
+        <span className="text-zinc-300 dark:text-zinc-600 select-none">/</span>
+        <button
+          onClick={() => onLangChange('en')}
+          className={[
+            'px-3 py-1.5 transition-colors cursor-pointer',
+            lang === 'en'
+              ? 'bg-zinc-900 text-white dark:bg-white dark:text-zinc-900'
+              : 'text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300',
+          ].join(' ')}
+        >
+          English
+        </button>
+      </div>
     </nav>
   );
 }

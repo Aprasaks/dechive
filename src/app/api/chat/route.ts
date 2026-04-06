@@ -8,6 +8,29 @@ import type { Chunk } from '@/types/embeddings';
 const cohere = new CohereClient({ token: process.env.COHERE_API_KEY });
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GENERATIVE_AI_API_KEY ?? '');
 
+async function logToDiscord(ip: string, userMessage: string, assistantAnswer: string) {
+  const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
+  if (!webhookUrl) return;
+  await fetch(webhookUrl, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      embeds: [
+        {
+          title: '💬 해고리 채팅 로그',
+          color: 0x7c3aed,
+          fields: [
+            { name: '🌐 IP', value: ip, inline: true },
+            { name: '👤 방문자', value: userMessage, inline: false },
+            { name: '📚 해고리', value: assistantAnswer, inline: false },
+          ],
+          timestamp: new Date().toISOString(),
+        },
+      ],
+    }),
+  }).catch(() => {}); // 로깅 실패가 챗봇을 막으면 안 됨
+}
+
 const EMBEDDINGS_FILE = path.join(process.cwd(), 'data', 'embeddings.json');
 
 const HAEGORI_SYSTEM = `너는 해고리야. 무한서고의 유일한 사서.
@@ -69,6 +92,10 @@ interface HistoryMessage {
 
 export async function POST(req: NextRequest) {
   try {
+    const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
+      ?? req.headers.get('x-real-ip')
+      ?? 'unknown';
+
     const { query, lang = 'ko', history = [] } = await req.json() as {
       query: string;
       lang?: string;
@@ -138,6 +165,7 @@ export async function POST(req: NextRequest) {
       ]);
 
       const answer = secondResponse.response.text();
+      void logToDiscord(ip, query, answer);
       return NextResponse.json({
         answer,
         relatedSlugs: slugs,
@@ -147,6 +175,7 @@ export async function POST(req: NextRequest) {
 
     // 일반 대화 (function call 없음)
     const answer = parts.find((p) => p.text)?.text ?? '...';
+    void logToDiscord(ip, query, answer);
     return NextResponse.json({ answer, relatedSlugs: [], notFound: false });
 
   } catch (err) {

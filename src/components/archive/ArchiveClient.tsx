@@ -36,7 +36,7 @@ export default function ArchiveClient({
         />
       </div>
 
-      <div className="col-span-4">
+      <div className="col-span-4 sticky top-6 h-[calc(100vh-3rem)]">
         <ChatBot onHighlight={setHighlightedSlugs} lang={lang} />
       </div>
     </div>

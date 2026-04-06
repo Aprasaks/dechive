@@ -24,12 +24,24 @@ function createMessage(
   };
 }
 
+const GREETING: Record<string, string> = {
+  ko: '어서오세요~ 원하시는 정보가 있으신가요?',
+  en: 'Welcome~ Is there anything you\'re looking for?',
+};
+
+const PLACEHOLDER: Record<string, string> = {
+  ko: '키워드 입력...',
+  en: 'Enter keyword...',
+};
+
+const SEND_LABEL: Record<string, string> = {
+  ko: '전송',
+  en: 'Send',
+};
+
 export default function ChatBot({ onHighlight, lang }: ChatBotProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([
-    createMessage(
-      'assistant',
-      '...왔군요. 무한서고에 오신 걸 환영해요. 찾는 기록이 있으면 말해줘요.',
-    ),
+    createMessage('assistant', GREETING[lang] ?? GREETING.ko),
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
@@ -37,7 +49,7 @@ export default function ChatBot({ onHighlight, lang }: ChatBotProps) {
 
   // 언어 바뀌면 대화 초기화
   useEffect(() => {
-    setMessages([createMessage('assistant', '...왔군요. 무한서고에 오신 걸 환영해요. 찾는 기록이 있으면 말해줘요.')]);
+    setMessages([createMessage('assistant', GREETING[lang] ?? GREETING.ko)]);
     setLastRelatedSlugs([]);
     onHighlight([]);
   }, [lang]);
@@ -162,7 +174,7 @@ export default function ChatBot({ onHighlight, lang }: ChatBotProps) {
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="키워드 입력..."
+            placeholder={PLACEHOLDER[lang] ?? PLACEHOLDER.ko}
             className="flex-1 rounded-xl bg-white/10 px-3 py-2 text-sm text-zinc-100 placeholder-zinc-500 outline-none"
           />
           <button
@@ -170,7 +182,7 @@ export default function ChatBot({ onHighlight, lang }: ChatBotProps) {
             disabled={loading || !input.trim()}
             className="rounded-xl bg-white/20 px-3 py-2 text-sm font-medium text-white transition-opacity disabled:opacity-40 cursor-pointer hover:bg-white/30"
           >
-            전송
+            {SEND_LABEL[lang] ?? SEND_LABEL.ko}
           </button>
         </div>
       </form>
