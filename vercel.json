@@ -1,0 +1,3 @@
+{
+  "buildCommand": "git config --global core.sshCommand 'ssh -i /tmp/deploy_key -o StrictHostKeyChecking=no' && echo \"$GIT_SUBMODULE_DEPLOY_KEY\" > /tmp/deploy_key && chmod 600 /tmp/deploy_key && git submodule update --init --recursive && npm run build"
+}
