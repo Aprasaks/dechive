@@ -47,11 +47,10 @@ export default function ChatBot({ onHighlight, lang }: ChatBotProps) {
   const [loading, setLoading] = useState(false);
   const [lastRelatedSlugs, setLastRelatedSlugs] = useState<string[]>([]);
 
-  // 언어 바뀌면 대화 초기화
+  // 언어 바뀌면 대화 초기화 (하이라이트는 같은 slug로 유지)
   useEffect(() => {
     setMessages([createMessage('assistant', GREETING[lang] ?? GREETING.ko)]);
-    setLastRelatedSlugs([]);
-    onHighlight([]);
+    onHighlight(lastRelatedSlugs);
   }, [lang]);
   const bottomRef = useRef<HTMLDivElement>(null);
 
