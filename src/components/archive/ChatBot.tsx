@@ -52,6 +52,7 @@ export default function ChatBot({ onHighlight, lang }: ChatBotProps) {
     setMessages([createMessage('assistant', GREETING[lang] ?? GREETING.ko)]);
     onHighlight(lastRelatedSlugs);
   }, [lang]);
+
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -103,16 +104,18 @@ export default function ChatBot({ onHighlight, lang }: ChatBotProps) {
   };
 
   return (
-    <aside className="flex h-full flex-col rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md">
+    <aside className="flex h-full flex-col overflow-hidden">
       {/* Header */}
-      <div className="border-b border-white/10 px-4 py-3">
-        <p className="text-xs font-semibold tracking-widest text-zinc-500 uppercase">
-          Archive Search
-        </p>
+      <div className="flex items-center justify-between border-b border-white/10 px-4 py-3 shrink-0">
+        <div className="flex items-center gap-2">
+          <span className="text-base">🦴</span>
+          <span className="text-sm font-semibold text-zinc-300">해고리</span>
+          <span className="text-xs text-zinc-600">— 무한서고 사서</span>
+        </div>
       </div>
 
       {/* Messages */}
-      <div className="flex flex-1 flex-col gap-3 overflow-y-auto px-4 py-4">
+      <div className="flex flex-1 flex-col gap-3 overflow-y-auto px-4 py-4 min-h-0">
         {messages.map((msg) => {
           const isRequest = msg.role === 'assistant' && msg.content.startsWith('__REQUEST__:');
           const requestQuery = isRequest ? msg.content.replace('__REQUEST__:', '') : '';
@@ -164,10 +167,7 @@ export default function ChatBot({ onHighlight, lang }: ChatBotProps) {
       </div>
 
       {/* Input */}
-      <form
-        onSubmit={handleSubmit}
-        className="border-t border-white/10 p-3"
-      >
+      <form onSubmit={handleSubmit} className="border-t border-white/10 p-3 shrink-0">
         <div className="flex items-center gap-2">
           <input
             type="text"

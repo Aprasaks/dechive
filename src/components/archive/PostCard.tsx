@@ -37,27 +37,11 @@ export default function PostCard({ post, highlighted, dimmed }: PostCardProps) {
         )}
       </div>
 
-      {/* 콘텐츠 */}
-      <div className="flex flex-col gap-2.5 p-4">
-        <span className="rounded-full bg-zinc-800 px-2.5 py-0.5 text-xs font-medium text-zinc-400 self-start">
-          {post.category}
-        </span>
-
+      {/* 제목 */}
+      <div className="px-3 py-2.5">
         <h3 className="line-clamp-2 text-sm font-semibold leading-snug text-zinc-100 transition-colors group-hover:text-zinc-300">
           {post.title}
         </h3>
-
-        <p className="line-clamp-2 text-xs leading-relaxed text-zinc-500">
-          {post.summary}
-        </p>
-
-        <div className="flex flex-wrap gap-1.5">
-          {post.tags.slice(0, 3).map((tag: string) => (
-            <span key={tag} className="text-xs text-zinc-600">
-              #{tag}
-            </span>
-          ))}
-        </div>
       </div>
     </Link>
   );
