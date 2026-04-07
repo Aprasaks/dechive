@@ -41,6 +41,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className="dark">
+      <head>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4611005224374273"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body
         className={`${geistSans.variable} flex min-h-screen flex-col font-sans antialiased`}
       >
