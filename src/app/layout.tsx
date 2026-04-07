@@ -10,9 +10,28 @@ const geistSans = Geist({
   subsets: ['latin'],
 });
 
+const BASE_URL = 'https://dechive.vercel.app';
+
 export const metadata: Metadata = {
-  title: 'Dechive',
-  description: "Demian's Archive & Logs",
+  title: { default: 'Dechive', template: '%s | Dechive' },
+  description: '기록된 지식은 가치를 가진다. 기술, 철학, 사유의 흔적을 기록하는 공간.',
+  metadataBase: new URL(BASE_URL),
+  openGraph: {
+    title: 'Dechive',
+    description: '기록된 지식은 가치를 가진다. 기술, 철학, 사유의 흔적을 기록하는 공간.',
+    url: BASE_URL,
+    siteName: 'Dechive',
+    images: [{ url: '/images/thumb.webp', width: 1200, height: 630, alt: 'Dechive' }],
+    locale: 'ko_KR',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Dechive',
+    description: '기록된 지식은 가치를 가진다. 기술, 철학, 사유의 흔적을 기록하는 공간.',
+    images: ['/images/thumb.webp'],
+  },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({
