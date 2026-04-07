@@ -10,7 +10,7 @@ const geistSans = Geist({
   subsets: ['latin'],
 });
 
-const BASE_URL = 'https://dechive.vercel.app';
+const BASE_URL = 'https://dechive.dev';
 
 export const metadata: Metadata = {
   title: { default: 'Dechive', template: '%s | Dechive' },

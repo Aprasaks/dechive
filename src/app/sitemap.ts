@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { getAllPosts } from '@/lib/posts';
 
-const BASE_URL = 'https://dechive.vercel.app';
+const BASE_URL = 'https://dechive.dev';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const koPosts = getAllPosts('ko');
