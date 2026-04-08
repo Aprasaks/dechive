@@ -42,7 +42,35 @@
 - **Ask First**: 불확실한 부분이 있거나 설계 선택지가 여러 개일 경우, 코드를 짜기 전에 먼저 오라버니에게 질문하여 방향을 확정한다.
 - **Short & Precise**: 답변은 장황한 설명보다 핵심 위주로, 코드는 중복을 최소화하여 토큰 낭비를 방지한다.
 
-## 7. GitHub 이슈 작성 규칙
+## 7. 포스트 작성 규칙 (Content Guidelines)
+
+포스트는 반드시 아래 frontmatter 구조를 준수한다. 파일명은 `{slug}.ko.md` / `{slug}.en.md` 형식.
+
+```yaml
+---
+title: "제목 (검색결과 클릭률 직결 — 키워드 포함, 명확하게)"
+date: YYYY-MM-DD
+category: Dev          # Dev / Productivity / Philosophy 중 하나
+tags:
+  - 태그1
+  - 태그2
+slug: url-friendly-slug
+summary: 카드에 표시될 한 줄 요약 (50자 내외)
+description: SEO 스니펫용 설명 (120~160자, 핵심 키워드 반드시 포함)
+thumbnail: 파일명.webp  # /public/images/posts/ 에 위치
+status: published       # draft | published
+lang: ko                # ko | en
+series: 시리즈명         # 연재글이면 기입, 없으면 생략
+---
+```
+
+- **description 규칙**: 120~160자 이내, 핵심 키워드를 앞쪽에 배치. 비어있으면 summary가 자동 fallback.
+- **series 규칙**: 연재글은 반드시 동일한 series명 사용 (예: `애자일 완전 정복`).
+- **thumbnail 규칙**: 1200×630px webp 권장. `/public/images/posts/`에 저장.
+- **한 포스트 = 한 주제 완결**: 다른 사이트 링크 없이 해당 주제를 자체적으로 완결.
+- **할루시네이션 금지**: 불확실한 사실은 작성하지 않는다.
+
+## 8. GitHub 이슈 작성 규칙
 
 - **제목**: `[feat]`, `[fix]`, `[refactor]`, `[chore]` 중 하나로 시작한다.
 - **본문 구조**: 아래 4개 섹션을 반드시 포함한다.

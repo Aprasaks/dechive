@@ -28,13 +28,22 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
     ? `${BASE_URL}/images/posts/${post.thumbnail}`
     : `${BASE_URL}/images/thumb.webp`;
 
+  const rawDesc = post.description || post.summary;
+  const description = rawDesc.length > 160 ? `${rawDesc.slice(0, 157)}...` : rawDesc;
+
   return {
     title: post.title,
-    description: post.description,
-    alternates: { canonical: url },
+    description,
+    alternates: {
+      canonical: url,
+      languages: {
+        'ko': `${url}?lang=ko`,
+        'en': `${url}?lang=en`,
+      },
+    },
     openGraph: {
       title: post.title,
-      description: post.description,
+      description,
       url,
       type: 'article',
       publishedTime: post.date,
