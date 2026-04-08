@@ -9,6 +9,7 @@ export default function NotFound() {
           src="/images/archive.webp"
           alt=""
           fill
+          sizes="128px"
           className="object-contain"
         />
       </div>

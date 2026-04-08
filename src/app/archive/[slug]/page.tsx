@@ -15,19 +15,30 @@ export async function generateStaticParams() {
   return posts.map((post) => ({ slug: post.slug }));
 }
 
+const BASE_URL = 'https://dechive.dev';
+
 export async function generateMetadata({ params, searchParams }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const { lang } = await searchParams;
   const post = getPostBySlug(slug, (lang as PostLang) ?? 'ko');
   if (!post) return {};
 
+  const url = `${BASE_URL}/archive/${slug}`;
+  const image = post.thumbnail
+    ? `${BASE_URL}/images/posts/${post.thumbnail}`
+    : `${BASE_URL}/images/thumb.webp`;
+
   return {
-    title: `${post.title} | Dechive`,
+    title: post.title,
     description: post.description,
+    alternates: { canonical: url },
     openGraph: {
       title: post.title,
       description: post.description,
-      images: post.thumbnail ? [`/images/posts/${post.thumbnail}`] : [],
+      url,
+      type: 'article',
+      publishedTime: post.date,
+      images: [{ url: image, width: 1200, height: 630, alt: post.title }],
     },
   };
 }
@@ -48,11 +59,20 @@ export default async function PostPage({ params, searchParams }: PageProps) {
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'BlogPosting',
+            mainEntityOfPage: { '@type': 'WebPage', '@id': `${BASE_URL}/archive/${post.slug}` },
             headline: post.title,
             description: post.description,
             datePublished: post.date,
-            image: post.thumbnail ? `/images/posts/${post.thumbnail}` : undefined,
+            image: post.thumbnail
+              ? `${BASE_URL}/images/posts/${post.thumbnail}`
+              : `${BASE_URL}/images/thumb.webp`,
             author: { '@type': 'Person', name: 'Demian' },
+            publisher: {
+              '@type': 'Organization',
+              name: 'Dechive',
+              logo: { '@type': 'ImageObject', url: `${BASE_URL}/images/thumb.webp` },
+            },
+            url: `${BASE_URL}/archive/${post.slug}`,
           }),
         }}
       />

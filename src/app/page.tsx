@@ -1,5 +1,10 @@
+import type { Metadata } from 'next';
 import HeroSection from '@/components/home/hero-section';
 import TopicContainer from '@/components/home/topic-container';
+
+export const metadata: Metadata = {
+  alternates: { canonical: 'https://dechive.dev' },
+};
 
 export default function Home() {
   return (

@@ -9,6 +9,7 @@ export default function HeroSection() {
           src="/images/coded-library.webp"
           alt="Coded Library Background Scene"
           fill
+          sizes="(max-width: 768px) 100vw, 80vw"
           className="object-cover object-bottom"
           priority
           quality={100}

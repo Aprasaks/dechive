@@ -46,12 +46,11 @@ export default function ChatBot({ onHighlight, lang }: ChatBotProps) {
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
-  const [lastRelatedSlugs, setLastRelatedSlugs] = useState<string[]>([]);
 
-  // 언어 바뀌면 대화 초기화 (하이라이트는 같은 slug로 유지)
+  // 언어 바뀌면 대화 초기화
   useEffect(() => {
     setMessages([createMessage('assistant', GREETING[lang] ?? GREETING.ko)]);
-    onHighlight(lastRelatedSlugs);
+    onHighlight([]);
   }, [lang]);
 
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -68,40 +67,29 @@ export default function ChatBot({ onHighlight, lang }: ChatBotProps) {
     setInput('');
     setMessages((prev) => [...prev, createMessage('user', trimmed)]);
 
-    // 직전 답변 있고 + 짧은 후속 질문이면 출처 안내
-    if (lastRelatedSlugs.length > 0 && trimmed.length <= 20) {
-      setMessages((prev) => [...prev, createMessage('assistant', '방금 답변이 담긴 포스트예요!', lastRelatedSlugs)]);
-      onHighlight(lastRelatedSlugs);
-      return;
-    }
-
     setLoading(true);
 
     const history = messages
-      .filter((m) => !m.content.startsWith('__REQUEST__:'))
+      .slice(-10)
       .map((m) => ({ role: m.role, content: m.content }));
 
-    const res = await fetch('/api/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ query: trimmed, lang, history }),
-    });
-    const data = await res.json() as { answer?: string | null; relatedSlugs?: string[]; allSlugs?: string[]; notFound?: boolean; error?: string };
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query: trimmed, lang, history }),
+      });
+      const data = await res.json() as { answer?: string | null; relatedSlugs?: string[]; error?: string };
 
-    if (data.notFound) {
-      setMessages((prev) => [
-        ...prev,
-        createMessage('assistant', `__REQUEST__:${trimmed}`),
-      ]);
-    } else {
       const answer = data.answer ?? data.error ?? '답변을 가져오지 못했어요.';
       const relatedSlugs = data.relatedSlugs ?? [];
-      const allSlugs = data.allSlugs ?? [];
       setMessages((prev) => [...prev, createMessage('assistant', answer, relatedSlugs)]);
-      if (allSlugs.length > 0) setLastRelatedSlugs(allSlugs);
       onHighlight(relatedSlugs);
+    } catch {
+      setMessages((prev) => [...prev, createMessage('assistant', '오류가 발생했어요. 잠시 후 다시 시도해주세요.')]);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (
@@ -117,65 +105,36 @@ export default function ChatBot({ onHighlight, lang }: ChatBotProps) {
 
       {/* Messages */}
       <div className="flex flex-1 flex-col gap-3 overflow-y-auto px-4 py-4 min-h-0">
-        {messages.map((msg) => {
-          const isRequest = msg.role === 'assistant' && msg.content.startsWith('__REQUEST__:');
-          const requestQuery = isRequest ? msg.content.replace('__REQUEST__:', '') : '';
-
-          return (
-            <div key={msg.id} className="flex flex-col gap-2">
-              <div
-                className={[
-                  'max-w-[90%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed',
-                  msg.role === 'user'
-                    ? 'self-end bg-white/20 text-white'
-                    : 'self-start bg-white/10 text-zinc-300',
-                ].join(' ')}
+        {messages.map((msg) => (
+          <div
+            key={msg.id}
+            className={[
+              'max-w-[90%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed',
+              msg.role === 'user'
+                ? 'self-end bg-white/20 text-white'
+                : 'self-start bg-white/10 text-zinc-300',
+            ].join(' ')}
+          >
+            {msg.role === 'user' ? (
+              msg.content
+            ) : (
+              <ReactMarkdown
+                components={{
+                  p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
+                  strong: ({ children }) => <strong className="font-semibold text-zinc-100">{children}</strong>,
+                  ul: ({ children }) => <ul className="mt-1 mb-2 flex flex-col gap-1 pl-4">{children}</ul>,
+                  ol: ({ children }) => <ol className="mt-1 mb-2 flex flex-col gap-1 pl-4 list-decimal">{children}</ol>,
+                  li: ({ children }) => <li className="list-disc">{children}</li>,
+                  code: ({ children }) => <code className="rounded bg-white/10 px-1 py-0.5 text-xs text-zinc-200">{children}</code>,
+                  h3: ({ children }) => <p className="font-semibold text-zinc-100 mb-1">{children}</p>,
+                  h4: ({ children }) => <p className="font-semibold text-zinc-200 mb-1">{children}</p>,
+                }}
               >
-                {isRequest ? (
-                  '아직 이 내용에 대한 포스트가 없어요. 작성을 요청하시겠어요?'
-                ) : msg.role === 'user' ? (
-                  msg.content
-                ) : (
-                  <ReactMarkdown
-                    components={{
-                      p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
-                      strong: ({ children }) => <strong className="font-semibold text-zinc-100">{children}</strong>,
-                      ul: ({ children }) => <ul className="mt-1 mb-2 flex flex-col gap-1 pl-4">{children}</ul>,
-                      ol: ({ children }) => <ol className="mt-1 mb-2 flex flex-col gap-1 pl-4 list-decimal">{children}</ol>,
-                      li: ({ children }) => <li className="list-disc">{children}</li>,
-                      code: ({ children }) => <code className="rounded bg-white/10 px-1 py-0.5 text-xs text-zinc-200">{children}</code>,
-                      h3: ({ children }) => <p className="font-semibold text-zinc-100 mb-1">{children}</p>,
-                      h4: ({ children }) => <p className="font-semibold text-zinc-200 mb-1">{children}</p>,
-                    }}
-                  >
-                    {msg.content}
-                  </ReactMarkdown>
-                )}
-              </div>
-              {isRequest && (
-                <button
-                  onClick={async () => {
-                    await fetch('/api/request-post', {
-                      method: 'POST',
-                      headers: { 'Content-Type': 'application/json' },
-                      body: JSON.stringify({ query: requestQuery }),
-                    });
-                    setMessages((prev) =>
-                      prev.map((m) =>
-                        m.id === msg.id
-                          ? { ...m, content: '요청이 전달됐어요! 곧 포스트로 만들어볼게요 😊' }
-                          : m,
-                      ),
-                    );
-                  }}
-                  className="self-start ml-1 rounded-xl bg-white/20 px-3 py-1.5 text-sm font-medium text-white hover:bg-white/30 transition-colors cursor-pointer"
-                >
-                  포스트 요청하기
-                </button>
-              )}
-            </div>
-          );
-        })}
+                {msg.content}
+              </ReactMarkdown>
+            )}
+          </div>
+        ))}
         {loading && (
           <div className="self-start rounded-2xl bg-white/10 px-3 py-2 text-sm text-zinc-400">
             검색 중...

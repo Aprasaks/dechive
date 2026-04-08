@@ -2,8 +2,15 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 
 export const metadata: Metadata = {
-  title: 'Logs | Dechive',
+  title: 'Logs',
   description: 'AI와 함께하는 트러블슈팅과 데일리 로그. 날것의 성장 기록.',
+  alternates: { canonical: 'https://dechive.dev/logs' },
+  openGraph: {
+    title: 'Logs | Dechive',
+    description: 'AI와 함께하는 트러블슈팅과 데일리 로그. 날것의 성장 기록.',
+    url: 'https://dechive.dev/logs',
+    images: [{ url: 'https://dechive.dev/images/thumb.webp', width: 1200, height: 630, alt: 'Dechive Logs' }],
+  },
 };
 
 export default function LogsPage() {
@@ -17,6 +24,7 @@ export default function LogsPage() {
             src="/images/logs.webp"
             alt="Logs mascot"
             fill
+            sizes="192px"
             className="object-contain drop-shadow-2xl"
             priority
           />

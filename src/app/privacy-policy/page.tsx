@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | Dechive',
+  title: 'Privacy Policy',
   description: 'Dechive의 개인정보처리방침입니다.',
+  alternates: { canonical: 'https://dechive.dev/privacy-policy' },
+  robots: { index: true, follow: false },
 };
 
 export default function PrivacyPolicyPage() {

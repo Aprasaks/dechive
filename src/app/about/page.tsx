@@ -3,8 +3,15 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'About | Dechive',
+  title: 'About',
   description: '기록되어지는 지식은 가치를 가진다. Dechive는 수많은 정보를 재정립하여 지식으로 만드는 공간입니다.',
+  alternates: { canonical: 'https://dechive.dev/about' },
+  openGraph: {
+    title: 'About | Dechive',
+    description: '기록되어지는 지식은 가치를 가진다. Dechive는 수많은 정보를 재정립하여 지식으로 만드는 공간입니다.',
+    url: 'https://dechive.dev/about',
+    images: [{ url: 'https://dechive.dev/images/thumb.webp', width: 1200, height: 630, alt: 'About Dechive' }],
+  },
 };
 
 const SPACES = [
@@ -39,6 +46,7 @@ export default function AboutPage() {
             src="/images/about.webp"
             alt="Dechive mascot"
             fill
+            sizes="192px"
             className="object-contain drop-shadow-2xl"
             priority
           />
@@ -72,6 +80,7 @@ export default function AboutPage() {
                   src={space.mascot}
                   alt={space.name}
                   fill
+                  sizes="128px"
                   className="object-contain transition-transform duration-300 group-hover:scale-110"
                 />
               </div>

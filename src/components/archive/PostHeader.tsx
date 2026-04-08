@@ -17,7 +17,7 @@ export default function PostHeader({ post }: PostHeaderProps) {
             fill
             className="object-cover"
             priority
-            sizes="(max-width: 1400px) 60vw"
+            sizes="(max-width: 768px) calc(100vw - 2rem), 672px"
           />
         </div>
       )}

@@ -57,6 +57,7 @@ export default function RootLayout({
               src="/images/library-main.webp"
               alt=""
               fill
+              sizes="100vw"
               className="object-cover blur-xs brightness-[0.35]"
               priority
             />

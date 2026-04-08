@@ -109,7 +109,7 @@ export default function ArchiveClient({
             mobileChat ? 'translate-y-0' : 'translate-y-full'
           }`}
         >
-          <div className={`h-[75dvh] mx-3 mb-3 ${panelClass}`}>
+          <div className={`h-[75svh] mx-3 mb-3 ${panelClass}`}>
             <ChatBot onHighlight={setHighlightedSlugs} lang={lang} />
           </div>
         </div>

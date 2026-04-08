@@ -30,7 +30,10 @@ export default function CategoryFilter({
   // 바깥 클릭 시 닫기
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target as Node)
+      ) {
         setSeriesOpen(false);
       }
     }
@@ -45,13 +48,13 @@ export default function CategoryFilter({
 
   return (
     <nav className="flex items-center gap-2">
-      <div className="flex flex-1 items-center gap-2 flex-wrap">
+      <div className="flex flex-1 flex-wrap items-center gap-2">
         {categories.map((cat) => (
           <button
             key={cat.id}
             onClick={() => onChange(cat.id)}
             className={[
-              'rounded-full px-4 py-1.5 text-sm font-medium transition-colors cursor-pointer',
+              'cursor-pointer rounded-full px-4 py-1.5 text-sm font-medium transition-colors',
               selected === cat.id
                 ? 'bg-zinc-900 text-white dark:bg-white dark:text-zinc-900'
                 : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100',
@@ -63,37 +66,40 @@ export default function CategoryFilter({
         ))}
       </div>
 
-      <div className="flex items-center gap-2 shrink-0">
+      <div className="flex shrink-0 items-center gap-2">
         {/* 시리즈 드롭다운 */}
         {series.length > 0 && (
           <div ref={dropdownRef} className="relative">
             <button
               onClick={() => setSeriesOpen((v) => !v)}
               className={[
-                'rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors cursor-pointer border',
+                'cursor-pointer rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors',
                 seriesOpen || selectedSeries
-                  ? 'bg-zinc-900 text-white border-zinc-900 dark:bg-white dark:text-zinc-900 dark:border-white'
-                  : 'border-zinc-300 dark:border-zinc-600 text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100',
+                  ? 'border-zinc-900 bg-zinc-900 text-white dark:border-white dark:bg-white dark:text-zinc-900'
+                  : 'border-zinc-300 text-zinc-500 hover:text-zinc-900 dark:border-zinc-600 dark:hover:text-zinc-100',
               ].join(' ')}
             >
-              {selectedSeries ? `📚 ${selectedSeries}` : 'Series'} {seriesOpen ? '▲' : '▼'}
+              {selectedSeries ? `${selectedSeries}` : 'Series'}{' '}
+              {seriesOpen ? '▲' : '▼'}
             </button>
 
             {seriesOpen && (
-              <div className="absolute right-0 top-full mt-2 z-50 min-w-48 rounded-2xl border border-white/10 bg-zinc-900/95 backdrop-blur-md shadow-xl overflow-hidden">
+              <div className="absolute top-full right-0 z-50 mt-2 min-w-48 overflow-hidden rounded-2xl border border-white/10 bg-zinc-900/95 shadow-xl backdrop-blur-md">
                 {series.map((s) => (
                   <button
                     key={s.id}
                     onClick={() => handleSeriesClick(s.id)}
                     className={[
-                      'w-full flex items-center justify-between px-4 py-2.5 text-sm transition-colors cursor-pointer text-left',
+                      'flex w-full cursor-pointer items-center justify-between px-4 py-2.5 text-left text-sm transition-colors',
                       selectedSeries === s.id
                         ? 'bg-violet-600/30 text-violet-300'
                         : 'text-zinc-300 hover:bg-white/10',
                     ].join(' ')}
                   >
-                    <span>📚 {s.label}</span>
-                    <span className="text-xs text-zinc-500 ml-3">{s.count}편</span>
+                    <span>{s.label}</span>
+                    <span className="ml-3 text-xs text-zinc-500">
+                      {s.count}편
+                    </span>
                   </button>
                 ))}
               </div>
@@ -102,11 +108,11 @@ export default function CategoryFilter({
         )}
 
         {/* 언어 토글 */}
-        <div className="flex items-center rounded-full border border-zinc-300 dark:border-zinc-600 overflow-hidden text-sm font-medium">
+        <div className="flex items-center overflow-hidden rounded-full border border-zinc-300 text-sm font-medium dark:border-zinc-600">
           <button
             onClick={() => onLangChange('ko')}
             className={[
-              'px-3 py-1.5 transition-colors cursor-pointer',
+              'cursor-pointer px-3 py-1.5 transition-colors',
               lang === 'ko'
                 ? 'bg-zinc-900 text-white dark:bg-white dark:text-zinc-900'
                 : 'text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300',
@@ -114,11 +120,13 @@ export default function CategoryFilter({
           >
             한국어
           </button>
-          <span className="text-zinc-300 dark:text-zinc-600 select-none">/</span>
+          <span className="text-zinc-300 select-none dark:text-zinc-600">
+            /
+          </span>
           <button
             onClick={() => onLangChange('en')}
             className={[
-              'px-3 py-1.5 transition-colors cursor-pointer',
+              'cursor-pointer px-3 py-1.5 transition-colors',
               lang === 'en'
                 ? 'bg-zinc-900 text-white dark:bg-white dark:text-zinc-900'
                 : 'text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300',
