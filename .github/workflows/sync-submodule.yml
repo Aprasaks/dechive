@@ -1,0 +1,28 @@
+name: Sync Content Submodule
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update submodule to latest
+        run: |
+          git submodule update --remote content
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add content
+          git diff --staged --quiet || git commit -m "chore: 콘텐츠 서브모듈 자동 업데이트"
+          git push
