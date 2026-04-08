@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "tsx scripts/sync-images.ts && next dev",
-    "build": "tsx scripts/sync-images.ts && next build",
+    "build": "tsx scripts/sync-images.ts && tsx scripts/generate-embeddings.ts && next build",
     "start": "next start",
     "lint": "eslint",
     "translate": "tsx scripts/translate.ts",
