@@ -75,19 +75,6 @@ export default function PostGrid({
         />
       </div>
 
-      {/* 선택된 시리즈 표시 */}
-      {selectedSeries && (
-        <div className="shrink-0 px-4 py-2 flex items-center gap-2 border-b border-white/10 bg-violet-600/10">
-          <span className="text-xs text-violet-400">📚 {selectedSeries}</span>
-          <button
-            onClick={() => setSelectedSeries('')}
-            className="text-xs text-zinc-500 hover:text-zinc-300 transition-colors cursor-pointer"
-          >
-            ✕ 해제
-          </button>
-        </div>
-      )}
-
       {/* 포스트 그리드 */}
       <div className="flex-1 min-h-0 overflow-y-auto px-4 py-4">
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
