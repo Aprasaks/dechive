@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import ReactMarkdown from 'react-markdown';
 import type { ChatMessage } from '@/types/archive';
 
 interface ChatBotProps {
@@ -108,7 +109,7 @@ export default function ChatBot({ onHighlight, lang }: ChatBotProps) {
       {/* Header */}
       <div className="flex items-center justify-between border-b border-white/10 px-4 py-3 shrink-0">
         <div className="flex items-center gap-2">
-          <span className="text-base">🦴</span>
+          <img src="/images/emoticon-small.png" alt="해고리" className="w-5 h-5 object-contain" />
           <span className="text-sm font-semibold text-zinc-300">해고리</span>
           <span className="text-xs text-zinc-600">— 무한서고 사서</span>
         </div>
@@ -124,15 +125,32 @@ export default function ChatBot({ onHighlight, lang }: ChatBotProps) {
             <div key={msg.id} className="flex flex-col gap-2">
               <div
                 className={[
-                  'max-w-[90%] rounded-2xl px-3 py-2 text-sm leading-relaxed',
+                  'max-w-[90%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed',
                   msg.role === 'user'
                     ? 'self-end bg-white/20 text-white'
                     : 'self-start bg-white/10 text-zinc-300',
                 ].join(' ')}
               >
-                {isRequest
-                  ? '아직 이 내용에 대한 포스트가 없어요. 작성을 요청하시겠어요?'
-                  : msg.content}
+                {isRequest ? (
+                  '아직 이 내용에 대한 포스트가 없어요. 작성을 요청하시겠어요?'
+                ) : msg.role === 'user' ? (
+                  msg.content
+                ) : (
+                  <ReactMarkdown
+                    components={{
+                      p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
+                      strong: ({ children }) => <strong className="font-semibold text-zinc-100">{children}</strong>,
+                      ul: ({ children }) => <ul className="mt-1 mb-2 flex flex-col gap-1 pl-4">{children}</ul>,
+                      ol: ({ children }) => <ol className="mt-1 mb-2 flex flex-col gap-1 pl-4 list-decimal">{children}</ol>,
+                      li: ({ children }) => <li className="list-disc">{children}</li>,
+                      code: ({ children }) => <code className="rounded bg-white/10 px-1 py-0.5 text-xs text-zinc-200">{children}</code>,
+                      h3: ({ children }) => <p className="font-semibold text-zinc-100 mb-1">{children}</p>,
+                      h4: ({ children }) => <p className="font-semibold text-zinc-200 mb-1">{children}</p>,
+                    }}
+                  >
+                    {msg.content}
+                  </ReactMarkdown>
+                )}
               </div>
               {isRequest && (
                 <button
