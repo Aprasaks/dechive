@@ -50,8 +50,8 @@ export default function Header() {
           </ul>
         </nav>
 
-        {/* 🌓 우측: 햄버거 버튼 */}
-        <div className="flex h-8 items-center gap-3">
+        {/* 🌓 우측: 로고 영역과 동일한 너비로 균형 맞춤 */}
+        <div className="flex h-8 items-center justify-end gap-3" style={{ minWidth: '7rem' }}>
           {/* 모바일 햄버거 버튼 */}
           <button
             className="hover:text-foreground text-zinc-500 transition-colors md:hidden"

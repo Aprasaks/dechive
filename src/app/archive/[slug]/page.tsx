@@ -40,7 +40,7 @@ export default async function PostPage({ params, searchParams }: PageProps) {
   if (!post) notFound();
 
   return (
-    <main className="mx-auto max-w-3xl px-6 py-12">
+    <main className="mx-auto max-w-3xl px-4 sm:px-6 py-12 min-h-[calc(100vh-64px-56px)]">
       {/* JSON-LD 구조화 데이터 */}
       <script
         type="application/ld+json"
