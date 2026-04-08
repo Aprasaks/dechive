@@ -42,13 +42,27 @@
 - **Ask First**: 불확실한 부분이 있거나 설계 선택지가 여러 개일 경우, 코드를 짜기 전에 먼저 오라버니에게 질문하여 방향을 확정한다.
 - **Short & Precise**: 답변은 장황한 설명보다 핵심 위주로, 코드는 중복을 최소화하여 토큰 낭비를 방지한다.
 
-## 7. 포스트 작성 규칙 (Content Guidelines)
+## 7. 콘텐츠 철학 (무한서고 구조)
 
-포스트는 반드시 아래 frontmatter 구조를 준수한다. 파일명은 `{slug}.ko.md` / `{slug}.en.md` 형식.
+Dechive는 두 종류의 서가로 구성된다.
+
+| 구분 | Archive | Logs |
+|------|---------|------|
+| 성격 | 정제된 지식 백과 | 현장 트러블슈팅 기록 |
+| 분량 | 충분한 설명, 시리즈 가능 | 짧아도 OK (500자 이상) |
+| 제목 | 주제 완결형 ("useEffect 완전 정복") | 증상/에러 직접 기술 ("useEffect deps 경고 해결") |
+| 역할 | Logs 여러 개를 흡수해 재정립한 완결본 | Archive의 원재료, 실시간 경험 기록 |
+
+- Archive는 해당 주제를 **다른 사이트 없이 자체 완결**해야 한다.
+- Logs는 Archive로 발전할 수 있는 원석이다. 여러 Logs를 묶어 Archive 한 편으로 재정립하는 흐름이 무한서고의 핵심이다.
+
+## 8. Archive 포스트 작성 규칙
+
+파일명: `{slug}.ko.md` / `{slug}.en.md` — `content/posts/` 에 저장.
 
 ```yaml
 ---
-title: "제목 (검색결과 클릭률 직결 — 키워드 포함, 명확하게)"
+title: "주제 완결형 제목 (키워드 포함, 시리즈면 편수 명시)"
 date: YYYY-MM-DD
 category: Dev          # Dev / Productivity / Philosophy 중 하나
 tags:
@@ -56,21 +70,45 @@ tags:
   - 태그2
 slug: url-friendly-slug
 summary: 카드에 표시될 한 줄 요약 (50자 내외)
-description: SEO 스니펫용 설명 (120~160자, 핵심 키워드 반드시 포함)
-thumbnail: 파일명.webp  # /public/images/posts/ 에 위치
-status: published       # draft | published
-lang: ko                # ko | en
+description: SEO 스니펫용 설명 (120~160자, 핵심 키워드를 앞쪽에 배치)
+thumbnail: 파일명.webp  # /public/images/posts/ 에 위치, 1200×630px webp 권장
+status: published
+lang: ko
 series: 시리즈명         # 연재글이면 기입, 없으면 생략
 ---
 ```
 
-- **description 규칙**: 120~160자 이내, 핵심 키워드를 앞쪽에 배치. 비어있으면 summary가 자동 fallback.
-- **series 규칙**: 연재글은 반드시 동일한 series명 사용 (예: `애자일 완전 정복`).
-- **thumbnail 규칙**: 1200×630px webp 권장. `/public/images/posts/`에 저장.
-- **한 포스트 = 한 주제 완결**: 다른 사이트 링크 없이 해당 주제를 자체적으로 완결.
+- **description**: 비어있으면 summary가 자동 fallback. 160자 초과 시 자동 truncate.
+- **series**: 연재글은 반드시 동일한 series명 사용 (예: `애자일 완전 정복`).
 - **할루시네이션 금지**: 불확실한 사실은 작성하지 않는다.
 
-## 8. GitHub 이슈 작성 규칙
+## 9. Logs 작성 규칙
+
+파일명: `{slug}.ko.md` — `content/logs/` 에 저장 (posts와 분리).
+
+```yaml
+---
+title: "에러 메시지 원문 또는 증상 그대로 + 해결/원인/정리"
+date: YYYY-MM-DD
+tags:
+  - 태그1
+slug: url-friendly-slug
+summary: 한 줄 요약
+description: 어떤 상황 → 뭐가 문제 → 이 글에서 뭘 알 수 있는지 (120~160자)
+status: published
+lang: ko
+---
+```
+
+- **제목 공식**: `[에러 원문 또는 증상] + [해결 | 원인 | 정리]`
+  - ✅ `Warning: Each child in a list should have a unique key prop 해결법`
+  - ✅ `Next.js Image fill 속성에 sizes 없을 때 경고 없애는 법`
+  - ❌ `useEffect 오류 해결` (너무 모호)
+- **분량**: 짧아도 OK. 상황 → 원인 → 해결 → 결론 4단 구조 권장.
+- **thumbnail 불필요**: Logs는 카드 형식이 아닌 리스트 형식으로 표시.
+- **할루시네이션 금지**: 실제 겪은 내용만 작성한다.
+
+## 10. GitHub 이슈 작성 규칙
 
 - **제목**: `[feat]`, `[fix]`, `[refactor]`, `[chore]` 중 하나로 시작한다.
 - **본문 구조**: 아래 4개 섹션을 반드시 포함한다.
