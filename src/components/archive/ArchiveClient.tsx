@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import type { Post, Category, PostLang } from '@/types/archive';
+import type { Post, Category, PostLang, Series } from '@/types/archive';
 import PostGrid from './PostGrid';
 import ChatBot from './ChatBot';
 
@@ -10,6 +10,8 @@ interface ArchiveClientProps {
   enPosts: Post[];
   koCategories: Category[];
   enCategories: Category[];
+  koSeries: Series[];
+  enSeries: Series[];
 }
 
 export default function ArchiveClient({
@@ -17,6 +19,8 @@ export default function ArchiveClient({
   enPosts,
   koCategories,
   enCategories,
+  koSeries,
+  enSeries,
 }: ArchiveClientProps) {
   const [highlightedSlugs, setHighlightedSlugs] = useState<string[]>([]);
   const [lang, setLang] = useState<PostLang>('ko');
@@ -29,6 +33,7 @@ export default function ArchiveClient({
 
   const posts = lang === 'ko' ? koPosts : enPosts;
   const categories = lang === 'ko' ? koCategories : enCategories;
+  const series = lang === 'ko' ? koSeries : enSeries;
 
   const panelClass = 'rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md overflow-hidden';
   const layoutHeight = 'calc(100dvh - 4rem - 3rem)';
@@ -44,6 +49,7 @@ export default function ArchiveClient({
           <PostGrid
             posts={posts}
             categories={categories}
+            series={series}
             highlightedSlugs={highlightedSlugs}
             lang={lang}
             onLangChange={setLang}
@@ -64,6 +70,7 @@ export default function ArchiveClient({
           <PostGrid
             posts={posts}
             categories={categories}
+            series={series}
             highlightedSlugs={highlightedSlugs}
             lang={lang}
             onLangChange={setLang}

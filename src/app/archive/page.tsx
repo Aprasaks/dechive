@@ -1,4 +1,4 @@
-import { getAllPosts, getCategories } from '@/lib/posts';
+import { getAllPosts, getCategories, getSeries } from '@/lib/posts';
 import ArchiveClient from '@/components/archive/ArchiveClient';
 
 export default function ArchivePage() {
@@ -6,6 +6,8 @@ export default function ArchivePage() {
   const enPosts = getAllPosts('en');
   const koCategories = getCategories('ko');
   const enCategories = getCategories('en');
+  const koSeries = getSeries('ko');
+  const enSeries = getSeries('en');
 
   return (
     <main className="flex-1 min-h-0 overflow-hidden">
@@ -14,6 +16,8 @@ export default function ArchivePage() {
         enPosts={enPosts}
         koCategories={koCategories}
         enCategories={enCategories}
+        koSeries={koSeries}
+        enSeries={enSeries}
       />
     </main>
   );

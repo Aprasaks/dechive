@@ -4,6 +4,12 @@ export interface Category {
   count: number;
 }
 
+export interface Series {
+  id: string;
+  label: string;
+  count: number;
+}
+
 export type PostStatus = 'draft' | 'published';
 export type PostLang = 'ko' | 'en';
 

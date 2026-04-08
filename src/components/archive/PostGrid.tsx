@@ -1,13 +1,14 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import type { Post, Category, PostLang } from '@/types/archive';
+import type { Post, Category, PostLang, Series } from '@/types/archive';
 import CategoryFilter from './CategoryFilter';
 import PostCard from './PostCard';
 
 interface PostGridProps {
   posts: Post[];
   categories: Category[];
+  series: Series[];
   highlightedSlugs: string[];
   lang: PostLang;
   onLangChange: (lang: PostLang) => void;
@@ -33,23 +34,25 @@ function PlaceholderCard() {
 export default function PostGrid({
   posts,
   categories,
+  series,
   highlightedSlugs,
   lang,
   onLangChange,
   initialCount = INITIAL_COUNT,
 }: PostGridProps) {
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [selectedSeries, setSelectedSeries] = useState('');
   const [visibleCount, setVisibleCount] = useState(initialCount);
 
-  // 언어/카테고리 바뀌면 더보기 초기화
   useEffect(() => {
     setVisibleCount(initialCount);
-  }, [posts, selectedCategory, initialCount]);
+  }, [posts, selectedCategory, selectedSeries, initialCount]);
 
-  const filtered =
-    selectedCategory === 'all'
-      ? posts
-      : posts.filter((p) => p.category === selectedCategory);
+  const filtered = posts.filter((p) => {
+    const categoryMatch = selectedCategory === 'all' || p.category === selectedCategory;
+    const seriesMatch = !selectedSeries || p.series === selectedSeries;
+    return categoryMatch && seriesMatch;
+  });
 
   const hasHighlight = highlightedSlugs.length > 0;
   const visiblePosts = filtered.slice(0, visibleCount);
@@ -58,7 +61,7 @@ export default function PostGrid({
 
   return (
     <div className="flex flex-col h-full">
-      {/* 카테고리 필터 - 상단 고정 */}
+      {/* 필터 헤더 */}
       <div className="shrink-0 px-4 pt-4 pb-3 border-b border-white/10">
         <CategoryFilter
           categories={categories}
@@ -66,10 +69,26 @@ export default function PostGrid({
           onChange={setSelectedCategory}
           lang={lang}
           onLangChange={onLangChange}
+          series={series}
+          selectedSeries={selectedSeries}
+          onSeriesChange={setSelectedSeries}
         />
       </div>
 
-      {/* 포스트 그리드 - 내부 스크롤 */}
+      {/* 선택된 시리즈 표시 */}
+      {selectedSeries && (
+        <div className="shrink-0 px-4 py-2 flex items-center gap-2 border-b border-white/10 bg-violet-600/10">
+          <span className="text-xs text-violet-400">📚 {selectedSeries}</span>
+          <button
+            onClick={() => setSelectedSeries('')}
+            className="text-xs text-zinc-500 hover:text-zinc-300 transition-colors cursor-pointer"
+          >
+            ✕ 해제
+          </button>
+        </div>
+      )}
+
+      {/* 포스트 그리드 */}
       <div className="flex-1 min-h-0 overflow-y-auto px-4 py-4">
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {visiblePosts.map((post) => {
@@ -90,7 +109,7 @@ export default function PostGrid({
         </div>
       </div>
 
-      {/* 더보기 버튼 - 하단 고정 */}
+      {/* 더보기 버튼 */}
       {hasMore && (
         <div className="shrink-0 border-t border-white/10 py-3 flex justify-center">
           <button

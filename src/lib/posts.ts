@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import type { Post, PostLang, PostStatus } from '@/types/archive';
+import type { Post, PostLang, PostStatus, Series } from '@/types/archive';
 
 const POSTS_DIR = path.join(process.cwd(), 'content', 'posts');
 
@@ -62,6 +62,24 @@ export function getPostBySlug(slug: string, lang: PostLang = 'ko'): Post | null 
   const filePath = path.join(POSTS_DIR, filename);
   if (!fs.existsSync(filePath)) return null;
   return parsePost(filename);
+}
+
+export function getSeries(lang: PostLang = 'ko'): Series[] {
+  const posts = getAllPosts(lang);
+  const countMap = new Map<string, number>();
+
+  for (const post of posts) {
+    if (post.series) {
+      countMap.set(post.series, (countMap.get(post.series) ?? 0) + 1);
+    }
+  }
+
+  const series: Series[] = [];
+  countMap.forEach((count, id) => {
+    series.push({ id, label: id, count });
+  });
+
+  return series;
 }
 
 export function getCategories(lang: PostLang = 'ko') {
