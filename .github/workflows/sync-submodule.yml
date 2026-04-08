@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: true
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GH_PAT }}
 
       - name: Update submodule to latest
         run: |
