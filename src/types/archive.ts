@@ -29,6 +29,17 @@ export interface Post {
   content: string;        // 마크다운 본문
 }
 
+export interface Log {
+  slug: string;
+  title: string;
+  date: string;
+  tags: string[];
+  summary: string;
+  description: string;
+  status: PostStatus;
+  content: string;
+}
+
 export interface ChatMessage {
   id: string;
   role: 'user' | 'assistant';
