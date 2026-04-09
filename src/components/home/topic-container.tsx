@@ -22,6 +22,7 @@ export default function TopicContainer() {
               src={`/images/posts/${post.thumbnail}`}
               alt={post.title}
               fill
+              priority
               className="object-cover transition-transform duration-300 group-hover:scale-105"
               sizes="(max-width: 1400px) 30vw"
             />
