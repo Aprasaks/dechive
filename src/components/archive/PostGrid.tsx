@@ -48,11 +48,16 @@ export default function PostGrid({
     setVisibleCount(initialCount);
   }, [posts, selectedCategory, selectedSeries, initialCount]);
 
-  const filtered = posts.filter((p) => {
-    const categoryMatch = selectedCategory === 'all' || p.category === selectedCategory;
-    const seriesMatch = !selectedSeries || p.series === selectedSeries;
-    return categoryMatch && seriesMatch;
-  });
+  const filtered = posts
+    .filter((p) => {
+      const categoryMatch = selectedCategory === 'all' || p.category === selectedCategory;
+      const seriesMatch = !selectedSeries || p.series === selectedSeries;
+      return categoryMatch && seriesMatch;
+    })
+    .sort((a, b) => {
+      if (selectedSeries) return a.date < b.date ? -1 : 1; // 시리즈: 오래된 순 (1편→N편)
+      return a.date > b.date ? -1 : 1; // 일반: 최신순
+    });
 
   const hasHighlight = highlightedSlugs.length > 0;
   const visiblePosts = filtered.slice(0, visibleCount);
