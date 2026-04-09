@@ -148,6 +148,8 @@ export default function ChatBot({ onHighlight, lang }: ChatBotProps) {
         <div className="flex items-center gap-2">
           <input
             type="text"
+            id="chatbot-input"
+            name="chatbot-input"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder={PLACEHOLDER[lang] ?? PLACEHOLDER.ko}
