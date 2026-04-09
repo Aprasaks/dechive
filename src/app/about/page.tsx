@@ -68,7 +68,7 @@ export default function AboutPage() {
         <h2 className="text-xs font-semibold tracking-widest text-zinc-500 uppercase mb-8 text-center">
           Spaces
         </h2>
-        <div className="grid grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           {SPACES.map((space) => (
             <Link
               key={space.name}
