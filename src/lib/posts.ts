@@ -64,6 +64,12 @@ export function getPostBySlug(slug: string, lang: PostLang = 'ko'): Post | null 
   return parsePost(filename);
 }
 
+export function getSeriesPosts(series: string, lang: PostLang = 'ko'): Post[] {
+  return getAllPosts(lang)
+    .filter((p) => p.series === series)
+    .sort((a, b) => (a.date < b.date ? -1 : 1)); // 오래된 순 (1편→N편)
+}
+
 export function getSeries(lang: PostLang = 'ko'): Series[] {
   const posts = getAllPosts(lang);
   const countMap = new Map<string, number>();

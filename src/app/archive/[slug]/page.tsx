@@ -1,8 +1,9 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import { getAllPosts, getPostBySlug } from '@/lib/posts';
+import { getAllPosts, getPostBySlug, getSeriesPosts } from '@/lib/posts';
 import PostHeader from '@/components/archive/PostHeader';
 import PostContent from '@/components/archive/PostContent';
+import SeriesNav from '@/components/archive/SeriesNav';
 import type { PostLang } from '@/types/archive';
 
 interface PageProps {
@@ -55,9 +56,16 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
 export default async function PostPage({ params, searchParams }: PageProps) {
   const { slug } = await params;
   const { lang } = await searchParams;
-  const post = getPostBySlug(slug, (lang as PostLang) ?? 'ko');
+  const postLang = (lang as PostLang) ?? 'ko';
+  const post = getPostBySlug(slug, postLang);
 
   if (!post) notFound();
+
+  // 시리즈 이전/다음 편
+  const seriesPosts = post.series ? getSeriesPosts(post.series, postLang) : [];
+  const currentIndex = seriesPosts.findIndex((p) => p.slug === slug);
+  const prev = currentIndex > 0 ? seriesPosts[currentIndex - 1] : null;
+  const next = currentIndex < seriesPosts.length - 1 ? seriesPosts[currentIndex + 1] : null;
 
   return (
     <main className="mx-auto max-w-3xl px-4 sm:px-6 py-12 min-h-[calc(100vh-64px-56px)]">
@@ -88,6 +96,7 @@ export default async function PostPage({ params, searchParams }: PageProps) {
 
       <PostHeader post={post} />
       <PostContent content={post.content} />
+      <SeriesNav prev={prev} next={next} lang={postLang} />
     </main>
   );
 }
