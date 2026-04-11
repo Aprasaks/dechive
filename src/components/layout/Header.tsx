@@ -56,6 +56,7 @@ export default function Header() {
           <button
             className="hover:text-foreground text-zinc-500 transition-colors md:hidden"
             onClick={() => setIsOpen(!isOpen)}
+            aria-label={isOpen ? '메뉴 닫기' : '메뉴 열기'}
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
