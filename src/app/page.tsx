@@ -14,7 +14,7 @@ export default function Home() {
           <HeroSection />
         </section>
 
-        <aside className="md:col-span-5 h-[420px]">
+        <aside className="md:col-span-5 h-105">
           <TopicContainer />
         </aside>
       </div>

@@ -52,7 +52,7 @@ export default function ChatBot({ onHighlight, lang }: ChatBotProps) {
   useEffect(() => {
     setMessages([createMessage('assistant', GREETING[lang] ?? GREETING.ko)]);
     onHighlight([]);
-  }, [lang]);
+  }, [lang, onHighlight]);
 
   const bottomRef = useRef<HTMLDivElement>(null);
 

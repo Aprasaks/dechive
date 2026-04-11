@@ -5,9 +5,7 @@ import { getAllPosts } from '@/lib/posts';
 export default function TopicContainer() {
   const posts = getAllPosts('ko');
 
-  const featured = [...posts]
-    .sort(() => Math.random() - 0.5)
-    .slice(0, 3);
+  const featured = posts.slice(0, 3);
 
   return (
     <div className="flex h-full flex-col gap-3">
