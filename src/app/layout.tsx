@@ -47,6 +47,17 @@ export default function RootLayout({
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4611005224374273"
           crossOrigin="anonymous"
         />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y08SJBLW8G" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-Y08SJBLW8G');
+            `,
+          }}
+        />
       </head>
       <body
         className={`${geistSans.variable} flex min-h-screen flex-col font-sans antialiased overflow-x-clip`}
