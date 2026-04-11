@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import type { ChatMessage } from '@/types/archive';
 
@@ -97,7 +98,7 @@ export default function ChatBot({ onHighlight, lang }: ChatBotProps) {
       {/* Header */}
       <div className="flex items-center justify-between border-b border-white/10 px-4 py-3 shrink-0">
         <div className="flex items-center gap-2">
-          <img src="/images/emoticon-small.png" alt="해고리" className="w-5 h-5 object-contain" />
+          <Image src="/images/emoticon-small.png" alt="해고리" width={20} height={20} className="object-contain" />
           <span className="text-sm font-semibold text-zinc-300">해고리</span>
           <span className="text-xs text-zinc-600">— 무한서고 사서</span>
         </div>
@@ -153,7 +154,7 @@ export default function ChatBot({ onHighlight, lang }: ChatBotProps) {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder={PLACEHOLDER[lang] ?? PLACEHOLDER.ko}
-            className="flex-1 rounded-xl bg-white/10 px-3 py-2 text-sm text-zinc-100 placeholder-zinc-500 outline-none"
+            className="flex-1 rounded-xl bg-white/10 px-3 py-2 text-base text-zinc-100 placeholder-zinc-500 outline-none"
           />
           <button
             type="submit"
