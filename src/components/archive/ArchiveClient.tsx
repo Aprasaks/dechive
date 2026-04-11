@@ -84,7 +84,7 @@ export default function ArchiveClient({
       {!mobileChat && (
         <button
           onClick={() => setMobileChat(true)}
-          className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-40 flex items-center gap-2 rounded-full bg-zinc-900 border border-white/20 px-5 py-3 text-sm font-medium text-zinc-100 shadow-xl hover:bg-zinc-800 transition-colors cursor-pointer"
+          className="md:hidden fixed bottom-5 left-1/2 -translate-x-1/2 z-40 flex items-center gap-1.5 rounded-full bg-zinc-900 border border-white/20 px-3.5 py-2 text-xs font-medium text-zinc-100 shadow-xl hover:bg-zinc-800 transition-colors cursor-pointer"
         >
           <Image src="/images/emoticon-small.png" alt="해고리" width={24} height={24} className="object-contain" />
           <span>소환</span>
