@@ -68,7 +68,7 @@ export default async function PostPage({ params, searchParams }: PageProps) {
   const next = currentIndex < seriesPosts.length - 1 ? seriesPosts[currentIndex + 1] : null;
 
   return (
-    <main className="mx-auto max-w-3xl px-4 sm:px-6 py-12 min-h-[calc(100vh-64px-56px)]">
+    <main className="mx-auto max-w-3xl px-4 sm:px-6 py-12 min-h-[calc(100vh-64px-56px)] overflow-x-hidden">
       {/* JSON-LD 구조화 데이터 */}
       <script
         type="application/ld+json"

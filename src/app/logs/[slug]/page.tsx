@@ -46,7 +46,7 @@ export default async function LogPage({ params }: PageProps) {
   if (!log) notFound();
 
   return (
-    <main className="mx-auto max-w-3xl px-4 sm:px-6 py-12 min-h-[calc(100vh-64px-56px)]">
+    <main className="mx-auto max-w-3xl px-4 sm:px-6 py-12 min-h-[calc(100vh-64px-56px)] overflow-x-hidden">
       {/* JSON-LD */}
       <script
         type="application/ld+json"

@@ -47,25 +47,27 @@ export default function CategoryFilter({
   };
 
   return (
-    <nav className="flex items-center gap-2">
-      <div className="flex flex-1 flex-wrap items-center gap-2">
+    <nav className="flex flex-col gap-2 sm:flex-row sm:items-center">
+      {/* 카테고리 */}
+      <div className="flex flex-1 flex-wrap items-center gap-1.5">
         {categories.map((cat) => (
           <button
             key={cat.id}
             onClick={() => onChange(cat.id)}
             className={[
-              'cursor-pointer rounded-full px-4 py-1.5 text-sm font-medium transition-colors',
+              'cursor-pointer rounded-full px-3 py-1 text-xs sm:px-4 sm:py-1.5 sm:text-sm font-medium transition-colors',
               selected === cat.id
                 ? 'bg-zinc-900 text-white dark:bg-white dark:text-zinc-900'
                 : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100',
             ].join(' ')}
           >
             {cat.label}
-            <span className="ml-1.5 text-xs opacity-60">{cat.count}</span>
+            <span className="ml-1 text-xs opacity-60">{cat.count}</span>
           </button>
         ))}
       </div>
 
+      {/* 시리즈 + 언어 토글 */}
       <div className="flex shrink-0 items-center gap-2">
         {/* 시리즈 드롭다운 */}
         {series.length > 0 && (
@@ -73,7 +75,7 @@ export default function CategoryFilter({
             <button
               onClick={() => setSeriesOpen((v) => !v)}
               className={[
-                'cursor-pointer rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors',
+                'cursor-pointer rounded-full border px-3 py-1 text-xs sm:px-3.5 sm:py-1.5 sm:text-sm font-medium transition-colors',
                 seriesOpen || selectedSeries
                   ? 'border-zinc-900 bg-zinc-900 text-white dark:border-white dark:bg-white dark:text-zinc-900'
                   : 'border-zinc-300 text-zinc-500 hover:text-zinc-900 dark:border-zinc-600 dark:hover:text-zinc-100',
@@ -108,31 +110,30 @@ export default function CategoryFilter({
         )}
 
         {/* 언어 토글 */}
-        <div className="flex items-center overflow-hidden rounded-full border border-zinc-300 text-sm font-medium dark:border-zinc-600">
+        <div className="flex items-center overflow-hidden rounded-full border border-zinc-300 text-xs sm:text-sm font-medium dark:border-zinc-600">
           <button
             onClick={() => onLangChange('ko')}
             className={[
-              'cursor-pointer px-3 py-1.5 transition-colors',
+              'cursor-pointer px-2.5 py-1 sm:px-3 sm:py-1.5 transition-colors',
               lang === 'ko'
                 ? 'bg-zinc-900 text-white dark:bg-white dark:text-zinc-900'
                 : 'text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300',
             ].join(' ')}
           >
-            한국어
+            <span className="sm:hidden">KO</span>
+            <span className="hidden sm:inline">한국어</span>
           </button>
-          <span className="text-zinc-300 select-none dark:text-zinc-600">
-            /
-          </span>
+          <span className="text-zinc-300 select-none dark:text-zinc-600">/</span>
           <button
             onClick={() => onLangChange('en')}
             className={[
-              'cursor-pointer px-3 py-1.5 transition-colors',
+              'cursor-pointer px-2.5 py-1 sm:px-3 sm:py-1.5 transition-colors',
               lang === 'en'
                 ? 'bg-zinc-900 text-white dark:bg-white dark:text-zinc-900'
                 : 'text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300',
             ].join(' ')}
           >
-            English
+            EN
           </button>
         </div>
       </div>

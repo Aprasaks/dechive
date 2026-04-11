@@ -46,6 +46,11 @@ export default function PostHeader({ post }: PostHeaderProps) {
         </p>
       )}
 
+      {/* 날짜 */}
+      <time dateTime={post.date} className="mt-4 block text-xs text-zinc-600 tabular-nums">
+        {post.date}
+      </time>
+
       <div className="mt-6 border-b border-zinc-800" />
     </header>
   );
