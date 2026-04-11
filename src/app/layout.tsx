@@ -49,7 +49,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} flex min-h-screen flex-col font-sans antialiased`}
+        className={`${geistSans.variable} flex min-h-screen flex-col font-sans antialiased overflow-x-hidden`}
       >
         <div className="fixed inset-0 -z-10 flex justify-center overflow-hidden bg-black">
           <div className="relative h-full w-full max-w-344">
