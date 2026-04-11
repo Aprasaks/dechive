@@ -75,13 +75,13 @@ export default function CategoryFilter({
             <button
               onClick={() => setSeriesOpen((v) => !v)}
               className={[
-                'cursor-pointer rounded-full border px-3 py-1 text-xs sm:px-3.5 sm:py-1.5 sm:text-sm font-medium transition-colors',
+                'cursor-pointer rounded-full border px-3 py-1 text-xs sm:px-3.5 sm:py-1.5 sm:text-sm font-medium transition-colors max-w-[7rem] sm:max-w-none truncate',
                 seriesOpen || selectedSeries
                   ? 'border-zinc-900 bg-zinc-900 text-white dark:border-white dark:bg-white dark:text-zinc-900'
                   : 'border-zinc-300 text-zinc-500 hover:text-zinc-900 dark:border-zinc-600 dark:hover:text-zinc-100',
               ].join(' ')}
             >
-              {selectedSeries ? `${selectedSeries}` : 'Series'}{' '}
+              {selectedSeries ? selectedSeries : 'Series'}{' '}
               {seriesOpen ? '▲' : '▼'}
             </button>
 

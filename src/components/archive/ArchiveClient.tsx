@@ -87,7 +87,7 @@ export default function ArchiveClient({
           className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-40 flex items-center gap-2 rounded-full bg-zinc-900 border border-white/20 px-5 py-3 text-sm font-medium text-zinc-100 shadow-xl hover:bg-zinc-800 transition-colors cursor-pointer"
         >
           <Image src="/images/emoticon-small.png" alt="해고리" width={24} height={24} className="object-contain" />
-          <span>사서에게 도움요청하기</span>
+          <span>소환</span>
         </button>
       )}
 
