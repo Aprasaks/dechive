@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Geist } from 'next/font/google';
 import Image from 'next/image';
+import Script from 'next/script';
 import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
@@ -42,13 +43,18 @@ export default function RootLayout({
   return (
     <html lang="ko" className="dark">
       <head>
-        <script
-          async
+        <Script
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4611005224374273"
           crossOrigin="anonymous"
+          strategy="afterInteractive"
         />
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y08SJBLW8G" />
-        <script
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-Y08SJBLW8G"
+          strategy="afterInteractive"
+        />
+        <Script
+          id="gtag-init"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
