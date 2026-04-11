@@ -68,7 +68,7 @@ export default function CategoryFilter({
       </div>
 
       {/* 시리즈 + 언어 토글 */}
-      <div className="flex shrink-0 items-center gap-2">
+      <div className="flex shrink-0 items-center gap-2 self-end sm:self-auto">
         {/* 시리즈 드롭다운 */}
         {series.length > 0 && (
           <div ref={dropdownRef} className="relative">
