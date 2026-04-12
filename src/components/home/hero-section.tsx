@@ -12,7 +12,7 @@ export default function HeroSection() {
           sizes="(max-width: 768px) 100vw, 80vw"
           className="object-cover object-bottom"
           priority
-          quality={100}
+          quality={75}
         />
       </div>
 
