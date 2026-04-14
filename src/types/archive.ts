@@ -40,6 +40,20 @@ export interface Log {
   content: string;
 }
 
+export interface Project {
+  slug: string;
+  title: string;
+  description: string;
+  summary: string;
+  techStack: string[];
+  status: 'in-progress' | 'completed' | 'archived';
+  url?: string;
+  github?: string;
+  thumbnail?: string;
+  date: string;
+  content: string;
+}
+
 export interface ChatMessage {
   id: string;
   role: 'user' | 'assistant';
