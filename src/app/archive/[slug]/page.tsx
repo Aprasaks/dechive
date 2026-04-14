@@ -12,8 +12,10 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  const posts = getAllPosts('ko');
-  return posts.map((post) => ({ slug: post.slug }));
+  const koPosts = getAllPosts('ko');
+  const enPosts = getAllPosts('en');
+  const allSlugs = [...new Set([...koPosts, ...enPosts].map((post) => post.slug))];
+  return allSlugs.map((slug) => ({ slug }));
 }
 
 const BASE_URL = 'https://dechive.dev';
@@ -24,7 +26,8 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
   const post = getPostBySlug(slug, (lang as PostLang) ?? 'ko');
   if (!post) return {};
 
-  const url = `${BASE_URL}/archive/${slug}`;
+  const baseUrl = `${BASE_URL}/archive/${slug}`;
+  const canonical = post.lang === 'en' ? `${baseUrl}?lang=en` : baseUrl;
   const image = post.thumbnail
     ? `${BASE_URL}/images/posts/${post.thumbnail}`
     : `${BASE_URL}/images/thumb.webp`;
@@ -36,16 +39,16 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
     title: post.title,
     description,
     alternates: {
-      canonical: url,
+      canonical,
       languages: {
-        'ko': `${url}?lang=ko`,
-        'en': `${url}?lang=en`,
+        'ko': baseUrl,
+        'en': `${baseUrl}?lang=en`,
       },
     },
     openGraph: {
       title: post.title,
       description,
-      url,
+      url: canonical,
       type: 'article',
       publishedTime: post.date,
       images: [{ url: image, width: 1200, height: 630, alt: post.title }],

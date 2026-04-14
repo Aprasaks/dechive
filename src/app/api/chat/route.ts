@@ -201,8 +201,7 @@ export async function POST(req: NextRequest) {
     void logToDiscord(ip, query, answer);
     return NextResponse.json({ answer, relatedSlugs: [], notFound: false });
 
-  } catch (err) {
-    console.error(err);
+  } catch {
     return NextResponse.json({ error: '서버 오류가 발생했습니다.' }, { status: 500 });
   }
 }
