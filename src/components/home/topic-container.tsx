@@ -15,18 +15,14 @@ export default function TopicContainer() {
           href={`/archive/${post.slug}?lang=ko`}
           className="group relative flex-1 w-full overflow-hidden rounded-xl border border-white/10 transition-all hover:border-white/20"
         >
-          {post.thumbnail ? (
-            <Image
-              src={`/images/posts/${post.thumbnail}`}
-              alt={post.title}
-              fill
-              priority
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
-              sizes="(max-width: 1400px) 30vw"
-            />
-          ) : (
-            <div className="absolute inset-0 bg-zinc-900" />
-          )}
+          <Image
+            src={post.thumbnail ? `/images/posts/${post.thumbnail}` : '/images/thumb.webp'}
+            alt={post.title}
+            fill
+            priority
+            className="object-cover transition-transform duration-300 group-hover:scale-105"
+            sizes="(max-width: 1400px) 30vw"
+          />
 
           {/* 하단 그라데이션 + 제목 */}
           <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent px-4 py-2.5">

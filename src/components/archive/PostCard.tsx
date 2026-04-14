@@ -22,19 +22,13 @@ export default function PostCard({ post, highlighted, dimmed }: PostCardProps) {
     >
       {/* 썸네일 */}
       <div className="relative w-full aspect-video bg-zinc-800">
-        {post.thumbnail ? (
-          <Image
-            src={`/images/posts/${post.thumbnail}`}
-            alt={post.title}
-            fill
-            className="object-cover transition-transform duration-300 group-hover:scale-105"
-            sizes="(max-width: 1400px) 20vw"
-          />
-        ) : (
-          <div className="absolute inset-0 flex items-center justify-center bg-zinc-900">
-            <span className="text-xs text-zinc-600">No Image</span>
-          </div>
-        )}
+        <Image
+          src={post.thumbnail ? `/images/posts/${post.thumbnail}` : '/images/thumb.webp'}
+          alt={post.title}
+          fill
+          className="object-cover transition-transform duration-300 group-hover:scale-105"
+          sizes="(max-width: 1400px) 20vw"
+        />
       </div>
 
       {/* 제목 */}
