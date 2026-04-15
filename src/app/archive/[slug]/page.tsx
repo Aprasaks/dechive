@@ -4,6 +4,7 @@ import { getAllPosts, getPostBySlug, getSeriesPosts } from '@/lib/posts';
 import PostHeader from '@/components/archive/PostHeader';
 import PostContent from '@/components/archive/PostContent';
 import SeriesNav from '@/components/archive/SeriesNav';
+import TableOfContents from '@/components/archive/TableOfContents';
 import type { PostLang } from '@/types/archive';
 
 interface PageProps {
@@ -71,7 +72,7 @@ export default async function PostPage({ params, searchParams }: PageProps) {
   const next = currentIndex < seriesPosts.length - 1 ? seriesPosts[currentIndex + 1] : null;
 
   return (
-    <main className="mx-auto max-w-3xl px-4 sm:px-6 py-12 min-h-[calc(100vh-64px-56px)] overflow-x-hidden">
+    <main className="mx-auto max-w-6xl px-4 sm:px-6 py-12 min-h-[calc(100vh-64px-56px)]">
       {/* JSON-LD 구조화 데이터 */}
       <script
         type="application/ld+json"
@@ -97,9 +98,21 @@ export default async function PostPage({ params, searchParams }: PageProps) {
         }}
       />
 
-      <PostHeader post={post} />
-      <PostContent content={post.content} />
-      <SeriesNav prev={prev} next={next} lang={postLang} />
+      <div className="flex gap-12">
+        {/* 본문 */}
+        <article className="min-w-0 w-full max-w-3xl overflow-x-hidden">
+          <PostHeader post={post} />
+          <PostContent content={post.content} />
+          <SeriesNav prev={prev} next={next} lang={postLang} />
+        </article>
+
+        {/* TOC 사이드바 — lg 이상에서만 표시 */}
+        <aside className="hidden lg:block w-56 shrink-0">
+          <div className="sticky top-24">
+            <TableOfContents content={post.content} />
+          </div>
+        </aside>
+      </div>
     </main>
   );
 }
