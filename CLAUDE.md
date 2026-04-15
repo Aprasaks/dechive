@@ -109,7 +109,78 @@ lang: ko
 - **thumbnail 불필요**: Logs는 카드 형식이 아닌 리스트 형식으로 표시.
 - **할루시네이션 금지**: 실제 겪은 내용만 작성한다.
 
-## 10. GitHub 이슈 작성 규칙
+## 10. 시리즈 커리큘럼 현황
+
+### 프롬프트 가이드 완전 정복 (18편)
+series명: `프롬프트 가이드`
+
+| 편수 | 제목 | 슬러그 | 상태 |
+|-----|-----|--------|------|
+| 1편 | LLM의 뇌 구조와 프롬프트의 원리 | `llm-architecture` | ✅ 완료 |
+| 2편 | 페르소나 설계의 정석 | `persona-design` | ✅ 완료 |
+| 3편 | 질문의 기술 – 구조적 글쓰기 | `structured-writing` | ✅ 완료 |
+| 4편 | Prompt Harnessing | `prompt-harnessing` | ✅ 완료 |
+| 5편 | Few-shot & CoT | `prompt-few-shot-cot` | ✅ 완료 |
+| 6편 | 할루시네이션 차단 | `prompt-hallucination` | ✅ 완료 |
+| 7편 | 변수와 템플릿 – 재사용 가능한 모듈형 프롬프트 시스템 | `prompt-variables-templates` | ✅ 완료 |
+| 8편 | Self-Consistency – 여러 추론 경로로 정답률 끌어올리기 | `prompt-self-consistency` | ✅ 완료 |
+| 9편 | Structured Output – JSON을 99% 안정적으로 받는 법 | `prompt-structured-output` | ✅ 완료 |
+| 10편 | Context Engineering – 컨텍스트 윈도우를 설계하는 법 | `prompt-context-engineering` | ⬜ 미작성 |
+| 11편 | RAG와 프롬프트 – 외부 지식을 실시간으로 주입하기 | `prompt-rag` | ⬜ 미작성 |
+| 12편 | ReAct 패턴 – 추론과 도구 사용을 엮는 에이전트의 핵심 | `prompt-react-pattern` | ⬜ 미작성 |
+| 13편 | Agentic 프롬프팅 – AI가 AI를 오케스트레이션하는 멀티에이전트 설계 | `prompt-agentic` | ⬜ 미작성 |
+| 14편 | Reasoning Model 프롬프팅 – thinking AI에겐 다르게 써야 한다 | `prompt-reasoning-model` | ⬜ 미작성 |
+| 15편 | 멀티모달 프롬프팅 – 이미지, 코드, 문서를 함께 다루기 | `prompt-multimodal` | ⬜ 미작성 |
+| 16편 | 프롬프트 인젝션 방어전 – 프로덕션 AI 서비스 보안 전략 | `prompt-injection-defense` | ⬜ 미작성 |
+| 17편 | 메타 프롬프팅 – AI가 AI의 프롬프트를 최적화하는 세계 | `prompt-meta` | ⬜ 미작성 |
+| 18편 | 프롬프트 엔지니어링을 직업으로 – 2026년에 팔리는 기술 | `prompt-as-career` | ⬜ 미작성 |
+
+**파트 구분:**
+- Part 1 (기초 원리): 1~3편
+- Part 2 (핵심 기법): 4~6편
+- Part 3 (설계 패턴): 7~9편
+- Part 4 (실전 시스템): 10~13편
+- Part 5 (최전선): 14~18편
+
+---
+
+### SQL 완전 정복 (28편)
+series명: `SQL 완전 정복`
+
+| 편수 | 주제 | 슬러그 | 상태 |
+|-----|-----|--------|------|
+| 1편 | 데이터모델의 이해 | `data-modeling-understanding` | ✅ 완료 |
+| 2편 | 관계형 데이터베이스 개요 | `relational-database-sql` | ✅ 완료 |
+| 3편 | 엔터티 | - | ⬜ 미작성 |
+| 4편 | 속성 | - | ⬜ 미작성 |
+| 5편 | 관계 | - | ⬜ 미작성 |
+| 6편 | 식별자 | - | ⬜ 미작성 |
+| 7편 | 정규화 | - | ⬜ 미작성 |
+| 8편 | 관계와 조인의 이해 | - | ⬜ 미작성 |
+| 9편 | 모델이 표현하는 트랜잭션의 이해 | - | ⬜ 미작성 |
+| 10편 | NULL 속성의 이해 | - | ⬜ 미작성 |
+| 11편 | 본질 식별자 vs 인조 식별자 | - | ⬜ 미작성 |
+| 12편 | SELECT문 | - | ⬜ 미작성 |
+| 13편 | 함수 | - | ⬜ 미작성 |
+| 14편 | WHERE 절 | - | ⬜ 미작성 |
+| 15편 | GROUP BY / HAVING / ORDER BY | - | ⬜ 미작성 |
+| 16편 | JOIN | - | ⬜ 미작성 |
+| 17편 | 서브쿼리 | - | ⬜ 미작성 |
+| 18편 | 집합 연산자 | - | ⬜ 미작성 |
+| 19편 | 그룹 함수 | - | ⬜ 미작성 |
+| 20편 | 윈도우 함수 | - | ⬜ 미작성 |
+| 21편 | Top N 쿼리 | - | ⬜ 미작성 |
+| 22편 | 계층형 질의와 셀프 조인 | - | ⬜ 미작성 |
+| 23편 | PIVOT 절과 UNPIVOT 절 | - | ⬜ 미작성 |
+| 24편 | 정규 표현식 | - | ⬜ 미작성 |
+| 25편 | DML 심화 | - | ⬜ 미작성 |
+| 26편 | TCL 심화 | - | ⬜ 미작성 |
+| 27편 | DDL 심화 | - | ⬜ 미작성 |
+| 28편 | DCL 심화 | - | ⬜ 미작성 |
+
+---
+
+## 11. GitHub 이슈 작성 규칙
 
 - **제목**: `[feat]`, `[fix]`, `[refactor]`, `[chore]` 중 하나로 시작한다.
 - **본문 구조**: 아래 4개 섹션을 반드시 포함한다.
