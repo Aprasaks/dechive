@@ -1,12 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { CohereClient } from 'cohere-ai';
 import { GoogleGenerativeAI, SchemaType, type FunctionCall } from '@google/generative-ai';
-import fs from 'fs';
-import path from 'path';
-import type { Chunk } from '@/types/embeddings';
+import { createClient } from '@supabase/supabase-js';
 
 const cohere = new CohereClient({ token: process.env.COHERE_API_KEY });
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GENERATIVE_AI_API_KEY ?? '');
+const supabase = createClient(
+  process.env.SUPABASE_URL!,
+  process.env.SUPABASE_ANON_KEY!,
+);
 
 async function logToDiscord(ip: string, userMessage: string, assistantAnswer: string) {
   const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
@@ -30,8 +32,6 @@ async function logToDiscord(ip: string, userMessage: string, assistantAnswer: st
     }),
   }).catch(() => {}); // 로깅 실패가 챗봇을 막으면 안 됨
 }
-
-const EMBEDDINGS_FILE = path.join(process.cwd(), 'data', 'embeddings.json');
 
 function getHaegoriSystem(lang: string): string {
   if (lang === 'en') {
@@ -63,21 +63,7 @@ IMPORTANT: Always respond in English, regardless of what language the user write
 중요: 사용자가 어떤 언어로 쓰더라도 반드시 한국어로만 답변해.`;
 }
 
-function cosineSimilarity(a: number[], b: number[]): number {
-  const dot = a.reduce((sum, val, i) => sum + val * b[i], 0);
-  const normA = Math.sqrt(a.reduce((sum, val) => sum + val * val, 0));
-  const normB = Math.sqrt(b.reduce((sum, val) => sum + val * val, 0));
-  return dot / (normA * normB);
-}
-
 async function searchBlog(query: string, lang: string): Promise<{ context: string; slugs: string[]; found: boolean }> {
-  if (!fs.existsSync(EMBEDDINGS_FILE)) {
-    return { context: '', slugs: [], found: false };
-  }
-
-  const chunks: Chunk[] = JSON.parse(fs.readFileSync(EMBEDDINGS_FILE, 'utf-8'));
-  const filtered = chunks.filter((c) => c.lang === lang);
-
   const res = await cohere.embed({
     texts: [query],
     model: 'embed-multilingual-v3.0',
@@ -88,19 +74,20 @@ async function searchBlog(query: string, lang: string): Promise<{ context: strin
   const queryEmbedding = (res.embeddings as { float?: number[][] }).float?.[0];
   if (!queryEmbedding) return { context: '', slugs: [], found: false };
 
-  const scored = filtered
-    .map((chunk) => ({ chunk, score: cosineSimilarity(queryEmbedding, chunk.embedding) }))
-    .sort((a, b) => b.score - a.score)
-    .slice(0, 3);
+  const { data, error } = await supabase.rpc('match_chunks', {
+    query_embedding: queryEmbedding,
+    match_lang: lang,
+    match_count: 3,
+    match_threshold: 0.5,
+  });
 
-  const topScore = scored[0]?.score ?? 0;
-  if (topScore < 0.5) return { context: '', slugs: [], found: false };
+  if (error || !data || data.length === 0) return { context: '', slugs: [], found: false };
 
-  const context = scored
-    .map((s) => `[${s.chunk.title} - ${s.chunk.section}]\n${s.chunk.content}`)
+  const context = data
+    .map((r: { title: string; section: string; content: string }) => `[${r.title} - ${r.section}]\n${r.content}`)
     .join('\n\n---\n\n');
 
-  const slugs = [...new Set(scored.map((s) => s.chunk.slug))];
+  const slugs = [...new Set(data.map((r: { slug: string }) => r.slug))] as string[];
   return { context, slugs, found: true };
 }
 
