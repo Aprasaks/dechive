@@ -2,7 +2,7 @@
  * 번역 스크립트: 한글 포스트(.ko.md) → 영문 포스트(.en.md) 자동 생성
  *
  * 실행: npm run translate
- * - 이미 .en.md가 존재하는 파일은 스킵 (API 비용 절감)
+ * 재번역: npm run translate -- --force
  * - Claude Haiku 모델 사용 (번역에 충분한 성능, 저비용)
  * - ANTHROPIC_API_KEY 환경변수 필요 (.env.local)
  */
@@ -17,6 +17,13 @@ config({ path: '.env.local' });
 
 const POSTS_DIR = path.join(process.cwd(), 'content', 'posts');
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+const FORCE = process.argv.includes('--force');
+
+// 시리즈 이름 매핑 (한 → 영)
+const SERIES_MAP: Record<string, string> = {
+  '프롬프트 가이드': 'Prompt Guide',
+  'SQL 완전 정복': 'SQL Mastery',
+};
 
 interface Frontmatter {
   title: string;
@@ -35,14 +42,20 @@ interface Frontmatter {
 async function translateText(text: string, context: string): Promise<string> {
   const message = await client.messages.create({
     model: 'claude-haiku-4-5-20251001',
-    max_tokens: 8192,
+    max_tokens: 16000,
     messages: [
       {
         role: 'user',
-        content: `Translate the following Korean ${context} to English.
-- Preserve all markdown formatting exactly (headings, bold, code blocks, lists, etc.)
-- Keep technical terms, code snippets, and proper nouns as-is
-- Return only the translated text, no explanation
+        content: `Translate the following Korean ${context} into natural, fluent English.
+
+Rules:
+- Write as a native English speaker would. Avoid literal Korean-to-English translation patterns.
+- Use concise, direct language. Prefer active voice over passive.
+- Vary sentence structure. Avoid repetitive openers like "We are...", "In this...", "It is...".
+- Preserve all markdown formatting exactly (headings, bold, italics, code blocks, lists, tables).
+- Keep technical terms, code snippets, proper nouns, brand names, and variable names as-is.
+- Do NOT add explanations, notes, or anything not in the original.
+- Return only the translated text.
 
 ${text}`,
       },
@@ -59,8 +72,7 @@ async function translatePost(koFilename: string): Promise<void> {
   const koPath = path.join(POSTS_DIR, koFilename);
   const enPath = path.join(POSTS_DIR, enFilename);
 
-  // 이미 번역된 파일 스킵
-  if (fs.existsSync(enPath)) {
+  if (!FORCE && fs.existsSync(enPath)) {
     console.log(`⏭️  스킵 (이미 존재): ${enFilename}`);
     return;
   }
@@ -71,19 +83,22 @@ async function translatePost(koFilename: string): Promise<void> {
   const { data, content } = matter(raw);
   const fm = data as Frontmatter;
 
-  // 병렬로 번역 (title, summary, description, content)
   const [title, summary, description, translatedContent] = await Promise.all([
-    translateText(fm.title, 'title'),
-    translateText(fm.summary, 'short summary'),
-    translateText(fm.description, 'SEO description'),
+    translateText(fm.title, 'title (single line, no markdown)'),
+    translateText(fm.summary, 'short summary (single line, no markdown symbols)'),
+    translateText(fm.description, 'SEO meta description (single line, 120-160 chars)'),
     translateText(content, 'blog post content'),
   ]);
+
+  // 시리즈 이름 매핑 (없으면 그대로)
+  const series = fm.series ? (SERIES_MAP[fm.series] ?? fm.series) : '';
 
   const enFrontmatter: Frontmatter = {
     ...fm,
     title,
     summary,
     description,
+    series,
     lang: 'en',
   };
 
@@ -112,7 +127,7 @@ async function main(): Promise<void> {
     return;
   }
 
-  console.log(`📚 총 ${koFiles.length}개 파일 확인 중...\n`);
+  console.log(`📚 총 ${koFiles.length}개 파일 확인 중... ${FORCE ? '(--force 재번역)' : ''}\n`);
 
   for (const file of koFiles) {
     await translatePost(file);
