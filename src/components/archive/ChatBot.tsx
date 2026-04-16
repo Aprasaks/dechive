@@ -27,8 +27,8 @@ function createMessage(
 }
 
 const GREETING: Record<string, string> = {
-  ko: '어서오세요~ 원하시는 정보가 있으신가요?',
-  en: 'Welcome~ Is there anything you\'re looking for?',
+  ko: '어서오세요 Dechive입니다.\n궁금하신 내용이 있으시면 알려드리겠습니다.',
+  en: 'Welcome to Dechive.\nFeel free to ask anything you\'re curious about.',
 };
 
 const PLACEHOLDER: Record<string, string> = {
