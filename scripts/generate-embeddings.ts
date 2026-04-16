@@ -69,6 +69,9 @@ async function main() {
 
   const allChunks: Omit<Chunk, 'embedding'>[] = [];
 
+  // 시리즈 메타 정보 수집 (시리즈 인덱스 청크 생성용)
+  const seriesMap: Record<string, { lang: string; titles: string[]; category: string }> = {};
+
   for (const file of files) {
     const raw = fs.readFileSync(path.join(POSTS_DIR, file), 'utf-8');
     const { data, content } = matter(raw);
@@ -87,6 +90,30 @@ async function main() {
         content: sections[i].text,
       });
     }
+
+    // 시리즈 수집
+    if (data.series && data.title) {
+      const key = `${data.series}-${data.lang ?? 'ko'}`;
+      if (!seriesMap[key]) {
+        seriesMap[key] = { lang: data.lang ?? 'ko', titles: [], category: data.category ?? '' };
+      }
+      seriesMap[key].titles.push(data.title);
+    }
+  }
+
+  // 시리즈 인덱스 청크 생성
+  for (const [key, { lang, titles, category }] of Object.entries(seriesMap)) {
+    const seriesName = key.replace(new RegExp(`-${lang}$`), '');
+    allChunks.push({
+      id: `series-index-${key}`,
+      slug: `series-${seriesName.toLowerCase().replace(/\s+/g, '-')}`,
+      lang,
+      title: `${seriesName} 시리즈 목록`,
+      category,
+      tags: [],
+      section: '시리즈 전체 목록',
+      content: `${seriesName}는 총 ${titles.length}편으로 구성된다.\n${titles.map((t, i) => `${i + 1}편: ${t}`).join('\n')}`,
+    });
   }
 
   console.log(`🔢 총 ${allChunks.length}개 청크 임베딩 생성 중...\n`);

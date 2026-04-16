@@ -77,8 +77,8 @@ async function searchBlog(query: string, lang: string): Promise<{ context: strin
   const { data, error } = await supabase.rpc('match_chunks', {
     query_embedding: queryEmbedding,
     match_lang: lang,
-    match_count: 3,
-    match_threshold: 0.5,
+    match_count: 5,
+    match_threshold: 0.45,
   });
 
   if (error || !data || data.length === 0) return { context: '', slugs: [], found: false };
