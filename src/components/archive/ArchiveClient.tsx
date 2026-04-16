@@ -84,6 +84,7 @@ export default function ArchiveClient({
       {!mobileChat && (
         <button
           onClick={() => setMobileChat(true)}
+          aria-label="해고리 챗봇 열기"
           className="md:hidden fixed bottom-5 left-1/2 -translate-x-1/2 z-40 flex items-center gap-1.5 rounded-full bg-zinc-900 border border-white/20 px-3.5 py-2 text-xs font-medium text-zinc-100 shadow-xl hover:bg-zinc-800 transition-colors cursor-pointer"
         >
           <Image src="/images/emoticon-small.png" alt="해고리" width={24} height={24} className="object-contain" />

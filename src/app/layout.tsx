@@ -9,6 +9,7 @@ import Footer from '@/components/layout/Footer';
 const geistSans = Geist({
   variable: '--font-geist-sans',
   subsets: ['latin'],
+  display: 'swap',
 });
 
 const BASE_URL = 'https://dechive.dev';
@@ -46,7 +47,7 @@ export default function RootLayout({
         <Script
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4611005224374273"
           crossOrigin="anonymous"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-Y08SJBLW8G"

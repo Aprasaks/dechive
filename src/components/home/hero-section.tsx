@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 export default function HeroSection() {
   return (
-    <div className="relative overflow-hidden rounded-5xl border border-white/10 bg-zinc-950/20 px-10 py-14 transition-all hover:border-white/20 hover:shadow-2xl md:px-12 md:py-16 min-h-105">
+    <section className="relative overflow-hidden rounded-5xl border border-white/10 bg-zinc-950/20 px-10 py-14 transition-all hover:border-white/20 hover:shadow-2xl md:px-12 md:py-16 min-h-105">
       <div className="pointer-events-none absolute inset-0 z-0 opacity-80 select-none">
         <Image
           src="/images/coded-library.webp"
@@ -24,6 +24,6 @@ export default function HeroSection() {
           </span>
         </h1>
       </div>
-    </div>
+    </section>
   );
 }
