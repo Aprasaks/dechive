@@ -5,6 +5,8 @@ import Script from 'next/script';
 import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import ParticleCanvas from '@/components/home/ParticleCanvas';
+import { MusicProvider } from '@/components/layout/MusicProvider';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -76,16 +78,19 @@ export default function RootLayout({
               alt=""
               fill
               sizes="100vw"
-              className="object-cover blur-xs brightness-[0.35]"
+              className="object-cover brightness-[0.55] blur-[1px]"
               priority
             />
             <div className="absolute inset-y-0 left-0 w-32 bg-linear-to-r from-black to-transparent" />
             <div className="absolute inset-y-0 right-0 w-32 bg-linear-to-l from-black to-transparent" />
           </div>
         </div>
-        <Header />
-        {children}
-        <Footer />
+        <MusicProvider>
+          <ParticleCanvas />
+          <Header />
+          {children}
+          <Footer />
+        </MusicProvider>
       </body>
     </html>
   );

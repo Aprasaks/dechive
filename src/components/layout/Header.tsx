@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import LangToggle from './LangToggle';
+import MusicToggle from './MusicToggle';
 
 const NAV_ITEMS = [
   { name: 'Archive', href: '/archive' },
@@ -41,10 +42,10 @@ export default function Header() {
               <li key={item.name}>
                 <Link
                   href={item.href}
-                  className={`text-sm font-medium tracking-tight transition-colors ${
+                  className={`text-base font-semibold tracking-tight transition-colors ${
                     pathname === item.href
-                      ? 'text-zinc-100'
-                      : 'text-zinc-500 hover:text-zinc-100'
+                      ? 'text-white'
+                      : 'text-zinc-300 hover:text-white'
                   }`}
                 >
                   {item.name}
@@ -56,8 +57,10 @@ export default function Header() {
 
         {/* 우측: 언어 토글 + 햄버거 */}
         <div className="flex h-8 items-center justify-end gap-4" style={{ minWidth: '7rem' }}>
-          <div className="hidden md:flex">
+          <div className="hidden md:flex items-center gap-3">
             <LangToggle />
+            <span className="text-zinc-700">·</span>
+            <MusicToggle />
           </div>
           <button
             className="relative z-[110] text-zinc-500 transition-colors hover:text-zinc-100 md:hidden"
@@ -90,10 +93,14 @@ export default function Header() {
             </Link>
           ))}
 
-          {/* 구분선 + 언어 토글 */}
+          {/* 구분선 + 언어 토글 + 음악 */}
           <div className="flex flex-col items-center gap-4">
             <div className="h-px w-12 bg-zinc-800" />
-            <LangToggle />
+            <div className="flex items-center gap-3">
+              <LangToggle />
+              <span className="text-zinc-700">·</span>
+              <MusicToggle />
+            </div>
           </div>
         </nav>
       </div>
