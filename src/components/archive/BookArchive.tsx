@@ -77,7 +77,7 @@ export default function BookArchive({ posts, categories, series, fontClassName }
   return (
     <div className="flex flex-1 items-center justify-center px-2 py-4">
       <div
-        className="flex w-full max-w-7xl overflow-hidden"
+        className="flex w-full max-w-6xl overflow-hidden"
         style={{
           height: BOOK_HEIGHT,
           boxShadow: `
