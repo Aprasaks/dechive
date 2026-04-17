@@ -109,7 +109,7 @@ export default function ChatDrawer() {
       <div
         className={`
           fixed bottom-0 right-0 z-50 flex flex-col
-          w-full md:w-[420px] md:bottom-4 md:right-4 md:rounded-2xl
+          w-full md:w-105 md:bottom-4 md:right-4 md:rounded-2xl
           transition-all duration-300 ease-in-out
           ${isOpen ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0 pointer-events-none'}
         `}
