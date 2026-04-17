@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { CohereClient } from 'cohere-ai';
 import { GoogleGenerativeAI, SchemaType, type FunctionCall } from '@google/generative-ai';
 import { createClient } from '@supabase/supabase-js';
+import { sendErrorAlert } from '@/lib/discord';
 
 const cohere = new CohereClient({ token: process.env.COHERE_API_KEY });
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GENERATIVE_AI_API_KEY ?? '');
@@ -168,7 +169,10 @@ export async function POST(req: NextRequest) {
     const answer = parts.find((p) => p.text)?.text ?? '...';
     return NextResponse.json({ answer, relatedSlugs: [], notFound: false });
 
-  } catch {
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.error('[api/chat] error:', message);
+    await sendErrorAlert('챗봇 API 오류', message).catch(() => {});
     return NextResponse.json({ error: '서버 오류가 발생했습니다.' }, { status: 500 });
   }
 }
