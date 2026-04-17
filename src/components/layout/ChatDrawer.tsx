@@ -23,7 +23,7 @@ function createMessage(
   };
 }
 
-const GREETING = '안녕하세요, 무한서고 사서입니다.\n찾고 싶은 글이 있으시면 말씀해주세요.';
+const GREETING = '안녕하세요. 오늘도 좋은 하루입니다.\n무엇을 도와드릴까요?';
 
 export default function ChatDrawer() {
   const { isOpen, close } = useChatContext();
@@ -124,22 +124,17 @@ export default function ChatDrawer() {
           className="flex items-center justify-between px-4 py-3 shrink-0"
           style={{ borderBottom: '1px solid rgba(200,150,58,0.12)' }}
         >
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-3">
             <Image
               src="/images/archive.webp"
               alt="사서"
-              width={28}
-              height={28}
+              width={40}
+              height={40}
               className="opacity-90"
             />
-            <div className="flex flex-col">
-              <span className="text-sm font-semibold" style={{ color: '#e8d5a0' }}>
-                해고리
-              </span>
-              <span className="text-[10px]" style={{ color: '#5a4520' }}>
-                무한서고 사서
-              </span>
-            </div>
+            <span className="text-sm font-semibold" style={{ color: '#e8d5a0' }}>
+              Dechive 사서
+            </span>
           </div>
           <button
             onClick={close}
