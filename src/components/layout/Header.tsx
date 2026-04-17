@@ -24,7 +24,7 @@ export default function Header() {
   const close = () => setIsOpen(false);
 
   return (
-    <header className="fixed top-0 z-50 h-16 w-full pt-4 bg-black/50 backdrop-blur-sm">
+    <header className="fixed top-0 z-50 h-16 w-full pt-4">
       <div className="mx-auto relative flex max-w-7xl items-center justify-between px-6 sm:px-8">
 
         {/* 로고 */}
