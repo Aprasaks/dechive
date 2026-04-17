@@ -73,6 +73,7 @@ export default async function PostPage({ params, searchParams }: PageProps) {
 
   return (
     <main className="mx-auto max-w-6xl px-4 sm:px-6 py-12 min-h-[calc(100vh-64px-56px)]">
+      <div className="absolute inset-0 -z-10 bg-black/50" />
       {/* JSON-LD 구조화 데이터 */}
       <script
         type="application/ld+json"
