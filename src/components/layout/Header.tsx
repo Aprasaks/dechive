@@ -4,9 +4,10 @@ import * as React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, BookOpen } from 'lucide-react';
 import LangToggle from './LangToggle';
 import MusicToggle from './MusicToggle';
+import { useChatContext } from './ChatProvider';
 
 const NAV_ITEMS = [
   { name: 'Archive', href: '/archive' },
@@ -18,6 +19,7 @@ const NAV_ITEMS = [
 export default function Header() {
   const [isOpen, setIsOpen] = React.useState(false);
   const pathname = usePathname();
+  const { toggle: toggleChat, isOpen: isChatOpen } = useChatContext();
 
   const close = () => setIsOpen(false);
 
@@ -61,6 +63,14 @@ export default function Header() {
             <LangToggle />
             <span className="text-zinc-700">·</span>
             <MusicToggle />
+            <span className="text-zinc-700">·</span>
+            <button
+              onClick={toggleChat}
+              aria-label="사서에게 묻기"
+              className={`transition-colors ${isChatOpen ? 'text-amber-400' : 'text-zinc-500 hover:text-zinc-100'}`}
+            >
+              <BookOpen size={17} />
+            </button>
           </div>
           <button
             className="relative z-[110] text-zinc-500 transition-colors hover:text-zinc-100 md:hidden"
@@ -100,6 +110,14 @@ export default function Header() {
               <LangToggle />
               <span className="text-zinc-700">·</span>
               <MusicToggle />
+              <span className="text-zinc-700">·</span>
+              <button
+                onClick={() => { toggleChat(); close(); }}
+                aria-label="사서에게 묻기"
+                className={`transition-colors ${isChatOpen ? 'text-amber-400' : 'text-zinc-500 hover:text-zinc-100'}`}
+              >
+                <BookOpen size={17} />
+              </button>
             </div>
           </div>
         </nav>

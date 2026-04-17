@@ -7,6 +7,8 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import ParticleCanvas from '@/components/home/ParticleCanvas';
 import { MusicProvider } from '@/components/layout/MusicProvider';
+import { ChatProvider } from '@/components/layout/ChatProvider';
+import ChatDrawer from '@/components/layout/ChatDrawer';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -86,10 +88,13 @@ export default function RootLayout({
           </div>
         </div>
         <MusicProvider>
-          <ParticleCanvas />
-          <Header />
-          {children}
-          <Footer />
+          <ChatProvider>
+            <ParticleCanvas />
+            <Header />
+            {children}
+            <Footer />
+            <ChatDrawer />
+          </ChatProvider>
         </MusicProvider>
       </body>
     </html>
