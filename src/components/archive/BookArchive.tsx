@@ -19,8 +19,8 @@ const GOLD_DIM = 'rgba(200,150,58,0.35)';
 const GOLD_FAINT = 'rgba(200,150,58,0.12)';
 const PAGE_BG = 'rgba(10,8,5,0.60)';
 const TEXT_ACTIVE = '#e8d5a0';
-const TEXT_INACTIVE = '#9a7d4a';
-const TEXT_LABEL = '#b09060';
+const TEXT_INACTIVE = '#c4a76a';
+const TEXT_LABEL = '#d4b87a';
 
 function stripPrefix(title: string) {
   return title
