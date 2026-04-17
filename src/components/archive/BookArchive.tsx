@@ -4,6 +4,8 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import type { Post, Category, Series } from '@/types/archive';
+import { useLang } from '@/components/layout/LangProvider';
+import i18n from '@/lib/i18n';
 
 interface BookArchiveProps {
   posts: Post[];
@@ -48,6 +50,8 @@ function Ornament() {
 export default function BookArchive({ posts, categories, series, fontClassName }: BookArchiveProps) {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedSeries, setSelectedSeries] = useState('');
+  const { lang } = useLang();
+  const t = i18n[lang];
 
   const filtered = posts
     .filter((p) => {
@@ -105,7 +109,7 @@ export default function BookArchive({ posts, categories, series, fontClassName }
           {/* 헤더 */}
           <div className="mt-6 mb-5">
             <p className="text-[9px] tracking-[0.35em] uppercase mb-2" style={{ color: TEXT_LABEL }}>
-              Dechive
+              {t.archiveLabel}
             </p>
             <div className="flex items-center gap-0">
               <Image src="/images/archive.webp" alt="" width={72} height={72} quality={100} className="opacity-90" />
@@ -113,7 +117,7 @@ export default function BookArchive({ posts, categories, series, fontClassName }
                 className={`text-[1.6rem] leading-tight ${fontClassName}`}
                 style={{ color: TEXT_ACTIVE }}
               >
-                무한서고
+                {t.infiniteArchive}
               </h1>
             </div>
           </div>
@@ -123,9 +127,9 @@ export default function BookArchive({ posts, categories, series, fontClassName }
           {/* 카테고리 */}
           <div className="flex flex-col mt-3 gap-0.5">
             <p className="text-[8px] tracking-[0.3em] uppercase mb-2" style={{ color: TEXT_LABEL }}>
-              Category
+              {t.categoryLabel}
             </p>
-            {[{ id: 'all', label: '전체', count: posts.length }, ...categories.filter(c => c.id !== 'all')].map((cat) => (
+            {[{ id: 'all', label: t.allPosts, count: posts.length }, ...categories.filter(c => c.id !== 'all')].map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => { setSelectedCategory(cat.id); setSelectedSeries(''); }}
@@ -150,7 +154,7 @@ export default function BookArchive({ posts, categories, series, fontClassName }
               <Ornament />
               <div className="flex flex-col mt-1 gap-0.5">
                 <p className="text-[8px] tracking-[0.3em] uppercase mb-2" style={{ color: TEXT_LABEL }}>
-                  Series
+                  {t.seriesLabel}
                 </p>
                 {series.map((s) => (
                   <button
@@ -166,7 +170,7 @@ export default function BookArchive({ posts, categories, series, fontClassName }
                       />
                       <span className={`truncate ${fontClassName}`}>{s.label}</span>
                     </div>
-                    <span className="text-[11px] shrink-0 ml-2" style={{ color: TEXT_INACTIVE }}>{s.count}편</span>
+                    <span className="text-[11px] shrink-0 ml-2" style={{ color: TEXT_INACTIVE }}>{s.count}{t.episodes}</span>
                   </button>
                 ))}
               </div>
@@ -208,7 +212,7 @@ export default function BookArchive({ posts, categories, series, fontClassName }
 
           <div className="mt-6 mb-5">
             <p className="text-[9px] tracking-[0.35em] uppercase" style={{ color: TEXT_LABEL }}>
-              {selectedSeries || (selectedCategory === 'all' ? '전체 기록' : selectedCategory)}
+              {selectedSeries || (selectedCategory === 'all' ? t.allPosts : selectedCategory)}
             </p>
           </div>
 
@@ -219,7 +223,7 @@ export default function BookArchive({ posts, categories, series, fontClassName }
           >
             {filtered.length === 0 ? (
               <p className={`mt-8 text-center text-lg ${fontClassName}`} style={{ color: TEXT_INACTIVE }}>
-                아직 기록이 없습니다.
+                {t.noRecords}
               </p>
             ) : (
               filtered.map((post, i) => (

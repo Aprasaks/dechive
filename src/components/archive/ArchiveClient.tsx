@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import type { Post, Category, Series } from '@/types/archive';
+import { useLang } from '@/components/layout/LangProvider';
 import BookArchive from './BookArchive';
 
 interface ArchiveClientProps {
@@ -23,12 +23,7 @@ export default function ArchiveClient({
   enSeries,
   fontClassName,
 }: ArchiveClientProps) {
-  const [lang, setLang] = useState<'ko' | 'en'>('ko');
-
-  useEffect(() => {
-    const saved = localStorage.getItem('lang');
-    if (saved === 'ko' || saved === 'en') setLang(saved as 'ko' | 'en');
-  }, []);
+  const { lang } = useLang();
 
   const posts = lang === 'ko' ? koPosts : enPosts;
   const categories = lang === 'ko' ? koCategories : enCategories;

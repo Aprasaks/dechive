@@ -1,10 +1,12 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import { X, Send } from 'lucide-react';
 import { useChatContext } from './ChatProvider';
+import { useLang } from './LangProvider';
+import i18n from '@/lib/i18n';
 import type { ChatMessage } from '@/types/archive';
 
 function createMessage(
@@ -23,14 +25,14 @@ function createMessage(
   };
 }
 
-const GREETING = '안녕하세요. 오늘도 좋은 하루입니다.\n무엇을 도와드릴까요?';
 
 export default function ChatDrawer() {
   const { isOpen, close } = useChatContext();
+  const { lang } = useLang();
+  const t = i18n[lang];
   const counter = useRef(0);
-  const [lang, setLang] = useState<'ko' | 'en'>('ko');
   const [messages, setMessages] = useState<ChatMessage[]>([
-    createMessage('assistant', GREETING, counter),
+    createMessage('assistant', t.chatGreeting, counter),
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
@@ -38,9 +40,9 @@ export default function ChatDrawer() {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    const saved = localStorage.getItem('lang');
-    if (saved === 'ko' || saved === 'en') setLang(saved);
-  }, []);
+    setMessages([createMessage('assistant', t.chatGreeting, counter)]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lang]);
 
   useEffect(() => {
     if (isOpen) {
@@ -77,7 +79,7 @@ export default function ChatDrawer() {
         error?: string;
       };
 
-      const answer = data.answer ?? data.error ?? '답변을 가져오지 못했어요.';
+      const answer = data.answer ?? data.error ?? t.chatFallback;
       setMessages((prev) => [
         ...prev,
         createMessage('assistant', answer, counter, data.relatedSlugs),
@@ -86,7 +88,7 @@ export default function ChatDrawer() {
       console.error('[ChatDrawer] API error:', err);
       setMessages((prev) => [
         ...prev,
-        createMessage('assistant', '오류가 발생했어요. 잠시 후 다시 시도해주세요.', counter),
+        createMessage('assistant', t.chatError, counter),
       ]);
     } finally {
       setLoading(false);
@@ -133,7 +135,7 @@ export default function ChatDrawer() {
               className="opacity-90"
             />
             <span className="text-sm font-semibold" style={{ color: '#e8d5a0' }}>
-              Dechive 사서
+              {t.chatLibrarian}
             </span>
           </div>
           <button
@@ -198,7 +200,7 @@ export default function ChatDrawer() {
               className="self-start rounded-2xl px-3.5 py-2.5 text-sm"
               style={{ background: 'rgba(255,255,255,0.06)', color: '#8a6e3a' }}
             >
-              <span className="animate-pulse">사서가 찾는 중...</span>
+              <span className="animate-pulse">{t.chatSearching}</span>
             </div>
           )}
           <div ref={bottomRef} />
@@ -219,7 +221,7 @@ export default function ChatDrawer() {
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="키워드를 입력하세요..."
+              placeholder={t.chatPlaceholder}
               className="flex-1 bg-transparent text-sm outline-none placeholder:text-[#5a4520]"
               style={{ color: '#e8d5a0' }}
             />
