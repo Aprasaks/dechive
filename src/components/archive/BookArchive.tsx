@@ -20,6 +20,12 @@ const TEXT_ACTIVE = '#e8d5a0';
 const TEXT_INACTIVE = '#5a4520';
 const TEXT_LABEL = '#8a6e3a';
 
+function stripPrefix(title: string) {
+  return title
+    .replace(/^.+\s\d+편:\s*/, '')
+    .replace(/^[\w\s]+Part\s+\d+:\s*/, '');
+}
+
 function RulingLines() {
   return (
     <div className="flex flex-col gap-[3px]">
@@ -233,7 +239,7 @@ export default function BookArchive({ posts, categories, series, fontClassName }
                       className={`text-[0.95rem] leading-snug transition-all group-hover:text-[#f0dfa8] group-hover:drop-shadow-[0_0_8px_rgba(200,150,58,0.6)] ${fontClassName}`}
                       style={{ color: TEXT_ACTIVE }}
                     >
-                      {post.title}
+                      {stripPrefix(post.title)}
                     </span>
                     <span className="text-[11px]" style={{ color: TEXT_INACTIVE }}>{post.date.slice(2).replace(/-/g, '.')}</span>
                   </div>
