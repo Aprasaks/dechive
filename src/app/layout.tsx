@@ -93,8 +93,10 @@ export default function RootLayout({
           <ChatProvider>
             <ParticleCanvas />
             <Header />
-            {children}
-            <Footer />
+            <div className="flex flex-1 flex-col pt-16">
+              {children}
+              <Footer />
+            </div>
             <ChatDrawer />
           </ChatProvider>
           </LangProvider>
