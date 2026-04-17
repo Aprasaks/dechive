@@ -47,7 +47,7 @@ export default async function LogPage({ params }: PageProps) {
 
   return (
     <main className="mx-auto max-w-3xl px-4 sm:px-6 py-12 min-h-[calc(100vh-64px-56px)] overflow-x-hidden">
-      <div className="absolute inset-0 -z-10 bg-black/50" />
+      <div className="fixed inset-0 -z-[5] bg-black/50" />
       {/* JSON-LD */}
       <script
         type="application/ld+json"
