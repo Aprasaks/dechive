@@ -1,56 +1,75 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { useLang } from '@/components/layout/LangProvider';
 import i18n from '@/lib/i18n';
 
-const SPACES = [
-  { href: '/archive', mascot: '/images/archive.webp', name: 'Archive', descKey: 'spaceArchiveDesc' },
-  { href: '/projects', mascot: '/images/projects.webp', name: 'Projects', descKey: 'spaceProjectsDesc' },
-  { href: '/logs', mascot: '/images/logs.webp', name: 'Logs', descKey: 'spaceLogsDesc' },
-] as const;
+const GOLD = '#c8963a';
+const GOLD_FAINT = 'rgba(200,150,58,0.2)';
+
+function Divider() {
+  return (
+    <div className="my-8 flex items-center gap-3">
+      <div className="h-px flex-1 bg-zinc-800" />
+      <span className="text-[10px] text-zinc-700">✦</span>
+      <div className="h-px flex-1 bg-zinc-800" />
+    </div>
+  );
+}
 
 export default function AboutClient() {
   const { lang } = useLang();
   const t = i18n[lang];
 
   return (
-    <main className="mx-auto max-w-4xl px-6 py-16 min-h-[calc(100vh-64px-56px)]">
-      <section className="flex flex-col items-center text-center mb-20">
-        <div className="relative w-48 h-48 mb-8">
-          <Image src="/images/about.webp" alt="Dechive mascot" fill sizes="192px" className="object-contain drop-shadow-2xl" priority />
-        </div>
-        <p className="text-xs font-semibold tracking-widest text-zinc-500 uppercase mb-4">
-          {t.aboutLabel}
-        </p>
-        <h1 className="text-3xl font-extrabold tracking-tight text-zinc-100 leading-snug mb-6">
-          {t.aboutTagline1}<br />{t.aboutTagline2}
-        </h1>
-        <p className="max-w-lg text-base leading-relaxed text-zinc-400">
-          {t.aboutDesc}
+    <main className="mx-auto min-h-[calc(100vh-64px-56px)] w-full max-w-xl px-6 pt-20 pb-10">
+      {/* 인트로 */}
+      <section className="text-center">
+        <p className="text-base leading-loose whitespace-pre-line text-white">
+          {t.aboutIntro}
         </p>
       </section>
 
-      <section>
-        <h2 className="text-xs font-semibold tracking-widest text-zinc-500 uppercase mb-8 text-center">
-          {t.spacesLabel}
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          {SPACES.map((space) => (
-            <Link
-              key={space.name}
-              href={space.href}
-              className="group flex flex-col items-center text-center rounded-2xl border border-zinc-800 p-8 transition-all hover:border-zinc-600"
-            >
-              <div className="relative w-32 h-32 mb-6">
-                <Image src={space.mascot} alt={space.name} fill sizes="128px" className="object-contain transition-transform duration-300 group-hover:scale-110" />
-              </div>
-              <h3 className="text-base font-bold text-zinc-100 mb-3">{space.name}</h3>
-              <p className="text-sm leading-relaxed text-zinc-500">{t[space.descKey]}</p>
-            </Link>
-          ))}
+      <Divider />
+
+      {/* 타임라인 */}
+      <section className="flex flex-col items-center gap-0">
+        {/* 항목 1 */}
+        <div className="flex flex-col items-center gap-2 pb-2 text-center">
+          <div className="size-2.5 rounded-full" style={{ background: GOLD }} />
+          <span className="text-sm font-bold" style={{ color: GOLD }}>
+            {t.aboutTimeline1Date}
+          </span>
+          <span className="text-base text-white">{t.aboutTimeline1Text}</span>
         </div>
+        {/* 연결선 */}
+        <div className="h-8 w-px" style={{ background: GOLD_FAINT }} />
+        {/* 항목 2 */}
+        <div className="flex flex-col items-center gap-2 pt-2 text-center">
+          <div className="size-2.5 rounded-full" style={{ background: GOLD }} />
+          <span className="text-sm font-bold" style={{ color: GOLD }}>
+            {t.aboutTimeline2Date}
+          </span>
+          <span className="text-base text-white">{t.aboutTimeline2Text}</span>
+        </div>
+      </section>
+
+      <Divider />
+
+      {/* 클로징 */}
+      <section className="text-center">
+        <p className="mb-20 text-lg leading-loose whitespace-pre-line text-white">
+          {t.aboutClosing}
+        </p>
+        <p className="animate-brand-shimmer text-5xl font-extrabold tracking-tight">
+          {t.aboutBrand}
+        </p>
+        <Link
+          href="/contact"
+          className="mt-4 inline-block text-sm text-zinc-300 underline underline-offset-4 transition-colors hover:text-white"
+        >
+          by Demian
+        </Link>
       </section>
     </main>
   );

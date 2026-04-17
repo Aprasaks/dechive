@@ -8,14 +8,28 @@ const i18n = {
     enterArchive: '서고 입장 →',
 
     // About
-    aboutLabel: 'Dechive',
-    aboutTagline1: '기록되어지는 지식은',
-    aboutTagline2: '가치를 가진다.',
-    aboutDesc: '수많은 정보 속에서 의미 있는 것을 골라내고, 재정립하여 지식으로 만드는 공간. Dechive는 그 과정을 투명하게 기록합니다.',
+    aboutLabel: 'About Demian',
+    aboutRole: '기록하는 학습자',
+    aboutBio: '4년간의 강의 경험을 토대로 누구나 쉽게 이해할 수 있게 지식을 정리합니다. 기록은 계속됩니다.',
+    aboutSkillsLabel: 'Skills & Tools',
+    aboutPhilosophyLabel: 'Dechive 철학',
+    aboutPhilosophyQuote: '자고 일어나면 AI가 또 바뀌어 있는 시대,\n편리함과 함께 수많은 할루시네이션도 함께 왔습니다.\n그래서 직접 검증하고, 직접 기록합니다.',
+    aboutGetLabel: '이 서고에서 얻을 수 있는 것',
+    aboutIntro: 'GPT, Gemini, Claude가 나오고\nLLM과 머신러닝이 세상을 뒤흔들 때,\n세상의 모든 지식을 정리해보자는 꿈을 가지기 시작했다.',
+    aboutTimeline1Date: '2025.05.11',
+    aboutTimeline1Text: '그 꿈을 위한 기획을 세웠고',
+    aboutTimeline2Date: '2026.04.05',
+    aboutTimeline2Text: '나의 도서관이 생겼다.',
+    aboutClosing: 'AI 전성시대, 수많은 정보를 손쉽게 얻을 수 있지만\n수많은 거짓 정보도 함께 넘쳐난다.\n직접 검증하고, 직접 기록한 Demian의 아카이브.',
+    aboutBrand: 'Dechive',
+    spaceArchiveTitle: '정제된 지식',
+    spaceArchiveDesc: 'AI 프롬프트 엔지니어링, SQL, 개발 개념을 시리즈로 정리. 한 편으로 주제를 완결합니다.',
+    spaceLogsTitle: '날것의 기록',
+    spaceLogsDesc: '에러, 삽질, 해결. AI와 함께하는 현장 트러블슈팅을 날것 그대로 기록합니다.',
+    spaceProjectsTitle: '만들어가는 과정',
+    spaceProjectsDesc: '아이디어를 코드로 만드는 과정. 완성된 결과물보다 그 여정이 더 값집니다.',
+    aboutContactCta: '같이 이야기해요',
     spacesLabel: 'Spaces',
-    spaceArchiveDesc: '수집된 지식을 정제하고 기록하는 공간. 기술, 철학, 사유의 흔적들이 쌓인다.',
-    spaceProjectsDesc: '직접 만들고 부수며 배운 것들의 기록. 아이디어가 코드가 되는 과정.',
-    spaceLogsDesc: 'AI와 함께하는 트러블슈팅과 데일리 로그. 날것의 성장 기록.',
 
     // Logs
     logsLabel: 'Dechive · Logs',
@@ -45,6 +59,13 @@ const i18n = {
     seriesLabel: 'Series',
     episodes: '편',
 
+    // GuestBook
+    guestBookTitle: 'GUEST BOOK',
+    guestBookNickname: '닉네임',
+    guestBookPassword: '비밀번호',
+    guestBookMessage: '한 마디 남겨주세요...',
+    guestBookSubmit: '등록',
+
     // ChatDrawer
     chatGreeting: '안녕하세요. 오늘도 좋은 하루입니다.\n무엇을 도와드릴까요?',
     chatPlaceholder: '키워드를 입력하세요...',
@@ -61,14 +82,28 @@ const i18n = {
     enterArchive: 'Enter Archive →',
 
     // About
-    aboutLabel: 'Dechive',
-    aboutTagline1: 'Knowledge that is recorded',
-    aboutTagline2: 'holds value.',
-    aboutDesc: 'A space for filtering meaning from an ocean of information — restructuring it into knowledge. Dechive documents that process with transparency.',
+    aboutLabel: 'About Demian',
+    aboutRole: 'Knowledge Explorer',
+    aboutBio: 'With 4 years of teaching experience, I break down complex knowledge so anyone can understand it. The records keep going.',
+    aboutSkillsLabel: 'Skills & Tools',
+    aboutPhilosophyLabel: 'The Dechive Philosophy',
+    aboutPhilosophyQuote: 'Every morning, a new AI.\nMore convenience. More hallucination.\nSo I verify it myself. And I write it down.',
+    aboutGetLabel: 'What You Can Find Here',
+    aboutIntro: 'When GPT, Gemini, and Claude emerged\nand LLMs began reshaping the world,\na dream was born — to organize all the world\'s knowledge.',
+    aboutTimeline1Date: '2025.05.11',
+    aboutTimeline1Text: 'The dream became a plan.',
+    aboutTimeline2Date: '2026.04.05',
+    aboutTimeline2Text: 'The library was built.',
+    aboutClosing: 'In the age of AI, information is everywhere.\nBut so is misinformation.\nThis is Demian\'s archive — verified and recorded by hand.',
+    aboutBrand: 'Dechive',
+    spaceArchiveTitle: 'Refined Knowledge',
+    spaceArchiveDesc: 'AI Prompt Engineering, SQL, and dev concepts organized into series — each post designed to stand alone.',
+    spaceLogsTitle: 'Raw Records',
+    spaceLogsDesc: 'Errors, struggles, solutions. Real-time troubleshooting logs with AI, unfiltered.',
+    spaceProjectsTitle: 'Works in Progress',
+    spaceProjectsDesc: 'Turning ideas into code. The journey matters more than the finished product.',
+    aboutContactCta: 'Let\'s Talk',
     spacesLabel: 'Spaces',
-    spaceArchiveDesc: 'A space where collected knowledge is refined and recorded. Layers of technology, philosophy, and thought.',
-    spaceProjectsDesc: 'Records of building and breaking things. The process of turning ideas into code.',
-    spaceLogsDesc: 'Troubleshooting and daily logs with AI. Raw records of growth.',
 
     // Logs
     logsLabel: 'Dechive · Logs',
@@ -97,6 +132,13 @@ const i18n = {
     categoryLabel: 'Category',
     seriesLabel: 'Series',
     episodes: 'ep.',
+
+    // GuestBook
+    guestBookTitle: 'GUEST BOOK',
+    guestBookNickname: 'Nickname',
+    guestBookPassword: 'Password',
+    guestBookMessage: 'Leave a message...',
+    guestBookSubmit: 'Submit',
 
     // ChatDrawer
     chatGreeting: 'Hello. Hope you have a wonderful day.\nHow can I help you?',

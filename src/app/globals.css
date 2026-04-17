@@ -69,6 +69,23 @@ body {
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+@keyframes brand-shimmer {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+.animate-brand-shimmer {
+  background: linear-gradient(
+    90deg,
+    #e8d5a0, #c8963a, #e07050, #a0c8e8, #90d0a0, #c8963a, #e8d5a0
+  );
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: brand-shimmer 4s linear infinite;
+}
+
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
