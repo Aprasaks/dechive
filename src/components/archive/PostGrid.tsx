@@ -10,8 +10,6 @@ interface PostGridProps {
   categories: Category[];
   series: Series[];
   highlightedSlugs: string[];
-  lang: PostLang;
-  onLangChange: (lang: PostLang) => void;
   initialCount?: number;
 }
 
@@ -36,8 +34,6 @@ export default function PostGrid({
   categories,
   series,
   highlightedSlugs,
-  lang,
-  onLangChange,
   initialCount = INITIAL_COUNT,
 }: PostGridProps) {
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -72,8 +68,6 @@ export default function PostGrid({
           categories={categories}
           selected={selectedCategory}
           onChange={setSelectedCategory}
-          lang={lang}
-          onLangChange={onLangChange}
           series={series}
           selectedSeries={selectedSeries}
           onSeriesChange={setSelectedSeries}
@@ -82,7 +76,7 @@ export default function PostGrid({
 
       {/* 포스트 그리드 */}
       <div className="flex-1 min-h-0 overflow-y-auto px-4 py-4">
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {visiblePosts.map((post) => {
             const highlighted = hasHighlight && highlightedSlugs.includes(post.slug);
             const dimmed = hasHighlight && !highlightedSlugs.includes(post.slug);

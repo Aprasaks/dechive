@@ -21,7 +21,7 @@ export default function PostCard({ post, highlighted, dimmed }: PostCardProps) {
       ].join(' ')}
     >
       {/* 썸네일 */}
-      <div className="relative w-full aspect-video bg-zinc-800">
+      <div className="relative w-full aspect-[3/2] bg-zinc-800">
         <Image
           src={post.thumbnail ? `/images/posts/${post.thumbnail}` : '/images/thumb.webp'}
           alt={post.title}
