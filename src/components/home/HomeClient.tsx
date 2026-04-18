@@ -45,13 +45,13 @@ function GuestBookModal({ t, messages, onClose, onRefresh }: { t: T; messages: G
     <>
       {/* 백드롭 */}
       <div
-        className="fixed inset-0 z-40 bg-black/30 backdrop-blur-[2px]"
+        className="fixed inset-0 z-40 bg-black/30 backdrop-blur-[2px] animate-in fade-in duration-200"
         onClick={onClose}
       />
 
       {/* 모달 */}
       <div
-        className="fixed left-1/2 top-1/2 z-50 w-full max-w-xl -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-2xl"
+        className="fixed left-1/2 top-1/2 z-50 w-full max-w-xl -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-2xl animate-in fade-in zoom-in-95 duration-200"
         style={{
           background: 'rgba(20,12,4,0.6)',
           backdropFilter: 'blur(24px)',
