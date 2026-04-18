@@ -1,4 +1,4 @@
-import { notFound, redirect } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { getAllPosts, getPostBySlug, getSeriesPosts } from '@/lib/posts';
 import PostHeader from '@/components/archive/PostHeader';
@@ -8,22 +8,21 @@ import TableOfContents from '@/components/archive/TableOfContents';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ lang?: string }>;
 }
 
 export async function generateStaticParams() {
-  const koPosts = getAllPosts('ko');
-  return koPosts.map((post) => ({ slug: post.slug }));
+  const enPosts = getAllPosts('en');
+  return enPosts.map((post) => ({ slug: post.slug }));
 }
 
 const BASE_URL = 'https://dechive.dev';
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPostBySlug(slug, 'ko');
+  const post = getPostBySlug(slug, 'en');
   if (!post) return {};
 
-  const canonical = `${BASE_URL}/archive/${slug}`;
+  const canonical = `${BASE_URL}/en/archive/${slug}`;
   const image = `${BASE_URL}/images/thumb.webp`;
 
   const rawDesc = post.description || post.summary;
@@ -35,8 +34,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     alternates: {
       canonical,
       languages: {
-        ko: canonical,
-        en: `${BASE_URL}/en/archive/${slug}`,
+        ko: `${BASE_URL}/archive/${slug}`,
+        en: canonical,
       },
     },
     openGraph: {
@@ -50,19 +49,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default async function PostPage({ params, searchParams }: PageProps) {
+export default async function EnPostPage({ params }: PageProps) {
   const { slug } = await params;
-  const { lang } = await searchParams;
-
-  // 이전 ?lang=en URL → 새 경로로 301 리다이렉트
-  if (lang === 'en') redirect(`/en/archive/${slug}`);
-
-  const post = getPostBySlug(slug, 'ko');
+  const post = getPostBySlug(slug, 'en');
 
   if (!post) notFound();
 
-  // 시리즈 이전/다음 편
-  const seriesPosts = post.series ? getSeriesPosts(post.series, 'ko') : [];
+  const seriesPosts = post.series ? getSeriesPosts(post.series, 'en') : [];
   const currentIndex = seriesPosts.findIndex((p) => p.slug === slug);
   const prev = currentIndex > 0 ? seriesPosts[currentIndex - 1] : null;
   const next = currentIndex < seriesPosts.length - 1 ? seriesPosts[currentIndex + 1] : null;
@@ -70,14 +63,13 @@ export default async function PostPage({ params, searchParams }: PageProps) {
   return (
     <main className="mx-auto max-w-6xl px-4 sm:px-6 py-12 min-h-[calc(100vh-64px-56px)]">
       <div className="fixed inset-0 -z-[5] bg-black/50" />
-      {/* JSON-LD 구조화 데이터 */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'BlogPosting',
-            mainEntityOfPage: { '@type': 'WebPage', '@id': `${BASE_URL}/archive/${post.slug}` },
+            mainEntityOfPage: { '@type': 'WebPage', '@id': `${BASE_URL}/en/archive/${post.slug}` },
             headline: post.title,
             description: post.description,
             datePublished: post.date,
@@ -88,20 +80,18 @@ export default async function PostPage({ params, searchParams }: PageProps) {
               name: 'Dechive',
               logo: { '@type': 'ImageObject', url: `${BASE_URL}/images/thumb.webp` },
             },
-            url: `${BASE_URL}/archive/${post.slug}`,
+            url: `${BASE_URL}/en/archive/${post.slug}`,
           }),
         }}
       />
 
       <div className="flex gap-12">
-        {/* 본문 */}
         <article className="min-w-0 w-full max-w-3xl overflow-x-hidden">
           <PostHeader post={post} />
           <PostContent content={post.content} />
-          <SeriesNav prev={prev} next={next} lang="ko" />
+          <SeriesNav prev={prev} next={next} lang="en" />
         </article>
 
-        {/* TOC 사이드바 — lg 이상에서만 표시 */}
         <aside className="hidden lg:block w-56 shrink-0">
           <div className="sticky top-24">
             <TableOfContents content={post.content} />

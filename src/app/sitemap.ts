@@ -12,7 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const postUrls: MetadataRoute.Sitemap = posts.map((post) => ({
     url: post.lang === 'en'
-      ? `${BASE_URL}/archive/${post.slug}?lang=en`
+      ? `${BASE_URL}/en/archive/${post.slug}`
       : `${BASE_URL}/archive/${post.slug}`,
     lastModified: post.date ? new Date(post.date) : new Date(),
     changeFrequency: 'monthly',

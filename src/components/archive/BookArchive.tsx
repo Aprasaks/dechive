@@ -230,7 +230,7 @@ export default function BookArchive({ posts, categories, series, fontClassName }
               filtered.map((post, i) => (
                 <Link
                   key={post.slug}
-                  href={`/archive/${post.slug}?lang=${post.lang}`}
+                  href={post.lang === 'en' ? `/en/archive/${post.slug}` : `/archive/${post.slug}`}
                   className="flex items-start gap-3 group"
                 >
                   <span

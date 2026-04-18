@@ -12,18 +12,16 @@ export default function LangToggle() {
   function toggle(next: Lang) {
     setLang(next);
 
-    const isPostPage =
-      pathname.startsWith('/archive/') || pathname.startsWith('/logs/');
-
-    if (isPostPage) {
-      const params = new URLSearchParams(window.location.search);
-      if (next === 'en') {
-        params.set('lang', 'en');
-      } else {
-        params.delete('lang');
+    if (pathname.startsWith('/en/archive/')) {
+      // 영문 포스트 → 한글로
+      if (next === 'ko') {
+        router.push(pathname.replace('/en/archive/', '/archive/'));
       }
-      const query = params.toString();
-      router.push(`${pathname}${query ? `?${query}` : ''}`);
+    } else if (pathname.startsWith('/archive/')) {
+      // 한글 포스트 → 영문으로
+      if (next === 'en') {
+        router.push(`/en${pathname}`);
+      }
     }
   }
 

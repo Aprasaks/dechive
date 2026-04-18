@@ -20,7 +20,7 @@ export default function SeriesNav({ prev, next, lang }: SeriesNavProps) {
         <div>
           {prev ? (
             <Link
-              href={`/archive/${prev.slug}?lang=${lang}`}
+              href={lang === 'en' ? `/en/archive/${prev.slug}` : `/archive/${prev.slug}`}
               className="group flex flex-col gap-1 rounded-xl border border-white/10 bg-white/5 p-4 transition-colors hover:border-white/20 hover:bg-white/10"
             >
               <span className="text-xs text-zinc-500">{lang === 'ko' ? '← 이전 편' : '← Prev'}</span>
@@ -37,7 +37,7 @@ export default function SeriesNav({ prev, next, lang }: SeriesNavProps) {
         <div>
           {next ? (
             <Link
-              href={`/archive/${next.slug}?lang=${lang}`}
+              href={lang === 'en' ? `/en/archive/${next.slug}` : `/archive/${next.slug}`}
               className="group flex flex-col gap-1 rounded-xl border border-white/10 bg-white/5 p-4 text-right transition-colors hover:border-white/20 hover:bg-white/10"
             >
               <span className="text-xs text-zinc-500">{lang === 'ko' ? '다음 편 →' : 'Next →'}</span>
