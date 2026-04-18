@@ -22,10 +22,23 @@ const TEXT_ACTIVE = '#e8d5a0';
 const TEXT_INACTIVE = '#d4b97a';
 const TEXT_LABEL = '#e0c990';
 
+// 시리즈명 한→영 매핑
+const SERIES_NAME_MAP: Record<string, string> = {
+  '프롬프트 가이드': 'Prompt Guide',
+  'SQL 완전 정복': 'SQL Mastery',
+  '애자일 가이드': 'Agile Guide',
+};
+
+function getSeriesLabel(seriesId: string, lang: string): string {
+  if (lang === 'en' && SERIES_NAME_MAP[seriesId]) return SERIES_NAME_MAP[seriesId];
+  return seriesId;
+}
+
 function stripPrefix(title: string) {
   return title
-    .replace(/^.+\s\d+편:\s*/, '')
-    .replace(/^[\w\s]+Part\s+\d+:\s*/, '');
+    .replace(/^.+\s\d+편:\s*/, '')                          // 한글: "프롬프트 가이드 10편:"
+    .replace(/^[\w\s]+(?:Episode|Vol\.)\s*\d+[:.]\s*/i, '') // 영문: "Prompt Guide Episode 2:" / "Vol.10:"
+    .replace(/^[\w\s]+Part\s+\d+:\s*/i, '');                // "Part 1:"
 }
 
 function RulingLines() {
@@ -168,7 +181,7 @@ export default function BookArchive({ posts, categories, series, fontClassName }
                         className="w-1 h-1 shrink-0 rounded-full transition-all"
                         style={{ background: isActive('', s.id) ? GOLD : TEXT_INACTIVE }}
                       />
-                      <span className={`truncate ${fontClassName}`}>{s.label}</span>
+                      <span className={`truncate ${fontClassName}`}>{getSeriesLabel(s.id, lang)}</span>
                     </div>
                     <span className="text-[11px] shrink-0 ml-2" style={{ color: TEXT_INACTIVE }}>{s.count}{t.episodes}</span>
                   </button>
@@ -212,7 +225,7 @@ export default function BookArchive({ posts, categories, series, fontClassName }
 
           <div className="mt-6 mb-5">
             <p className="text-[9px] tracking-[0.35em] uppercase" style={{ color: TEXT_LABEL }}>
-              {selectedSeries || (selectedCategory === 'all' ? t.allPosts : selectedCategory)}
+              {selectedSeries ? getSeriesLabel(selectedSeries, lang) : (selectedCategory === 'all' ? t.allPosts : selectedCategory)}
             </p>
           </div>
 
