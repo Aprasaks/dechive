@@ -15,12 +15,13 @@ const components: Components = {
     if (!src || typeof src !== 'string') return null;
     const imgSrc = src.startsWith('http') ? src : `/images/posts/${src}`;
     return (
-      <span className="relative block w-full aspect-video my-6 rounded-xl overflow-hidden">
+      <span className="block w-full my-6 rounded-xl overflow-hidden">
         <Image
           src={imgSrc}
           alt={alt ?? ''}
-          fill
-          className="object-cover"
+          width={1200}
+          height={630}
+          className="w-full h-auto rounded-xl"
           sizes="(max-width: 1400px) 60vw"
         />
       </span>
