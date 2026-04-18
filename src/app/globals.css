@@ -86,6 +86,12 @@ body {
   animation: brand-shimmer 4s linear infinite;
 }
 
+/* 코드블록 글래스 스타일: hljs 자체 배경 제거 */
+.hljs {
+  background: transparent !important;
+  padding: 0 !important;
+}
+
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;

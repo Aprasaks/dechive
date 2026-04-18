@@ -132,8 +132,8 @@ series명: `프롬프트 가이드`
 | 14편 | Reasoning Model 프롬프팅 – thinking AI에겐 다르게 써야 한다 | `prompt-reasoning-model` | ⬜ 미작성 |
 | 15편 | 멀티모달 프롬프팅 – 이미지, 코드, 문서를 함께 다루기 | `prompt-multimodal` | ⬜ 미작성 |
 | 16편 | 프롬프트 인젝션 방어전 – 프로덕션 AI 서비스 보안 전략 | `prompt-injection-defense` | ⬜ 미작성 |
-| 17편 | 메타 프롬프팅 – AI가 AI의 프롬프트를 최적화하는 세계 | `prompt-meta` | ⬜ 미작성 |
-| 18편 | 프롬프트 엔지니어링을 직업으로 – 2026년에 팔리는 기술 | `prompt-as-career` | ⬜ 미작성 |
+| 17편 | Tool Use & Function Calling – AI가 도구를 쥐는 법 | `prompt-tool-use` | ⬜ 미작성 |
+| 18편 | AI 하네싱을 직업으로 – 2026년에 팔리는 기술 | `prompt-as-career` | ⬜ 미작성 |
 
 **파트 구분:**
 - Part 1 (기초 원리): 1~3편

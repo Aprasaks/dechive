@@ -17,9 +17,8 @@ const PER_PAGE = 3;
 
 type T = typeof i18n['ko'] | typeof i18n['en'];
 
-function GuestBookModal({ t, onClose }: { t: T; onClose: () => void }) {
+function GuestBookModal({ t, messages, onClose, onRefresh }: { t: T; messages: GuestMessage[]; onClose: () => void; onRefresh: () => Promise<void> }) {
   const [page, setPage] = useState(0);
-  const [messages, setMessages] = useState<GuestMessage[]>([]);
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -27,14 +26,6 @@ function GuestBookModal({ t, onClose }: { t: T; onClose: () => void }) {
 
   const totalPages = Math.ceil(messages.length / PER_PAGE);
   const pageMessages = messages.slice(page * PER_PAGE, page * PER_PAGE + PER_PAGE);
-
-  const fetchMessages = useCallback(async () => {
-    const res = await fetch('/api/guestbook');
-    const data = await res.json() as { messages: GuestMessage[] };
-    setMessages(data.messages ?? []);
-  }, []);
-
-  useEffect(() => { fetchMessages(); }, [fetchMessages]);
 
   const handleSubmit = async () => {
     if (!name.trim() || !password.trim() || !message.trim()) return;
@@ -45,7 +36,7 @@ function GuestBookModal({ t, onClose }: { t: T; onClose: () => void }) {
       body: JSON.stringify({ name, password, message }),
     });
     setName(''); setPassword(''); setMessage('');
-    await fetchMessages();
+    await onRefresh();
     setPage(0);
     setSubmitting(false);
   };
@@ -174,6 +165,15 @@ export default function HomeClient() {
   const { lang } = useLang();
   const t = i18n[lang];
   const [guestBookOpen, setGuestBookOpen] = useState(false);
+  const [messages, setMessages] = useState<GuestMessage[]>([]);
+
+  const fetchMessages = useCallback(async () => {
+    const res = await fetch('/api/guestbook');
+    const data = await res.json() as { messages: GuestMessage[] };
+    setMessages(data.messages ?? []);
+  }, []);
+
+  useEffect(() => { fetchMessages(); }, [fetchMessages]);
 
   return (
     <main className="flex flex-1 flex-col items-center justify-center px-6 pb-20 text-center">
@@ -186,20 +186,20 @@ export default function HomeClient() {
         <div className="h-px w-10 bg-zinc-700" />
         <Link
           href="/archive"
-          className="rounded-full border border-zinc-600 px-8 py-2.5 text-sm font-medium text-zinc-300 backdrop-blur-sm transition-all hover:border-zinc-400 hover:text-white active:scale-95"
+          className="rounded-full border border-zinc-500 px-8 py-2.5 text-sm font-semibold text-white transition-all hover:border-zinc-300 active:scale-95"
         >
           {t.enterArchive}
         </Link>
         <button
           onClick={() => setGuestBookOpen(true)}
-          className="rounded-full border border-zinc-600 px-8 py-2.5 text-sm font-medium text-zinc-300 backdrop-blur-sm transition-all hover:border-zinc-400 hover:text-white active:scale-95"
+          className="rounded-full border border-zinc-500 px-8 py-2.5 text-sm font-semibold text-white transition-all hover:border-zinc-300 active:scale-95"
         >
           {t.guestBookTitle}
         </button>
       </div>
 
       {guestBookOpen && (
-        <GuestBookModal t={t} onClose={() => setGuestBookOpen(false)} />
+        <GuestBookModal t={t} messages={messages} onClose={() => setGuestBookOpen(false)} onRefresh={fetchMessages} />
       )}
     </main>
   );

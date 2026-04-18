@@ -3,6 +3,7 @@ import { Geist } from 'next/font/google';
 import Image from 'next/image';
 import Script from 'next/script';
 import './globals.css';
+import 'highlight.js/styles/atom-one-dark.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import ParticleCanvas from '@/components/home/ParticleCanvas';
