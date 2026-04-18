@@ -21,7 +21,7 @@ export interface Post {
   tags: string[];
   summary: string;        // 카드 표시용 짧은 요약
   description: string;    // SEO / AdSense용 (150자 내외)
-  thumbnail: string;      // 파일명 (e.g. "next-app-router.webp")
+  thumbnail?: string;     // 파일명 (e.g. "next-app-router.webp"), 없으면 기본 이미지 사용
   status: PostStatus;
   lang: PostLang;
   series?: string;        // 연재글 묶음 이름 (없으면 빈 문자열)
