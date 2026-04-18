@@ -5,7 +5,7 @@ const i18n = {
     // Home
     homeTagline1: '생각이 기록이 되는 순간',
     homeTagline2: '의미를 가진다.',
-    enterArchive: '서고 입장 →',
+    enterArchive: '아카이브 입장',
 
     // About
     aboutLabel: 'About Demian',
@@ -79,7 +79,7 @@ const i18n = {
     // Home
     homeTagline1: 'When thoughts become records,',
     homeTagline2: 'meaning is born.',
-    enterArchive: 'Enter Archive →',
+    enterArchive: 'Enter Library',
 
     // About
     aboutLabel: 'About Demian',
