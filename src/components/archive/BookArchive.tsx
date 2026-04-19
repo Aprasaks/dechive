@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import type { Post, Category, Series } from '@/types/archive';
 import { useLang } from '@/components/layout/LangProvider';
 import i18n from '@/lib/i18n';
@@ -18,9 +17,9 @@ const GOLD = '#c8963a';
 const GOLD_DIM = 'rgba(200,150,58,0.35)';
 const GOLD_FAINT = 'rgba(200,150,58,0.12)';
 const PAGE_BG = 'rgba(10,8,5,0.60)';
-const TEXT_ACTIVE = '#e8d5a0';
-const TEXT_INACTIVE = '#d4b97a';
-const TEXT_LABEL = '#e0c990';
+const TEXT_ACTIVE = '#f0e0b0';
+const TEXT_INACTIVE = '#c8a870';
+const TEXT_LABEL = '#e8d090';
 
 function stripPrefix(title: string) {
   return title
@@ -112,14 +111,14 @@ export default function BookArchive({ posts, categories, series, fontClassName }
         {mobilePage === 'index' && (
           <div className="flex flex-col flex-1 overflow-y-auto px-5 py-5" style={{ scrollbarWidth: 'none' }}>
             <RulingLines />
-            <div className="mt-5 mb-4 flex items-center gap-2">
-              <Image src="/images/archive.webp" alt="" width={40} height={40} quality={100} className="size-10 opacity-90" />
-              <h1 className={`text-xl leading-tight ${fontClassName}`} style={{ color: TEXT_ACTIVE }}>{t.infiniteArchive}</h1>
+            <div className="mt-5 mb-4">
+              <p className="text-xs tracking-[0.35em] uppercase mb-2" style={{ color: TEXT_LABEL }}>{t.archiveLabel}</p>
+              <h1 className={`text-2xl leading-tight ${fontClassName}`} style={{ color: TEXT_ACTIVE }}>{t.infiniteArchive}</h1>
             </div>
             <Ornament />
             {/* 카테고리 */}
             <div className="flex flex-col mt-3 gap-0.5">
-              <p className="text-[8px] tracking-[0.3em] uppercase mb-2" style={{ color: TEXT_LABEL }}>{t.categoryLabel}</p>
+              <p className="text-xs tracking-[0.3em] uppercase mb-2" style={{ color: TEXT_LABEL }}>{t.categoryLabel}</p>
               {[{ id: 'all', label: t.allPosts, count: posts.length }, ...categories.filter(c => c.id !== 'all')].map((cat) => (
                 <button
                   key={cat.id}
@@ -128,7 +127,7 @@ export default function BookArchive({ posts, categories, series, fontClassName }
                   style={{ color: isActive(cat.id) ? TEXT_ACTIVE : TEXT_INACTIVE }}
                 >
                   <div className="flex items-center gap-2">
-                    <span className="w-1 h-1 rounded-full" style={{ background: isActive(cat.id) ? GOLD : TEXT_INACTIVE }} />
+                    <span className="w-1.5 h-1.5 rounded-full" style={{ background: isActive(cat.id) ? GOLD : TEXT_INACTIVE }} />
                     <span className={fontClassName}>{cat.label}</span>
                   </div>
                   <span className="text-xs" style={{ color: TEXT_INACTIVE }}>{cat.count}</span>
@@ -140,7 +139,7 @@ export default function BookArchive({ posts, categories, series, fontClassName }
               <>
                 <Ornament />
                 <div className="flex flex-col mt-1 gap-0.5">
-                  <p className="text-[8px] tracking-[0.3em] uppercase mb-2" style={{ color: TEXT_LABEL }}>{t.seriesLabel}</p>
+                  <p className="text-xs tracking-[0.3em] uppercase mb-2" style={{ color: TEXT_LABEL }}>{t.seriesLabel}</p>
                   {series.map((s) => (
                     <button
                       key={s.id}
@@ -149,7 +148,7 @@ export default function BookArchive({ posts, categories, series, fontClassName }
                       style={{ color: isActive('', s.id) ? TEXT_ACTIVE : TEXT_INACTIVE }}
                     >
                       <div className="flex items-center gap-2 min-w-0">
-                        <span className="w-1 h-1 shrink-0 rounded-full" style={{ background: isActive('', s.id) ? GOLD : TEXT_INACTIVE }} />
+                        <span className="w-1.5 h-1.5 shrink-0 rounded-full" style={{ background: isActive('', s.id) ? GOLD : TEXT_INACTIVE }} />
                         <span className={`truncate ${fontClassName}`}>{s.label}</span>
                       </div>
                       <span className="text-xs shrink-0 ml-2" style={{ color: TEXT_INACTIVE }}>{s.count}{t.episodes}</span>
@@ -167,7 +166,7 @@ export default function BookArchive({ posts, categories, series, fontClassName }
           <div className="flex flex-col flex-1 overflow-y-auto px-5 py-5" style={{ scrollbarWidth: 'none' }}>
             <RulingLines />
             <div className="mt-4 mb-4">
-              <p className="text-[9px] tracking-[0.35em] uppercase" style={{ color: TEXT_LABEL }}>
+              <p className="text-xs tracking-[0.35em] uppercase" style={{ color: TEXT_LABEL }}>
                 {selectedSeries || (selectedCategory === 'all' ? t.allPosts : selectedCategory)}
               </p>
             </div>
@@ -234,42 +233,39 @@ export default function BookArchive({ posts, categories, series, fontClassName }
 
           {/* 헤더 */}
           <div className="mt-6 mb-5">
-            <p className="text-[9px] tracking-[0.35em] uppercase mb-2" style={{ color: TEXT_LABEL }}>
+            <p className="text-xs tracking-[0.35em] uppercase mb-3" style={{ color: TEXT_LABEL }}>
               {t.archiveLabel}
             </p>
-            <div className="flex items-center gap-0">
-              <Image src="/images/archive.webp" alt="" width={72} height={72} quality={100} className="size-18 opacity-90" />
-              <h1
-                className={`text-[1.6rem] leading-tight ${fontClassName}`}
-                style={{ color: TEXT_ACTIVE }}
-              >
-                {t.infiniteArchive}
-              </h1>
-            </div>
+            <h1
+              className={`text-2xl leading-tight ${fontClassName}`}
+              style={{ color: TEXT_ACTIVE }}
+            >
+              {t.infiniteArchive}
+            </h1>
           </div>
 
           <Ornament />
 
           {/* 카테고리 */}
           <div className="flex flex-col mt-3 gap-0.5">
-            <p className="text-[8px] tracking-[0.3em] uppercase mb-2" style={{ color: TEXT_LABEL }}>
+            <p className="text-xs tracking-[0.3em] uppercase mb-2" style={{ color: TEXT_LABEL }}>
               {t.categoryLabel}
             </p>
             {[{ id: 'all', label: t.allPosts, count: posts.length }, ...categories.filter(c => c.id !== 'all')].map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => { setSelectedCategory(cat.id); setSelectedSeries(''); }}
-                className="group text-left flex items-center justify-between py-1.5 text-[13px] transition-all"
+                className="group text-left flex items-center justify-between py-2 text-sm transition-all"
                 style={{ color: isActive(cat.id) ? TEXT_ACTIVE : TEXT_INACTIVE }}
               >
                 <div className="flex items-center gap-2">
                   <span
-                    className="w-1 h-1 rounded-full transition-all"
+                    className="w-1.5 h-1.5 rounded-full transition-all"
                     style={{ background: isActive(cat.id) ? GOLD : TEXT_INACTIVE }}
                   />
                   <span className={fontClassName}>{cat.label}</span>
                 </div>
-                <span className="text-[11px]" style={{ color: TEXT_INACTIVE }}>{cat.count}</span>
+                <span className="text-xs" style={{ color: TEXT_INACTIVE }}>{cat.count}</span>
               </button>
             ))}
           </div>
@@ -279,19 +275,19 @@ export default function BookArchive({ posts, categories, series, fontClassName }
             <>
               <Ornament />
               <div className="flex flex-col mt-1 gap-0.5">
-                <p className="text-[8px] tracking-[0.3em] uppercase mb-2" style={{ color: TEXT_LABEL }}>
+                <p className="text-xs tracking-[0.3em] uppercase mb-2" style={{ color: TEXT_LABEL }}>
                   {t.seriesLabel}
                 </p>
                 {series.map((s) => (
                   <button
                     key={s.id}
                     onClick={() => { setSelectedSeries(s.id); setSelectedCategory('all'); }}
-                    className="text-left flex items-center justify-between py-1.5 text-[13px] transition-all"
+                    className="text-left flex items-center justify-between py-2 text-sm transition-all"
                     style={{ color: isActive('', s.id) ? TEXT_ACTIVE : TEXT_INACTIVE }}
                   >
                     <div className="flex items-center gap-2 min-w-0">
                       <span
-                        className="w-1 h-1 shrink-0 rounded-full transition-all"
+                        className="w-1.5 h-1.5 shrink-0 rounded-full transition-all"
                         style={{ background: isActive('', s.id) ? GOLD : TEXT_INACTIVE }}
                       />
                       <span className={`truncate ${fontClassName}`}>{s.label}</span>
