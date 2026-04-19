@@ -86,7 +86,7 @@ export default async function EnPostPage({ params }: PageProps) {
       />
 
       <div className="flex gap-12">
-        <article className="min-w-0 w-full max-w-3xl overflow-x-hidden">
+        <article className="min-w-0 w-full max-w-3xl">
           <PostHeader post={post} />
           <PostContent content={post.content} />
           <SeriesNav prev={prev} next={next} lang="en" />

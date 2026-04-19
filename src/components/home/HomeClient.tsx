@@ -45,7 +45,7 @@ function GuestBookModal({ t, messages, onClose, onRefresh }: { t: T; messages: G
     <>
       {/* 백드롭 */}
       <div
-        className="fixed inset-0 z-40 bg-black/30 backdrop-blur-[2px] animate-in fade-in duration-200"
+        className="fixed inset-0 z-40 bg-black/30 backdrop-blur-xs animate-in fade-in duration-200"
         onClick={onClose}
       />
 

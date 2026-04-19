@@ -111,3 +111,10 @@ body {
     @apply font-sans;
   }
 }
+
+/* 코드블록: 뷰포트 기준으로 너비 제한 후 내부 스크롤 */
+.prose pre {
+  max-width: calc(100vw - 2rem);
+  width: 100%;
+  overflow-x: auto;
+}

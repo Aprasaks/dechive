@@ -27,6 +27,14 @@ const components: Components = {
       </span>
     );
   },
+  // 테이블 → 가로 스크롤 래퍼
+  table({ children }) {
+    return (
+      <div className="overflow-x-auto my-6 rounded-xl border border-white/10">
+        <table className="min-w-full">{children}</table>
+      </div>
+    );
+  },
 };
 
 export default function PostContent({ content }: PostContentProps) {
@@ -42,8 +50,9 @@ export default function PostContent({ content }: PostContentProps) {
       prose-blockquote:border-zinc-600 prose-blockquote:text-zinc-300
       prose-code:text-zinc-200 prose-code:bg-zinc-800 prose-code:rounded prose-code:px-1 prose-pre:prose-code:bg-transparent prose-pre:prose-code:px-0 prose-pre:prose-code:rounded-none
       prose-pre:bg-black/40 prose-pre:backdrop-blur-sm prose-pre:border prose-pre:border-white/10 prose-pre:rounded-xl prose-pre:overflow-x-auto
-      prose-table:block prose-table:overflow-x-auto prose-table:whitespace-nowrap prose-table:max-w-full
+      prose-table:w-full
       prose-td:px-3 prose-td:py-2 prose-th:px-3 prose-th:py-2
+      prose-p:break-words prose-li:break-words prose-a:break-all
       prose-a:text-zinc-300 prose-a:underline prose-a:underline-offset-4 hover:prose-a:text-zinc-100
       prose-hr:border-zinc-800
     ">

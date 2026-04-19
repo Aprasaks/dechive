@@ -95,7 +95,7 @@ export default async function PostPage({ params, searchParams }: PageProps) {
 
       <div className="flex gap-12">
         {/* 본문 */}
-        <article className="min-w-0 w-full max-w-3xl overflow-x-hidden">
+        <article className="min-w-0 w-full max-w-3xl">
           <PostHeader post={post} />
           <PostContent content={post.content} />
           <SeriesNav prev={prev} next={next} lang="ko" />

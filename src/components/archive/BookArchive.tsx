@@ -51,6 +51,7 @@ function Ornament() {
 export default function BookArchive({ posts, categories, series, fontClassName }: BookArchiveProps) {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedSeries, setSelectedSeries] = useState('');
+  const [mobilePage, setMobilePage] = useState<'posts' | 'index'>('posts');
   const { lang } = useLang();
   const t = i18n[lang];
 
@@ -76,7 +77,131 @@ export default function BookArchive({ posts, categories, series, fontClassName }
   };
 
   return (
-    <div className="flex flex-1 items-center justify-center px-2 py-4">
+    <>
+    {/* ── 모바일 전용 ── */}
+    <div className="flex flex-1 flex-col md:hidden px-4 py-4">
+      <div
+        className="flex flex-col overflow-hidden flex-1"
+        style={{
+          background: 'rgba(8,6,4,0.85)',
+          backdropFilter: 'blur(16px)',
+          boxShadow: `0 20px 60px rgba(0,0,0,0.9), 0 0 0 1px ${GOLD_FAINT}`,
+          borderRadius: '4px',
+        }}
+      >
+        {/* 모바일 탭 헤더 */}
+        <div className="flex shrink-0" style={{ borderBottom: `1px solid ${GOLD_FAINT}` }}>
+          <button
+            onClick={() => setMobilePage('index')}
+            className="flex-1 py-3 text-xs tracking-widest uppercase transition-colors"
+            style={{ color: mobilePage === 'index' ? TEXT_ACTIVE : TEXT_INACTIVE, borderBottom: mobilePage === 'index' ? `1px solid ${GOLD}` : 'none' }}
+          >
+            {t.categoryLabel}
+          </button>
+          <div style={{ width: '1px', background: GOLD_FAINT }} />
+          <button
+            onClick={() => setMobilePage('posts')}
+            className="flex-1 py-3 text-xs tracking-widest uppercase transition-colors"
+            style={{ color: mobilePage === 'posts' ? TEXT_ACTIVE : TEXT_INACTIVE, borderBottom: mobilePage === 'posts' ? `1px solid ${GOLD}` : 'none' }}
+          >
+            {t.allPosts}
+          </button>
+        </div>
+
+        {/* 모바일 목차 페이지 */}
+        {mobilePage === 'index' && (
+          <div className="flex flex-col flex-1 overflow-y-auto px-5 py-5" style={{ scrollbarWidth: 'none' }}>
+            <RulingLines />
+            <div className="mt-5 mb-4 flex items-center gap-2">
+              <Image src="/images/archive.webp" alt="" width={40} height={40} quality={100} className="opacity-90" />
+              <h1 className={`text-xl leading-tight ${fontClassName}`} style={{ color: TEXT_ACTIVE }}>{t.infiniteArchive}</h1>
+            </div>
+            <Ornament />
+            {/* 카테고리 */}
+            <div className="flex flex-col mt-3 gap-0.5">
+              <p className="text-[8px] tracking-[0.3em] uppercase mb-2" style={{ color: TEXT_LABEL }}>{t.categoryLabel}</p>
+              {[{ id: 'all', label: t.allPosts, count: posts.length }, ...categories.filter(c => c.id !== 'all')].map((cat) => (
+                <button
+                  key={cat.id}
+                  onClick={() => { setSelectedCategory(cat.id); setSelectedSeries(''); setMobilePage('posts'); }}
+                  className="text-left flex items-center justify-between py-2 text-sm transition-all"
+                  style={{ color: isActive(cat.id) ? TEXT_ACTIVE : TEXT_INACTIVE }}
+                >
+                  <div className="flex items-center gap-2">
+                    <span className="w-1 h-1 rounded-full" style={{ background: isActive(cat.id) ? GOLD : TEXT_INACTIVE }} />
+                    <span className={fontClassName}>{cat.label}</span>
+                  </div>
+                  <span className="text-xs" style={{ color: TEXT_INACTIVE }}>{cat.count}</span>
+                </button>
+              ))}
+            </div>
+            {/* 시리즈 */}
+            {series.length > 0 && (
+              <>
+                <Ornament />
+                <div className="flex flex-col mt-1 gap-0.5">
+                  <p className="text-[8px] tracking-[0.3em] uppercase mb-2" style={{ color: TEXT_LABEL }}>{t.seriesLabel}</p>
+                  {series.map((s) => (
+                    <button
+                      key={s.id}
+                      onClick={() => { setSelectedSeries(s.id); setSelectedCategory('all'); setMobilePage('posts'); }}
+                      className="text-left flex items-center justify-between py-2 text-sm transition-all"
+                      style={{ color: isActive('', s.id) ? TEXT_ACTIVE : TEXT_INACTIVE }}
+                    >
+                      <div className="flex items-center gap-2 min-w-0">
+                        <span className="w-1 h-1 shrink-0 rounded-full" style={{ background: isActive('', s.id) ? GOLD : TEXT_INACTIVE }} />
+                        <span className={`truncate ${fontClassName}`}>{s.label}</span>
+                      </div>
+                      <span className="text-xs shrink-0 ml-2" style={{ color: TEXT_INACTIVE }}>{s.count}{t.episodes}</span>
+                    </button>
+                  ))}
+                </div>
+              </>
+            )}
+            <div className="mt-auto pt-4"><Ornament /></div>
+          </div>
+        )}
+
+        {/* 모바일 글 목록 페이지 */}
+        {mobilePage === 'posts' && (
+          <div className="flex flex-col flex-1 overflow-y-auto px-5 py-5" style={{ scrollbarWidth: 'none' }}>
+            <RulingLines />
+            <div className="mt-4 mb-4">
+              <p className="text-[9px] tracking-[0.35em] uppercase" style={{ color: TEXT_LABEL }}>
+                {selectedSeries || (selectedCategory === 'all' ? t.allPosts : selectedCategory)}
+              </p>
+            </div>
+            <div className="flex flex-col gap-4">
+              {filtered.length === 0 ? (
+                <p className={`mt-8 text-center text-base ${fontClassName}`} style={{ color: TEXT_INACTIVE }}>{t.noRecords}</p>
+              ) : (
+                filtered.map((post, i) => (
+                  <Link
+                    key={post.slug}
+                    href={post.lang === 'en' ? `/en/archive/${post.slug}` : `/archive/${post.slug}`}
+                    className="flex items-start gap-3 group"
+                  >
+                    <span className="text-xs mt-[5px] w-5 shrink-0 text-right font-light transition-colors group-hover:text-[#c8963a]" style={{ color: TEXT_INACTIVE }}>
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <div className="flex flex-col gap-0.5 border-b pb-3 flex-1 transition-colors group-hover:border-[rgba(200,150,58,0.4)]" style={{ borderColor: GOLD_FAINT }}>
+                      <span className={`text-sm leading-snug transition-all group-hover:text-[#f0dfa8] ${fontClassName}`} style={{ color: TEXT_ACTIVE }}>
+                        {stripPrefix(post.title)}
+                      </span>
+                      <span className="text-[11px]" style={{ color: TEXT_INACTIVE }}>{post.date.slice(2).replace(/-/g, '.')}</span>
+                    </div>
+                  </Link>
+                ))
+              )}
+            </div>
+            <div className="mt-auto pt-4"><RulingLines /></div>
+          </div>
+        )}
+      </div>
+    </div>
+
+    {/* ── 데스크탑 전용 ── */}
+    <div className="hidden md:flex flex-1 items-center justify-center px-2 py-4">
       <div
         className="flex w-full max-w-6xl overflow-hidden"
         style={{
@@ -267,5 +392,6 @@ export default function BookArchive({ posts, categories, series, fontClassName }
         />
       </div>
     </div>
+    </>
   );
 }
