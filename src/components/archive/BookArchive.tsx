@@ -113,7 +113,7 @@ export default function BookArchive({ posts, categories, series, fontClassName }
           <div className="flex flex-col flex-1 overflow-y-auto px-5 py-5" style={{ scrollbarWidth: 'none' }}>
             <RulingLines />
             <div className="mt-5 mb-4 flex items-center gap-2">
-              <Image src="/images/archive.webp" alt="" width={40} height={40} quality={100} className="opacity-90" />
+              <Image src="/images/archive.webp" alt="" width={40} height={40} quality={100} className="size-10 opacity-90" />
               <h1 className={`text-xl leading-tight ${fontClassName}`} style={{ color: TEXT_ACTIVE }}>{t.infiniteArchive}</h1>
             </div>
             <Ornament />
@@ -238,7 +238,7 @@ export default function BookArchive({ posts, categories, series, fontClassName }
               {t.archiveLabel}
             </p>
             <div className="flex items-center gap-0">
-              <Image src="/images/archive.webp" alt="" width={72} height={72} quality={100} className="opacity-90" />
+              <Image src="/images/archive.webp" alt="" width={72} height={72} quality={100} className="size-18 opacity-90" />
               <h1
                 className={`text-[1.6rem] leading-tight ${fontClassName}`}
                 style={{ color: TEXT_ACTIVE }}

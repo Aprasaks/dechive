@@ -141,7 +141,7 @@ export default function ChatDrawer() {
               alt="사서"
               width={40}
               height={40}
-              className="opacity-90"
+              className="size-10 opacity-90"
             />
             <span className="text-sm font-semibold" style={{ color: '#e8d5a0' }}>
               {t.chatLibrarian}
