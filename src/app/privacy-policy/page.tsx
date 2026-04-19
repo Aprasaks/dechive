@@ -18,7 +18,7 @@ export default function PrivacyPolicyPage() {
         <section>
           <p className="text-sm text-zinc-500">Last updated: April 6, 2026</p>
           <p className="mt-4 leading-relaxed">
-            Dechive ("we", "our", or "us") operates the website dechive.dev. This page informs you of our policies regarding the collection, use, and disclosure of personal information when you use our service.
+            Dechive (&ldquo;we&rdquo;, &ldquo;our&rdquo;, or &ldquo;us&rdquo;) operates the website dechive.dev. This page informs you of our policies regarding the collection, use, and disclosure of personal information when you use our service.
           </p>
         </section>
 
@@ -64,7 +64,7 @@ export default function PrivacyPolicyPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold text-zinc-100">Children's Privacy</h2>
+          <h2 className="mb-3 text-xl font-bold text-zinc-100">Children&apos;s Privacy</h2>
           <p className="leading-relaxed">
             Our service is not directed to anyone under the age of 13. We do not knowingly collect personally identifiable information from children.
           </p>
