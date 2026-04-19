@@ -10,7 +10,7 @@ export default function MusicToggle() {
     <button
       onClick={toggle}
       aria-label={playing ? '음악 끄기' : '음악 켜기'}
-      className={`transition-colors ${playing ? 'text-zinc-100' : 'text-zinc-600 hover:text-zinc-400'}`}
+      className={`transition-colors ${playing ? 'text-white' : 'text-zinc-400 hover:text-zinc-200'}`}
     >
       {playing ? <Volume2 size={15} /> : <VolumeX size={15} />}
     </button>

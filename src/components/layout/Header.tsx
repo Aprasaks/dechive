@@ -67,7 +67,7 @@ export default function Header() {
             <button
               onClick={toggleChat}
               aria-label="사서에게 묻기"
-              className={`transition-colors ${isChatOpen ? 'text-amber-400' : 'text-zinc-500 hover:text-zinc-100'}`}
+              className={`transition-colors ${isChatOpen ? 'text-amber-400' : 'text-zinc-400 hover:text-zinc-100'}`}
             >
               <BookOpen size={17} />
             </button>
@@ -96,7 +96,7 @@ export default function Header() {
               href={item.href}
               onClick={close}
               className={`text-lg font-light tracking-[0.3em] uppercase transition-colors ${
-                pathname === item.href ? 'text-zinc-100' : 'text-zinc-500 hover:text-zinc-100'
+                pathname === item.href ? 'text-zinc-100' : 'text-zinc-400 hover:text-zinc-100'
               }`}
             >
               {item.name}
@@ -114,7 +114,7 @@ export default function Header() {
               <button
                 onClick={() => { toggleChat(); close(); }}
                 aria-label="사서에게 묻기"
-                className={`transition-colors ${isChatOpen ? 'text-amber-400' : 'text-zinc-500 hover:text-zinc-100'}`}
+                className={`transition-colors ${isChatOpen ? 'text-amber-400' : 'text-zinc-400 hover:text-zinc-100'}`}
               >
                 <BookOpen size={17} />
               </button>

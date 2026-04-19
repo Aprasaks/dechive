@@ -29,14 +29,14 @@ export default function LangToggle() {
     <div className="flex items-center gap-1 text-xs font-medium">
       <button
         onClick={() => toggle('ko')}
-        className={`transition-colors ${lang === 'ko' ? 'text-zinc-100' : 'text-zinc-600 hover:text-zinc-400'}`}
+        className={`transition-colors ${lang === 'ko' ? 'text-white' : 'text-zinc-400 hover:text-zinc-200'}`}
       >
         KO
       </button>
-      <span className="text-zinc-700">·</span>
+      <span className="text-zinc-500">·</span>
       <button
         onClick={() => toggle('en')}
-        className={`transition-colors ${lang === 'en' ? 'text-zinc-100' : 'text-zinc-600 hover:text-zinc-400'}`}
+        className={`transition-colors ${lang === 'en' ? 'text-white' : 'text-zinc-400 hover:text-zinc-200'}`}
       >
         EN
       </button>

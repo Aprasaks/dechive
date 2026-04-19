@@ -37,7 +37,7 @@ export default function AboutClient() {
         {/* 항목 1 */}
         <div className="flex flex-col items-center gap-2 pb-2 text-center">
           <div className="size-2.5 rounded-full" style={{ background: GOLD }} />
-          <span className="text-sm font-bold" style={{ color: GOLD }}>
+          <span className="text-sm font-extrabold tracking-widest" style={{ color: '#f0c060', textShadow: '0 0 12px rgba(240,180,60,0.6)' }}>
             {t.aboutTimeline1Date}
           </span>
           <span className="text-base text-white">{t.aboutTimeline1Text}</span>
@@ -47,7 +47,7 @@ export default function AboutClient() {
         {/* 항목 2 */}
         <div className="flex flex-col items-center gap-2 pt-2 text-center">
           <div className="size-2.5 rounded-full" style={{ background: GOLD }} />
-          <span className="text-sm font-bold" style={{ color: GOLD }}>
+          <span className="text-sm font-extrabold tracking-widest" style={{ color: '#f0c060', textShadow: '0 0 12px rgba(240,180,60,0.6)' }}>
             {t.aboutTimeline2Date}
           </span>
           <span className="text-base text-white">{t.aboutTimeline2Text}</span>
@@ -66,7 +66,7 @@ export default function AboutClient() {
         </p>
         <Link
           href="/contact"
-          className="mt-4 inline-block text-sm text-zinc-300 underline underline-offset-4 transition-colors hover:text-white"
+          className="mt-4 inline-block text-sm text-white underline underline-offset-4 transition-colors hover:text-zinc-300"
         >
           by Demian
         </Link>

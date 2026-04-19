@@ -10,19 +10,19 @@ export default function Footer() {
         <nav className="flex items-center gap-6">
           <Link
             href="/about"
-            className="text-xs text-zinc-400 transition-colors hover:text-zinc-400"
+            className="text-xs text-zinc-400 transition-colors hover:text-zinc-200"
           >
             About
           </Link>
           <Link
             href="/privacy-policy"
-            className="text-xs text-zinc-400 transition-colors hover:text-zinc-400"
+            className="text-xs text-zinc-400 transition-colors hover:text-zinc-200"
           >
             Privacy Policy
           </Link>
           <Link
             href="/contact"
-            className="text-xs text-zinc-400 transition-colors hover:text-zinc-400"
+            className="text-xs text-zinc-400 transition-colors hover:text-zinc-200"
           >
             Contact
           </Link>
