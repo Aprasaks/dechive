@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import { X, Send } from 'lucide-react';
@@ -27,20 +27,29 @@ function createMessage(
 
 
 export default function ChatDrawer() {
-  const { isOpen, close } = useChatContext();
+  const { isOpen, close, messages, setMessages, counter } = useChatContext();
   const { lang } = useLang();
   const t = i18n[lang];
-  const counter = useRef(0);
-  const [messages, setMessages] = useState<ChatMessage[]>([
-    createMessage('assistant', t.chatGreeting, counter),
-  ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const prevLangRef = useRef(lang);
 
   useEffect(() => {
-    setMessages([createMessage('assistant', t.chatGreeting, counter)]);
+    // 초기 인사말 세팅 (messages가 비어있을 때)
+    if (messages.length === 0) {
+      setMessages([createMessage('assistant', t.chatGreeting, counter)]);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    // 언어 변경 시에만 초기화
+    if (prevLangRef.current !== lang) {
+      prevLangRef.current = lang;
+      setMessages([createMessage('assistant', t.chatGreeting, counter)]);
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lang]);
 
