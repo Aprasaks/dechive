@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import type { Post, Category, Series } from '@/types/archive';
 import { useLang } from '@/components/layout/LangProvider';
@@ -53,6 +53,11 @@ export default function BookArchive({ posts, categories, series, fontClassName }
   const [mobilePage, setMobilePage] = useState<'posts' | 'index'>('posts');
   const { lang } = useLang();
   const t = i18n[lang];
+
+  useEffect(() => {
+    setSelectedCategory('all');
+    setSelectedSeries('');
+  }, [lang]);
 
   const filtered = posts
     .filter((p) => {
