@@ -89,7 +89,7 @@ async function searchBlog(query: string, lang: string): Promise<{ context: strin
   const seen = new Set<string>();
   const relatedPosts: RelatedPost[] = [];
   for (const r of data as SearchResult[]) {
-    if (!seen.has(r.slug)) {
+    if (!seen.has(r.slug) && !r.slug.startsWith('series-')) {
       seen.add(r.slug);
       relatedPosts.push({ slug: r.slug, title: r.title });
     }
