@@ -93,6 +93,13 @@ const SERIES_MAP: Record<string, string> = {
 };
 ```
 
+### 포스트 이미지 경로 — public 아니다
+포스트에 삽입되는 이미지는 **반드시 `content/posts/`에 저장**한다.
+- ✅ `content/posts/prompt-react-pattern.webp`
+- ❌ `public/images/posts/prompt-react-pattern.webp`
+
+마크다운에서 `![설명](파일명.webp)` 상대 경로로 참조하기 때문에 md 파일과 같은 디렉토리여야 한다.
+
 ### git push rejected
 ```bash
 git pull --rebase origin main && git push

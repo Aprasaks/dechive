@@ -55,21 +55,12 @@ function GuestBookModal({ t, messages, onClose, onRefresh }: { t: T; messages: G
         style={{
           background: 'rgba(20,12,4,0.6)',
           backdropFilter: 'blur(24px)',
-          maskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent), linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
-          WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent), linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
+          maskImage: 'linear-gradient(to bottom, transparent, black 15%), linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
+          WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 15%), linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
           maskComposite: 'intersect',
           WebkitMaskComposite: 'source-in',
         }}
       >
-        {/* 파피루스 텍스처 */}
-        <div
-          className="pointer-events-none absolute inset-0"
-          style={{
-            backgroundImage: 'url(/images/background-image.svg)',
-            backgroundSize: 'cover',
-            opacity: 0.5,
-          }}
-        />
 
         <div className="relative px-6 py-6">
           {/* 헤더 */}
@@ -143,14 +134,14 @@ function GuestBookModal({ t, messages, onClose, onRefresh }: { t: T; messages: G
             <button
               onClick={() => setPage((p) => Math.max(0, p - 1))}
               disabled={page === 0}
-              className="text-amber-300 transition-opacity disabled:opacity-20"
+              className="text-white transition-opacity disabled:opacity-30"
             >
               <ChevronLeft size={18} />
             </button>
             <button
               onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
               disabled={page === totalPages - 1}
-              className="text-amber-300 transition-opacity disabled:opacity-20"
+              className="text-white transition-opacity disabled:opacity-30"
             >
               <ChevronRight size={18} />
             </button>
