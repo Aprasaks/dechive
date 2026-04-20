@@ -21,6 +21,15 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Dechive Archive',
+  description: '기술, 철학, 사유의 흔적을 정제하고 기록하는 지식 저장소.',
+  url: 'https://dechive.dev/archive',
+  isPartOf: { '@type': 'WebSite', name: 'Dechive', url: 'https://dechive.dev' },
+};
+
 export default function ArchivePage() {
   const koPosts = getAllPosts('ko');
   const enPosts = getAllPosts('en');
@@ -30,16 +39,22 @@ export default function ArchivePage() {
   const enSeries = getSeries('en');
 
   return (
-    <main className={`flex flex-1 min-h-0 ${notoSerifKR.variable}`}>
-      <ArchiveClient
-        koPosts={koPosts}
-        enPosts={enPosts}
-        koCategories={koCategories}
-        enCategories={enCategories}
-        koSeries={koSeries}
-        enSeries={enSeries}
-        fontClassName="font-[family-name:var(--font-noto-serif-kr)]"
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-    </main>
+      <main className={`flex flex-1 min-h-0 ${notoSerifKR.variable}`}>
+        <ArchiveClient
+          koPosts={koPosts}
+          enPosts={enPosts}
+          koCategories={koCategories}
+          enCategories={enCategories}
+          koSeries={koSeries}
+          enSeries={enSeries}
+          fontClassName="font-[family-name:var(--font-noto-serif-kr)]"
+        />
+      </main>
+    </>
   );
 }
