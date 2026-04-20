@@ -50,10 +50,10 @@ export default function RootLayout({
   return (
     <html lang="ko" className="dark">
       <head>
-        <Script
+        <script
+          async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4611005224374273"
           crossOrigin="anonymous"
-          strategy="lazyOnload"
         />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-Y08SJBLW8G"
