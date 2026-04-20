@@ -40,6 +40,9 @@ export const metadata: Metadata = {
     images: ['/images/thumb.webp'],
   },
   robots: { index: true, follow: true },
+  verification: {
+    other: { 'naver-site-verification': 'ca13b5bbfb7f3981b08fd61d44f999d6436500de' },
+  },
 };
 
 export default function RootLayout({
