@@ -66,6 +66,9 @@ const i18n = {
     guestBookMessage: '한 마디 남겨주세요...',
     guestBookSubmit: '등록',
 
+    // TableOfContents
+    tocTitle: '목차',
+
     // ChatDrawer
     chatGreeting: '안녕하세요. 오늘도 좋은 하루입니다.\n무엇을 도와드릴까요?',
     chatPlaceholder: '키워드를 입력하세요...',
@@ -139,6 +142,9 @@ const i18n = {
     guestBookPassword: 'Password',
     guestBookMessage: 'Leave a message...',
     guestBookSubmit: 'Submit',
+
+    // TableOfContents
+    tocTitle: 'On this page',
 
     // ChatDrawer
     chatGreeting: 'Hello. Hope you have a wonderful day.\nHow can I help you?',
