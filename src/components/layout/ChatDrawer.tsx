@@ -2,18 +2,19 @@
 
 import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import { X, Send } from 'lucide-react';
 import { useChatContext } from './ChatProvider';
 import { useLang } from './LangProvider';
 import i18n from '@/lib/i18n';
-import type { ChatMessage } from '@/types/archive';
+import type { ChatMessage, RelatedPost } from '@/types/archive';
 
 function createMessage(
   role: ChatMessage['role'],
   content: string,
   counter: { current: number },
-  relatedPostIds?: string[],
+  relatedPosts?: RelatedPost[],
 ): ChatMessage {
   counter.current += 1;
   return {
@@ -21,7 +22,7 @@ function createMessage(
     role,
     content,
     timestamp: new Date().toISOString(),
-    relatedPostIds,
+    relatedPosts,
   };
 }
 
@@ -84,14 +85,14 @@ export default function ChatDrawer() {
       });
       const data = await res.json() as {
         answer?: string | null;
-        relatedSlugs?: string[];
+        relatedPosts?: RelatedPost[];
         error?: string;
       };
 
       const answer = data.answer ?? data.error ?? t.chatFallback;
       setMessages((prev) => [
         ...prev,
-        createMessage('assistant', answer, counter, data.relatedSlugs),
+        createMessage('assistant', answer, counter, data.relatedPosts),
       ]);
     } catch (err) {
       console.error('[ChatDrawer] API error:', err);
@@ -201,6 +202,24 @@ export default function ChatDrawer() {
                   </ReactMarkdown>
                 )}
               </div>
+              {msg.role === 'assistant' && msg.relatedPosts && msg.relatedPosts.length > 0 && (
+                <div className="mt-2 flex flex-col gap-1 w-full">
+                  {msg.relatedPosts.map((post) => (
+                    <Link
+                      key={post.slug}
+                      href={lang === 'en' ? `/en/archive/${post.slug}` : `/archive/${post.slug}`}
+                      onClick={close}
+                      className="flex items-center gap-1.5 text-xs transition-colors hover:opacity-100"
+                      style={{ color: '#8a6e3a' }}
+                      onMouseEnter={(e) => { e.currentTarget.style.color = '#c8963a'; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.color = '#8a6e3a'; }}
+                    >
+                      <span style={{ color: '#c8963a' }}>→</span>
+                      <span className="underline underline-offset-2 decoration-dotted">{post.title}</span>
+                    </Link>
+                  ))}
+                </div>
+              )}
             </div>
           ))}
 

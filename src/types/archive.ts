@@ -54,10 +54,15 @@ export interface Project {
   content: string;
 }
 
+export interface RelatedPost {
+  slug: string;
+  title: string;
+}
+
 export interface ChatMessage {
   id: string;
   role: 'user' | 'assistant';
   content: string;
   timestamp: string;
-  relatedPostIds?: string[]; // RAG 연동 시 채워질 필드
+  relatedPosts?: RelatedPost[];
 }

@@ -50,7 +50,19 @@ IMPORTANT: Always respond in English, regardless of what language the user write
 중요: 사용자가 어떤 언어로 쓰더라도 반드시 한국어로만 답변해.`;
 }
 
-async function searchBlog(query: string, lang: string): Promise<{ context: string; slugs: string[]; found: boolean }> {
+interface SearchResult {
+  slug: string;
+  title: string;
+  section: string;
+  content: string;
+}
+
+interface RelatedPost {
+  slug: string;
+  title: string;
+}
+
+async function searchBlog(query: string, lang: string): Promise<{ context: string; relatedPosts: RelatedPost[]; found: boolean }> {
   const res = await cohere.embed({
     texts: [query],
     model: 'embed-multilingual-v3.0',
@@ -59,7 +71,7 @@ async function searchBlog(query: string, lang: string): Promise<{ context: strin
   });
 
   const queryEmbedding = (res.embeddings as { float?: number[][] }).float?.[0];
-  if (!queryEmbedding) return { context: '', slugs: [], found: false };
+  if (!queryEmbedding) return { context: '', relatedPosts: [], found: false };
 
   const { data, error } = await supabase.rpc('match_chunks', {
     query_embedding: queryEmbedding,
@@ -68,14 +80,22 @@ async function searchBlog(query: string, lang: string): Promise<{ context: strin
     match_threshold: 0.45,
   });
 
-  if (error || !data || data.length === 0) return { context: '', slugs: [], found: false };
+  if (error || !data || data.length === 0) return { context: '', relatedPosts: [], found: false };
 
-  const context = data
-    .map((r: { title: string; section: string; content: string }) => `[${r.title} - ${r.section}]\n${r.content}`)
+  const context = (data as SearchResult[])
+    .map((r) => `[${r.title} - ${r.section}]\n${r.content}`)
     .join('\n\n---\n\n');
 
-  const slugs = [...new Set(data.map((r: { slug: string }) => r.slug))] as string[];
-  return { context, slugs, found: true };
+  const seen = new Set<string>();
+  const relatedPosts: RelatedPost[] = [];
+  for (const r of data as SearchResult[]) {
+    if (!seen.has(r.slug)) {
+      seen.add(r.slug);
+      relatedPosts.push({ slug: r.slug, title: r.title });
+    }
+  }
+
+  return { context, relatedPosts, found: true };
 }
 
 interface HistoryMessage {
@@ -141,7 +161,7 @@ export async function POST(req: NextRequest) {
     if (functionCallPart) {
       // 서고 검색 실행
       const searchQuery = (functionCallPart.functionCall.args as { query: string }).query;
-      const { context, slugs, found } = await searchBlog(searchQuery, lang);
+      const { context, relatedPosts, found } = await searchBlog(searchQuery, lang);
 
       const functionResult = found
         ? context
@@ -160,14 +180,14 @@ export async function POST(req: NextRequest) {
       const answer = secondResponse.response.text();
       return NextResponse.json({
         answer,
-        relatedSlugs: slugs,
+        relatedPosts,
         notFound: false,
       });
     }
 
     // 일반 대화 (function call 없음)
     const answer = parts.find((p) => p.text)?.text ?? '...';
-    return NextResponse.json({ answer, relatedSlugs: [], notFound: false });
+    return NextResponse.json({ answer, relatedPosts: [], notFound: false });
 
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
