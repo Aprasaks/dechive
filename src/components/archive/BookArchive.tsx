@@ -54,9 +54,27 @@ export default function BookArchive({ posts, categories, series, fontClassName }
   const { lang } = useLang();
   const t = i18n[lang];
 
+  const SERIES_MAP: Record<string, string> = {
+    '프롬프트 가이드': 'Prompt Guide',
+    'SQL 완전 정복': 'SQL Mastery',
+    '애자일 가이드': 'Agile Guide',
+  };
+  const SERIES_MAP_REVERSE = Object.fromEntries(
+    Object.entries(SERIES_MAP).map(([k, v]) => [v, k])
+  );
+
   useEffect(() => {
-    setSelectedCategory('all');
-    setSelectedSeries('');
+    if (!selectedSeries) return;
+    if (lang === 'en') {
+      const mapped = SERIES_MAP[selectedSeries];
+      if (mapped) setSelectedSeries(mapped);
+      else setSelectedSeries('');
+    } else {
+      const mapped = SERIES_MAP_REVERSE[selectedSeries];
+      if (mapped) setSelectedSeries(mapped);
+      else setSelectedSeries('');
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lang]);
 
   const filtered = posts
