@@ -89,7 +89,7 @@ export default function RootLayout({
         <div className="fixed inset-0 -z-10 flex justify-center overflow-hidden bg-black">
           <div className="relative h-full w-full max-w-344">
             <Image
-              src="/images/library-main.webp"
+              src="/images/background.webp"
               alt=""
               fill
               sizes="100vw"
