@@ -18,7 +18,7 @@ const components: Components = {
       <span className="block w-full my-6 rounded-xl overflow-hidden">
         <Image
           src={imgSrc}
-          alt={alt ?? ''}
+          alt={alt ?? src.split('/').pop() ?? 'image'}
           width={1200}
           height={630}
           className="w-full h-auto rounded-xl"

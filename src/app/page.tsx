@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import HomeClient from '@/components/home/HomeClient';
 
 export const metadata: Metadata = {
-  alternates: { canonical: 'https://dechive.dev' },
+  alternates: { canonical: 'https://dechive.dev', languages: { 'x-default': 'https://dechive.dev' } },
 };
 
 const jsonLd = {

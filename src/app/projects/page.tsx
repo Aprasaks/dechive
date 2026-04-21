@@ -5,7 +5,7 @@ import ProjectsClient from '@/components/projects/ProjectsClient';
 export const metadata: Metadata = {
   title: 'Projects',
   description: '직접 만들고 부수며 배운 것들의 기록. 아이디어가 코드가 되는 과정.',
-  alternates: { canonical: 'https://dechive.dev/projects' },
+  alternates: { canonical: 'https://dechive.dev/projects', languages: { 'x-default': 'https://dechive.dev/projects' } },
   openGraph: {
     title: 'Projects | Dechive',
     description: '직접 만들고 부수며 배운 것들의 기록. 아이디어가 코드가 되는 과정.',

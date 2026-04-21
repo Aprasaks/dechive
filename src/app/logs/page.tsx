@@ -5,7 +5,7 @@ import LogsClient from '@/components/logs/LogsClient';
 export const metadata: Metadata = {
   title: 'Logs',
   description: 'AI와 함께하는 트러블슈팅과 데일리 로그. 날것의 성장 기록.',
-  alternates: { canonical: 'https://dechive.dev/logs' },
+  alternates: { canonical: 'https://dechive.dev/logs', languages: { 'x-default': 'https://dechive.dev/logs' } },
   openGraph: {
     title: 'Logs | Dechive',
     description: 'AI와 함께하는 트러블슈팅과 데일리 로그. 날것의 성장 기록.',

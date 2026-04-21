@@ -12,7 +12,7 @@ const notoSerifKR = Noto_Serif_KR({
 export const metadata: Metadata = {
   title: 'Archive',
   description: '기술, 철학, 사유의 흔적을 정제하고 기록하는 공간. Dechive의 모든 포스트를 탐색하세요.',
-  alternates: { canonical: 'https://dechive.dev/archive' },
+  alternates: { canonical: 'https://dechive.dev/archive', languages: { 'x-default': 'https://dechive.dev/archive' } },
   openGraph: {
     title: 'Archive | Dechive',
     description: '기술, 철학, 사유의 흔적을 정제하고 기록하는 공간. Dechive의 모든 포스트를 탐색하세요.',
