@@ -37,6 +37,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       languages: {
         ko: canonical,
         en: `${BASE_URL}/en/archive/${slug}`,
+        'x-default': canonical,
       },
     },
     openGraph: {
