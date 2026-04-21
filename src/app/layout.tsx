@@ -11,6 +11,7 @@ import { MusicProvider } from '@/components/layout/MusicProvider';
 import { ChatProvider } from '@/components/layout/ChatProvider';
 import ChatDrawer from '@/components/layout/ChatDrawer';
 import { LangProvider } from '@/components/layout/LangProvider';
+import AuroraLight from '@/components/layout/AuroraLight';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -22,26 +23,33 @@ const BASE_URL = 'https://dechive.dev';
 
 export const metadata: Metadata = {
   title: { default: 'Dechive', template: '%s | Dechive' },
-  description: '기록된 지식은 가치를 가진다. 기술, 철학, 사유의 흔적을 기록하는 공간.',
+  description:
+    '기록된 지식은 가치를 가진다. 기술, 철학, 사유의 흔적을 기록하는 공간.',
   metadataBase: new URL(BASE_URL),
   openGraph: {
     title: 'Dechive',
-    description: '기록된 지식은 가치를 가진다. 기술, 철학, 사유의 흔적을 기록하는 공간.',
+    description:
+      '기록된 지식은 가치를 가진다. 기술, 철학, 사유의 흔적을 기록하는 공간.',
     url: BASE_URL,
     siteName: 'Dechive',
-    images: [{ url: '/images/thumb.webp', width: 1200, height: 630, alt: 'Dechive' }],
+    images: [
+      { url: '/images/thumb.webp', width: 1200, height: 630, alt: 'Dechive' },
+    ],
     locale: 'ko_KR',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Dechive',
-    description: '기록된 지식은 가치를 가진다. 기술, 철학, 사유의 흔적을 기록하는 공간.',
+    description:
+      '기록된 지식은 가치를 가진다. 기술, 철학, 사유의 흔적을 기록하는 공간.',
     images: ['/images/thumb.webp'],
   },
   robots: { index: true, follow: true },
   verification: {
-    other: { 'naver-site-verification': 'ca13b5bbfb7f3981b08fd61d44f999d6436500de' },
+    other: {
+      'naver-site-verification': 'ca13b5bbfb7f3981b08fd61d44f999d6436500de',
+    },
   },
 };
 
@@ -76,7 +84,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} flex min-h-screen flex-col font-sans antialiased overflow-x-clip`}
+        className={`${geistSans.variable} flex min-h-screen flex-col overflow-x-clip font-sans antialiased`}
       >
         <div className="fixed inset-0 -z-10 flex justify-center overflow-hidden bg-black">
           <div className="relative h-full w-full max-w-344">
@@ -85,22 +93,23 @@ export default function RootLayout({
               alt=""
               fill
               sizes="100vw"
-              className="object-cover brightness-[0.55]"
+              className="object-cover brightness-65"
               priority
             />
             <div className="absolute inset-y-0 left-0 w-32 bg-linear-to-r from-black to-transparent" />
             <div className="absolute inset-y-0 right-0 w-32 bg-linear-to-l from-black to-transparent" />
           </div>
         </div>
+        <AuroraLight />
         <MusicProvider>
           <LangProvider>
-          <ChatProvider>
-            <ParticleCanvas />
-            <Header />
-            {children}
-            <Footer />
-            <ChatDrawer />
-          </ChatProvider>
+            <ChatProvider>
+              <ParticleCanvas />
+              <Header />
+              {children}
+              <Footer />
+              <ChatDrawer />
+            </ChatProvider>
           </LangProvider>
         </MusicProvider>
       </body>

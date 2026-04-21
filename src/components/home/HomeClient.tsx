@@ -175,17 +175,12 @@ export default function HomeClient() {
           <span className="text-white">{t.homeTagline2}</span>
         </h1>
         <div className="h-px w-10 bg-zinc-700" />
-        <Link
-          href="/archive"
-          className="rounded-full border border-zinc-500 px-8 py-2.5 text-sm font-semibold text-white transition-all hover:border-zinc-300 active:scale-95"
-        >
-          {t.enterArchive}
-        </Link>
         <button
           onClick={() => setGuestBookOpen(true)}
-          className="rounded-full border border-zinc-500 px-8 py-2.5 text-sm font-semibold text-white transition-all hover:border-zinc-300 active:scale-95"
+          className="group relative text-sm font-semibold text-zinc-300 transition-colors hover:text-white"
         >
-          {t.guestBookTitle}
+          &gt; {t.guestBookTitle} &lt;
+          <span className="absolute bottom-0 left-0 h-px w-0 bg-white transition-all duration-300 group-hover:w-full" />
         </button>
       </div>
 

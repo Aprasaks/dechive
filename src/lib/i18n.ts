@@ -60,7 +60,7 @@ const i18n = {
     episodes: '편',
 
     // GuestBook
-    guestBookTitle: 'GUEST BOOK',
+    guestBookTitle: '방명록 입장',
     guestBookNickname: '닉네임',
     guestBookPassword: '비밀번호',
     guestBookMessage: '한 마디 남겨주세요...',
