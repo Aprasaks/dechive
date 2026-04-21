@@ -179,7 +179,7 @@ export default function HomeClient() {
     {
       icon: <BookOpen size={22} />,
       name: 'Archive',
-      href: lang === 'en' ? '/en/archive' : '/archive',
+      href: '/archive',
       desc: lang === 'en'
         ? 'Books re-established after reading vast amounts of knowledge. Each post distills a subject into one complete, standalone record.'
         : '수많은 지식을 탐독한 뒤 다시 재정립한 책들을 모아놓은 공간. 한 편이 하나의 주제를 완결합니다.',
