@@ -11,7 +11,6 @@ import { MusicProvider } from '@/components/layout/MusicProvider';
 import { ChatProvider } from '@/components/layout/ChatProvider';
 import ChatDrawer from '@/components/layout/ChatDrawer';
 import { LangProvider } from '@/components/layout/LangProvider';
-import AuroraLight from '@/components/layout/AuroraLight';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -100,7 +99,6 @@ export default function RootLayout({
             <div className="absolute inset-y-0 right-0 w-32 bg-linear-to-l from-black to-transparent" />
           </div>
         </div>
-        <AuroraLight />
         <MusicProvider>
           <LangProvider>
             <ChatProvider>

@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { ChevronLeft, ChevronRight, X, ChevronDown, BookOpen, Wrench, ScrollText } from 'lucide-react';
+import AuroraLight from '@/components/layout/AuroraLight';
 import { useLang } from '@/components/layout/LangProvider';
 import i18n from '@/lib/i18n';
 
@@ -203,6 +204,8 @@ export default function HomeClient() {
   ];
 
   return (
+    <>
+    <AuroraLight />
     <main className="flex flex-1 flex-col">
 
       {/* 히어로 */}
@@ -264,5 +267,6 @@ export default function HomeClient() {
         <GuestBookModal t={t} messages={messages} onClose={() => setGuestBookOpen(false)} onRefresh={fetchMessages} />
       )}
     </main>
+    </>
   );
 }
