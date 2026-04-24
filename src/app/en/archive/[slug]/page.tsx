@@ -45,7 +45,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       url: canonical,
       type: 'article',
       publishedTime: post.date,
+      authors: ['Demian'],
+      tags: post.tags,
       images: [{ url: image, width: 1200, height: 630, alt: post.title }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description,
+      images: [image],
     },
   };
 }
@@ -72,16 +80,33 @@ export default async function EnPostPage({ params }: PageProps) {
             '@type': 'BlogPosting',
             mainEntityOfPage: { '@type': 'WebPage', '@id': `${BASE_URL}/en/archive/${post.slug}` },
             headline: post.title,
-            description: post.description,
+            description: post.description || post.summary,
             datePublished: post.date,
+            keywords: post.tags.join(', '),
+            articleSection: post.category,
             image: `${BASE_URL}/images/thumb.webp`,
-            author: { '@type': 'Person', name: 'Demian' },
+            author: { '@type': 'Person', name: 'Demian', url: `${BASE_URL}/about` },
             publisher: {
               '@type': 'Organization',
               name: 'Dechive',
-              logo: { '@type': 'ImageObject', url: `${BASE_URL}/images/thumb.webp` },
+              logo: { '@type': 'ImageObject', url: `${BASE_URL}/logo-icon.svg` },
             },
             url: `${BASE_URL}/en/archive/${post.slug}`,
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'Home', item: BASE_URL },
+              { '@type': 'ListItem', position: 2, name: 'Archive', item: `${BASE_URL}/archive` },
+              { '@type': 'ListItem', position: 3, name: post.category, item: `${BASE_URL}/archive` },
+              { '@type': 'ListItem', position: 4, name: post.title, item: `${BASE_URL}/en/archive/${post.slug}` },
+            ],
           }),
         }}
       />
