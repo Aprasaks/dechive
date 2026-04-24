@@ -13,13 +13,13 @@ interface BookArchiveProps {
   fontClassName: string;
 }
 
-const GOLD = '#c8963a';
-const GOLD_DIM = 'rgba(200,150,58,0.35)';
-const GOLD_FAINT = 'rgba(200,150,58,0.12)';
+const GOLD = '#ffffff';
+const GOLD_DIM = 'rgba(255,255,255,0.3)';
+const GOLD_FAINT = 'rgba(255,255,255,0.1)';
 const PAGE_BG = 'rgba(10,8,5,0.60)';
-const TEXT_ACTIVE = '#f0e0b0';
-const TEXT_INACTIVE = '#c8a870';
-const TEXT_LABEL = '#e8d090';
+const TEXT_ACTIVE = '#ffffff';
+const TEXT_INACTIVE = '#d4d4d8';
+const TEXT_LABEL = '#ffffff';
 
 function stripPrefix(title: string) {
   return title
@@ -203,11 +203,11 @@ export default function BookArchive({ posts, categories, series, fontClassName }
                     href={post.lang === 'en' ? `/en/archive/${post.slug}` : `/archive/${post.slug}`}
                     className="flex items-start gap-3 group"
                   >
-                    <span className="text-xs mt-[5px] w-5 shrink-0 text-right font-light transition-colors group-hover:text-[#c8963a]" style={{ color: TEXT_INACTIVE }}>
+                    <span className="text-xs mt-[5px] w-5 shrink-0 text-right font-light transition-colors group-hover:text-white" style={{ color: TEXT_INACTIVE }}>
                       {String(i + 1).padStart(2, '0')}
                     </span>
-                    <div className="flex flex-col gap-0.5 border-b pb-3 flex-1 transition-colors group-hover:border-[rgba(200,150,58,0.4)]" style={{ borderColor: GOLD_FAINT }}>
-                      <span className={`text-sm leading-snug transition-all group-hover:text-[#f0dfa8] ${fontClassName}`} style={{ color: TEXT_ACTIVE }}>
+                    <div className="flex flex-col gap-0.5 border-b pb-3 flex-1 transition-colors group-hover:border-white/30" style={{ borderColor: GOLD_FAINT }}>
+                      <span className={`text-sm leading-snug transition-all group-hover:text-white ${fontClassName}`} style={{ color: TEXT_ACTIVE }}>
                         {stripPrefix(post.title)}
                       </span>
                       <span className="text-[11px]" style={{ color: TEXT_INACTIVE }}>{post.date.slice(2).replace(/-/g, '.')}</span>
@@ -378,14 +378,14 @@ export default function BookArchive({ posts, categories, series, fontClassName }
                   className="flex items-start gap-3 group"
                 >
                   <span
-                    className="text-xs mt-[5px] w-5 shrink-0 text-right font-light transition-colors group-hover:text-[#c8963a]"
+                    className="text-xs mt-[5px] w-5 shrink-0 text-right font-light transition-colors group-hover:text-white"
                     style={{ color: TEXT_INACTIVE }}
                   >
                     {String(i + 1).padStart(2, '0')}
                   </span>
-                  <div className="flex flex-col gap-0.5 border-b pb-3 flex-1 transition-colors group-hover:border-[rgba(200,150,58,0.4)]" style={{ borderColor: GOLD_FAINT }}>
+                  <div className="flex flex-col gap-0.5 border-b pb-3 flex-1 transition-colors group-hover:border-white/30" style={{ borderColor: GOLD_FAINT }}>
                     <span
-                      className={`text-[0.95rem] leading-snug transition-all group-hover:text-[#f0dfa8] group-hover:drop-shadow-[0_0_8px_rgba(200,150,58,0.6)] ${fontClassName}`}
+                      className={`text-[0.95rem] leading-snug transition-all group-hover:text-white  ${fontClassName}`}
                       style={{ color: TEXT_ACTIVE }}
                     >
                       {stripPrefix(post.title)}
