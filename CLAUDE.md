@@ -175,7 +175,7 @@ tags:
   - 태그1
 slug: url-friendly-slug
 summary: 카드에 표시될 한 줄 요약 (50자 내외)
-description: SEO 스니펫용 설명 (120~160자)
+description: "SEO 스니펫용 설명 (120~160자, 콤마 포함 시 따옴표 필수)"
 status: published
 lang: ko
 series: 시리즈명         # 연재글이면 기입, 없으면 생략
@@ -225,13 +225,20 @@ series명: `프롬프트 가이드`
 | 9편 | Structured Output | `prompt-structured-output` | ✅ 완료 |
 | 10편 | Context Engineering | `prompt-context-engineering` | ✅ 완료 |
 | 11편 | RAG와 프롬프트 | `prompt-rag` | ✅ 완료 |
-| 12편 | ReAct 패턴 | `prompt-react-pattern` | ⬜ 미작성 |
-| 13편 | Agentic 프롬프팅 | `prompt-agentic` | ⬜ 미작성 |
-| 14편 | Reasoning Model 프롬프팅 | `prompt-reasoning-model` | ⬜ 미작성 |
-| 15편 | 멀티모달 프롬프팅 | `prompt-multimodal` | ⬜ 미작성 |
-| 16편 | 프롬프트 인젝션 방어전 | `prompt-injection-defense` | ⬜ 미작성 |
-| 17편 | Tool Use & Function Calling | `prompt-tool-use` | ⬜ 미작성 |
-| 18편 | AI 하네싱을 직업으로 | `prompt-as-career` | ⬜ 미작성 |
+| 12편 | ReAct 패턴 | `prompt-react-pattern` | ✅ 완료 |
+| 13편 | Agentic 프롬프팅 | `prompt-agentic` | ✅ 완료 |
+| 14편 | Reasoning Model 프롬프팅 | `prompt-reasoning-model` | ✅ 완료 |
+| 15편 | 멀티모달 프롬프팅 | `prompt-multimodal` | ✅ 완료 |
+| 16편 | 프롬프트 인젝션 방어전 | `prompt-injection-defense` | ✅ 완료 |
+| 17편 | Tool Use & Function Calling | `prompt-tool-use` | ✅ 완료 |
+| 18편 | AI 하네싱을 직업으로 | `prompt-as-career` | ✅ 완료 |
+
+**🎉 프롬프트 가이드 시리즈 완결 (18/18편)**
+
+### 독립 포스트
+| 제목 | 슬러그 | 상태 |
+|------|--------|------|
+| AI 프롬프트 실전 가이드 (16가지 상황별 템플릿) | `prompt-real-world-guide` | ✅ 완료 |
 
 ---
 
