@@ -38,9 +38,8 @@ const i18n = {
     logsEmpty: '로그 기록들이 곧 채워질 예정입니다.',
 
     // Projects
-    projectsLabel: 'Dechive · Projects',
-    projectsTagline1: '아이디어가 코드가 되는',
-    projectsTagline2: '과정을 기록한다.',
+    projectsTagline1: '생각을 하고 기획을 하고',
+    projectsTagline2: '코드를 작성하고 세상에 내보낸다.',
     projectsDesc: '직접 만들고, 부수고, 다시 만드는 과정에서 배운 것들을 기록하는 공간. 완성된 결과물보다 그 과정이 더 값지다.',
     projectsEmpty: '프로젝트 기록들이 곧 채워질 예정입니다.',
 
@@ -115,9 +114,8 @@ const i18n = {
     logsEmpty: 'Log entries will be added soon.',
 
     // Projects
-    projectsLabel: 'Dechive · Projects',
-    projectsTagline1: 'Where ideas become code —',
-    projectsTagline2: 'the process is recorded.',
+    projectsTagline1: 'Think. Plan. Build.',
+    projectsTagline2: 'Ship it to the world.',
     projectsDesc: 'A space for recording what is learned through building, breaking, and rebuilding. The process is worth more than the finished product.',
     projectsEmpty: 'Project records will be added soon.',
 

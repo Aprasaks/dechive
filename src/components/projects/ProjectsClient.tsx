@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { useLang } from '@/components/layout/LangProvider';
 import i18n from '@/lib/i18n';
@@ -29,12 +28,6 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
   return (
     <main className="mx-auto max-w-4xl px-6 py-16 min-h-[calc(100vh-64px-56px)]">
       <section className="flex flex-col items-center text-center mb-20">
-        <div className="relative w-48 h-48 mb-8">
-          <Image src="/images/projects.webp" alt="Projects mascot" fill sizes="192px" className="object-contain drop-shadow-2xl" priority />
-        </div>
-        <p className="text-xs font-semibold tracking-widest text-zinc-500 uppercase mb-4">
-          {t.projectsLabel}
-        </p>
         <h1 className="text-3xl font-extrabold tracking-tight text-zinc-100 leading-snug mb-6">
           {t.projectsTagline1}<br />{t.projectsTagline2}
         </h1>
