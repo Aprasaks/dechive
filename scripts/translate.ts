@@ -23,11 +23,12 @@ const FORCE = process.argv.includes('--force');
 const SERIES_MAP: Record<string, string> = {
   '프롬프트 가이드': 'Prompt Guide',
   'SQL 완전 정복': 'SQL Mastery',
+  'GA4 완전 정복': 'GA4 Mastery',
 };
 
 interface Frontmatter {
   title: string;
-  date: string;
+  date: string | Date;
   category: string;
   tags: string[];
   slug: string;
@@ -37,6 +38,29 @@ interface Frontmatter {
   status: string;
   lang: string;
   series: string;
+}
+
+function formatDate(date: unknown): string {
+  if (date instanceof Date) return date.toISOString().split('T')[0];
+  return String(date);
+}
+
+function buildFrontmatter(fm: Frontmatter): string {
+  const lines: string[] = ['---'];
+  lines.push(`title: ${JSON.stringify(fm.title)}`);
+  lines.push(`date: ${formatDate(fm.date)}`);
+  lines.push(`category: ${fm.category}`);
+  lines.push(`tags:`);
+  (fm.tags ?? []).forEach((t) => lines.push(`  - ${t}`));
+  lines.push(`slug: ${fm.slug}`);
+  lines.push(`summary: ${JSON.stringify(fm.summary)}`);
+  lines.push(`description: ${JSON.stringify(fm.description)}`);
+  if (fm.thumbnail) lines.push(`thumbnail: ${fm.thumbnail}`);
+  lines.push(`status: ${fm.status}`);
+  lines.push(`lang: ${fm.lang}`);
+  if (fm.series) lines.push(`series: ${JSON.stringify(fm.series)}`);
+  lines.push('---');
+  return lines.join('\n');
 }
 
 async function translateText(text: string, context: string): Promise<string> {
@@ -102,7 +126,7 @@ async function translatePost(koFilename: string): Promise<void> {
     lang: 'en',
   };
 
-  const enFile = matter.stringify(translatedContent, enFrontmatter);
+  const enFile = buildFrontmatter(enFrontmatter) + '\n\n' + translatedContent;
   fs.writeFileSync(enPath, enFile, 'utf-8');
   console.log(`✅ 완료: ${enFilename}`);
 }
