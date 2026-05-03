@@ -23,9 +23,38 @@ export default function AboutClient() {
 
   return (
     <main className="mx-auto min-h-[calc(100vh-64px-56px)] w-full max-w-xl px-6 pt-20 pb-10">
-      {/* 인트로 */}
+      {/* 정의 */}
       <section className="text-center">
-        <p className="text-base leading-loose whitespace-pre-line text-white">
+        <p className="mb-4 text-xs font-medium tracking-[0.18em] text-white/55 uppercase">
+          {t.aboutKicker}
+        </p>
+        <h1 className="mb-8 animate-brand-shimmer text-5xl font-extrabold tracking-tight">
+          {t.aboutBrand}
+        </h1>
+        <div className="flex flex-col gap-5 text-left">
+          <p className="text-lg leading-loose text-white">
+            {t.aboutDefinition}
+          </p>
+          <p className="text-base leading-loose text-zinc-200">
+            {t.aboutPurpose}
+          </p>
+          <p className="text-base leading-loose text-zinc-200">
+            {t.aboutReading}
+          </p>
+          <p className="text-base leading-loose text-zinc-200">
+            {t.aboutExplore}
+          </p>
+          <p className="text-base leading-loose text-white">
+            {t.aboutClosing}
+          </p>
+        </div>
+      </section>
+
+      <Divider />
+
+      {/* 시작 */}
+      <section className="text-center">
+        <p className="text-base leading-loose text-zinc-200">
           {t.aboutIntro}
         </p>
       </section>
@@ -56,17 +85,11 @@ export default function AboutClient() {
 
       <Divider />
 
-      {/* 클로징 */}
+      {/* 서명 */}
       <section className="text-center">
-        <p className="mb-20 text-lg leading-loose whitespace-pre-line text-white">
-          {t.aboutClosing}
-        </p>
-        <p className="animate-brand-shimmer text-5xl font-extrabold tracking-tight">
-          {t.aboutBrand}
-        </p>
         <Link
           href="/contact"
-          className="mt-4 inline-block text-sm text-white underline underline-offset-4 transition-colors hover:text-zinc-300"
+          className="inline-block text-sm text-white underline underline-offset-4 transition-colors hover:text-zinc-300"
         >
           by Demian
         </Link>
