@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { useLang } from '@/components/layout/LangProvider';
 import i18n from '@/lib/i18n';
@@ -10,69 +9,112 @@ interface LogsClientProps {
   logs: Log[];
 }
 
+const PANEL_BG = 'rgba(10,8,5,0.78)';
+const LINE_COLOR = 'rgba(255,255,255,0.10)';
+const DOT_DIM = 'rgba(255,255,255,0.20)';
+const TEXT_PRIMARY = '#ffffff';
+const TEXT_SECONDARY = 'rgba(255,255,255,0.45)';
+const TEXT_TAG = 'rgba(255,255,255,0.25)';
+
 export default function LogsClient({ logs }: LogsClientProps) {
   const { lang } = useLang();
   const t = i18n[lang];
 
-  return (
-    <main className="mx-auto max-w-3xl px-6 py-16 min-h-[calc(100vh-64px-56px)]">
-      <section className="flex flex-col items-center text-center mb-16">
-        <div className="relative w-32 h-32 mb-6">
-          <Image src="/images/logs.webp" alt="Logs mascot" fill sizes="128px" className="object-contain drop-shadow-2xl" priority />
-        </div>
-        <p className="text-xs font-semibold tracking-widest text-zinc-500 uppercase mb-3">
-          {t.logsLabel}
-        </p>
-        <h1 className="text-2xl font-extrabold tracking-tight text-zinc-100 leading-snug mb-4">
-          {t.logsTagline}
-        </h1>
-        <p className="max-w-md text-sm leading-relaxed text-zinc-400">
-          {t.logsDesc}
-        </p>
-      </section>
+  const sorted = [...logs].sort((a, b) => (a.date > b.date ? -1 : 1));
 
-      {logs.length === 0 ? (
-        <section className="flex flex-col items-center text-center">
-          <div className="rounded-2xl border border-zinc-800 px-12 py-10">
-            <p className="text-xs font-semibold tracking-widest text-zinc-600 uppercase mb-3">
-              {t.comingSoon}
+  return (
+    <main className="mx-auto max-w-2xl px-4 py-10 min-h-[calc(100vh-64px-56px)]">
+      <div
+        className="overflow-hidden"
+        style={{
+          background: PANEL_BG,
+          backdropFilter: 'blur(20px)',
+          boxShadow: '0 40px 80px rgba(0,0,0,0.9), 0 0 0 1px rgba(255,255,255,0.06)',
+          borderRadius: '3px',
+        }}
+      >
+        {/* Header */}
+        <div className="px-8 pt-9 pb-7" style={{ borderBottom: `1px solid ${LINE_COLOR}` }}>
+          <h1 className="text-xl font-bold tracking-tight mb-2" style={{ color: TEXT_PRIMARY }}>
+            {t.logsTagline}
+          </h1>
+          <p className="text-xs leading-relaxed" style={{ color: TEXT_SECONDARY }}>
+            {t.logsDesc}
+          </p>
+        </div>
+
+        {/* Timeline */}
+        <div className="px-8 py-8">
+          {sorted.length === 0 ? (
+            <p className="text-sm text-center py-12" style={{ color: TEXT_SECONDARY }}>
+              {t.logsEmpty}
             </p>
-            <p className="text-sm text-zinc-500 leading-relaxed">{t.logsEmpty}</p>
-          </div>
-        </section>
-      ) : (
-        <section className="flex flex-col">
-          {logs.map((log, i) => (
-            <Link
-              key={log.slug}
-              href={`/logs/${log.slug}`}
-              className={[
-                'group flex gap-6 py-5 transition-colors hover:bg-white/5 -mx-4 px-4 rounded-xl',
-                i !== logs.length - 1 ? 'border-b border-zinc-800/60' : '',
-              ].join(' ')}
-            >
-              <time dateTime={log.date} className="shrink-0 w-20 text-xs text-zinc-600 pt-0.5 tabular-nums">
-                {log.date}
-              </time>
-              <div className="flex flex-col gap-1.5 min-w-0">
-                <h2 className="text-sm font-semibold text-zinc-200 group-hover:text-white transition-colors leading-snug">
-                  {log.title}
-                </h2>
-                {log.summary && (
-                  <p className="text-xs text-zinc-500 leading-relaxed line-clamp-2">{log.summary}</p>
-                )}
-                {log.tags.length > 0 && (
-                  <div className="flex flex-wrap gap-1.5 mt-1">
-                    {log.tags.map((tag) => (
-                      <span key={tag} className="text-xs text-zinc-600">#{tag}</span>
-                    ))}
-                  </div>
-                )}
+          ) : (
+            <div className="relative">
+              <div
+                className="absolute left-[6px] top-2 bottom-2"
+                style={{ width: '1px', background: LINE_COLOR }}
+              />
+              <div className="flex flex-col gap-8">
+                {sorted.map((log) => (
+                  <Link key={log.slug} href={`/logs/${log.slug}`} className="group relative pl-7">
+                    {/* dot */}
+                    <div
+                      className="absolute left-0 top-[5px] size-[13px] rounded-full border flex items-center justify-center"
+                      style={{ borderColor: DOT_DIM, background: 'rgba(10,8,5,0.95)' }}
+                    >
+                      <div
+                        className="size-[4px] rounded-full transition-all duration-200 group-hover:scale-[2]"
+                        style={{ background: DOT_DIM }}
+                      />
+                    </div>
+
+                    <div className="flex flex-col gap-1">
+                      <time
+                        dateTime={log.date}
+                        className="font-mono text-[11px]"
+                        style={{ color: TEXT_TAG }}
+                      >
+                        {log.date.slice(2).replace(/-/g, '.')}
+                      </time>
+                      <h2
+                        className="text-sm font-semibold leading-snug transition-colors duration-150 group-hover:text-white"
+                        style={{ color: TEXT_PRIMARY }}
+                      >
+                        {log.title}
+                      </h2>
+                      {log.summary && (
+                        <p
+                          className="text-xs leading-relaxed line-clamp-2"
+                          style={{ color: TEXT_SECONDARY }}
+                        >
+                          {log.summary}
+                        </p>
+                      )}
+                      {log.tags.length > 0 && (
+                        <div className="flex flex-wrap gap-2 mt-0.5">
+                          {log.tags.map((tag) => (
+                            <span key={tag} className="font-mono text-[11px]" style={{ color: TEXT_TAG }}>
+                              #{tag}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </Link>
+                ))}
               </div>
-            </Link>
-          ))}
-        </section>
-      )}
+            </div>
+          )}
+        </div>
+
+        {/* Footer */}
+        <div className="px-8 py-3" style={{ borderTop: `1px solid ${LINE_COLOR}` }}>
+          <p className="font-mono text-[10px] text-right" style={{ color: TEXT_TAG }}>
+            {sorted.length} {lang === 'ko' ? '개의 기록' : 'entries'}
+          </p>
+        </div>
+      </div>
     </main>
   );
 }
