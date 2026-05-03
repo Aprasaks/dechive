@@ -38,10 +38,6 @@ Each post covers one topic completely. No other source should be needed. Every c
 - **GA4 Mastery** (10 parts, in progress) — From GA4 fundamentals to Looker Studio
 - **Standalone posts** — Dev, Productivity, Philosophy
 
-### Logs — Raw Field Records
-
-Everything that happens while building and maintaining this site. Errors encountered, bugs investigated, decisions made. Written immediately — not reconstructed from memory. Logs are not rewritten into Archive posts. They stand on their own as an honest record of the process.
-
 ### Projects — Everything Being Built
 
 A collection of all active projects. Dechive is one of them. Each project has its own context, stack, and purpose — documented as it evolves.

@@ -12,7 +12,6 @@ import { useChatContext } from './ChatProvider';
 const NAV_ITEMS = [
   { name: 'Archive', href: '/archive' },
   { name: 'Projects', href: '/projects' },
-  { name: 'Logs', href: '/logs' },
   { name: 'About', href: '/about' },
 ];
 

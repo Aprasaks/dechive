@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
-import { ChevronLeft, ChevronRight, X, ChevronDown, BookOpen, Wrench, ScrollText } from 'lucide-react';
+import { ChevronLeft, ChevronRight, X, ChevronDown, BookOpen, Wrench } from 'lucide-react';
 import { useLang } from '@/components/layout/LangProvider';
 import i18n from '@/lib/i18n';
 
@@ -191,14 +191,6 @@ export default function HomeClient() {
       desc: lang === 'en'
         ? 'The space where ideas become reality. Every concept, prototype, and shipped product starts here.'
         : '아이디어를 현실로 바꾼 공간. 구상에서 완성까지의 과정을 기록합니다.',
-    },
-    {
-      icon: <ScrollText size={22} />,
-      name: 'Logs',
-      href: '/logs',
-      desc: lang === 'en'
-        ? 'Errors encountered, dead ends hit, problems solved. A raw record of the real work behind the code.'
-        : '코드를 짜면서 마주친 에러, 삽질, 그리고 해결. 현장의 흔적을 날것 그대로 모아놓습니다.',
     },
   ];
 

@@ -24,17 +24,10 @@ const i18n = {
     aboutBrand: 'Dechive',
     spaceArchiveTitle: '정제된 지식',
     spaceArchiveDesc: 'AI 프롬프트 엔지니어링, SQL, 개발 개념을 시리즈로 정리. 한 편으로 주제를 완결합니다.',
-    spaceLogsTitle: '날것의 기록',
-    spaceLogsDesc: '에러, 삽질, 해결. AI와 함께하는 현장 트러블슈팅을 날것 그대로 기록합니다.',
     spaceProjectsTitle: '만들어가는 과정',
     spaceProjectsDesc: '아이디어를 코드로 만드는 과정. 완성된 결과물보다 그 여정이 더 값집니다.',
     aboutContactCta: '같이 이야기해요',
     spacesLabel: 'Spaces',
-
-    // Logs
-    logsTagline: '실패의 기록.',
-    logsDesc: '다시는 같은 실수를 반복하지 않기 위한 기록.',
-    logsEmpty: '로그 기록들이 곧 채워질 예정입니다.',
 
     // Projects
     projectsTagline1: '생각을 하고 기획을 하고',
@@ -99,17 +92,10 @@ const i18n = {
     aboutBrand: 'Dechive',
     spaceArchiveTitle: 'Refined Knowledge',
     spaceArchiveDesc: 'AI Prompt Engineering, SQL, and dev concepts organized into series — each post designed to stand alone.',
-    spaceLogsTitle: 'Raw Records',
-    spaceLogsDesc: 'Errors, struggles, solutions. Real-time troubleshooting logs with AI, unfiltered.',
     spaceProjectsTitle: 'Works in Progress',
     spaceProjectsDesc: 'Turning ideas into code. The journey matters more than the finished product.',
     aboutContactCta: 'Let\'s Talk',
     spacesLabel: 'Spaces',
-
-    // Logs
-    logsTagline: 'Failure Log.',
-    logsDesc: 'A record to never repeat the same mistake twice.',
-    logsEmpty: 'Log entries will be added soon.',
 
     // Projects
     projectsTagline1: 'Think. Plan. Build.',
