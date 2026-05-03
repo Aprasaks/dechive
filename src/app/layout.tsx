@@ -88,11 +88,11 @@ export default function RootLayout({
         <div className="fixed inset-0 -z-10 flex justify-center overflow-hidden bg-black">
           <div className="relative h-full w-full max-w-344">
             <Image
-              src="/images/background.webp"
+              src="/images/background3.webp"
               alt=""
               fill
               sizes="100vw"
-              className="object-cover brightness-65"
+              className="object-cover brightness-100"
               priority
             />
             <div className="absolute inset-y-0 left-0 w-32 bg-linear-to-r from-black to-transparent" />
