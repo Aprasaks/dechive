@@ -50,7 +50,9 @@ rm content/posts/{slug}.en.md && npm run translate
 ```
 - `.en.md` 직접 작성 또는 수동 번역 **절대 금지**
 - `--force` 옵션 사용 금지 (전체 재번역 → API 비용 폭발)
-- 새 시리즈 추가 시 `scripts/translate.ts`의 `SERIES_MAP`에 반드시 추가:
+- 새 시리즈 추가 시 **두 군데** 모두 반드시 추가:
+  - `scripts/translate.ts`의 `SERIES_MAP`
+  - `src/components/archive/BookArchive.tsx`의 `SERIES_MAP`
 ```typescript
 const SERIES_MAP: Record<string, string> = {
   '프롬프트 가이드': 'Prompt Guide',
@@ -63,11 +65,13 @@ const SERIES_MAP: Record<string, string> = {
 ### 서브모듈 워크플로우
 ```bash
 cd content
+git pull --rebase origin main
 git add . && git commit -m "..." && git push
 cd ..
+git pull --rebase origin main
 git add content && git commit -m "chore: content 서브모듈 업데이트" && git push
 ```
-push 실패 시: `git pull --rebase origin main` → 충돌 시 `git checkout --theirs {file}` → push
+충돌 시: `git checkout --theirs {file}` → push
 
 ---
 

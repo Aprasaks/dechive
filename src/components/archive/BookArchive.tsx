@@ -57,6 +57,7 @@ export default function BookArchive({ posts, categories, series, fontClassName }
   const SERIES_MAP: Record<string, string> = {
     '프롬프트 가이드': 'Prompt Guide',
     'SQL 완전 정복': 'SQL Mastery',
+    'GA4 완전 정복': 'GA4 Mastery',
     '애자일 가이드': 'Agile Guide',
   };
   const SERIES_MAP_REVERSE = Object.fromEntries(
