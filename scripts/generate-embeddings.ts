@@ -119,7 +119,7 @@ async function main() {
   console.log(`🔢 총 ${allChunks.length}개 청크 임베딩 생성 중...\n`);
 
   const BATCH_SIZE = 96;
-  const BATCH_DELAY_MS = 12000; // Cohere rate limit 대응: 배치 간 12초 대기
+  const BATCH_DELAY_MS = 65000; // Cohere trial rate limit 대응: 배치 간 65초 대기 (분당 1콜)
   const embeddings: number[][] = [];
 
   for (let i = 0; i < allChunks.length; i += BATCH_SIZE) {
