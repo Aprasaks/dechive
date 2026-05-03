@@ -119,9 +119,12 @@ async function main() {
   console.log(`🔢 총 ${allChunks.length}개 청크 임베딩 생성 중...\n`);
 
   const BATCH_SIZE = 96;
+  const BATCH_DELAY_MS = 12000; // Cohere rate limit 대응: 배치 간 12초 대기
   const embeddings: number[][] = [];
 
   for (let i = 0; i < allChunks.length; i += BATCH_SIZE) {
+    if (i > 0) await new Promise((r) => setTimeout(r, BATCH_DELAY_MS));
+
     const batch = allChunks.slice(i, i + BATCH_SIZE);
     const response = await cohere.embed({
       texts: batch.map((c) => `${c.title} ${c.section}\n${c.content}`),
@@ -155,4 +158,7 @@ async function main() {
   console.log(`\n🎉 Supabase 저장 완료! (${rows.length}개 청크)`);
 }
 
-main().catch(console.error);
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});
