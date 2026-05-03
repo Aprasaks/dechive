@@ -14,6 +14,7 @@ const LINE_COLOR = 'rgba(255,255,255,0.10)';
 const DOT_DIM = 'rgba(255,255,255,0.20)';
 const TEXT_PRIMARY = '#ffffff';
 const TEXT_SECONDARY = 'rgba(255,255,255,0.45)';
+const TEXT_DATE = 'rgba(255,255,255,0.60)';
 const TEXT_TAG = 'rgba(255,255,255,0.25)';
 
 export default function LogsClient({ logs }: LogsClientProps) {
@@ -72,33 +73,24 @@ export default function LogsClient({ logs }: LogsClientProps) {
                     <div className="flex flex-col gap-1">
                       <time
                         dateTime={log.date}
-                        className="font-mono text-[11px]"
-                        style={{ color: TEXT_TAG }}
+                        className="font-mono text-xs"
+                        style={{ color: TEXT_DATE }}
                       >
                         {log.date.slice(2).replace(/-/g, '.')}
                       </time>
                       <h2
-                        className="text-sm font-semibold leading-snug transition-colors duration-150 group-hover:text-white"
+                        className="text-base font-semibold leading-snug transition-colors duration-150 group-hover:text-white"
                         style={{ color: TEXT_PRIMARY }}
                       >
                         {log.title}
                       </h2>
                       {log.summary && (
                         <p
-                          className="text-xs leading-relaxed line-clamp-2"
+                          className="text-sm leading-relaxed line-clamp-2"
                           style={{ color: TEXT_SECONDARY }}
                         >
                           {log.summary}
                         </p>
-                      )}
-                      {log.tags.length > 0 && (
-                        <div className="flex flex-wrap gap-2 mt-0.5">
-                          {log.tags.map((tag) => (
-                            <span key={tag} className="font-mono text-[11px]" style={{ color: TEXT_TAG }}>
-                              #{tag}
-                            </span>
-                          ))}
-                        </div>
                       )}
                     </div>
                   </Link>

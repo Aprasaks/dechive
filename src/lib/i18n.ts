@@ -32,8 +32,8 @@ const i18n = {
     spacesLabel: 'Spaces',
 
     // Logs
-    logsTagline: '날것의 기록.',
-    logsDesc: '에러, 삽질, 해결. 정제되지 않은 현장 기록.',
+    logsTagline: '실패의 기록.',
+    logsDesc: '다시는 같은 실수를 반복하지 않기 위한 기록.',
     logsEmpty: '로그 기록들이 곧 채워질 예정입니다.',
 
     // Projects
@@ -107,8 +107,8 @@ const i18n = {
     spacesLabel: 'Spaces',
 
     // Logs
-    logsTagline: 'Raw Records.',
-    logsDesc: 'Errors, struggles, solutions. Unfiltered field notes.',
+    logsTagline: 'Failure Log.',
+    logsDesc: 'A record to never repeat the same mistake twice.',
     logsEmpty: 'Log entries will be added soon.',
 
     // Projects
