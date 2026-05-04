@@ -3,8 +3,10 @@ export type Lang = 'ko' | 'en';
 const i18n = {
   ko: {
     // Home
-    homeTagline1: '생각이 기록이 되는 순간',
-    homeTagline2: '의미를 가진다.',
+    homeTagline1: '생각이 머무는 도서관',
+    homeTagline2: '생각이 기록이 되는 순간,\n의미를 가진다.',
+    homeBrowseRecords: '기록 둘러보기',
+    homeRandomRecord: '아무 기록이나 펼쳐보기',
     enterArchive: '아카이브 입장',
 
     // About
@@ -76,8 +78,10 @@ const i18n = {
 
   en: {
     // Home
-    homeTagline1: 'When thoughts become records,',
-    homeTagline2: 'meaning is born.',
+    homeTagline1: 'A library where thoughts stay',
+    homeTagline2: 'When thoughts become records,\nmeaning is born.',
+    homeBrowseRecords: 'Browse Records',
+    homeRandomRecord: 'Open a Random Record',
     enterArchive: 'Enter Library',
 
     // About
