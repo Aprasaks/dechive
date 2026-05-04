@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { Search } from 'lucide-react';
 import type { Post, Category, Series } from '@/types/archive';
 import { useLang } from '@/components/layout/LangProvider';
 import i18n from '@/lib/i18n';
@@ -255,17 +256,22 @@ export default function BookArchive({ posts, categories, series, fontClassName }
         >
           <RulingLines />
 
-          {/* 헤더 */}
+          {/* 검색 */}
           <div className="mt-6 mb-5">
-            <p className="text-xs tracking-[0.35em] uppercase mb-3" style={{ color: TEXT_LABEL }}>
-              {t.archiveLabel}
+            <label className="mb-3 block text-[10px] tracking-[0.35em] uppercase" style={{ color: 'rgba(255,255,255,0.62)' }}>
+              Search
+            </label>
+            <div className="mx-auto flex h-11 w-[92%] items-center gap-3 rounded-md border bg-black/25 px-4 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.06)] backdrop-blur-sm" style={{ borderColor: 'rgba(255,255,255,0.18)' }}>
+              <Search size={15} className="shrink-0 text-white/70" />
+              <input
+                type="search"
+                placeholder={lang === 'en' ? 'Search the shelves' : '서가에서 찾기'}
+                className="w-full bg-transparent text-sm text-white outline-none placeholder:text-white/60"
+              />
+            </div>
+            <p className="mt-3 text-[10px]" style={{ color: 'rgba(255,255,255,0.25)' }}>
+              {lang === 'en' ? 'Search by title, tag, or content.' : '제목, 태그, 기록 내용으로 찾습니다.'}
             </p>
-            <h1
-              className={`text-2xl leading-tight ${fontClassName}`}
-              style={{ color: TEXT_ACTIVE }}
-            >
-              {t.infiniteArchive}
-            </h1>
           </div>
 
           <Ornament />
