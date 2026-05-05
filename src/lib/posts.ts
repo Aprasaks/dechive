@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import type { Post, PostLang, PostStatus, Series } from '@/types/archive';
+import type { Post, PostLang, PostStatus, Subject } from '@/types/archive';
 
 const POSTS_DIR = path.join(process.cwd(), 'content', 'posts');
 
@@ -39,6 +39,7 @@ function parsePost(filename: string): Post | null {
     status: (data.status as PostStatus) ?? 'draft',
     lang,
     series: data.series ?? '',
+    subject: data.subject ?? '',
     readingTime: calcReadingTime(content, lang),
     content,
   };
@@ -70,22 +71,22 @@ export function getSeriesPosts(series: string, lang: PostLang = 'ko'): Post[] {
     .sort((a, b) => (a.date < b.date ? -1 : 1)); // 오래된 순 (1편→N편)
 }
 
-export function getSeries(lang: PostLang = 'ko'): Series[] {
+export function getSubjects(lang: PostLang = 'ko'): Subject[] {
   const posts = getAllPosts(lang);
   const countMap = new Map<string, number>();
 
   for (const post of posts) {
-    if (post.series) {
-      countMap.set(post.series, (countMap.get(post.series) ?? 0) + 1);
+    if (post.subject) {
+      countMap.set(post.subject, (countMap.get(post.subject) ?? 0) + 1);
     }
   }
 
-  const series: Series[] = [];
+  const subjects: Subject[] = [];
   countMap.forEach((count, id) => {
-    series.push({ id, label: id, count });
+    subjects.push({ id, label: id, count });
   });
 
-  return series;
+  return subjects;
 }
 
 export function getCategories(lang: PostLang = 'ko') {

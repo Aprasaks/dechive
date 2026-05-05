@@ -54,7 +54,7 @@ const i18n = {
     infiniteArchive: '무한서고',
     allPosts: '전체 기록',
     categoryLabel: 'Category',
-    seriesLabel: 'Series',
+    subjectLabel: 'Subject',
     episodes: '편',
 
     // GuestBook
@@ -129,7 +129,7 @@ const i18n = {
     infiniteArchive: 'Infinite Archive',
     allPosts: 'All Posts',
     categoryLabel: 'Category',
-    seriesLabel: 'Series',
+    subjectLabel: 'Subject',
     episodes: 'ep.',
 
     // GuestBook

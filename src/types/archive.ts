@@ -4,7 +4,7 @@ export interface Category {
   count: number;
 }
 
-export interface Series {
+export interface Subject {
   id: string;
   label: string;
   count: number;
@@ -24,7 +24,8 @@ export interface Post {
   thumbnail?: string;     // 파일명 (e.g. "next-app-router.webp"), 없으면 기본 이미지 사용
   status: PostStatus;
   lang: PostLang;
-  series?: string;        // 연재글 묶음 이름 (없으면 빈 문자열)
+  series?: string;        // 상세 페이지 이전/다음 호환용. Archive 목록은 subject를 우선 사용
+  subject?: string;       // Archive 주제 묶음 이름 (없으면 빈 문자열)
   readingTime: number;    // 파싱 시 자동 계산 (분 단위)
   content: string;        // 마크다운 본문
 }

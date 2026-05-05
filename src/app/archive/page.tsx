@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Noto_Serif_KR } from 'next/font/google';
-import { getAllPosts, getCategories, getSeries } from '@/lib/posts';
+import { getAllPosts, getCategories, getSubjects } from '@/lib/posts';
 import ArchiveClient from '@/components/archive/ArchiveClient';
 
 const notoSerifKR = Noto_Serif_KR({
@@ -35,8 +35,8 @@ export default function ArchivePage() {
   const enPosts = getAllPosts('en');
   const koCategories = getCategories('ko');
   const enCategories = getCategories('en');
-  const koSeries = getSeries('ko');
-  const enSeries = getSeries('en');
+  const koSubjects = getSubjects('ko');
+  const enSubjects = getSubjects('en');
 
   return (
     <>
@@ -50,8 +50,8 @@ export default function ArchivePage() {
           enPosts={enPosts}
           koCategories={koCategories}
           enCategories={enCategories}
-          koSeries={koSeries}
-          enSeries={enSeries}
+          koSubjects={koSubjects}
+          enSubjects={enSubjects}
           fontClassName="font-[family-name:var(--font-noto-serif-kr)]"
         />
       </main>

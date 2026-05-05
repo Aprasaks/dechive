@@ -3,14 +3,14 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Search } from 'lucide-react';
-import type { Post, Category, Series } from '@/types/archive';
+import type { Post, Category, Subject } from '@/types/archive';
 import { useLang } from '@/components/layout/LangProvider';
 import i18n from '@/lib/i18n';
 
 interface BookArchiveProps {
   posts: Post[];
   categories: Category[];
-  series: Series[];
+  subjects: Subject[];
   fontClassName: string;
 }
 
@@ -48,33 +48,33 @@ function Ornament() {
   );
 }
 
-export default function BookArchive({ posts, categories, series, fontClassName }: BookArchiveProps) {
+export default function BookArchive({ posts, categories, subjects, fontClassName }: BookArchiveProps) {
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const [selectedSeries, setSelectedSeries] = useState('');
+  const [selectedSubject, setSelectedSubject] = useState('');
   const [mobilePage, setMobilePage] = useState<'posts' | 'index'>('posts');
   const { lang } = useLang();
   const t = i18n[lang];
 
-  const SERIES_MAP: Record<string, string> = {
+  const SUBJECT_MAP: Record<string, string> = {
     '프롬프트 가이드': 'Prompt Guide',
     'SQL 완전 정복': 'SQL Mastery',
     'GA4 완전 정복': 'GA4 Mastery',
     '애자일 가이드': 'Agile Guide',
   };
-  const SERIES_MAP_REVERSE = Object.fromEntries(
-    Object.entries(SERIES_MAP).map(([k, v]) => [v, k])
+  const SUBJECT_MAP_REVERSE = Object.fromEntries(
+    Object.entries(SUBJECT_MAP).map(([k, v]) => [v, k])
   );
 
   useEffect(() => {
-    if (!selectedSeries) return;
+    if (!selectedSubject) return;
     if (lang === 'en') {
-      const mapped = SERIES_MAP[selectedSeries];
-      if (mapped) setSelectedSeries(mapped);
-      else setSelectedSeries('');
+      const mapped = SUBJECT_MAP[selectedSubject];
+      if (mapped) setSelectedSubject(mapped);
+      else setSelectedSubject('');
     } else {
-      const mapped = SERIES_MAP_REVERSE[selectedSeries];
-      if (mapped) setSelectedSeries(mapped);
-      else setSelectedSeries('');
+      const mapped = SUBJECT_MAP_REVERSE[selectedSubject];
+      if (mapped) setSelectedSubject(mapped);
+      else setSelectedSubject('');
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lang]);
@@ -82,16 +82,29 @@ export default function BookArchive({ posts, categories, series, fontClassName }
   const filtered = posts
     .filter((p) => {
       const catMatch = selectedCategory === 'all' || p.category === selectedCategory;
-      const seriesMatch = !selectedSeries || p.series === selectedSeries;
-      return catMatch && seriesMatch;
+      const subjectMatch = !selectedSubject || p.subject === selectedSubject;
+      return catMatch && subjectMatch;
     })
     .sort((a, b) => {
-      if (selectedSeries) return a.date < b.date ? -1 : 1;
+      if (selectedSubject) return a.date < b.date ? -1 : 1;
       return a.date > b.date ? -1 : 1;
     });
 
-  const isActive = (catId: string, seriesId = '') =>
-    seriesId ? selectedSeries === seriesId : selectedCategory === catId && !selectedSeries;
+  const isActive = (catId: string, subjectId = '') =>
+    subjectId ? selectedSubject === subjectId : selectedCategory === catId && !selectedSubject;
+
+  const visibleSubjects = selectedCategory === 'all'
+    ? subjects
+    : Array.from(
+        posts
+          .filter((post) => post.category === selectedCategory && post.subject)
+          .reduce((countMap, post) => {
+            const subject = post.subject;
+            if (!subject) return countMap;
+            countMap.set(subject, (countMap.get(subject) ?? 0) + 1);
+            return countMap;
+          }, new Map<string, number>()),
+      ).map(([id, count]) => ({ id, label: id, count }));
 
   const BOOK_HEIGHT = '74vh';
 
@@ -147,7 +160,7 @@ export default function BookArchive({ posts, categories, series, fontClassName }
               {[{ id: 'all', label: t.allPosts, count: posts.length }, ...categories.filter(c => c.id !== 'all')].map((cat) => (
                 <button
                   key={cat.id}
-                  onClick={() => { setSelectedCategory(cat.id); setSelectedSeries(''); setMobilePage('posts'); }}
+                  onClick={() => { setSelectedCategory(cat.id); setSelectedSubject(''); setMobilePage('posts'); }}
                   className="text-left flex items-center justify-between py-2 text-sm transition-all"
                   style={{ color: isActive(cat.id) ? TEXT_ACTIVE : TEXT_INACTIVE }}
                 >
@@ -160,15 +173,15 @@ export default function BookArchive({ posts, categories, series, fontClassName }
               ))}
             </div>
             {/* 시리즈 */}
-            {series.length > 0 && (
+            {visibleSubjects.length > 0 && (
               <>
                 <Ornament />
                 <div className="flex flex-col mt-1 gap-0.5">
-                  <p className="text-xs tracking-[0.3em] uppercase mb-2" style={{ color: TEXT_LABEL }}>{t.seriesLabel}</p>
-                  {series.map((s) => (
+                  <p className="text-xs tracking-[0.3em] uppercase mb-2" style={{ color: TEXT_LABEL }}>{t.subjectLabel}</p>
+                  {visibleSubjects.map((s) => (
                     <button
                       key={s.id}
-                      onClick={() => { setSelectedSeries(s.id); setSelectedCategory('all'); setMobilePage('posts'); }}
+                      onClick={() => { setSelectedSubject(s.id); setMobilePage('posts'); }}
                       className="text-left flex items-center justify-between py-2 text-sm transition-all"
                       style={{ color: isActive('', s.id) ? TEXT_ACTIVE : TEXT_INACTIVE }}
                     >
@@ -192,7 +205,7 @@ export default function BookArchive({ posts, categories, series, fontClassName }
             <RulingLines />
             <div className="mt-4 mb-4">
               <p className="text-xs tracking-[0.35em] uppercase" style={{ color: TEXT_LABEL }}>
-                {selectedSeries || (selectedCategory === 'all' ? t.allPosts : selectedCategory)}
+                {selectedSubject || (selectedCategory === 'all' ? t.allPosts : selectedCategory)}
               </p>
             </div>
             <div className="flex flex-col gap-4">
@@ -284,7 +297,7 @@ export default function BookArchive({ posts, categories, series, fontClassName }
             {[{ id: 'all', label: t.allPosts, count: posts.length }, ...categories.filter(c => c.id !== 'all')].map((cat) => (
               <button
                 key={cat.id}
-                onClick={() => { setSelectedCategory(cat.id); setSelectedSeries(''); }}
+                onClick={() => { setSelectedCategory(cat.id); setSelectedSubject(''); }}
                 className="group text-left flex items-center justify-between py-2 text-sm transition-all"
                 style={{ color: isActive(cat.id) ? TEXT_ACTIVE : TEXT_INACTIVE }}
               >
@@ -301,17 +314,17 @@ export default function BookArchive({ posts, categories, series, fontClassName }
           </div>
 
           {/* 시리즈 */}
-          {series.length > 0 && (
+          {visibleSubjects.length > 0 && (
             <>
               <Ornament />
               <div className="flex flex-col mt-1 gap-0.5">
                 <p className="text-xs tracking-[0.3em] uppercase mb-2" style={{ color: TEXT_LABEL }}>
-                  {t.seriesLabel}
+                  {t.subjectLabel}
                 </p>
-                {series.map((s) => (
+                {visibleSubjects.map((s) => (
                   <button
                     key={s.id}
-                    onClick={() => { setSelectedSeries(s.id); setSelectedCategory('all'); }}
+                    onClick={() => { setSelectedSubject(s.id); }}
                     className="text-left flex items-center justify-between py-2 text-sm transition-all"
                     style={{ color: isActive('', s.id) ? TEXT_ACTIVE : TEXT_INACTIVE }}
                   >
@@ -364,7 +377,7 @@ export default function BookArchive({ posts, categories, series, fontClassName }
 
           <div className="mt-6 mb-5">
             <p className="text-[9px] tracking-[0.35em] uppercase" style={{ color: TEXT_LABEL }}>
-              {selectedSeries || (selectedCategory === 'all' ? t.allPosts : selectedCategory)}
+              {selectedSubject || (selectedCategory === 'all' ? t.allPosts : selectedCategory)}
             </p>
           </div>
 

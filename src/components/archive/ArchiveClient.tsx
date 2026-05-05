@@ -1,6 +1,6 @@
 'use client';
 
-import type { Post, Category, Series } from '@/types/archive';
+import type { Post, Category, Subject } from '@/types/archive';
 import { useLang } from '@/components/layout/LangProvider';
 import BookArchive from './BookArchive';
 
@@ -9,8 +9,8 @@ interface ArchiveClientProps {
   enPosts: Post[];
   koCategories: Category[];
   enCategories: Category[];
-  koSeries: Series[];
-  enSeries: Series[];
+  koSubjects: Subject[];
+  enSubjects: Subject[];
   fontClassName: string;
 }
 
@@ -19,21 +19,21 @@ export default function ArchiveClient({
   enPosts,
   koCategories,
   enCategories,
-  koSeries,
-  enSeries,
+  koSubjects,
+  enSubjects,
   fontClassName,
 }: ArchiveClientProps) {
   const { lang } = useLang();
 
   const posts = lang === 'ko' ? koPosts : enPosts;
   const categories = lang === 'ko' ? koCategories : enCategories;
-  const series = lang === 'ko' ? koSeries : enSeries;
+  const subjects = lang === 'ko' ? koSubjects : enSubjects;
 
   return (
     <BookArchive
       posts={posts}
       categories={categories}
-      series={series}
+      subjects={subjects}
       fontClassName={fontClassName}
     />
   );
