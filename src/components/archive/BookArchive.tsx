@@ -11,7 +11,8 @@ interface BookArchiveProps {
   posts: Post[];
   categories: Category[];
   subjects: Subject[];
-  fontClassName: string;
+  serifFontClassName: string;
+  sansFontClassName: string;
 }
 
 const GOLD = '#ffffff';
@@ -21,6 +22,10 @@ const PAGE_BG = 'rgba(10,8,5,0.60)';
 const TEXT_ACTIVE = '#ffffff';
 const TEXT_INACTIVE = '#d4d4d8';
 const TEXT_LABEL = '#ffffff';
+const ACTIVE_TEXT = '#fffbeb';
+const ACTIVE_COUNT = 'rgba(253,230,138,0.72)';
+const ACTIVE_BULLET = 'rgba(253,230,138,0.95)';
+const ACTIVE_BG = 'rgba(253,230,138,0.05)';
 
 function stripPrefix(title: string) {
   return title
@@ -118,7 +123,13 @@ function Ornament() {
   );
 }
 
-export default function BookArchive({ posts, categories, subjects, fontClassName }: BookArchiveProps) {
+export default function BookArchive({
+  posts,
+  categories,
+  subjects,
+  serifFontClassName,
+  sansFontClassName,
+}: BookArchiveProps) {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedSubject, setSelectedSubject] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
@@ -193,7 +204,7 @@ export default function BookArchive({ posts, categories, subjects, fontClassName
     ? `${scopeLabel} contains ${filtered.length} record${filtered.length === 1 ? '' : 's'}`
     : `${scopeLabel} 안에서 ${filtered.length}개의 기록`;
   const rightPageTitle = isSearching
-    ? `"${normalizedSearchQuery}" ${lang === 'en' ? 'search results' : '검색 결과'}`
+    ? `‘${normalizedSearchQuery}’ ${lang === 'en' ? 'search results' : '검색 결과'}`
     : selectedSubject || (selectedCategory === 'all' ? t.allPosts : selectedCategoryLabel);
 
   const BOOK_HEIGHT = '74vh';
@@ -206,7 +217,7 @@ export default function BookArchive({ posts, categories, subjects, fontClassName
   return (
     <>
     {/* ── 모바일 전용 ── */}
-    <div className="flex flex-1 flex-col md:hidden px-4 py-4">
+    <div className={`flex flex-1 flex-col md:hidden px-4 py-4 ${sansFontClassName}`}>
       <div
         className="flex flex-col overflow-hidden flex-1"
         style={{
@@ -241,7 +252,7 @@ export default function BookArchive({ posts, categories, subjects, fontClassName
             <RulingLines />
             <div className="mt-5 mb-4">
               <p className="text-xs tracking-[0.35em] uppercase mb-2" style={{ color: TEXT_LABEL }}>{t.archiveLabel}</p>
-              <h1 className={`text-2xl leading-tight ${fontClassName}`} style={{ color: TEXT_ACTIVE }}>{t.infiniteArchive}</h1>
+              <h1 className={`text-2xl leading-tight ${serifFontClassName}`} style={{ color: TEXT_ACTIVE }}>{t.infiniteArchive}</h1>
             </div>
             <div className="mb-4">
               <label className="mb-3 block text-[10px] tracking-[0.35em] uppercase" style={{ color: 'rgba(255,255,255,0.62)' }}>
@@ -254,7 +265,7 @@ export default function BookArchive({ posts, categories, subjects, fontClassName
                   value={searchQuery}
                   onChange={(event) => setSearchQuery(event.target.value)}
                   placeholder={lang === 'en' ? 'Search by title, tag, or content' : '제목, 태그, 내용으로 찾아보기'}
-                  className="w-full bg-transparent text-sm text-white outline-none placeholder:text-white/60"
+                  className={`w-full bg-transparent text-sm text-white outline-none placeholder:text-white/60 ${sansFontClassName}`}
                 />
               </div>
               <p className="mt-3 text-xs leading-relaxed" style={{ color: 'rgba(255,255,255,0.72)' }}>
@@ -269,14 +280,17 @@ export default function BookArchive({ posts, categories, subjects, fontClassName
                 <button
                   key={cat.id}
                   onClick={() => { setSelectedCategory(cat.id); setSelectedSubject(''); setMobilePage('posts'); }}
-                  className="text-left flex items-center justify-between py-2 text-sm transition-all"
-                  style={{ color: isActive(cat.id) ? TEXT_ACTIVE : TEXT_INACTIVE }}
+                  className="text-left flex items-center justify-between rounded-sm px-2 py-2 text-sm transition-all"
+                  style={{
+                    color: isActive(cat.id) ? ACTIVE_TEXT : TEXT_INACTIVE,
+                    background: isActive(cat.id) ? ACTIVE_BG : 'transparent',
+                  }}
                 >
                   <div className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full" style={{ background: isActive(cat.id) ? GOLD : TEXT_INACTIVE }} />
-                    <span className={fontClassName}>{cat.label}</span>
+                    <span className="w-1.5 h-1.5 rounded-full" style={{ background: isActive(cat.id) ? ACTIVE_BULLET : TEXT_INACTIVE }} />
+                    <span className={sansFontClassName}>{cat.label}</span>
                   </div>
-                  <span className="text-xs" style={{ color: TEXT_INACTIVE }}>{cat.count}</span>
+                  <span className="text-xs" style={{ color: isActive(cat.id) ? ACTIVE_COUNT : TEXT_INACTIVE }}>{cat.count}</span>
                 </button>
               ))}
             </div>
@@ -290,14 +304,17 @@ export default function BookArchive({ posts, categories, subjects, fontClassName
                     <button
                       key={s.id}
                       onClick={() => { setSelectedSubject(s.id); setMobilePage('posts'); }}
-                      className="text-left flex items-center justify-between py-2 text-sm transition-all"
-                      style={{ color: isActive('', s.id) ? TEXT_ACTIVE : TEXT_INACTIVE }}
+                      className="text-left flex items-center justify-between rounded-sm px-2 py-2 text-sm transition-all"
+                      style={{
+                        color: isActive('', s.id) ? ACTIVE_TEXT : TEXT_INACTIVE,
+                        background: isActive('', s.id) ? ACTIVE_BG : 'transparent',
+                      }}
                     >
                       <div className="flex items-center gap-2 min-w-0">
-                        <span className="w-1.5 h-1.5 shrink-0 rounded-full" style={{ background: isActive('', s.id) ? GOLD : TEXT_INACTIVE }} />
-                        <span className={`truncate ${fontClassName}`}>{s.label}</span>
+                        <span className="w-1.5 h-1.5 shrink-0 rounded-full" style={{ background: isActive('', s.id) ? ACTIVE_BULLET : TEXT_INACTIVE }} />
+                        <span className={`truncate ${sansFontClassName}`}>{s.label}</span>
                       </div>
-                      <span className="text-xs shrink-0 ml-2" style={{ color: TEXT_INACTIVE }}>{s.count}{t.episodes}</span>
+                      <span className="text-xs shrink-0 ml-2" style={{ color: isActive('', s.id) ? ACTIVE_COUNT : TEXT_INACTIVE }}>{s.count}{t.episodes}</span>
                     </button>
                   ))}
                 </div>
@@ -312,7 +329,7 @@ export default function BookArchive({ posts, categories, subjects, fontClassName
           <div className="flex flex-col flex-1 overflow-y-auto px-5 py-5" style={{ scrollbarWidth: 'none' }}>
             <RulingLines />
             <div className="mt-4 mb-4">
-              <p className={`text-base leading-snug tracking-[0.12em] ${fontClassName}`} style={{ color: TEXT_ACTIVE }}>
+              <p className={`text-base leading-snug tracking-[0.12em] ${serifFontClassName}`} style={{ color: TEXT_ACTIVE }}>
                 {rightPageTitle}
               </p>
               {isSearching && (
@@ -324,15 +341,15 @@ export default function BookArchive({ posts, categories, subjects, fontClassName
             <div className="flex flex-col gap-4">
               {filtered.length === 0 ? (
                 <div className="mt-8 flex flex-col items-center text-center">
-                  <p className={`text-base ${fontClassName}`} style={{ color: TEXT_INACTIVE }}>
-                    {isSearching ? (lang === 'en' ? 'No records were found in the current scope.' : '현재 범위에서 검색된 기록이 없습니다.') : t.noRecords}
+                  <p className={`text-base ${sansFontClassName}`} style={{ color: TEXT_INACTIVE }}>
+                    {isSearching ? (lang === 'en' ? 'No records were found in this range yet.' : '이 범위에서는 아직 해당 기록을 찾지 못했습니다.') : t.noRecords}
                   </p>
                   {isSearching && (
                     <>
                       <p className="mt-2 text-xs leading-relaxed" style={{ color: 'rgba(255,255,255,0.35)' }}>
                         {lang === 'en'
-                          ? 'Try another word or search again from all records.'
-                          : '다른 단어로 찾아보거나 전체 기록에서 다시 검색해보세요.'}
+                          ? 'Try another word, or open the search across all records.'
+                          : '다른 단어로 찾거나, 전체 기록에서 다시 펼쳐보세요.'}
                       </p>
                       <button
                         type="button"
@@ -340,7 +357,7 @@ export default function BookArchive({ posts, categories, subjects, fontClassName
                         className="mt-5 rounded-md border bg-black/25 px-4 py-2 text-xs transition-colors hover:bg-black/40"
                         style={{ borderColor: 'rgba(255,255,255,0.18)', color: TEXT_ACTIVE }}
                       >
-                        {lang === 'en' ? 'Search All Records' : '전체 기록에서 다시 검색'}
+                        {lang === 'en' ? 'Search All Records' : '전체 기록에서 찾기'}
                       </button>
                     </>
                   )}
@@ -356,7 +373,7 @@ export default function BookArchive({ posts, categories, subjects, fontClassName
                       {String(i + 1).padStart(2, '0')}
                     </span>
                     <div className="flex flex-col gap-0.5 border-b pb-3 flex-1 transition-colors group-hover:border-white/30" style={{ borderColor: GOLD_FAINT }}>
-                      <span className={`text-sm leading-snug transition-all group-hover:text-white ${fontClassName}`} style={{ color: TEXT_ACTIVE }}>
+                      <span className={`text-sm leading-snug transition-all group-hover:text-white ${serifFontClassName}`} style={{ color: TEXT_ACTIVE }}>
                         {stripPrefix(post.title)}
                       </span>
                       <span className="text-[11px]" style={{ color: TEXT_INACTIVE }}>{post.date.slice(2).replace(/-/g, '.')}</span>
@@ -372,7 +389,7 @@ export default function BookArchive({ posts, categories, subjects, fontClassName
     </div>
 
     {/* ── 데스크탑 전용 ── */}
-    <div className="hidden md:flex flex-1 items-center justify-center px-2 py-4">
+    <div className={`hidden md:flex flex-1 items-center justify-center px-2 py-4 ${sansFontClassName}`}>
       <div
         className="flex w-full max-w-6xl overflow-hidden"
         style={{
@@ -415,7 +432,7 @@ export default function BookArchive({ posts, categories, subjects, fontClassName
                 value={searchQuery}
                 onChange={(event) => setSearchQuery(event.target.value)}
                 placeholder={lang === 'en' ? 'Search by title, tag, or content' : '제목, 태그, 내용으로 찾아보기'}
-                className="w-full bg-transparent text-sm text-white outline-none placeholder:text-white/60"
+                className={`w-full bg-transparent text-sm text-white outline-none placeholder:text-white/60 ${sansFontClassName}`}
               />
             </div>
             <p className="mx-auto mt-3 w-[92%] text-xs leading-relaxed" style={{ color: 'rgba(255,255,255,0.72)' }}>
@@ -434,17 +451,20 @@ export default function BookArchive({ posts, categories, subjects, fontClassName
               <button
                 key={cat.id}
                 onClick={() => { setSelectedCategory(cat.id); setSelectedSubject(''); }}
-                className="group text-left flex items-center justify-between py-2 text-sm transition-all"
-                style={{ color: isActive(cat.id) ? TEXT_ACTIVE : TEXT_INACTIVE }}
+                className="group text-left flex items-center justify-between rounded-sm px-2 py-2 text-sm transition-all"
+                style={{
+                  color: isActive(cat.id) ? ACTIVE_TEXT : TEXT_INACTIVE,
+                  background: isActive(cat.id) ? ACTIVE_BG : 'transparent',
+                }}
               >
                 <div className="flex items-center gap-2">
                   <span
                     className="w-1.5 h-1.5 rounded-full transition-all"
-                    style={{ background: isActive(cat.id) ? GOLD : TEXT_INACTIVE }}
+                    style={{ background: isActive(cat.id) ? ACTIVE_BULLET : TEXT_INACTIVE }}
                   />
-                  <span className={fontClassName}>{cat.label}</span>
+                  <span className={sansFontClassName}>{cat.label}</span>
                 </div>
-                <span className="text-xs" style={{ color: TEXT_INACTIVE }}>{cat.count}</span>
+                <span className="text-xs" style={{ color: isActive(cat.id) ? ACTIVE_COUNT : TEXT_INACTIVE }}>{cat.count}</span>
               </button>
             ))}
           </div>
@@ -461,17 +481,20 @@ export default function BookArchive({ posts, categories, subjects, fontClassName
                   <button
                     key={s.id}
                     onClick={() => { setSelectedSubject(s.id); }}
-                    className="text-left flex items-center justify-between py-2 text-sm transition-all"
-                    style={{ color: isActive('', s.id) ? TEXT_ACTIVE : TEXT_INACTIVE }}
+                    className="text-left flex items-center justify-between rounded-sm px-2 py-2 text-sm transition-all"
+                    style={{
+                      color: isActive('', s.id) ? ACTIVE_TEXT : TEXT_INACTIVE,
+                      background: isActive('', s.id) ? ACTIVE_BG : 'transparent',
+                    }}
                   >
                     <div className="flex items-center gap-2 min-w-0">
                       <span
                         className="w-1.5 h-1.5 shrink-0 rounded-full transition-all"
-                        style={{ background: isActive('', s.id) ? GOLD : TEXT_INACTIVE }}
+                        style={{ background: isActive('', s.id) ? ACTIVE_BULLET : TEXT_INACTIVE }}
                       />
-                      <span className={`truncate ${fontClassName}`}>{s.label}</span>
+                      <span className={`truncate ${sansFontClassName}`}>{s.label}</span>
                     </div>
-                    <span className="text-[11px] shrink-0 ml-2" style={{ color: TEXT_INACTIVE }}>{s.count}{t.episodes}</span>
+                    <span className="text-[11px] shrink-0 ml-2" style={{ color: isActive('', s.id) ? ACTIVE_COUNT : TEXT_INACTIVE }}>{s.count}{t.episodes}</span>
                   </button>
                 ))}
               </div>
@@ -512,7 +535,7 @@ export default function BookArchive({ posts, categories, subjects, fontClassName
 
 
           <div className="mt-6 mb-5">
-            <p className={`text-lg leading-snug tracking-[0.12em] ${fontClassName}`} style={{ color: TEXT_ACTIVE }}>
+            <p className={`text-lg leading-snug tracking-[0.12em] ${serifFontClassName}`} style={{ color: TEXT_ACTIVE }}>
               {rightPageTitle}
             </p>
             {isSearching && (
@@ -529,15 +552,15 @@ export default function BookArchive({ posts, categories, subjects, fontClassName
           >
             {filtered.length === 0 ? (
               <div className="mt-8 flex flex-col items-center text-center">
-                <p className={`text-lg ${fontClassName}`} style={{ color: TEXT_INACTIVE }}>
-                  {isSearching ? (lang === 'en' ? 'No records were found in the current scope.' : '현재 범위에서 검색된 기록이 없습니다.') : t.noRecords}
+                <p className={`text-lg ${sansFontClassName}`} style={{ color: TEXT_INACTIVE }}>
+                  {isSearching ? (lang === 'en' ? 'No records were found in this range yet.' : '이 범위에서는 아직 해당 기록을 찾지 못했습니다.') : t.noRecords}
                 </p>
                 {isSearching && (
                   <>
                     <p className="mt-2 text-xs leading-relaxed" style={{ color: 'rgba(255,255,255,0.35)' }}>
                       {lang === 'en'
-                        ? 'Try another word or search again from all records.'
-                        : '다른 단어로 찾아보거나 전체 기록에서 다시 검색해보세요.'}
+                        ? 'Try another word, or open the search across all records.'
+                        : '다른 단어로 찾거나, 전체 기록에서 다시 펼쳐보세요.'}
                     </p>
                     <button
                       type="button"
@@ -545,7 +568,7 @@ export default function BookArchive({ posts, categories, subjects, fontClassName
                       className="mt-5 rounded-md border bg-black/25 px-4 py-2 text-xs transition-colors hover:bg-black/40"
                       style={{ borderColor: 'rgba(255,255,255,0.18)', color: TEXT_ACTIVE }}
                     >
-                      {lang === 'en' ? 'Search All Records' : '전체 기록에서 다시 검색'}
+                      {lang === 'en' ? 'Search All Records' : '전체 기록에서 찾기'}
                     </button>
                   </>
                 )}
@@ -565,7 +588,7 @@ export default function BookArchive({ posts, categories, subjects, fontClassName
                   </span>
                   <div className="flex flex-col gap-0.5 border-b pb-3 flex-1 transition-colors group-hover:border-white/30" style={{ borderColor: GOLD_FAINT }}>
                     <span
-                      className={`text-[0.95rem] leading-snug transition-all group-hover:text-white  ${fontClassName}`}
+                      className={`text-[0.95rem] leading-snug transition-all group-hover:text-white ${serifFontClassName}`}
                       style={{ color: TEXT_ACTIVE }}
                     >
                       {stripPrefix(post.title)}

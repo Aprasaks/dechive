@@ -11,7 +11,8 @@ interface ArchiveClientProps {
   enCategories: Category[];
   koSubjects: Subject[];
   enSubjects: Subject[];
-  fontClassName: string;
+  serifFontClassName: string;
+  sansFontClassName: string;
 }
 
 export default function ArchiveClient({
@@ -21,7 +22,8 @@ export default function ArchiveClient({
   enCategories,
   koSubjects,
   enSubjects,
-  fontClassName,
+  serifFontClassName,
+  sansFontClassName,
 }: ArchiveClientProps) {
   const { lang } = useLang();
 
@@ -34,7 +36,8 @@ export default function ArchiveClient({
       posts={posts}
       categories={categories}
       subjects={subjects}
-      fontClassName={fontClassName}
+      serifFontClassName={serifFontClassName}
+      sansFontClassName={sansFontClassName}
     />
   );
 }

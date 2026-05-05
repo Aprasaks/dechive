@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Noto_Serif_KR } from 'next/font/google';
+import { Noto_Sans_KR, Noto_Serif_KR } from 'next/font/google';
 import { getAllPosts, getCategories, getSubjects } from '@/lib/posts';
 import ArchiveClient from '@/components/archive/ArchiveClient';
 
@@ -7,6 +7,12 @@ const notoSerifKR = Noto_Serif_KR({
   weight: ['400', '500'],
   subsets: ['latin'],
   variable: '--font-noto-serif-kr',
+});
+
+const notoSansKR = Noto_Sans_KR({
+  weight: ['400', '500'],
+  subsets: ['latin'],
+  variable: '--font-noto-sans-kr',
 });
 
 export const metadata: Metadata = {
@@ -44,7 +50,7 @@ export default function ArchivePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <main className={`flex flex-1 min-h-0 ${notoSerifKR.variable}`}>
+      <main className={`flex flex-1 min-h-0 ${notoSerifKR.variable} ${notoSansKR.variable}`}>
         <ArchiveClient
           koPosts={koPosts}
           enPosts={enPosts}
@@ -52,7 +58,8 @@ export default function ArchivePage() {
           enCategories={enCategories}
           koSubjects={koSubjects}
           enSubjects={enSubjects}
-          fontClassName="font-[family-name:var(--font-noto-serif-kr)]"
+          serifFontClassName="font-[family-name:var(--font-noto-serif-kr)]"
+          sansFontClassName="font-[family-name:var(--font-noto-sans-kr)]"
         />
       </main>
     </>
