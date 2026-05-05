@@ -29,6 +29,76 @@ function stripPrefix(title: string) {
     .replace(/^[\w\s]+Part\s+\d+:\s*/i, '');                // "Part 1:"
 }
 
+function getMatchedTerms(value: string, terms: string[]) {
+  const normalized = value.toLowerCase();
+  return terms.filter((term) => normalized.includes(term));
+}
+
+function getSearchScore(post: Post, terms: string[]) {
+  let score = 0;
+  const title = post.title;
+  const tags = post.tags.join(' ');
+  const subject = post.subject ?? '';
+  const description = post.description;
+  const content = post.content;
+  const category = post.category;
+
+  if (getMatchedTerms(title, terms).length > 0) score += 100;
+  if (getMatchedTerms(tags, terms).length > 0) score += 80;
+  if (getMatchedTerms(subject, terms).length > 0) score += 60;
+  if (getMatchedTerms(description, terms).length > 0) score += 40;
+  if (getMatchedTerms(content, terms).length > 0) score += 20;
+  if (getMatchedTerms(category, terms).length > 0) score += 10;
+
+  return score;
+}
+
+function getMatchedTermCount(post: Post, terms: string[]) {
+  const searchableText = [
+    post.title,
+    post.tags.join(' '),
+    post.subject ?? '',
+    post.description,
+    post.content,
+    post.category,
+  ].join(' ').toLowerCase();
+
+  return terms.filter((term) => searchableText.includes(term)).length;
+}
+
+function shouldIncludeSearchResult(score: number, matchedTermCount: number, totalTermCount: number) {
+  if (score === 0) return false;
+  if (totalTermCount === 1) return matchedTermCount >= 1;
+  if (totalTermCount === 2) return matchedTermCount >= 2 || score >= 80;
+  return matchedTermCount >= Math.ceil(totalTermCount / 2);
+}
+
+function searchPosts(posts: Post[], query: string) {
+  const terms = query
+    .trim()
+    .toLowerCase()
+    .split(/\s+/)
+    .filter(Boolean);
+
+  if (terms.length === 0) return posts;
+
+  return posts
+    .map((post) => ({
+      post,
+      score: getSearchScore(post, terms),
+      matchedTermCount: getMatchedTermCount(post, terms),
+    }))
+    .filter(({ score, matchedTermCount }) => shouldIncludeSearchResult(score, matchedTermCount, terms.length))
+    .sort((a, b) => {
+      if (a.score !== b.score) return b.score - a.score;
+      if (a.matchedTermCount !== b.matchedTermCount) {
+        return b.matchedTermCount - a.matchedTermCount;
+      }
+      return a.post.date > b.post.date ? -1 : 1;
+    })
+    .map(({ post }) => post);
+}
+
 function RulingLines() {
   return (
     <div className="flex flex-col gap-[3px]">
@@ -51,6 +121,7 @@ function Ornament() {
 export default function BookArchive({ posts, categories, subjects, fontClassName }: BookArchiveProps) {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedSubject, setSelectedSubject] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
   const [mobilePage, setMobilePage] = useState<'posts' | 'index'>('posts');
   const { lang } = useLang();
   const t = i18n[lang];
@@ -79,7 +150,7 @@ export default function BookArchive({ posts, categories, subjects, fontClassName
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lang]);
 
-  const filtered = posts
+  const scopedPosts = posts
     .filter((p) => {
       const catMatch = selectedCategory === 'all' || p.category === selectedCategory;
       const subjectMatch = !selectedSubject || p.subject === selectedSubject;
@@ -89,6 +160,9 @@ export default function BookArchive({ posts, categories, subjects, fontClassName
       if (selectedSubject) return a.date < b.date ? -1 : 1;
       return a.date > b.date ? -1 : 1;
     });
+  const normalizedSearchQuery = searchQuery.trim();
+  const isSearching = normalizedSearchQuery.length > 0;
+  const filtered = isSearching ? searchPosts(scopedPosts, normalizedSearchQuery) : scopedPosts;
 
   const isActive = (catId: string, subjectId = '') =>
     subjectId ? selectedSubject === subjectId : selectedCategory === catId && !selectedSubject;
@@ -105,6 +179,22 @@ export default function BookArchive({ posts, categories, subjects, fontClassName
             return countMap;
           }, new Map<string, number>()),
       ).map(([id, count]) => ({ id, label: id, count }));
+
+  const selectedCategoryLabel = selectedCategory === 'all'
+    ? t.allPosts
+    : categories.find((category) => category.id === selectedCategory)?.label ?? selectedCategory;
+  const inferredSubjectCategory = selectedSubject
+    ? posts.find((post) => post.subject === selectedSubject)?.category
+    : '';
+  const scopeLabel = selectedSubject
+    ? `${selectedCategory === 'all' ? inferredSubjectCategory || selectedCategoryLabel : selectedCategoryLabel} > ${selectedSubject}`
+    : selectedCategoryLabel;
+  const rangeLabel = lang === 'en'
+    ? `${scopeLabel} contains ${filtered.length} record${filtered.length === 1 ? '' : 's'}`
+    : `${scopeLabel} 안에서 ${filtered.length}개의 기록`;
+  const rightPageTitle = isSearching
+    ? `"${normalizedSearchQuery}" ${lang === 'en' ? 'search results' : '검색 결과'}`
+    : selectedSubject || (selectedCategory === 'all' ? t.allPosts : selectedCategoryLabel);
 
   const BOOK_HEIGHT = '74vh';
 
@@ -152,6 +242,24 @@ export default function BookArchive({ posts, categories, subjects, fontClassName
             <div className="mt-5 mb-4">
               <p className="text-xs tracking-[0.35em] uppercase mb-2" style={{ color: TEXT_LABEL }}>{t.archiveLabel}</p>
               <h1 className={`text-2xl leading-tight ${fontClassName}`} style={{ color: TEXT_ACTIVE }}>{t.infiniteArchive}</h1>
+            </div>
+            <div className="mb-4">
+              <label className="mb-3 block text-[10px] tracking-[0.35em] uppercase" style={{ color: 'rgba(255,255,255,0.62)' }}>
+                Search
+              </label>
+              <div className="flex h-11 items-center gap-3 rounded-md border bg-black/25 px-4 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.06)] backdrop-blur-sm" style={{ borderColor: 'rgba(255,255,255,0.18)' }}>
+                <Search size={15} className="shrink-0 text-white/70" />
+                <input
+                  type="search"
+                  value={searchQuery}
+                  onChange={(event) => setSearchQuery(event.target.value)}
+                  placeholder={lang === 'en' ? 'Search by title, tag, or content' : '제목, 태그, 내용으로 찾아보기'}
+                  className="w-full bg-transparent text-sm text-white outline-none placeholder:text-white/60"
+                />
+              </div>
+              <p className="mt-3 text-xs leading-relaxed" style={{ color: 'rgba(255,255,255,0.72)' }}>
+                {lang === 'en' ? `Current scope: ${scopeLabel}` : `현재 범위: ${scopeLabel}`}
+              </p>
             </div>
             <Ornament />
             {/* 카테고리 */}
@@ -204,13 +312,39 @@ export default function BookArchive({ posts, categories, subjects, fontClassName
           <div className="flex flex-col flex-1 overflow-y-auto px-5 py-5" style={{ scrollbarWidth: 'none' }}>
             <RulingLines />
             <div className="mt-4 mb-4">
-              <p className="text-xs tracking-[0.35em] uppercase" style={{ color: TEXT_LABEL }}>
-                {selectedSubject || (selectedCategory === 'all' ? t.allPosts : selectedCategory)}
+              <p className={`text-base leading-snug tracking-[0.12em] ${fontClassName}`} style={{ color: TEXT_ACTIVE }}>
+                {rightPageTitle}
               </p>
+              {isSearching && (
+                <p className="mt-2 text-xs" style={{ color: 'rgba(255,255,255,0.72)' }}>
+                  {rangeLabel}
+                </p>
+              )}
             </div>
             <div className="flex flex-col gap-4">
               {filtered.length === 0 ? (
-                <p className={`mt-8 text-center text-base ${fontClassName}`} style={{ color: TEXT_INACTIVE }}>{t.noRecords}</p>
+                <div className="mt-8 flex flex-col items-center text-center">
+                  <p className={`text-base ${fontClassName}`} style={{ color: TEXT_INACTIVE }}>
+                    {isSearching ? (lang === 'en' ? 'No records were found in the current scope.' : '현재 범위에서 검색된 기록이 없습니다.') : t.noRecords}
+                  </p>
+                  {isSearching && (
+                    <>
+                      <p className="mt-2 text-xs leading-relaxed" style={{ color: 'rgba(255,255,255,0.35)' }}>
+                        {lang === 'en'
+                          ? 'Try another word or search again from all records.'
+                          : '다른 단어로 찾아보거나 전체 기록에서 다시 검색해보세요.'}
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() => { setSelectedCategory('all'); setSelectedSubject(''); }}
+                        className="mt-5 rounded-md border bg-black/25 px-4 py-2 text-xs transition-colors hover:bg-black/40"
+                        style={{ borderColor: 'rgba(255,255,255,0.18)', color: TEXT_ACTIVE }}
+                      >
+                        {lang === 'en' ? 'Search All Records' : '전체 기록에서 다시 검색'}
+                      </button>
+                    </>
+                  )}
+                </div>
               ) : (
                 filtered.map((post, i) => (
                   <Link
@@ -278,12 +412,14 @@ export default function BookArchive({ posts, categories, subjects, fontClassName
               <Search size={15} className="shrink-0 text-white/70" />
               <input
                 type="search"
-                placeholder={lang === 'en' ? 'Search the shelves' : '서가에서 찾기'}
+                value={searchQuery}
+                onChange={(event) => setSearchQuery(event.target.value)}
+                placeholder={lang === 'en' ? 'Search by title, tag, or content' : '제목, 태그, 내용으로 찾아보기'}
                 className="w-full bg-transparent text-sm text-white outline-none placeholder:text-white/60"
               />
             </div>
-            <p className="mt-3 text-[10px]" style={{ color: 'rgba(255,255,255,0.25)' }}>
-              {lang === 'en' ? 'Search by title, tag, or content.' : '제목, 태그, 기록 내용으로 찾습니다.'}
+            <p className="mx-auto mt-3 w-[92%] text-xs leading-relaxed" style={{ color: 'rgba(255,255,255,0.72)' }}>
+              {lang === 'en' ? `Current scope: ${scopeLabel}` : `현재 범위: ${scopeLabel}`}
             </p>
           </div>
 
@@ -376,9 +512,14 @@ export default function BookArchive({ posts, categories, subjects, fontClassName
 
 
           <div className="mt-6 mb-5">
-            <p className="text-[9px] tracking-[0.35em] uppercase" style={{ color: TEXT_LABEL }}>
-              {selectedSubject || (selectedCategory === 'all' ? t.allPosts : selectedCategory)}
+            <p className={`text-lg leading-snug tracking-[0.12em] ${fontClassName}`} style={{ color: TEXT_ACTIVE }}>
+              {rightPageTitle}
             </p>
+            {isSearching && (
+              <p className="mt-2 text-sm" style={{ color: 'rgba(255,255,255,0.72)' }}>
+                {rangeLabel}
+              </p>
+            )}
           </div>
 
           {/* 포스트 목록 */}
@@ -387,9 +528,28 @@ export default function BookArchive({ posts, categories, subjects, fontClassName
             style={{ scrollbarWidth: 'none' }}
           >
             {filtered.length === 0 ? (
-              <p className={`mt-8 text-center text-lg ${fontClassName}`} style={{ color: TEXT_INACTIVE }}>
-                {t.noRecords}
-              </p>
+              <div className="mt-8 flex flex-col items-center text-center">
+                <p className={`text-lg ${fontClassName}`} style={{ color: TEXT_INACTIVE }}>
+                  {isSearching ? (lang === 'en' ? 'No records were found in the current scope.' : '현재 범위에서 검색된 기록이 없습니다.') : t.noRecords}
+                </p>
+                {isSearching && (
+                  <>
+                    <p className="mt-2 text-xs leading-relaxed" style={{ color: 'rgba(255,255,255,0.35)' }}>
+                      {lang === 'en'
+                        ? 'Try another word or search again from all records.'
+                        : '다른 단어로 찾아보거나 전체 기록에서 다시 검색해보세요.'}
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => { setSelectedCategory('all'); setSelectedSubject(''); }}
+                      className="mt-5 rounded-md border bg-black/25 px-4 py-2 text-xs transition-colors hover:bg-black/40"
+                      style={{ borderColor: 'rgba(255,255,255,0.18)', color: TEXT_ACTIVE }}
+                    >
+                      {lang === 'en' ? 'Search All Records' : '전체 기록에서 다시 검색'}
+                    </button>
+                  </>
+                )}
+              </div>
             ) : (
               filtered.map((post, i) => (
                 <Link
