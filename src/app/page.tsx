@@ -1,6 +1,13 @@
 import type { Metadata } from 'next';
+import { Noto_Serif_KR } from 'next/font/google';
 import HomeClient from '@/components/home/HomeClient';
 import { getAllPosts } from '@/lib/posts';
+
+const notoSerifKR = Noto_Serif_KR({
+  weight: ['500'],
+  subsets: ['latin'],
+  variable: '--font-home-serif-kr',
+});
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://dechive.dev', languages: { 'x-default': 'https://dechive.dev' } },
@@ -25,7 +32,11 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <HomeClient koPostHrefs={koPostHrefs} enPostHrefs={enPostHrefs} />
+      <HomeClient
+        koPostHrefs={koPostHrefs}
+        enPostHrefs={enPostHrefs}
+        heroSerifClassName={notoSerifKR.className}
+      />
     </>
   );
 }

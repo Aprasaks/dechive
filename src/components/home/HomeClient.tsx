@@ -10,12 +10,16 @@ import i18n from '@/lib/i18n';
 interface HomeClientProps {
   koPostHrefs: string[];
   enPostHrefs: string[];
+  heroSerifClassName: string;
 }
 
-export default function HomeClient({ koPostHrefs, enPostHrefs }: HomeClientProps) {
+export default function HomeClient({ koPostHrefs, enPostHrefs, heroSerifClassName }: HomeClientProps) {
   const router = useRouter();
   const { lang } = useLang();
   const t = i18n[lang];
+  const heroTitleClassName = lang === 'ko'
+    ? `font-medium leading-[1.38] ${heroSerifClassName}`
+    : `font-medium leading-[1.35] ${heroSerifClassName}`;
 
   const handleRandomPost = useCallback(() => {
     const postHrefs = lang === 'en' ? enPostHrefs : koPostHrefs;
@@ -41,8 +45,16 @@ export default function HomeClient({ koPostHrefs, enPostHrefs }: HomeClientProps
             <div className="h-px flex-1 bg-linear-to-l from-transparent to-white/45" />
           </div>
 
-          <h1 className="mt-9 text-3xl font-semibold leading-[1.35] tracking-normal whitespace-pre-line text-white drop-shadow-[0_0_16px_rgba(255,255,255,0.18)] sm:text-4xl lg:text-[52px]">
-            {t.homeTagline2}
+          <h1 className={`mt-9 text-3xl tracking-normal whitespace-pre-line text-white drop-shadow-[0_0_16px_rgba(255,255,255,0.18)] sm:text-4xl lg:text-[52px] ${heroTitleClassName}`}>
+            {lang === 'en' ? (
+              <>
+                When thoughts become records,
+                <br />
+                <span className="italic">meaning is born.</span>
+              </>
+            ) : (
+              t.homeTagline2
+            )}
           </h1>
 
           <div className="mt-20 flex flex-col items-center justify-center gap-3 sm:flex-row">
