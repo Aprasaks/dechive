@@ -15,6 +15,12 @@ export default function Footer() {
             About
           </Link>
           <Link
+            href="/guestbook"
+            className="text-xs text-zinc-400 transition-colors hover:text-zinc-200"
+          >
+            Guestbook
+          </Link>
+          <Link
             href="/privacy-policy"
             className="text-xs text-zinc-400 transition-colors hover:text-zinc-200"
           >
