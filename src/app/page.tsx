@@ -10,7 +10,34 @@ const notoSerifKR = Noto_Serif_KR({
 });
 
 export const metadata: Metadata = {
+  title: 'Dechive — 생각이 머무는 도서관',
+  description:
+    '생각이 기록이 되는 순간, 의미를 가진다. Dechive는 지식과 생각을 짧은 책처럼 남기는 개인 도서관입니다.',
   alternates: { canonical: 'https://dechive.dev', languages: { 'x-default': 'https://dechive.dev' } },
+  openGraph: {
+    title: 'Dechive — 생각이 머무는 도서관',
+    description:
+      '생각이 기록이 되는 순간, 의미를 가진다. Dechive는 지식과 생각을 짧은 책처럼 남기는 개인 도서관입니다.',
+    url: 'https://dechive.dev',
+    siteName: 'Dechive',
+    locale: 'ko_KR',
+    type: 'website',
+    images: [
+      {
+        url: 'https://dechive.dev/images/thumb.webp',
+        width: 1200,
+        height: 630,
+        alt: 'Dechive — 생각이 머무는 도서관',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Dechive — 생각이 머무는 도서관',
+    description:
+      '생각이 기록이 되는 순간, 의미를 가진다. Dechive는 지식과 생각을 짧은 책처럼 남기는 개인 도서관입니다.',
+    images: ['https://dechive.dev/images/thumb.webp'],
+  },
 };
 
 const jsonLd = {

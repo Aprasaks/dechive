@@ -30,20 +30,6 @@ export interface Post {
   content: string;        // 마크다운 본문
 }
 
-export interface Project {
-  slug: string;
-  title: string;
-  description: string;
-  summary: string;
-  techStack: string[];
-  status: 'in-progress' | 'completed' | 'archived';
-  url?: string;
-  github?: string;
-  thumbnail?: string;
-  date: string;
-  content: string;
-}
-
 export interface RelatedPost {
   slug: string;
   title: string;

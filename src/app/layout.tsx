@@ -21,14 +21,14 @@ const geistSans = Geist({
 const BASE_URL = 'https://dechive.dev';
 
 export const metadata: Metadata = {
-  title: { default: 'Dechive', template: '%s | Dechive' },
+  title: { default: 'Dechive — 생각이 머무는 도서관', template: '%s | Dechive' },
   description:
-    '기록된 지식은 가치를 가진다. 기술, 철학, 사유의 흔적을 기록하는 공간.',
+    'Dechive는 생각과 지식을 짧은 책처럼 기록하고 다시 탐색하기 위한 개인 도서관입니다.',
   metadataBase: new URL(BASE_URL),
   openGraph: {
-    title: 'Dechive',
+    title: 'Dechive — 생각이 머무는 도서관',
     description:
-      '기록된 지식은 가치를 가진다. 기술, 철학, 사유의 흔적을 기록하는 공간.',
+      'Dechive는 생각과 지식을 짧은 책처럼 기록하고 다시 탐색하기 위한 개인 도서관입니다.',
     url: BASE_URL,
     siteName: 'Dechive',
     images: [
@@ -39,9 +39,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Dechive',
+    title: 'Dechive — 생각이 머무는 도서관',
     description:
-      '기록된 지식은 가치를 가진다. 기술, 철학, 사유의 흔적을 기록하는 공간.',
+      'Dechive는 생각과 지식을 짧은 책처럼 기록하고 다시 탐색하기 위한 개인 도서관입니다.',
     images: ['/images/thumb.webp'],
   },
   robots: { index: true, follow: true },

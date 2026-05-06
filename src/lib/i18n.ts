@@ -31,16 +31,8 @@ const i18n = {
     aboutBrand: 'Dechive',
     spaceArchiveTitle: '정제된 지식',
     spaceArchiveDesc: 'AI 프롬프트 엔지니어링, SQL, 개발 개념을 시리즈로 정리. 한 편으로 주제를 완결합니다.',
-    spaceProjectsTitle: '만들어가는 과정',
-    spaceProjectsDesc: '아이디어를 코드로 만드는 과정. 완성된 결과물보다 그 여정이 더 값집니다.',
     aboutContactCta: '같이 이야기해요',
     spacesLabel: 'Spaces',
-
-    // Projects
-    projectsTagline1: '생각을 하고 기획을 하고',
-    projectsTagline2: '코드를 작성하고 세상에 내보낸다.',
-    projectsDesc: '직접 만들고, 부수고, 다시 만드는 과정에서 배운 것들을 기록하는 공간. 완성된 결과물보다 그 과정이 더 값지다.',
-    projectsEmpty: '프로젝트 기록들이 곧 채워질 예정입니다.',
 
     // Contact
     contactDesc: '질문, 피드백, 협업 제안 무엇이든 환영해요.',
@@ -106,16 +98,8 @@ const i18n = {
     aboutBrand: 'Dechive',
     spaceArchiveTitle: 'Refined Knowledge',
     spaceArchiveDesc: 'AI Prompt Engineering, SQL, and dev concepts organized into series — each post designed to stand alone.',
-    spaceProjectsTitle: 'Works in Progress',
-    spaceProjectsDesc: 'Turning ideas into code. The journey matters more than the finished product.',
     aboutContactCta: 'Let\'s Talk',
     spacesLabel: 'Spaces',
-
-    // Projects
-    projectsTagline1: 'Think. Plan. Build.',
-    projectsTagline2: 'Ship it to the world.',
-    projectsDesc: 'A space for recording what is learned through building, breaking, and rebuilding. The process is worth more than the finished product.',
-    projectsEmpty: 'Project records will be added soon.',
 
     // Contact
     contactDesc: 'Questions, feedback, or collaboration proposals — all welcome.',
