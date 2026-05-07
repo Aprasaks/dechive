@@ -120,7 +120,7 @@ export default async function PostPage({ params, searchParams }: PageProps) {
         </article>
 
         {/* TOC는 본문을 밀지 않는 보조 책갈피로 배치 */}
-        <aside className="absolute left-[calc(50%+390px)] top-0 hidden w-52 xl:block">
+        <aside className="absolute bottom-0 left-[calc(50%+390px)] top-0 hidden w-52 xl:block">
           <div className="sticky top-24 rounded-md border border-white/10 bg-black/20 p-4 shadow-[0_16px_60px_rgba(0,0,0,0.22)] backdrop-blur-sm">
             <TableOfContents content={post.content} />
           </div>
