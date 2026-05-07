@@ -48,7 +48,8 @@ export default function PostContent({ content }: PostContentProps) {
       prose-ul:my-6 prose-ol:my-6
       prose-li:my-2 prose-li:text-zinc-200 prose-li:leading-[1.8]
       prose-strong:text-white
-      prose-blockquote:my-8 prose-blockquote:border-zinc-600 prose-blockquote:text-zinc-300
+      prose-blockquote:my-8 prose-blockquote:rounded-md prose-blockquote:border-l prose-blockquote:border-amber-200/30 prose-blockquote:bg-black/25 prose-blockquote:px-5 prose-blockquote:py-1 prose-blockquote:text-zinc-300 prose-blockquote:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04)]
+      prose-blockquote:prose-p:my-4 prose-blockquote:prose-p:text-zinc-300 prose-blockquote:prose-p:leading-[1.8]
       prose-code:text-zinc-200 prose-code:bg-zinc-800 prose-code:rounded prose-code:px-1 prose-pre:prose-code:bg-transparent prose-pre:prose-code:px-0 prose-pre:prose-code:rounded-none
       prose-pre:my-8 prose-pre:bg-black/40 prose-pre:backdrop-blur-sm prose-pre:border prose-pre:border-white/10 prose-pre:rounded-xl prose-pre:overflow-x-auto
       prose-table:w-full
