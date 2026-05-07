@@ -21,19 +21,19 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
 
   return (
     <nav aria-label="목차">
-      <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-zinc-500">
+      <p className="mb-4 text-[10px] font-medium uppercase tracking-[0.28em] text-zinc-500/80">
         {t.tocTitle}
       </p>
-      <ul className="space-y-1">
+      <ul className="space-y-1.5">
         {headings.map((heading) => (
           <li key={heading.id} className={heading.level === 3 ? 'pl-3' : ''}>
             <a
               href={`#${heading.id}`}
               className={[
-                'block truncate text-xs leading-relaxed transition-colors duration-150',
+                'block truncate border-l pl-3 text-xs leading-relaxed transition-colors duration-150',
                 activeId === heading.id
-                  ? 'font-medium text-zinc-100'
-                  : 'text-zinc-500 hover:text-zinc-300',
+                  ? 'border-amber-200/45 font-medium text-amber-50/90'
+                  : 'border-white/5 text-zinc-600 hover:border-white/15 hover:text-zinc-400',
               ].join(' ')}
             >
               {heading.text}
