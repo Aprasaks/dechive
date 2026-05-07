@@ -47,7 +47,7 @@ const i18n = {
     allPosts: '전체 기록',
     categoryLabel: 'Category',
     subjectLabel: 'Subject',
-    episodes: '편',
+    recordCount: '개의 기록',
 
     // GuestBook
     guestBookTitle: '방명록 입장',
@@ -114,7 +114,7 @@ const i18n = {
     allPosts: 'All Posts',
     categoryLabel: 'Category',
     subjectLabel: 'Subject',
-    episodes: 'ep.',
+    recordCount: ' records',
 
     // GuestBook
     guestBookTitle: 'GUEST BOOK',

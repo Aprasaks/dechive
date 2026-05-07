@@ -294,7 +294,7 @@ export default function BookArchive({
                 </button>
               ))}
             </div>
-            {/* 시리즈 */}
+            {/* 주제 */}
             {visibleSubjects.length > 0 && (
               <>
                 <Ornament />
@@ -314,7 +314,7 @@ export default function BookArchive({
                         <span className="w-1.5 h-1.5 shrink-0 rounded-full" style={{ background: isActive('', s.id) ? ACTIVE_BULLET : TEXT_INACTIVE }} />
                         <span className={`truncate ${sansFontClassName}`}>{s.label}</span>
                       </div>
-                      <span className="text-xs shrink-0 ml-2" style={{ color: isActive('', s.id) ? ACTIVE_COUNT : TEXT_INACTIVE }}>{s.count}{t.episodes}</span>
+                      <span className="text-xs shrink-0 ml-2" style={{ color: isActive('', s.id) ? ACTIVE_COUNT : TEXT_INACTIVE }}>{s.count}{t.recordCount}</span>
                     </button>
                   ))}
                 </div>
@@ -469,7 +469,7 @@ export default function BookArchive({
             ))}
           </div>
 
-          {/* 시리즈 */}
+          {/* 주제 */}
           {visibleSubjects.length > 0 && (
             <>
               <Ornament />
@@ -494,7 +494,7 @@ export default function BookArchive({
                       />
                       <span className={`truncate ${sansFontClassName}`}>{s.label}</span>
                     </div>
-                    <span className="text-[11px] shrink-0 ml-2" style={{ color: isActive('', s.id) ? ACTIVE_COUNT : TEXT_INACTIVE }}>{s.count}{t.episodes}</span>
+                    <span className="text-[11px] shrink-0 ml-2" style={{ color: isActive('', s.id) ? ACTIVE_COUNT : TEXT_INACTIVE }}>{s.count}{t.recordCount}</span>
                   </button>
                 ))}
               </div>

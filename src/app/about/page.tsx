@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import AboutClient from '@/components/about/AboutClient';
 
 export const metadata: Metadata = {
-  title: 'About | Dechive — 생각이 머무는 도서관',
+  title: 'About',
   description:
     'Dechive는 생각과 지식을 기록하고 다시 탐색하기 위한 개인 도서관입니다.',
   alternates: {
