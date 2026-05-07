@@ -1,9 +1,8 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import { getAllPosts, getPostBySlug, getSeriesPosts } from '@/lib/posts';
+import { getAllPosts, getPostBySlug } from '@/lib/posts';
 import PostHeader from '@/components/archive/PostHeader';
 import PostContent from '@/components/archive/PostContent';
-import SeriesNav from '@/components/archive/SeriesNav';
 import TableOfContents from '@/components/archive/TableOfContents';
 
 interface PageProps {
@@ -25,7 +24,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const canonical = `${BASE_URL}/en/archive/${slug}`;
   const image = `${BASE_URL}/images/thumb.webp`;
 
-  const rawDesc = post.description || post.summary;
+  const rawDesc = post.description;
   const description = rawDesc.length > 160 ? `${rawDesc.slice(0, 157)}...` : rawDesc;
 
   return {
@@ -64,11 +63,6 @@ export default async function EnPostPage({ params }: PageProps) {
 
   if (!post) notFound();
 
-  const seriesPosts = post.series ? getSeriesPosts(post.series, 'en') : [];
-  const currentIndex = seriesPosts.findIndex((p) => p.slug === slug);
-  const prev = currentIndex > 0 ? seriesPosts[currentIndex - 1] : null;
-  const next = currentIndex < seriesPosts.length - 1 ? seriesPosts[currentIndex + 1] : null;
-
   return (
     <main className="mx-auto max-w-6xl px-4 sm:px-6 py-12 min-h-[calc(100vh-64px-56px)]">
       <div className="fixed inset-0 -z-[5] bg-black/50" />
@@ -80,7 +74,7 @@ export default async function EnPostPage({ params }: PageProps) {
             '@type': 'BlogPosting',
             mainEntityOfPage: { '@type': 'WebPage', '@id': `${BASE_URL}/en/archive/${post.slug}` },
             headline: post.title,
-            description: post.description || post.summary,
+            description: post.description,
             datePublished: post.date,
             keywords: post.tags.join(', '),
             articleSection: post.category,
@@ -115,7 +109,6 @@ export default async function EnPostPage({ params }: PageProps) {
         <article className="min-w-0 w-full max-w-3xl">
           <PostHeader post={post} />
           <PostContent content={post.content} />
-          <SeriesNav prev={prev} next={next} lang="en" />
         </article>
 
         <aside className="hidden lg:block w-56 shrink-0">

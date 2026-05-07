@@ -19,25 +19,17 @@ const POSTS_DIR = path.join(process.cwd(), 'content', 'posts');
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 const FORCE = process.argv.includes('--force');
 
-// 시리즈 이름 매핑 (한 → 영)
-const SERIES_MAP: Record<string, string> = {
-  '프롬프트 가이드': 'Prompt Guide',
-  'SQL 완전 정복': 'SQL Mastery',
-  'GA4 완전 정복': 'GA4 Mastery',
-};
-
 interface Frontmatter {
   title: string;
   date: string | Date;
   category: string;
   tags: string[];
   slug: string;
-  summary: string;
   description: string;
   thumbnail: string;
   status: string;
   lang: string;
-  series: string;
+  subject?: string;
 }
 
 function formatDate(date: unknown): string {
@@ -53,12 +45,11 @@ function buildFrontmatter(fm: Frontmatter): string {
   lines.push(`tags:`);
   (fm.tags ?? []).forEach((t) => lines.push(`  - ${t}`));
   lines.push(`slug: ${fm.slug}`);
-  lines.push(`summary: ${JSON.stringify(fm.summary)}`);
   lines.push(`description: ${JSON.stringify(fm.description)}`);
   if (fm.thumbnail) lines.push(`thumbnail: ${fm.thumbnail}`);
   lines.push(`status: ${fm.status}`);
   lines.push(`lang: ${fm.lang}`);
-  if (fm.series) lines.push(`series: ${JSON.stringify(fm.series)}`);
+  if (fm.subject) lines.push(`subject: ${JSON.stringify(fm.subject)}`);
   lines.push('---');
   return lines.join('\n');
 }
@@ -72,14 +63,17 @@ async function translateText(text: string, context: string): Promise<string> {
         role: 'user',
         content: `Translate the following Korean ${context} into natural, fluent English.
 
-Rules:
-- Write as a native English speaker would. Avoid literal Korean-to-English translation patterns.
-- Use concise, direct language. Prefer active voice over passive.
-- Vary sentence structure. Avoid repetitive openers like "We are...", "In this...", "It is...".
-- Preserve all markdown formatting exactly (headings, bold, italics, code blocks, lists, tables).
-- Keep technical terms, code snippets, proper nouns, brand names, and variable names as-is.
-- Do NOT add explanations, notes, or anything not in the original.
-- Return only the translated text.
+Write for a native English reader.
+Keep the tone calm, clear, thoughtful, and slightly literary.
+Use concise, direct language, but do not flatten the original rhythm.
+Prefer active voice over passive voice.
+Vary sentence structure naturally.
+
+Preserve the original meaning, nuance, and quiet tone.
+Do not make the writing sound promotional, overly casual, academic, or mechanical.
+Do not add explanations, examples, headings, or emphasis that are not in the original.
+Keep technical terms accurate and consistent.
+Keep Markdown structure, frontmatter keys, code blocks, and placeholders unchanged.
 
 ${text}`,
       },
@@ -107,22 +101,16 @@ async function translatePost(koFilename: string): Promise<void> {
   const { data, content } = matter(raw);
   const fm = data as Frontmatter;
 
-  const [title, summary, description, translatedContent] = await Promise.all([
+  const [title, description, translatedContent] = await Promise.all([
     translateText(fm.title, 'title (single line, no markdown)'),
-    translateText(fm.summary, 'short summary (single line, no markdown symbols)'),
     translateText(fm.description, 'SEO meta description (single line, 120-160 chars)'),
     translateText(content, 'blog post content'),
   ]);
 
-  // 시리즈 이름 매핑 (없으면 그대로)
-  const series = fm.series ? (SERIES_MAP[fm.series] ?? fm.series) : '';
-
   const enFrontmatter: Frontmatter = {
     ...fm,
     title,
-    summary,
     description,
-    series,
     lang: 'en',
   };
 

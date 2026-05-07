@@ -19,12 +19,10 @@ export interface Post {
   date: string;           // ISO 8601 (e.g. "2026-04-05"), 정렬용
   category: string;
   tags: string[];
-  summary: string;        // 카드 표시용 짧은 요약
   description: string;    // SEO / AdSense용 (150자 내외)
   thumbnail?: string;     // 파일명 (e.g. "next-app-router.webp"), 없으면 기본 이미지 사용
   status: PostStatus;
   lang: PostLang;
-  series?: string;        // 상세 페이지 이전/다음 호환용. Archive 목록은 subject를 우선 사용
   subject?: string;       // Archive 주제 묶음 이름 (없으면 빈 문자열)
   readingTime: number;    // 파싱 시 자동 계산 (분 단위)
   content: string;        // 마크다운 본문

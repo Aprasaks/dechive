@@ -1,5 +1,5 @@
 /**
- * 임베딩 생성 스크립트: 한글 포스트(.ko.md) → Supabase Vector DB
+ * 임베딩 생성 스크립트: 포스트(.md) → Supabase Vector DB
  *
  * 실행: npm run embeddings
  * - content/posts 의 모든 .md 파일을 ## 헤딩 기준으로 청킹
@@ -69,8 +69,8 @@ async function main() {
 
   const allChunks: Omit<Chunk, 'embedding'>[] = [];
 
-  // 시리즈 메타 정보 수집 (시리즈 인덱스 청크 생성용)
-  const seriesMap: Record<string, { lang: string; titles: string[]; category: string }> = {};
+  // subject 메타 정보 수집 (subject 인덱스 청크 생성용)
+  const subjectMap: Record<string, { lang: string; titles: string[]; category: string }> = {};
 
   for (const file of files) {
     const raw = fs.readFileSync(path.join(POSTS_DIR, file), 'utf-8');
@@ -91,28 +91,28 @@ async function main() {
       });
     }
 
-    // 시리즈 수집
-    if (data.series && data.title) {
-      const key = `${data.series}-${data.lang ?? 'ko'}`;
-      if (!seriesMap[key]) {
-        seriesMap[key] = { lang: data.lang ?? 'ko', titles: [], category: data.category ?? '' };
+    // subject 수집
+    if (data.subject && data.title) {
+      const key = `${data.subject}-${data.lang ?? 'ko'}`;
+      if (!subjectMap[key]) {
+        subjectMap[key] = { lang: data.lang ?? 'ko', titles: [], category: data.category ?? '' };
       }
-      seriesMap[key].titles.push(data.title);
+      subjectMap[key].titles.push(data.title);
     }
   }
 
-  // 시리즈 인덱스 청크 생성
-  for (const [key, { lang, titles, category }] of Object.entries(seriesMap)) {
-    const seriesName = key.replace(new RegExp(`-${lang}$`), '');
+  // subject 인덱스 청크 생성
+  for (const [key, { lang, titles, category }] of Object.entries(subjectMap)) {
+    const subjectName = key.replace(new RegExp(`-${lang}$`), '');
     allChunks.push({
-      id: `series-index-${key}`,
-      slug: `series-${seriesName.toLowerCase().replace(/\s+/g, '-')}`,
+      id: `subject-index-${key}`,
+      slug: `subject-${subjectName.toLowerCase().replace(/\s+/g, '-')}`,
       lang,
-      title: `${seriesName} 시리즈 목록`,
+      title: `${subjectName} 주제 목록`,
       category,
       tags: [],
-      section: '시리즈 전체 목록',
-      content: `${seriesName}는 총 ${titles.length}편으로 구성된다.\n${titles.map((t, i) => `${i + 1}편: ${t}`).join('\n')}`,
+      section: '주제 전체 목록',
+      content: `${subjectName} 주제에는 총 ${titles.length}편의 기록이 있다.\n${titles.map((t, i) => `${i + 1}편: ${t}`).join('\n')}`,
     });
   }
 

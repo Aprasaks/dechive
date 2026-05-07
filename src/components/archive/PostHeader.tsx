@@ -39,13 +39,6 @@ export default function PostHeader({ post }: PostHeaderProps) {
         {post.title}
       </h1>
 
-      {/* 요약 */}
-      {post.summary && (
-        <p className="mt-4 text-base leading-relaxed text-zinc-400">
-          {post.summary}
-        </p>
-      )}
-
       {/* 날짜 */}
       <time dateTime={post.date} className="mt-4 block text-xs text-zinc-600 tabular-nums">
         {post.date}

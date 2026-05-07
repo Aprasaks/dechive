@@ -33,12 +33,10 @@ function parsePost(filename: string): Post | null {
       : String(data.date ?? ''),
     category: data.category ?? '',
     tags: Array.isArray(data.tags) ? data.tags : [],
-    summary: data.summary ?? '',
     description: data.description ?? '',
     thumbnail: data.thumbnail ?? '',
     status: (data.status as PostStatus) ?? 'draft',
     lang,
-    series: data.series ?? '',
     subject: data.subject ?? '',
     readingTime: calcReadingTime(content, lang),
     content,
@@ -63,12 +61,6 @@ export function getPostBySlug(slug: string, lang: PostLang = 'ko'): Post | null 
   const filePath = path.join(POSTS_DIR, filename);
   if (!fs.existsSync(filePath)) return null;
   return parsePost(filename);
-}
-
-export function getSeriesPosts(series: string, lang: PostLang = 'ko'): Post[] {
-  return getAllPosts(lang)
-    .filter((p) => p.series === series)
-    .sort((a, b) => (a.date < b.date ? -1 : 1)); // 오래된 순 (1편→N편)
 }
 
 export function getSubjects(lang: PostLang = 'ko'): Subject[] {
