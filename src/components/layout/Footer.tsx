@@ -15,12 +15,6 @@ export default function Footer() {
         </span>
         <nav className="flex items-center gap-6">
           <Link
-            href="/about"
-            className="text-xs text-zinc-400 transition-colors hover:text-zinc-200"
-          >
-            About
-          </Link>
-          <Link
             href="/guestbook"
             className="text-xs text-zinc-400 transition-colors hover:text-zinc-200"
           >
