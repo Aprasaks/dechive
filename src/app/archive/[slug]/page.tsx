@@ -112,16 +112,16 @@ export default async function PostPage({ params, searchParams }: PageProps) {
         }}
       />
 
-      <div className="flex gap-12">
+      <div className="relative mx-auto max-w-6xl">
         {/* 본문 */}
-        <article className="min-w-0 w-full max-w-3xl">
+        <article className="mx-auto min-w-0 w-full max-w-[720px] rounded-md border border-white/10 bg-black/25 px-5 py-7 shadow-[0_24px_80px_rgba(0,0,0,0.28)] backdrop-blur-[2px] sm:px-8">
           <PostHeader post={post} />
           <PostContent content={post.content} />
         </article>
 
-        {/* TOC 사이드바 — lg 이상에서만 표시 */}
-        <aside className="hidden lg:block w-56 shrink-0">
-          <div className="sticky top-24">
+        {/* TOC는 본문을 밀지 않는 보조 책갈피로 배치 */}
+        <aside className="absolute left-[calc(50%+390px)] top-0 hidden w-52 xl:block">
+          <div className="sticky top-24 rounded-md border border-white/10 bg-black/20 p-4 shadow-[0_16px_60px_rgba(0,0,0,0.22)] backdrop-blur-sm">
             <TableOfContents content={post.content} />
           </div>
         </aside>
