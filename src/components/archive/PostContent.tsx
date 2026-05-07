@@ -41,15 +41,16 @@ export default function PostContent({ content }: PostContentProps) {
   return (
     <div className="prose prose-invert prose-zinc max-w-none
       prose-headings:font-bold prose-headings:text-zinc-100 prose-headings:tracking-tight
-      prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
-      prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
-      prose-h4:text-base prose-h4:mt-6 prose-h4:mb-2
-      prose-p:text-zinc-100 prose-p:leading-relaxed
-      prose-li:text-zinc-100
+      prose-h2:mt-16 prose-h2:mb-5 prose-h2:text-2xl prose-h2:leading-[1.35]
+      prose-h3:mt-12 prose-h3:mb-4 prose-h3:text-xl prose-h3:leading-[1.4]
+      prose-h4:mt-8 prose-h4:mb-3 prose-h4:text-base prose-h4:leading-[1.5]
+      prose-p:my-5 prose-p:text-zinc-200 prose-p:leading-[1.85]
+      prose-ul:my-6 prose-ol:my-6
+      prose-li:my-2 prose-li:text-zinc-200 prose-li:leading-[1.8]
       prose-strong:text-white
-      prose-blockquote:border-zinc-600 prose-blockquote:text-zinc-300
+      prose-blockquote:my-8 prose-blockquote:border-zinc-600 prose-blockquote:text-zinc-300
       prose-code:text-zinc-200 prose-code:bg-zinc-800 prose-code:rounded prose-code:px-1 prose-pre:prose-code:bg-transparent prose-pre:prose-code:px-0 prose-pre:prose-code:rounded-none
-      prose-pre:bg-black/40 prose-pre:backdrop-blur-sm prose-pre:border prose-pre:border-white/10 prose-pre:rounded-xl prose-pre:overflow-x-auto
+      prose-pre:my-8 prose-pre:bg-black/40 prose-pre:backdrop-blur-sm prose-pre:border prose-pre:border-white/10 prose-pre:rounded-xl prose-pre:overflow-x-auto
       prose-table:w-full
       prose-td:px-3 prose-td:py-2 prose-th:px-3 prose-th:py-2
       prose-p:break-words prose-li:break-words prose-a:break-all
