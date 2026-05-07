@@ -60,6 +60,18 @@ export default function RootLayout({
   return (
     <html lang="ko" className="dark">
       <head>
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="Dechive"
+          href={`${BASE_URL}/feed.xml`}
+        />
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="Dechive English"
+          href={`${BASE_URL}/en/feed.xml`}
+        />
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4611005224374273"
