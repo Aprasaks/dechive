@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { Search } from 'lucide-react';
 import type { Post, Category, Subject } from '@/types/archive';
@@ -29,9 +29,9 @@ const ACTIVE_BG = 'rgba(253,230,138,0.05)';
 
 function stripPrefix(title: string) {
   return title
-    .replace(/^.+\s\d+편:\s*/, '')                          // 한글: "프롬프트 가이드 10편:"
-    .replace(/^[\w\s]+(?:Episode|Vol\.)\s*\d+[:.]\s*/i, '') // 영문: "Prompt Guide Episode 2:" / "Vol.10:"
-    .replace(/^[\w\s]+Part\s+\d+:\s*/i, '');                // "Part 1:"
+    .replace(/^.+\s\d+편:\s*/, '')
+    .replace(/^[\w\s]+(?:Episode|Vol\.)\s*\d+[:.]\s*/i, '')
+    .replace(/^[\w\s]+Part\s+\d+:\s*/i, '');
 }
 
 function getMatchedTerms(value: string, terms: string[]) {
@@ -136,30 +136,6 @@ export default function BookArchive({
   const [mobilePage, setMobilePage] = useState<'posts' | 'index'>('posts');
   const { lang } = useLang();
   const t = i18n[lang];
-
-  const SUBJECT_MAP: Record<string, string> = {
-    '프롬프트 가이드': 'Prompt Guide',
-    'SQL 완전 정복': 'SQL Mastery',
-    'GA4 완전 정복': 'GA4 Mastery',
-    '애자일 가이드': 'Agile Guide',
-  };
-  const SUBJECT_MAP_REVERSE = Object.fromEntries(
-    Object.entries(SUBJECT_MAP).map(([k, v]) => [v, k])
-  );
-
-  useEffect(() => {
-    if (!selectedSubject) return;
-    if (lang === 'en') {
-      const mapped = SUBJECT_MAP[selectedSubject];
-      if (mapped) setSelectedSubject(mapped);
-      else setSelectedSubject('');
-    } else {
-      const mapped = SUBJECT_MAP_REVERSE[selectedSubject];
-      if (mapped) setSelectedSubject(mapped);
-      else setSelectedSubject('');
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lang]);
 
   const scopedPosts = posts
     .filter((p) => {
