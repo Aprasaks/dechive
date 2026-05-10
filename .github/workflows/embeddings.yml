@@ -13,6 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          fetch-depth: 0
           submodules: recursive
           token: ${{ secrets.GH_PAT }}
 
@@ -22,9 +23,40 @@ jobs:
 
       - run: npm ci
 
+      - name: Detect changed markdown posts
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          CHANGED_FILE_LIST=".github/changed-posts.txt"
+          BEFORE_SHA="${{ github.event.before }}"
+          AFTER_SHA="${{ github.sha }}"
+
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" || "$BEFORE_SHA" =~ ^0+$ ]]; then
+            echo "__FULL__" > "$CHANGED_FILE_LIST"
+            exit 0
+          fi
+
+          OLD_CONTENT_SHA="$(git ls-tree "$BEFORE_SHA" content | awk '{print $3}')"
+          NEW_CONTENT_SHA="$(git ls-tree "$AFTER_SHA" content | awk '{print $3}')"
+
+          if [[ -z "$OLD_CONTENT_SHA" || -z "$NEW_CONTENT_SHA" ]]; then
+            echo "__FULL__" > "$CHANGED_FILE_LIST"
+            exit 0
+          fi
+
+          git -C content fetch --no-tags origin "$OLD_CONTENT_SHA" "$NEW_CONTENT_SHA" || true
+
+          if ! git -C content cat-file -e "$OLD_CONTENT_SHA^{commit}" || ! git -C content cat-file -e "$NEW_CONTENT_SHA^{commit}"; then
+            echo "__FULL__" > "$CHANGED_FILE_LIST"
+            exit 0
+          fi
+
+          git -C content diff --name-status "$OLD_CONTENT_SHA" "$NEW_CONTENT_SHA" -- posts > "$CHANGED_FILE_LIST"
+
       - name: Generate & upsert embeddings
         env:
           COHERE_API_KEY: ${{ secrets.COHERE_API_KEY }}
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-        run: npx tsx scripts/generate-embeddings.ts
+        run: npm run embeddings:changed
