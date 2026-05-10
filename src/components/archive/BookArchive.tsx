@@ -252,7 +252,7 @@ export default function BookArchive({
             {/* 카테고리 */}
             <div className="flex flex-col mt-3 gap-0.5">
               <p className="text-xs tracking-[0.3em] uppercase mb-2" style={{ color: TEXT_LABEL }}>{t.categoryLabel}</p>
-              {[{ id: 'all', label: t.allPosts, count: posts.length }, ...categories.filter(c => c.id !== 'all')].map((cat) => (
+              {categories.map((cat) => (
                 <button
                   key={cat.id}
                   onClick={() => { setSelectedCategory(cat.id); setSelectedSubject(''); setMobilePage('posts'); }}
@@ -423,7 +423,7 @@ export default function BookArchive({
             <p className="text-xs tracking-[0.3em] uppercase mb-2" style={{ color: TEXT_LABEL }}>
               {t.categoryLabel}
             </p>
-            {[{ id: 'all', label: t.allPosts, count: posts.length }, ...categories.filter(c => c.id !== 'all')].map((cat) => (
+            {categories.map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => { setSelectedCategory(cat.id); setSelectedSubject(''); }}

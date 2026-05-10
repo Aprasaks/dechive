@@ -206,6 +206,55 @@ post = 하나의 짧은 책
 tags = 색인
 ```
 
+Dechive의 category는 작은 기술명이 아니라 큰 서가다.
+React, SQL, Prompt 같은 이름은 category가 아니라 subject에 가깝다.
+
+현재 기본 서가는 다음을 기준으로 한다.
+
+```txt
+Dev = 코드와 웹 개발의 서가
+Data = 데이터, 분석, 쿼리의 서가
+Product = 제품, 기획, 일하는 방식의 서가
+AI = 인공지능, 프롬프트, 모델 이해의 서가
+```
+
+subject는 각 서가 안의 주제 책장이다.
+
+```txt
+Dev
+- JavaScript
+- TypeScript
+- React
+- HTML CSS
+- Docker
+
+Data
+- SQL
+- Google Analytics
+
+Product
+- PM
+- Agile
+
+AI
+- Prompt
+- Deep Learning
+```
+
+필요할 때만 Tool 서가를 추가할 수 있다.
+
+```txt
+Tool
+- GitHub
+- Supabase
+- Vercel
+- Claude Code
+- Codex
+```
+
+단, category를 너무 많이 만들지 않는다.
+새 category는 여러 subject를 담을 수 있을 때만 만든다.
+
 중요:
 
 - `series`는 사용하지 않는다
@@ -250,15 +299,16 @@ tags = 색인
 ---
 title: '글의 핵심 통찰을 담은 제목'
 date: YYYY-MM-DD
-category: Dev
+category: Data
 tags:
-  - tag1
-  - tag2
+  - SQL
+  - database
+  - query
 slug: url-friendly-slug
 description: 'SEO 스니펫용 설명'
 status: published
 lang: ko
-subject: prompt
+subject: SQL
 ---
 ```
 
@@ -267,10 +317,46 @@ subject: prompt
 - `series` 사용 금지
 - `summary` 사용 금지
 - `subject` 필수
+- `category`는 글의 기술명이 아니라 큰 서가를 나타낸다
+- `subject`는 그 안에서 글이 놓일 주제 책장이다
 - `slug`는 가능하면 변경하지 않는다
 - 이미 Google에 노출된 slug는 특히 신중하게 다룬다
 - `description`은 과장 없이 명확하게 쓴다
 - title은 블로그식 제목이 아니라 짧은 책 제목처럼 쓴다
+
+category / subject 선택 예:
+
+```txt
+React 글
+category: Dev
+subject: React
+
+SQL 글
+category: Data
+subject: SQL
+
+GA4 글
+category: Data
+subject: Google Analytics
+
+PM 글
+category: Product
+subject: PM
+
+프롬프트 글
+category: AI
+subject: Prompt
+```
+
+잘못된 예:
+
+```txt
+category: React
+category: SQL
+category: Prompt
+```
+
+이런 값은 category가 아니라 subject에 가깝다.
 
 나쁜 제목:
 
@@ -674,33 +760,25 @@ About은 다음을 설명해야 한다.
 
 ## 23. Contact Page Rules
 
-Contact는 이력서 페이지가 아니다.
+Contact는 별도 페이지로 강조하지 않는다.
+Dechive에서는 About 하단에 사서에게 닿을 수 있는 이메일을 조용히 남기는 방식을 기본으로 한다.
 
 금지:
 
+- 이력서 페이지처럼 보이는 Contact
 - skill percentage bar
 - AI Prompting 90%
 - Next.js 75%
 - SQL 20%
+- 포트폴리오식 자기소개
 - 포트폴리오식 자기 과시
 - 기술 숙련도 숫자화
 
-Contact는 도서관의 사서에게 닿는 조용한 문이어야 한다.
+현재 방향:
 
-가능한 섹션:
-
-```txt
-사서에게
-관리 중인 서가
-전갈을 보낼 곳
-방명록 남기기
-```
-
-연락 수단은 간결하게 둔다.
-
-- Email
-- GitHub
-- Guestbook
+- Header에는 Archive, About만 둔다
+- Footer에는 Guestbook, RSS, Privacy Policy를 둔다
+- 연락 수단은 About 하단에 작게 배치한다
 
 ---
 

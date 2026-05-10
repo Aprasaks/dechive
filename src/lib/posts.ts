@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import type { Post, PostLang, PostStatus, Subject } from '@/types/archive';
+import type { Category, Post, PostLang, PostStatus, Subject } from '@/types/archive';
 
 const POSTS_DIR = path.join(process.cwd(), 'content', 'posts');
 
@@ -89,7 +89,7 @@ export function getCategories(lang: PostLang = 'ko') {
     countMap.set(post.category, (countMap.get(post.category) ?? 0) + 1);
   }
 
-  const categories = [{ id: 'all', label: 'All', count: posts.length }];
+  const categories: Category[] = [];
   countMap.forEach((count, id) => {
     categories.push({ id, label: id, count });
   });
