@@ -1,11 +1,7 @@
 'use client';
 
-import Link from 'next/link';
 import { useLang } from '@/components/layout/LangProvider';
 import i18n from '@/lib/i18n';
-
-const GOLD = '#c8963a';
-const GOLD_FAINT = 'rgba(200,150,58,0.2)';
 
 function Divider() {
   return (
@@ -31,20 +27,20 @@ export default function AboutClient() {
         <h1 className="mb-8 animate-brand-shimmer text-5xl font-extrabold tracking-tight">
           {t.aboutBrand}
         </h1>
-        <div className="flex flex-col gap-5 text-left">
-          <p className="text-lg leading-loose text-white">
+        <div className="flex flex-col gap-6 text-center">
+          <p className="whitespace-pre-line text-lg leading-loose text-white">
             {t.aboutDefinition}
           </p>
-          <p className="text-base leading-loose text-zinc-200">
+          <p className="whitespace-pre-line text-base leading-loose text-zinc-200">
             {t.aboutPurpose}
           </p>
-          <p className="text-base leading-loose text-zinc-200">
+          <p className="whitespace-pre-line text-base leading-loose text-zinc-200">
             {t.aboutReading}
           </p>
-          <p className="text-base leading-loose text-zinc-200">
+          <p className="whitespace-pre-line text-base leading-loose text-zinc-200">
             {t.aboutExplore}
           </p>
-          <p className="text-base leading-loose text-white">
+          <p className="whitespace-pre-line text-base leading-loose text-white">
             {t.aboutClosing}
           </p>
         </div>
@@ -52,47 +48,17 @@ export default function AboutClient() {
 
       <Divider />
 
-      {/* 시작 */}
+      {/* 사서에게 닿을 곳 */}
       <section className="text-center">
-        <p className="text-base leading-loose text-zinc-200">
-          {t.aboutIntro}
+        <p className="mb-3 text-xs font-medium tracking-[0.24em] text-amber-100/70 uppercase">
+          {t.aboutContactTitle}
         </p>
-      </section>
-
-      <Divider />
-
-      {/* 타임라인 */}
-      <section className="flex flex-col items-center gap-0">
-        {/* 항목 1 */}
-        <div className="flex flex-col items-center gap-2 pb-2 text-center">
-          <div className="size-2.5 rounded-full" style={{ background: GOLD }} />
-          <span className="text-sm font-extrabold tracking-widest" style={{ color: '#f0c060', textShadow: '0 0 12px rgba(240,180,60,0.6)' }}>
-            {t.aboutTimeline1Date}
-          </span>
-          <span className="text-base text-white">{t.aboutTimeline1Text}</span>
-        </div>
-        {/* 연결선 */}
-        <div className="h-8 w-px" style={{ background: GOLD_FAINT }} />
-        {/* 항목 2 */}
-        <div className="flex flex-col items-center gap-2 pt-2 text-center">
-          <div className="size-2.5 rounded-full" style={{ background: GOLD }} />
-          <span className="text-sm font-extrabold tracking-widest" style={{ color: '#f0c060', textShadow: '0 0 12px rgba(240,180,60,0.6)' }}>
-            {t.aboutTimeline2Date}
-          </span>
-          <span className="text-base text-white">{t.aboutTimeline2Text}</span>
-        </div>
-      </section>
-
-      <Divider />
-
-      {/* 서명 */}
-      <section className="text-center">
-        <Link
-          href="/contact"
-          className="inline-block text-sm text-white underline underline-offset-4 transition-colors hover:text-zinc-300"
+        <a
+          href={`mailto:${t.aboutContactEmail}`}
+          className="text-sm text-amber-100/85 underline decoration-amber-100/25 underline-offset-4 transition-colors hover:text-amber-50 hover:decoration-amber-100/45"
         >
-          by Demian
-        </Link>
+          {t.aboutContactEmail}
+        </a>
       </section>
     </main>
   );

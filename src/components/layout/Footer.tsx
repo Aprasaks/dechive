@@ -32,12 +32,6 @@ export default function Footer() {
           >
             Privacy Policy
           </Link>
-          <Link
-            href="/contact"
-            className="text-xs text-zinc-400 transition-colors hover:text-zinc-200"
-          >
-            Contact
-          </Link>
         </nav>
       </div>
     </footer>
