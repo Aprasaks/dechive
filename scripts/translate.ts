@@ -75,6 +75,8 @@ Do not add explanations, examples, headings, or emphasis that are not in the ori
 Keep technical terms accurate and consistent.
 Keep Markdown structure, frontmatter keys, code blocks, and placeholders unchanged.
 
+Output ONLY the translated text. No commentary, notes, character counts, or explanations.
+
 ${text}`,
       },
     ],
