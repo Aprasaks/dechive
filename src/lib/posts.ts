@@ -34,6 +34,7 @@ function parsePost(filename: string): Post | null {
     category: data.category ?? '',
     tags: Array.isArray(data.tags) ? data.tags : [],
     description: data.description ?? '',
+    seoTitle: data.seoTitle,
     thumbnail: data.thumbnail ?? '',
     status: (data.status as PostStatus) ?? 'draft',
     lang,

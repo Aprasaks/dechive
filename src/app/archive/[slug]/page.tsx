@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const description = rawDesc.length > 160 ? `${rawDesc.slice(0, 157)}...` : rawDesc;
 
   return {
-    title: post.title,
+    title: post.seoTitle ?? post.title,
     description,
     alternates: {
       canonical,

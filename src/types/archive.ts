@@ -20,6 +20,7 @@ export interface Post {
   category: string;
   tags: string[];
   description: string;    // SEO / AdSense용 (150자 내외)
+  seoTitle?: string;      // 검색용 <title> (없으면 title 사용)
   thumbnail?: string;     // 파일명 (e.g. "next-app-router.webp"), 없으면 기본 이미지 사용
   status: PostStatus;
   lang: PostLang;
