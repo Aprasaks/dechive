@@ -1,62 +1,127 @@
-<!-- BEGIN:nextjs-agent-rules -->
+# AGENTS.md
 
-# This is NOT the Next.js you know
+## 1. Read First
 
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
+This repository may use a Next.js version with breaking changes.  
+Before editing Next.js code, check the relevant local docs under `node_modules/next/dist/docs/` when needed.
 
-<!-- END:nextjs-agent-rules -->
+Before any change:
 
-# Additional Repository Instructions
+1. Run `git status`.
+2. Identify existing user, Codex, or Claude Code changes.
+3. Do not overwrite changes from another agent.
+4. If ownership is unclear, stop and report.
 
-Before making code changes, read `CLAUDE.md` in this repository and follow its instructions.
+## 2. Agent Ownership
 
-Before making UI/UX or visual design changes, read `docs/dechive_design_notes.md` and follow its direction.
+Codex owns:
 
-# Current Product Direction
+- application code
+- routes and components
+- refactors
+- tests
+- type/lint/build verification
+- app code that consumes content
 
-The Logs section has been removed from Dechive. Do not recreate `/logs`, `content/logs`, Logs navigation items, Logs sitemap entries, Logs i18n strings, or log-generation scripts unless explicitly asked.
+Claude Code owns:
 
-# Multi-Agent Workflow
+- content creation and editing
+- copywriting
+- planning and review
+- translation script runs
+- Supabase/RAG embedding generation
+- content submodule commits when requested
 
-Codex and Claude Code may work in this repository at the same time. Before editing, check `git status` and avoid overwriting changes from the other agent.
+Shared only by explicit user request:
 
-Keep work ownership separate:
-- Codex: application code implementation, refactors, tests, type/lint verification, Next.js route and component changes.
-- Claude Code: content creation and editing, copywriting, design critique, planning, review, translation script runs, and Supabase embedding generation.
-- Shared by explicit user request only: workflow files, translation scripts, content metadata cleanup, and content submodule commit/push coordination.
+- workflow files
+- translation scripts
+- content metadata cleanup
+- content submodule pointer updates
 
-Claude Code owns content workflows:
-- Create or edit posts/projects inside `content/`.
-- Run translation only when needed after new Korean posts are ready.
-- Run the embedding workflow for Supabase/RAG updates (`npm run embeddings` or the current project-specific embedding command).
-- Handle content submodule commits when the user asks for content commits.
+Codex must not edit `content/`, run translation, or run embeddings unless explicitly asked.
 
-Codex should not run translation or embedding generation unless explicitly asked. Codex may edit app code that consumes content, and may edit content workflow files when the user explicitly asks for automation fixes. Codex should avoid changing `content/` while Claude Code is assigned content work.
+## 3. Harness Rules
 
-# Translation Policy
+Harness engineering means binding AI work to:
 
-Dechive uses Korean posts as the source, but existing English posts are protected editorial content.
+- goal
+- scope
+- boundary
+- verification
+- stop condition
 
-Default behavior:
-- Automatic translation is for first-time creation of missing `posts/*.en.md` files.
-- If the matching English file already exists, translation scripts and workflows must skip it.
-- Existing English files must not be overwritten unless the user explicitly requests force retranslation.
+Before editing, clarify internally:
 
-Force behavior:
-- GitHub Actions may overwrite existing English posts only when manually run with `force_retranslate: true`.
-- Local translation may overwrite existing English posts only when run with `npm run translate -- --force`.
-- After any force retranslation, English `title`, `seoTitle`, `tags`, and body text need review.
+- What problem is this change solving?
+- Which files are allowed to change?
+- Which systems must not be touched?
+- What check proves the change is safe?
+- When should the agent stop instead of guessing?
 
-Frontmatter translation:
-- New English posts should translate `title`, `description`, `seoTitle`, `tags`, and body content.
-- `lang` changes from `ko` to `en`.
-- `slug` must stay unchanged across Korean and English versions.
+Stop and report when:
 
-When a Korean post changes:
-- Do not assume the English post should be regenerated.
-- Existing English content may intentionally differ because it has been reviewed or refined.
-- If the Korean change materially affects meaning, report that the matching English post may need manual review or explicit force retranslation.
+- git status shows unexpected changes
+- the task crosses agent ownership boundaries
+- the fix requires unrelated infrastructure changes
+- errors appear unrelated to the current task
+- the request conflicts with Dechive identity
 
-Do not edit the same files concurrently. If a task needs files currently being edited by the other agent, stop and ask for coordination instead of forcing changes.
+A good harness makes the agent narrower, not louder.
 
-Only commit or push when the user explicitly asks. When committing content submodule changes, commit inside `content/` first, then commit the updated submodule pointer in the root repository.
+## 4. Translation Policy
+
+Korean posts are the source.  
+Existing English posts are protected editorial content.
+
+Default:
+
+- create missing `.en.md` files only
+- skip existing `.en.md`
+- do not overwrite reviewed English content
+
+Force retranslation only when explicitly requested:
+
+- GitHub Actions: `force_retranslate: true`
+- Local: `npm run translate -- --force`
+
+New English posts should translate:
+
+- title
+- description
+- seoTitle
+- tags
+- body
+- lang: ko → en
+
+Do not translate slug.
+
+## 5. Commit / Push
+
+Do not commit or push unless explicitly asked.
+
+- "커밋해" = commit only
+- "푸시해" = push only
+- "커밋푸시해" = commit and push
+
+## 6. Report Format
+
+After work, report:
+
+```txt
+변경 파일:
+- ...
+
+주요 변경:
+- ...
+
+확인:
+- ...
+
+주의/TODO:
+- ...
+```
+
+```
+
+```

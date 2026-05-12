@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "tsx scripts/sync-images.ts && next dev",
-    "build": "tsx scripts/sync-images.ts && next build",
+    "build": "tsx scripts/check-content.ts && tsx scripts/sync-images.ts && next build",
     "start": "next start",
     "lint": "eslint",
+    "check:content": "tsx scripts/check-content.ts",
     "translate": "tsx scripts/translate.ts",
     "embeddings": "tsx scripts/generate-embeddings.ts",
     "embeddings:changed": "tsx scripts/generate-embeddings.ts --changed-file-list .github/changed-posts.txt"
