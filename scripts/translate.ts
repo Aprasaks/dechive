@@ -105,12 +105,13 @@ async function translatePost(koFilename: string): Promise<void> {
   const { data, content } = matter(raw);
   const fm = data as Frontmatter;
 
-  const [title, description, seoTitle, translatedContent] = await Promise.all([
+  const [title, description, seoTitle, tags, translatedContent] = await Promise.all([
     translateText(fm.title, 'title (single line, no markdown)'),
     translateText(fm.description, 'SEO meta description (single line, 120-160 chars)'),
     fm.seoTitle
       ? translateText(fm.seoTitle, 'SEO page title for search engines (single line, no markdown)')
       : Promise.resolve(undefined),
+    Promise.all((fm.tags ?? []).map((tag) => translateText(tag, 'tag (single phrase, no markdown)'))),
     translateText(content, 'blog post content'),
   ]);
 
@@ -119,6 +120,7 @@ async function translatePost(koFilename: string): Promise<void> {
     title,
     description,
     ...(seoTitle && { seoTitle }),
+    tags,
     lang: 'en',
   };
 

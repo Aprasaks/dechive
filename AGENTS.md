@@ -23,14 +23,39 @@ Codex and Claude Code may work in this repository at the same time. Before editi
 Keep work ownership separate:
 - Codex: application code implementation, refactors, tests, type/lint verification, Next.js route and component changes.
 - Claude Code: content creation and editing, copywriting, design critique, planning, review, translation script runs, and Supabase embedding generation.
+- Shared by explicit user request only: workflow files, translation scripts, content metadata cleanup, and content submodule commit/push coordination.
 
 Claude Code owns content workflows:
 - Create or edit posts/projects inside `content/`.
-- Run `npm run translate` after new Korean posts are ready.
+- Run translation only when needed after new Korean posts are ready.
 - Run the embedding workflow for Supabase/RAG updates (`npm run embeddings` or the current project-specific embedding command).
 - Handle content submodule commits when the user asks for content commits.
 
-Codex should not run translation or embedding generation unless explicitly asked. Codex may edit app code that consumes content, but should avoid changing `content/` while Claude Code is assigned content work.
+Codex should not run translation or embedding generation unless explicitly asked. Codex may edit app code that consumes content, and may edit content workflow files when the user explicitly asks for automation fixes. Codex should avoid changing `content/` while Claude Code is assigned content work.
+
+# Translation Policy
+
+Dechive uses Korean posts as the source, but existing English posts are protected editorial content.
+
+Default behavior:
+- Automatic translation is for first-time creation of missing `posts/*.en.md` files.
+- If the matching English file already exists, translation scripts and workflows must skip it.
+- Existing English files must not be overwritten unless the user explicitly requests force retranslation.
+
+Force behavior:
+- GitHub Actions may overwrite existing English posts only when manually run with `force_retranslate: true`.
+- Local translation may overwrite existing English posts only when run with `npm run translate -- --force`.
+- After any force retranslation, English `title`, `seoTitle`, `tags`, and body text need review.
+
+Frontmatter translation:
+- New English posts should translate `title`, `description`, `seoTitle`, `tags`, and body content.
+- `lang` changes from `ko` to `en`.
+- `slug` must stay unchanged across Korean and English versions.
+
+When a Korean post changes:
+- Do not assume the English post should be regenerated.
+- Existing English content may intentionally differ because it has been reviewed or refined.
+- If the Korean change materially affects meaning, report that the matching English post may need manual review or explicit force retranslation.
 
 Do not edit the same files concurrently. If a task needs files currently being edited by the other agent, stop and ask for coordination instead of forcing changes.
 
