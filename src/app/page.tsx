@@ -7,6 +7,7 @@ const notoSerifKR = Noto_Serif_KR({
   weight: ['500'],
   subsets: ['latin'],
   variable: '--font-home-serif-kr',
+  preload: false,
 });
 
 export const metadata: Metadata = {
