@@ -3,6 +3,9 @@ import { Noto_Sans_KR, Noto_Serif_KR } from 'next/font/google';
 import { getAllPosts, getCategories, getSubjects } from '@/lib/posts';
 import ArchiveClient from '@/components/archive/ArchiveClient';
 
+const ARCHIVE_DESCRIPTION =
+  '하나의 질문을 하나의 짧은 책으로 남기고, 본질에 닿는 생각을 다시 탐색하는 개인 도서관입니다.';
+
 const notoSerifKR = Noto_Serif_KR({
   weight: ['400', '500'],
   subsets: ['latin'],
@@ -19,11 +22,11 @@ const notoSansKR = Noto_Sans_KR({
 
 export const metadata: Metadata = {
   title: 'Archive',
-  description: '기술, 철학, 사유의 흔적을 정제하고 기록하는 공간. Dechive의 모든 포스트를 탐색하세요.',
+  description: ARCHIVE_DESCRIPTION,
   alternates: { canonical: 'https://dechive.dev/archive', languages: { 'x-default': 'https://dechive.dev/archive' } },
   openGraph: {
     title: 'Archive | Dechive',
-    description: '기술, 철학, 사유의 흔적을 정제하고 기록하는 공간. Dechive의 모든 포스트를 탐색하세요.',
+    description: ARCHIVE_DESCRIPTION,
     url: 'https://dechive.dev/archive',
     images: [{ url: 'https://dechive.dev/images/thumb.webp', width: 1200, height: 630, alt: 'Dechive Archive' }],
   },
@@ -33,7 +36,7 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'CollectionPage',
   name: 'Dechive Archive',
-  description: '기술, 철학, 사유의 흔적을 정제하고 기록하는 지식 저장소.',
+  description: ARCHIVE_DESCRIPTION,
   url: 'https://dechive.dev/archive',
   isPartOf: { '@type': 'WebSite', name: 'Dechive', url: 'https://dechive.dev' },
 };
