@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Search } from 'lucide-react';
 import type { Post, Category, Subject } from '@/types/archive';
@@ -136,6 +136,23 @@ export default function BookArchive({
   const [mobilePage, setMobilePage] = useState<'posts' | 'index'>('posts');
   const { lang } = useLang();
   const t = i18n[lang];
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const subject = params.get('subject');
+    const category = params.get('category');
+
+    if (subject && subjects.some((item) => item.id === subject)) {
+      setSelectedCategory('all');
+      setSelectedSubject(subject);
+      return;
+    }
+
+    if (category && categories.some((item) => item.id === category)) {
+      setSelectedCategory(category);
+      setSelectedSubject('');
+    }
+  }, [categories, subjects]);
 
   const scopedPosts = posts
     .filter((p) => {

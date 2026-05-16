@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import { Noto_Serif_KR } from 'next/font/google';
 import HomeClient from '@/components/home/HomeClient';
-import { getAllPosts } from '@/lib/posts';
+import { getAllPosts, getPostBySlug } from '@/lib/posts';
+import type { PostLang } from '@/types/archive';
 
 const notoSerifKR = Noto_Serif_KR({
   weight: ['500'],
@@ -11,14 +12,14 @@ const notoSerifKR = Noto_Serif_KR({
 });
 
 export const metadata: Metadata = {
-  title: 'Dechive — 생각이 머무는 도서관',
+  title: 'Dechive — AI 시대의 검증 아카이브',
   description:
-    '생각이 기록이 되는 순간, 의미를 가진다. Dechive는 지식과 생각을 짧은 책처럼 남기는 개인 도서관입니다.',
+    'Dechive는 개발, AI, 데이터, 웹 기술에 대한 질문을 개념, 예시, 실수, 판단 기준까지 정리하는 개인 지식 아카이브입니다.',
   alternates: { canonical: 'https://dechive.dev', languages: { 'x-default': 'https://dechive.dev' } },
   openGraph: {
-    title: 'Dechive — 생각이 머무는 도서관',
+    title: 'Dechive — AI 시대의 검증 아카이브',
     description:
-      '생각이 기록이 되는 순간, 의미를 가진다. Dechive는 지식과 생각을 짧은 책처럼 남기는 개인 도서관입니다.',
+      'Dechive는 개발, AI, 데이터, 웹 기술에 대한 질문을 개념, 예시, 실수, 판단 기준까지 정리하는 개인 지식 아카이브입니다.',
     url: 'https://dechive.dev',
     siteName: 'Dechive',
     locale: 'ko_KR',
@@ -28,15 +29,15 @@ export const metadata: Metadata = {
         url: 'https://dechive.dev/images/thumb.webp',
         width: 1200,
         height: 630,
-        alt: 'Dechive — 생각이 머무는 도서관',
+        alt: 'Dechive — AI 시대의 검증 아카이브',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Dechive — 생각이 머무는 도서관',
+    title: 'Dechive — AI 시대의 검증 아카이브',
     description:
-      '생각이 기록이 되는 순간, 의미를 가진다. Dechive는 지식과 생각을 짧은 책처럼 남기는 개인 도서관입니다.',
+      'Dechive는 개발, AI, 데이터, 웹 기술에 대한 질문을 개념, 예시, 실수, 판단 기준까지 정리하는 개인 지식 아카이브입니다.',
     images: ['https://dechive.dev/images/thumb.webp'],
   },
 };
@@ -51,8 +52,46 @@ const jsonLd = {
 };
 
 export default function Home() {
-  const koPostHrefs = getAllPosts('ko').map((post) => `/archive/${post.slug}`);
-  const enPostHrefs = getAllPosts('en').map((post) => `/en/archive/${post.slug}`);
+  function getHomePosts(lang: PostLang) {
+    const posts = getAllPosts(lang);
+    const featuredPost = getPostBySlug('what-null-leaves-behind', lang) ?? posts[0];
+    const preferredLatestSlugs = [
+      'what-null-leaves-behind',
+      'ga4-introduction',
+      'asking-data-with-sql',
+      'prompt-context-engineering',
+      'asking-why-the-structure-exists',
+    ];
+    const preferredLatestPosts = preferredLatestSlugs
+      .map((slug) => getPostBySlug(slug, lang))
+      .filter((post): post is NonNullable<typeof post> => Boolean(post));
+    const fallbackPosts = posts.filter(
+      (post) => !preferredLatestSlugs.includes(post.slug),
+    );
+    const latestPosts = [...preferredLatestPosts, ...fallbackPosts].slice(0, 5).map((post) => ({
+      slug: post.slug,
+      title: post.title,
+      description: post.description,
+      category: post.category,
+      subject: post.subject ?? '',
+      seoTitle: post.seoTitle,
+    }));
+
+    return {
+      featuredPost: featuredPost ? {
+        slug: featuredPost.slug,
+        title: featuredPost.title,
+        description: featuredPost.description,
+        category: featuredPost.category,
+        subject: featuredPost.subject ?? '',
+        seoTitle: featuredPost.seoTitle,
+      } : null,
+      latestPosts,
+    };
+  }
+
+  const koHome = getHomePosts('ko');
+  const enHome = getHomePosts('en');
 
   return (
     <>
@@ -61,8 +100,8 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <HomeClient
-        koPostHrefs={koPostHrefs}
-        enPostHrefs={enPostHrefs}
+        featuredPosts={{ ko: koHome.featuredPost, en: enHome.featuredPost }}
+        latestPosts={{ ko: koHome.latestPosts, en: enHome.latestPosts }}
         heroSerifClassName={notoSerifKR.className}
       />
     </>

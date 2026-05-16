@@ -1,12 +1,10 @@
 import type { Metadata } from 'next';
 import { Geist } from 'next/font/google';
-import Image from 'next/image';
 import Script from 'next/script';
 import './globals.css';
 import 'highlight.js/styles/atom-one-dark.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-import ParticleCanvas from '@/components/home/ParticleCanvas';
 import { MusicProvider } from '@/components/layout/MusicProvider';
 import { ChatProvider } from '@/components/layout/ChatProvider';
 import ChatDrawer from '@/components/layout/ChatDrawer';
@@ -95,26 +93,11 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} flex min-h-screen flex-col overflow-x-clip font-sans antialiased`}
+        className={`${geistSans.variable} flex min-h-screen flex-col overflow-x-clip bg-black font-sans text-zinc-100 antialiased`}
       >
-        <div className="fixed inset-0 -z-10 flex justify-center overflow-hidden bg-black">
-          <div className="relative h-full w-full max-w-344">
-            <Image
-              src="/images/background3.webp"
-              alt=""
-              fill
-              sizes="100vw"
-              className="object-cover brightness-100"
-              priority
-            />
-            <div className="absolute inset-y-0 left-0 w-32 bg-linear-to-r from-black to-transparent" />
-            <div className="absolute inset-y-0 right-0 w-32 bg-linear-to-l from-black to-transparent" />
-          </div>
-        </div>
         <MusicProvider>
           <LangProvider>
             <ChatProvider>
-              <ParticleCanvas />
               <Header />
               {children}
               <Footer />

@@ -11,6 +11,7 @@ import { useChatContext } from './ChatProvider';
 
 const NAV_ITEMS = [
   { name: 'Archive', href: '/archive' },
+  { name: 'Deep Dive', href: '/archive/what-null-leaves-behind' },
   { name: 'About', href: '/about' },
 ];
 
@@ -18,12 +19,17 @@ export default function Header() {
   const [isOpen, setIsOpen] = React.useState(false);
   const pathname = usePathname();
   const { toggle: toggleChat, isOpen: isChatOpen } = useChatContext();
+  const isHome = pathname === '/';
 
   const close = () => setIsOpen(false);
 
+  if (isHome) return null;
+
   return (
-    <header className="sticky top-0 z-50 h-16 w-full pt-4 transition-all duration-300">
-      <div className="mx-auto relative flex max-w-7xl items-center justify-between px-6 sm:px-8">
+    <header className={`sticky top-0 z-50 h-16 w-full transition-all duration-300 ${
+      'pt-4'
+    }`}>
+      <div className="mx-auto relative flex h-full max-w-7xl items-center justify-between px-6 sm:px-8">
 
         {/* 로고 */}
         <Link href="/" onClick={close} className="group flex h-8 items-center gap-3">
@@ -44,8 +50,8 @@ export default function Header() {
                   href={item.href}
                   className={`text-base font-semibold tracking-tight transition-colors ${
                     pathname === item.href
-                      ? 'text-white'
-                      : 'text-zinc-300 hover:text-white'
+                        ? 'text-white'
+                        : 'text-zinc-300 hover:text-white'
                   }`}
                 >
                   {item.name}
@@ -65,7 +71,9 @@ export default function Header() {
             <button
               onClick={toggleChat}
               aria-label="사서에게 묻기"
-              className={`transition-colors ${isChatOpen ? 'text-amber-400' : 'text-zinc-400 hover:text-zinc-100'}`}
+              className={`transition-colors ${
+                isChatOpen ? 'text-amber-400' : 'text-zinc-400 hover:text-zinc-100'
+              }`}
             >
               <BookOpen size={17} />
             </button>
