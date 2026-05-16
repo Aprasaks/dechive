@@ -4,7 +4,7 @@ import AboutClient from '@/components/about/AboutClient';
 export const metadata: Metadata = {
   title: 'About',
   description:
-    'Dechive는 생각과 지식을 기록하고 다시 탐색하기 위한 개인 도서관입니다.',
+    'Dechive는 AI가 만든 답을 검증하고, 근거와 맥락을 따라 추론 가능한 지식으로 정리하는 개인 아카이브입니다.',
   alternates: {
     canonical: 'https://dechive.dev/about',
     languages: {
@@ -13,9 +13,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'About | Dechive — 생각이 머무는 도서관',
+    title: 'About | Dechive — 검증을 넘어 추론까지',
     description:
-      'Dechive는 생각과 지식을 기록하고 다시 탐색하기 위한 개인 도서관입니다.',
+      'Dechive는 AI가 만든 답을 검증하고, 근거와 맥락을 따라 추론 가능한 지식으로 정리하는 개인 아카이브입니다.',
     url: 'https://dechive.dev/about',
     siteName: 'Dechive',
     locale: 'ko_KR',
@@ -25,15 +25,15 @@ export const metadata: Metadata = {
         url: 'https://dechive.dev/images/thumb.webp',
         width: 1200,
         height: 630,
-        alt: 'Dechive — 생각이 머무는 도서관',
+        alt: 'Dechive — 검증을 넘어 추론까지',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'About | Dechive — 생각이 머무는 도서관',
+    title: 'About | Dechive — 검증을 넘어 추론까지',
     description:
-      'Dechive는 생각과 지식을 기록하고 다시 탐색하기 위한 개인 도서관입니다.',
+      'Dechive는 AI가 만든 답을 검증하고, 근거와 맥락을 따라 추론 가능한 지식으로 정리하는 개인 아카이브입니다.',
     images: ['https://dechive.dev/images/thumb.webp'],
   },
 };

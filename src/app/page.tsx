@@ -12,14 +12,14 @@ const notoSerifKR = Noto_Serif_KR({
 });
 
 export const metadata: Metadata = {
-  title: 'Dechive — AI 시대의 검증 아카이브',
+  title: 'Dechive — 검증을 넘어 추론까지',
   description:
-    'Dechive는 개발, AI, 데이터, 웹 기술에 대한 질문을 개념, 예시, 실수, 판단 기준까지 정리하는 개인 지식 아카이브입니다.',
+    'Dechive는 AI가 만든 답을 그대로 소비하지 않고, 개념과 예시, 실수와 판단 기준을 따라 검증하고 추론하는 개인 지식 아카이브입니다.',
   alternates: { canonical: 'https://dechive.dev', languages: { 'x-default': 'https://dechive.dev' } },
   openGraph: {
-    title: 'Dechive — AI 시대의 검증 아카이브',
+    title: 'Dechive — 검증을 넘어 추론까지',
     description:
-      'Dechive는 개발, AI, 데이터, 웹 기술에 대한 질문을 개념, 예시, 실수, 판단 기준까지 정리하는 개인 지식 아카이브입니다.',
+      'Dechive는 AI가 만든 답을 그대로 소비하지 않고, 개념과 예시, 실수와 판단 기준을 따라 검증하고 추론하는 개인 지식 아카이브입니다.',
     url: 'https://dechive.dev',
     siteName: 'Dechive',
     locale: 'ko_KR',
@@ -29,15 +29,15 @@ export const metadata: Metadata = {
         url: 'https://dechive.dev/images/thumb.webp',
         width: 1200,
         height: 630,
-        alt: 'Dechive — AI 시대의 검증 아카이브',
+        alt: 'Dechive — 검증을 넘어 추론까지',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Dechive — AI 시대의 검증 아카이브',
+    title: 'Dechive — 검증을 넘어 추론까지',
     description:
-      'Dechive는 개발, AI, 데이터, 웹 기술에 대한 질문을 개념, 예시, 실수, 판단 기준까지 정리하는 개인 지식 아카이브입니다.',
+      'Dechive는 AI가 만든 답을 그대로 소비하지 않고, 개념과 예시, 실수와 판단 기준을 따라 검증하고 추론하는 개인 지식 아카이브입니다.',
     images: ['https://dechive.dev/images/thumb.webp'],
   },
 };

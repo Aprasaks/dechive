@@ -4,6 +4,7 @@ import { type ReactNode, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useLang } from '@/components/layout/LangProvider';
 import LangToggle from '@/components/layout/LangToggle';
+import MusicToggle from '@/components/layout/MusicToggle';
 import type { Lang } from '@/lib/i18n';
 
 interface HomePost {
@@ -226,8 +227,9 @@ export default function HomeClient({
           </p>
         </div>
 
-        <div className="absolute top-6 right-6 z-20 sm:right-10 lg:right-20">
+        <div className="absolute top-6 right-6 z-20 flex items-center gap-4 sm:right-10 lg:right-20">
           <LangToggle tone="light" />
+          <MusicToggle tone="light" />
         </div>
 
         <div className="absolute top-[clamp(6.2rem,12.5vw,11rem)] left-6 z-10 sm:left-10 lg:left-20">

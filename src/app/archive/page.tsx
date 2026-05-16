@@ -4,7 +4,7 @@ import { getAllPosts, getCategories, getSubjects } from '@/lib/posts';
 import ArchiveClient from '@/components/archive/ArchiveClient';
 
 const ARCHIVE_DESCRIPTION =
-  '하나의 질문을 하나의 짧은 책으로 남기고, 본질에 닿는 생각을 다시 탐색하는 개인 도서관입니다.';
+  'AI, 데이터, 제품, 웹 기술에 대한 질문을 검증하고, 근거와 맥락을 따라 다시 추론할 수 있게 남긴 Dechive의 지식 아카이브입니다.';
 
 const notoSerifKR = Noto_Serif_KR({
   weight: ['400', '500'],

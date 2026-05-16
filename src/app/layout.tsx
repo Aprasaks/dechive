@@ -19,27 +19,27 @@ const geistSans = Geist({
 const BASE_URL = 'https://dechive.dev';
 
 export const metadata: Metadata = {
-  title: { default: 'Dechive — 생각이 머무는 도서관', template: '%s | Dechive' },
+  title: { default: 'Dechive — 검증을 넘어 추론까지', template: '%s | Dechive' },
   description:
-    'Dechive는 생각과 지식을 짧은 책처럼 기록하고 다시 탐색하기 위한 개인 도서관입니다.',
+    'Dechive는 AI, 데이터, 제품, 웹 기술에 대한 질문을 검증하고, 근거와 맥락을 따라 추론 가능한 기록으로 정리하는 개인 지식 아카이브입니다.',
   metadataBase: new URL(BASE_URL),
   openGraph: {
-    title: 'Dechive — 생각이 머무는 도서관',
+    title: 'Dechive — 검증을 넘어 추론까지',
     description:
-      'Dechive는 생각과 지식을 짧은 책처럼 기록하고 다시 탐색하기 위한 개인 도서관입니다.',
+      'Dechive는 AI, 데이터, 제품, 웹 기술에 대한 질문을 검증하고, 근거와 맥락을 따라 추론 가능한 기록으로 정리하는 개인 지식 아카이브입니다.',
     url: BASE_URL,
     siteName: 'Dechive',
     images: [
-      { url: '/images/thumb.webp', width: 1200, height: 630, alt: 'Dechive' },
+      { url: '/images/thumb.webp', width: 1200, height: 630, alt: 'Dechive — 검증을 넘어 추론까지' },
     ],
     locale: 'ko_KR',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Dechive — 생각이 머무는 도서관',
+    title: 'Dechive — 검증을 넘어 추론까지',
     description:
-      'Dechive는 생각과 지식을 짧은 책처럼 기록하고 다시 탐색하기 위한 개인 도서관입니다.',
+      'Dechive는 AI, 데이터, 제품, 웹 기술에 대한 질문을 검증하고, 근거와 맥락을 따라 추론 가능한 기록으로 정리하는 개인 지식 아카이브입니다.',
     images: ['/images/thumb.webp'],
   },
   robots: { index: true, follow: true },
