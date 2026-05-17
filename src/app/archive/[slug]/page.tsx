@@ -1,9 +1,9 @@
 import { notFound, redirect } from 'next/navigation';
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { getAllPosts, getPostBySlug } from '@/lib/posts';
 import PostHeader from '@/components/archive/PostHeader';
 import PostContent from '@/components/archive/PostContent';
-import TableOfContents from '@/components/archive/TableOfContents';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -70,8 +70,7 @@ export default async function PostPage({ params, searchParams }: PageProps) {
   if (!post) notFound();
 
   return (
-    <main className="mx-auto max-w-6xl px-4 sm:px-6 py-12 min-h-[calc(100vh-64px-56px)]">
-      <div className="fixed inset-0 -z-[5] bg-black/50" />
+    <main className="min-h-[calc(100vh-5rem)] bg-[#f8f6f1] px-5 py-12 text-[#19140f] sm:px-8 lg:py-16">
       {/* JSON-LD 구조화 데이터 */}
       <script
         type="application/ld+json"
@@ -112,19 +111,27 @@ export default async function PostPage({ params, searchParams }: PageProps) {
         }}
       />
 
-      <div className="relative mx-auto max-w-6xl">
-        {/* 본문 */}
-        <article className="mx-auto min-w-0 w-full max-w-[720px] rounded-md border border-white/10 bg-black/25 px-5 py-7 shadow-[0_24px_80px_rgba(0,0,0,0.28)] backdrop-blur-[2px] sm:px-8">
+      <div className="mx-auto w-full max-w-[800px]">
+        <Link
+          href="/archive"
+          className="mb-10 inline-flex text-sm font-medium tracking-[0.16em] text-[#9a7a3f] transition hover:text-[#17120d]"
+        >
+          ← Archive
+        </Link>
+
+        <article className="min-w-0 border-t border-[#2a211b]/10 pt-10">
           <PostHeader post={post} />
           <PostContent content={post.content} />
         </article>
 
-        {/* TOC는 본문을 밀지 않는 보조 책갈피로 배치 */}
-        <aside className="absolute bottom-0 left-[calc(50%+390px)] top-0 hidden w-52 xl:block">
-          <div className="sticky top-24 rounded-md border border-white/10 bg-black/20 p-4 shadow-[0_16px_60px_rgba(0,0,0,0.22)] backdrop-blur-sm">
-            <TableOfContents content={post.content} />
-          </div>
-        </aside>
+        <div className="mt-16 border-t border-[#2a211b]/10 pt-8">
+          <Link
+            href="/archive"
+            className="inline-flex rounded-sm border border-[#9a7a3f]/35 px-5 py-3 text-sm font-medium tracking-[0.12em] text-[#5d4630] transition hover:border-[#9a7a3f]/70 hover:bg-[#efe7da]"
+          >
+            Archive로 돌아가기
+          </Link>
+        </div>
       </div>
     </main>
   );

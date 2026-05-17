@@ -5,12 +5,25 @@ interface PostHeaderProps {
   post: Post;
 }
 
+function formatDisplayDate(date: string, lang: Post['lang']) {
+  const parsed = new Date(`${date}T00:00:00`);
+  if (Number.isNaN(parsed.getTime())) return date;
+
+  return new Intl.DateTimeFormat(lang === 'ko' ? 'ko-KR' : 'en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  }).format(parsed);
+}
+
 export default function PostHeader({ post }: PostHeaderProps) {
+  const metaItems = [post.category, post.subject].filter(Boolean);
+
   return (
-    <header className="mb-10">
+    <header className="mb-12">
       {/* 썸네일 */}
       {post.thumbnail && (
-        <div className="relative w-full aspect-video rounded-2xl overflow-hidden mb-8">
+        <div className="relative mb-10 aspect-video w-full overflow-hidden rounded-sm border border-[#2a211b]/10">
           <Image
             src={`/images/posts/${post.thumbnail}`}
             alt={post.title}
@@ -22,29 +35,21 @@ export default function PostHeader({ post }: PostHeaderProps) {
         </div>
       )}
 
-      {/* 카테고리 + 태그 */}
-      <div className="flex flex-wrap items-center gap-2 mb-4">
-        <span className="rounded-full bg-zinc-800 px-3 py-1 text-xs font-medium text-zinc-400">
-          {post.category}
-        </span>
-        {post.tags.map((tag: string) => (
-          <span key={tag} className="text-xs text-zinc-600">
-            #{tag}
-          </span>
+      <div className="mb-5 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs font-medium uppercase tracking-[0.18em] text-[#9a7a3f]">
+        {metaItems.map((item) => (
+          <span key={item}>{item}</span>
         ))}
+        {metaItems.length > 0 && <span className="text-[#2a211b]/25">/</span>}
+        <time dateTime={post.date}>{formatDisplayDate(post.date, post.lang)}</time>
       </div>
 
-      {/* 제목 */}
-      <h1 className="text-3xl font-extrabold leading-tight tracking-tight text-zinc-100">
+      <h1 className="font-[family-name:var(--font-header-serif)] text-4xl font-semibold leading-[1.18] tracking-tight text-[#17120d] sm:text-5xl">
         {post.title}
       </h1>
 
-      {/* 날짜 */}
-      <time dateTime={post.date} className="mt-4 block text-xs text-zinc-600 tabular-nums">
-        {post.date}
-      </time>
+      <p className="mt-6 text-lg leading-[1.8] text-[#5f564d]">{post.description}</p>
 
-      <div className="mt-6 border-b border-zinc-800" />
+      <div className="mt-9 border-b border-[#2a211b]/10" />
     </header>
   );
 }
