@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Noto_Sans_KR, Noto_Serif_KR } from 'next/font/google';
-import { getAllPosts, getCategories, getSubjects } from '@/lib/posts';
+import { getAllPosts } from '@/lib/posts';
 import ArchiveClient from '@/components/archive/ArchiveClient';
 
 const ARCHIVE_DESCRIPTION =
@@ -44,10 +44,6 @@ const jsonLd = {
 export default function ArchivePage() {
   const koPosts = getAllPosts('ko');
   const enPosts = getAllPosts('en');
-  const koCategories = getCategories('ko');
-  const enCategories = getCategories('en');
-  const koSubjects = getSubjects('ko');
-  const enSubjects = getSubjects('en');
 
   return (
     <>
@@ -59,10 +55,6 @@ export default function ArchivePage() {
         <ArchiveClient
           koPosts={koPosts}
           enPosts={enPosts}
-          koCategories={koCategories}
-          enCategories={enCategories}
-          koSubjects={koSubjects}
-          enSubjects={enSubjects}
           serifFontClassName="font-[family-name:var(--font-noto-serif-kr)]"
           sansFontClassName="font-[family-name:var(--font-noto-sans-kr)]"
         />

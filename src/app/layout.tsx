@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Geist } from 'next/font/google';
+import { Geist, Noto_Serif_KR } from 'next/font/google';
 import Script from 'next/script';
 import './globals.css';
 import 'highlight.js/styles/atom-one-dark.css';
@@ -14,6 +14,13 @@ const geistSans = Geist({
   variable: '--font-geist-sans',
   subsets: ['latin'],
   display: 'swap',
+});
+
+const headerSerif = Noto_Serif_KR({
+  weight: ['500'],
+  subsets: ['latin'],
+  variable: '--font-header-serif',
+  preload: false,
 });
 
 const BASE_URL = 'https://dechive.dev';
@@ -93,7 +100,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} flex min-h-screen flex-col overflow-x-clip bg-black font-sans text-zinc-100 antialiased`}
+        className={`${geistSans.variable} ${headerSerif.variable} flex min-h-screen flex-col overflow-x-clip bg-black font-sans text-zinc-100 antialiased`}
       >
         <MusicProvider>
           <LangProvider>

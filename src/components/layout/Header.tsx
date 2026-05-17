@@ -1,10 +1,11 @@
 'use client';
 
 import * as React from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
+import LangToggle from './LangToggle';
+import MusicToggle from './MusicToggle';
 
 const NAV_ITEMS = [
   { name: 'Archive', href: '/archive' },
@@ -28,31 +29,22 @@ export default function Header() {
   if (isHome) return null;
 
   return (
-    <header className="sticky top-0 z-50 h-16 w-full border-b border-[#ded6c9] bg-[#f8f6f1]/92 text-[#17120d] backdrop-blur-xl">
-      <div className="relative mx-auto flex h-full max-w-7xl items-center justify-between px-6 sm:px-8">
+    <header className="sticky top-0 z-50 h-20 w-full border-b border-[#ded6c9] bg-[#f8f6f1]/94 text-[#17120d] backdrop-blur-xl">
+      <div className="relative flex h-full w-full items-center justify-between px-7 sm:px-10">
 
-        <Link href="/" onClick={close} className="group flex h-8 items-center gap-3">
-          <div className="relative h-8 w-8 transition-transform group-hover:scale-105">
-            <Image
-              src="/logo-icon.svg"
-              alt="Dechive Logo"
-              width={32}
-              height={32}
-              priority
-            />
-          </div>
-          <span className="text-lg leading-none font-semibold tracking-tight text-[#17120d]">
-            Dechive
+        <Link href="/" onClick={close} className="group flex items-center">
+          <span className="font-[family-name:var(--font-header-serif)] text-4xl leading-none font-medium tracking-[0.04em] text-[#6f6257] transition-colors group-hover:text-[#17120d] lg:text-5xl">
+            DECHIVE
           </span>
         </Link>
 
-        <nav className="hidden items-center md:flex">
-          <ul className="flex items-center gap-9">
+        <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center md:flex">
+          <ul className="flex items-center gap-11">
             {NAV_ITEMS.map((item) => (
               <li key={item.name}>
                 <Link
                   href={item.href}
-                  className={`relative py-2 text-sm font-semibold tracking-[0.02em] transition-colors ${
+                  className={`relative py-2 font-[family-name:var(--font-header-serif)] text-sm font-medium tracking-[0.12em] uppercase transition-colors ${
                     isActive(item.href)
                       ? 'text-[#17120d] after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:bg-[#b08d57]'
                       : 'text-[#6f6257] hover:text-[#17120d]'
@@ -64,6 +56,12 @@ export default function Header() {
             ))}
           </ul>
         </nav>
+
+        <div className="hidden items-center gap-4 md:flex">
+          <LangToggle tone="light" />
+          <span className="h-4 w-px bg-[#cfc5b8]" />
+          <MusicToggle tone="light" />
+        </div>
 
         <div className="flex h-8 w-8 items-center justify-end md:hidden">
           <button
@@ -88,7 +86,7 @@ export default function Header() {
               key={item.name}
               href={item.href}
               onClick={close}
-              className={`relative text-lg font-semibold tracking-[0.22em] uppercase transition-colors ${
+              className={`relative font-[family-name:var(--font-header-serif)] text-lg font-medium tracking-[0.22em] uppercase transition-colors ${
                 isActive(item.href)
                   ? 'text-[#17120d] after:absolute after:-bottom-3 after:left-1/2 after:h-px after:w-10 after:-translate-x-1/2 after:bg-[#b08d57]'
                   : 'text-[#6f6257] hover:text-[#17120d]'
