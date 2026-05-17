@@ -55,20 +55,7 @@ export default function Home() {
   function getHomePosts(lang: PostLang) {
     const posts = getAllPosts(lang);
     const featuredPost = getPostBySlug('what-null-leaves-behind', lang) ?? posts[0];
-    const preferredLatestSlugs = [
-      'what-null-leaves-behind',
-      'ga4-introduction',
-      'asking-data-with-sql',
-      'prompt-context-engineering',
-      'asking-why-the-structure-exists',
-    ];
-    const preferredLatestPosts = preferredLatestSlugs
-      .map((slug) => getPostBySlug(slug, lang))
-      .filter((post): post is NonNullable<typeof post> => Boolean(post));
-    const fallbackPosts = posts.filter(
-      (post) => !preferredLatestSlugs.includes(post.slug),
-    );
-    const latestPosts = [...preferredLatestPosts, ...fallbackPosts].slice(0, 5).map((post) => ({
+    const latestPosts = [...posts].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 5).map((post) => ({
       slug: post.slug,
       title: post.title,
       description: post.description,

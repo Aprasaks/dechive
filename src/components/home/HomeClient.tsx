@@ -416,7 +416,7 @@ export default function HomeClient({
                   {String(index + 1).padStart(2, '0')}
                 </span>
                 <span>
-                  <span className="block text-xl font-semibold text-[#111111]">
+                  <span className="block font-[family-name:var(--font-header-serif)] text-2xl font-semibold text-[#111111]">
                     {post.seoTitle ?? post.title}
                   </span>
                   <span className="mt-2 block max-w-3xl text-sm leading-7 text-[#555555]">
