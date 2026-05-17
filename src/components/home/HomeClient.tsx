@@ -198,6 +198,123 @@ function renderLines(lines: readonly string[], hiddenBreak = false) {
   ));
 }
 
+function MobileHomeCover({
+  lang,
+  t,
+  archiveRootHref,
+  featuredHref,
+  heroSerifClassName,
+}: {
+  lang: Lang;
+  t: (typeof homeCopy)[Lang];
+  archiveRootHref: string;
+  featuredHref: string;
+  heroSerifClassName: string;
+}) {
+  const slides = [
+    {
+      index: '01',
+      label: lang === 'ko' ? 'Intro' : 'Intro',
+      title: 'The Age Of Verification',
+      body: lang === 'ko' ? 'AI의 답을 의심하라\nDechive는 검증한다' : 'Question AI answers.\nDechive verifies.',
+      href: null,
+      linkLabel: null,
+    },
+    {
+      index: '02',
+      label: t.archiveLabel,
+      title: lang === 'ko' ? '시간이 지나도\n검증 가능한 기록' : 'Verifiable records\nthat remain over time',
+      body: '',
+      href: archiveRootHref,
+      linkLabel: t.archiveAll,
+    },
+    {
+      index: '03',
+      label: t.deepDiveLabel,
+      title: renderLines(t.deepDive),
+      body: '',
+      href: featuredHref,
+      linkLabel: t.readDeepDive,
+    },
+    {
+      index: '04',
+      label: t.manifestoEyebrow,
+      title: lang === 'ko'
+        ? '검증의 시대\n선택이 아니라 기준입니다.'
+        : 'The Age of Verification\nNot optional. The standard.',
+      body: '',
+      href: '/about',
+      linkLabel: t.aboutLink,
+    },
+  ];
+
+  return (
+    <section className="relative isolate min-h-[100svh] overflow-hidden border-b border-black/10 bg-[#f8f6f1] md:hidden">
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 bg-[url('/images/bg-mobile.webp')] bg-cover bg-center"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 bg-white/18"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 bg-linear-to-b from-white/18 via-transparent to-[#f8f6f1]/54"
+      />
+
+      <div className="flex min-h-[100svh] snap-x snap-mandatory overflow-x-auto scrollbar-hide">
+        {slides.map((slide) => (
+          <article
+            key={slide.index}
+            className="flex min-h-[100svh] w-screen shrink-0 snap-start flex-col justify-between px-6 py-8"
+          >
+            <div>
+              <p className={`text-center text-[4.15rem] leading-[0.78] font-semibold tracking-[-0.06em] text-[#3a2416] ${heroSerifClassName}`}>
+                DECHIVE
+              </p>
+              <div className="mt-5 flex items-center gap-3">
+                <TodayStamp />
+                <span className="h-px flex-1 bg-[#3a2416]/25" />
+                <div className="flex items-center gap-3">
+                  <LangToggle tone="light" />
+                  <MusicToggle tone="light" />
+                </div>
+              </div>
+            </div>
+
+            <div className="mx-auto w-full max-w-sm bg-[#f8f6f1]/70 p-6 text-center shadow-[0_22px_70px_rgba(42,33,27,0.14)] backdrop-blur-sm">
+                <p className="text-[11px] font-bold tracking-[0.26em] text-[#8a632f] uppercase">
+                  {slide.label}
+                </p>
+                <h1 className={`mt-4 whitespace-pre-line text-2xl leading-tight font-semibold text-[#111111] ${heroSerifClassName}`}>
+                  {slide.title}
+                </h1>
+                {slide.body ? (
+                  <p className="mt-5 whitespace-pre-line text-sm leading-7 text-[#3f3f3f]">
+                    {slide.body}
+                  </p>
+                ) : null}
+                {slide.href && slide.linkLabel ? (
+                  <Link
+                    href={slide.href}
+                    className="mt-7 inline-flex border border-[#111111] bg-[#111111] px-4 py-3 text-xs font-semibold text-white transition-colors hover:border-[#7a5d2c] hover:bg-[#7a5d2c]"
+                  >
+                    {slide.linkLabel}
+                  </Link>
+                ) : null}
+            </div>
+
+            <p className="text-center text-[11px] font-semibold tracking-[0.28em] text-[#8a632f] uppercase">
+              {slide.index} / 04
+            </p>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 export default function HomeClient({
   featuredPosts,
   latestPosts,
@@ -207,14 +324,22 @@ export default function HomeClient({
   const t = homeCopy[lang];
   const featuredPost = featuredPosts[lang];
   const currentLatestPosts = latestPosts[lang];
-  const archiveRootHref = lang === 'en' ? '/en/archive' : '/archive';
+  const archiveRootHref = '/archive';
   const featuredHref = featuredPost
-    ? `${archiveRootHref}/${featuredPost.slug}`
+    ? `${lang === 'en' ? '/en/archive' : '/archive'}/${featuredPost.slug}`
     : archiveRootHref;
 
   return (
     <main className="flex flex-1 flex-col bg-[#F8F6F1] text-[#111111]">
-      <section className="relative isolate grid min-h-screen overflow-hidden border-b border-black/10 px-6 pt-16 pb-12 sm:px-10 lg:px-20">
+      <MobileHomeCover
+        lang={lang}
+        t={t}
+        archiveRootHref={archiveRootHref}
+        featuredHref={featuredHref}
+        heroSerifClassName={heroSerifClassName}
+      />
+
+      <section className="relative isolate hidden min-h-screen overflow-hidden border-b border-black/10 px-6 pt-16 pb-12 sm:px-10 md:grid lg:px-20">
         <div
           aria-hidden="true"
           className="absolute inset-0 -z-10 bg-[url('/images/bg.webp')] bg-cover bg-center"
@@ -321,7 +446,7 @@ export default function HomeClient({
         </div>
       </section>
 
-      <section className="border-b border-black/10 px-6 py-24 sm:px-10 lg:px-20">
+      <section className="hidden border-b border-black/10 px-6 py-24 sm:px-10 md:block lg:px-20">
         <div className="mx-auto max-w-7xl">
           <SectionTitle
             eyebrow={t.thinkingEyebrow}
@@ -348,7 +473,7 @@ export default function HomeClient({
         </div>
       </section>
 
-      <section className="border-b border-black/10 px-6 py-24 sm:px-10 lg:px-20">
+      <section className="hidden border-b border-black/10 px-6 py-24 sm:px-10 md:block lg:px-20">
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
           <SectionTitle
             eyebrow={t.featuredEyebrow}
@@ -389,7 +514,7 @@ export default function HomeClient({
         </div>
       </section>
 
-      <section className="border-b border-black/10 px-6 py-24 sm:px-10 lg:px-20">
+      <section className="hidden border-b border-black/10 px-6 py-24 sm:px-10 md:block lg:px-20">
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
             <SectionTitle
@@ -409,7 +534,7 @@ export default function HomeClient({
             {currentLatestPosts.map((post, index) => (
               <Link
                 key={post.slug}
-                href={`${archiveRootHref}/${post.slug}`}
+                href={`${lang === 'en' ? '/en/archive' : '/archive'}/${post.slug}`}
                 className="grid gap-5 border-b border-black/15 py-7 transition-colors hover:bg-white/45 sm:grid-cols-[72px_1fr]"
               >
                 <span className="text-sm font-semibold text-[#B08D57]">
@@ -429,7 +554,7 @@ export default function HomeClient({
         </div>
       </section>
 
-      <section className="px-6 py-24 sm:px-10 lg:px-20">
+      <section className="hidden px-6 py-24 sm:px-10 md:block lg:px-20">
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.7fr_1.3fr]">
           <p className="text-xs font-semibold tracking-[0.28em] text-[#B08D57] uppercase">
             {t.manifestoEyebrow}
