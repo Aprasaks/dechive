@@ -32,9 +32,10 @@ export default function Header() {
     <>
       <header className="sticky top-0 z-50 h-20 w-full border-b border-[#ded6c9] bg-[#f8f6f1]/94 text-[#17120d] backdrop-blur-xl">
         <div className="relative flex h-full w-full items-center justify-between px-7 sm:px-10">
+          <div className="h-8 w-8 md:hidden" aria-hidden="true" />
 
-          <Link href="/" onClick={close} className="group flex items-center">
-            <span className="font-[family-name:var(--font-header-serif)] text-4xl leading-none font-medium tracking-[0.04em] text-[#6f6257] transition-colors group-hover:text-[#17120d] lg:text-5xl">
+          <Link href="/" onClick={close} className="group absolute left-1/2 flex -translate-x-1/2 items-center md:static md:left-auto md:translate-x-0">
+            <span className="font-[family-name:var(--font-header-serif)] text-3xl leading-none font-medium tracking-[0.04em] text-[#3a2416] transition-colors group-hover:text-[#17120d] md:text-4xl md:text-[#6f6257] lg:text-5xl">
               DECHIVE
             </span>
           </Link>

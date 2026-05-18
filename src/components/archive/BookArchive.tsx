@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Braces, Compass, Database, Sparkles } from 'lucide-react';
+import { Braces, ChevronDown, Compass, Database, Sparkles } from 'lucide-react';
 import type { Post } from '@/types/archive';
 import { useLang } from '@/components/layout/LangProvider';
 
@@ -55,6 +55,7 @@ export default function BookArchive({
 }: BookArchiveProps) {
   const { lang } = useLang();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [isMobileCategoryOpen, setIsMobileCategoryOpen] = useState(false);
   const indexCategories = [
     { label: 'AI', Icon: Sparkles },
     { label: 'DEV', Icon: Braces },
@@ -67,7 +68,7 @@ export default function BookArchive({
   const groupedPosts = groupPostsByYear(filteredPosts);
 
   return (
-    <section className={`relative h-[calc(100vh-5rem)] flex-1 overflow-hidden bg-[#f8f6f1] text-[#17120d] ${sansFontClassName}`}>
+    <section className={`relative min-h-[calc(100vh-5rem)] flex-1 overflow-visible bg-[#f8f6f1] text-[#17120d] lg:h-[calc(100vh-5rem)] lg:overflow-hidden ${sansFontClassName}`}>
       <div
         aria-hidden="true"
         className="pointer-events-none absolute top-16 right-0 h-96 w-96 rounded-full border border-[#b08d57]/10"
@@ -77,8 +78,8 @@ export default function BookArchive({
         className="pointer-events-none absolute top-24 right-24 h-[34rem] w-px bg-linear-to-b from-transparent via-[#b08d57]/20 to-transparent"
       />
 
-      <div className="grid h-full lg:grid-cols-[15.5rem_1fr] xl:grid-cols-[17rem_1fr]">
-        <aside className="h-full overflow-hidden border-r border-[#ded6c9] bg-[#f2eee6]/70 px-6 pt-8 pb-12 sm:px-7 lg:px-8">
+      <div className="grid min-h-[calc(100vh-5rem)] lg:h-full lg:min-h-0 lg:grid-cols-[15.5rem_1fr] xl:grid-cols-[17rem_1fr]">
+        <aside className="hidden h-full overflow-hidden border-r border-[#ded6c9] bg-[#f2eee6]/70 px-6 pt-8 pb-12 sm:px-7 lg:block lg:px-8">
           <div>
             <p className={`text-sm font-semibold tracking-[0.08em] text-[#8a6332] uppercase ${serifFontClassName}`}>
               Browse Archives
@@ -122,8 +123,52 @@ export default function BookArchive({
           </div>
         </aside>
 
-        <div className="h-full overflow-y-auto px-6 py-16 sm:px-8 lg:px-14 xl:px-20">
+        <div className="px-6 py-8 sm:px-8 lg:h-full lg:overflow-y-auto lg:px-14 lg:py-16 xl:px-20">
           <div className="mx-auto max-w-6xl">
+            <div className="mb-8 lg:hidden">
+              <button
+                type="button"
+                onClick={() => setIsMobileCategoryOpen((open) => !open)}
+                className={`flex w-full items-center justify-between border border-[#ded6c9] bg-[#f2eee6]/80 px-4 py-3 text-left text-sm font-semibold tracking-[0.12em] text-[#3f342b] uppercase ${serifFontClassName}`}
+                aria-expanded={isMobileCategoryOpen}
+              >
+                <span>{selectedCategory ?? 'Categories'}</span>
+                <ChevronDown
+                  size={16}
+                  strokeWidth={1.6}
+                  className={`text-[#8a6332] transition-transform ${isMobileCategoryOpen ? 'rotate-180' : ''}`}
+                />
+              </button>
+              <div className={`${isMobileCategoryOpen ? 'grid' : 'hidden'} mt-2 gap-1 border border-[#ded6c9] bg-[#f8f6f1] p-2 shadow-[0_18px_50px_rgba(42,33,27,0.08)]`}>
+                {indexCategories.map(({ label, Icon }) => {
+                  const isSelected = selectedCategory === label;
+
+                  return (
+                    <button
+                      key={label}
+                      type="button"
+                      onClick={() => {
+                        setSelectedCategory(label);
+                        setIsMobileCategoryOpen(false);
+                      }}
+                      className={`flex items-center gap-3 rounded-sm px-3 py-3 text-left text-sm leading-none transition-colors ${serifFontClassName} ${
+                        isSelected
+                          ? 'bg-[#e8e1d6] text-[#17120d] shadow-[inset_2px_0_0_#b08d57]'
+                          : 'text-[#3f342b] hover:bg-[#ece6dc]/70 hover:text-[#17120d]'
+                      }`}
+                    >
+                      <Icon
+                        size={13}
+                        strokeWidth={1.6}
+                        className={isSelected ? 'text-[#6f461d]' : 'text-[#8a6332]'}
+                      />
+                      {label}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
             <div className="border-b border-[#ded6c9] pb-12">
               <p className={`max-w-xl text-2xl leading-snug text-[#2b2119] ${serifFontClassName}`}>
                 {lang === 'en'
