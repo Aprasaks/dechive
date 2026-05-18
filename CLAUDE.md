@@ -7,23 +7,23 @@ Dechive 작업에서 Claude Code가 따라야 할 기준이다.
 
 Dechive는 일반 블로그, 포트폴리오, 튜토리얼 사이트가 아니다.
 
-Dechive는 생각이 머무는 개인 도서관이다.
+Dechive는 AI 시대의 검증 지식 아카이브다.
 
 Core line:
 
-> 생각이 머무는 도서관  
-> A library where thoughts stay.
+> AI는 답을 만든다.  
+> Dechive는 그 답을 검증한다.
 
-Dechive의 글은 단순한 포스트가 아니라 하나의 짧은 책이다.  
-각 글은 하나의 독립적인 질문에 답해야 한다.
+Dechive의 글은 빠른 답을 모으는 포스트가 아니다.  
+각 글은 하나의 질문, 하나의 키워드, 하나의 판단 기준을 남겨야 한다.
 
 지향:
 
-- 조용한 도서관
-- 짧은 책이 꽂힌 서가
-- 다시 꺼내 읽는 기록
-- 낮은 대비와 은은한 amber
-- AI 시대의 지식과 생각을 정리하는 공간
+- AI가 만든 답을 이해하고 검증하는 기준
+- 질문과 이해가 쌓이는 Archive
+- 하나의 키워드를 끝까지 파고드는 Deep Dive
+- 추론, 한계, 실수, 검증 기준을 남기는 문서
+- 에디토리얼한 지식 아카이브
 
 피할 것:
 
@@ -54,12 +54,27 @@ Dechive에서 하네스란 작업을 다음 요소로 묶는 것이다.
 Dechive의 콘텐츠 구조:
 
 ```txt
+type = archive | deepdive
 category = 큰 서가
 subject = 주제 책장
-post = 하나의 짧은 책
+post = 하나의 독립 기록 또는 심층 문서
 tags = 색인
 concepts = 개념 색인 연결
 ```
+
+콘텐츠 타입:
+
+```txt
+Archive = 하나의 질문으로 남긴 독립 기록
+Deep Dive = 하나의 키워드를 끝까지 파고드는 심층 지식 문서
+Daily = 현재 사용하지 않음
+```
+
+Archive는 짧더라도 하나의 질문에 답해야 한다.  
+다른 글의 앞뒤 순서를 전제로 쓰지 않는다.
+
+Deep Dive는 하나의 키워드를 기준으로 개념, 배경, 구조, 예시, 실수, 한계, 추론, 검증 기준까지 정리한다.  
+나중에 AI 추론 시스템이나 사서가 붙을 수 있으므로 문서 구조가 명확해야 한다.
 
 기본 category:
 
@@ -85,6 +100,8 @@ AI: Prompt, Deep Learning
 - subject는 시리즈가 아니라 책장이다
 - 각 글은 독립적으로 읽혀야 한다
 - 같은 subject 안에서 자연스럽게 연결될 수는 있지만 연재처럼 쓰지 않는다
+- Daily는 현재 콘텐츠 구조에 포함하지 않는다
+- Archive와 Deep Dive는 type으로 구분한다
 
 금지 표현:
 
@@ -101,24 +118,49 @@ AI: Prompt, Deep Learning
 
 ## 4. Frontmatter Rules
 
-기본 구조:
+Archive 기본 구조:
 
 ```yaml
 ---
-title: '글의 핵심 통찰을 담은 제목'
-seoTitle: '검색용 색인 제목'
+title: '하나의 질문을 담은 제목'
+seoTitle: '검색용 설명형 제목'
 date: YYYY-MM-DD
+type: archive
 category: AI
 tags:
   - AI
-  - prompt
+  - Prompt
 slug: url-friendly-slug
-description: 'SEO 스니펫용 설명'
+description: '질문과 답의 핵심을 설명하는 문장'
 status: published
 lang: ko
-subject: Prompt
 concepts:
   - Prompt
+---
+```
+
+Deep Dive 기본 구조:
+
+```yaml
+---
+title: '키워드를 끝까지 파고드는 제목'
+seoTitle: '검색용 설명형 제목'
+date: YYYY-MM-DD
+updated: YYYY-MM-DD
+type: deepdive
+category: Product
+subject: Agile
+tags:
+  - Agile
+  - AI
+  - Verification
+slug: ai-era-agile-verification
+description: '개념, 예시, 실수, 한계, 추론, 검증 기준까지 다루는 설명'
+status: draft
+lang: ko
+concepts:
+  - Agile
+  - Verification
 ---
 ```
 
@@ -130,6 +172,12 @@ concepts:
 - slug는 임의로 변경하지 않는다
 - description은 과장 없이 명확하게 쓴다
 - category는 큰 서가, subject는 주제 책장이다
+- type은 `archive` 또는 `deepdive`를 사용한다
+- Archive는 하나의 질문을 담은 독립 기록이다
+- Deep Dive는 하나의 키워드를 끝까지 파고드는 심층 문서다
+- 한국어 `.ko.md`가 원문이다
+- 기존 영어 `.en.md`는 보호한다
+- slug는 번역하지 않는다
 
 ## 5. Writing Rules
 
@@ -145,7 +193,7 @@ MCP는 워크플로우와 무엇이 다른가?
 
 글 전체는 이 질문 하나에 답해야 한다.
 
-기본 흐름:
+Archive 기본 흐름:
 
 ```txt
 도입
@@ -157,6 +205,24 @@ MCP는 워크플로우와 무엇이 다른가?
 ```
 
 단, 이 이름을 헤딩으로 쓰지 않는다.
+
+Deep Dive 기본 흐름:
+
+```txt
+핵심 키워드
+왜 필요한가
+개념과 배경
+구조
+예시
+자주 하는 실수
+한계
+추론 과정
+검증 기준
+정리
+```
+
+Deep Dive는 단순히 긴 글이 아니다.  
+다른 글을 다시 찾아보지 않아도 하나의 키워드를 이해하고 검증할 수 있어야 한다.
 
 도입은 정의가 아니라 혼란, 관찰, 문제의식에서 시작한다.
 
@@ -313,17 +379,18 @@ concepts = 개념 연결
 
 ## 10. UI / UX Rules
 
-Dechive UI는 조용한 도서관 분위기를 유지한다.
+Dechive UI는 에디토리얼한 검증 아카이브 분위기를 유지한다.
 
 지향:
 
 ```txt
-고딕 도서관
-조용한 서가
-짧은 책
-낮은 대비
+잡지형 지면
+검증 아카이브
+명확한 색인
+넓은 여백
 얇은 border
-은은한 amber
+muted gold
+warm ivory
 ```
 
 피할 것:
@@ -341,12 +408,23 @@ skill percentage bar
 
 ### Archive
 
-Archive는 Dechive의 핵심 서가다.
+Archive는 하나의 질문으로 남긴 독립 기록의 색인이다.
 
 - 왼쪽은 색인, 필터, 검색
 - 오른쪽은 기록 목록과 검색 결과
 - 검색은 현재 category/subject 범위 안에서 작동한다
 - 선택된 범위는 명확하게 보여준다
+- 이전 글, 다음 글, 이어지는 글처럼 순서를 암시하지 않는다
+- 각 Archive 글은 단독으로 읽혀야 한다
+
+### Deep Dive
+
+Deep Dive는 하나의 키워드를 끝까지 파고드는 심층 지식 문서다.
+
+- 개념, 배경, 구조, 예시를 포함한다
+- 실수, 한계, 추론, 검증 기준을 포함한다
+- 단순한 긴 글이나 튜토리얼로 만들지 않는다
+- 나중에 AI 추론 시스템이나 사서가 읽을 수 있도록 구조를 명확히 한다
 
 ### Index
 
@@ -364,8 +442,9 @@ Index는 단순 사전이 아니라 개념 지도다.
 About은 Dechive의 정체성을 설명한다.
 
 - Dechive가 무엇인지
-- 왜 도서관인지
-- 글을 왜 짧은 책으로 보는지
+- 왜 검증 아카이브인지
+- AI 시대에 왜 사람이 이해하고 검증해야 하는지
+- Archive와 Deep Dive가 어떤 역할인지
 - 일반 블로그와 무엇이 다른지
 
 ## 12. Infrastructure Rules
@@ -396,6 +475,9 @@ About은 Dechive의 정체성을 설명한다.
 - 검수 없이 force 재번역
 - skill percentage bar 추가
 - 밝은 SaaS 스타일로 변경
+- Daily를 현재 구조에 임의로 추가
+- Deep Dive를 단순히 긴 Archive 글처럼 작성
+- Archive 글을 이어지는 연재처럼 작성
 - 사실을 만들어내기
 - 글을 길게 보이게 하려고 불필요하게 늘리기
 
@@ -425,17 +507,11 @@ About은 Dechive의 정체성을 설명한다.
 - 정체성을 흐리지 않는다
 - 필요한 것만 바꾼다
 - 글은 하나의 질문에 답한다
-- UI는 도서관 분위기를 유지한다
+- Archive는 독립 기록으로 남는다
+- Deep Dive는 검증 가능한 심층 문서가 된다
+- UI는 에디토리얼한 검증 아카이브 분위기를 유지한다
 - SEO보다 사람을 먼저 생각한다
 - 결과는 조용하지만 선명하다
 
 Dechive는 콘텐츠를 빠르게 쌓는 곳이 아니다.
-Dechive는 생각이 머무는 곳이다.
-
-```
-
----
-
-내 생각엔 이렇게 줄이는 게 좋아.
-기존 `CLAUDE.md`는 엄청 정성스럽지만 너무 길어서, 실제 작업 때는 핵심이 묻힐 수 있어. 지금처럼 **정체성 → 하네스 → 콘텐츠 모델 → 글쓰기 → 번역 → SEO → UI → 금지사항** 순서로 줄이면 훨씬 잘 작동할 거야.
-```
+Dechive는 AI 시대의 답을 이해하고 검증하기 위한 지식 아카이브다.
