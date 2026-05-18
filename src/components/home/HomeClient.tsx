@@ -34,9 +34,9 @@ const homeCopy = {
     insideLabel: 'Inside',
     inside: ['지식은 검증으로', '완성된다'],
     soloAgileLabel: 'Solo Agile',
-    soloAgile: ['AI가 빨라질수록', '방향은 더 자주', '검증되어야 한다'],
+    soloAgile: ['1인기업시대,', '회고는 필요없는것인가'],
     archiveLabel: 'AI Tutorial',
-    archive: ['시간이 지나도', '검증 가능한 기록을', '남긴다'],
+    archive: ['AI, 넌 어떻게', '써야 하니'],
     thinkingEyebrow: 'How Dechive Thinks',
     thinkingTitle: 'Dechive의 글은 하나의 질문에서 시작합니다.',
     thinkingDescription: '정의에서 끝나지 않고, 예시와 실수, 한계와 검증 기준까지 따라갑니다.',
@@ -86,9 +86,9 @@ const homeCopy = {
     insideLabel: 'Inside',
     inside: ['Knowledge is completed', 'through verification'],
     soloAgileLabel: 'Solo Agile',
-    soloAgile: ['As AI gets faster,', 'direction must be', 'verified more often'],
+    soloAgile: ['In the solo business era,', 'is reflection unnecessary?'],
     archiveLabel: 'AI Tutorial',
-    archive: ['Even after time passes,', 'verifiable records', 'remain'],
+    archive: ['AI, how should', 'I use you?'],
     thinkingEyebrow: 'How Dechive Thinks',
     thinkingTitle: 'Every Dechive piece begins with one question.',
     thinkingDescription: 'It does not stop at definitions. It follows examples, mistakes, limits, and verification criteria.',
@@ -406,7 +406,7 @@ export default function HomeClient({
           </div>
         </div>
 
-        <div className="absolute top-[26%] right-6 z-10 hidden max-w-68 bg-[#F8F6F1]/66 px-5 py-6 text-right shadow-[0_18px_60px_rgba(17,17,17,0.08)] backdrop-blur-sm sm:right-10 sm:max-w-xs sm:px-6 md:block lg:right-20">
+        <div className="absolute top-[28%] right-6 z-10 hidden max-w-68 bg-[#F8F6F1]/66 px-5 py-6 text-right shadow-[0_18px_60px_rgba(17,17,17,0.08)] backdrop-blur-sm sm:right-10 sm:max-w-xs sm:px-6 md:block lg:right-20">
           <div className="relative">
             <p className="text-[11px] font-bold tracking-[0.22em] text-[#6f461d] uppercase">
               {t.insideLabel}
