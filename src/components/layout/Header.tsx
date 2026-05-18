@@ -9,7 +9,7 @@ import MusicToggle from './MusicToggle';
 
 const NAV_ITEMS = [
   { name: 'Archive', href: '/archive' },
-  { name: 'Deep Dive', href: '/archive/what-null-leaves-behind' },
+  { name: 'Deep Dive', href: '/deep-dive' },
   { name: 'About', href: '/about' },
 ];
 
@@ -22,6 +22,9 @@ export default function Header() {
   const isActive = (href: string) => {
     if (href === '/archive') {
       return pathname.startsWith('/archive') || pathname.startsWith('/en/archive');
+    }
+    if (href === '/deep-dive') {
+      return pathname.startsWith('/deep-dive');
     }
     return pathname === href;
   };
