@@ -27,7 +27,7 @@ const homeCopy = {
     topLine: '지식을 검증하고, 가치를 아카이빙하다',
     editorNoteLabel: "Editor's Note",
     editorNote: ['AI는 답을 만들고', 'Dechive는 검증한다'],
-    dailyArchiveLabel: 'Daily Archive',
+    dailyArchiveLabel: 'Archive',
     dailyArchive: ['오늘의 질문,', '내일의 기준'],
     deepDiveLabel: 'Deep Dive',
     deepDive: ['한계를 넘어서', '신뢰할 수 있는 기록'],
@@ -35,7 +35,7 @@ const homeCopy = {
     inside: ['지식은 검증으로', '완성된다'],
     soloAgileLabel: 'Solo Agile',
     soloAgile: ['AI가 빨라질수록', '방향은 더 자주', '검증되어야 한다'],
-    archiveLabel: 'Archive',
+    archiveLabel: 'AI Tutorial',
     archive: ['시간이 지나도', '검증 가능한 기록을', '남긴다'],
     thinkingEyebrow: 'How Dechive Thinks',
     thinkingTitle: 'Dechive의 글은 하나의 질문에서 시작합니다.',
@@ -79,7 +79,7 @@ const homeCopy = {
     topLine: 'Verifying knowledge, archiving value',
     editorNoteLabel: "Editor's Note",
     editorNote: ['AI makes answers.', 'Dechive verifies.'],
-    dailyArchiveLabel: 'Daily Archive',
+    dailyArchiveLabel: 'Archive',
     dailyArchive: ["Today's questions,", "tomorrow's standards"],
     deepDiveLabel: 'Deep Dive',
     deepDive: ['Beyond limits,', 'records you can trust'],
@@ -87,7 +87,7 @@ const homeCopy = {
     inside: ['Knowledge is completed', 'through verification'],
     soloAgileLabel: 'Solo Agile',
     soloAgile: ['As AI gets faster,', 'direction must be', 'verified more often'],
-    archiveLabel: 'Archive',
+    archiveLabel: 'AI Tutorial',
     archive: ['Even after time passes,', 'verifiable records', 'remain'],
     thinkingEyebrow: 'How Dechive Thinks',
     thinkingTitle: 'Every Dechive piece begins with one question.',
@@ -339,7 +339,7 @@ export default function HomeClient({
         heroSerifClassName={heroSerifClassName}
       />
 
-      <section className="relative isolate hidden min-h-screen overflow-hidden border-b border-black/10 px-6 pt-16 pb-12 sm:px-10 md:grid lg:px-20">
+      <section className="relative isolate hidden min-h-screen overflow-hidden border-b border-black/10 px-6 pt-16 pb-12 sm:px-10 md:grid md:min-h-[760px] lg:min-h-[820px] lg:px-20">
         <div
           aria-hidden="true"
           className="absolute inset-0 -z-10 bg-[url('/images/bg.webp')] bg-cover bg-center"
