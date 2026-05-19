@@ -46,13 +46,8 @@ export default function DeepDiveLanding({
       <div className="grid min-h-[calc(100vh-5rem)] w-full lg:grid-cols-[15.5rem_1fr] xl:grid-cols-[17rem_1fr]">
         <aside className="hidden border-r border-[#ded6c9] bg-[#f2eee6]/70 px-6 pt-12 pb-12 sm:px-7 lg:block lg:px-8">
           <div className="sticky top-28">
-            <p className={`text-sm font-semibold tracking-[0.12em] text-[#17120d] uppercase ${serifFontClassName}`}>
+            <p className={`text-sm font-semibold tracking-[0.08em] text-[#8a6332] uppercase ${serifFontClassName}`}>
               Deep Dive
-            </p>
-            <p className="mt-4 text-sm leading-7 text-[#6f6257]">
-              하나의 키워드를 끝까지
-              <br />
-              파고드는 심층 문서.
             </p>
 
             <div className="mt-8 flex w-14 items-center gap-1.5">
@@ -101,11 +96,11 @@ export default function DeepDiveLanding({
 
         <div className="px-6 py-10 sm:px-8 lg:px-14 lg:py-16 xl:px-20">
           <div className="mx-auto max-w-6xl">
-            <div>
-              <h1 className={`text-5xl leading-none font-medium tracking-[-0.05em] text-[#17120d] md:text-6xl ${serifFontClassName}`}>
-                Deep Dive
-              </h1>
-              <p className="mt-7 max-w-2xl text-lg leading-8 text-[#4b4036]">
+            <div className="border-b border-[#ded6c9] pb-10">
+              <p className={`max-w-2xl text-2xl leading-snug text-[#2b2119] ${serifFontClassName}`}>
+                빠른 답으로 끝나지 않는 질문들.
+              </p>
+              <p className="mt-5 max-w-2xl text-sm leading-7 text-[#6f6257]">
                 빠른 답으로 끝나지 않는 질문을
                 <br className="hidden sm:block" />
                 개념, 예시, 실수, 한계, 검증 기준까지 정리합니다.
