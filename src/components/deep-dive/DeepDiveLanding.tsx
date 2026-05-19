@@ -1,46 +1,48 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { ArrowRight, LibraryBig } from 'lucide-react';
 
+export interface DeepDivePost {
+  slug: string;
+  title: string;
+  meta: string;
+  description: string;
+  image: string;
+  tags: string[];
+}
+
 interface DeepDiveLandingProps {
+  basePath: string;
+  deepDives: DeepDivePost[];
   serifFontClassName: string;
   sansFontClassName: string;
 }
 
 const keywords = ['Agile', 'Prompt', 'React', 'SQL', 'Next.js', 'GA4', 'Testing', 'Product'];
 
-const chips = ['개념', '예시', '실수', '한계', '검증 기준'];
-
-const deepDives = [
+const fallbackDeepDives: DeepDivePost[] = [
   {
-    title: '좋은 프롬프트는 질문 설계다',
-    meta: 'AI · Prompt',
-    description: 'AI에게 원하는 답을 얻기 위한 질문의 구조와 맥락 설계 방법을 정리합니다.',
-    image: '/images/posts/prompt-agentic.webp',
-  },
-  {
-    title: 'useEffect는 동기화 도구다',
-    meta: 'DEV · React',
-    description: 'useEffect의 정확한 역할과 오해, 실수, 대안까지 정리합니다.',
-    image: '/images/coded-library.webp',
-  },
-  {
-    title: 'SQL의 NULL을 정확히 이해하기',
-    meta: 'DATA · SQL',
-    description: 'NULL의 개념, 3값 논리, 비교, 집계, 실무 함정과 안전하게 다루는 방법을 정리합니다.',
-    image: '/images/posts/null-vs-zero-vs-empty.webp',
-  },
-  {
-    title: 'GA4는 이벤트 설계가 전부다',
-    meta: 'PRODUCT · ANALYTICS',
-    description: '지표를 만들기 전에 이벤트를 설계해야 분석이 쉬워집니다.',
-    image: '/images/posts/ga4-event-types.webp',
+    slug: 'ai-era-agile-verification',
+    title: 'Agile은 속도가 아니라 방향을 검증하는 방식이다',
+    meta: 'Product · Agile',
+    description: 'AI가 구현 속도를 높이는 시대에도 Agile이 왜 필요한지, 방향 검증의 방식으로 정리합니다.',
+    image: '/images/posts/ai-era-agile-cover.webp',
+    tags: ['Agile', 'AI', 'Verification'],
   },
 ];
 
 export default function DeepDiveLanding({
+  basePath,
+  deepDives,
   serifFontClassName,
   sansFontClassName,
 }: DeepDiveLandingProps) {
+  const visibleDeepDives = deepDives.length > 0 ? deepDives : fallbackDeepDives;
+  const featuredDeepDive = visibleDeepDives[0];
+  const featuredTags = featuredDeepDive.tags.length > 0
+    ? featuredDeepDive.tags
+    : ['개념', '예시', '검증 기준'];
+
   return (
     <section className={`flex min-h-[calc(100vh-5rem)] flex-1 bg-[#f8f6f1] text-[#17120d] ${sansFontClassName}`}>
       <div className="grid min-h-[calc(100vh-5rem)] w-full lg:grid-cols-[15.5rem_1fr] xl:grid-cols-[17rem_1fr]">
@@ -110,7 +112,7 @@ export default function DeepDiveLanding({
             <article className="group relative mt-10 overflow-hidden rounded-md border border-[#d8c9b0] bg-[#17120d] shadow-[0_28px_90px_rgba(42,33,27,0.18)]">
               <div className="relative min-h-[25rem]">
                 <Image
-                  src="/images/library-main.webp"
+                  src={featuredDeepDive.image}
                   alt=""
                   fill
                   sizes="(min-width: 1024px) 75vw, 100vw"
@@ -122,18 +124,16 @@ export default function DeepDiveLanding({
 
                 <div className="relative z-10 flex min-h-[25rem] max-w-2xl flex-col justify-center px-7 py-10 text-[#f8f6f1] sm:px-10">
                   <p className="text-xs font-medium tracking-[0.12em] text-[#e2c47b] uppercase">
-                    Product <span className="mx-2">·</span> Agile <span className="mx-2">·</span> Verification
+                    {featuredDeepDive.meta}
                   </p>
                   <h2 className={`mt-7 text-4xl leading-snug font-medium tracking-[-0.04em] md:text-5xl ${serifFontClassName}`}>
-                    Agile은 속도가 아니라
-                    <br />
-                    방향을 검증하는 방식이다
+                    {featuredDeepDive.title}
                   </h2>
                   <p className="mt-7 max-w-lg text-base leading-8 text-[#f1eadf]/86">
-                    AI가 구현 속도를 높이는 시대에도, 1인 개발자와 SaaS에게 필요한 것은 방향을 검증하는 일입니다.
+                    {featuredDeepDive.description}
                   </p>
                   <div className="mt-6 flex flex-wrap gap-2">
-                    {chips.map((chip) => (
+                    {featuredTags.map((chip) => (
                       <span
                         key={chip}
                         className="rounded-full border border-[#f8f6f1]/18 px-3 py-1 text-sm text-[#f8f6f1]/86"
@@ -142,13 +142,13 @@ export default function DeepDiveLanding({
                       </span>
                     ))}
                   </div>
-                  <button
-                    type="button"
+                  <Link
+                    href={`${basePath}/${featuredDeepDive.slug}`}
                     className={`mt-8 inline-flex w-fit items-center gap-8 rounded-sm bg-[#9a6b2e] px-6 py-3 text-lg text-white transition-colors hover:bg-[#7f5421] ${serifFontClassName}`}
                   >
                     Read Deep Dive
                     <ArrowRight size={22} strokeWidth={1.4} />
-                  </button>
+                  </Link>
                 </div>
               </div>
             </article>
@@ -168,9 +168,10 @@ export default function DeepDiveLanding({
               </div>
 
               <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-                {deepDives.map((deepDive) => (
-                  <article
+                {visibleDeepDives.map((deepDive) => (
+                  <Link
                     key={deepDive.title}
+                    href={`${basePath}/${deepDive.slug}`}
                     className="group overflow-hidden rounded-md border border-[#ded6c9] bg-[#fbfaf7] shadow-[0_16px_50px_rgba(42,33,27,0.06)] transition-colors hover:border-[#b08d57]/55"
                   >
                     <div className="relative aspect-[16/9] overflow-hidden bg-[#e8e1d6]">
@@ -194,7 +195,7 @@ export default function DeepDiveLanding({
                         {deepDive.description}
                       </p>
                     </div>
-                  </article>
+                  </Link>
                 ))}
               </div>
             </section>

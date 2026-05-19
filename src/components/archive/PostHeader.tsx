@@ -18,14 +18,15 @@ function formatDisplayDate(date: string, lang: Post['lang']) {
 
 export default function PostHeader({ post }: PostHeaderProps) {
   const metaItems = [post.category, post.subject].filter(Boolean);
+  const headerImage = post.thumbnail || post.coverImage?.replace(/^\.\//, '');
 
   return (
     <header className="mb-12">
       {/* 썸네일 */}
-      {post.thumbnail && (
+      {headerImage && (
         <div className="relative mb-10 aspect-video w-full overflow-hidden rounded-sm border border-[#2a211b]/10">
           <Image
-            src={`/images/posts/${post.thumbnail}`}
+            src={`/images/posts/${headerImage}`}
             alt={post.title}
             fill
             className="object-cover"

@@ -325,9 +325,8 @@ export default function HomeClient({
   const featuredPost = featuredPosts[lang];
   const currentLatestPosts = latestPosts[lang];
   const archiveRootHref = '/archive';
-  const featuredHref = featuredPost
-    ? `${lang === 'en' ? '/en/archive' : '/archive'}/${featuredPost.slug}`
-    : archiveRootHref;
+  const deepDiveRootHref = lang === 'en' ? '/en/deep-dive' : '/deep-dive';
+  const agileDeepDiveHref = `${deepDiveRootHref}/ai-era-agile-verification`;
 
   return (
     <main className="flex flex-1 flex-col bg-[#F8F6F1] text-[#111111]">
@@ -335,7 +334,7 @@ export default function HomeClient({
         lang={lang}
         t={t}
         archiveRootHref={archiveRootHref}
-        featuredHref={featuredHref}
+        featuredHref={deepDiveRootHref}
         heroSerifClassName={heroSerifClassName}
       />
 
@@ -420,7 +419,10 @@ export default function HomeClient({
 
           <div className="mt-8 ml-auto h-px w-16 bg-[#3a2416]/40" />
 
-          <div className="mt-7">
+          <Link
+            href={agileDeepDiveHref}
+            className="mt-7 block text-right transition-colors hover:text-[#7a5d2c]"
+          >
             <p className="text-[11px] font-bold tracking-[0.22em] text-[#6f461d] uppercase">
               {t.soloAgileLabel}
             </p>
@@ -429,7 +431,7 @@ export default function HomeClient({
             >
               {renderLines(t.soloAgile)}
             </p>
-          </div>
+          </Link>
 
           <div className="mt-8 ml-auto h-px w-16 bg-[#3a2416]/40" />
 
@@ -505,7 +507,7 @@ export default function HomeClient({
                 : t.featuredDescriptionFallback}
             </p>
             <Link
-              href={featuredHref}
+              href={deepDiveRootHref}
               className="mt-9 inline-flex border border-[#111111] px-6 py-3 text-sm font-semibold text-[#111111] transition-colors hover:border-[#B08D57] hover:text-[#7a5d2c]"
             >
               {t.readDeepDive}

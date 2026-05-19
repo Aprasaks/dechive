@@ -22,10 +22,26 @@ export default function LangToggle({ tone = 'dark' }: { tone?: 'dark' | 'light' 
       if (next === 'ko') {
         router.push(pathname.replace('/en/archive/', '/archive/'));
       }
+    } else if (pathname.startsWith('/en/deep-dive/')) {
+      if (next === 'ko') {
+        router.push(pathname.replace('/en/deep-dive/', '/deep-dive/'));
+      }
+    } else if (pathname === '/en/deep-dive') {
+      if (next === 'ko') {
+        router.push('/deep-dive');
+      }
     } else if (pathname.startsWith('/archive/')) {
       // 한글 포스트 → 영문으로
       if (next === 'en') {
         router.push(`/en${pathname}`);
+      }
+    } else if (pathname.startsWith('/deep-dive/')) {
+      if (next === 'en') {
+        router.push(`/en${pathname}`);
+      }
+    } else if (pathname === '/deep-dive') {
+      if (next === 'en') {
+        router.push('/en/deep-dive');
       }
     }
   }

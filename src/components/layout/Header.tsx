@@ -24,7 +24,7 @@ export default function Header() {
       return pathname.startsWith('/archive') || pathname.startsWith('/en/archive');
     }
     if (href === '/deep-dive') {
-      return pathname.startsWith('/deep-dive');
+      return pathname.startsWith('/deep-dive') || pathname.startsWith('/en/deep-dive');
     }
     return pathname === href;
   };

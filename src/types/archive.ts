@@ -12,6 +12,7 @@ export interface Subject {
 
 export type PostStatus = 'draft' | 'published';
 export type PostLang = 'ko' | 'en';
+export type PostType = 'archive' | 'deepdive';
 
 export interface Post {
   slug: string;
@@ -22,6 +23,8 @@ export interface Post {
   description: string;    // SEO / AdSense용 (150자 내외)
   seoTitle?: string;      // 검색용 <title> (없으면 title 사용)
   thumbnail?: string;     // 파일명 (e.g. "next-app-router.webp"), 없으면 기본 이미지 사용
+  coverImage?: string;    // Deep Dive 커버 이미지 경로
+  type: PostType;
   status: PostStatus;
   lang: PostLang;
   subject?: string;       // Archive 주제 묶음 이름 (없으면 빈 문자열)

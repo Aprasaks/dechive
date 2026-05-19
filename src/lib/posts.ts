@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import type { Category, Post, PostLang, PostStatus, Subject } from '@/types/archive';
+import type { Category, Post, PostLang, PostStatus, PostType, Subject } from '@/types/archive';
 
 const POSTS_DIR = path.join(process.cwd(), 'content', 'posts');
 
@@ -36,12 +36,18 @@ function parsePost(filename: string): Post | null {
     description: data.description ?? '',
     seoTitle: data.seoTitle,
     thumbnail: data.thumbnail ?? '',
+    coverImage: data.coverImage ?? '',
+    type: (data.type as PostType) ?? 'archive',
     status: (data.status as PostStatus) ?? 'draft',
     lang,
     subject: data.subject ?? '',
     readingTime: calcReadingTime(content, lang),
     content,
   };
+}
+
+export function getDeepDivePosts(lang: PostLang = 'ko'): Post[] {
+  return getAllPosts(lang).filter((post) => post.type === 'deepdive');
 }
 
 export function getAllPosts(lang: PostLang = 'ko'): Post[] {

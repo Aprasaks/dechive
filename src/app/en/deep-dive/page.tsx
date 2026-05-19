@@ -4,7 +4,7 @@ import DeepDiveLanding from '@/components/deep-dive/DeepDiveLanding';
 import { getDeepDivePosts } from '@/lib/posts';
 
 const DEEP_DIVE_DESCRIPTION =
-  '빠른 답으로 끝나지 않는 질문을 개념, 예시, 실수, 한계, 검증 기준까지 정리하는 Dechive의 심층 지식 문서입니다.';
+  'Long-form Dechive knowledge documents that follow one question through concepts, examples, mistakes, limits, and verification criteria.';
 const FEATURED_DEEP_DIVE_SLUG = 'ai-era-agile-verification';
 
 const notoSerifKR = Noto_Serif_KR({
@@ -25,13 +25,17 @@ export const metadata: Metadata = {
   title: 'Deep Dive',
   description: DEEP_DIVE_DESCRIPTION,
   alternates: {
-    canonical: 'https://dechive.dev/deep-dive',
-    languages: { 'x-default': 'https://dechive.dev/deep-dive' },
+    canonical: 'https://dechive.dev/en/deep-dive',
+    languages: {
+      ko: 'https://dechive.dev/deep-dive',
+      en: 'https://dechive.dev/en/deep-dive',
+      'x-default': 'https://dechive.dev/deep-dive',
+    },
   },
   openGraph: {
     title: 'Deep Dive | Dechive',
     description: DEEP_DIVE_DESCRIPTION,
-    url: 'https://dechive.dev/deep-dive',
+    url: 'https://dechive.dev/en/deep-dive',
     images: [
       {
         url: 'https://dechive.dev/images/thumb.webp',
@@ -50,8 +54,8 @@ function resolvePostImage(image?: string) {
   return `/images/posts/${image.replace(/^\.\//, '')}`;
 }
 
-export default function DeepDivePage() {
-  const deepDives = getDeepDivePosts('ko')
+export default function EnDeepDivePage() {
+  const deepDives = getDeepDivePosts('en')
     .sort((a, b) => {
       if (a.slug === FEATURED_DEEP_DIVE_SLUG) return -1;
       if (b.slug === FEATURED_DEEP_DIVE_SLUG) return 1;
@@ -69,7 +73,7 @@ export default function DeepDivePage() {
   return (
     <main className={`flex flex-1 min-h-0 ${notoSerifKR.variable} ${notoSansKR.variable}`}>
       <DeepDiveLanding
-        basePath="/deep-dive"
+        basePath="/en/deep-dive"
         deepDives={deepDives}
         serifFontClassName="font-[family-name:var(--font-noto-serif-kr)]"
         sansFontClassName="font-[family-name:var(--font-noto-sans-kr)]"
