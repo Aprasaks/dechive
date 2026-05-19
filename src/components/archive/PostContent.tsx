@@ -13,7 +13,8 @@ const components: Components = {
   // 본문 이미지 → Next.js Image 최적화
   img({ src, alt }) {
     if (!src || typeof src !== 'string') return null;
-    const imgSrc = src.startsWith('http') ? src : `/images/posts/${src}`;
+    const normalizedSrc = src.replace(/^\.\//, '');
+    const imgSrc = normalizedSrc.startsWith('http') ? normalizedSrc : `/images/posts/${normalizedSrc}`;
     return (
       <span className="block w-full my-6 rounded-xl overflow-hidden">
         <Image
