@@ -4,7 +4,7 @@ import DeepDiveLanding from '@/components/deep-dive/DeepDiveLanding';
 import { getDeepDivePosts } from '@/lib/posts';
 
 const DEEP_DIVE_DESCRIPTION =
-  'Long-form Dechive knowledge documents that follow one question through concepts, examples, mistakes, limits, and verification criteria.';
+  'Long-form Dechive knowledge documents that carry one deep question through concepts, examples, mistakes, limits, and verification criteria.';
 const FEATURED_DEEP_DIVE_SLUG = 'ai-era-agile-verification';
 
 const notoSerifKR = Noto_Serif_KR({

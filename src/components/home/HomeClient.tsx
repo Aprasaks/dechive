@@ -28,51 +28,50 @@ const homeCopy = {
     editorNoteLabel: "Editor's Note",
     editorNote: ['AI는 답을 만들고', 'Dechive는 검증한다'],
     dailyArchiveLabel: 'Archive',
-    dailyArchive: ['오늘의 질문,', '내일의 기준'],
+    dailyArchive: ['하나의 질문,', '하나의 기록'],
     deepDiveLabel: 'Deep Dive',
-    deepDive: ['한계를 넘어서', '신뢰할 수 있는 기록'],
+    deepDive: ['깊은 질문을', '끝까지 밀고 가기'],
     insideLabel: 'Inside',
     inside: ['지식은 검증으로', '완성된다'],
     soloAgileLabel: 'Solo Agile',
     soloAgile: ['1인기업시대,', '회고는 필요없는것인가'],
-    archiveLabel: 'AI Tutorial',
-    archive: ['AI, 넌 어떻게', '써야 하니'],
+    archiveLabel: 'Archive',
+    archive: ['질문 하나를', '기록 하나로'],
     thinkingEyebrow: 'How Dechive Thinks',
-    thinkingTitle: 'Dechive의 글은 하나의 질문에서 시작합니다.',
-    thinkingDescription: '정의에서 끝나지 않고, 예시와 실수, 한계와 검증 기준까지 따라갑니다.',
+    thinkingTitle: 'Dechive는 질문의 깊이에 따라 기록을 나눕니다.',
+    thinkingDescription: 'Archive는 하나의 질문을 독립된 기록으로 남기고, Deep Dive는 더 깊은 질문을 길게 밀고 갑니다.',
     thinkingItems: [
       {
         title: 'Concept',
-        body: '개념을 먼저 세웁니다. 무엇인지보다, 왜 필요한지를 묻습니다.',
+        body: 'Archive는 한 질문에 필요한 개념을 먼저 세웁니다.',
       },
       {
         title: 'Example',
-        body: '코드와 상황으로 확인합니다. 설명은 실제 예시 안에서 검증됩니다.',
+        body: '예시와 상황으로 답이 실제로 성립하는지 확인합니다.',
       },
       {
         title: 'Mistake',
-        body: '자주 틀리는 지점을 남깁니다. 오류는 개념이 무너지는 곳에서 드러납니다.',
+        body: '자주 틀리는 지점을 남겨 다시 검증할 수 있게 합니다.',
       },
       {
         title: 'Verification',
-        body: 'AI가 만든 답을 검증합니다. 왜 맞는지, 언제 틀릴 수 있는지 확인합니다.',
+        body: 'Deep Dive는 깊은 질문을 한계와 판단 기준까지 이어갑니다.',
       },
     ],
     featuredEyebrow: 'Featured Deep Dive',
-    featuredTitle: '하나의 질문을 끝까지 검증합니다.',
-    featuredDescription: ['개념, 예시, 실수, 한계, 판단 기준까지 따라가며', 'AI가 만든 답을 사람이 이해하고 검증할 수 있는 기록으로 정리합니다.'],
-    featuredMetaFallback: 'Archive / Verification',
-    featuredFallbackTitle: 'SQL NULL은 왜 빈칸이 아닌가?',
-    featuredDescriptionWithPost: '값이 없다는 사실은 계산과 집계에 조용히 흔적을 남깁니다. IS NULL, COALESCE, COUNT의 차이를 따라가며 AI가 만든 SQL 답을 검증하는 기준까지 정리합니다.',
-    featuredDescriptionFallback: '값이 없다는 사실은 계산과 집계에 조용히 흔적을 남깁니다. SQL NULL의 의미와 검증 기준을 정리합니다.',
-    readDeepDive: 'Read Deep Dive',
+    featuredTitle: '깊은 질문을 끝까지 밀고 갑니다.',
+    featuredDescription: ['Deep Dive는 심층적인 질문을 개념, 예시, 실수, 한계까지 따라가며', 'AI가 만든 답을 사람이 검증할 수 있는 긴 문서로 정리합니다.'],
+    featuredMetaFallback: 'Deep Dive / Verification',
+    featuredFallbackTitle: 'Agile은 속도가 아니라 방향을 검증하는 방식이다',
+    featuredDescriptionFallback: 'AI가 구현 속도를 높이는 시대에도 Agile이 왜 필요한지, 방향 검증의 방식으로 정리합니다.',
+    readDeepDive: 'Deep Dive 읽기',
     latestEyebrow: 'Latest Archive',
-    latestTitle: '오늘의 질문, 내일의 이해.',
-    latestDescription: '개념과 실수, 생각과 관찰을 다시 꺼내볼 수 있는 기록으로 남깁니다.',
+    latestTitle: '하나의 질문에서 시작한 기록들.',
+    latestDescription: '각 글은 독립적으로 읽히는 질문의 기록입니다. 빠르게 답하지 않고 다시 검증할 수 있게 남깁니다.',
     archiveAll: 'Archive 전체 보기',
     manifestoEyebrow: 'Manifesto',
     manifestoLead: ['AI가 답을 만들어주는 시대에도,', '사람은 그 답을 이해하고 검증할 수 있어야 합니다.'],
-    manifestoBody: ['Dechive는 책과 문서와 AI를 뒤지며 얻은 이해를', '다시 꺼내볼 수 있는 기록으로 남깁니다.', '', '이곳의 글은 빠른 요약이 아니라,', '다음 질문까지 견디는 지식으로 쌓입니다.'],
+    manifestoBody: ['Archive는 하나의 질문을 독립된 기록으로 남기고,', 'Deep Dive는 깊은 질문을 끝까지 밀고 갑니다.', '', '이곳의 글은 빠른 요약이 아니라,', '다음 질문까지 견디는 지식으로 쌓입니다.'],
     aboutLink: 'About Dechive',
   },
   en: {
@@ -80,51 +79,50 @@ const homeCopy = {
     editorNoteLabel: "Editor's Note",
     editorNote: ['AI makes answers.', 'Dechive verifies.'],
     dailyArchiveLabel: 'Archive',
-    dailyArchive: ["Today's questions,", "tomorrow's standards"],
+    dailyArchive: ['One question,', 'one record'],
     deepDiveLabel: 'Deep Dive',
-    deepDive: ['Beyond limits,', 'records you can trust'],
+    deepDive: ['Carrying deeper', 'questions through'],
     insideLabel: 'Inside',
     inside: ['Knowledge is completed', 'through verification'],
     soloAgileLabel: 'Solo Agile',
     soloAgile: ['In the solo business era,', 'is reflection unnecessary?'],
-    archiveLabel: 'AI Tutorial',
-    archive: ['AI, how should', 'I use you?'],
+    archiveLabel: 'Archive',
+    archive: ['One question', 'as one record'],
     thinkingEyebrow: 'How Dechive Thinks',
-    thinkingTitle: 'Every Dechive piece begins with one question.',
-    thinkingDescription: 'It does not stop at definitions. It follows examples, mistakes, limits, and verification criteria.',
+    thinkingTitle: 'Dechive separates records by the depth of the question.',
+    thinkingDescription: 'Archive keeps one question as an independent record. Deep Dive carries a deeper question through a longer chain of reasoning.',
     thinkingItems: [
       {
         title: 'Concept',
-        body: 'It builds the concept first. It asks why it matters before what it is.',
+        body: 'Archive first sets the concept needed for one question.',
       },
       {
         title: 'Example',
-        body: 'It checks ideas through code and situations. Explanation is verified inside examples.',
+        body: 'Examples and situations check whether the answer holds.',
       },
       {
         title: 'Mistake',
-        body: 'It leaves the common failure points visible. Mistakes show where a concept breaks.',
+        body: 'Common failure points stay visible so the record can be checked again.',
       },
       {
         title: 'Verification',
-        body: 'It verifies answers made by AI. It asks why they are right and when they can fail.',
+        body: 'Deep Dive follows a deeper question through limits and judgment criteria.',
       },
     ],
     featuredEyebrow: 'Featured Deep Dive',
-    featuredTitle: 'A question followed until it can be verified.',
-    featuredDescription: ['Following concepts, examples, mistakes, limits, and judgment criteria,', 'Dechive turns AI-made answers into records people can understand and verify.'],
-    featuredMetaFallback: 'Archive / Verification',
-    featuredFallbackTitle: 'Why SQL NULL Is Not Empty',
-    featuredDescriptionWithPost: 'The absence of a value leaves quiet traces in calculation and aggregation. This deep dive follows IS NULL, COALESCE, and COUNT to build criteria for verifying SQL answers made by AI.',
-    featuredDescriptionFallback: 'The absence of a value leaves quiet traces in calculation and aggregation. This record organizes the meaning and verification criteria of SQL NULL.',
+    featuredTitle: 'A deep question carried to the end.',
+    featuredDescription: ['Deep Dive follows a deeper question through concepts, examples, mistakes, and limits,', 'then turns AI-made answers into long-form records people can verify.'],
+    featuredMetaFallback: 'Deep Dive / Verification',
+    featuredFallbackTitle: 'Agile Is Not Speed, But a Way to Verify Direction',
+    featuredDescriptionFallback: 'Why Agile still matters in an age when AI accelerates implementation, organized as a method for verifying direction.',
     readDeepDive: 'Read Deep Dive',
     latestEyebrow: 'Latest Archive',
-    latestTitle: "Today's questions, tomorrow's understanding.",
-    latestDescription: 'Concepts, mistakes, thoughts, and observations are left as records that can be opened again.',
+    latestTitle: 'Records that begin with one question.',
+    latestDescription: 'Each Archive post stands alone as a question record that can be reopened and verified.',
     archiveAll: 'View All Archive',
     manifestoEyebrow: 'Manifesto',
     manifestoLead: ['Even in an age when AI makes answers,', 'people still need to understand and verify them.'],
-    manifestoBody: ['Dechive records the understanding found through books, documents, and AI', 'so it can be opened again later.', '', 'The writing here is not a quick summary.', 'It becomes knowledge that can withstand the next question.'],
+    manifestoBody: ['Archive keeps one question as an independent record,', 'and Deep Dive carries a deeper question to the end.', '', 'The writing here is not a quick summary.', 'It becomes knowledge that can withstand the next question.'],
     aboutLink: 'About Dechive',
   },
 } as const;
@@ -327,6 +325,9 @@ export default function HomeClient({
   const archiveRootHref = '/archive';
   const deepDiveRootHref = lang === 'en' ? '/en/deep-dive' : '/deep-dive';
   const agileDeepDiveHref = `${deepDiveRootHref}/ai-era-agile-verification`;
+  const featuredDeepDiveHref = featuredPost
+    ? `${deepDiveRootHref}/${featuredPost.slug}`
+    : deepDiveRootHref;
 
   return (
     <main className="flex flex-1 flex-col bg-[#F8F6F1] text-[#111111]">
@@ -491,7 +492,7 @@ export default function HomeClient({
           <article className="border-l-2 border-[#B08D57] bg-white/55 p-8 shadow-[0_28px_80px_rgba(17,17,17,0.08)] sm:p-10">
             <p className="text-xs font-semibold tracking-[0.24em] text-[#777777] uppercase">
               {featuredPost
-                ? `${featuredPost.category} / ${featuredPost.subject || 'Archive'} / Verification`
+                ? `${featuredPost.category} / ${featuredPost.subject || 'Deep Dive'} / Deep Dive`
                 : t.featuredMetaFallback}
             </p>
             <h3
@@ -503,11 +504,11 @@ export default function HomeClient({
             </h3>
             <p className="mt-6 max-w-2xl text-base leading-8 text-[#3f3f3f]">
               {featuredPost
-                ? t.featuredDescriptionWithPost
+                ? featuredPost.description
                 : t.featuredDescriptionFallback}
             </p>
             <Link
-              href={deepDiveRootHref}
+              href={featuredDeepDiveHref}
               className="mt-9 inline-flex border border-[#111111] px-6 py-3 text-sm font-semibold text-[#111111] transition-colors hover:border-[#B08D57] hover:text-[#7a5d2c]"
             >
               {t.readDeepDive}

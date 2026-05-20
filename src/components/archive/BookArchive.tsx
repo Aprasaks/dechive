@@ -172,21 +172,21 @@ export default function BookArchive({
             <div className="border-b border-[#ded6c9] pb-12">
               <p className={`max-w-xl text-2xl leading-snug text-[#2b2119] ${serifFontClassName}`}>
                 {lang === 'en'
-                  ? 'Records left from a single question.'
-                  : '하나의 질문으로 남긴 기록들.'}
+                  ? 'Independent records that begin with one question.'
+                  : '하나의 질문에서 출발한 독립 기록들.'}
               </p>
               <p className="mt-5 max-w-xl text-sm leading-7 text-[#6f6257]">
                 {lang === 'en' ? (
                   <>
-                    Questions held between books, documents, code, and AI
+                    Archive posts hold one question at a time
                     <br />
-                    are left as records that can be opened again.
+                    so the reasoning can be opened and checked again.
                   </>
                 ) : (
                   <>
-                    책과 문서, 코드와 AI 사이에서 붙잡은 질문을
+                    Archive는 하나의 질문을 붙잡고
                     <br />
-                    다시 꺼내볼 수 있는 기록으로 남깁니다.
+                    다시 확인할 수 있는 추론의 기록으로 남깁니다.
                   </>
                 )}
               </p>

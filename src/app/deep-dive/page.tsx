@@ -4,7 +4,7 @@ import DeepDiveLanding from '@/components/deep-dive/DeepDiveLanding';
 import { getDeepDivePosts } from '@/lib/posts';
 
 const DEEP_DIVE_DESCRIPTION =
-  '빠른 답으로 끝나지 않는 질문을 개념, 예시, 실수, 한계, 검증 기준까지 정리하는 Dechive의 심층 지식 문서입니다.';
+  '하나의 깊은 질문을 개념, 예시, 실수, 한계, 검증 기준까지 길게 밀고 가는 Dechive의 심층 지식 문서입니다.';
 const FEATURED_DEEP_DIVE_SLUG = 'ai-era-agile-verification';
 
 const notoSerifKR = Noto_Serif_KR({

@@ -4,7 +4,7 @@ import AboutClient from '@/components/about/AboutClient';
 export const metadata: Metadata = {
   title: 'About',
   description:
-    'Dechive는 AI가 만든 답을 검증하고, 근거와 맥락을 따라 추론 가능한 지식으로 정리하는 개인 아카이브입니다.',
+    'Dechive는 하나의 질문을 독립 기록으로 남기는 Archive와 깊은 질문을 끝까지 밀고 가는 Deep Dive로 지식을 검증하는 개인 아카이브입니다.',
   alternates: {
     canonical: 'https://dechive.dev/about',
     languages: {
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'About | Dechive — 검증을 넘어 추론까지',
     description:
-      'Dechive는 AI가 만든 답을 검증하고, 근거와 맥락을 따라 추론 가능한 지식으로 정리하는 개인 아카이브입니다.',
+      'Dechive는 하나의 질문을 독립 기록으로 남기는 Archive와 깊은 질문을 끝까지 밀고 가는 Deep Dive로 지식을 검증하는 개인 아카이브입니다.',
     url: 'https://dechive.dev/about',
     siteName: 'Dechive',
     locale: 'ko_KR',
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'About | Dechive — 검증을 넘어 추론까지',
     description:
-      'Dechive는 AI가 만든 답을 검증하고, 근거와 맥락을 따라 추론 가능한 지식으로 정리하는 개인 아카이브입니다.',
+      'Dechive는 하나의 질문을 독립 기록으로 남기는 Archive와 깊은 질문을 끝까지 밀고 가는 Deep Dive로 지식을 검증하는 개인 아카이브입니다.',
     images: ['https://dechive.dev/images/thumb.webp'],
   },
 };

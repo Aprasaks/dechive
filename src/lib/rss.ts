@@ -22,7 +22,7 @@ function getFeedMeta(lang: PostLang) {
   if (lang === 'en') {
     return {
       title: 'Dechive English',
-      description: 'A quiet library where thoughts stay.',
+      description: 'Archive records that begin with one question and Deep Dive documents that carry deeper questions to the end.',
       link: `${BASE_URL}/en/feed.xml`,
       language: 'en',
     };
@@ -30,7 +30,7 @@ function getFeedMeta(lang: PostLang) {
 
   return {
     title: 'Dechive',
-    description: '생각과 지식을 짧은 책처럼 기록하고 다시 탐색하기 위한 개인 도서관입니다.',
+    description: '하나의 질문에서 출발한 Archive와 깊은 질문을 끝까지 밀고 가는 Deep Dive로 지식을 검증합니다.',
     link: `${BASE_URL}/feed.xml`,
     language: 'ko',
   };

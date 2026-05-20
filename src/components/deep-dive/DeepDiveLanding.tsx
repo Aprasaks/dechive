@@ -37,11 +37,35 @@ export default function DeepDiveLanding({
   serifFontClassName,
   sansFontClassName,
 }: DeepDiveLandingProps) {
+  const isEnglish = basePath.startsWith('/en');
   const visibleDeepDives = deepDives.length > 0 ? deepDives : fallbackDeepDives;
   const featuredDeepDive = visibleDeepDives[0];
+  const copy = isEnglish
+    ? {
+        librarianTitle: 'AI Librarian',
+        librarianBody: 'Ask only inside this shelf.\nQuestions raised while reading long documents return through concepts, examples, and verification criteria.',
+        librarianAction: 'Ask the librarian',
+        leadTitle: 'Documents that carry one deep question to the end.',
+        leadBody: 'Deep Dive follows a deeper question through concepts, examples, mistakes, limits, and verification criteria.',
+        read: 'Read Deep Dive',
+        all: 'All Deep Dives',
+        sort: 'Latest',
+        fallbackTags: ['Concept', 'Example', 'Verification'],
+      }
+    : {
+        librarianTitle: 'AI Librarian',
+        librarianBody: '이 서가 안에서만 질문합니다.\n긴 문서를 읽으며 생기는 질문을 개념, 예시, 검증 기준 안에서 다시 찾아옵니다.',
+        librarianAction: '사서에게 묻기',
+        leadTitle: '하나의 깊은 질문을 끝까지 밀고 가는 문서들.',
+        leadBody: 'Deep Dive는 심층적인 질문을 따라 개념, 예시, 실수, 한계, 검증 기준까지 길게 정리합니다.',
+        read: 'Read Deep Dive',
+        all: 'All Deep Dives',
+        sort: '최신순',
+        fallbackTags: ['개념', '예시', '검증 기준'],
+      };
   const featuredTags = featuredDeepDive.tags.length > 0
     ? featuredDeepDive.tags
-    : ['개념', '예시', '검증 기준'];
+    : copy.fallbackTags;
 
   return (
     <section className={`flex min-h-[calc(100vh-5rem)] flex-1 bg-[#f8f6f1] text-[#17120d] ${sansFontClassName}`}>
@@ -78,18 +102,16 @@ export default function DeepDiveLanding({
             <div className="mt-20 rounded-md border border-[#d5c5aa] bg-[#f8f6f1]/70 p-5 shadow-[0_18px_60px_rgba(42,33,27,0.06)]">
               <LibraryBig size={29} strokeWidth={1.2} className="text-[#9a7340]" />
               <p className={`mt-5 text-sm font-semibold tracking-[0.08em] text-[#8a6332] uppercase ${serifFontClassName}`}>
-                AI Librarian
+                {copy.librarianTitle}
               </p>
-              <p className="mt-4 text-sm leading-7 text-[#4b4036]">
-                이 서가 안에서만 질문합니다.
-                <br />
-                긴 문서를 읽으며 생기는 질문을 개념, 예시, 검증 기준 안에서 다시 찾아옵니다.
+              <p className="mt-4 whitespace-pre-line text-sm leading-7 text-[#4b4036]">
+                {copy.librarianBody}
               </p>
               <button
                 type="button"
                 className={`mt-6 inline-flex items-center gap-3 text-sm text-[#8a6332] transition-colors hover:text-[#17120d] ${serifFontClassName}`}
               >
-                사서에게 묻기
+                {copy.librarianAction}
                 <ArrowRight size={18} strokeWidth={1.4} />
               </button>
             </div>
@@ -100,12 +122,10 @@ export default function DeepDiveLanding({
           <div className="mx-auto max-w-6xl">
             <div className="border-b border-[#ded6c9] pb-10">
               <p className={`max-w-2xl text-2xl leading-snug text-[#2b2119] ${serifFontClassName}`}>
-                빠른 답으로 끝나지 않는 질문들.
+                {copy.leadTitle}
               </p>
               <p className="mt-5 max-w-2xl text-sm leading-7 text-[#6f6257]">
-                빠른 답으로 끝나지 않는 질문을
-                <br className="hidden sm:block" />
-                개념, 예시, 실수, 한계, 검증 기준까지 정리합니다.
+                {copy.leadBody}
               </p>
             </div>
 
@@ -146,7 +166,7 @@ export default function DeepDiveLanding({
                     href={`${basePath}/${featuredDeepDive.slug}`}
                     className={`mt-8 inline-flex w-fit items-center gap-8 rounded-sm bg-[#9a6b2e] px-6 py-3 text-lg text-white transition-colors hover:bg-[#7f5421] ${serifFontClassName}`}
                   >
-                    Read Deep Dive
+                    {copy.read}
                     <ArrowRight size={22} strokeWidth={1.4} />
                   </Link>
                 </div>
@@ -159,11 +179,11 @@ export default function DeepDiveLanding({
                   id="all-deep-dives-heading"
                   className={`shrink-0 text-xl font-medium text-[#17120d] ${serifFontClassName}`}
                 >
-                  All Deep Dives
+                  {copy.all}
                 </h2>
                 <span className="h-px flex-1 bg-[#d8c9b0]" />
                 <button type="button" className="shrink-0 text-sm text-[#4b4036] transition-colors hover:text-[#8a6332]">
-                  최신순
+                  {copy.sort}
                 </button>
               </div>
 

@@ -28,12 +28,12 @@ const BASE_URL = 'https://dechive.dev';
 export const metadata: Metadata = {
   title: { default: 'Dechive — 검증을 넘어 추론까지', template: '%s | Dechive' },
   description:
-    'Dechive는 AI, 데이터, 제품, 웹 기술에 대한 질문을 검증하고, 근거와 맥락을 따라 추론 가능한 기록으로 정리하는 개인 지식 아카이브입니다.',
+    'Dechive는 하나의 질문에서 출발한 Archive와 깊은 질문을 끝까지 밀고 가는 Deep Dive로 AI 시대의 답을 검증하는 지식 아카이브입니다.',
   metadataBase: new URL(BASE_URL),
   openGraph: {
     title: 'Dechive — 검증을 넘어 추론까지',
     description:
-      'Dechive는 AI, 데이터, 제품, 웹 기술에 대한 질문을 검증하고, 근거와 맥락을 따라 추론 가능한 기록으로 정리하는 개인 지식 아카이브입니다.',
+      'Dechive는 하나의 질문에서 출발한 Archive와 깊은 질문을 끝까지 밀고 가는 Deep Dive로 AI 시대의 답을 검증하는 지식 아카이브입니다.',
     url: BASE_URL,
     siteName: 'Dechive',
     images: [
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Dechive — 검증을 넘어 추론까지',
     description:
-      'Dechive는 AI, 데이터, 제품, 웹 기술에 대한 질문을 검증하고, 근거와 맥락을 따라 추론 가능한 기록으로 정리하는 개인 지식 아카이브입니다.',
+      'Dechive는 하나의 질문에서 출발한 Archive와 깊은 질문을 끝까지 밀고 가는 Deep Dive로 AI 시대의 답을 검증하는 지식 아카이브입니다.',
     images: ['/images/thumb.webp'],
   },
   robots: { index: true, follow: true },
