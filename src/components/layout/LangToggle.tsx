@@ -30,10 +30,18 @@ export default function LangToggle({ tone = 'dark' }: { tone?: 'dark' | 'light' 
       if (next === 'ko') {
         router.push('/deep-dive');
       }
+    } else if (pathname === '/en/archive') {
+      if (next === 'ko') {
+        router.push('/archive');
+      }
     } else if (pathname.startsWith('/archive/')) {
       // 한글 포스트 → 영문으로
       if (next === 'en') {
         router.push(`/en${pathname}`);
+      }
+    } else if (pathname === '/archive') {
+      if (next === 'en') {
+        router.push('/en/archive');
       }
     } else if (pathname.startsWith('/deep-dive/')) {
       if (next === 'en') {

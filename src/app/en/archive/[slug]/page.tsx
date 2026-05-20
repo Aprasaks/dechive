@@ -107,7 +107,7 @@ export default async function EnPostPage({ params }: PageProps) {
 
       <div className="mx-auto w-full max-w-[800px]">
         <Link
-          href="/archive"
+          href="/en/archive"
           className="mb-10 inline-flex text-sm font-medium tracking-[0.16em] text-[#9a7a3f] transition hover:text-[#17120d]"
         >
           ← Archive
@@ -122,7 +122,7 @@ export default async function EnPostPage({ params }: PageProps) {
 
         <div className="mt-16 border-t border-[#2a211b]/10 pt-8">
           <Link
-            href="/archive"
+            href="/en/archive"
             className="inline-flex rounded-sm border border-[#9a7a3f]/35 px-5 py-3 text-sm font-medium tracking-[0.12em] text-[#5d4630] transition hover:border-[#9a7a3f]/70 hover:bg-[#efe7da]"
           >
             Back to Archive

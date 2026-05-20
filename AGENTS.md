@@ -106,7 +106,7 @@ A good harness makes the agent narrower, not louder.
 Current content types:
 
 - `archive`: an independent record built around one question
-- `deepdive`: a long-form knowledge document built around one keyword
+- `deepdive`: a long-form knowledge document that carries one deep question through concepts, examples, mistakes, limits, reasoning, and verification criteria
 
 Rules:
 
@@ -115,7 +115,31 @@ Rules:
 - Archive posts must be readable independently.
 - Deep Dive documents should preserve clear structure for future AI reasoning or librarian systems.
 
-## 6. Translation Policy
+## 6. Language Routing Rules
+
+Dechive uses Korean as the default source language and English as a protected translated content layer.
+
+Rules:
+
+- Content index/detail routes with separate language content should have language-specific URLs.
+- Archive routes:
+  - `/archive`
+  - `/en/archive`
+  - `/archive/[slug]`
+  - `/en/archive/[slug]`
+- Deep Dive routes:
+  - `/deep-dive`
+  - `/en/deep-dive`
+  - `/deep-dive/[slug]`
+  - `/en/deep-dive/[slug]`
+- Shared utility or static pages should not get `/en/...` routes unless explicitly requested.
+  - Keep `/guestbook`, `/about`, and `/privacy-policy` as shared URLs.
+  - Render their UI copy from persisted language state instead.
+- When a visitor selects KO or EN, preserve that language across navigation.
+- Header, home, list, and detail links must generate language-appropriate content URLs.
+- Do not collapse English content navigation back to Korean URLs.
+
+## 7. Translation Policy
 
 Korean posts are the source.  
 Existing English posts are protected editorial content.
@@ -167,7 +191,7 @@ Do not translate:
 - subject
 - concepts
 
-## 7. Commit / Push
+## 8. Commit / Push
 
 Do not commit or push unless explicitly asked.
 
@@ -180,7 +204,7 @@ When content submodule changes are involved:
 1. Commit/push inside `content/` first.
 2. Commit/push the root submodule pointer second.
 
-## 8. Report Format
+## 9. Report Format
 
 After work, report:
 

@@ -16,12 +16,14 @@ export function LangProvider({ children }: { children: React.ReactNode }) {
   const [lang, setLangState] = useState<Lang>('ko');
 
   useEffect(() => {
-    if (pathname.startsWith('/en/')) {
+    if (pathname === '/en' || pathname.startsWith('/en/')) {
       setLangState('en');
+      localStorage.setItem('lang', 'en');
       return;
     }
     if (pathname.startsWith('/archive') || pathname.startsWith('/deep-dive')) {
       setLangState('ko');
+      localStorage.setItem('lang', 'ko');
       return;
     }
 

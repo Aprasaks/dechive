@@ -20,6 +20,12 @@ export default function Header() {
   const { lang } = useLang();
   const isHome = pathname === '/';
   const guestbookLabel = lang === 'en' ? 'Ask' : '질문 남기기';
+  const getLocalizedHref = (href: string) => {
+    if (lang !== 'en') return href;
+    if (href === '/archive') return '/en/archive';
+    if (href === '/deep-dive') return '/en/deep-dive';
+    return href;
+  };
 
   const close = () => setIsOpen(false);
   const isActive = (href: string) => {
@@ -51,7 +57,7 @@ export default function Header() {
               {NAV_ITEMS.map((item) => (
                 <li key={item.name}>
                   <Link
-                    href={item.href}
+                    href={getLocalizedHref(item.href)}
                     className={`relative py-2 font-[family-name:var(--font-header-serif)] text-sm font-medium tracking-[0.12em] uppercase transition-colors ${
                       isActive(item.href)
                         ? 'text-[#17120d] after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:bg-[#b08d57]'
@@ -117,7 +123,7 @@ export default function Header() {
           {NAV_ITEMS.map((item) => (
             <Link
               key={item.name}
-              href={item.href}
+              href={getLocalizedHref(item.href)}
               onClick={close}
               className={`relative font-[family-name:var(--font-header-serif)] text-lg font-medium tracking-[0.22em] uppercase transition-colors ${
                 isActive(item.href)

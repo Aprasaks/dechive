@@ -40,8 +40,8 @@ const i18n = {
     // GuestBook
     guestBookNickname: '닉네임',
     guestBookPassword: '비밀번호',
-    guestBookMessage: '한 마디 남겨주세요...',
-    guestBookSubmit: '등록',
+    guestBookMessage: '검증해보고 싶은 질문이나 AI 답변을 남겨주세요...',
+    guestBookSubmit: '질문 남기기',
 
     // TableOfContents
     tocTitle: '목차',
@@ -94,8 +94,8 @@ const i18n = {
     // GuestBook
     guestBookNickname: 'Nickname',
     guestBookPassword: 'Password',
-    guestBookMessage: 'Leave a message...',
-    guestBookSubmit: 'Submit',
+    guestBookMessage: 'Leave a question or an AI answer to verify...',
+    guestBookSubmit: 'Leave Question',
 
     // TableOfContents
     tocTitle: 'On this page',

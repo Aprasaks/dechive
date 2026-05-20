@@ -4,7 +4,7 @@ import { getArchivePosts } from '@/lib/posts';
 import ArchiveClient from '@/components/archive/ArchiveClient';
 
 const ARCHIVE_DESCRIPTION =
-  '하나의 질문에서 출발해 AI, 데이터, 제품, 웹 기술의 개념과 판단 기준을 독립된 기록으로 남기는 Dechive Archive입니다.';
+  'Dechive Archive keeps AI, data, product, and web technology questions as independent records that can be reopened and verified.';
 
 const notoSerifKR = Noto_Serif_KR({
   weight: ['400', '500'],
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   title: 'Archive',
   description: ARCHIVE_DESCRIPTION,
   alternates: {
-    canonical: 'https://dechive.dev/archive',
+    canonical: 'https://dechive.dev/en/archive',
     languages: {
       ko: 'https://dechive.dev/archive',
       en: 'https://dechive.dev/en/archive',
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Archive | Dechive',
     description: ARCHIVE_DESCRIPTION,
-    url: 'https://dechive.dev/archive',
+    url: 'https://dechive.dev/en/archive',
     images: [{ url: 'https://dechive.dev/images/thumb.webp', width: 1200, height: 630, alt: 'Dechive Archive' }],
   },
 };
@@ -44,11 +44,11 @@ const jsonLd = {
   '@type': 'CollectionPage',
   name: 'Dechive Archive',
   description: ARCHIVE_DESCRIPTION,
-  url: 'https://dechive.dev/archive',
+  url: 'https://dechive.dev/en/archive',
   isPartOf: { '@type': 'WebSite', name: 'Dechive', url: 'https://dechive.dev' },
 };
 
-export default function ArchivePage() {
+export default function EnArchivePage() {
   const koPosts = getArchivePosts('ko');
   const enPosts = getArchivePosts('en');
 

@@ -322,7 +322,7 @@ export default function HomeClient({
   const t = homeCopy[lang];
   const featuredPost = featuredPosts[lang];
   const currentLatestPosts = latestPosts[lang];
-  const archiveRootHref = '/archive';
+  const archiveRootHref = lang === 'en' ? '/en/archive' : '/archive';
   const deepDiveRootHref = lang === 'en' ? '/en/deep-dive' : '/deep-dive';
   const agileDeepDiveHref = `${deepDiveRootHref}/ai-era-agile-verification`;
   const featuredDeepDiveHref = featuredPost
