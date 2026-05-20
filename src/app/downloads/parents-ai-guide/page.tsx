@@ -1,17 +1,18 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 
+const DOWNLOAD_DESCRIPTION =
+  'AI에 낯선 사람들이 AI를 제대로 이해할 수 있도록 정리한 무료 전자책입니다.';
+
 export const metadata: Metadata = {
-  title: '부모님 세대를 위한 AI 판단 가이드',
-  description:
-    'AI 부업, 자동화, 프롬프트, 에이전트, 개인정보까지. 2026년 5월 기준, 부모님 세대가 AI를 걸러서 이해할 수 있도록 정리한 무료 전자책입니다.',
+  title: 'AI가 낯선 사람들을 위한 AI 이해 가이드',
+  description: DOWNLOAD_DESCRIPTION,
   alternates: {
     canonical: 'https://dechive.dev/downloads/parents-ai-guide',
   },
   openGraph: {
-    title: '부모님 세대를 위한 AI 판단 가이드 | Dechive',
-    description:
-      'AI 부업, 자동화, 프롬프트, 에이전트, 개인정보까지. 2026년 5월 기준, 부모님 세대가 AI를 걸러서 이해할 수 있도록 정리한 무료 전자책입니다.',
+    title: 'AI가 낯선 사람들을 위한 AI 이해 가이드 | Dechive',
+    description: DOWNLOAD_DESCRIPTION,
     url: 'https://dechive.dev/downloads/parents-ai-guide',
     siteName: 'Dechive',
     locale: 'ko_KR',
@@ -21,15 +22,14 @@ export const metadata: Metadata = {
         url: 'https://dechive.dev/downloads/parents-ai-guide-cover.webp',
         width: 1200,
         height: 630,
-        alt: '부모님 세대를 위한 AI 판단 가이드',
+        alt: 'AI가 낯선 사람들을 위한 AI 이해 가이드',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: '부모님 세대를 위한 AI 판단 가이드 | Dechive',
-    description:
-      'AI 부업, 자동화, 프롬프트, 에이전트, 개인정보까지. 2026년 5월 기준, 부모님 세대가 AI를 걸러서 이해할 수 있도록 정리한 무료 전자책입니다.',
+    title: 'AI가 낯선 사람들을 위한 AI 이해 가이드 | Dechive',
+    description: DOWNLOAD_DESCRIPTION,
     images: ['https://dechive.dev/downloads/parents-ai-guide-cover.webp'],
   },
 };
@@ -44,8 +44,8 @@ const COVERS = [
 ];
 
 const AUDIENCE = [
-  'AI를 처음 배우는 40·50·60대',
-  '부모님께 AI를 설명해드리고 싶은 자녀',
+  'AI를 처음 배우는 사람',
+  'AI를 어디까지 믿어야 할지 헷갈리는 사람',
   'AI 부업 광고가 헷갈리는 사람',
   'AI를 무조건 믿지도, 무조건 거부하지도 않고 제대로 이해하고 싶은 사람',
 ];
@@ -57,7 +57,7 @@ function DownloadButton() {
       target="_blank"
       rel="noopener noreferrer"
       download
-      aria-label="부모님 세대를 위한 AI 판단 가이드 PDF 무료 다운로드"
+      aria-label="AI가 낯선 사람들을 위한 AI 이해 가이드 PDF 무료 다운로드"
       className="inline-flex items-center gap-2 rounded-sm bg-[#2a211b] px-7 py-3.5 text-sm font-medium tracking-wide text-[#f8f6f1] transition-colors hover:bg-[#19140f]"
     >
       <svg
@@ -106,9 +106,9 @@ export default function ParentsAiGuidePage() {
                 Dechive · 무료 전자책
               </p>
               <h1 className="mb-3 font-[family-name:var(--font-header-serif)] text-4xl font-semibold leading-snug tracking-tight text-[#17120d] sm:text-5xl">
-                부모님 세대를 위한
+                AI가 낯선 사람들을 위한
                 <br />
-                AI 판단 가이드
+                AI 이해 가이드
               </h1>
               <p className="text-base leading-relaxed text-[#5f564d]">
                 AI의 답을 무조건 믿지 않고,
@@ -120,7 +120,7 @@ export default function ParentsAiGuidePage() {
             <p className="text-sm leading-loose text-[#5f564d]">
               AI 부업, 자동화, 프롬프트, 에이전트, 개인정보까지.
               <br />
-              2026년 5월 기준, 부모님 세대가 AI를 걸러서 이해할 수 있도록 정리한 무료 전자책입니다.
+              {DOWNLOAD_DESCRIPTION}
             </p>
 
             <div className="flex items-center gap-4">
@@ -134,7 +134,7 @@ export default function ParentsAiGuidePage() {
             <div className="relative aspect-[3/4] w-full overflow-hidden rounded-sm border border-[#9a7a3f]/20 bg-[#efe7da]/60 shadow-[0_32px_64px_rgba(42,33,27,0.14)]">
               <Image
                 src="/downloads/parents-ai-guide-cover.webp"
-                alt="부모님 세대를 위한 AI 판단 가이드 표지"
+                alt="AI가 낯선 사람들을 위한 AI 이해 가이드 표지"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 220px, 240px"
@@ -219,10 +219,10 @@ export default function ParentsAiGuidePage() {
         <section className="mx-auto max-w-2xl">
           <blockquote className="rounded-sm border border-[#9a7a3f]/20 bg-white/50 px-7 py-6">
             <p className="text-sm leading-loose text-[#2a211b]">
-              "이 책은 AI를 무조건 두려워하거나 맹신하지 말고, 스스로 판단하며 걸러서 받아들이는
+              &ldquo;이 책은 AI를 무조건 두려워하거나 맹신하지 말고, 스스로 판단하며 걸러서 받아들이는
               힘을 길러야 한다는 메시지를 전달한 점이 인상 깊었습니다. 빠르게 발전하는 AI 시대에서는
               단순히 기술을 익히는 것보다, 정보를 직접 확인하고 비판적으로 생각하는 습관이 더
-              중요하다는 내용이 특히 마음에 남았습니다."
+              중요하다는 내용이 특히 마음에 남았습니다.&rdquo;
             </p>
             <footer className="mt-4 text-xs text-[#9a7a3f]">— 10년차 풀스택 개발자 윤*현</footer>
           </blockquote>
