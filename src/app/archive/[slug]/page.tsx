@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { getAllPosts, getPostBySlug } from '@/lib/posts';
 import PostHeader from '@/components/archive/PostHeader';
 import PostContent from '@/components/archive/PostContent';
+import GuestbookCTA from '@/components/guestbook/GuestbookCTA';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -123,6 +124,8 @@ export default async function PostPage({ params, searchParams }: PageProps) {
           <PostHeader post={post} />
           <PostContent content={post.content} />
         </article>
+
+        <GuestbookCTA lang="ko" />
 
         <div className="mt-16 border-t border-[#2a211b]/10 pt-8">
           <Link

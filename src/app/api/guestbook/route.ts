@@ -7,12 +7,15 @@ const supabase = createClient(
   process.env.SUPABASE_ANON_KEY!,
 );
 
+const GUESTBOOK_LIMIT = 50;
+
 // GET — 메시지 목록
 export async function GET() {
   const { data, error } = await supabase
     .from('guestbook')
     .select('id, name, message, created_at')
-    .order('created_at', { ascending: false });
+    .order('created_at', { ascending: false })
+    .limit(GUESTBOOK_LIMIT);
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
   return NextResponse.json({ messages: data });

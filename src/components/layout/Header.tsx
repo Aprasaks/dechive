@@ -4,6 +4,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
+import { useLang } from '@/components/layout/LangProvider';
 import LangToggle from './LangToggle';
 import MusicToggle from './MusicToggle';
 
@@ -16,7 +17,9 @@ const NAV_ITEMS = [
 export default function Header() {
   const [isOpen, setIsOpen] = React.useState(false);
   const pathname = usePathname();
+  const { lang } = useLang();
   const isHome = pathname === '/';
+  const guestbookLabel = lang === 'en' ? 'Ask' : '질문 남기기';
 
   const close = () => setIsOpen(false);
   const isActive = (href: string) => {
@@ -63,6 +66,16 @@ export default function Header() {
           </nav>
 
           <div className="hidden items-center gap-4 md:flex">
+            <Link
+              href="/guestbook"
+              className={`rounded-sm border px-4 py-2 text-xs font-semibold tracking-[0.12em] transition-colors ${
+                pathname === '/guestbook'
+                  ? 'border-[#9a7a3f]/65 bg-[#2a211b] text-[#f8f6f1]'
+                  : 'border-[#9a7a3f]/35 text-[#5d4630] hover:border-[#9a7a3f]/70 hover:bg-[#efe7da]'
+              }`}
+            >
+              {guestbookLabel}
+            </Link>
             <LangToggle tone="light" />
             <span className="h-4 w-px bg-[#cfc5b8]" />
             <MusicToggle tone="light" />
@@ -115,6 +128,17 @@ export default function Header() {
               {item.name}
             </Link>
           ))}
+          <Link
+            href="/guestbook"
+            onClick={close}
+            className={`rounded-sm border px-5 py-3 text-sm font-semibold tracking-[0.18em] transition-colors ${
+              pathname === '/guestbook'
+                ? 'border-[#9a7a3f]/65 bg-[#2a211b] text-[#f8f6f1]'
+                : 'border-[#9a7a3f]/35 text-[#5d4630] hover:border-[#9a7a3f]/70 hover:bg-[#efe7da]'
+            }`}
+          >
+            {guestbookLabel}
+          </Link>
         </nav>
       </div>
     </>
