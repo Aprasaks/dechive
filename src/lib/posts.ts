@@ -50,6 +50,10 @@ export function getDeepDivePosts(lang: PostLang = 'ko'): Post[] {
   return getAllPosts(lang).filter((post) => post.type === 'deepdive');
 }
 
+export function getArchivePosts(lang: PostLang = 'ko'): Post[] {
+  return getAllPosts(lang).filter((post) => post.type === 'archive');
+}
+
 export function getAllPosts(lang: PostLang = 'ko'): Post[] {
   if (!fs.existsSync(POSTS_DIR)) return [];
 
@@ -71,7 +75,7 @@ export function getPostBySlug(slug: string, lang: PostLang = 'ko'): Post | null 
 }
 
 export function getSubjects(lang: PostLang = 'ko'): Subject[] {
-  const posts = getAllPosts(lang);
+  const posts = getArchivePosts(lang);
   const countMap = new Map<string, number>();
 
   for (const post of posts) {
@@ -89,7 +93,7 @@ export function getSubjects(lang: PostLang = 'ko'): Subject[] {
 }
 
 export function getCategories(lang: PostLang = 'ko') {
-  const posts = getAllPosts(lang);
+  const posts = getArchivePosts(lang);
   const countMap = new Map<string, number>();
 
   for (const post of posts) {

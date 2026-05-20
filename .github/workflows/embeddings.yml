@@ -52,7 +52,52 @@ jobs:
             exit 0
           fi
 
-          git -C content diff --name-status "$OLD_CONTENT_SHA" "$NEW_CONTENT_SHA" -- posts > "$CHANGED_FILE_LIST"
+          RAW_CHANGED_FILE_LIST="$(mktemp)"
+          git -C content diff --name-status "$OLD_CONTENT_SHA" "$NEW_CONTENT_SHA" -- posts > "$RAW_CHANGED_FILE_LIST"
+
+          body_from_ref() {
+            local ref="$1"
+            local file="$2"
+
+            git -C content show "$ref:$file" 2>/dev/null | awk '
+              NR == 1 && $0 == "---" { in_frontmatter = 1; next }
+              in_frontmatter && $0 == "---" { in_frontmatter = 0; next }
+              !in_frontmatter { print }
+            '
+          }
+
+          : > "$CHANGED_FILE_LIST"
+          while IFS=$'\t' read -r status path_one path_two; do
+            [[ -z "$status" ]] && continue
+
+            if [[ "$status" == "D" ]]; then
+              [[ "$path_one" == *.md ]] && printf '%s\t%s\n' "$status" "$path_one" >> "$CHANGED_FILE_LIST"
+              continue
+            fi
+
+            if [[ "$status" == R* || "$status" == C* ]]; then
+              [[ "$path_one" == *.md ]] && printf 'D\t%s\n' "$path_one" >> "$CHANGED_FILE_LIST"
+              old_path="$path_one"
+              new_path="$path_two"
+            else
+              old_path="$path_one"
+              new_path="$path_one"
+            fi
+
+            [[ "$new_path" == *.md ]] || continue
+
+            if [[ "$status" == "A" ]]; then
+              printf '%s\t%s\n' "$status" "$new_path" >> "$CHANGED_FILE_LIST"
+              continue
+            fi
+
+            old_body="$(body_from_ref "$OLD_CONTENT_SHA" "$old_path")"
+            new_body="$(body_from_ref "$NEW_CONTENT_SHA" "$new_path")"
+
+            if [[ "$old_body" != "$new_body" ]]; then
+              printf '%s\t%s\n' "$status" "$new_path" >> "$CHANGED_FILE_LIST"
+            fi
+          done < "$RAW_CHANGED_FILE_LIST"
 
       - name: Generate & upsert embeddings
         env:

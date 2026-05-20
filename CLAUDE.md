@@ -158,6 +158,7 @@ slug: ai-era-agile-verification
 description: '개념, 예시, 실수, 한계, 추론, 검증 기준까지 다루는 설명'
 status: draft
 lang: ko
+coverImage: './ai-era-agile-cover.png'
 concepts:
   - Agile
   - Verification
@@ -178,6 +179,23 @@ concepts:
 - 한국어 `.ko.md`가 원문이다
 - 기존 영어 `.en.md`는 보호한다
 - slug는 번역하지 않는다
+
+이미지 규칙:
+
+- `coverImage`는 Deep Dive에만 기본 사용한다
+- Archive에는 기본적으로 `coverImage`를 넣지 않는다
+- Archive는 텍스트 중심의 독립 기록으로 둔다
+- Deep Dive는 커버가 있는 특집 문서로 다룬다
+- 현재 단계에서는 `thumbnailImage`를 필수 필드로 만들지 않는다
+- 목록 썸네일과 상세 상단 이미지는 우선 `coverImage`를 재사용한다
+- 나중에 필요할 때만 `thumbnailImage`를 선택 필드로 확장한다
+- 이미지 안에는 제목이나 긴 텍스트를 넣지 않는다
+- 제목, 설명, 태그는 코드나 본문에서 렌더링한다
+- 커버 이미지는 텍스트 없는 상징 이미지로 만든다
+- 파일은 해당 md 파일과 같은 `content/posts` 안에 둔다
+- 경로는 `./filename.png` 형식을 사용한다
+- 본문 도식 이미지는 필요한 경우에만 최소한으로 넣는다
+- Deep Dive 본문 이미지는 처음부터 많이 넣지 말고, 핵심 도식 2~3개부터 시작한다
 
 ## 5. Writing Rules
 

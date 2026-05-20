@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Noto_Serif_KR } from 'next/font/google';
 import HomeClient from '@/components/home/HomeClient';
-import { getAllPosts, getPostBySlug } from '@/lib/posts';
+import { getArchivePosts, getPostBySlug } from '@/lib/posts';
 import type { PostLang } from '@/types/archive';
 
 const notoSerifKR = Noto_Serif_KR({
@@ -53,8 +53,9 @@ const jsonLd = {
 
 export default function Home() {
   function getHomePosts(lang: PostLang) {
-    const posts = getAllPosts(lang);
-    const featuredPost = getPostBySlug('what-null-leaves-behind', lang) ?? posts[0];
+    const posts = getArchivePosts(lang);
+    const preferredPost = getPostBySlug('what-null-leaves-behind', lang);
+    const featuredPost = preferredPost?.type === 'archive' ? preferredPost : posts[0];
     const latestPosts = [...posts].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 5).map((post) => ({
       slug: post.slug,
       title: post.title,

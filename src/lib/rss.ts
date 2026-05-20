@@ -12,9 +12,10 @@ function escapeXml(value: string): string {
 }
 
 function getPostUrl(post: Post): string {
-  return post.lang === 'en'
-    ? `${BASE_URL}/en/archive/${post.slug}`
-    : `${BASE_URL}/archive/${post.slug}`;
+  const localePrefix = post.lang === 'en' ? '/en' : '';
+  const section = post.type === 'deepdive' ? 'deep-dive' : 'archive';
+
+  return `${BASE_URL}${localePrefix}/${section}/${post.slug}`;
 }
 
 function getFeedMeta(lang: PostLang) {

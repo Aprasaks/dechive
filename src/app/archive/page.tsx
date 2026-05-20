@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Noto_Sans_KR, Noto_Serif_KR } from 'next/font/google';
-import { getAllPosts } from '@/lib/posts';
+import { getArchivePosts } from '@/lib/posts';
 import ArchiveClient from '@/components/archive/ArchiveClient';
 
 const ARCHIVE_DESCRIPTION =
@@ -42,8 +42,8 @@ const jsonLd = {
 };
 
 export default function ArchivePage() {
-  const koPosts = getAllPosts('ko');
-  const enPosts = getAllPosts('en');
+  const koPosts = getArchivePosts('ko');
+  const enPosts = getArchivePosts('en');
 
   return (
     <>

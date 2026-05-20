@@ -1,7 +1,7 @@
 import { notFound, redirect } from 'next/navigation';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { getAllPosts, getPostBySlug } from '@/lib/posts';
+import { getArchivePosts, getPostBySlug } from '@/lib/posts';
 import PostHeader from '@/components/archive/PostHeader';
 import PostContent from '@/components/archive/PostContent';
 import GuestbookCTA from '@/components/guestbook/GuestbookCTA';
@@ -12,7 +12,7 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  const koPosts = getAllPosts('ko');
+  const koPosts = getArchivePosts('ko');
   return koPosts.map((post) => ({ slug: post.slug }));
 }
 
@@ -21,7 +21,7 @@ const BASE_URL = 'https://dechive.dev';
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const post = getPostBySlug(slug, 'ko');
-  if (!post) return {};
+  if (!post || post.type !== 'archive') return {};
 
   const canonical = `${BASE_URL}/archive/${slug}`;
   const image = `${BASE_URL}/images/thumb.webp`;
@@ -68,7 +68,7 @@ export default async function PostPage({ params, searchParams }: PageProps) {
 
   const post = getPostBySlug(slug, 'ko');
 
-  if (!post) notFound();
+  if (!post || post.type !== 'archive') notFound();
 
   return (
     <main className="min-h-[calc(100vh-5rem)] bg-[#f8f6f1] px-5 py-12 text-[#19140f] sm:px-8 lg:py-16">

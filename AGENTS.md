@@ -14,6 +14,13 @@ Before any change:
 
 ## 2. Agent Ownership
 
+Current Dechive identity:
+
+- Core line: `AI는 답을 만든다. Dechive는 그 답을 검증한다.`
+- Dechive is an AI-era verification knowledge archive.
+- Current content types are `archive` and `deepdive`.
+- `Daily` is not currently used.
+
 Codex owns:
 
 - application code
@@ -41,7 +48,32 @@ Shared only by explicit user request:
 
 Codex must not edit `content/`, run translation, or run embeddings unless explicitly asked.
 
-## 3. Harness Rules
+## 3. Content Submodule Workflow
+
+`content/` is not a normal folder. It is a Git submodule pointing to:
+
+```txt
+Aprasaks/dechive-content
+```
+
+Posts are written under:
+
+```txt
+content/posts/*.ko.md
+```
+
+But the actual content source repository is `dechive-content`.
+
+When editing posts:
+
+1. Modify files under `content/posts`.
+2. Commit and push inside `content/` first.
+3. Return to the root repository.
+4. Commit and push the updated `content` submodule pointer in the root repository.
+
+Never commit only the root submodule pointer before committing the content repository.
+
+## 4. Harness Rules
 
 Harness engineering means binding AI work to:
 
@@ -69,10 +101,40 @@ Stop and report when:
 
 A good harness makes the agent narrower, not louder.
 
-## 4. Translation Policy
+## 5. Content Type Rules
+
+Current content types:
+
+- `archive`: an independent record built around one question
+- `deepdive`: a long-form knowledge document built around one keyword
+
+Rules:
+
+- Do not add `series`.
+- Do not add previous/next/series flows for Archive content.
+- Archive posts must be readable independently.
+- Deep Dive documents should preserve clear structure for future AI reasoning or librarian systems.
+
+## 6. Translation Policy
 
 Korean posts are the source.  
 Existing English posts are protected editorial content.
+
+Canonical translation logic lives in:
+
+```txt
+content/.github/scripts/translate.mjs
+```
+
+Root script:
+
+```txt
+scripts/translate.ts
+```
+
+is only a wrapper for `npm run translate`.
+
+Do not reintroduce translation prompts, frontmatter reconstruction, Anthropic calls, or file translation logic into the root wrapper.
 
 Default:
 
@@ -94,9 +156,18 @@ New English posts should translate:
 - body
 - lang: ko → en
 
-Do not translate slug.
+Do not translate:
 
-## 5. Commit / Push
+- slug
+- type
+- status
+- date
+- updated
+- category
+- subject
+- concepts
+
+## 7. Commit / Push
 
 Do not commit or push unless explicitly asked.
 
@@ -104,7 +175,12 @@ Do not commit or push unless explicitly asked.
 - "푸시해" = push only
 - "커밋푸시해" = commit and push
 
-## 6. Report Format
+When content submodule changes are involved:
+
+1. Commit/push inside `content/` first.
+2. Commit/push the root submodule pointer second.
+
+## 8. Report Format
 
 After work, report:
 
