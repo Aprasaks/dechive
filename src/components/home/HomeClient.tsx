@@ -35,8 +35,8 @@ const homeCopy = {
     inside: ['지식은 검증으로', '완성된다'],
     soloAgileLabel: 'Solo Agile',
     soloAgile: ['1인기업시대,', '회고는 필요없는것인가'],
-    archiveLabel: 'Archive',
-    archive: ['질문 하나를', '기록 하나로'],
+    archiveLabel: '무료 전자책',
+    archive: ['부모님,', '이건 알아야해요'],
     thinkingEyebrow: 'How Dechive Thinks',
     thinkingTitle: 'Dechive는 질문의 깊이에 따라 기록을 나눕니다.',
     thinkingDescription: 'Archive는 하나의 질문을 독립된 기록으로 남기고, Deep Dive는 더 깊은 질문을 길게 밀고 갑니다.',
@@ -86,8 +86,8 @@ const homeCopy = {
     inside: ['Knowledge is completed', 'through verification'],
     soloAgileLabel: 'Solo Agile',
     soloAgile: ['In the solo business era,', 'is reflection unnecessary?'],
-    archiveLabel: 'Archive',
-    archive: ['One question', 'as one record'],
+    archiveLabel: 'Free Ebook',
+    archive: ['What parents need', 'to know about AI'],
     thinkingEyebrow: 'How Dechive Thinks',
     thinkingTitle: 'Dechive separates records by the depth of the question.',
     thinkingDescription: 'Archive keeps one question as an independent record. Deep Dive carries a deeper question through a longer chain of reasoning.',
@@ -436,7 +436,10 @@ export default function HomeClient({
 
           <div className="mt-8 ml-auto h-px w-16 bg-[#3a2416]/40" />
 
-          <div className="mt-7">
+          <Link
+            href="/downloads/parents-ai-guide"
+            className="mt-7 block text-right transition-colors hover:text-[#7a5d2c]"
+          >
             <p className="text-[11px] font-bold tracking-[0.22em] text-[#6f461d] uppercase">
               {t.archiveLabel}
             </p>
@@ -445,7 +448,7 @@ export default function HomeClient({
             >
               {renderLines(t.archive)}
             </p>
-          </div>
+          </Link>
         </div>
       </section>
 
