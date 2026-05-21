@@ -17,7 +17,9 @@ Before any change:
 Current Dechive identity:
 
 - Core line: `AI는 답을 만든다. Dechive는 그 답을 검증한다.`
-- Dechive is an AI-era verification knowledge archive.
+- Dechive is a personal archive that turns AI-era answers into verifiable records.
+- Dechive language should center verification, questions, records, criteria, and judgment.
+- Avoid library/librarian/shelf metaphors unless the user explicitly asks to restore them.
 - Current content types are `archive` and `deepdive`.
 - `Daily` is not currently used.
 
@@ -113,7 +115,7 @@ Rules:
 - Do not add `series`.
 - Do not add previous/next/series flows for Archive content.
 - Archive posts must be readable independently.
-- Deep Dive documents should preserve clear structure for future AI reasoning or librarian systems.
+- Deep Dive documents should preserve clear structure for future AI reasoning and verification guidance.
 
 ## 6. Language Routing Rules
 

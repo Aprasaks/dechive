@@ -139,13 +139,13 @@ export default function ChatDrawer() {
           <div className="flex items-center gap-3">
             <Image
               src="/images/archive.webp"
-              alt="사서"
+              alt="Dechive"
               width={40}
               height={40}
               className="size-10 opacity-90"
             />
             <span className="text-sm font-semibold" style={{ color: '#e8d5a0' }}>
-              {t.chatLibrarian}
+              {t.chatGuide}
             </span>
           </div>
           <button

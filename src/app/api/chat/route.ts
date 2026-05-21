@@ -14,14 +14,14 @@ const supabase = createClient(
 
 function getHaegoriSystem(lang: string): string {
   if (lang === 'en') {
-    return `You are Haegori, the sole librarian of the Infinite Archive (Dechive).
-Your job is to help visitors find knowledge stored in this archive.
+    return `You are Haegori, the verification guide for Dechive.
+Your job is to help visitors check Dechive records and understand the reasoning behind them.
 
 Search rules (MUST follow):
 - For ANY question about technology, knowledge, or topics — ALWAYS call search_blog FIRST before answering.
 - Only skip searching for pure greetings or small talk (e.g. "hello", "thanks").
 - If search returns results, base your answer on them and cite naturally.
-- If search returns nothing, say "It's not in the archive yet" and answer from general knowledge.
+- If search returns nothing, say "There is no related verification record yet" and answer from general knowledge.
 
 Tone rules:
 - Short, clear, helpful
@@ -32,14 +32,14 @@ Tone rules:
 IMPORTANT: Always respond in English, regardless of what language the user writes in.`;
   }
 
-  return `너는 해고리야. Dechive 무한서고의 사서.
-방문자의 질문에 답하고 서고 안 기록을 찾아주는 게 역할이야.
+  return `너는 해고리야. Dechive의 검증 안내자야.
+방문자의 질문에 답하고 Dechive 안의 검증 기록을 확인하도록 돕는 게 역할이야.
 
 검색 규칙 (반드시 지켜):
 - 기술, 지식, 주제에 관한 질문이면 반드시 search_blog를 먼저 호출해. 직접 답하지 마.
 - 인사, 잡담처럼 순수 대화성 메시지만 검색 없이 응답해도 돼.
 - 검색 결과가 있으면 그 내용을 바탕으로 답변하고 자연스럽게 출처 언급.
-- 검색 결과가 없으면 "서고엔 아직 없는 내용이에요" 하고 일반 지식으로 보충.
+- 검색 결과가 없으면 "아직 관련 검증 기록은 없어요" 하고 일반 지식으로 보충.
 
 말투 규칙:
 - 짧고 명확하게, 친절하게
@@ -123,7 +123,7 @@ export async function POST(req: NextRequest) {
           functionDeclarations: [
             {
               name: 'search_blog',
-              description: '블로그 서고에서 관련 포스트를 검색합니다. 사용자가 블로그 글 내용, 특정 기술/주제에 대해 묻거나 포스트를 찾을 때 사용하세요.',
+              description: 'Dechive의 검증 기록에서 관련 포스트를 검색합니다. 사용자가 글 내용, 특정 기술/주제에 대해 묻거나 포스트를 찾을 때 사용하세요.',
               parameters: {
                 type: SchemaType.OBJECT,
                 properties: {
@@ -159,13 +159,13 @@ export async function POST(req: NextRequest) {
     const functionCallPart = parts.find((p) => p.functionCall) as { functionCall: FunctionCall } | undefined;
 
     if (functionCallPart) {
-      // 서고 검색 실행
+      // 검증 기록 검색 실행
       const searchQuery = (functionCallPart.functionCall.args as { query: string }).query;
       const { context, relatedPosts, found } = await searchBlog(searchQuery, lang);
 
       const functionResult = found
         ? context
-        : '서고에 관련 기록이 없습니다.';
+        : '관련 검증 기록이 없습니다.';
 
       // 검색 결과로 최종 답변
       const secondResponse = await chat.sendMessage([

@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const DOWNLOADS_DESCRIPTION =
-  'Dechive에서 만든 무료 전자책과 자료를 모아둔 다운로드 서가입니다.';
+  'Dechive에서 만든 무료 전자책과 자료를 모아둔 다운로드 공간입니다.';
 
 const downloads = [
   {
@@ -54,7 +54,7 @@ export default function DownloadsPage() {
             Dechive Downloads
           </p>
           <h1 className="mt-5 font-[family-name:var(--font-header-serif)] text-4xl font-medium text-[#2a211b] sm:text-5xl">
-            무료 자료 서가
+            무료 자료 공간
           </h1>
           <p className="mt-5 max-w-2xl text-sm leading-7 text-[#6f6257]">
             Dechive에서 만든 전자책과 자료를 모아둡니다.

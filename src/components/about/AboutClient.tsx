@@ -91,7 +91,7 @@ export default function AboutClient() {
 
       <Divider />
 
-      {/* 사서에게 닿을 곳 */}
+      {/* Dechive에 닿을 곳 */}
       <section className="text-center">
         <p className="mb-3 text-xs font-medium tracking-[0.24em] text-[#9a7a3f] uppercase">
           {t.aboutContactTitle}

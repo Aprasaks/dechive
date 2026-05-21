@@ -48,7 +48,7 @@ export const metadata: Metadata = {
 };
 
 function resolvePostImage(image?: string) {
-  if (!image) return '/images/library-main.webp';
+  if (!image) return '/images/verification-main.webp';
   if (image.startsWith('/')) return image;
 
   return `/images/posts/${image.replace(/^\.\//, '')}`;

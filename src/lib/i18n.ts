@@ -3,7 +3,7 @@ export type Lang = 'ko' | 'en';
 const i18n = {
   ko: {
     // Home
-    homeTagline1: '생각이 머무는 도서관',
+    homeTagline1: '답을 검증하는 기록',
     homeTagline2: '생각이 기록이 되는 순간,\n의미를 가진다.',
     homeBrowseRecords: '기록 둘러보기',
     homeRandomRecord: '아무 기록이나 펼쳐보기',
@@ -22,8 +22,8 @@ const i18n = {
     aboutDeepDiveTitle: 'Deep Dive',
     aboutDeepDiveDescription: '하나의 깊은 질문을 끝까지 밀고 가는 심층 문서입니다.\n개념, 예시, 실수, 한계, 추론, 검증 기준까지 길게 정리합니다.',
     aboutExplore: 'Dechive는 정답을 모아두는 공간이 아닙니다.',
-    aboutClosing: '질문을 남기고,\n이해를 쌓고,\n다시 검증하기 위한 서가입니다.',
-    aboutContactTitle: '사서에게 닿을 곳',
+    aboutClosing: '질문을 남기고,\n이해를 쌓고,\n다시 검증하기 위한 기록 공간입니다.',
+    aboutContactTitle: 'Dechive에 닿을 곳',
     aboutContactEmail: 'heavenis0113@gmail.com',
 
     // Common
@@ -31,7 +31,7 @@ const i18n = {
 
     // BookArchive
     archiveLabel: 'Dechive',
-    infiniteArchive: '무한서고',
+    infiniteArchive: '검증 기록',
     allPosts: '전체 기록',
     categoryLabel: 'Category',
     subjectLabel: 'Subject',
@@ -49,15 +49,15 @@ const i18n = {
     // ChatDrawer
     chatGreeting: '안녕하세요. 오늘도 좋은 하루입니다.\n무엇을 도와드릴까요?',
     chatPlaceholder: '키워드를 입력하세요...',
-    chatSearching: '사서가 찾는 중...',
-    chatLibrarian: 'Dechive 사서',
+    chatSearching: '기록을 확인하는 중...',
+    chatGuide: 'Dechive 검증 안내자',
     chatError: '오류가 발생했어요. 잠시 후 다시 시도해주세요.',
     chatFallback: '답변을 가져오지 못했어요.',
   },
 
   en: {
     // Home
-    homeTagline1: 'A library where thoughts stay',
+    homeTagline1: 'Records that verify answers',
     homeTagline2: 'When thoughts become records,\nmeaning is born.',
     homeBrowseRecords: 'Browse Records',
     homeRandomRecord: 'Open a Random Record',
@@ -76,8 +76,8 @@ const i18n = {
     aboutDeepDiveTitle: 'Deep Dive',
     aboutDeepDiveDescription: 'A long-form document that carries one deep question to the end.\nIt organizes concepts, examples, mistakes, limits, reasoning, and verification criteria.',
     aboutExplore: 'Dechive is not a place for collecting final answers.',
-    aboutClosing: 'It leaves questions,\nbuilds understanding,\nand keeps a shelf for verification.',
-    aboutContactTitle: 'Where to reach the librarian',
+    aboutClosing: 'It leaves questions,\nbuilds understanding,\nand keeps records for verification.',
+    aboutContactTitle: 'Where to reach Dechive',
     aboutContactEmail: 'heavenis0113@gmail.com',
 
     // Common
@@ -85,7 +85,7 @@ const i18n = {
 
     // BookArchive
     archiveLabel: 'Dechive',
-    infiniteArchive: 'Infinite Archive',
+    infiniteArchive: 'Verification Records',
     allPosts: 'All Posts',
     categoryLabel: 'Category',
     subjectLabel: 'Subject',
@@ -104,7 +104,7 @@ const i18n = {
     chatGreeting: 'Hello. Hope you have a wonderful day.\nHow can I help you?',
     chatPlaceholder: 'Enter a keyword...',
     chatSearching: 'Searching...',
-    chatLibrarian: 'Dechive Librarian',
+    chatGuide: 'Dechive Verification Guide',
     chatError: 'An error occurred. Please try again later.',
     chatFallback: 'Unable to retrieve a response.',
   },

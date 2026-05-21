@@ -173,7 +173,7 @@ export default function GuestBookClient() {
 
           {loading ? (
             <p className="py-8 text-center text-sm text-[#8b8175]">
-              {lang === 'en' ? 'Opening the question shelf...' : '질문 서가를 여는 중입니다...'}
+              {lang === 'en' ? 'Loading verification questions...' : '검증 질문을 불러오는 중입니다...'}
             </p>
           ) : pageMessages.length === 0 ? (
             <p className="py-8 text-center text-sm text-[#8b8175]">

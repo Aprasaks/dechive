@@ -6,7 +6,7 @@
 @plugin '@tailwindcss/typography';
 
 @theme {
-  /* 🎨 우리 서고의 메인 테마 컬러 정의 */
+  /* Dechive main theme colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 }

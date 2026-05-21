@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, LibraryBig } from 'lucide-react';
+import { ArrowRight, ShieldCheck } from 'lucide-react';
 
 export interface DeepDivePost {
   slug: string;
@@ -42,9 +42,9 @@ export default function DeepDiveLanding({
   const featuredDeepDive = visibleDeepDives[0];
   const copy = isEnglish
     ? {
-        librarianTitle: 'AI Librarian',
-        librarianBody: 'Ask only inside this shelf.\nQuestions raised while reading long documents return through concepts, examples, and verification criteria.',
-        librarianAction: 'Ask the librarian',
+        guideTitle: 'Verification Guide',
+        guideBody: 'Use this space to follow the question.\nDeep Dive keeps concepts, examples, limits, and verification criteria together.',
+        guideAction: 'Check the record',
         leadTitle: 'Documents that carry one deep question to the end.',
         leadBody: 'Deep Dive follows a deeper question through concepts, examples, mistakes, limits, and verification criteria.',
         read: 'Read Deep Dive',
@@ -53,9 +53,9 @@ export default function DeepDiveLanding({
         fallbackTags: ['Concept', 'Example', 'Verification'],
       }
     : {
-        librarianTitle: 'AI Librarian',
-        librarianBody: '이 서가 안에서만 질문합니다.\n긴 문서를 읽으며 생기는 질문을 개념, 예시, 검증 기준 안에서 다시 찾아옵니다.',
-        librarianAction: '사서에게 묻기',
+        guideTitle: '검증 안내',
+        guideBody: '이 공간은 깊은 질문을 끝까지 따라갑니다.\n개념, 예시, 한계, 검증 기준을 하나의 기록 안에서 확인합니다.',
+        guideAction: '기록 확인하기',
         leadTitle: '하나의 깊은 질문을 끝까지 밀고 가는 문서들.',
         leadBody: 'Deep Dive는 심층적인 질문을 따라 개념, 예시, 실수, 한계, 검증 기준까지 길게 정리합니다.',
         read: 'Read Deep Dive',
@@ -100,18 +100,18 @@ export default function DeepDiveLanding({
             </div>
 
             <div className="mt-20 rounded-md border border-[#d5c5aa] bg-[#f8f6f1]/70 p-5 shadow-[0_18px_60px_rgba(42,33,27,0.06)]">
-              <LibraryBig size={29} strokeWidth={1.2} className="text-[#9a7340]" />
+              <ShieldCheck size={29} strokeWidth={1.2} className="text-[#9a7340]" />
               <p className={`mt-5 text-sm font-semibold tracking-[0.08em] text-[#8a6332] uppercase ${serifFontClassName}`}>
-                {copy.librarianTitle}
+                {copy.guideTitle}
               </p>
               <p className="mt-4 whitespace-pre-line text-sm leading-7 text-[#4b4036]">
-                {copy.librarianBody}
+                {copy.guideBody}
               </p>
               <button
                 type="button"
                 className={`mt-6 inline-flex items-center gap-3 text-sm text-[#8a6332] transition-colors hover:text-[#17120d] ${serifFontClassName}`}
               >
-                {copy.librarianAction}
+                {copy.guideAction}
                 <ArrowRight size={18} strokeWidth={1.4} />
               </button>
             </div>
