@@ -46,13 +46,13 @@ export default function GuestBookClient() {
       const data = await response.json() as GuestBookResponse;
 
       if (!response.ok) {
-        setError(data.error ?? (lang === 'en' ? 'Unable to load questions.' : '질문을 불러오지 못했습니다.'));
+        setError(data.error ?? (lang === 'en' ? 'Unable to load notes.' : '남겨진 글을 불러오지 못했습니다.'));
         return;
       }
 
       setMessages(data.messages ?? []);
     } catch {
-      setError(lang === 'en' ? 'Unable to load questions.' : '질문을 불러오지 못했습니다.');
+      setError(lang === 'en' ? 'Unable to load notes.' : '남겨진 글을 불러오지 못했습니다.');
     } finally {
       setLoading(false);
     }
@@ -84,7 +84,7 @@ export default function GuestBookClient() {
       const data = await response.json() as GuestBookResponse;
 
       if (!response.ok) {
-        setError(data.error ?? (lang === 'en' ? 'Unable to leave a question.' : '질문을 남기지 못했습니다.'));
+        setError(data.error ?? (lang === 'en' ? 'Unable to leave a note.' : '글을 남기지 못했습니다.'));
         return;
       }
 
@@ -94,7 +94,7 @@ export default function GuestBookClient() {
       setPage(0);
       await fetchMessages();
     } catch {
-      setError(lang === 'en' ? 'Unable to leave a question.' : '질문을 남기지 못했습니다.');
+      setError(lang === 'en' ? 'Unable to leave a note.' : '글을 남기지 못했습니다.');
     } finally {
       setSubmitting(false);
     }
@@ -108,12 +108,12 @@ export default function GuestBookClient() {
             Dechive
           </p>
           <h1 className="font-[family-name:var(--font-header-serif)] text-4xl font-medium text-[#2a211b] sm:text-5xl">
-            {lang === 'en' ? 'Leave a Question' : '검증 질문 남기기'}
+            {lang === 'en' ? 'Leave a Note' : '흔적 남기기'}
           </h1>
           <p className="mx-auto mt-5 max-w-xl text-sm leading-relaxed text-[#6f6257]">
             {lang === 'en'
-              ? 'Leave a question, an AI answer to verify, or a topic Dechive should examine next.'
-              : '검증해보고 싶은 질문, 확인하고 싶은 AI 답변, 다음에 다뤄볼 주제를 남겨주세요.'}
+              ? 'Leave a question, feedback, a short impression, or a topic Dechive should examine next.'
+              : '질문, 피드백, 짧은 감상, 다음에 다뤄볼 주제를 편하게 남겨주세요.'}
           </p>
         </div>
 
@@ -164,7 +164,7 @@ export default function GuestBookClient() {
         <div className="mt-10 rounded-md border border-[#d8c9b0] bg-[#f2eee6]/70 p-5 shadow-[0_18px_60px_rgba(42,33,27,0.05)] sm:p-6">
           <div className="mb-5 flex items-center justify-between gap-4">
             <h2 className="text-sm font-medium tracking-[0.18em] text-[#5d4630]">
-              {lang === 'en' ? 'QUESTIONS LEFT FOR VERIFICATION' : '남겨진 검증 질문'}
+              {lang === 'en' ? 'NOTES LEFT ON DECHIVE' : '남겨진 흔적'}
             </h2>
             <span className="text-xs text-[#8b8175]">
               {messages.length}
@@ -173,11 +173,11 @@ export default function GuestBookClient() {
 
           {loading ? (
             <p className="py-8 text-center text-sm text-[#8b8175]">
-              {lang === 'en' ? 'Loading verification questions...' : '검증 질문을 불러오는 중입니다...'}
+              {lang === 'en' ? 'Loading notes...' : '남겨진 글을 불러오는 중입니다...'}
             </p>
           ) : pageMessages.length === 0 ? (
             <p className="py-8 text-center text-sm text-[#8b8175]">
-              {lang === 'en' ? 'No questions have been left yet.' : '아직 남겨진 질문이 없습니다.'}
+              {lang === 'en' ? 'No notes have been left yet.' : '아직 남겨진 글이 없습니다.'}
             </p>
           ) : (
             <div className="flex flex-col gap-5">

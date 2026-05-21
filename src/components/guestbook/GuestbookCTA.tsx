@@ -8,16 +8,16 @@ interface GuestbookCTAProps {
 export default function GuestbookCTA({ lang }: GuestbookCTAProps) {
   const copy = lang === 'en'
     ? {
-        eyebrow: 'Question for Dechive',
-        title: 'What should be verified next?',
-        body: 'Leave a short question, an AI answer you want checked, or a point that felt unclear while reading.',
-        action: 'Leave a Question',
+        eyebrow: 'Note for Dechive',
+        title: 'Want to leave something?',
+        body: 'Leave a short impression, feedback, a question, or an AI answer you want checked.',
+        action: 'Leave a Note',
       }
     : {
-        eyebrow: 'Dechive에 묻기',
-        title: '다음에 검증할 질문이 있나요?',
-        body: '읽다가 헷갈린 개념, 확인해보고 싶은 AI 답변, 더 파고들 주제를 한 줄로 남겨주세요.',
-        action: '검증 질문 남기기',
+        eyebrow: 'Dechive에 남기기',
+        title: '짧게 남기고 싶은 말이 있나요?',
+        body: '읽고 난 감상, 피드백, 헷갈린 개념, 확인해보고 싶은 AI 답변을 편하게 남겨주세요.',
+        action: '흔적 남기기',
       };
 
   return (
