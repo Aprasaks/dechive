@@ -1,9 +1,11 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useLang } from '@/components/layout/LangProvider';
 
 export default function Footer() {
+  const pathname = usePathname();
   const { lang } = useLang();
   const rssHref = lang === 'en' ? '/en/feed.xml' : '/feed.xml';
   const footerClassName = 'border-[#ded6c9] bg-[#f8f6f1] text-[#6f6257]';
@@ -11,6 +13,8 @@ export default function Footer() {
   const accentClassName = 'text-[#8a6332]';
   const copyrightClassName = 'text-[#8b8175]';
   const linkClassName = 'text-[#6f6257] hover:text-[#17120d]';
+
+  if (pathname.startsWith('/admin')) return null;
 
   return (
     <footer className={`w-full border-t px-6 py-10 sm:px-8 ${footerClassName}`}>

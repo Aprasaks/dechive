@@ -20,6 +20,7 @@ export default function Header() {
   const pathname = usePathname();
   const { lang } = useLang();
   const isHome = pathname === '/';
+  const isAdmin = pathname.startsWith('/admin');
   const guestbookLabel = lang === 'en' ? 'Guestbook' : '방명록';
   const getLocalizedHref = (href: string) => {
     if (lang !== 'en') return href;
@@ -42,7 +43,7 @@ export default function Header() {
     return pathname === href;
   };
 
-  if (isHome) return null;
+  if (isHome || isAdmin) return null;
 
   return (
     <>

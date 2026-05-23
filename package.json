@@ -11,6 +11,7 @@
     "translate": "tsx scripts/translate.ts"
   },
   "dependencies": {
+    "@google-analytics/data": "^6.0.0",
     "@supabase/supabase-js": "^2.103.2",
     "@tailwindcss/typography": "^0.5.19",
     "bcryptjs": "^3.0.3",
