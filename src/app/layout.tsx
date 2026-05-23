@@ -6,8 +6,6 @@ import 'highlight.js/styles/atom-one-dark.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { MusicProvider } from '@/components/layout/MusicProvider';
-import { ChatProvider } from '@/components/layout/ChatProvider';
-import ChatDrawer from '@/components/layout/ChatDrawer';
 import { LangProvider } from '@/components/layout/LangProvider';
 
 const geistSans = Geist({
@@ -104,12 +102,9 @@ export default function RootLayout({
       >
         <MusicProvider>
           <LangProvider>
-            <ChatProvider>
-              <Header />
-              {children}
-              <Footer />
-              <ChatDrawer />
-            </ChatProvider>
+            <Header />
+            {children}
+            <Footer />
           </LangProvider>
         </MusicProvider>
       </body>

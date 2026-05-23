@@ -10,7 +10,8 @@ import path from 'path';
 import matter from 'gray-matter';
 
 const POSTS_DIR = path.join(process.cwd(), 'content', 'posts');
-const REQUIRED_FIELDS = ['title', 'date', 'category', 'tags', 'slug', 'description', 'status', 'lang', 'subject'] as const;
+const COMMON_REQUIRED_FIELDS = ['title', 'seoTitle', 'date', 'type', 'category', 'tags', 'slug', 'description', 'status', 'lang'] as const;
+const VALID_TYPES = new Set(['archive', 'deepdive']);
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null;
@@ -31,10 +32,14 @@ function validatePost(file: string): string[] {
     return [`frontmatter parse failed: ${message}`];
   }
 
-  for (const field of REQUIRED_FIELDS) {
+  for (const field of COMMON_REQUIRED_FIELDS) {
     if (data[field] === undefined || data[field] === null || data[field] === '') {
       errors.push(`missing required field: ${field}`);
     }
+  }
+
+  if (typeof data.type !== 'string' || !VALID_TYPES.has(data.type)) {
+    errors.push(`type must be one of: ${Array.from(VALID_TYPES).join(', ')}`);
   }
 
   if (file.endsWith('.en.md') && data.lang !== 'en') {
@@ -47,6 +52,26 @@ function validatePost(file: string): string[] {
 
   if (!Array.isArray(data.tags)) {
     errors.push('tags must be a list');
+  }
+
+  if (data.type === 'archive') {
+    for (const field of ['subject', 'thumbnail', 'coverImage', 'updated', 'concepts']) {
+      if (data[field] !== undefined) errors.push(`archive must not use field: ${field}`);
+    }
+  }
+
+  if (data.type === 'deepdive') {
+    for (const field of ['subject', 'thumbnail', 'updated']) {
+      if (data[field] !== undefined) errors.push(`deepdive must not use field: ${field}`);
+    }
+
+    if (typeof data.coverImage !== 'string' || data.coverImage.trim() === '') {
+      errors.push('deepdive requires coverImage');
+    }
+
+    if (!Array.isArray(data.concepts) || data.concepts.length === 0) {
+      errors.push('deepdive requires concepts list');
+    }
   }
 
   return errors;

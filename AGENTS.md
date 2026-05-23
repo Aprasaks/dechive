@@ -19,7 +19,7 @@ Current Dechive identity:
 - Core line: `AI는 답을 만든다. Dechive는 그 답을 검증한다.`
 - Dechive is a personal archive that turns AI-era answers into verifiable records.
 - Dechive language should center verification, questions, records, criteria, and judgment.
-- Avoid library/librarian/shelf metaphors unless the user explicitly asks to restore them.
+- Avoid retired book-place metaphors unless the user explicitly asks to restore them.
 - Current content types are `archive` and `deepdive`.
 - `Daily` is not currently used.
 
@@ -38,7 +38,6 @@ Claude Code owns:
 - copywriting
 - planning and review
 - translation script runs
-- Supabase/RAG embedding generation
 - content submodule commits when requested
 
 Shared only by explicit user request:
@@ -48,7 +47,7 @@ Shared only by explicit user request:
 - content metadata cleanup
 - content submodule pointer updates
 
-Codex must not edit `content/`, run translation, or run embeddings unless explicitly asked.
+Codex must not edit `content/` or run translation unless explicitly asked.
 
 ## 3. Content Submodule Workflow
 
@@ -188,9 +187,7 @@ Do not translate:
 - type
 - status
 - date
-- updated
 - category
-- subject
 - concepts
 
 ## 8. Commit / Push

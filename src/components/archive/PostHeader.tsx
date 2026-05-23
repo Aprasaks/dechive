@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import type { Post } from '@/types/archive';
 
 interface PostHeaderProps {
@@ -17,25 +16,10 @@ function formatDisplayDate(date: string, lang: Post['lang']) {
 }
 
 export default function PostHeader({ post }: PostHeaderProps) {
-  const metaItems = [post.category, post.subject].filter(Boolean);
-  const headerImage = post.thumbnail || post.coverImage?.replace(/^\.\//, '');
+  const metaItems = [post.category].filter(Boolean);
 
   return (
     <header className="mb-12">
-      {/* 썸네일 */}
-      {headerImage && (
-        <div className="relative mb-10 aspect-video w-full overflow-hidden rounded-sm border border-[#2a211b]/10">
-          <Image
-            src={`/images/posts/${headerImage}`}
-            alt={post.title}
-            fill
-            className="object-cover"
-            priority
-            sizes="(max-width: 768px) calc(100vw - 2rem), 672px"
-          />
-        </div>
-      )}
-
       <div className="mb-5 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs font-medium uppercase tracking-[0.18em] text-[#9a7a3f]">
         {metaItems.map((item) => (
           <span key={item}>{item}</span>

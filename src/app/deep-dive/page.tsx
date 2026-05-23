@@ -60,9 +60,9 @@ export default function DeepDivePage() {
     .map((post) => ({
       slug: post.slug,
       title: post.title,
-      meta: [post.category, post.subject].filter(Boolean).join(' · '),
+      meta: post.category,
       description: post.description,
-      image: resolvePostImage(post.coverImage || post.thumbnail),
+      image: resolvePostImage(post.coverImage),
       tags: post.tags,
     }));
 

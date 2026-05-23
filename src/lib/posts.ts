@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import type { Category, Post, PostLang, PostStatus, PostType, Subject } from '@/types/archive';
+import type { Category, Post, PostLang, PostStatus, PostType } from '@/types/archive';
 
 const POSTS_DIR = path.join(process.cwd(), 'content', 'posts');
 
@@ -35,12 +35,11 @@ function parsePost(filename: string): Post | null {
     tags: Array.isArray(data.tags) ? data.tags : [],
     description: data.description ?? '',
     seoTitle: data.seoTitle,
-    thumbnail: data.thumbnail ?? '',
     coverImage: data.coverImage ?? '',
+    concepts: Array.isArray(data.concepts) ? data.concepts : [],
     type: (data.type as PostType) ?? 'archive',
     status: (data.status as PostStatus) ?? 'draft',
     lang,
-    subject: data.subject ?? '',
     readingTime: calcReadingTime(content, lang),
     content,
   };
@@ -72,24 +71,6 @@ export function getPostBySlug(slug: string, lang: PostLang = 'ko'): Post | null 
   const filePath = path.join(POSTS_DIR, filename);
   if (!fs.existsSync(filePath)) return null;
   return parsePost(filename);
-}
-
-export function getSubjects(lang: PostLang = 'ko'): Subject[] {
-  const posts = getArchivePosts(lang);
-  const countMap = new Map<string, number>();
-
-  for (const post of posts) {
-    if (post.subject) {
-      countMap.set(post.subject, (countMap.get(post.subject) ?? 0) + 1);
-    }
-  }
-
-  const subjects: Subject[] = [];
-  countMap.forEach((count, id) => {
-    subjects.push({ id, label: id, count });
-  });
-
-  return subjects;
 }
 
 export function getCategories(lang: PostLang = 'ko') {

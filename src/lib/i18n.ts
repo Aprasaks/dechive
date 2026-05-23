@@ -34,7 +34,6 @@ const i18n = {
     infiniteArchive: '검증 기록',
     allPosts: '전체 기록',
     categoryLabel: 'Category',
-    subjectLabel: 'Subject',
     recordCount: '개의 기록',
 
     // GuestBook
@@ -46,13 +45,6 @@ const i18n = {
     // TableOfContents
     tocTitle: '목차',
 
-    // ChatDrawer
-    chatGreeting: '안녕하세요. 오늘도 좋은 하루입니다.\n무엇을 도와드릴까요?',
-    chatPlaceholder: '키워드를 입력하세요...',
-    chatSearching: '기록을 확인하는 중...',
-    chatGuide: 'Dechive 검증 안내자',
-    chatError: '오류가 발생했어요. 잠시 후 다시 시도해주세요.',
-    chatFallback: '답변을 가져오지 못했어요.',
   },
 
   en: {
@@ -88,7 +80,6 @@ const i18n = {
     infiniteArchive: 'Verification Records',
     allPosts: 'All Posts',
     categoryLabel: 'Category',
-    subjectLabel: 'Subject',
     recordCount: ' records',
 
     // GuestBook
@@ -100,13 +91,6 @@ const i18n = {
     // TableOfContents
     tocTitle: 'On this page',
 
-    // ChatDrawer
-    chatGreeting: 'Hello. Hope you have a wonderful day.\nHow can I help you?',
-    chatPlaceholder: 'Enter a keyword...',
-    chatSearching: 'Searching...',
-    chatGuide: 'Dechive Verification Guide',
-    chatError: 'An error occurred. Please try again later.',
-    chatFallback: 'Unable to retrieve a response.',
   },
 } as const;
 

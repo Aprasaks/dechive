@@ -12,7 +12,6 @@ interface HomePost {
   title: string;
   description: string;
   category: string;
-  subject: string;
   seoTitle?: string;
 }
 
@@ -495,7 +494,7 @@ export default function HomeClient({
           <article className="border-l-2 border-[#B08D57] bg-white/55 p-8 shadow-[0_28px_80px_rgba(17,17,17,0.08)] sm:p-10">
             <p className="text-xs font-semibold tracking-[0.24em] text-[#777777] uppercase">
               {featuredPost
-                ? `${featuredPost.category} / ${featuredPost.subject || 'Deep Dive'} / Deep Dive`
+                ? `${featuredPost.category} / Deep Dive`
                 : t.featuredMetaFallback}
             </p>
             <h3

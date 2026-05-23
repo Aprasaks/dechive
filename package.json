@@ -8,16 +8,12 @@
     "start": "next start",
     "lint": "eslint",
     "check:content": "tsx scripts/check-content.ts",
-    "translate": "tsx scripts/translate.ts",
-    "embeddings": "tsx scripts/generate-embeddings.ts",
-    "embeddings:changed": "tsx scripts/generate-embeddings.ts --changed-file-list .github/changed-posts.txt"
+    "translate": "tsx scripts/translate.ts"
   },
   "dependencies": {
-    "@google/generative-ai": "^0.24.1",
     "@supabase/supabase-js": "^2.103.2",
     "@tailwindcss/typography": "^0.5.19",
     "bcryptjs": "^3.0.3",
-    "cohere-ai": "^8.0.0",
     "dotenv": "^17.4.0",
     "github-slugger": "^2.0.0",
     "gray-matter": "^4.0.3",

@@ -63,7 +63,6 @@ export default function Home() {
       title: post.title,
       description: post.description,
       category: post.category,
-      subject: post.subject ?? '',
       seoTitle: post.seoTitle,
     }));
 
@@ -73,7 +72,6 @@ export default function Home() {
         title: featuredPost.title,
         description: featuredPost.description,
         category: featuredPost.category,
-        subject: featuredPost.subject ?? '',
         seoTitle: featuredPost.seoTitle,
       } : null,
       latestPosts,

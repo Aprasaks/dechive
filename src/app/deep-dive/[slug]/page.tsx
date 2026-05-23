@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const canonical = `${BASE_URL}/deep-dive/${slug}`;
   const rawDesc = post.description;
   const description = rawDesc.length > 160 ? `${rawDesc.slice(0, 157)}...` : rawDesc;
-  const image = resolvePostImage(post.coverImage || post.thumbnail);
+  const image = resolvePostImage(post.coverImage);
 
   return {
     title: post.seoTitle ?? post.title,
@@ -75,7 +75,7 @@ export default async function DeepDivePostPage({ params }: PageProps) {
   if (!post) notFound();
 
   const canonical = `${BASE_URL}/deep-dive/${post.slug}`;
-  const image = resolvePostImage(post.coverImage || post.thumbnail);
+  const image = resolvePostImage(post.coverImage);
 
   return (
     <main className="min-h-[calc(100vh-5rem)] bg-[#f8f6f1] px-5 py-12 text-[#19140f] sm:px-8 lg:py-16">
