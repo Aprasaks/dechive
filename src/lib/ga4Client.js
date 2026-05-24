@@ -4,6 +4,18 @@ import { createAnalyticsInsight } from '@/lib/analyticsInsight';
 
 let analyticsClient;
 
+const EXCLUDE_ADMIN_PATH_FILTER = {
+  notExpression: {
+    filter: {
+      fieldName: 'pagePath',
+      stringFilter: {
+        matchType: 'BEGINS_WITH',
+        value: '/admin',
+      },
+    },
+  },
+};
+
 function getPropertyName() {
   const propertyId = process.env.GA_PROPERTY_ID;
 
@@ -50,6 +62,7 @@ async function runReport({ startDate, endDate }, report) {
   const [response] = await getAnalyticsClient().runReport({
     property: getPropertyName(),
     dateRanges: [{ startDate, endDate }],
+    dimensionFilter: EXCLUDE_ADMIN_PATH_FILTER,
     ...report,
   });
 
