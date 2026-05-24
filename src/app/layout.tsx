@@ -1,12 +1,12 @@
 import type { Metadata } from 'next';
 import { Geist, Noto_Serif_KR } from 'next/font/google';
-import Script from 'next/script';
 import './globals.css';
 import 'highlight.js/styles/atom-one-dark.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { MusicProvider } from '@/components/layout/MusicProvider';
 import { LangProvider } from '@/components/layout/LangProvider';
+import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -80,22 +80,6 @@ export default function RootLayout({
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4611005224374273"
           crossOrigin="anonymous"
         />
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-Y08SJBLW8G"
-          strategy="afterInteractive"
-        />
-        <Script
-          id="gtag-init"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-Y08SJBLW8G');
-            `,
-          }}
-        />
       </head>
       <body
         className={`${geistSans.variable} ${headerSerif.variable} flex min-h-screen flex-col overflow-x-clip bg-black font-sans text-zinc-100 antialiased`}
@@ -105,6 +89,7 @@ export default function RootLayout({
             <Header />
             {children}
             <Footer />
+            <GoogleAnalytics />
           </LangProvider>
         </MusicProvider>
       </body>

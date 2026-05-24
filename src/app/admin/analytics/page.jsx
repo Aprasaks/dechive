@@ -5,6 +5,7 @@ import { resolveAnalyticsDateRange } from '@/lib/analyticsDateRange';
 import { getAnalytics } from '@/lib/ga4Client';
 import DateRangeControls from './DateRangeControls';
 import LogoutButton from './LogoutButton';
+import TrackingOptOut from './TrackingOptOut';
 
 export const metadata = {
   title: 'Dechive Analytics',
@@ -130,6 +131,7 @@ export default async function AdminAnalyticsPage({ searchParams }) {
             <div className="flex justify-end">
               <LogoutButton />
             </div>
+            <TrackingOptOut />
             <DateRangeControls
               activePreset={dateRange.preset}
               startDate={dateRange.startDate}
