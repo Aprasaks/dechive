@@ -17,30 +17,30 @@ export const dynamic = 'force-dynamic';
 const SUMMARY_ITEMS = [
   {
     key: 'activeUsers',
-    label: '방문자',
+    label: '들어온 사람',
     metric: 'activeUsers',
-    description: '중복 페이지 조회를 뺀 고유 방문자에 가까운 값입니다.',
+    description: '선택한 기간에 들어온 고유 방문자에 가까운 값입니다.',
     read: '몇 명이 왔나',
   },
   {
     key: 'screenPageViews',
-    label: '열린 페이지',
+    label: '읽힌 페이지',
     metric: 'screenPageViews',
-    description: '페이지가 열린 총 횟수입니다. 같은 사람이 여러 글을 보면 계속 늘어납니다.',
-    read: '얼마나 읽혔나',
+    description: '방문자들이 연 페이지의 총합입니다. 한 사람이 여러 글을 보면 늘어납니다.',
+    read: '무엇을 봤나',
   },
   {
     key: 'sessions',
-    label: '방문 횟수',
+    label: '방문 흐름',
     metric: 'sessions',
     description: '한 번 들어와 둘러본 흐름을 한 묶음으로 본 값입니다.',
     read: '몇 번 찾아왔나',
   },
   {
     key: 'eventCount',
-    label: '행동 신호',
+    label: '전체 행동',
     metric: 'eventCount',
-    description: '페이지 보기, 세션 시작, 스크롤, 클릭 같은 GA4 이벤트의 합계입니다.',
+    description: '페이지 보기, 세션 시작, 스크롤, 다운로드 같은 GA4 이벤트의 합계입니다.',
     read: '무엇을 했나',
   },
 ];
@@ -77,6 +77,14 @@ function maxDailyValue(daily) {
   return Math.max(...daily.map((item) => item.screenPageViews), 1);
 }
 
+function downloadInterpretation(downloadSummary) {
+  if (!downloadSummary.activeUsers) return '선택한 기간에는 PDF 다운로드가 아직 없습니다.';
+  if (downloadSummary.clicks > downloadSummary.activeUsers) {
+    return `다운로드한 사람은 ${formatNumber(downloadSummary.activeUsers)}명이고, 버튼 클릭은 ${formatNumber(downloadSummary.clicks)}회입니다. 같은 사람이 여러 번 누른 기록이 포함되어 있습니다.`;
+  }
+  return `다운로드한 사람은 ${formatNumber(downloadSummary.activeUsers)}명입니다. 반복 클릭은 거의 보이지 않습니다.`;
+}
+
 export default async function AdminAnalyticsPage({ searchParams }) {
   const cookieStore = await cookies();
   const session = cookieStore.get(ADMIN_SESSION_COOKIE)?.value;
@@ -102,6 +110,9 @@ export default async function AdminAnalyticsPage({ searchParams }) {
       pages: [],
       events: [],
       daily: [],
+      downloads: [],
+      downloadLocations: [],
+      downloadSummary: { activeUsers: 0, clicks: 0 },
       insight: `${dateRange.periodLabel}에는 아직 해석할 방문 데이터가 없습니다.`,
     };
   }
@@ -120,8 +131,8 @@ export default async function AdminAnalyticsPage({ searchParams }) {
               Dechive Analytics
             </h1>
             <p className="mt-5 max-w-2xl text-sm leading-7 text-zinc-500">
-              GA4를 직접 열지 않고 선택한 기간의 방문 흔적을 확인합니다. 숫자는 판단의
-              시작점이고, 해석은 Dechive가 읽힌 방향을 보기 위한 보조 신호입니다.
+              GA4를 직접 열지 않고 선택한 기간에 누가 들어왔고, 무엇을 읽었고, 어떤 행동을
+              했는지 확인합니다. 반복 클릭은 사람 수와 분리해서 봅니다.
             </p>
             <p className="mt-4 text-sm text-amber-100/70">
               현재 조회 기간: {analytics.range.periodLabel}
@@ -170,6 +181,84 @@ export default async function AdminAnalyticsPage({ searchParams }) {
           ))}
         </section>
 
+        <div className="mt-6 grid gap-6 xl:grid-cols-[0.9fr_1.1fr]">
+          <Section title="다운로드 행동" eyebrow="Downloads">
+            <div className="grid gap-3 sm:grid-cols-2">
+              <div className="border border-white/10 bg-black/30 p-5">
+                <p className="text-xs font-semibold tracking-[0.18em] text-zinc-500 uppercase">
+                  다운로드한 사람
+                </p>
+                <p className="mt-4 text-4xl font-semibold text-zinc-100">
+                  {formatNumber(analytics.downloadSummary.activeUsers)}
+                </p>
+                <p className="mt-4 text-xs leading-5 text-zinc-500">
+                  같은 사람이 여러 번 눌러도 사람 수는 중복을 줄여서 봅니다.
+                </p>
+              </div>
+              <div className="border border-white/10 bg-black/30 p-5">
+                <p className="text-xs font-semibold tracking-[0.18em] text-zinc-500 uppercase">
+                  다운로드 클릭
+                </p>
+                <p className="mt-4 text-4xl font-semibold text-zinc-100">
+                  {formatNumber(analytics.downloadSummary.clicks)}
+                </p>
+                <p className="mt-4 text-xs leading-5 text-zinc-500">
+                  버튼을 누른 총 횟수입니다. 실수로 여러 번 누르면 같이 올라갑니다.
+                </p>
+              </div>
+            </div>
+            <p className="mt-4 border-l border-amber-400/35 bg-amber-950/10 px-4 py-3 text-sm leading-7 text-amber-50/85">
+              {downloadInterpretation(analytics.downloadSummary)}
+            </p>
+            {analytics.downloads.length > 0 ? (
+              <div className="mt-5 divide-y divide-white/10">
+                {analytics.downloads.map((download) => (
+                  <div key={`${download.fileName}-${download.linkUrl}`} className="py-3">
+                    <div className="flex flex-wrap items-center justify-between gap-3">
+                      <p className="max-w-full truncate text-sm text-zinc-200">{download.fileName}</p>
+                      <p className="text-sm text-amber-100/70">
+                        {formatNumber(download.activeUsers)}명 · 클릭 {formatNumber(download.clicks)}회
+                      </p>
+                    </div>
+                    {download.linkUrl ? (
+                      <p className="mt-2 max-w-full truncate text-xs text-zinc-600">{download.linkUrl}</p>
+                    ) : null}
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <EmptyState>선택한 기간에 다운로드된 파일이 없습니다.</EmptyState>
+            )}
+          </Section>
+
+          <Section title="다운로드 지역" eyebrow="Location">
+            {analytics.downloadLocations.length > 0 ? (
+              <div className="divide-y divide-white/10">
+                {analytics.downloadLocations.map((location) => (
+                  <div
+                    key={`${location.country}-${location.region}-${location.city}`}
+                    className="grid gap-2 py-3 text-sm md:grid-cols-[1fr_auto] md:items-center"
+                  >
+                    <div>
+                      <p className="text-zinc-200">
+                        {location.country} / {location.region} / {location.city}
+                      </p>
+                      <p className="mt-1 text-xs text-zinc-500">
+                        위치는 IP 기반 추정값이라 실제 거주지와 다를 수 있습니다.
+                      </p>
+                    </div>
+                    <p className="text-amber-100/70">
+                      {formatNumber(location.activeUsers)}명 · 클릭 {formatNumber(location.clicks)}회
+                    </p>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <EmptyState>선택한 기간에 다운로드 위치 데이터가 없습니다.</EmptyState>
+            )}
+          </Section>
+        </div>
+
         <div className="mt-8 grid gap-6 xl:grid-cols-[0.95fr_1.05fr]">
           <Section title="기간별 흐름" eyebrow="Daily Trace">
             {analytics.daily.length > 0 ? (
@@ -186,7 +275,7 @@ export default async function AdminAnalyticsPage({ searchParams }) {
                       />
                     </div>
                     <p className="text-xs text-zinc-500 sm:text-right">
-                      방문자 {formatNumber(day.activeUsers)} · 페이지 {formatNumber(day.screenPageViews)} · 세션{' '}
+                      사람 {formatNumber(day.activeUsers)} · 페이지 {formatNumber(day.screenPageViews)} · 흐름{' '}
                       {formatNumber(day.sessions)}
                     </p>
                   </div>
@@ -203,7 +292,7 @@ export default async function AdminAnalyticsPage({ searchParams }) {
             </p>
             <div className="mt-5 grid gap-3 sm:grid-cols-2">
               <p className="border border-white/10 bg-black/20 p-4 text-xs leading-6 text-zinc-500">
-                방문자가 있는데 스크롤이 없다면 페이지는 열렸지만 깊게 읽힌 신호는 약하게
+                사람이 들어왔는데 스크롤이 없다면 페이지는 열렸지만 깊게 읽힌 신호는 약하게
                 봅니다.
               </p>
               <p className="border border-white/10 bg-black/20 p-4 text-xs leading-6 text-zinc-500">
@@ -223,8 +312,8 @@ export default async function AdminAnalyticsPage({ searchParams }) {
                     className="grid grid-cols-[1fr_auto_auto] items-center gap-4 py-3 text-sm"
                   >
                     <span className="truncate text-zinc-200">{source.sourceMedium}</span>
-                    <span className="text-zinc-500">{formatNumber(source.activeUsers)}명</span>
-                    <span className="text-amber-100/70">{formatNumber(source.sessions)}회</span>
+                    <span className="text-zinc-500">사람 {formatNumber(source.activeUsers)}명</span>
+                    <span className="text-amber-100/70">흐름 {formatNumber(source.sessions)}회</span>
                   </div>
                 ))}
               </div>
@@ -240,11 +329,11 @@ export default async function AdminAnalyticsPage({ searchParams }) {
                   <div key={`${page.pagePath}-${page.pageTitle}`} className="py-3">
                     <div className="flex flex-wrap items-center justify-between gap-3">
                       <p className="max-w-full truncate text-sm text-zinc-200">{page.pageTitle}</p>
-                      <p className="text-sm text-amber-100/70">{formatNumber(page.views)}회 열림</p>
+                      <p className="text-sm text-amber-100/70">{formatNumber(page.views)}회 읽힘</p>
                     </div>
                     <div className="mt-2 flex flex-wrap items-center gap-3 text-xs text-zinc-500">
                       <span className="max-w-full truncate">{page.pagePath}</span>
-                      <span>방문자 {formatNumber(page.activeUsers)}명</span>
+                      <span>사람 {formatNumber(page.activeUsers)}명</span>
                     </div>
                   </div>
                 ))}

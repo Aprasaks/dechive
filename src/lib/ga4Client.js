@@ -81,7 +81,15 @@ function formatDateLabel(value) {
 
 export async function getAnalytics({ startDate = 'today', endDate = 'today', periodLabel = '오늘' } = {}) {
   const dateRange = { startDate, endDate };
-  const [summaryRows, sourceRows, pageRows, eventRows, dailyRows] = await Promise.all([
+  const [
+    summaryRows,
+    sourceRows,
+    pageRows,
+    eventRows,
+    dailyRows,
+    downloadRows,
+    downloadLocationRows,
+  ] = await Promise.all([
     runReport(dateRange, {
       metrics: [
         { name: 'activeUsers' },
@@ -117,6 +125,44 @@ export async function getAnalytics({ startDate = 'today', endDate = 'today', per
         { name: 'eventCount' },
       ],
       orderBys: [{ dimension: { dimensionName: 'date' } }],
+    }),
+    runReport(dateRange, {
+      dimensions: [{ name: 'fileName' }, { name: 'linkUrl' }],
+      metrics: [{ name: 'activeUsers' }, { name: 'eventCount' }],
+      dimensionFilter: {
+        andGroup: {
+          expressions: [
+            EXCLUDE_ADMIN_PATH_FILTER,
+            {
+              filter: {
+                fieldName: 'eventName',
+                stringFilter: { matchType: 'EXACT', value: 'file_download' },
+              },
+            },
+          ],
+        },
+      },
+      orderBys: [{ metric: { metricName: 'eventCount' }, desc: true }],
+      limit: 10,
+    }),
+    runReport(dateRange, {
+      dimensions: [{ name: 'country' }, { name: 'region' }, { name: 'city' }],
+      metrics: [{ name: 'activeUsers' }, { name: 'eventCount' }],
+      dimensionFilter: {
+        andGroup: {
+          expressions: [
+            EXCLUDE_ADMIN_PATH_FILTER,
+            {
+              filter: {
+                fieldName: 'eventName',
+                stringFilter: { matchType: 'EXACT', value: 'file_download' },
+              },
+            },
+          ],
+        },
+      },
+      orderBys: [{ metric: { metricName: 'eventCount' }, desc: true }],
+      limit: 10,
     }),
   ]);
 
@@ -159,6 +205,29 @@ export async function getAnalytics({ startDate = 'today', endDate = 'today', per
     eventCount: metric(row, 3),
   }));
 
+  const downloads = downloadRows.map((row) => ({
+    fileName: dimension(row, 0) || 'unknown file',
+    linkUrl: dimension(row, 1),
+    activeUsers: metric(row, 0),
+    clicks: metric(row, 1),
+  }));
+
+  const downloadLocations = downloadLocationRows.map((row) => ({
+    country: dimension(row, 0) || 'unknown country',
+    region: dimension(row, 1) || 'unknown region',
+    city: dimension(row, 2) || 'unknown city',
+    activeUsers: metric(row, 0),
+    clicks: metric(row, 1),
+  }));
+
+  const downloadSummary = downloads.reduce(
+    (total, item) => ({
+      activeUsers: total.activeUsers + item.activeUsers,
+      clicks: total.clicks + item.clicks,
+    }),
+    { activeUsers: 0, clicks: 0 },
+  );
+
   return {
     range: { startDate, endDate, periodLabel },
     summary,
@@ -166,6 +235,9 @@ export async function getAnalytics({ startDate = 'today', endDate = 'today', per
     pages,
     events,
     daily,
+    downloads,
+    downloadLocations,
+    downloadSummary,
     insight: createAnalyticsInsight({ summary, sources, pages, events, periodLabel }),
   };
 }
