@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Noto_Serif_KR } from 'next/font/google';
 import HomeClient from '@/components/home/HomeClient';
+import { getLatestDailyIssue } from '@/lib/dailyIssues';
 import { getArchivePosts, getDeepDivePosts } from '@/lib/posts';
 import type { PostLang } from '@/types/archive';
 
@@ -80,6 +81,7 @@ export default function Home() {
 
   const koHome = getHomePosts('ko');
   const enHome = getHomePosts('en');
+  const latestIssue = getLatestDailyIssue();
 
   return (
     <>
@@ -90,6 +92,7 @@ export default function Home() {
       <HomeClient
         featuredPosts={{ ko: koHome.featuredPost, en: enHome.featuredPost }}
         latestPosts={{ ko: koHome.latestPosts, en: enHome.latestPosts }}
+        latestIssue={latestIssue}
         heroSerifClassName={notoSerifKR.className}
       />
     </>
