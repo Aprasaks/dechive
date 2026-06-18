@@ -74,6 +74,13 @@ function splitQuestionTitle(title: string) {
     ];
   }
 
+  if (title.includes('우리는 왜') && title.includes('AI 콘텐츠에')) {
+    return [
+      '우리는 왜',
+      title.replace('우리는 왜', '').trim(),
+    ];
+  }
+
   const words = title.trim().split(/\s+/).filter(Boolean);
 
   if (words.length < 4 && title.length < 18) {
@@ -379,9 +386,9 @@ function DarkPanelSection({
   children: React.ReactNode;
 }) {
   return (
-    <div className="border-b border-[#d6a352]/24 py-7 first:pt-0 last:border-b-0 last:pb-0">
-      <div className="flex items-start gap-5">
-        <div className="mt-1 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#d6a352]/46 text-[#d6a352]">
+    <div className="border-b border-[#d6a352]/22 py-7 first:pt-0 last:border-b-0 last:pb-0">
+      <div className="flex items-start gap-4">
+        <div className="mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#d6a352]/38 text-[#d6a352]/88">
           {icon}
         </div>
         <div className="min-w-0 flex-1">
@@ -411,27 +418,27 @@ function DarkEditorialPanel({
   const visibleUpdates = dailyAiUpdates.updates.slice(0, 3);
 
   return (
-    <aside className="absolute top-0 right-0 bottom-[4.35rem] z-10 hidden w-[30vw] min-w-[21rem] max-w-[30rem] bg-[#080806]/68 px-10 pt-[14vh] pb-10 text-[#fffaf0] shadow-[-26px_0_90px_rgba(0,0,0,0.18)] backdrop-blur-[2px] xl:block">
+    <aside className="absolute top-0 right-0 bottom-[4.35rem] z-10 hidden w-[28vw] min-w-[20rem] max-w-[28rem] bg-[#080806]/68 px-9 pt-[14vh] pb-10 text-[#fffaf0] shadow-[-26px_0_90px_rgba(0,0,0,0.18)] backdrop-blur-[2px] xl:block">
       <div className="flex h-full flex-col justify-center">
-        <DarkPanelSection icon={<Search size={22} strokeWidth={1.7} />} label={getText(verificationItem.label, lang)}>
-          <Link href={getLocalizedHref(verificationItem.href, lang)} className="group mt-3 flex items-start justify-between gap-5 transition-opacity hover:opacity-80">
-            <span className={`text-[clamp(23px,1.8vw,31px)] leading-[1.1] font-semibold ${heroSerifClassName}`}>
+        <DarkPanelSection icon={<Search size={18} strokeWidth={1.45} />} label={getText(verificationItem.label, lang)}>
+          <Link href={getLocalizedHref(verificationItem.href, lang)} className="group mt-3 flex items-start justify-between gap-4 transition-opacity hover:opacity-80">
+            <span className={`whitespace-pre-line text-[clamp(21px,1.55vw,27px)] leading-[1.12] font-semibold ${heroSerifClassName}`}>
               {getText(verificationItem.title, lang)}
             </span>
-            <ArrowRight className="mt-1 shrink-0 text-[#d6a352]" size={20} />
+            <ArrowRight className="mt-1 shrink-0 text-[#d6a352]" size={18} />
           </Link>
         </DarkPanelSection>
         {weeklyBook ? (
-          <DarkPanelSection icon={<BookOpen size={22} strokeWidth={1.7} />} label={getText(weeklyBook.label, lang)}>
-            <Link href={getLocalizedHref(weeklyBook.href ?? '#', lang)} className="group mt-3 flex items-start justify-between gap-5 transition-opacity hover:opacity-80">
-              <span className={`text-[clamp(23px,1.8vw,31px)] leading-[1.1] font-semibold ${heroSerifClassName}`}>
+          <DarkPanelSection icon={<BookOpen size={18} strokeWidth={1.45} />} label={getText(weeklyBook.label, lang)}>
+            <Link href={getLocalizedHref(weeklyBook.href ?? '#', lang)} className="group mt-3 flex items-start justify-between gap-4 transition-opacity hover:opacity-80">
+              <span className={`text-[clamp(21px,1.55vw,27px)] leading-[1.12] font-semibold ${heroSerifClassName}`}>
                 {getText(weeklyBook.title, lang)}
               </span>
-              <ArrowRight className="mt-1 shrink-0 text-[#d6a352]" size={20} />
+              <ArrowRight className="mt-1 shrink-0 text-[#d6a352]" size={18} />
             </Link>
           </DarkPanelSection>
         ) : null}
-        <DarkPanelSection icon={<Sparkles size={22} strokeWidth={1.7} />} label={getText(dailyAiUpdates.label, lang)}>
+        <DarkPanelSection icon={<Sparkles size={18} strokeWidth={1.45} />} label={getText(dailyAiUpdates.label, lang)}>
           {visibleUpdates.length ? (
             <ul className="mt-4 space-y-3">
               {visibleUpdates.map((update) => (
@@ -541,14 +548,14 @@ function ClassicEditorialLayout({
   return (
     <>
       <Masthead heroSerifClassName={heroSerifClassName} tone="light" />
-      <div className="absolute top-[32%] left-6 z-10 max-w-[min(820px,58vw)] sm:left-10 lg:left-14 xl:left-20">
+      <div className="absolute top-[32%] left-6 z-10 max-w-[min(800px,56vw)] sm:left-10 lg:left-14 xl:left-20">
         <QuestionSlot
           item={issue.question}
           lang={lang}
           heroSerifClassName={heroSerifClassName}
           tone="light"
-          className="max-w-[min(820px,58vw)]"
-          titleClassName="max-w-[min(820px,58vw)] text-[clamp(56px,5.6vw,98px)] leading-[0.94]"
+          className="max-w-[min(800px,56vw)]"
+          titleClassName="max-w-[min(800px,56vw)] text-[clamp(54px,5.2vw,92px)] leading-[0.94]"
         />
       </div>
       <DarkEditorialPanel
@@ -798,7 +805,7 @@ export default function DailyIssueCover({
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-[42%] bg-linear-to-t from-[rgba(47,33,23,0.34)] via-[rgba(47,33,23,0.08)] to-transparent"
       />
-      <div className="absolute top-6 right-6 z-20 flex items-center gap-4 sm:right-10 lg:right-20">
+      <div className="absolute top-5 right-5 z-20 flex items-center gap-3 opacity-70 transition-opacity hover:opacity-100 sm:right-8 lg:right-14">
         <LangToggle tone="light" />
         <MusicToggle tone="light" />
       </div>

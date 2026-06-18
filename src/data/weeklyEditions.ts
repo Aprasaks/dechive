@@ -22,7 +22,7 @@ export const weeklyEditions: WeeklyEdition[] = [
         en: 'VERIFICATION',
       },
       title: {
-        ko: '1인 기업, agile 필요합니다',
+        ko: '1인기업,\nAgile이 필요합니다',
         en: 'Solo companies need Agile',
       },
       href: '/deep-dive/ai-era-agile-verification',
