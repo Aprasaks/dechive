@@ -18,6 +18,16 @@ export type DailyIssueTheme = {
   muted?: string;
 };
 
+export type DailyIssueLayout =
+  | 'classic-editorial'
+  | 'big-question'
+  | 'side-cover-lines';
+
+// Layout rotation guide:
+// - classic-editorial: left headline + right dark editorial panel
+// - big-question: question-led full-bleed cover
+// - side-cover-lines: full-bleed cover with side magazine lines
+
 export type DailyIssueBook = {
   label: LocalizedText;
   title: LocalizedText;
@@ -32,6 +42,7 @@ export type DailyIssue = {
   date: string;
   coverImage: string;
   question: DailyIssueLink;
+  layout?: DailyIssueLayout;
   theme?: DailyIssueTheme;
   issueNo?: string;
   verification?: DailyIssueLink;
@@ -43,7 +54,9 @@ export const dailyIssues: DailyIssue[] = [
   {
     id: '2026-06-18',
     date: '2026-06-18',
-    coverImage: '/images/covers/2026-06-18.webp',
+    coverImage: '/images/covers/2026-06/template-classic-editorial.webp',
+    // Image #3 reference: right editorial panel.
+    layout: 'classic-editorial',
     question: {
       label: {
         ko: '오늘의 질문',
@@ -64,7 +77,9 @@ export const dailyIssues: DailyIssue[] = [
   {
     id: '2026-06-17',
     date: '2026-06-17',
-    coverImage: '/images/covers/2026-06-17.webp',
+    coverImage: '/images/covers/2026-06/template-big-question.webp',
+    // Image #2 reference: question-led cover.
+    layout: 'big-question',
     question: {
       label: {
         ko: '오늘의 질문',
@@ -89,7 +104,9 @@ export const dailyIssues: DailyIssue[] = [
   {
     id: '2026-06-16',
     date: '2026-06-16',
-    coverImage: '/images/covers/2026-06-16.webp',
+    coverImage: '/images/covers/2026-06/template-side-cover-lines.webp',
+    // Image #1 reference: side cover lines.
+    layout: 'side-cover-lines',
     question: {
       label: {
         ko: '오늘의 질문',
