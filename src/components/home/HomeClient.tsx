@@ -6,7 +6,9 @@ import DailyIssueCover from '@/components/home/DailyIssueCover';
 import { useLang } from '@/components/layout/LangProvider';
 import LangToggle from '@/components/layout/LangToggle';
 import MusicToggle from '@/components/layout/MusicToggle';
+import type { DailyAiUpdates } from '@/data/dailyAiUpdates';
 import type { DailyIssue } from '@/data/dailyIssues';
+import type { WeeklyEdition } from '@/data/weeklyEditions';
 import type { Lang } from '@/lib/i18n';
 
 interface HomePost {
@@ -21,6 +23,8 @@ interface HomeClientProps {
   featuredPosts: Record<Lang, HomePost | null>;
   latestPosts: Record<Lang, HomePost[]>;
   latestIssue: DailyIssue;
+  latestWeeklyEdition: WeeklyEdition | null;
+  latestAiUpdates: DailyAiUpdates;
   heroSerifClassName: string;
 }
 
@@ -307,6 +311,8 @@ function MobileHomeCover({
 
 export default function HomeClient({
   latestIssue,
+  latestWeeklyEdition,
+  latestAiUpdates,
   heroSerifClassName,
 }: HomeClientProps) {
   const { lang } = useLang();
@@ -326,6 +332,8 @@ export default function HomeClient({
 
       <DailyIssueCover
         issue={latestIssue}
+        weeklyEdition={latestWeeklyEdition}
+        dailyAiUpdates={latestAiUpdates}
         lang={lang}
         heroSerifClassName={heroSerifClassName}
       />

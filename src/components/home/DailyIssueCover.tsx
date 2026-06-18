@@ -1,11 +1,15 @@
 import Link from 'next/link';
 import LangToggle from '@/components/layout/LangToggle';
 import MusicToggle from '@/components/layout/MusicToggle';
-import type { DailyIssue, DailyIssueLink, LocalizedText } from '@/data/dailyIssues';
+import type { DailyAiUpdates } from '@/data/dailyAiUpdates';
+import type { DailyIssue, DailyIssueBook, DailyIssueLink, LocalizedText } from '@/data/dailyIssues';
+import type { WeeklyEdition } from '@/data/weeklyEditions';
 import type { Lang } from '@/lib/i18n';
 
 interface DailyIssueCoverProps {
   issue: DailyIssue;
+  weeklyEdition: WeeklyEdition | null;
+  dailyAiUpdates: DailyAiUpdates;
   lang: Lang;
   heroSerifClassName: string;
 }
@@ -19,23 +23,6 @@ function getLocalizedHref(href: string, lang: Lang) {
   if (href === '/archive' || href.startsWith('/archive/')) return `/en${href}`;
   if (href === '/deep-dive' || href.startsWith('/deep-dive/')) return `/en${href}`;
   return href;
-}
-
-function formatWeekLabel(date: string, lang: Lang) {
-  const parsedDate = new Date(`${date}T00:00:00+09:00`);
-
-  if (Number.isNaN(parsedDate.getTime())) return date;
-
-  const month = parsedDate.getMonth() + 1;
-  const week = Math.ceil(parsedDate.getDate() / 7);
-
-  if (lang === 'en') {
-    return `${new Intl.DateTimeFormat('en-US', { month: 'long', timeZone: 'Asia/Seoul' }).format(parsedDate)} Week ${String(week).padStart(2, '0')}`;
-  }
-
-  const weekLabels = ['첫째', '둘째', '셋째', '넷째', '다섯째'];
-
-  return `${month}월 ${weekLabels[week - 1] ?? `${week}번째`} 주`;
 }
 
 function formatCoverDate(date: string) {
@@ -139,75 +126,102 @@ function QuestionSlot({
   lang: Lang;
   heroSerifClassName: string;
 }) {
-  const kicker = lang === 'ko'
-    ? '급변하는 시대에 있는 우리는'
-    : 'In a rapidly changing age,';
-  const questionPrefix = lang === 'ko'
-    ? '어디까지 AI 컨텐츠를'
-    : 'how far can we trust';
-  const questionFocus = lang === 'ko'
-    ? '믿을 수 있을까요?'
-    : 'AI content?';
+  const title = getText(item.title, lang);
 
   return (
-    <Link href={getLocalizedHref(item.href, lang)} className="group block transition-opacity duration-200 hover:opacity-80">
+    <Link href={getLocalizedHref(item.href, lang)} className="group block max-w-[min(760px,54vw)] transition-opacity duration-200 hover:opacity-80">
       <p className="text-[clamp(13px,1vw,16px)] font-black tracking-[0.26em] text-[#9b5a18] uppercase">
         {getText(item.label, lang)}
       </p>
-      <p className={`mt-5 max-w-[54rem] text-[clamp(24px,2vw,34px)] leading-none font-semibold tracking-[-0.018em] text-[#2a1d14] drop-shadow-[0_1px_10px_rgba(248,246,241,0.54)] ${heroSerifClassName}`}>
-        {kicker}
-      </p>
-      <p className={`mt-2 max-w-[62rem] whitespace-nowrap text-[clamp(34px,2.75vw,50px)] leading-none font-semibold tracking-[-0.032em] text-[#17100b] drop-shadow-[0_1px_12px_rgba(248,246,241,0.58)] ${heroSerifClassName}`}>
-        {questionPrefix}{' '}
-        <span className="text-[clamp(46px,4vw,72px)] tracking-[-0.04em]">
-          {questionFocus}
-        </span>
-      </p>
-      {item.description ? (
-        <p className="mt-6 max-w-md text-[clamp(14px,1vw,16px)] leading-7 font-semibold text-[#342519]/86">
-          {getText(item.description, lang)}
-        </p>
-      ) : null}
+      <h1
+        className={`mt-5 max-w-[min(760px,54vw)] text-[clamp(42px,4vw,70px)] leading-[0.98] font-semibold tracking-[-0.04em] text-[#17100b] [word-break:keep-all] drop-shadow-[0_1px_12px_rgba(248,246,241,0.58)] ${heroSerifClassName}`}
+        style={{
+          display: '-webkit-box',
+          WebkitBoxOrient: 'vertical',
+          WebkitLineClamp: 2,
+          overflow: 'hidden',
+        }}
+      >
+        {title}
+      </h1>
     </Link>
   );
 }
 
 function WeeklyBookSlot({
-  issue,
+  book,
   lang,
   heroSerifClassName,
 }: {
-  issue: DailyIssue;
+  book: DailyIssueBook;
   lang: Lang;
   heroSerifClassName: string;
 }) {
   const content = (
     <div>
       <p className="text-[clamp(12px,0.92vw,14px)] font-black tracking-[0.24em] text-[#a24f16] uppercase">
-        {getText(issue.weeklyBook.label, lang)}
+        {getText(book.label, lang)}
       </p>
       <p
         className={`mt-2 text-[clamp(20px,1.65vw,26px)] leading-[1.07] font-semibold text-[#1f1712] ${heroSerifClassName}`}
       >
-        {getText(issue.weeklyBook.title, lang)}
+        {getText(book.title, lang)}
       </p>
-      {issue.weeklyBook.author ? (
+      {book.author ? (
         <p className="mt-2 text-[12px] font-semibold tracking-[0.08em] text-[#5f5144]">
-          {issue.weeklyBook.author}
+          {book.author}
         </p>
       ) : null}
     </div>
   );
 
-  if (issue.weeklyBook.href) {
+  if (book.href) {
     return (
-      <Link href={getLocalizedHref(issue.weeklyBook.href, lang)} className="block transition-opacity duration-200 hover:opacity-75">
+      <Link href={getLocalizedHref(book.href, lang)} className="block transition-opacity duration-200 hover:opacity-75">
         {content}
       </Link>
     );
   }
 
   return <div>{content}</div>;
+}
+
+function DailyAiUpdatesSlot({
+  dailyAiUpdates,
+  lang,
+  heroSerifClassName,
+}: {
+  dailyAiUpdates: DailyAiUpdates;
+  lang: Lang;
+  heroSerifClassName: string;
+}) {
+  return (
+    <div>
+      <p className="text-[clamp(12px,0.92vw,14px)] font-black tracking-[0.24em] text-[#a24f16] uppercase">
+        {getText(dailyAiUpdates.label, lang)}
+      </p>
+      {dailyAiUpdates.updates.length ? (
+        <ul className="mt-5 space-y-5 text-left">
+          {dailyAiUpdates.updates.map((update) => (
+            <li key={update.title}>
+              <Link href={update.href} className="group block transition-opacity duration-200 hover:opacity-75">
+                <span className={`block text-[clamp(20px,1.55vw,25px)] leading-[1.08] font-semibold text-[#1f1712] ${heroSerifClassName}`}>
+                  {update.title}
+                </span>
+                <span className="mt-2 block text-[clamp(13px,0.95vw,15px)] leading-6 font-semibold text-[#5f5144]">
+                  {getText(update.description, lang)}
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p className="mt-2 text-sm font-semibold tracking-[0.08em] text-[#5f5144] uppercase">
+          {lang === 'ko' ? '업데이트 준비 중' : 'Updates pending'}
+        </p>
+      )}
+    </div>
+  );
 }
 
 function WeeklyIndexItem({ children }: { children: React.ReactNode }) {
@@ -220,12 +234,14 @@ function WeeklyIndexItem({ children }: { children: React.ReactNode }) {
 
 export default function DailyIssueCover({
   issue,
+  weeklyEdition,
+  dailyAiUpdates,
   lang,
   heroSerifClassName,
 }: DailyIssueCoverProps) {
   const archiveHref = lang === 'en' ? '/en/archive' : '/archive';
   const deepDiveHref = lang === 'en' ? '/en/deep-dive' : '/deep-dive';
-  const verificationItem: DailyIssueLink = issue.verification ?? {
+  const verificationItem: DailyIssueLink = weeklyEdition?.verification ?? issue.verification ?? {
     label: {
       ko: '검증 기록',
       en: 'Verification',
@@ -236,6 +252,7 @@ export default function DailyIssueCover({
     },
     href: '/deep-dive',
   };
+  const weeklyBook = weeklyEdition?.book ?? issue.weeklyBook;
 
   return (
     <section className="relative isolate hidden h-screen min-h-[720px] overflow-hidden border-b border-black/10 bg-[#f8f6f1] px-6 py-7 sm:px-10 md:grid lg:px-14 xl:px-20">
@@ -270,7 +287,7 @@ export default function DailyIssueCover({
         <MusicToggle tone="light" />
       </div>
 
-      <div className="absolute top-[28%] left-6 z-10 max-w-[58rem] sm:left-10 lg:left-14 xl:top-[32%] xl:left-20">
+      <div className="absolute top-[28%] left-6 z-10 max-w-[min(760px,54vw)] sm:left-10 lg:left-14 xl:top-[32%] xl:left-20">
         <QuestionSlot
           item={issue.question}
           lang={lang}
@@ -287,7 +304,7 @@ export default function DailyIssueCover({
           <div className="relative z-10 xl:pt-[15vh]">
             <div className="flex flex-col gap-1 border-b border-[rgba(70,45,25,0.16)] pb-5">
               <p className="text-[clamp(13px,0.9vw,15px)] font-semibold tracking-[0.14em] text-[#3a2c22] uppercase">
-                {formatWeekLabel(issue.date, lang)}
+                {weeklyEdition ? getText(weeklyEdition.label, lang) : formatCoverDate(issue.date)}
               </p>
               <p className="text-[11px] font-semibold tracking-[0.14em] text-[#5f5144] uppercase">
                 {formatCoverDate(issue.date)}
@@ -301,17 +318,19 @@ export default function DailyIssueCover({
                   heroSerifClassName={heroSerifClassName}
                 />
               </WeeklyIndexItem>
-              <WeeklyIndexItem>
-                <WeeklyBookSlot
-                  issue={issue}
-                  lang={lang}
-                  heroSerifClassName={heroSerifClassName}
-                />
-              </WeeklyIndexItem>
+              {weeklyBook ? (
+                <WeeklyIndexItem>
+                  <WeeklyBookSlot
+                    book={weeklyBook}
+                    lang={lang}
+                    heroSerifClassName={heroSerifClassName}
+                  />
+                </WeeklyIndexItem>
+              ) : null}
               <WeeklyIndexItem>
                 <div className="max-w-64">
-                  <EditorialSlot
-                    item={issue.aiUpdate}
+                  <DailyAiUpdatesSlot
+                    dailyAiUpdates={dailyAiUpdates}
                     lang={lang}
                     heroSerifClassName={heroSerifClassName}
                   />
@@ -332,9 +351,9 @@ export default function DailyIssueCover({
             DEEP DIVE
           </Link>
           <span className="mx-3">·</span>
-          <a href="#" className="transition-opacity hover:opacity-70">
+          <Link href="/issues" className="transition-opacity hover:opacity-70">
             ISSUE
-          </a>
+          </Link>
           <span className="mx-3">·</span>
           <a href="#" className="transition-opacity hover:opacity-70">
             SUBSCRIBE

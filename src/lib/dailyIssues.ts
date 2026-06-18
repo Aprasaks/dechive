@@ -1,8 +1,18 @@
 import fs from 'fs';
 import path from 'path';
 import { dailyIssues, type DailyIssue } from '@/data/dailyIssues';
+import { dailyAiUpdates, type DailyAiUpdates } from '@/data/dailyAiUpdates';
+import { weeklyEditions, type WeeklyEdition } from '@/data/weeklyEditions';
 
 const FALLBACK_COVER_IMAGE = '/images/bg.webp';
+const EMPTY_DAILY_AI_UPDATES: DailyAiUpdates = {
+  date: '',
+  label: {
+    ko: '오늘의 AI 업데이트',
+    en: 'AI UPDATE',
+  },
+  updates: [],
+};
 
 function compareIssueDateDesc(a: DailyIssue, b: DailyIssue) {
   return b.date.localeCompare(a.date);
@@ -24,14 +34,20 @@ function resolveCoverImage(issue: DailyIssue): DailyIssue {
   };
 }
 
+export function getAllDailyIssues(): DailyIssue[] {
+  return [...dailyIssues]
+    .sort(compareIssueDateDesc)
+    .map(resolveCoverImage);
+}
+
 export function getLatestDailyIssue(): DailyIssue {
-  const latestIssue = [...dailyIssues].sort(compareIssueDateDesc)[0];
+  const latestIssue = getAllDailyIssues()[0];
 
   if (!latestIssue) {
     throw new Error('No daily issues configured.');
   }
 
-  return resolveCoverImage(latestIssue);
+  return latestIssue;
 }
 
 export function getDailyIssueByDate(date: string): DailyIssue | null {
@@ -41,7 +57,32 @@ export function getDailyIssueByDate(date: string): DailyIssue | null {
 }
 
 export function getDailyIssueDates(): string[] {
-  return dailyIssues
-    .map((issue) => issue.date)
-    .sort((a, b) => b.localeCompare(a));
+  return getAllDailyIssues().map((issue) => issue.date);
+}
+
+export function getPreviousDailyIssue(date: string): DailyIssue | null {
+  const olderIssues = getAllDailyIssues().filter((issue) => issue.date < date);
+
+  return olderIssues[0] ?? null;
+}
+
+export function getNextDailyIssue(date: string): DailyIssue | null {
+  const newerIssues = getAllDailyIssues()
+    .filter((issue) => issue.date > date)
+    .sort((a, b) => a.date.localeCompare(b.date));
+
+  return newerIssues[0] ?? null;
+}
+
+export function getWeeklyEditionByDate(date: string): WeeklyEdition | null {
+  return weeklyEditions.find((edition) =>
+    edition.weekStart <= date && date <= edition.weekEnd
+  ) ?? null;
+}
+
+export function getDailyAiUpdatesByDate(date: string): DailyAiUpdates {
+  return dailyAiUpdates.find((updates) => updates.date === date) ?? {
+    ...EMPTY_DAILY_AI_UPDATES,
+    date,
+  };
 }
