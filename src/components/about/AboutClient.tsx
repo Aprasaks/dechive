@@ -3,105 +3,167 @@
 import { useLang } from '@/components/layout/LangProvider';
 import i18n from '@/lib/i18n';
 
-function Divider() {
-  return (
-    <div className="my-12 flex items-center gap-3">
-      <div className="h-px flex-1 bg-[#2a211b]/10" />
-      <span className="text-[10px] text-[#9a7a3f]/45">✦</span>
-      <div className="h-px flex-1 bg-[#2a211b]/10" />
-    </div>
-  );
-}
+type EditorialItem = {
+  number: string;
+  title: string;
+  body: string;
+};
+
+const promiseCopy = {
+  ko: {
+    kicker: 'Our Promise',
+    title: '우리는 자극적인 주장보다,\n검증된 기록을 남깁니다.',
+    points: [
+      '출처를 남깁니다',
+      '맥락을 설명합니다',
+      '한계를 인정합니다',
+      '다시 검토할 수 있도록 기록합니다',
+    ],
+  },
+  en: {
+    kicker: 'Our Promise',
+    title: 'We leave verified records,\nnot louder claims.',
+    points: [
+      'Leave the source',
+      'Explain the context',
+      'Admit the limits',
+      'Keep records that can be checked again',
+    ],
+  },
+};
 
 export default function AboutClient() {
   const { lang } = useLang();
   const t = i18n[lang];
+  const promise = promiseCopy[lang];
+  const editorialItems: EditorialItem[] = [
+    {
+      number: '01',
+      title: t.aboutWhyTitle,
+      body: `${t.aboutWhyDescription}\n\n${
+        lang === 'ko'
+          ? 'Dechive는 그 과정을 기록하고,\n검증의 궤적을 남깁니다.'
+          : 'Dechive records that process\nand leaves a trail of verification.'
+      }`,
+    },
+    {
+      number: '02',
+      title: t.aboutHowTitle,
+      body: `${t.aboutHowDescription}\n\n${
+        lang === 'ko'
+          ? '정리하고, 고도화하고, 연결하며\n생각의 흐름을 보존합니다.'
+          : 'It organizes, deepens, connects,\nand preserves the flow of thought.'
+      }`,
+    },
+    {
+      number: '03',
+      title: t.aboutArchiveTitle,
+      body: t.aboutArchiveDescription,
+    },
+    {
+      number: '04',
+      title: t.aboutDeepDiveTitle,
+      body: t.aboutDeepDiveDescription,
+    },
+  ];
 
   return (
-    <main className="relative min-h-[calc(100vh-5rem)] overflow-hidden bg-[#f8f6f1] px-6 py-14 text-[#19140f] sm:py-16">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_12%,rgba(255,255,255,0.86),transparent_34%),linear-gradient(180deg,rgba(176,141,87,0.08),transparent_42%)]" />
-      <div className="pointer-events-none absolute left-1/2 top-16 h-[460px] w-[min(760px,88vw)] -translate-x-1/2 rounded-t-full border border-b-0 border-[#9a7a3f]/14" />
-      <div className="pointer-events-none absolute left-[12%] top-28 hidden h-[72%] w-px bg-linear-to-b from-transparent via-[#9a7a3f]/16 to-transparent lg:block" />
-      <div className="pointer-events-none absolute right-[12%] top-28 hidden h-[72%] w-px bg-linear-to-b from-transparent via-[#9a7a3f]/16 to-transparent lg:block" />
-
-      <section className="relative mx-auto w-full max-w-3xl text-center">
-        <p className="mb-4 text-xs font-medium tracking-[0.18em] text-[#9a7a3f] uppercase">
-          {t.aboutKicker}
-        </p>
-        <div className="mx-auto mb-6 h-px w-20 bg-[#9a7a3f]/35" />
-        <h1 className="mb-8 font-[family-name:var(--font-header-serif)] text-5xl font-semibold tracking-tight text-[#17120d] sm:text-6xl">
-          {t.aboutTitle}
-        </h1>
-        <div className="mx-auto flex max-w-2xl flex-col gap-5 text-center">
-          <p className="whitespace-pre-line text-xl leading-loose text-[#2a211b]">
-            {t.aboutDefinition}
-          </p>
-          <p className="whitespace-pre-line text-base leading-loose text-[#5f564d]">
-            {t.aboutPurpose}
-          </p>
+    <main className="bg-[#f4efe6] text-[#1c1712]">
+      <section className="relative overflow-hidden border-b border-[#3b2a1e]/12">
+        <div className="grid min-h-[420px] lg:grid-cols-[44%_56%]">
+          <div className="relative z-10 flex flex-col justify-center px-6 py-12 sm:px-10 lg:px-16 xl:px-20">
+            <p className="text-[11px] font-semibold tracking-[0.22em] text-[#9a6f35] uppercase">
+              {t.aboutKicker}
+            </p>
+            <h1 className="mt-5 max-w-[500px] font-[family-name:var(--font-header-serif)] text-[clamp(28px,2.8vw,42px)] leading-[1.12] font-semibold tracking-[-0.03em] text-[#1c1712]">
+              {t.aboutTitle}
+            </h1>
+            <div className="mt-6 max-w-[500px] space-y-4 text-[clamp(14px,1vw,16px)] leading-[1.75] text-[#332820]">
+              <p className="whitespace-pre-line">{t.aboutDefinition}</p>
+              <div className="h-px w-9 bg-[#9a6f35]/55" />
+              <p className="text-[clamp(13px,0.92vw,15px)] whitespace-pre-line text-[#5e5146]">
+                {t.aboutPurpose}
+              </p>
+            </div>
+          </div>
+          <div className="relative min-h-[320px] lg:min-h-[420px]">
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 bg-cover bg-center"
+              style={{
+                backgroundImage: "url('/images/about/about-hero.webp')",
+              }}
+            />
+            <div
+              aria-hidden="true"
+              className="absolute inset-y-0 left-0 w-[42%] bg-linear-to-r from-[#f4efe6] via-[#f4efe6]/74 to-transparent"
+            />
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 bg-[#23180f]/8"
+            />
+          </div>
         </div>
       </section>
 
-      <section className="relative mx-auto mt-10 grid w-full max-w-4xl gap-4 md:grid-cols-2">
-        <div className="rounded-sm border border-[#9a7a3f]/18 bg-white/48 p-6 text-center shadow-[0_24px_80px_rgba(42,33,27,0.08)]">
-          <p className="mb-4 text-xs font-medium uppercase tracking-[0.24em] text-[#9a7a3f]">
-            {t.aboutWhyTitle}
-          </p>
-          <p className="whitespace-pre-line text-sm leading-loose text-[#5f564d]">
-            {t.aboutWhyDescription}
-          </p>
-        </div>
-        <div className="rounded-sm border border-[#9a7a3f]/18 bg-white/48 p-6 text-center shadow-[0_24px_80px_rgba(42,33,27,0.08)]">
-          <p className="mb-4 text-xs font-medium uppercase tracking-[0.24em] text-[#9a7a3f]">
-            {t.aboutHowTitle}
-          </p>
-          <p className="whitespace-pre-line text-sm leading-loose text-[#5f564d]">
-            {t.aboutHowDescription}
-          </p>
-        </div>
+      <section className="grid border-b border-[#3b2a1e]/12 bg-[#f7f1e8] lg:grid-cols-4">
+        {editorialItems.map((item) => (
+          <article
+            key={item.number}
+            className="min-h-[210px] border-b border-[#3b2a1e]/12 px-6 py-7 sm:px-10 lg:border-r lg:border-b-0 lg:px-9 lg:py-6 xl:px-12"
+          >
+            <div className="flex items-start justify-between gap-6">
+              <div>
+                <p className="font-[family-name:var(--font-header-serif)] text-[13px] tracking-[0.14em] text-[#4f3926]">
+                  {item.number}
+                </p>
+                <div className="mt-2 h-px w-4 bg-[#9a6f35]/55" />
+              </div>
+            </div>
+            <h2 className="mt-5 text-[13px] font-semibold tracking-[0.28em] text-[#6f4f2d] uppercase">
+              {item.title}
+            </h2>
+            <p className="mt-4 text-[13px] leading-[1.7] whitespace-pre-line text-[#3d332b]">
+              {item.body}
+            </p>
+          </article>
+        ))}
       </section>
 
-      <section className="relative mx-auto mt-4 grid w-full max-w-4xl gap-4 md:grid-cols-2">
-        <div className="rounded-sm border border-[#9a7a3f]/24 bg-[#efe7da]/55 p-6 text-center shadow-[0_24px_80px_rgba(42,33,27,0.1)] transition-colors hover:border-[#9a7a3f]/45">
-          <p className="mb-4 text-xs font-medium uppercase tracking-[0.24em] text-[#9a7a3f]">
-            {t.aboutArchiveTitle}
-          </p>
-          <p className="whitespace-pre-line text-sm leading-loose text-[#443a32]">
-            {t.aboutArchiveDescription}
-          </p>
+      <section className="relative overflow-hidden bg-[#0d0d0a] text-[#f8f1e6]">
+        <div
+          aria-hidden="true"
+          className="absolute inset-y-0 left-0 w-full bg-cover bg-center opacity-[0.68] md:w-[44%]"
+          style={{ backgroundImage: "url('/images/about/about-promise.webp')" }}
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-linear-to-r from-[#080806]/36 via-[#080806]/68 to-[#080806]/86"
+        />
+        <div className="relative grid min-h-[210px] items-center gap-8 px-6 py-9 sm:px-10 lg:grid-cols-[36%_34%_30%] lg:px-16 xl:px-20">
+          <div className="hidden lg:block" />
+          <div>
+            <p className="text-[11px] font-semibold tracking-[0.24em] text-[#b99255] uppercase">
+              {promise.kicker}
+            </p>
+            <p className="mt-4 font-[family-name:var(--font-header-serif)] text-[clamp(24px,1.9vw,34px)] leading-[1.2] whitespace-pre-line text-[#f6efe3]">
+              {promise.title}
+            </p>
+          </div>
+          <ul className="space-y-3 text-[13px] leading-none text-[#d8c9b8]/84">
+            {promise.points.map((point) => (
+              <li
+                key={point}
+                className="grid grid-cols-[auto_1fr] items-center gap-4"
+              >
+                <span className="h-1 w-1 rounded-full bg-[#b99255]" />
+                <span className="border-b border-[#f8f1e6]/14 pb-2">
+                  {point}
+                </span>
+              </li>
+            ))}
+          </ul>
         </div>
-        <div className="rounded-sm border border-[#9a7a3f]/24 bg-[#efe7da]/55 p-6 text-center shadow-[0_24px_80px_rgba(42,33,27,0.1)] transition-colors hover:border-[#9a7a3f]/45">
-          <p className="mb-4 text-xs font-medium uppercase tracking-[0.24em] text-[#9a7a3f]">
-            {t.aboutDeepDiveTitle}
-          </p>
-          <p className="whitespace-pre-line text-sm leading-loose text-[#443a32]">
-            {t.aboutDeepDiveDescription}
-          </p>
-        </div>
-      </section>
-
-      <section className="relative mx-auto mt-10 flex w-full max-w-2xl flex-col gap-5 text-center">
-        <p className="whitespace-pre-line text-base leading-loose text-[#5f564d]">
-          {t.aboutExplore}
-        </p>
-        <p className="whitespace-pre-line text-lg leading-loose text-[#2a211b]">
-          {t.aboutClosing}
-        </p>
-      </section>
-
-      <Divider />
-
-      {/* Dechive에 닿을 곳 */}
-      <section className="text-center">
-        <p className="mb-3 text-xs font-medium tracking-[0.24em] text-[#9a7a3f] uppercase">
-          {t.aboutContactTitle}
-        </p>
-        <a
-          href={`mailto:${t.aboutContactEmail}`}
-          className="text-sm text-[#5d4630] underline decoration-[#9a7a3f]/25 underline-offset-4 transition-colors hover:text-[#17120d] hover:decoration-[#9a7a3f]/55"
-        >
-          {t.aboutContactEmail}
-        </a>
       </section>
     </main>
   );

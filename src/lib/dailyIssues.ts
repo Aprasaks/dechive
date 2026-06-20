@@ -1,10 +1,21 @@
 import fs from 'fs';
 import path from 'path';
-import { dailyIssues, type DailyIssue } from '@/data/dailyIssues';
+import { dailyIssues, type DailyIssue, type DailyIssueLayout } from '@/data/dailyIssues';
 import { dailyAiUpdates, type DailyAiUpdates } from '@/data/dailyAiUpdates';
 import { weeklyEditions, type WeeklyEdition } from '@/data/weeklyEditions';
+import { getArchivePosts, getPostBySlug } from '@/lib/posts';
 
 const FALLBACK_COVER_IMAGE = '/images/bg.webp';
+const TEMPLATE_LAYOUTS: DailyIssueLayout[] = [
+  'classic-editorial',
+  'big-question',
+  'side-cover-lines',
+];
+const TEMPLATE_COVER_IMAGES: Record<DailyIssueLayout, string> = {
+  'classic-editorial': '/images/covers/2026-06/template-classic-editorial.webp',
+  'big-question': '/images/covers/2026-06/template-big-question.webp',
+  'side-cover-lines': '/images/covers/2026-06/template-side-cover-lines.webp',
+};
 const EMPTY_DAILY_AI_UPDATES: DailyAiUpdates = {
   date: '',
   label: {
@@ -16,6 +27,62 @@ const EMPTY_DAILY_AI_UPDATES: DailyAiUpdates = {
 
 function compareIssueDateDesc(a: DailyIssue, b: DailyIssue) {
   return b.date.localeCompare(a.date);
+}
+
+function getLayoutForDate(date: string): DailyIssueLayout {
+  const day = Number(date.slice(-2));
+
+  if (!Number.isFinite(day)) return 'classic-editorial';
+
+  return TEMPLATE_LAYOUTS[day % TEMPLATE_LAYOUTS.length] ?? 'classic-editorial';
+}
+
+function getLatestConfiguredIssueDate() {
+  return [...dailyIssues].sort(compareIssueDateDesc)[0]?.date ?? '';
+}
+
+function getAutoDailyIssuesFromArchivePosts(): DailyIssue[] {
+  const configuredIssueDates = new Set(dailyIssues.map((issue) => issue.date));
+  const latestConfiguredDate = getLatestConfiguredIssueDate();
+  const enPostsBySlug = new Map(getArchivePosts('en').map((post) => [post.slug, post]));
+
+  return getArchivePosts('ko')
+    .filter((post) => post.date > latestConfiguredDate)
+    .filter((post) => !configuredIssueDates.has(post.date))
+    .map((post) => {
+      const layout = getLayoutForDate(post.date);
+      const enPost = enPostsBySlug.get(post.slug);
+
+      return {
+        id: post.date,
+        date: post.date,
+        coverImage: TEMPLATE_COVER_IMAGES[layout],
+        layout,
+        question: {
+          label: {
+            ko: '오늘의 질문',
+            en: 'QUESTION',
+          },
+          title: {
+            ko: post.title,
+            en: enPost?.title ?? post.title,
+          },
+          href: `/archive/${post.slug}`,
+        },
+        theme: {
+          text: '#1f1712',
+          accent: '#a24f16',
+          muted: '#5f5144',
+        },
+      };
+    });
+}
+
+function getConfiguredAndAutoDailyIssues() {
+  return [
+    ...dailyIssues,
+    ...getAutoDailyIssuesFromArchivePosts(),
+  ];
 }
 
 function resolveCoverImage(issue: DailyIssue): DailyIssue {
@@ -34,10 +101,43 @@ function resolveCoverImage(issue: DailyIssue): DailyIssue {
   };
 }
 
+function getArchiveSlugFromHref(href: string) {
+  const normalizedHref = href.replace(/^\/en/, '');
+  const match = normalizedHref.match(/^\/archive\/([^/?#]+)/);
+
+  return match?.[1] ?? null;
+}
+
+function resolveQuestionTitle(issue: DailyIssue): DailyIssue {
+  const slug = getArchiveSlugFromHref(issue.question.href);
+
+  if (!slug) return issue;
+
+  const koPost = getPostBySlug(slug, 'ko');
+  const enPost = getPostBySlug(slug, 'en');
+
+  if (!koPost && !enPost) return issue;
+
+  return {
+    ...issue,
+    question: {
+      ...issue.question,
+      title: {
+        ko: koPost?.title ?? issue.question.title.ko,
+        en: enPost?.title ?? issue.question.title.en,
+      },
+    },
+  };
+}
+
+function resolveDailyIssue(issue: DailyIssue): DailyIssue {
+  return resolveQuestionTitle(resolveCoverImage(issue));
+}
+
 export function getAllDailyIssues(): DailyIssue[] {
-  return [...dailyIssues]
+  return getConfiguredAndAutoDailyIssues()
     .sort(compareIssueDateDesc)
-    .map(resolveCoverImage);
+    .map(resolveDailyIssue);
 }
 
 export function getLatestDailyIssue(): DailyIssue {
@@ -51,9 +151,9 @@ export function getLatestDailyIssue(): DailyIssue {
 }
 
 export function getDailyIssueByDate(date: string): DailyIssue | null {
-  const issue = dailyIssues.find((dailyIssue) => dailyIssue.date === date);
+  const issue = getConfiguredAndAutoDailyIssues().find((dailyIssue) => dailyIssue.date === date);
 
-  return issue ? resolveCoverImage(issue) : null;
+  return issue ? resolveDailyIssue(issue) : null;
 }
 
 export function getDailyIssueDates(): string[] {

@@ -68,43 +68,19 @@ function splitQuestionTitle(title: string) {
     .filter(Boolean);
 
   if (explicitLines.length > 1) {
+    return explicitLines;
+  }
+
+  const commaIndex = title.search(/[,，]/);
+
+  if (commaIndex > 0 && commaIndex < title.length - 1) {
     return [
-      explicitLines[0],
-      explicitLines.slice(1).join(' '),
+      title.slice(0, commaIndex + 1).trim(),
+      title.slice(commaIndex + 1).trim(),
     ];
   }
 
-  if (title.includes('우리는 왜') && title.includes('AI 콘텐츠에')) {
-    return [
-      '우리는 왜',
-      title.replace('우리는 왜', '').trim(),
-    ];
-  }
-
-  const words = title.trim().split(/\s+/).filter(Boolean);
-
-  if (words.length < 4 && title.length < 18) {
-    return [title.trim()];
-  }
-
-  const midpoint = title.length / 2;
-  let bestIndex = 1;
-  let bestDistance = Number.POSITIVE_INFINITY;
-
-  for (let index = 1; index < words.length; index += 1) {
-    const firstLine = words.slice(0, index).join(' ');
-    const distance = Math.abs(firstLine.length - midpoint);
-
-    if (distance < bestDistance) {
-      bestDistance = distance;
-      bestIndex = index;
-    }
-  }
-
-  return [
-    words.slice(0, bestIndex).join(' '),
-    words.slice(bestIndex).join(' '),
-  ];
+  return [title.trim()];
 }
 
 function EditorialSlot({
@@ -198,14 +174,14 @@ function QuestionSlot({
         {getText(item.label, lang)}
       </p>
       <h1
-        className={`mt-5 max-w-[min(760px,54vw)] text-[clamp(42px,4vw,70px)] leading-[0.98] font-semibold tracking-[-0.04em] [word-break:keep-all] ${titleToneClassName} ${heroSerifClassName} ${titleClassName}`}
+        className={`mt-5 max-w-[min(760px,54vw)] text-[clamp(42px,4vw,70px)] leading-[0.98] font-semibold tracking-[-0.04em] [overflow-wrap:normal] [text-wrap:balance] [word-break:keep-all] ${titleToneClassName} ${heroSerifClassName} ${titleClassName}`}
       >
         {titleLines.map((line, index) => (
           <span
             key={`${line}-${index}`}
             className={index === 0 && titleLines.length > 1
-              ? 'mb-3 block text-[0.82em] leading-[0.95]'
-              : 'block text-[1em] leading-[0.95]'}
+              ? 'mb-4 block text-[0.86em] leading-[0.98] [text-wrap:balance]'
+              : 'block text-[1em] leading-[0.98] [text-wrap:balance]'}
           >
             {line}
           </span>
@@ -349,9 +325,11 @@ function Masthead({
 function FooterRail({
   archiveHref,
   deepDiveHref,
+  issueDate,
 }: {
   archiveHref: string;
   deepDiveHref: string;
+  issueDate: string;
 }) {
   return (
     <div className="absolute inset-x-0 bottom-0 z-10 flex h-16 items-center justify-center border-t border-[#d6a352]/28 bg-[#080806]/72 px-4 text-[clamp(11px,0.82vw,12px)] font-black tracking-[0.24em] text-[#fffaf0]/86 uppercase backdrop-blur-sm sm:h-[4.35rem]">
@@ -372,6 +350,12 @@ function FooterRail({
           SUBSCRIBE
         </a>
       </nav>
+      <time
+        dateTime={issueDate}
+        className="absolute right-6 hidden text-[10px] font-black tracking-[0.22em] text-[#fffaf0]/62 sm:right-10 lg:right-14 xl:right-20 xl:block"
+      >
+        {issueDate}
+      </time>
     </div>
   );
 }
@@ -814,7 +798,7 @@ export default function DailyIssueCover({
       {layout === 'side-cover-lines' ? <SideCoverLinesLayout {...layoutProps} /> : null}
       {layout === 'classic-editorial' ? <ClassicEditorialLayout {...layoutProps} /> : null}
 
-      <FooterRail archiveHref={archiveHref} deepDiveHref={deepDiveHref} />
+      <FooterRail archiveHref={archiveHref} deepDiveHref={deepDiveHref} issueDate={issue.date} />
     </section>
   );
 }

@@ -14,7 +14,7 @@ export default function Footer() {
   const copyrightClassName = 'text-[#8b8175]';
   const linkClassName = 'text-[#6f6257] hover:text-[#17120d]';
 
-  if (pathname === '/' || pathname.startsWith('/admin')) return null;
+  if (pathname === '/' || pathname === '/about' || pathname.startsWith('/admin')) return null;
 
   return (
     <footer className={`w-full border-t px-6 py-10 sm:px-8 ${footerClassName}`}>
