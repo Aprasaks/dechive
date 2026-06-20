@@ -10,8 +10,9 @@ import MusicToggle from './MusicToggle';
 
 const NAV_ITEMS = [
   { name: 'Archive', href: '/archive' },
-  { name: 'Deep Dive', href: '/deep-dive' },
-  { name: 'Downloads', href: '/downloads' },
+  { name: 'DeepDive', href: '/deep-dive' },
+  { name: 'Book', href: '/book' },
+  { name: 'AI-Update', href: '/ai-updates' },
   { name: 'About', href: '/about' },
 ];
 
@@ -37,8 +38,11 @@ export default function Header() {
     if (href === '/deep-dive') {
       return pathname.startsWith('/deep-dive') || pathname.startsWith('/en/deep-dive');
     }
-    if (href === '/downloads') {
-      return pathname.startsWith('/downloads');
+    if (href === '/book') {
+      return pathname.startsWith('/book');
+    }
+    if (href === '/ai-updates') {
+      return pathname.startsWith('/ai-updates');
     }
     return pathname === href;
   };
@@ -58,7 +62,7 @@ export default function Header() {
           </Link>
 
           <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center md:flex">
-            <ul className="flex items-center gap-8 xl:gap-11">
+            <ul className="flex items-center gap-6 xl:gap-8">
               {NAV_ITEMS.map((item) => (
                 <li key={item.name}>
                   <Link

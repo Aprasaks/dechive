@@ -1,4 +1,5 @@
 import type { MetadataRoute } from 'next';
+import { aiUpdateDays } from '@/data/aiUpdates';
 import { getArchivePosts, getDeepDivePosts } from '@/lib/posts';
 
 const BASE_URL = 'https://dechive.dev';
@@ -16,6 +17,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: 'monthly',
     priority: 0.7,
   }));
+  const aiUpdateUrls: MetadataRoute.Sitemap = aiUpdateDays.flatMap((day) =>
+    day.updates.map((update) => ({
+      url: `${BASE_URL}/ai-updates/${day.date}/${update.slug}`,
+      lastModified: new Date(`${day.date}T00:00:00+09:00`),
+      changeFrequency: 'monthly' as const,
+      priority: 0.5,
+    })),
+  );
 
   return [
     { url: BASE_URL, lastModified: new Date(), changeFrequency: 'weekly', priority: 1 },
@@ -23,10 +32,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/en/archive`, lastModified: new Date(), changeFrequency: 'daily', priority: 0.8 },
     { url: `${BASE_URL}/deep-dive`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE_URL}/en/deep-dive`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
-    { url: `${BASE_URL}/downloads`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.6 },
+    { url: `${BASE_URL}/book`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.6 },
+    { url: `${BASE_URL}/book/parents-ai-guide`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.5 },
+    { url: `${BASE_URL}/ai-updates`, lastModified: new Date(), changeFrequency: 'daily', priority: 0.6 },
     { url: `${BASE_URL}/about`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.6 },
     { url: `${BASE_URL}/guestbook`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.4 },
     { url: `${BASE_URL}/privacy-policy`, lastModified: new Date(), changeFrequency: 'yearly', priority: 0.3 },
     ...postUrls,
+    ...aiUpdateUrls,
   ];
 }
