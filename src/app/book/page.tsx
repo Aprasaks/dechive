@@ -1,19 +1,9 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
-import Link from 'next/link';
+import BookCard from '@/components/book/BookCard';
+import { getAllBookNotes } from '@/lib/books';
 
 const BOOK_DESCRIPTION =
-  'Dechive에서 만든 무료 전자책과 자료를 모아둔 Book 공간입니다.';
-
-const books = [
-  {
-    title: 'AI가 낯선 사람들을 위한 AI 이해 가이드',
-    description: 'AI에 낯선 사람들이 AI를 제대로 이해할 수 있도록 정리한 무료 전자책입니다.',
-    href: '/book/parents-ai-guide',
-    image: '/downloads/parents-ai-guide-cover.webp',
-    meta: 'PDF · 무료 전자책',
-  },
-];
+  '책에서 만난 문장과 그 문장에서 출발한 생각을 남기는 Dechive 독서 기록 서가입니다.';
 
 export const metadata: Metadata = {
   title: 'Book',
@@ -46,57 +36,35 @@ export const metadata: Metadata = {
 };
 
 export default function BookPage() {
+  const books = getAllBookNotes('ko');
+
   return (
     <main className="min-h-[calc(100vh-5rem)] bg-[#f8f6f1] px-6 py-16 text-[#19140f] sm:px-8 lg:py-20">
-      <section className="mx-auto max-w-5xl">
+      <section className="mx-auto max-w-6xl">
         <div className="border-b border-[#ded6c9] pb-10">
           <p className="text-xs font-medium tracking-[0.24em] text-[#9a7a3f] uppercase">
             Dechive Book
           </p>
           <h1 className="mt-5 font-[family-name:var(--font-header-serif)] text-4xl font-medium text-[#2a211b] sm:text-5xl">
-            책과 자료
+            인용과 생각의 서가
           </h1>
           <p className="mt-5 max-w-2xl text-sm leading-7 text-[#6f6257]">
-            Dechive에서 만든 전자책과 자료를 모아둡니다.
+            책의 내용을 대신하지 않고, 책에서 붙잡은 짧은 문장과 그 문장에서 출발한 생각을 남깁니다.
             <br className="hidden sm:block" />
-            AI 시대의 답을 더 천천히 이해하고 검증하기 위한 읽을거리입니다.
+            이곳은 요약본이 아니라 생각이 기록으로 남는 독서 기록입니다.
           </p>
         </div>
 
-        <div className="mt-10 grid gap-6 md:grid-cols-2">
-          {books.map((book) => (
-            <Link
-              key={book.href}
-              href={book.href}
-              className="group grid overflow-hidden rounded-md border border-[#d8c9b0] bg-[#fbfaf7] shadow-[0_18px_60px_rgba(42,33,27,0.06)] transition-colors hover:border-[#b08d57]/70 sm:grid-cols-[10rem_1fr]"
-            >
-              <div className="relative min-h-64 bg-[#efe7da] sm:min-h-0">
-                <Image
-                  src={book.image}
-                  alt=""
-                  fill
-                  sizes="(min-width: 768px) 160px, 100vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                />
-              </div>
-              <div className="flex flex-col justify-between p-6">
-                <div>
-                  <p className="text-xs font-semibold tracking-[0.18em] text-[#9a7a3f] uppercase">
-                    {book.meta}
-                  </p>
-                  <h2 className="mt-4 font-[family-name:var(--font-header-serif)] text-2xl leading-snug font-medium text-[#2a211b]">
-                    {book.title}
-                  </h2>
-                  <p className="mt-4 text-sm leading-7 text-[#6f6257]">
-                    {book.description}
-                  </p>
-                </div>
-                <span className="mt-7 text-sm font-semibold text-[#7a5d2c] transition-colors group-hover:text-[#17120d]">
-                  무료 전자책 보기
-                </span>
-              </div>
-            </Link>
-          ))}
+        <div className="mt-8">
+          {books.length ? (
+            books.map((book) => (
+              <BookCard key={book.slug} book={book} />
+            ))
+          ) : (
+            <p className="py-10 text-sm leading-7 text-[#6f6257]">
+              아직 공개된 독서 기록이 없습니다.
+            </p>
+          )}
         </div>
       </section>
     </main>

@@ -37,8 +37,8 @@ export const weeklyEditions: WeeklyEdition[] = [
         en: 'The AI Bubble Is Coming',
       },
       author: '아르빈드 나라야난, 사이쉬 카푸르',
-      href: '#',
-      coverImage: '/images/books/ai-snake-oil.webp',
+      href: '/book/ai-bubble-is-coming',
+      coverImage: '/images/books/2026-06-15.webp',
     },
   },
 ];
