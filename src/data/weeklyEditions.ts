@@ -5,7 +5,7 @@ export type WeeklyEdition = {
   weekEnd: string;
   label: LocalizedText;
   verification: DailyIssueLink;
-  book: DailyIssueBook;
+  book?: DailyIssueBook;
 };
 
 export const weeklyEditions: WeeklyEdition[] = [
@@ -39,6 +39,25 @@ export const weeklyEditions: WeeklyEdition[] = [
       author: '아르빈드 나라야난, 사이쉬 카푸르',
       href: '/book/ai-bubble-is-coming',
       coverImage: '/images/books/2026-06-15.webp',
+    },
+  },
+  {
+    weekStart: '2026-06-22',
+    weekEnd: '2026-06-28',
+    label: {
+      ko: '6월 넷째 주',
+      en: 'JUNE WEEK 04',
+    },
+    verification: {
+      label: {
+        ko: '검증 기록',
+        en: 'VERIFICATION',
+      },
+      title: {
+        ko: '데이터 분석은\n기업에만 필요한 것인가?',
+        en: 'Is data analysis only for companies?',
+      },
+      href: '/deep-dive/data-analysis-beyond-business',
     },
   },
 ];
