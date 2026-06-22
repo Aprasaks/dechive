@@ -27,6 +27,10 @@ function getUpdatesForDate(days: AiUpdateDay[], date: string) {
   return days.find((day) => day.date === date)?.updates ?? [];
 }
 
+function getDayForDate(days: AiUpdateDay[], date: string) {
+  return days.find((day) => day.date === date) ?? null;
+}
+
 function Badge({ label }: { label: string }) {
   return (
     <span className="inline-flex rounded-sm border border-[#bda77e]/45 bg-[#fbfaf7] px-2.5 py-1 text-[10px] font-semibold tracking-[0.12em] text-[#6d5634] uppercase">
@@ -55,7 +59,7 @@ function UpdateCard({ update }: { update: AiUpdateItem }) {
             </p>
           </div>
           <span className="shrink-0 text-xs font-semibold tracking-[0.14em] text-[#8a6a39] uppercase transition-colors group-hover:text-[#211812]">
-            상세 보기
+            날짜 기록 보기
           </span>
         </div>
         <div className="mt-5 flex flex-wrap gap-2">
@@ -69,9 +73,13 @@ function UpdateCard({ update }: { update: AiUpdateItem }) {
 }
 
 export default function AiUpdatesClient({ month, days }: AiUpdatesClientProps) {
-  const [selectedDate, setSelectedDate] = React.useState('2026-06-20');
+  const [selectedDate, setSelectedDate] = React.useState(days[0]?.date ?? '2026-06-22');
   const recordedDates = React.useMemo(() => getRecordedDates(days), [days]);
   const selectedUpdates = getUpdatesForDate(days, selectedDate);
+  const selectedDay = getDayForDate(days, selectedDate);
+  const visibleUpdates = selectedUpdates.slice(0, 3);
+  const hasMoreUpdates = selectedUpdates.length > visibleUpdates.length;
+  const dateDetailHref = `/ai-updates/${selectedDate}`;
 
   return (
     <main className="min-h-[calc(100vh-5rem)] bg-[#f8f6f1] text-[#19140f]">
@@ -158,9 +166,27 @@ export default function AiUpdatesClient({ month, days }: AiUpdatesClientProps) {
 
           <div className="mt-7 bg-[#fbfaf7]/55 px-5 py-7 sm:px-7">
             {selectedUpdates.length ? (
-              selectedUpdates.map((update) => (
-                <UpdateCard key={update.id} update={update} />
-              ))
+              <>
+                {visibleUpdates.map((update) => (
+                  <UpdateCard
+                    key={update.id}
+                    update={{
+                      ...update,
+                      detailHref: dateDetailHref,
+                    }}
+                  />
+                ))}
+                {hasMoreUpdates || selectedDay?.groups?.length ? (
+                  <div className="border-t border-[#d8cdbd] pt-7">
+                    <Link
+                      href={dateDetailHref}
+                      className="inline-flex text-xs font-semibold tracking-[0.16em] text-[#8a6a39] uppercase transition-colors hover:text-[#2a211b]"
+                    >
+                      {formatDisplayDate(selectedDate)} 전체 기록 보기
+                    </Link>
+                  </div>
+                ) : null}
+              </>
             ) : (
               <div className="border-t border-[#d8cdbd] py-10">
                 <p className="font-[family-name:var(--font-header-serif)] text-2xl font-medium text-[#2a211b]">

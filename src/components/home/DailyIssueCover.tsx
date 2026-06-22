@@ -26,6 +26,10 @@ function getLocalizedHref(href: string, lang: Lang) {
   return href;
 }
 
+function getDailyAiUpdatesHref(dailyAiUpdates: DailyAiUpdates) {
+  return dailyAiUpdates.date ? `/ai-updates/${dailyAiUpdates.date}` : '/ai-updates';
+}
+
 function formatCoverDate(date: string) {
   const parsedDate = new Date(`${date}T00:00:00+09:00`);
 
@@ -251,17 +255,18 @@ function DailyAiUpdatesSlot({
   const labelClassName = tone === 'light' ? 'text-[#d6a352]' : 'text-[#a24f16]';
   const titleClassName = tone === 'light' ? 'text-[#fffaf0]' : 'text-[#1f1712]';
   const descriptionClassName = tone === 'light' ? 'text-[#fffaf0]/70' : 'text-[#5f5144]';
+  const dailyUpdatesHref = getDailyAiUpdatesHref(dailyAiUpdates);
 
   return (
     <div>
-      <p className={`text-[clamp(12px,0.92vw,14px)] font-black tracking-[0.24em] uppercase ${labelClassName}`}>
-        {getText(dailyAiUpdates.label, lang)}
-      </p>
+      <Link href={dailyUpdatesHref} className={`inline-flex text-[clamp(12px,0.92vw,14px)] font-black tracking-[0.24em] uppercase transition-opacity hover:opacity-75 ${labelClassName}`}>
+          {getText(dailyAiUpdates.label, lang)}
+      </Link>
       {visibleUpdates.length ? (
         <ul className="mt-5 space-y-5 text-left">
           {visibleUpdates.map((update) => (
             <li key={update.title}>
-              <Link href={update.href} className="group block transition-opacity duration-200 hover:opacity-75">
+              <Link href={update.href || dailyUpdatesHref} className="group block transition-opacity duration-200 hover:opacity-75">
                 <span className={`block text-[clamp(20px,1.55vw,25px)] leading-[1.08] font-semibold ${titleClassName} ${heroSerifClassName}`}>
                   {update.title}
                 </span>
@@ -400,6 +405,7 @@ function DarkEditorialPanel({
   heroSerifClassName: string;
 }) {
   const visibleUpdates = dailyAiUpdates.updates.slice(0, 3);
+  const dailyUpdatesHref = getDailyAiUpdatesHref(dailyAiUpdates);
 
   return (
     <aside className="absolute top-0 right-0 bottom-[4.35rem] z-10 hidden w-[28vw] min-w-[20rem] max-w-[28rem] bg-[#080806]/68 px-9 pt-[14vh] pb-10 text-[#fffaf0] shadow-[-26px_0_90px_rgba(0,0,0,0.18)] backdrop-blur-[2px] xl:block">
@@ -428,7 +434,7 @@ function DarkEditorialPanel({
               {visibleUpdates.map((update) => (
                 <li key={update.title} className="flex gap-3 text-[clamp(15px,1.05vw,18px)] leading-snug font-semibold">
                   <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#d6a352]" />
-                  <Link href={update.href} className="transition-opacity hover:opacity-75">
+                  <Link href={update.href || dailyUpdatesHref} className="transition-opacity hover:opacity-75">
                     {update.title}
                   </Link>
                 </li>
@@ -579,6 +585,7 @@ function BigQuestionLayout({
   heroSerifClassName: string;
 }) {
   const visibleUpdates = dailyAiUpdates.updates.slice(0, 3);
+  const dailyUpdatesHref = getDailyAiUpdatesHref(dailyAiUpdates);
 
   return (
     <>
@@ -621,14 +628,14 @@ function BigQuestionLayout({
               </p>
             </Link>
           ) : null}
-          <div>
+          <Link href={dailyUpdatesHref} className="group block transition-opacity hover:opacity-80">
             <p className="text-[13px] font-black tracking-[0.14em] text-[#d6a352] uppercase">
               AI UPDATE <span className="text-[#fffaf0]/56">—</span>
             </p>
             <p className="mt-2 max-w-[58rem] text-[clamp(14px,1vw,17px)] leading-snug font-semibold text-[#fffaf0]/88">
               {visibleUpdates.map((update) => update.title).join(' / ')}
             </p>
-          </div>
+          </Link>
         </div>
       </div>
     </>
@@ -665,6 +672,7 @@ function SideCoverLinesLayout({
   heroSerifClassName: string;
 }) {
   const visibleUpdates = dailyAiUpdates.updates.slice(0, 3);
+  const dailyUpdatesHref = getDailyAiUpdatesHref(dailyAiUpdates);
 
   return (
     <>
@@ -718,23 +726,23 @@ function SideCoverLinesLayout({
             </SideCoverLine>
           ) : null}
           <SideCoverLine>
-            <p className="text-[13px] font-black tracking-[0.16em] text-[#d6a352] uppercase">
+            <Link href={dailyUpdatesHref} className="inline-flex text-[13px] font-black tracking-[0.16em] text-[#d6a352] uppercase transition-opacity hover:opacity-80">
               {getText(dailyAiUpdates.label, lang)}
-            </p>
+            </Link>
             {visibleUpdates.length ? (
               <ul className={`mt-5 space-y-4 text-[clamp(18px,1.45vw,24px)] leading-[1.08] font-semibold text-[#fffaf0] [text-shadow:0_2px_18px_rgba(0,0,0,0.35)] ${heroSerifClassName}`}>
                 {visibleUpdates.map((update) => (
                   <li key={update.title}>
-                    <Link href={update.href} className="block transition-opacity hover:opacity-80">
+                    <Link href={update.href || dailyUpdatesHref} className="block transition-opacity hover:opacity-80">
                       {update.title}
                     </Link>
                   </li>
                 ))}
               </ul>
             ) : null}
-            <span className="mt-5 inline-flex items-center gap-3 text-[12px] font-black tracking-[0.18em] text-[#d6a352] uppercase">
+            <Link href={dailyUpdatesHref} className="mt-5 inline-flex items-center gap-3 text-[12px] font-black tracking-[0.18em] text-[#d6a352] uppercase transition-opacity hover:opacity-80">
               READ MORE <ArrowRight size={16} strokeWidth={1.8} />
-            </span>
+            </Link>
           </SideCoverLine>
         </div>
       </div>

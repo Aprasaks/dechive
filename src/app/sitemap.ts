@@ -20,12 +20,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
   const aiUpdateUrls: MetadataRoute.Sitemap = aiUpdateDays.flatMap((day) =>
-    day.updates.map((update) => ({
-      url: `${BASE_URL}/ai-updates/${day.date}/${update.slug}`,
-      lastModified: new Date(`${day.date}T00:00:00+09:00`),
-      changeFrequency: 'monthly' as const,
-      priority: 0.5,
-    })),
+    [
+      {
+        url: `${BASE_URL}/ai-updates/${day.date}`,
+        lastModified: new Date(`${day.date}T00:00:00+09:00`),
+        changeFrequency: 'monthly' as const,
+        priority: 0.6,
+      },
+    ],
   );
   const bookUrls: MetadataRoute.Sitemap = books.map((book) => ({
     url: `${BASE_URL}/book/${book.slug}`,

@@ -14,6 +14,39 @@ export type DailyAiUpdates = {
 
 export const dailyAiUpdates: DailyAiUpdates[] = [
   {
+    date: '2026-06-22',
+    label: {
+      ko: '오늘의 AI 업데이트',
+      en: 'AI UPDATE',
+    },
+    updates: [
+      {
+        title: 'Zoom Workplace',
+        description: {
+          ko: 'AI가 회의와 문서 흐름 안으로 들어간다',
+          en: 'AI moves deeper into meetings and documents',
+        },
+        href: '/ai-updates/2026-06-22',
+      },
+      {
+        title: 'ZoomMate Workflow',
+        description: {
+          ko: '전화와 회의 요약이 AI 워크플로우의 시작점이 된다',
+          en: 'calls and meeting summaries become workflow triggers',
+        },
+        href: '/ai-updates/2026-06-22',
+      },
+      {
+        title: 'Google Cloud MCP',
+        description: {
+          ko: 'AI 애플리케이션이 클라우드 저장소 자원과 연결된다',
+          en: 'AI apps connect to cloud storage resources',
+        },
+        href: '/ai-updates/2026-06-22',
+      },
+    ],
+  },
+  {
     date: '2026-06-18',
     label: {
       ko: '오늘의 AI 업데이트',
