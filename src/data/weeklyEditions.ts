@@ -59,5 +59,18 @@ export const weeklyEditions: WeeklyEdition[] = [
       },
       href: '/deep-dive/data-analysis-beyond-business',
     },
+    book: {
+      label: {
+        ko: '도서',
+        en: 'BOOK',
+      },
+      title: {
+        ko: '듀얼 브레인',
+        en: 'Dual Brain',
+      },
+      author: '이선 몰릭',
+      href: '/book/dual-brain',
+      coverImage: '/images/books/2026-06-22.webp',
+    },
   },
 ];
