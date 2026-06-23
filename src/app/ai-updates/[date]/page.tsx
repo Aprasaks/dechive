@@ -40,6 +40,7 @@ function toBriefingItem(update: AiUpdateDay['updates'][number]): AiUpdateBriefin
     id: update.id,
     title: update.title,
     officialDate: '',
+    checkedDateKST: '',
     sourceType: update.source.label,
     updateType: update.badges.slice(0, 2).join(' / ') || 'Official Update',
     badges: update.badges,
@@ -133,7 +134,7 @@ function UpdateCard({ update }: { update: AiUpdateBriefingItem }) {
       <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
         <div>
           <p className="text-[11px] font-semibold tracking-[0.2em] text-[#9a7342] uppercase">
-            {[update.officialDate, update.sourceType].filter(Boolean).join(' · ')}
+            {[update.officialDate, update.checkedDateKST ? `Checked KST ${update.checkedDateKST}` : '', update.sourceType].filter(Boolean).join(' · ')}
           </p>
           <h3 className="mt-3 font-[family-name:var(--font-header-serif)] text-2xl leading-tight font-medium text-[#2a211b] sm:text-3xl">
             {update.title}

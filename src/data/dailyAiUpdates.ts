@@ -14,6 +14,39 @@ export type DailyAiUpdates = {
 
 export const dailyAiUpdates: DailyAiUpdates[] = [
   {
+    date: '2026-06-23',
+    label: {
+      ko: '오늘의 AI 업데이트',
+      en: 'AI UPDATE',
+    },
+    updates: [
+      {
+        title: 'ChatGPT Input',
+        description: {
+          ko: '긴 붙여넣기를 첨부파일처럼 정리한다',
+          en: 'long paste input becomes attachment-like',
+        },
+        href: '/ai-updates/2026-06-23',
+      },
+      {
+        title: 'OpenAI Security',
+        description: {
+          ko: 'AI 보안이 패치와 검증 자동화로 이동한다',
+          en: 'AI security moves toward patch and verification',
+        },
+        href: '/ai-updates/2026-06-23',
+      },
+      {
+        title: 'Claude Code MCP',
+        description: {
+          ko: 'MCP 인증과 CLI 워크플로우가 더 깊게 연결된다',
+          en: 'MCP auth and CLI workflows become deeper',
+        },
+        href: '/ai-updates/2026-06-23',
+      },
+    ],
+  },
+  {
     date: '2026-06-22',
     label: {
       ko: '오늘의 AI 업데이트',

@@ -17,7 +17,14 @@ export type AiUpdateBadge =
   | 'Enterprise AI'
   | 'Official Screen Available'
   | 'Official Screen Not Confirmed'
-  | 'Explanation Image Recommended';
+  | 'Explanation Image Recommended'
+  | 'Product Update'
+  | 'Security Update'
+  | 'Cyber Defense'
+  | 'Developer Tool'
+  | 'CLI Workflow'
+  | 'Business Automation'
+  | 'AI Operations';
 
 export interface AiUpdateItem {
   id: string;
@@ -63,6 +70,7 @@ export interface AiUpdateBriefingItem {
   id: string;
   title: string;
   officialDate: string;
+  checkedDateKST?: string;
   sourceType: string;
   updateType: string;
   badges: AiUpdateBadge[];
@@ -78,6 +86,192 @@ export interface AiUpdateBriefingItem {
 export const AI_UPDATES_MONTH = '2026.06';
 
 export const aiUpdateDays: AiUpdateDay[] = [
+  {
+    date: '2026-06-23',
+    title: 'AI가 입력창, 보안, 코딩 CLI, 업무 자동화 안으로 들어간 날',
+    subtitle: '오늘의 업데이트는 새 챗봇 출시가 아니라, AI가 긴 입력을 정리하고, 보안 패치를 돕고, CLI와 업무 워크플로우 안에서 실제 실행 흐름을 이어가는 변화다.',
+    quickSummary: [
+      'ChatGPT는 긴 붙여넣기를 자동으로 첨부파일처럼 처리하며, 긴 입력을 더 정리된 방식으로 다루기 시작했다.',
+      'OpenAI Daybreak와 Codex Security는 AI 보안이 취약점 발견에서 패치와 검증 자동화로 이동하고 있음을 보여준다.',
+      'Claude Code, ZoomMate, Zoom Phone 계열 업데이트는 AI가 CLI, 전화, 회의 요약, 업무 워크플로우 안으로 들어가는 흐름을 보여준다.',
+    ],
+    groups: [
+      {
+        name: 'OpenAI ChatGPT',
+        intro: '일반 사용자의 입력창 경험에서 긴 자료를 다루는 방식이 정리되는 업데이트다.',
+        updates: [
+          {
+            id: 'chatgpt-long-paste-attachments',
+            title: 'OpenAI ChatGPT — 긴 붙여넣기를 자동 첨부파일로 처리하다',
+            officialDate: '2026.06.22',
+            checkedDateKST: '2026.06.23',
+            sourceType: 'Official Release Notes',
+            updateType: 'Product Update',
+            badges: ['Product Update', 'Official Source', 'Official Screen Not Confirmed', 'Explanation Image Recommended'],
+            summary: 'ChatGPT Free와 Go 사용자도 긴 텍스트를 붙여넣으면 입력창에 그대로 넣는 대신 자동으로 첨부파일처럼 처리되도록 바뀌었다.',
+            whatChanged: '긴 텍스트를 대화 입력창에 그대로 넣는 방식에서, 10,000자를 넘으면 자동으로 파일처럼 정리하는 방식으로 바뀌었다. 사용자는 다시 Show in text field로 본문 입력창에 되돌릴 수 있다.',
+            whyItMatters: '긴 문서, 긴 회의록, 긴 원고를 붙여넣을 때 입력창이 지나치게 복잡해지는 문제를 줄일 수 있다. AI가 긴 입력을 더 구조화된 자료로 다루게 되는 변화다.',
+            dechiveView: '이 업데이트는 작아 보이지만 AI 사용 경험에서 중요하다. 사용자는 점점 더 긴 문서와 복잡한 자료를 AI에게 넘기고 있다. AI 도구는 단순히 답변을 잘하는 것뿐 아니라, 사용자가 넣는 자료를 어떻게 정리하고 다룰지도 중요해진다.',
+            readerTakeaway: 'ChatGPT는 긴 글을 그냥 대화창에 쌓는 대신, 자료처럼 정리해서 다루는 방향으로 가고 있다.',
+            screenMaterialStatus: 'ChatGPT 입력창에서 긴 붙여넣기가 첨부파일처럼 처리되는 실제 화면이 있으면 가장 좋다. 공식 릴리즈노트에 화면이 없다면, 설명 이미지는 조용한 UI 재현 형태로만 사용한다.',
+            cautionNote: '이 기능을 “모든 긴 문서를 자동 분석한다”로 과장하지 않는다. 핵심은 긴 붙여넣기 입력 처리 방식의 개선이다.',
+          },
+        ],
+      },
+      {
+        name: 'OpenAI Daybreak / Codex Security',
+        intro: 'AI 보안이 취약점 발견에서 패치 제안과 검증 자동화로 확장되는 흐름이다.',
+        updates: [
+          {
+            id: 'openai-daybreak-codex-security',
+            title: 'OpenAI Daybreak / Codex Security — AI 보안이 취약점 발견에서 패치 자동화로 이동하다',
+            officialDate: '2026.06.22',
+            checkedDateKST: '2026.06.23',
+            sourceType: 'Official Blog / Official Product Update',
+            updateType: 'Security Update / Cyber Defense',
+            badges: ['Security Update', 'Cyber Defense', 'Official Source', 'Explanation Image Recommended'],
+            summary: 'OpenAI는 Daybreak를 확장하면서 Codex Security 플러그인 업데이트, GPT-5.5-Cyber 제한 출시, 파트너 프로그램과 Patch the Planet 이니셔티브를 발표했다.',
+            whatChanged: 'AI 보안 도구가 “취약점 찾기” 중심에서 “패치와 검증을 돕는 흐름”으로 확장되고 있다. Codex Security는 코드베이스를 스캔하고, 발견된 문제를 fixed 상태로 판단하는 자동화 흐름을 포함한다.',
+            whyItMatters: '보안에서 가장 큰 문제는 취약점을 찾는 것만이 아니다. 실제로 고치고, 그 수정이 맞는지 검증하고, 운영 코드에 안전하게 반영하는 과정이 중요하다.',
+            dechiveView: 'AI가 답을 만드는 수준을 넘어 보안 문제를 발견하고 패치까지 제안하는 단계로 가고 있다. 하지만 이럴수록 검증은 더 중요해진다. AI가 제안한 보안 패치가 실제로 안전한지, 기존 기능을 망가뜨리지 않는지 사람이 확인해야 한다.',
+            readerTakeaway: 'AI 보안은 문제를 찾는 단계에서, 고치고 검증하는 단계로 이동하고 있다.',
+            screenMaterialStatus: '보안 대시보드나 Codex Security 플러그인 화면이 공식적으로 공개되어 있다면 참고 가능하다. 명확한 공식 화면이 없으면 “취약점 발견 → 패치 제안 → 검증” 흐름을 보여주는 설명 다이어그램이 적합하다.',
+            cautionNote: '“AI가 모든 보안 문제를 자동으로 해결한다”라고 쓰지 않는다. 제한 출시, 검증된 방어자, 보안 조직 중심의 업데이트라는 점을 유지한다.',
+          },
+        ],
+      },
+      {
+        name: 'Claude Code',
+        intro: 'AI 코딩 도구가 MCP 인증과 워크플로우 조작을 CLI 안으로 더 깊게 가져오는 변화다.',
+        updates: [
+          {
+            id: 'claude-code-2-1-186-mcp-cli',
+            title: 'Claude Code 2.1.186 — MCP 인증과 워크플로우 조작을 CLI 안으로 더 깊게 넣다',
+            officialDate: '2026.06.22',
+            checkedDateKST: '2026.06.23',
+            sourceType: 'Official Changelog',
+            updateType: 'Developer Tool / CLI Workflow / MCP',
+            badges: ['Developer Tool', 'CLI Workflow', 'MCP', 'Official Source', 'Explanation Image Recommended'],
+            summary: 'Claude Code 2.1.186에는 claude mcp login/logout 명령, SSH 환경을 위한 --no-browser 흐름, workflow 상태 필터와 Bash 명령 출력 응답 흐름이 추가되었다.',
+            whatChanged: 'Claude Code가 MCP 인증, 워크플로우 필터링, Bash 명령 출력 응답을 CLI 안에서 더 직접적으로 다룰 수 있게 되었다.',
+            whyItMatters: 'AI 코딩 도구는 단순히 코드를 추천하는 도구가 아니라, 외부 도구와 연결되고 명령어 실행 결과를 이어받아 다음 작업으로 연결하는 환경이 되고 있다.',
+            dechiveView: '비전공자에게는 어렵지만 방향은 분명하다. AI 코딩 도구는 점점 더 작업 환경에 가까워지고 있다. 로그인, 외부 도구 연결, 명령어 결과 해석, 워크플로우 상태 관리가 모두 AI 코딩 환경 안으로 들어온다.',
+            readerTakeaway: 'AI 코딩 도구는 채팅창이 아니라, 외부 도구와 명령어를 이어주는 작업 환경으로 바뀌고 있다.',
+            screenMaterialStatus: 'CLI 업데이트라서 제품 화면보다는 터미널 예시 또는 “Claude Code ↔ MCP Server ↔ 외부 도구” 흐름을 보여주는 설명 이미지가 적합하다.',
+            cautionNote: '비전공자에게는 용어가 어렵다. 본문에서는 MCP를 “AI가 외부 도구와 연결되는 통로” 정도로 풀어 설명한다. 명령어 세부 사용법보다 변화의 방향을 중심으로 쓴다.',
+          },
+        ],
+      },
+      {
+        name: 'ZoomMate',
+        intro: 'AI 워크플로우가 전화, 문자, 회의 요약, 문서 저장 같은 업무 이벤트와 연결되는 흐름이다.',
+        updates: [
+          {
+            id: 'zoommate-workflow-phone-meeting-documents',
+            title: 'ZoomMate — AI 워크플로우를 전화·문자·회의 요약·문서 저장으로 확장하다',
+            officialDate: '2026.06.22',
+            checkedDateKST: '2026.06.23',
+            sourceType: 'Official Release Notes',
+            updateType: 'Workflow Update / Agentic Workflow / Business Automation',
+            badges: ['Workflow Update', 'Agentic Workflow', 'Business Automation', 'Official Source', 'Explanation Image Recommended'],
+            summary: 'ZoomMate는 Agentic Workflows의 오류/종료 상태 표시를 개선하고, Zoom Phone 이벤트와 회의 요약 저장을 워크플로우로 연결한다.',
+            whatChanged: 'AI 워크플로우가 단순 실행에서 벗어나, 전화 이벤트 감지, 회의 요약 저장, 문서화, 오류 상태 설명까지 확장되고 있다.',
+            whyItMatters: '업무 자동화에서 중요한 것은 “AI가 답을 주는가”가 아니라 “업무 이벤트를 감지하고 다음 행동으로 연결할 수 있는가”다.',
+            dechiveView: 'AI는 점점 업무 흐름의 중간에 들어오고 있다. 사용자가 매번 명령하지 않아도, 부재중 전화나 문자, 회의 요약 생성 같은 사건이 다음 자동화의 시작점이 된다. 하지만 자동화가 강해질수록 어떤 조건에서 실행되고 어디에 저장되는지 검증해야 한다.',
+            readerTakeaway: 'AI는 이제 답변만 하는 것이 아니라, 전화와 회의 요약을 감지해 다음 업무 흐름으로 이어주는 자동화 도구가 되고 있다.',
+            screenMaterialStatus: '워크플로우 빌더, 전화 이벤트 트리거, 회의 요약 → Google Drive/OneDrive 저장 흐름을 보여주는 설명 이미지가 적합하다. 공식 화면이 명확히 없으면 다이어그램형 설명 자료를 사용한다.',
+            cautionNote: '모든 Zoom 사용자에게 자동 적용되는 기능처럼 쓰지 않는다. ZoomMate, Zoom Phone, workflow 설정 맥락에서 설명한다.',
+          },
+        ],
+      },
+      {
+        name: 'Zoom Phone / Zoom Workplace',
+        intro: 'AI가 별도 Companion 브랜드가 아니라 업무 시스템 안의 기본 기능과 운영 단위로 정리되는 흐름이다.',
+        updates: [
+          {
+            id: 'zoom-phone-workplace-ai-operations',
+            title: 'Zoom Phone / Zoom Workplace — AI를 별도 Companion 기능이 아니라 업무 시스템 안의 기본 기능으로 정리하다',
+            officialDate: '2026.06.22 / 일부 항목 2026.06.21',
+            checkedDateKST: '2026.06.23',
+            sourceType: 'Official Release Notes',
+            updateType: 'Product Integration / AI Operations',
+            badges: ['Product Integration', 'AI Operations', 'Official Source', 'Explanation Image Recommended'],
+            summary: 'Zoom Phone 릴리즈노트에는 AI Companion 이름이 retired되고 기존 AI 기능은 Zoom Workplace 안의 AI 기능으로 유지된다고 안내되어 있다.',
+            whatChanged: 'AI가 별도 Companion 브랜드로 분리되는 대신, Zoom 업무 시스템 안의 기본 AI 기능처럼 정리된다. 또한 AI 상담원을 전화 시스템 안에서 독립적인 개체로 관리할 수 있는 흐름이 추가된다.',
+            whyItMatters: 'AI가 제품의 보조 기능에서 업무 시스템의 운영 단위로 이동하고 있다. Virtual Agent가 전화 시스템 안에서 번호와 확장을 부여받을 수 있다는 것은 AI 상담원이 실제 고객 접점의 일부로 관리될 수 있음을 보여준다.',
+            dechiveView: 'AI가 “옆에서 도와주는 친구” 같은 Companion 개념에서 조직이 관리하는 업무 시스템의 한 구성요소로 바뀌고 있다. 이제 AI는 기능명이 아니라 운영 단위가 된다.',
+            readerTakeaway: 'AI는 별도 도우미에서 업무 시스템 안의 기본 기능과 운영 단위로 이동하고 있다.',
+            screenMaterialStatus: 'Zoom Phone 관리자 화면 또는 Virtual Agent 설정 화면이 있으면 적합하다. 공식 화면이 없으면 “AI Virtual Agent가 전화 시스템 안의 하나의 개체로 배치되는 구조”를 보여주는 설명 이미지가 적합하다.',
+            cautionNote: '“AI Companion이 완전히 종료된다”처럼 쓰지 않는다. 명칭이 retired되고 기존 기능은 Zoom Workplace 안의 AI 기능으로 유지된다는 점을 명확히 쓴다.',
+          },
+        ],
+      },
+    ],
+    verificationNote: '오늘 확인한 업데이트는 OpenAI, Claude Code, ZoomMate, Zoom Phone/Workplace에 집중되어 있다. OpenAI는 긴 입력 처리와 보안 자동화 흐름에서 변화가 있었고, Claude Code는 MCP와 CLI 작업 흐름을 강화했다. ZoomMate와 Zoom Phone은 AI를 전화, 회의, 문서, 업무 자동화 안으로 연결하는 방향을 보여준다. 다만 오늘 페이지에서는 기능 출시와 제품 명칭 정리, 보안 업데이트, 개발자용 CLI 개선, 업무 자동화를 구분한다. 공식 화면이 확인되지 않은 항목은 실제 화면처럼 단정하지 않고, 설명 이미지가 더 적절하다고 표시한다. Microsoft Power Automate, Gemini API, xAI 등은 오늘 AI Updates 메인으로 보기 어려우면 보류한다.',
+    closingLine: 'AI는 답변창 안에 머무르지 않는다. 긴 입력을 정리하고, 보안을 점검하고, 외부 도구와 로그인하고, 전화와 회의 요약을 업무 흐름으로 연결한다. Dechive는 그 변화가 실제로 무엇을 바꾸는지 기록한다.',
+    updates: [
+      {
+        id: 'chatgpt-long-paste-attachments',
+        slug: 'chatgpt-long-paste-attachments',
+        title: 'OpenAI ChatGPT — 긴 붙여넣기를 자동 첨부파일로 처리하다',
+        summary: '긴 텍스트를 붙여넣으면 입력창에 그대로 넣는 대신 자동으로 첨부파일처럼 처리되도록 바뀌었다.',
+        badges: ['Product Update', 'Official Source', 'Official Screen Not Confirmed'],
+        detailHref: '/ai-updates/2026-06-23#chatgpt-long-paste-attachments',
+        source: {
+          label: 'OpenAI Release Notes',
+          url: 'https://help.openai.com/',
+          description: 'ChatGPT 긴 붙여넣기 입력 처리 변경을 확인하는 항목입니다.',
+        },
+        whatChanged: '10,000자를 넘는 긴 텍스트가 자동으로 첨부파일처럼 처리된다.',
+        useCriteria: '긴 문서 입력 처리 방식의 개선으로 읽어야 하며, 모든 긴 문서 자동 분석 기능으로 과장하지 않는다.',
+        verificationNotes: ['공식 릴리즈노트 기준으로 기록합니다.'],
+        image: {
+          status: 'none',
+          caption: '공식 화면이 명확하지 않으면 조용한 UI 재현 이미지가 적절합니다.',
+        },
+      },
+      {
+        id: 'openai-daybreak-codex-security',
+        slug: 'openai-daybreak-codex-security',
+        title: 'OpenAI Daybreak / Codex Security — AI 보안이 취약점 발견에서 패치 자동화로 이동하다',
+        summary: 'AI 보안 도구가 취약점 발견에서 패치와 검증을 돕는 흐름으로 확장되고 있다.',
+        badges: ['Security Update', 'Cyber Defense', 'Official Source'],
+        detailHref: '/ai-updates/2026-06-23#openai-daybreak-codex-security',
+        source: {
+          label: 'OpenAI Official Blog / Product Update',
+          url: 'https://openai.com/',
+          description: 'Daybreak와 Codex Security 관련 공식 발표를 확인하는 항목입니다.',
+        },
+        whatChanged: '보안 취약점 발견뿐 아니라 패치 제안과 검증 자동화 흐름이 강조된다.',
+        useCriteria: 'AI가 모든 보안 문제를 자동 해결한다는 의미가 아니라, 방어자와 보안 조직을 돕는 흐름으로 읽어야 합니다.',
+        verificationNotes: ['공식 블로그와 공식 제품 업데이트 기준으로 기록합니다.'],
+        image: {
+          status: 'none',
+          caption: '취약점 발견 → 패치 제안 → 검증 흐름을 보여주는 설명 다이어그램이 적합합니다.',
+        },
+      },
+      {
+        id: 'claude-code-2-1-186-mcp-cli',
+        slug: 'claude-code-2-1-186-mcp-cli',
+        title: 'Claude Code 2.1.186 — MCP 인증과 워크플로우 조작을 CLI 안으로 더 깊게 넣다',
+        summary: 'MCP 인증, 워크플로우 필터링, Bash 명령 출력 응답이 CLI 안에서 더 직접적으로 처리된다.',
+        badges: ['Developer Tool', 'CLI Workflow', 'MCP', 'Official Source'],
+        detailHref: '/ai-updates/2026-06-23#claude-code-2-1-186-mcp-cli',
+        source: {
+          label: 'Claude Code Changelog',
+          url: 'https://docs.anthropic.com/',
+          description: 'Claude Code 2.1.186 변경 기록을 확인하는 항목입니다.',
+        },
+        whatChanged: 'Claude Code가 외부 도구 인증과 명령어 출력 응답을 CLI 안으로 더 깊게 통합한다.',
+        useCriteria: '개발자용 CLI 워크플로우 개선으로 분류하고, 일반 사용자 기능처럼 넓혀 쓰지 않는다.',
+        verificationNotes: ['공식 변경 기록 기준으로 기록합니다.'],
+        image: {
+          status: 'none',
+          caption: '터미널 예시 또는 Claude Code ↔ MCP Server 흐름 설명 이미지가 적합합니다.',
+        },
+      },
+    ],
+  },
   {
     date: '2026-06-22',
     title: 'AI가 업무 도구 안으로 더 깊게 들어간 날',
