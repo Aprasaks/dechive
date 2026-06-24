@@ -146,6 +146,16 @@ function UpdateCard({ update }: { update: AiUpdateBriefingItem }) {
         <p className="shrink-0 text-xs font-semibold tracking-[0.14em] text-[#8a6a39] uppercase">
           {update.updateType}
         </p>
+        {update.officialSource ? (
+          <a
+            href={update.officialSource.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-3 inline-flex text-xs font-semibold tracking-[0.12em] text-[#8a6a39] uppercase underline decoration-[#b08d57]/35 underline-offset-4 transition-colors hover:text-[#2a211b]"
+          >
+            {update.officialSource.label}
+          </a>
+        ) : null}
       </div>
 
       <div className="mt-5 flex flex-wrap gap-2">

@@ -24,7 +24,22 @@ export type AiUpdateBadge =
   | 'Developer Tool'
   | 'CLI Workflow'
   | 'Business Automation'
-  | 'AI Operations';
+  | 'AI Operations'
+  | 'Team AI'
+  | 'Slack Agent'
+  | 'Model Update'
+  | 'Document Intelligence'
+  | 'Security'
+  | 'Organization Control'
+  | 'Code Quality'
+  | 'BYOK'
+  | 'Model Provider'
+  | 'Case Study'
+  | 'Status Watch'
+  | 'API'
+  | 'Agentic Coding'
+  | 'Bug Fix'
+  | 'Copilot Reliability';
 
 export interface AiUpdateItem {
   id: string;
@@ -72,6 +87,10 @@ export interface AiUpdateBriefingItem {
   officialDate: string;
   checkedDateKST?: string;
   sourceType: string;
+  officialSource?: {
+    label: string;
+    url: string;
+  };
   updateType: string;
   badges: AiUpdateBadge[];
   summary: string;
@@ -86,6 +105,330 @@ export interface AiUpdateBriefingItem {
 export const AI_UPDATES_MONTH = '2026.06';
 
 export const aiUpdateDays: AiUpdateDay[] = [
+  {
+    date: '2026-06-24',
+    title: 'AI가 팀 협업, 터미널, 문서 처리, 코드 보안 안으로 들어간 날',
+    subtitle: '오늘의 업데이트는 새 챗봇 출시가 아니라, AI가 팀 협업 공간에서 호출되고, 문서의 구조를 읽고, 터미널에서 이슈와 PR을 다루고, 조직의 모델·보안 정책 안에서 작동하기 시작했다는 점이 핵심이다.',
+    quickSummary: [
+      'Anthropic은 Slack 안에서 Claude를 태그해 팀 작업을 맡기는 Claude Tag를 공개했고, Mistral은 OCR 4로 문서 구조와 신뢰도까지 읽는 방향을 보여줬다.',
+      'Claude Code와 GitHub Copilot CLI는 터미널, MCP, 조직 제어, 이슈와 PR 작업 흐름 안으로 AI를 더 깊게 넣고 있다.',
+      'GitHub Code Quality, Visual Studio/SSMS, Gemini 문서, OpenAI 사례, Anthropic Status는 기능 출시와 문서·사례·상태 기록을 구분해 보조 항목으로 다룬다.',
+    ],
+    groups: [
+      {
+        name: 'Anthropic',
+        intro: 'AI가 별도 채팅창이 아니라 팀 협업 공간 안에서 호출되는 흐름이다.',
+        updates: [
+          {
+            id: 'anthropic-claude-tag',
+            title: 'Anthropic Claude Tag — Slack에서 Claude를 태그해 일을 맡기는 팀 AI',
+            officialDate: '2026.06.23',
+            checkedDateKST: '2026.06.24',
+            sourceType: 'Official Blog',
+            officialSource: {
+              label: 'Anthropic — Introducing Claude Tag',
+              url: 'https://www.anthropic.com/news/introducing-claude-tag',
+            },
+            updateType: 'Product Update / Team AI / Slack Agent',
+            badges: ['Product Update', 'Team AI', 'Slack Agent', 'Official Source', 'Official Screen Not Confirmed'],
+            summary: 'Anthropic이 Claude Tag를 공개했다. Slack에서 @Claude를 태그하면 Claude가 요청을 단계로 나누고, 접근 가능한 도구를 사용해 작업한 뒤, Slack 스레드에 결과를 남긴다.',
+            whatChanged: 'AI가 별도 채팅창에서만 작동하는 것이 아니라, 팀이 실제로 협업하는 Slack 스레드 안에서 호출되고 작업을 수행하는 형태로 들어왔다.',
+            whyItMatters: '팀 협업에서 중요한 것은 단순 답변이 아니라, 대화 맥락 안에서 요청을 이해하고, 필요한 작업을 분해하고, 결과를 다시 같은 스레드에 남기는 것이다.',
+            dechiveView: '이 업데이트는 “AI 비서가 더 똑똑해졌다”보다 “AI의 위치가 바뀌었다”는 점이 중요하다. AI가 별도 창에 있는 도구에서, 팀이 실제로 일하는 협업 공간 안의 작업자로 이동하고 있다.',
+            readerTakeaway: '이제 팀은 Slack에서 사람을 태그하듯 Claude를 태그해 일을 맡길 수 있다.',
+            screenMaterialStatus: 'Slack 안에서 @Claude가 태그되고 스레드에 결과를 남기는 공식 화면이 있으면 가장 적합하다. 공식 화면이 명확하지 않으면 Slack 스레드 안에서 AI가 작업 결과를 남기는 설명 이미지가 적합하다.',
+            cautionNote: '모든 Claude 사용자에게 제공되는 일반 기능처럼 쓰지 않는다. 현재는 Claude Enterprise와 Team 고객 대상 베타라는 점을 명확히 한다.',
+          },
+        ],
+      },
+      {
+        name: 'Mistral',
+        intro: '문서를 단순 텍스트가 아니라 구조와 신뢰도를 가진 데이터로 읽는 업데이트다.',
+        updates: [
+          {
+            id: 'mistral-ocr-4',
+            title: 'Mistral OCR 4 — 문서를 구조와 신뢰도까지 읽는 AI',
+            officialDate: '2026.06.23',
+            checkedDateKST: '2026.06.24',
+            sourceType: 'Official Blog',
+            officialSource: {
+              label: 'Mistral AI — Mistral OCR 4',
+              url: 'https://mistral.ai/news/ocr-4/',
+            },
+            updateType: 'Model Update / Document Intelligence',
+            badges: ['Model Update', 'Document Intelligence', 'Official Source', 'Explanation Image Recommended'],
+            summary: 'Mistral이 OCR 4를 공개했다. 이 모델은 추출된 텍스트와 함께 bounding boxes, block classification, inline confidence scores를 제공한다.',
+            whatChanged: 'OCR이 단순 텍스트 추출 도구에서, 문서의 위치·구조·블록 유형·신뢰도까지 남기는 문서 이해 파이프라인으로 확장되고 있다.',
+            whyItMatters: 'AI 검색이나 RAG 시스템에서 문서를 넣을 때 단순 텍스트만 추출하면 구조와 맥락이 사라질 수 있다. 어느 위치에서 어떤 정보가 나왔고 얼마나 신뢰할 수 있는지를 함께 남기는 것은 AI 검증에 중요하다.',
+            dechiveView: 'AI가 답을 만들기 전에, 무엇을 근거로 읽었는지 기록해야 한다. 문서 구조와 신뢰도는 “AI가 읽었다”는 말을 검증 가능한 형태로 바꾸는 요소다.',
+            readerTakeaway: '문서 AI는 이제 글자만 읽는 것이 아니라, 문서의 구조와 신뢰도까지 함께 남기는 방향으로 가고 있다.',
+            screenMaterialStatus: '문서 페이지 위에 bounding box와 confidence score가 표시된 공식 이미지가 있으면 가장 적합하다. 공식 화면이 없으면 문서 → 구조화된 데이터 → RAG 입력 흐름을 보여주는 설명 이미지가 적합하다.',
+            cautionNote: '단순 OCR 성능 자랑처럼 쓰지 않는다. 핵심은 문서 추출 결과를 검증 가능한 구조로 남긴다는 점이다.',
+          },
+        ],
+      },
+      {
+        name: 'Claude Code',
+        intro: 'AI 코딩 도구가 자동 작업 환경의 보안, 조직 제어, MCP 안정성을 강화하는 흐름이다.',
+        updates: [
+          {
+            id: 'claude-code-2-1-187-security-control',
+            title: 'Claude Code 2.1.187 — 자동 작업 환경의 보안과 조직 제어 강화',
+            officialDate: '2026.06.23',
+            checkedDateKST: '2026.06.24',
+            sourceType: 'Official Changelog',
+            officialSource: {
+              label: 'Claude Code changelog',
+              url: 'https://code.claude.com/docs/en/changelog',
+            },
+            updateType: 'Developer Tool / Security / CLI Workflow / MCP / Organization Control',
+            badges: ['Developer Tool', 'Security', 'CLI Workflow', 'MCP', 'Organization Control', 'Official Source'],
+            summary: 'Claude Code 2.1.187에는 sandbox.credentials, 조직 제한 모델 표시/차단, remote MCP tool call timeout, 한국어/CJK 붙여넣기 수정이 포함됐다.',
+            whatChanged: 'Claude Code가 더 많은 작업을 자동으로 수행하는 만큼, 비밀정보 접근 차단, 조직 정책 반영, 원격 도구 멈춤 처리, 다국어 터미널 입력 안정성이 강화됐다.',
+            whyItMatters: 'AI 코딩 도구는 파일을 고치고, 명령어를 실행하고, 외부 도구와 연결된다. secret, credential, 조직 모델 정책, 원격 도구 장애를 제대로 다루지 못하면 실제 프로젝트에 문제가 생길 수 있다.',
+            dechiveView: '좋은 AI 코딩 도구는 코드를 잘 만드는 것만으로 충분하지 않다. 비밀정보를 지키고, 조직의 정책을 따르고, 멈춘 도구를 무한히 기다리지 않고, 다양한 언어 입력을 안정적으로 처리해야 한다.',
+            readerTakeaway: 'AI 코딩 도구는 더 강력해질수록, 보안과 조직 제어가 더 중요해진다.',
+            screenMaterialStatus: 'CLI 업데이트라 실제 제품 화면보다는 터미널 화면 또는 AI 작업 환경 ↔ 보안 정책 ↔ 외부 MCP 도구 흐름을 보여주는 설명 이미지가 적합하다.',
+            cautionNote: '비전공자에게는 세부 명령어보다 “AI 코딩 도구가 비밀정보와 조직 정책을 더 조심스럽게 다루게 됐다”는 흐름으로 설명한다.',
+          },
+        ],
+      },
+      {
+        name: 'GitHub',
+        intro: '터미널과 모델 공급자 선택, 코드 품질 API가 AI 개발 흐름 안으로 들어오는 업데이트다.',
+        updates: [
+          {
+            id: 'github-copilot-cli-terminal-ga',
+            title: 'GitHub Copilot CLI — 새 터미널 인터페이스 정식 출시',
+            officialDate: '2026.06.23',
+            checkedDateKST: '2026.06.24',
+            sourceType: 'Official Changelog',
+            officialSource: {
+              label: 'GitHub Changelog — Copilot CLI new terminal interface',
+              url: 'https://github.blog/changelog/2026-06-23-copilot-cli-new-terminal-interface-is-generally-available/',
+            },
+            updateType: 'Developer Tool / CLI Workflow / Agentic Coding',
+            badges: ['Developer Tool', 'CLI Workflow', 'Agentic Coding', 'Official Source', 'Official Screen Available'],
+            summary: 'GitHub이 Copilot CLI의 새 터미널 인터페이스를 정식 출시했다. 터미널 안에서 Issues, Pull requests, Gists를 탭으로 탐색하고 Copilot 프롬프트에 참조로 넣을 수 있다.',
+            whatChanged: '터미널이 단순 명령어 입력창에서, 이슈·PR·MCP·스킬·플러그인을 다루는 AI 작업 공간으로 확장되고 있다.',
+            whyItMatters: '개발자는 이미 터미널에서 많은 작업을 한다. Copilot CLI가 터미널 안에서 이슈와 PR을 참조하고, MCP와 플러그인을 구성할 수 있게 되면 AI가 개발 흐름 안으로 더 깊게 들어온다.',
+            dechiveView: 'AI 코딩 도구의 경쟁은 “누가 더 좋은 답변을 하느냐”에서 “어디에서 작업을 이어갈 수 있느냐”로 이동하고 있다.',
+            readerTakeaway: 'AI 코딩 도구는 이제 IDE뿐 아니라 터미널 안에서도 이슈와 PR을 다루는 작업 환경이 되고 있다.',
+            screenMaterialStatus: 'GitHub Copilot CLI의 새 터미널 UI 공식 화면이 있으면 적합하다. 공식 화면이 없으면 터미널 안에서 Issue/PR/MCP가 연결되는 설명 이미지가 적합하다.',
+            cautionNote: '이 기능은 개발자용 업데이트다. 일반 독자에게는 “터미널 안에서 AI가 이슈와 PR을 참고해 작업을 돕는 기능”으로 풀어 설명한다.',
+          },
+          {
+            id: 'github-copilot-app-byok',
+            title: 'GitHub Copilot App — BYOK 지원',
+            officialDate: '2026.06.23',
+            checkedDateKST: '2026.06.24',
+            sourceType: 'Official Changelog',
+            officialSource: {
+              label: 'GitHub Changelog — Copilot App BYOK',
+              url: 'https://github.blog/changelog/2026-06-23-github-copilot-app-support-for-byok/',
+            },
+            updateType: 'Product Update / BYOK / Model Provider / Enterprise AI',
+            badges: ['Product Update', 'BYOK', 'Model Provider', 'Enterprise AI', 'Official Source'],
+            summary: 'GitHub Copilot App이 BYOK를 지원하기 시작했다. 사용자는 OpenAI, Azure OpenAI, Microsoft Foundry, Anthropic, LM Studio, Ollama, OpenAI-compatible endpoint 같은 공급자를 연결할 수 있다.',
+            whatChanged: 'Copilot App이 기본 제공 모델만 쓰는 구조에서, 사용자가 가진 모델 키나 로컬 모델, 호환 엔드포인트를 연결할 수 있는 구조로 확장된다.',
+            whyItMatters: '기업이나 개인 개발자는 비용, 보안, 데이터 정책, 모델 성능에 따라 다른 모델을 선택하고 싶어 한다. BYOK는 AI 코딩 도구가 하나의 모델에 묶이지 않고 사용자의 모델 환경과 연결되는 방향을 보여준다.',
+            dechiveView: 'AI 도구는 점점 “하나의 모델을 쓰는 서비스”에서 “여러 모델과 연결되는 작업 환경”으로 변하고 있다.',
+            readerTakeaway: 'AI 코딩 도구는 이제 기본 모델만 쓰는 것이 아니라, 내가 가진 모델 키와 로컬 모델을 연결하는 방향으로 가고 있다.',
+            screenMaterialStatus: 'Copilot App의 모델 공급자 설정 화면이 공식적으로 공개되어 있으면 적합하다. 없으면 모델 공급자 → Copilot App → 작업 세션 흐름을 보여주는 설명 이미지가 적합하다.',
+            cautionNote: 'BYOK는 “무료로 모든 모델을 쓸 수 있다”는 뜻이 아니다. 사용자가 직접 가진 키나 호환 엔드포인트를 연결하는 기능으로 설명한다.',
+          },
+          {
+            id: 'github-code-quality-findings-api',
+            title: 'GitHub Code Quality — Findings REST API 공개 프리뷰',
+            officialDate: '2026.06.23',
+            checkedDateKST: '2026.06.24',
+            sourceType: 'Official Changelog',
+            officialSource: {
+              label: 'GitHub Changelog — Code Quality findings REST API',
+              url: 'https://github.blog/changelog/2026-06-23-fetch-code-quality-findings-via-rest-api/',
+            },
+            updateType: 'Code Quality / API / Agentic Remediation',
+            badges: ['Code Quality', 'API', 'Official Source', 'Explanation Image Recommended'],
+            summary: 'GitHub이 Code Quality findings를 조회하는 REST API를 공개 프리뷰로 제공하기 시작했다.',
+            whatChanged: '코드 품질 검사 결과가 UI 안에만 머무르지 않고, API를 통해 자동화 도구와 AI 수정 워크플로우가 읽을 수 있는 데이터가 된다.',
+            whyItMatters: 'AI가 코드 품질 문제를 고치려면 먼저 어떤 문제가 있는지 구조화된 데이터로 읽을 수 있어야 한다. Findings API는 AI 기반 수정 흐름의 입력 데이터가 될 수 있다.',
+            dechiveView: 'AI 코드 수정은 갑자기 코드를 고치는 것이 아니다. 먼저 문제를 읽고, 분류하고, 수정할 위치를 찾고, 그 결과를 검증해야 한다.',
+            readerTakeaway: '코드 품질 결과가 AI와 자동화 도구가 읽을 수 있는 데이터로 열리고 있다.',
+            screenMaterialStatus: 'API 업데이트이므로 실제 제품 화면보다는 Code Quality findings → REST API → 자동 수정 워크플로우 흐름을 보여주는 설명 이미지가 적합하다.',
+            cautionNote: '이 기능은 공개 프리뷰다. 정식 일반 기능처럼 단정하지 말고 Preview로 표기한다.',
+          },
+        ],
+      },
+      {
+        name: 'Microsoft',
+        intro: 'Copilot 기능 자체보다 안정성 수정과 reliability 이슈로 분리해 읽어야 하는 항목이다.',
+        updates: [
+          {
+            id: 'microsoft-visual-studio-ssms-copilot-fixes',
+            title: 'Microsoft Visual Studio / SSMS — Copilot 안정성 수정',
+            officialDate: '2026.06.23',
+            checkedDateKST: '2026.06.24',
+            sourceType: 'Official Release Notes',
+            officialSource: {
+              label: 'Microsoft Visual Studio release notes',
+              url: 'https://learn.microsoft.com/en-us/visualstudio/releases/2026/release-notes',
+            },
+            updateType: 'Bug Fix / Copilot Reliability',
+            badges: ['Bug Fix', 'Copilot Reliability', 'Official Source', 'Explanation Image Recommended'],
+            summary: 'Visual Studio 2026 18.7.2와 SSMS 22.7.2 계열에서 Copilot Chat 창, 인증 오류, Agent Mode preview 관련 안정성 문제가 수정됐다.',
+            whatChanged: 'Copilot 관련 창이 열리지 않거나 인증 오류가 발생하거나, 에이전트 모드에서 도구가 잘못 실행될 수 있는 문제들이 수정됐다.',
+            whyItMatters: 'AI 개발 도구는 새 기능보다 실제로 안정적으로 열리고 작동하는 것이 중요하다.',
+            dechiveView: 'AI 도구의 품질은 모델 성능만으로 결정되지 않는다. 인증, 창 열림, 도구 실행, 쿼리 검증 같은 안정성 문제가 실제 사용 경험을 좌우한다.',
+            readerTakeaway: 'AI 개발 도구는 새 기능만큼이나 안정적으로 열리고 실행되는 문제가 중요해지고 있다.',
+            screenMaterialStatus: 'Visual Studio/SSMS 안의 Copilot 창 또는 에러 수정 흐름을 보여주는 설명 이미지가 적합하다.',
+            cautionNote: '이 항목은 신기능이 아니라 bug fix / reliability update로 분류한다.',
+          },
+        ],
+      },
+      {
+        name: 'Google',
+        intro: '모델 출시가 아니라 모델 문서 업데이트로 구분해 기록한다.',
+        updates: [
+          {
+            id: 'gemini-3-1-flash-lite-docs',
+            title: 'Gemini 3.1 Flash-Lite — 모델 문서 업데이트',
+            officialDate: '2026.06.23 UTC',
+            checkedDateKST: '2026.06.24',
+            sourceType: 'Official Documentation',
+            officialSource: {
+              label: 'Google AI Developers — Gemini 3.1 Flash-Lite',
+              url: 'https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite',
+            },
+            updateType: 'Documentation Update / Model Documentation',
+            badges: ['Documentation Update', 'Model Update', 'Official Source', 'Explanation Image Recommended'],
+            summary: 'Google AI Developers의 Gemini 3.1 Flash-Lite 모델 문서가 저지연·저비용 멀티모달 모델의 입력, 출력, 도구 지원, 토큰 한도 등을 정리하고 있다.',
+            whatChanged: '새 기능 발표라기보다, 저비용·고빈도 작업용 모델의 지원 입력, 출력, 도구 기능, 토큰 한도 등이 공식 문서에 정리됐다.',
+            whyItMatters: 'AI 모델을 실제 서비스에 쓰려면 성능뿐 아니라 입력 종류, 토큰 한도, 도구 지원, 비용 구조를 알아야 한다.',
+            dechiveView: '이 항목은 “신규 모델 출시”가 아니라 “모델 문서 정리/업데이트”로 다뤄야 한다. 공식 문서가 무엇을 지원한다고 말하는지 기록하는 것이 중요하다.',
+            readerTakeaway: 'Gemini 3.1 Flash-Lite는 저비용·고빈도 작업을 위한 모델로 문서가 정리되고 있다.',
+            screenMaterialStatus: '모델 문서 화면 또는 모델 기능 표를 참고 자료로 사용할 수 있다. 공식 화면이 없으면 모델 기능 요약표 형태의 설명 자료가 적합하다.',
+            cautionNote: '오늘 새 모델이 출시됐다고 쓰지 않는다. Documentation Update로 표기한다.',
+          },
+        ],
+      },
+      {
+        name: 'OpenAI',
+        intro: '제품 출시가 아니라 기업 적용 사례로 분리해 짧게 기록한다.',
+        updates: [
+          {
+            id: 'openai-omio-case-study',
+            title: 'OpenAI Omio 사례 공개',
+            officialDate: '2026.06.23',
+            checkedDateKST: '2026.06.24',
+            sourceType: 'Official Case Study',
+            officialSource: {
+              label: 'OpenAI — Omio',
+              url: 'https://openai.com/index/omio',
+            },
+            updateType: 'Case Study / Enterprise AI',
+            badges: ['Case Study', 'Enterprise AI', 'Official Source', 'Official Screen Not Confirmed'],
+            summary: 'OpenAI는 Omio가 ChatGPT, Codex, API를 활용해 여행 검색과 예약 경험을 대화형 AI로 전환하고 있다는 사례를 공개했다.',
+            whatChanged: '신기능 발표라기보다, OpenAI 도구가 실제 여행 검색·예약 서비스와 내부 개발/운영에 적용되는 사례가 공개됐다.',
+            whyItMatters: 'AI가 검색창을 대체하는 대화형 여행 인터페이스로 들어가는 흐름을 보여준다. 다만 제품 업데이트보다는 기업 적용 사례에 가깝다.',
+            dechiveView: '이 항목은 오늘의 메인 업데이트보다는 기록용으로 적합하다. “AI가 여행 검색의 인터페이스가 되는 사례”로 짧게 남길 수 있다.',
+            readerTakeaway: 'AI는 여행 검색과 예약 경험도 대화형 인터페이스로 바꾸고 있다.',
+            screenMaterialStatus: 'OpenAI 사례 페이지의 공식 이미지가 있으면 참고 가능하다. 없으면 별도 대표 이미지는 만들 필요가 낮다.',
+            cautionNote: '이건 기능 업데이트가 아니라 Case Study다. 메인 업데이트처럼 다루지 않는다.',
+          },
+        ],
+      },
+      {
+        name: 'Status Watch',
+        intro: '기능 업데이트가 아니라 서비스 운영 안정성 기록으로 분리한다.',
+        updates: [
+          {
+            id: 'anthropic-status-claude-errors',
+            title: 'Anthropic Status — Claude 서비스 오류 이슈 기록',
+            officialDate: '2026.06.24 UTC',
+            checkedDateKST: '2026.06.24',
+            sourceType: 'Official Status Page',
+            officialSource: {
+              label: 'Anthropic Status',
+              url: 'https://status.anthropic.com/',
+            },
+            updateType: 'Status Watch / Reliability',
+            badges: ['Status Watch', 'Official Source', 'Official Screen Available'],
+            summary: 'Anthropic Status에는 6월 24일 Opus 4.8 elevated error rate 이슈가 조사 중으로 표시되어 있다.',
+            whatChanged: '기능 업데이트가 아니라 서비스 상태 이슈 기록이다.',
+            whyItMatters: 'AI 서비스는 모델 성능뿐 아니라 실제 운영 안정성도 중요하다. 오류율 증가와 해결 기록은 AI 도구를 업무에 쓰는 조직에게 중요한 정보다.',
+            dechiveView: '이 항목은 메인 업데이트가 아니라 Status Watch로 분리하는 것이 적절하다. AI는 잘하는 것뿐 아니라 안정적으로 작동하는지도 검증되어야 한다.',
+            readerTakeaway: 'AI 서비스는 모델 성능뿐 아니라 운영 안정성도 함께 봐야 한다.',
+            screenMaterialStatus: 'Status page 화면을 참고할 수 있다.',
+            cautionNote: '기능 업데이트처럼 쓰지 않는다. Status Watch / Reliability 항목으로 분리한다.',
+          },
+        ],
+      },
+    ],
+    verificationNote: '오늘 확인한 업데이트는 Anthropic, Mistral, Claude Code, GitHub, Microsoft, Google 문서, OpenAI 사례, Anthropic Status로 나뉜다. 메인 업데이트는 Claude Tag, Mistral OCR 4, Claude Code 2.1.187, GitHub Copilot CLI와 BYOK다. 다만 모든 항목을 같은 무게로 다루지 않는다. Claude Tag와 Mistral OCR 4는 일반 독자에게도 설명 가능한 메인 업데이트다. Claude Code와 GitHub Copilot CLI/BYOK는 개발자용 핵심 업데이트다. Gemini 3.1 Flash-Lite는 신규 출시가 아니라 Documentation Update다. OpenAI Omio는 Case Study다. Anthropic Status는 기능 업데이트가 아니라 Status Watch다. 공식 화면이 확인되지 않은 항목은 실제 화면처럼 단정하지 않고, 설명 이미지가 더 적절하다고 표시한다.',
+    closingLine: 'AI는 더 이상 별도의 채팅창에 머물지 않는다. 팀 협업 공간에서 호출되고, 문서 구조를 읽고, 터미널에서 이슈와 PR을 다루며, 조직의 모델·보안 정책 안에서 작동하기 시작했다. Dechive는 그 변화가 실제로 무엇을 바꾸는지 기록한다.',
+    updates: [
+      {
+        id: 'anthropic-claude-tag',
+        slug: 'anthropic-claude-tag',
+        title: 'Anthropic Claude Tag',
+        summary: 'Slack에서 @Claude를 태그해 팀 작업을 맡길 수 있는 Claude Tag가 공개됐다.',
+        badges: ['Product Update', 'Team AI', 'Slack Agent', 'Official Source'],
+        detailHref: '/ai-updates/2026-06-24#anthropic-claude-tag',
+        source: {
+          label: 'Anthropic Official Blog',
+          url: 'https://www.anthropic.com/news/introducing-claude-tag',
+          description: 'Claude Tag 공식 발표를 확인하는 항목입니다.',
+        },
+        whatChanged: 'AI가 Slack 스레드 안에서 호출되고 작업 결과를 남긴다.',
+        useCriteria: 'Claude Enterprise와 Team 고객 대상 베타로 읽어야 합니다.',
+        verificationNotes: ['공식 블로그 기준으로 기록합니다.'],
+        image: {
+          status: 'none',
+          caption: 'Slack 스레드 안에서 Claude가 작업하는 설명 이미지가 적합합니다.',
+        },
+      },
+      {
+        id: 'mistral-ocr-4',
+        slug: 'mistral-ocr-4',
+        title: 'Mistral OCR 4',
+        summary: '문서를 텍스트뿐 아니라 구조, 좌표, 신뢰도와 함께 읽는 OCR 4가 공개됐다.',
+        badges: ['Model Update', 'Document Intelligence', 'Official Source'],
+        detailHref: '/ai-updates/2026-06-24#mistral-ocr-4',
+        source: {
+          label: 'Mistral Official Blog',
+          url: 'https://mistral.ai/news/ocr-4/',
+          description: 'Mistral OCR 4 공식 발표를 확인하는 항목입니다.',
+        },
+        whatChanged: 'OCR이 문서 구조와 신뢰도까지 남기는 파이프라인으로 확장된다.',
+        useCriteria: '단순 OCR 성능이 아니라 검증 가능한 문서 인입 구조로 읽어야 합니다.',
+        verificationNotes: ['공식 블로그 기준으로 기록합니다.'],
+        image: {
+          status: 'none',
+          caption: '문서 → 구조화된 데이터 → RAG 입력 흐름 이미지가 적합합니다.',
+        },
+      },
+      {
+        id: 'github-copilot-cli-terminal-ga',
+        slug: 'github-copilot-cli-terminal-ga',
+        title: 'GitHub Copilot CLI',
+        summary: 'Copilot CLI의 새 터미널 인터페이스가 정식 출시됐다.',
+        badges: ['Developer Tool', 'CLI Workflow', 'Agentic Coding', 'Official Source'],
+        detailHref: '/ai-updates/2026-06-24#github-copilot-cli-terminal-ga',
+        source: {
+          label: 'GitHub Changelog',
+          url: 'https://github.blog/changelog/2026-06-23-copilot-cli-new-terminal-interface-is-generally-available/',
+          description: 'Copilot CLI 새 터미널 인터페이스 정식 출시를 확인하는 항목입니다.',
+        },
+        whatChanged: '터미널 안에서 이슈, PR, MCP, 스킬, 플러그인을 다루는 AI 작업 공간이 확장된다.',
+        useCriteria: '개발자용 업데이트로 분류해야 합니다.',
+        verificationNotes: ['공식 changelog 기준으로 기록합니다.'],
+        image: {
+          status: 'available',
+          caption: 'GitHub changelog의 터미널 UI 자료를 참고할 수 있습니다.',
+        },
+      },
+    ],
+  },
   {
     date: '2026-06-23',
     title: 'AI가 입력창, 보안, 코딩 CLI, 업무 자동화 안으로 들어간 날',

@@ -14,6 +14,39 @@ export type DailyAiUpdates = {
 
 export const dailyAiUpdates: DailyAiUpdates[] = [
   {
+    date: '2026-06-24',
+    label: {
+      ko: '오늘의 AI 업데이트',
+      en: 'AI UPDATE',
+    },
+    updates: [
+      {
+        title: 'Claude Tag',
+        description: {
+          ko: 'Slack에서 Claude를 태그해 팀 작업을 맡긴다',
+          en: 'Claude can be tagged for team work in Slack',
+        },
+        href: '/ai-updates/2026-06-24',
+      },
+      {
+        title: 'Mistral OCR 4',
+        description: {
+          ko: '문서를 구조와 신뢰도까지 읽는다',
+          en: 'documents are read with structure and confidence',
+        },
+        href: '/ai-updates/2026-06-24',
+      },
+      {
+        title: 'Copilot CLI',
+        description: {
+          ko: '터미널이 이슈와 PR을 다루는 AI 작업 공간이 된다',
+          en: 'the terminal becomes an AI workspace for issues and PRs',
+        },
+        href: '/ai-updates/2026-06-24',
+      },
+    ],
+  },
+  {
     date: '2026-06-23',
     label: {
       ko: '오늘의 AI 업데이트',
