@@ -21,26 +21,26 @@ export const dailyAiUpdates: DailyAiUpdates[] = [
     },
     updates: [
       {
-        title: 'Claude Tag',
+        title: 'GPT-5.5 Instant',
         description: {
-          ko: 'Slack에서 Claude를 태그해 팀 작업을 맡긴다',
-          en: 'Claude can be tagged for team work in Slack',
+          ko: '조건과 반박을 따라가는 대화 품질 업데이트',
+          en: 'conversation quality improves for constraints and pushback',
         },
         href: '/ai-updates/2026-06-24',
       },
       {
-        title: 'Mistral OCR 4',
+        title: 'Gemini Computer Use',
         description: {
-          ko: '문서를 구조와 신뢰도까지 읽는다',
-          en: 'documents are read with structure and confidence',
+          ko: '컴퓨터 환경을 사용하는 도구 공개 프리뷰',
+          en: 'computer use tool enters public preview',
         },
         href: '/ai-updates/2026-06-24',
       },
       {
-        title: 'Copilot CLI',
+        title: 'Jalapeño Inference',
         description: {
-          ko: '터미널이 이슈와 PR을 다루는 AI 작업 공간이 된다',
-          en: 'the terminal becomes an AI workspace for issues and PRs',
+          ko: 'LLM 추론 인프라 경쟁으로 확장된다',
+          en: 'AI competition expands into inference infrastructure',
         },
         href: '/ai-updates/2026-06-24',
       },

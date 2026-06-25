@@ -39,7 +39,22 @@ export type AiUpdateBadge =
   | 'API'
   | 'Agentic Coding'
   | 'Bug Fix'
-  | 'Copilot Reliability';
+  | 'Copilot Reliability'
+  | 'Public Preview'
+  | 'Tool Update'
+  | 'Computer Use'
+  | 'Infrastructure'
+  | 'AI Chip'
+  | 'Inference'
+  | 'Company Update'
+  | 'Connectors'
+  | 'Governance'
+  | 'Admin Control'
+  | 'Product Policy'
+  | 'Model Selection'
+  | 'Auto Routing'
+  | 'Reliability Update'
+  | 'Model Behavior Update';
 
 export interface AiUpdateItem {
   id: string;
@@ -107,14 +122,140 @@ export const AI_UPDATES_MONTH = '2026.06';
 export const aiUpdateDays: AiUpdateDay[] = [
   {
     date: '2026-06-24',
-    title: 'AI가 팀 협업, 터미널, 문서 처리, 코드 보안 안으로 들어간 날',
-    subtitle: '오늘의 업데이트는 새 챗봇 출시가 아니라, AI가 팀 협업 공간에서 호출되고, 문서의 구조를 읽고, 터미널에서 이슈와 PR을 다루고, 조직의 모델·보안 정책 안에서 작동하기 시작했다는 점이 핵심이다.',
+    title: 'AI가 대화 품질, 컴퓨터 조작, 인프라, 외부 도구 연결로 확장된 날',
+    subtitle: '오늘의 업데이트는 새 챗봇 출시가 아니라, AI가 더 나은 의사결정 대화를 제공하고, 컴퓨터 환경을 조작하는 도구로 확장되며, LLM 추론 인프라와 외부 도구 연결의 통제 장치까지 강화되는 변화가 중심이다.',
     quickSummary: [
-      'Anthropic은 Slack 안에서 Claude를 태그해 팀 작업을 맡기는 Claude Tag를 공개했고, Mistral은 OCR 4로 문서 구조와 신뢰도까지 읽는 방향을 보여줬다.',
-      'Claude Code와 GitHub Copilot CLI는 터미널, MCP, 조직 제어, 이슈와 PR 작업 흐름 안으로 AI를 더 깊게 넣고 있다.',
-      'GitHub Code Quality, Visual Studio/SSMS, Gemini 문서, OpenAI 사례, Anthropic Status는 기능 출시와 문서·사례·상태 기록을 구분해 보조 항목으로 다룬다.',
+      '2026.06.25 KST 기준으로 새롭게 확인한 officialDate 2026.06.24 항목은 ChatGPT 대화 품질, Gemini Computer Use 공개 프리뷰, OpenAI/Broadcom 추론 칩, Mistral connector 통제, GitHub Copilot 모델 선택, Claude Code 안정성 개선이다.',
+      '기존에 작성한 officialDate 2026.06.23 항목은 중복 작성하지 않고, 새로 확인된 공식 날짜 항목과 이전 확인 항목을 섹션으로 구분한다.',
+      '이번 보강은 기능 업데이트, 공개 프리뷰, 인프라 발표, 엔터프라이즈 거버넌스, 제품 정책 변경, 안정성 개선을 같은 무게로 섞지 않고 분리해 읽는다.',
     ],
     groups: [
+      {
+        name: '새로 확인된 공식 업데이트 — 2026.06.24',
+        intro: '2026.06.25 KST 기준으로 새롭게 확인한 officialDate 2026.06.24 항목이다. 기존 6월 23일 공식 날짜 항목과 섞지 않고 별도로 읽는다.',
+        updates: [
+          {
+            id: 'openai-chatgpt-gpt-5-5-instant-quality',
+            title: 'OpenAI ChatGPT — GPT-5.5 Instant 대화 품질 업데이트',
+            officialDate: '2026.06.24',
+            checkedDateKST: '2026.06.25',
+            sourceType: 'Official Release Notes',
+            officialSource: {
+              label: 'OpenAI ChatGPT Release Notes',
+              url: 'https://help.openai.com/en/articles/6825453-chatgpt-release-notes',
+            },
+            updateType: 'Product Update / Model Behavior Update',
+            badges: ['Product Update', 'Model Behavior Update', 'Official Source', 'Explanation Image Recommended'],
+            summary: 'OpenAI는 GPT-5.5 Instant 업데이트를 공개했다. 이 업데이트는 ChatGPT에서 많이 사용되는 GPT-5.5 Instant의 대화 품질을 개선하는 내용이다.',
+            whatChanged: 'GPT-5.5 Instant가 사용자의 숨은 목적을 더 잘 파악하고, 여러 제약 조건이 있는 요청을 더 잘 따라가며, 사용자가 조건을 추가하거나 반박할 때 기존 답을 반복하지 않고 더 잘 적응하도록 조정됐다.',
+            whyItMatters: 'AI 사용자는 단순한 지식 답변보다 “무엇을 선택해야 하는가”, “어떤 조건을 고려해야 하는가”, “내 상황에서는 무엇이 더 나은가”를 자주 묻는다. 이런 상황에서 모델이 조건과 반박을 더 잘 따라가는 것은 실제 사용 경험에 직접적인 영향을 준다.',
+            dechiveView: '이 업데이트는 화려한 새 기능은 아니지만 중요하다. AI가 더 빨리 답하는 것보다, 사용자의 조건과 의도를 더 잘 따라가는 것이 실제 활용에서는 더 중요할 수 있다.',
+            readerTakeaway: 'ChatGPT는 단순히 빠르게 답하는 모델이 아니라, 사용자의 조건과 반박을 더 잘 따라가며 선택을 도와주는 방향으로 조정되고 있다.',
+            screenMaterialStatus: '공식 릴리즈노트에는 별도 제품 화면이 없을 수 있다. 실제 화면보다는 “복잡한 조건을 가진 사용자 요청 → GPT-5.5 Instant가 조건을 정리해 답변”하는 설명 이미지가 적합하다.',
+            cautionNote: '이 항목을 “새 모델 출시”로 쓰지 않는다. GPT-5.5 Instant의 동작/대화 품질 업데이트로 표기한다.',
+          },
+          {
+            id: 'google-gemini-api-computer-use-preview',
+            title: 'Google Gemini API — Computer Use 도구 공개 프리뷰',
+            officialDate: '2026.06.24',
+            checkedDateKST: '2026.06.25',
+            sourceType: 'Official Changelog / Official Documentation',
+            officialSource: {
+              label: 'Google AI Developers — Gemini API changelog',
+              url: 'https://ai.google.dev/gemini-api/docs/changelog',
+            },
+            updateType: 'Tool Update / Computer Use / Agentic AI / Public Preview',
+            badges: ['Tool Update', 'Computer Use', 'Agentic Workflow', 'Public Preview', 'Official Source'],
+            summary: 'Google은 Gemini API에서 Computer Use 도구의 공개 프리뷰 지원을 시작했다. Gemini 3.5 Flash에서 사용할 수 있으며, 브라우저·모바일·데스크톱 환경과 안전 정책을 포함한다.',
+            whatChanged: 'Gemini API가 텍스트 응답 중심에서 벗어나, 컴퓨터 환경을 조작하는 도구 사용 흐름으로 확장된다. AI가 브라우저나 앱 환경에서 작업을 수행할 수 있는 기반이 열린 것이다.',
+            whyItMatters: 'Computer Use는 AI 에이전트에서 중요한 단계다. AI가 단순히 “방법을 설명”하는 것과 실제 화면·브라우저·앱 환경을 사용해 작업을 수행하는 것은 다르다.',
+            dechiveView: 'AI가 컴퓨터를 사용할 수 있게 될수록 “무엇을 할 수 있는가”보다 “어디까지 허용할 것인가”, “위험한 지시를 어떻게 막을 것인가”, “사용자가 검증할 수 있는가”가 중요해진다.',
+            readerTakeaway: 'Gemini API는 AI가 답변하는 단계를 넘어, 컴퓨터 환경을 사용하는 에이전트 도구로 확장되고 있다.',
+            screenMaterialStatus: '공식 문서 화면 또는 Computer Use 흐름을 보여주는 설명 다이어그램이 적합하다. 실제 제품 화면이 명확하지 않다면 “AI → 브라우저/앱 환경 → 안전 정책/프롬프트 인젝션 감지” 구조를 시각화한다.',
+            cautionNote: '이 기능은 Public Preview다. 정식 일반 출시처럼 쓰지 않는다. 또한 “AI가 마음대로 컴퓨터를 조작한다”처럼 과장하지 않는다.',
+          },
+          {
+            id: 'openai-broadcom-jalapeno-inference-chip',
+            title: 'OpenAI + Broadcom — Jalapeño LLM 추론 칩 공개',
+            officialDate: '2026.06.24',
+            checkedDateKST: '2026.06.25',
+            sourceType: 'Official Company Blog',
+            officialSource: {
+              label: 'OpenAI official blog',
+              url: 'https://openai.com/',
+            },
+            updateType: 'Infrastructure / AI Chip / Inference / Company Update',
+            badges: ['Infrastructure', 'AI Chip', 'Inference', 'Company Update', 'Official Source'],
+            summary: 'OpenAI와 Broadcom은 LLM 추론에 최적화된 AI 칩 Jalapeño를 공개했다. OpenAI는 이 칩을 현재와 미래의 LLM 추론을 위해 설계한 가속기로 설명한다.',
+            whatChanged: 'OpenAI가 모델 자체뿐 아니라, 모델을 더 빠르고 효율적으로 운영하기 위한 추론 인프라까지 직접 설계하는 방향을 보여준다.',
+            whyItMatters: 'AI 경쟁은 모델 성능만으로 끝나지 않는다. 실제 사용자에게 AI를 제공하려면 추론 비용, 전력 효율, 응답 속도, 데이터센터 배치, 확장성이 중요하다.',
+            dechiveView: '이 업데이트는 일반 사용자가 바로 체감하는 기능은 아니다. 하지만 앞으로 AI 경쟁은 “누가 더 좋은 모델을 만들었나”뿐 아니라 “누가 그 모델을 더 빠르고 저렴하고 안정적으로 운영할 수 있나”로 이동한다.',
+            readerTakeaway: 'AI 경쟁은 모델 성능을 넘어, 그 모델을 운영할 수 있는 추론 인프라 경쟁으로 확장되고 있다.',
+            screenMaterialStatus: 'OpenAI 공식 블로그에 Jalapeño 칩 이미지가 있다면 공식 이미지 참고 가능으로 표시한다. 없거나 사용이 어렵다면 “모델 → 추론 칩 → 데이터센터 → ChatGPT/Codex/API” 흐름을 보여주는 설명 이미지가 적합하다.',
+            cautionNote: '이 항목은 사용자 기능 업데이트가 아니라 인프라/회사 발표다. “ChatGPT가 오늘 빨라졌다”처럼 직접 체감 효과를 단정하지 않는다.',
+          },
+          {
+            id: 'mistral-connectors-control-governance',
+            title: 'Mistral — Connectors 통제·보안·디버깅 기능 강화',
+            officialDate: '2026.06.24',
+            checkedDateKST: '2026.06.25',
+            sourceType: 'Official Blog',
+            officialSource: {
+              label: 'Mistral AI official blog',
+              url: 'https://mistral.ai/news/',
+            },
+            updateType: 'Enterprise AI / Connectors / Governance / MCP / Admin Control',
+            badges: ['Enterprise AI', 'Connectors', 'Governance', 'MCP', 'Admin Control', 'Official Source'],
+            summary: 'Mistral은 Connectors를 더 안전하게 운영하기 위한 기능을 발표했다. 조직·워크스페이스 접근 제어, 도구 on/off, connector scope API key, multi-account connectors, Connectors Debugger 등이 포함된다.',
+            whatChanged: 'AI가 외부 기업 도구와 연결될 때, 누가 어떤 connector를 사용할 수 있는지, 어떤 도구를 켜고 끌 수 있는지, 어떤 계정으로 실행되는지, 연결 실패 원인을 어떻게 추적할 수 있는지가 더 명확해졌다.',
+            whyItMatters: '기업에서 AI 에이전트를 쓰려면 CRM, 저장소, 메일, 지식베이스 같은 실제 데이터와 연결해야 한다. 하지만 연결만 되면 위험하다. 권한, 계정, 도구 범위, 실패 원인 분석이 있어야 운영 환경에서 쓸 수 있다.',
+            dechiveView: '이 항목은 “AI가 더 많은 도구와 연결된다”보다 “AI가 외부 도구와 연결될 때 필요한 통제 장치가 강화된다”는 점이 중요하다.',
+            readerTakeaway: 'AI가 외부 도구와 연결될수록 중요한 것은 연결 자체가 아니라, 누가 무엇을 어디까지 실행할 수 있는지 통제하는 능력이다.',
+            screenMaterialStatus: '공식 블로그의 connector 관리 화면이나 debugger 화면이 있다면 공식 화면 참고 가능으로 표시한다. 공식 화면이 없으면 “AI agent → Connector → 권한/계정/도구 범위/디버깅” 흐름을 보여주는 설명 이미지가 적합하다.',
+            cautionNote: '이 항목은 일반 소비자용 업데이트가 아니라 엔터프라이즈 AI 운영/거버넌스 업데이트다. “AI가 모든 외부 도구를 자유롭게 쓴다”가 아니라 “외부 도구 연결을 더 안전하게 관리한다”로 설명한다.',
+          },
+          {
+            id: 'github-copilot-free-student-auto-model-selection',
+            title: 'GitHub Copilot — Free/Student 플랜 모델 선택을 Auto로 통일',
+            officialDate: '2026.06.24',
+            checkedDateKST: '2026.06.25',
+            sourceType: 'Official Changelog',
+            officialSource: {
+              label: 'GitHub Changelog',
+              url: 'https://github.blog/changelog/',
+            },
+            updateType: 'Product Policy / Model Selection / Auto Routing',
+            badges: ['Product Policy', 'Model Selection', 'Auto Routing', 'Official Source', 'Official Screen Not Confirmed'],
+            summary: 'GitHub은 Copilot Free와 Student 플랜에서 Copilot auto model selection을 기본이자 유일한 모델 선택 경험으로 사용한다고 발표했다.',
+            whatChanged: '무료·학생 플랜에서는 사용자가 직접 모델을 고르는 방식보다, Copilot이 작업에 맞는 모델을 자동 선택하는 방식으로 단순화된다.',
+            whyItMatters: 'AI 도구가 복잡해질수록 일반 사용자는 어떤 모델을 골라야 하는지 알기 어렵다. Auto model selection은 모델 선택을 사용자에게 맡기기보다, 도구가 작업에 맞게 라우팅하는 방향을 보여준다.',
+            dechiveView: 'AI 서비스는 점점 “사용자가 모델을 고르는 제품”에서 “작업에 맞게 모델을 자동 배치하는 제품”으로 바뀌고 있다. 다만 이것은 사용자의 선택권이 줄어드는 방향이기도 하다.',
+            readerTakeaway: 'AI 도구는 점점 사용자가 모델을 직접 고르는 방식에서, 작업에 맞게 자동으로 모델을 선택하는 방식으로 이동하고 있다.',
+            screenMaterialStatus: 'GitHub Copilot의 모델 선택 UI 또는 Auto model selection 설명 화면이 공식적으로 있으면 참고 가능하다. 없으면 “사용자 작업 → Auto model selection → 모델 라우팅” 설명 이미지가 적합하다.',
+            cautionNote: '이 항목은 Free와 Student 플랜 대상이다. 모든 Copilot 플랜의 모델 선택이 동일하게 바뀌었다고 쓰지 않는다.',
+          },
+          {
+            id: 'claude-code-2-1-190-reliability',
+            title: 'Claude Code 2.1.190 — 버그 수정과 안정성 개선',
+            officialDate: '2026.06.24',
+            checkedDateKST: '2026.06.25',
+            sourceType: 'Official Changelog',
+            officialSource: {
+              label: 'Claude Code changelog',
+              url: 'https://code.claude.com/docs/en/changelog',
+            },
+            updateType: 'Developer Tool / Reliability Update',
+            badges: ['Developer Tool', 'Reliability Update', 'Official Changelog', 'Official Source'],
+            summary: 'Claude Code 2.1.190은 Bug fixes and reliability improvements로 짧게 정리된 안정성 업데이트다.',
+            whatChanged: '구체적인 상세 항목은 공개 changelog에 길게 설명되어 있지 않다. 따라서 메인 업데이트가 아니라 안정성 보조 기록으로 다룬다.',
+            whyItMatters: 'AI 코딩 도구는 새 기능뿐 아니라 안정성 개선도 중요하다. 다만 상세 내용이 공개되지 않은 경우에는 과장하지 않고 짧게 기록하는 것이 맞다.',
+            dechiveView: '이 항목은 메인 카드로 크게 다루기보다 Reliability Watch 또는 Small Update로 짧게 기록하는 것이 적절하다.',
+            readerTakeaway: 'Claude Code는 6월 24일 안정성 개선 업데이트를 냈지만, 공개 changelog 기준으로는 세부 기능 변화가 크지 않다.',
+            screenMaterialStatus: '공식 changelog 화면 외 별도 이미지 필요 없음.',
+            cautionNote: '상세 내용이 공개되지 않았으므로 추측해서 설명하지 않는다.',
+          },
+        ],
+      },
       {
         name: 'Anthropic',
         intro: 'AI가 별도 채팅창이 아니라 팀 협업 공간 안에서 호출되는 흐름이다.',
@@ -364,9 +505,69 @@ export const aiUpdateDays: AiUpdateDay[] = [
         ],
       },
     ],
-    verificationNote: '오늘 확인한 업데이트는 Anthropic, Mistral, Claude Code, GitHub, Microsoft, Google 문서, OpenAI 사례, Anthropic Status로 나뉜다. 메인 업데이트는 Claude Tag, Mistral OCR 4, Claude Code 2.1.187, GitHub Copilot CLI와 BYOK다. 다만 모든 항목을 같은 무게로 다루지 않는다. Claude Tag와 Mistral OCR 4는 일반 독자에게도 설명 가능한 메인 업데이트다. Claude Code와 GitHub Copilot CLI/BYOK는 개발자용 핵심 업데이트다. Gemini 3.1 Flash-Lite는 신규 출시가 아니라 Documentation Update다. OpenAI Omio는 Case Study다. Anthropic Status는 기능 업데이트가 아니라 Status Watch다. 공식 화면이 확인되지 않은 항목은 실제 화면처럼 단정하지 않고, 설명 이미지가 더 적절하다고 표시한다.',
-    closingLine: 'AI는 더 이상 별도의 채팅창에 머물지 않는다. 팀 협업 공간에서 호출되고, 문서 구조를 읽고, 터미널에서 이슈와 PR을 다루며, 조직의 모델·보안 정책 안에서 작동하기 시작했다. Dechive는 그 변화가 실제로 무엇을 바꾸는지 기록한다.',
+    verificationNote: '오늘 확인한 업데이트는 Anthropic, Mistral, Claude Code, GitHub, Microsoft, Google 문서, OpenAI 사례, Anthropic Status로 나뉜다. 메인 업데이트는 Claude Tag, Mistral OCR 4, Claude Code 2.1.187, GitHub Copilot CLI와 BYOK다. 다만 모든 항목을 같은 무게로 다루지 않는다. Claude Tag와 Mistral OCR 4는 일반 독자에게도 설명 가능한 메인 업데이트다. Claude Code와 GitHub Copilot CLI/BYOK는 개발자용 핵심 업데이트다. Gemini 3.1 Flash-Lite는 신규 출시가 아니라 Documentation Update다. OpenAI Omio는 Case Study다. Anthropic Status는 기능 업데이트가 아니라 Status Watch다. 공식 화면이 확인되지 않은 항목은 실제 화면처럼 단정하지 않고, 설명 이미지가 더 적절하다고 표시한다. 2026.06.25 KST 기준으로 새롭게 확인한 officialDate 2026.06.24 항목을 추가했다. 기존에 작성한 officialDate 2026.06.23 항목은 중복 작성하지 않았고, 이번 보강에서는 ChatGPT GPT-5.5 Instant 업데이트, Gemini API Computer Use 공개 프리뷰, OpenAI/Broadcom Jalapeño 추론 칩, Mistral Connectors 통제 기능, GitHub Copilot Free/Student 모델 선택 변경, Claude Code 2.1.190 안정성 업데이트만 다룬다. 이번 추가 항목은 기능 업데이트, 공개 프리뷰, 인프라 발표, 엔터프라이즈 거버넌스, 제품 정책 변경, 안정성 개선을 구분해서 기록한다. 특히 Gemini Computer Use는 Public Preview이며, Claude Code 2.1.190은 세부 내용이 공개되지 않은 안정성 업데이트이므로 과장하지 않는다.',
+    closingLine: 'AI는 더 이상 별도의 채팅창에 머물지 않는다. 대화 품질을 조정하고, 컴퓨터 환경을 사용하고, 추론 인프라를 설계하며, 외부 도구 연결을 통제하는 방향으로 확장되고 있다. Dechive는 그 변화가 실제로 무엇을 바꾸는지 기록한다.',
     updates: [
+      {
+        id: 'openai-chatgpt-gpt-5-5-instant-quality',
+        slug: 'openai-chatgpt-gpt-5-5-instant-quality',
+        title: 'ChatGPT GPT-5.5 Instant',
+        summary: 'GPT-5.5 Instant가 조건, 반박, 선택 상황을 더 잘 따라가도록 대화 품질이 조정됐다.',
+        badges: ['Product Update', 'Model Behavior Update', 'Official Source'],
+        detailHref: '/ai-updates/2026-06-24#openai-chatgpt-gpt-5-5-instant-quality',
+        source: {
+          label: 'OpenAI ChatGPT Release Notes',
+          url: 'https://help.openai.com/en/articles/6825453-chatgpt-release-notes',
+          description: 'ChatGPT GPT-5.5 Instant 대화 품질 업데이트를 확인하는 항목입니다.',
+        },
+        whatChanged: 'GPT-5.5 Instant가 복잡한 조건과 사용자 반박에 더 잘 적응하도록 조정됐다.',
+        useCriteria: '새 모델 출시가 아니라 모델 동작/대화 품질 업데이트로 읽어야 합니다.',
+        verificationNotes: ['officialDate 2026.06.24, checkedDateKST 2026.06.25 기준으로 기록합니다.'],
+        image: {
+          status: 'none',
+          caption: '복잡한 조건을 정리해 답변하는 설명 이미지가 적합합니다.',
+        },
+      },
+      {
+        id: 'google-gemini-api-computer-use-preview',
+        slug: 'google-gemini-api-computer-use-preview',
+        title: 'Gemini Computer Use',
+        summary: 'Gemini API가 브라우저·모바일·데스크톱 환경을 사용하는 Computer Use 공개 프리뷰로 확장됐다.',
+        badges: ['Tool Update', 'Computer Use', 'Public Preview', 'Official Source'],
+        detailHref: '/ai-updates/2026-06-24#google-gemini-api-computer-use-preview',
+        source: {
+          label: 'Google AI Developers changelog',
+          url: 'https://ai.google.dev/gemini-api/docs/changelog',
+          description: 'Gemini API Computer Use 공개 프리뷰를 확인하는 항목입니다.',
+        },
+        whatChanged: 'Gemini API가 텍스트 답변을 넘어 컴퓨터 환경을 사용하는 도구 흐름으로 확장됐다.',
+        useCriteria: 'Public Preview이므로 정식 일반 출시처럼 단정하지 않아야 합니다.',
+        verificationNotes: ['officialDate 2026.06.24, checkedDateKST 2026.06.25 기준으로 기록합니다.'],
+        image: {
+          status: 'none',
+          caption: 'AI와 브라우저/앱 환경, 안전 정책을 연결한 설명 다이어그램이 적합합니다.',
+        },
+      },
+      {
+        id: 'openai-broadcom-jalapeno-inference-chip',
+        slug: 'openai-broadcom-jalapeno-inference-chip',
+        title: 'OpenAI Jalapeño',
+        summary: 'OpenAI와 Broadcom의 Jalapeño는 모델 기능이 아니라 LLM 추론 인프라 경쟁을 보여주는 발표다.',
+        badges: ['Infrastructure', 'AI Chip', 'Inference', 'Official Source'],
+        detailHref: '/ai-updates/2026-06-24#openai-broadcom-jalapeno-inference-chip',
+        source: {
+          label: 'OpenAI official blog',
+          url: 'https://openai.com/',
+          description: 'OpenAI와 Broadcom의 Jalapeño 추론 칩 발표를 확인하는 항목입니다.',
+        },
+        whatChanged: 'OpenAI가 모델을 운영하기 위한 추론 인프라 설계 방향을 공개했다.',
+        useCriteria: '사용자 기능 업데이트가 아니라 인프라/회사 발표로 읽어야 합니다.',
+        verificationNotes: ['officialDate 2026.06.24, checkedDateKST 2026.06.25 기준으로 기록합니다.'],
+        image: {
+          status: 'none',
+          caption: '모델, 추론 칩, 데이터센터, 서비스 운영 흐름을 보여주는 설명 이미지가 적합합니다.',
+        },
+      },
       {
         id: 'anthropic-claude-tag',
         slug: 'anthropic-claude-tag',
