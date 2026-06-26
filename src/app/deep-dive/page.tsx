@@ -64,6 +64,8 @@ export default function DeepDivePage() {
       description: post.description,
       image: resolvePostImage(post.coverImage),
       tags: post.tags,
+      date: post.date,
+      readingTime: post.readingTime,
     }));
 
   return (
