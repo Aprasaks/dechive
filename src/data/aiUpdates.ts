@@ -54,7 +54,30 @@ export type AiUpdateBadge =
   | 'Model Selection'
   | 'Auto Routing'
   | 'Reliability Update'
-  | 'Model Behavior Update';
+  | 'Model Behavior Update'
+  | 'Remote Workspace'
+  | 'Codex'
+  | 'Memory'
+  | 'Personalization'
+  | 'Research'
+  | 'Agentic Work'
+  | 'AI Adoption'
+  | 'Auto Mode'
+  | 'Observability'
+  | 'Jira'
+  | 'Agent Sessions'
+  | 'Code Review'
+  | 'Efficiency Update'
+  | 'Enterprise Governance'
+  | 'Plugin Control'
+  | 'Financial AI'
+  | 'Effective Change'
+  | 'Deprecation'
+  | 'Enterprise CMS'
+  | 'Beta'
+  | 'Feature Release'
+  | 'AI Education'
+  | 'Funding';
 
 export interface AiUpdateItem {
   id: string;
@@ -120,6 +143,370 @@ export interface AiUpdateBriefingItem {
 export const AI_UPDATES_MONTH = '2026.06';
 
 export const aiUpdateDays: AiUpdateDay[] = [
+  {
+    date: '2026-06-25',
+    title: 'AI가 원격 작업, 업무 기억, 코드 리뷰, 조직 도구 안으로 들어간 날',
+    subtitle: '오늘의 공식 업데이트는 새 모델 발표보다, AI가 원격 개발 환경, 업무 기억, 에이전트형 작업, 코드 리뷰, Jira·금융·기업 도구 안으로 들어가는 변화가 중심이다.',
+    quickSummary: [
+      '2026년 6월 25일 공식 업데이트는 Codex Remote GA, ChatGPT Business Memory, Claude Code 2.1.193, GitHub Copilot for Jira GA가 중심이다.',
+      '개발자·거버넌스 업데이트는 Copilot Code Review 효율 개선과 strictKnownMarketplaces 공개 프리뷰로 구분한다.',
+      'xAI 금융 플랫폼 통합, Gemini preview 모델 종료 시행, Adobe AEM agents, Anthropic Status, Google.org AI Education은 보조 기록으로 분리한다.',
+    ],
+    groups: [
+      {
+        name: 'OpenAI',
+        intro: 'Codex Remote, ChatGPT Business Memory, agentic work 분석 자료를 기능 출시·엔터프라이즈 기억·연구성 자료로 나누어 읽는다.',
+        updates: [
+          {
+            id: 'openai-codex-remote-ga',
+            title: 'OpenAI Codex Remote — AI 코딩이 모바일과 원격 워크스페이스로 확장되다',
+            officialDate: '2026.06.25',
+            checkedDateKST: '2026.06.26',
+            sourceType: 'Official Release Notes',
+            officialSource: {
+              label: 'OpenAI ChatGPT Release Notes',
+              url: 'https://help.openai.com/en/articles/6825453-chatgpt-release-notes',
+            },
+            updateType: 'Product Update / Codex / Remote Workspace',
+            badges: ['Product Update', 'Codex', 'Remote Workspace', 'Official Source', 'Explanation Image Recommended'],
+            summary: 'OpenAI는 Codex Remote를 모든 ChatGPT 플랜에서 일반 제공한다고 발표했다. 사용자는 ChatGPT 모바일 앱에서 Mac 또는 Windows host에 연결된 작업을 시작하거나 이어가고, 진행 상황 확인과 action approval도 할 수 있다. DigitalOcean Droplet Workspace plugin도 추가됐다.',
+            whatChanged: 'Codex 작업이 로컬 컴퓨터 안에만 머무르지 않고, 모바일 앱과 원격 host, 클라우드 워크스페이스까지 연결되는 방향으로 확장됐다.',
+            whyItMatters: 'AI 코딩 도구가 실제 개발 환경을 다룰수록, 사용자는 언제 어디서 작업을 시작하고 승인할 수 있는지가 중요해진다.',
+            dechiveView: 'AI는 더 이상 내 컴퓨터 안의 편집기에서만 움직이는 도구가 아니다. 모바일, 로컬 host, 클라우드 워크스페이스가 하나의 작업 흐름으로 연결되고 있다. 원격 작업이 강해질수록 승인, 권한, 연결 방식의 검증이 중요해진다.',
+            readerTakeaway: 'Codex는 이제 모바일과 원격 워크스페이스를 통해 개발 작업을 이어갈 수 있는 방향으로 확장되고 있다.',
+            screenMaterialStatus: 'ChatGPT 모바일 앱에서 Codex Remote 작업을 확인하거나 QR pairing을 하는 공식 화면이 있으면 가장 적합하다. 공식 화면이 없다면 “모바일 앱 → 로컬 host → DigitalOcean Droplet Workspace” 흐름을 보여주는 설명 이미지가 적합하다.',
+            cautionNote: '이 항목을 “모든 개발 작업이 자동으로 클라우드에서 처리된다”로 과장하지 않는다. Codex Remote와 DigitalOcean plugin의 원격 작업 연결 기능으로 정확히 설명한다.',
+          },
+          {
+            id: 'chatgpt-business-memory-context',
+            title: 'ChatGPT Business Memory — 업무 맥락을 기억하되 사용자가 검증할 수 있게 하다',
+            officialDate: '2026.06.25',
+            checkedDateKST: '2026.06.26',
+            sourceType: 'Official Business Release Notes',
+            officialSource: {
+              label: 'OpenAI ChatGPT Business Release Notes',
+              url: 'https://help.openai.com/en/articles/11391654-chatgpt-business-release-notes',
+            },
+            updateType: 'Enterprise AI / Memory / Personalization / Governance',
+            badges: ['Enterprise AI', 'Memory', 'Personalization', 'Governance', 'Official Source'],
+            summary: 'ChatGPT Business에서 memory 기능이 개선됐다. 저장된 정보뿐 아니라 과거 대화의 관련 맥락도 활용하고, 사용자는 memory summary, sources, 수정·삭제·끄기 흐름을 확인할 수 있다.',
+            whatChanged: 'ChatGPT Business가 사용자의 업무 맥락을 더 넓게 활용하는 방향으로 바뀌었다. 동시에 사용자가 무엇을 기억했는지 확인하고 수정할 수 있는 관리 흐름이 함께 제공된다.',
+            whyItMatters: '기업용 AI에서 memory는 편리함만의 문제가 아니다. 어떤 정보를 기억했는지, 어떤 대화를 참조했는지, 그 기억을 사용자가 수정하거나 끌 수 있는지가 신뢰와 거버넌스의 핵심이 된다.',
+            dechiveView: 'AI가 업무 맥락을 기억할수록 더 개인화된 답변을 받을 수 있다. 하지만 Dechive 관점에서는 “AI가 기억한다”보다 “무엇을 기억했고, 그것을 사용자가 확인하고 고칠 수 있는가”가 더 중요하다.',
+            readerTakeaway: 'ChatGPT Business는 업무 맥락을 더 잘 기억하되, 사용자가 그 기억을 확인하고 관리할 수 있게 하는 방향으로 가고 있다.',
+            screenMaterialStatus: 'Memory summary, source 표시, memory 관리 화면이 공식적으로 있으면 참고 가능하다. 공식 화면이 없다면 “업무 대화 → memory → source 확인 → 수정/삭제/끄기” 흐름을 보여주는 설명 이미지가 적합하다.',
+            cautionNote: '개인용 ChatGPT 전체에 동일하게 적용되는 기능처럼 쓰지 않는다. ChatGPT Business memory 개선으로 구분한다. Codex memory에는 영향이 없다는 점도 필요하면 명시한다.',
+          },
+          {
+            id: 'openai-agentic-work-research',
+            title: 'OpenAI — 에이전트가 지식 노동의 단위를 바꾸고 있다는 연구/분석 자료',
+            officialDate: '2026.06.25',
+            checkedDateKST: '2026.06.26',
+            sourceType: 'Official Research / Official Blog',
+            officialSource: {
+              label: 'OpenAI — How agents are transforming work',
+              url: 'https://openai.com/index/how-agents-are-transforming-work/',
+            },
+            updateType: 'Research / Agentic Work / AI Adoption',
+            badges: ['Research', 'Agentic Work', 'AI Adoption', 'Official Source', 'Explanation Image Recommended'],
+            summary: 'OpenAI는 agentic AI가 지식 노동의 단위를 바꾸고 있다는 연구성 글을 공개했다. 핵심은 AI 사용이 짧은 질의응답에서 긴 작업 위임으로 이동하고 있다는 점이다.',
+            whatChanged: '신규 기능 출시라기보다, OpenAI가 agentic AI의 업무 적용 흐름과 경제적 의미를 정리한 분석 자료를 공개했다.',
+            whyItMatters: 'AI가 단순 답변 도구에서 업무 위임 도구로 이동하면, 사용자는 질문하는 사람에서 작업을 정의하고, 위임하고, 결과를 검증하는 사람으로 이동한다.',
+            dechiveView: 'AI가 “답변”에서 “업무 수행”으로 이동할수록 사람이 해야 할 일은 줄어드는 것이 아니라 바뀐다. 작업 정의, 경계 설정, 결과 검증이 더 중요해진다.',
+            readerTakeaway: 'AI 에이전트는 지식 노동을 짧은 답변에서 긴 작업 위임으로 바꾸고 있다.',
+            screenMaterialStatus: 'OpenAI 공식 글의 그래프나 이미지가 있으면 참고 가능하다. 없으면 “질문 → 작업 위임 → 도구 호출 → 결과 검증” 흐름을 보여주는 설명 이미지가 적합하다.',
+            cautionNote: '이 항목은 기능 출시가 아니라 연구/분석 자료다. Product Update처럼 작성하지 않는다.',
+          },
+        ],
+      },
+      {
+        name: 'Claude Code',
+        intro: '자동 실행이 늘어나는 코딩 도구에서 거부 이유, 로그, MCP 인증, shell 처리 안정성을 어떻게 남기는지 본다.',
+        updates: [
+          {
+            id: 'claude-code-2-1-193-auto-mode-observability',
+            title: 'Claude Code 2.1.193 — 자동 실행의 거부 이유와 관측성을 더 명확히 하다',
+            officialDate: '2026.06.25',
+            checkedDateKST: '2026.06.26',
+            sourceType: 'Official Changelog',
+            officialSource: {
+              label: 'Claude Code changelog',
+              url: 'https://code.claude.com/docs/en/changelog',
+            },
+            updateType: 'Developer Tool / Auto Mode / Security / Observability / MCP',
+            badges: ['Developer Tool', 'Auto Mode', 'Security', 'Observability', 'MCP', 'Official Changelog'],
+            summary: 'Claude Code 2.1.193에는 autoMode.classifyAllShell 설정, auto-mode 거부 이유 기록, OpenTelemetry log event, bash mode 파일 경로 자동완성, MCP 인증 필요 안내, idle background shell command memory-pressure reaping 등이 포함된다.',
+            whatChanged: 'Claude Code가 자동 실행을 더 세밀하게 분류하고, 거부 이유와 로그를 더 명확히 남기며, MCP 인증과 shell command 처리 경험을 개선했다.',
+            whyItMatters: 'AI 코딩 도구가 자동으로 명령을 실행할수록, 어떤 명령이 왜 허용되거나 거부됐는지 기록하는 것이 중요하다.',
+            dechiveView: '이 업데이트는 기능보다 운영 안전성에 가깝다. AI가 자동 실행을 많이 할수록 “실행 능력”만큼 중요한 것은 “설명 가능한 거부”다.',
+            readerTakeaway: 'Claude Code는 자동 실행을 강화하면서도, 왜 거부됐는지와 무엇이 기록되는지를 더 명확히 남기는 방향으로 가고 있다.',
+            screenMaterialStatus: 'CLI changelog 항목이므로 실제 제품 화면보다는 “명령 입력 → auto-mode classifier → 허용/거부 → 로그 기록” 흐름을 보여주는 설명 이미지가 적합하다.',
+            cautionNote: '비전공자에게는 명령어 세부보다 “AI가 자동 실행을 할 때 거부 이유와 로그가 더 중요해졌다”는 흐름으로 설명한다.',
+          },
+        ],
+      },
+      {
+        name: 'GitHub',
+        intro: 'Copilot이 Jira, 코드 리뷰, 플러그인 거버넌스까지 확장되는 흐름을 제품 통합·효율 개선·기업 통제로 구분한다.',
+        updates: [
+          {
+            id: 'github-copilot-for-jira-ga',
+            title: 'GitHub Copilot for Jira — AI가 이슈 관리 도구 안으로 들어가다',
+            officialDate: '2026.06.25',
+            checkedDateKST: '2026.06.26',
+            sourceType: 'Official Changelog',
+            officialSource: {
+              label: 'GitHub Changelog — Copilot for Jira GA',
+              url: 'https://github.blog/changelog/2026-06-25-github-copilot-for-jira-is-now-generally-available/',
+            },
+            updateType: 'Product Integration / Jira / Agent Sessions',
+            badges: ['Product Integration', 'Jira', 'Agent Sessions', 'Official Source', 'Official Screen Not Confirmed'],
+            summary: 'GitHub Copilot for Jira가 정식 출시됐다. Public preview 이후 model selection, Confluence context via MCP, custom agents, custom fields, space-level guidance, Jira 안의 review request notification 등이 추가됐다.',
+            whatChanged: 'GitHub Copilot이 GitHub 안의 코드 보조 도구를 넘어 Jira의 이슈 관리와 팀 업무 흐름 안으로 들어갔다.',
+            whyItMatters: '개발 작업은 코드만으로 이루어지지 않는다. 이슈, 문서, 리뷰 요청, 팀 맥락이 함께 연결되어야 한다.',
+            dechiveView: 'AI 코딩 도구의 범위가 코드 작성에서 업무 관리로 넓어지고 있다. 앞으로 AI 개발 도구는 Jira 이슈, Confluence 문서, 리뷰 요청, 팀 규칙까지 함께 보게 될 가능성이 크다.',
+            readerTakeaway: 'AI 코딩 도구는 이제 코드 편집기뿐 아니라 Jira 같은 이슈 관리 도구 안으로 들어가고 있다.',
+            screenMaterialStatus: 'Jira 안에서 Copilot agent session이나 review request notification이 보이는 공식 화면이 있으면 적합하다. 공식 화면이 없으면 “Jira Issue → Confluence Context → Copilot Agent Session → GitHub PR” 흐름을 보여주는 설명 이미지가 적합하다.',
+            cautionNote: '이 기능은 GitHub Copilot for Jira GA 항목으로 설명한다. 모든 Jira 사용자에게 자동 적용되는 일반 AI 기능처럼 쓰지 않는다.',
+          },
+          {
+            id: 'github-copilot-code-review-efficiency',
+            title: 'GitHub Copilot Code Review — 관련 코드를 더 빠르게 찾고 비용을 줄이다',
+            officialDate: '2026.06.25',
+            checkedDateKST: '2026.06.26',
+            sourceType: 'Official Changelog',
+            officialSource: {
+              label: 'GitHub Changelog — Copilot code review updates',
+              url: 'https://github.blog/changelog/2026-06-25-copilot-code-review-analysis-depth-and-efficiency-updates/',
+            },
+            updateType: 'Code Review / Developer Tool / Efficiency Update',
+            badges: ['Code Review', 'Developer Tool', 'Efficiency Update', 'Official Source'],
+            summary: 'GitHub Copilot code review가 Copilot CLI와 SDK의 built-in file exploration tools를 사용하도록 개선됐다. grep, rg, glob, view 같은 도구를 사용해 관련 코드를 더 빠르게 찾고, Medium analysis depth preview도 추가됐다.',
+            whatChanged: 'Copilot Code Review가 코드 리뷰 과정에서 관련 파일을 탐색하는 방식을 개선하고, 분석 깊이와 비용 효율을 조정할 수 있는 방향으로 확장됐다.',
+            whyItMatters: 'AI 코드 리뷰는 단순히 diff만 읽어서는 충분하지 않다. 관련 파일을 찾고, 프로젝트 맥락을 이해하고, 필요한 깊이만큼 분석해야 한다.',
+            dechiveView: 'AI 코드 리뷰는 “AI가 리뷰 코멘트를 달아준다”에서 끝나지 않는다. 어떤 파일을 찾아보고, 얼마나 깊게 분석하고, 비용을 얼마나 쓰는지가 실제 품질을 좌우한다.',
+            readerTakeaway: 'AI 코드 리뷰는 관련 코드를 더 잘 찾고, 분석 깊이와 비용을 조절하는 방향으로 발전하고 있다.',
+            screenMaterialStatus: 'Copilot Code Review 화면이나 analysis depth 관련 공식 화면이 있으면 적합하다. 공식 화면이 없다면 “PR diff → file exploration tools → analysis depth → review comment” 흐름의 설명 이미지가 적합하다.',
+            cautionNote: 'Medium analysis depth는 preview로 구분한다. “모든 리뷰 비용이 항상 20% 절감된다”처럼 일반화하지 않는다.',
+          },
+          {
+            id: 'github-strict-known-marketplaces-preview',
+            title: 'GitHub Enterprise Governance — Copilot 플러그인 설치 경로를 기업이 통제하다',
+            officialDate: '2026.06.25',
+            checkedDateKST: '2026.06.26',
+            sourceType: 'Official Changelog',
+            officialSource: {
+              label: 'GitHub Changelog — strictKnownMarketplaces',
+              url: 'https://github.blog/changelog/2026-06-25-enterprise-managed-settings-now-support-strictknownmarketplaces-in-vs-code-and-the-cli/',
+            },
+            updateType: 'Enterprise Governance / Plugin Control / Security / Public Preview',
+            badges: ['Enterprise Governance', 'Plugin Control', 'Security', 'Public Preview', 'Official Source'],
+            summary: 'GitHub은 Copilot CLI와 VS Code에서 사용자가 설치할 수 있는 plugin marketplace를 기업이 통제할 수 있는 strictKnownMarketplaces 설정을 공개 프리뷰로 추가했다.',
+            whatChanged: '기업은 Copilot 환경에서 사용자가 어떤 plugin marketplace를 사용할 수 있는지 제한할 수 있게 됐다.',
+            whyItMatters: 'AI 도구가 plugin과 외부 도구를 연결할수록, 신뢰할 수 없는 확장 기능이 보안 위험이 될 수 있다.',
+            dechiveView: 'AI 거버넌스는 모델 선택이나 데이터 정책만의 문제가 아니다. AI가 연결하는 plugin, marketplace, 외부 도구 경로까지 관리해야 한다.',
+            readerTakeaway: 'AI 도구가 plugin을 연결할수록, 기업은 어떤 plugin을 허용할지 통제해야 한다.',
+            screenMaterialStatus: 'VS Code 또는 Copilot CLI의 plugin marketplace 설정 화면이 있으면 적합하다. 없으면 “기업 정책 → 허용된 marketplace → Copilot plugin 설치” 흐름을 보여주는 설명 이미지가 적합하다.',
+            cautionNote: '이 기능은 Public Preview다. 정식 일반 출시처럼 단정하지 않는다.',
+          },
+        ],
+      },
+      {
+        name: 'xAI',
+        intro: '금융 플랫폼 통합은 투자 조언이 아니라 제품 통합과 사용 맥락 변화로 제한해 기록한다.',
+        updates: [
+          {
+            id: 'xai-grok-interactive-brokers',
+            title: 'xAI Grok / Interactive Brokers — AI가 금융 플랫폼 안으로 들어가다',
+            officialDate: '2026.06.25',
+            checkedDateKST: '2026.06.26',
+            sourceType: 'Official Company Blog',
+            officialSource: {
+              label: 'xAI News — Grok and Interactive Brokers',
+              url: 'https://x.ai/news/grok-interactive-brokers',
+            },
+            updateType: 'Financial AI / Platform Integration',
+            badges: ['Financial AI', 'Platform Integration', 'Official Source', 'Official Screen Not Confirmed'],
+            summary: 'xAI는 Interactive Brokers와 Grok 통합을 발표했다. Grok은 투자 플랫폼 경험 안에서 portfolio analysis, scenario modeling, research, order instructions 같은 영역에 활용될 수 있다고 소개된다.',
+            whatChanged: 'Grok이 금융 플랫폼의 사용자 경험 안으로 들어가는 통합 사례가 공개됐다.',
+            whyItMatters: 'AI가 금융 플랫폼 안으로 들어가면 사용자는 투자 정보 탐색, 시나리오 비교, 포트폴리오 분석 같은 작업을 대화형 인터페이스로 할 수 있다. 하지만 금융 영역은 오해나 과신 위험이 크다.',
+            dechiveView: '이 항목을 투자 추천처럼 다루면 안 된다. 핵심은 Grok이 금융 플랫폼 안으로 들어간다는 제품 통합 흐름이다.',
+            readerTakeaway: 'AI는 금융 플랫폼 안으로 들어가고 있지만, 투자 판단을 대신하는 도구로 이해하면 위험하다.',
+            screenMaterialStatus: 'Interactive Brokers 안에서 Grok이 보이는 공식 화면이 있으면 참고 가능하다. 없으면 “금융 플랫폼 → Grok → 포트폴리오 분석/시나리오/리서치” 흐름의 설명 이미지가 적합하다.',
+            cautionNote: '투자 조언처럼 작성하지 않는다. “매수/매도 판단을 돕는다”거나 “수익을 높인다”는 식의 표현은 피한다. 제품 통합 사례로만 다룬다.',
+          },
+        ],
+      },
+      {
+        name: 'Google / Gemini',
+        intro: '새 기능 발표가 아니라, 기존 preview 모델 종료 일정이 실제 시행되는 Effective Change로 기록한다.',
+        updates: [
+          {
+            id: 'gemini-image-preview-models-shutdown',
+            title: 'Gemini Image Preview Models — 이미지 preview 모델 종료 시행',
+            officialDate: '2026.06.25',
+            checkedDateKST: '2026.06.26',
+            sourceType: 'Official Changelog',
+            officialSource: {
+              label: 'Google AI Developers — Gemini API changelog',
+              url: 'https://ai.google.dev/gemini-api/docs/changelog',
+            },
+            updateType: 'Effective Change / Deprecation',
+            badges: ['Effective Change', 'Deprecation', 'Official Source'],
+            summary: 'Gemini API changelog에는 gemini-3.1-flash-image-preview와 gemini-3-pro-image-preview가 2026년 6월 25일에 shut down된다는 기존 공지가 있다.',
+            whatChanged: '기존 preview 이미지 모델 종료 일정이 2026년 6월 25일에 실제 시행된다.',
+            whyItMatters: 'AI 모델과 preview API는 영구적으로 유지되지 않을 수 있다. 서비스를 만드는 사람은 모델 종료 일정과 대체 모델을 확인해야 한다.',
+            dechiveView: '이 항목은 신기능이 아니라 Effective Change로 기록해야 한다. AI 업데이트는 새 기능만이 아니라, preview 모델 종료처럼 실제 사용에 영향을 주는 변화도 포함한다.',
+            readerTakeaway: 'AI API를 쓰는 사람은 새 모델뿐 아니라 종료되는 preview 모델도 확인해야 한다.',
+            screenMaterialStatus: '공식 changelog 화면 외 별도 이미지 필요 없음.',
+            cautionNote: '오늘 새로 발표된 업데이트처럼 쓰지 않는다. 기존 공지의 시행일로 분류한다.',
+          },
+        ],
+      },
+      {
+        name: 'Adobe',
+        intro: '기업 콘텐츠 관리 시스템 안의 agentic capabilities 실험을 보조 기록으로 다룬다.',
+        updates: [
+          {
+            id: 'adobe-aem-cloud-service-agents',
+            title: 'Adobe AEM as a Cloud Service 2026.6.0 — 기업 콘텐츠 관리 안의 에이전트 실험',
+            officialDate: '2026.06.25',
+            checkedDateKST: '2026.06.26',
+            sourceType: 'Official Release Notes',
+            officialSource: {
+              label: 'Adobe Experience Manager as a Cloud Service Release Notes',
+              url: 'https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/release-notes/release-notes/release-notes-current',
+            },
+            updateType: 'Enterprise CMS / Agents in AEM / Beta / Feature Release',
+            badges: ['Enterprise AI', 'Enterprise CMS', 'Agentic Workflow', 'Beta', 'Feature Release', 'Official Source'],
+            summary: 'Adobe Experience Manager as a Cloud Service 2026.6.0 feature release 날짜가 2026년 6월 25일로 올라와 있다. 문서에는 Agents in AEM 베타 프로그램이 언급된다.',
+            whatChanged: 'Adobe AEM 환경에서도 기업 콘텐츠 관리, 거버넌스, 최적화, 탐색, 개발 과정에 에이전트 기능을 실험하는 흐름이 확인된다.',
+            whyItMatters: '기업 콘텐츠 관리 시스템은 많은 승인, 관리, 검색, 최적화 작업을 포함한다. 에이전트가 이 영역에 들어오면 콘텐츠 운영 방식이 바뀔 수 있다.',
+            dechiveView: '이 항목은 메인 AI 기능 출시라기보다, 기업 CMS 안에서 에이전트 기능이 실험되고 있다는 보조 기록으로 적합하다.',
+            readerTakeaway: 'AI 에이전트는 개발 도구뿐 아니라 기업 콘텐츠 관리 시스템 안에서도 실험되고 있다.',
+            screenMaterialStatus: 'Adobe AEM release notes나 Agents in AEM 관련 공식 화면이 있으면 참고 가능하다. 없으면 별도 이미지는 필수 아님.',
+            cautionNote: 'Content Hub의 AI Search를 2026.06.25 신규 기능처럼 쓰지 않는다. AI Search는 별도 이전 릴리즈 항목으로 구분해야 한다.',
+          },
+        ],
+      },
+      {
+        name: 'Status Watch',
+        intro: '서비스 상태 기록은 기능 업데이트와 분리해서 안정성 확인 항목으로만 짧게 남긴다.',
+        updates: [
+          {
+            id: 'anthropic-status-2026-06-25',
+            title: 'Anthropic Status — 6월 25일 신규 incident 없음',
+            officialDate: '2026.06.25',
+            checkedDateKST: '2026.06.26',
+            sourceType: 'Official Status Page',
+            officialSource: {
+              label: 'Anthropic Status',
+              url: 'https://status.anthropic.com/',
+            },
+            updateType: 'Status Watch / Reliability',
+            badges: ['Status Watch', 'Official Source', 'Official Screen Available'],
+            summary: 'Anthropic Status 기준으로 2026년 6월 25일에는 별도 incident가 보고되지 않았다.',
+            whatChanged: '기능 업데이트가 아니라 서비스 상태 기록이다.',
+            whyItMatters: 'AI 서비스는 모델 성능뿐 아니라 실제 운영 안정성도 중요하다. incident가 없는 날도 Status Watch로 짧게 기록할 수 있다.',
+            dechiveView: '이 항목은 메인 업데이트가 아니라 Status Watch로 분리하는 것이 적절하다. AI는 잘하는 것뿐 아니라 안정적으로 작동하는지도 검증해야 한다.',
+            readerTakeaway: 'AI 서비스의 안정성도 업데이트 기록에서 함께 확인할 필요가 있다.',
+            screenMaterialStatus: 'Status page 화면을 참고할 수 있다.',
+            cautionNote: '기능 업데이트처럼 쓰지 않는다. Status Watch로만 짧게 다룬다.',
+          },
+        ],
+      },
+      {
+        name: 'Education / AI',
+        intro: '교육과 AI 지원 발표는 제품 업데이트가 아니라 접근성·리터러시 흐름의 보조 기록으로 둔다.',
+        updates: [
+          {
+            id: 'google-org-education-ai-funding',
+            title: 'Google.org — 교육과 AI 관련 지원 발표',
+            officialDate: '2026.06.25',
+            checkedDateKST: '2026.06.26',
+            sourceType: 'Official Blog',
+            officialSource: {
+              label: 'Google Blog — Google.org education AI funding',
+              url: 'https://blog.google/company-news/outreach-and-initiatives/google-org/education-ai-funding/',
+            },
+            updateType: 'AI Education / Funding / Official Blog',
+            badges: ['AI Education', 'Funding', 'Official Source'],
+            summary: 'Google.org는 교육과 AI 관련 장기 파트너 지원 내용을 공개했다. AI를 교육 현장에 적용하고, 학습자와 교육기관을 지원하기 위한 사회공헌/지원 성격의 발표다.',
+            whatChanged: '신규 AI 제품 출시라기보다는, 교육과 AI를 연결하는 지원 프로그램 발표에 가깝다.',
+            whyItMatters: 'AI가 교육 현장에 확산될수록, 기술 접근성, 교육 격차, 교사와 학생의 활용 역량이 중요한 문제가 된다.',
+            dechiveView: '이 항목은 AI 제품 업데이트 메인으로 보기에는 약하다. 다만 AI 리터러시와 교육 흐름을 함께 기록한다면 보조 항목으로 짧게 남길 수 있다.',
+            readerTakeaway: 'AI는 제품 업데이트뿐 아니라 교육과 접근성 영역에서도 중요한 주제가 되고 있다.',
+            screenMaterialStatus: '공식 블로그 이미지가 있으면 참고 가능하다. 별도 설명 이미지는 필수 아님.',
+            cautionNote: '제품 업데이트처럼 쓰지 않는다. AI Education / Funding 항목으로 분류한다.',
+          },
+        ],
+      },
+    ],
+    verificationNote: '이번 페이지는 2026.06.26 KST에 확인한 officialDate 2026.06.25 공식 업데이트를 정리한다. 한국 시간 기준으로는 하루 늦게 해외 공식 업데이트를 정리하는 운영 방식이 더 정확하므로, Dechive 발행일과 공식 발표일을 구분한다. 오늘 메인 업데이트는 OpenAI Codex Remote GA, ChatGPT Business Memory 개선, OpenAI의 agentic work 분석 자료, Claude Code 2.1.193, GitHub Copilot for Jira GA, Copilot Code Review 개선, GitHub strictKnownMarketplaces 공개 프리뷰다. xAI Grok / Interactive Brokers는 금융 플랫폼 통합 사례로 조심스럽게 다루고, Gemini image preview models shutdown은 새 기능이 아니라 Effective Change로 기록한다. Adobe AEM Agents는 기업 CMS 안의 에이전트 실험으로 보조 기록하며, Anthropic Status와 Google.org 교육 AI 지원은 메인 업데이트가 아니라 상태/보조 기록으로 분리한다. 기능 출시, 연구/분석 자료, 공개 프리뷰, 시행 변경, 상태 기록을 서로 섞지 않는다.',
+    closingLine: 'AI는 이제 답변창 밖에서 작동한다. 원격 개발 환경을 열고, 업무 맥락을 기억하고, 코드 리뷰와 Jira 작업을 돕고, 금융·기업 도구 안으로 들어간다. Dechive는 그 변화가 실제로 무엇을 바꾸는지 기록한다.',
+    updates: [
+      {
+        id: 'codex-remote-ga',
+        slug: 'codex-remote-ga',
+        title: 'OpenAI Codex Remote',
+        summary: '모바일과 원격 워크스페이스로 AI 코딩 작업을 이어갈 수 있게 됐다.',
+        badges: ['Product Update', 'Codex', 'Remote Workspace', 'Official Source'],
+        detailHref: '/ai-updates/2026-06-25#openai-codex-remote-ga',
+        source: {
+          label: 'OpenAI ChatGPT Release Notes',
+          url: 'https://help.openai.com/en/articles/6825453-chatgpt-release-notes',
+          description: 'Codex Remote 일반 제공과 DigitalOcean Droplet Workspace plugin 관련 공식 릴리즈노트다.',
+        },
+        whatChanged: 'Codex가 모바일 앱, 로컬 host, 원격 워크스페이스를 하나의 작업 흐름으로 연결한다.',
+        useCriteria: '원격 개발 작업을 켜고 승인할 때 인증, 권한, host 연결 방식을 함께 확인해야 한다.',
+        verificationNotes: ['officialDate 2026.06.25', 'checkedDateKST 2026.06.26', '제품 업데이트로 분류'],
+        image: {
+          status: 'none',
+          caption: '공식 화면이 없으면 모바일 앱 → 로컬 host → remote workspace 흐름의 설명 이미지가 적합하다.',
+        },
+      },
+      {
+        id: 'chatgpt-business-memory',
+        slug: 'chatgpt-business-memory',
+        title: 'ChatGPT Business Memory',
+        summary: '업무 맥락을 더 넓게 기억하되, 사용자가 기억과 출처를 확인하고 관리할 수 있게 됐다.',
+        badges: ['Enterprise AI', 'Memory', 'Governance', 'Official Source'],
+        detailHref: '/ai-updates/2026-06-25#chatgpt-business-memory-context',
+        source: {
+          label: 'OpenAI ChatGPT Business Release Notes',
+          url: 'https://help.openai.com/en/articles/11391654-chatgpt-business-release-notes',
+          description: 'ChatGPT Business memory 개선과 사용자 관리 흐름을 설명하는 공식 릴리즈노트다.',
+        },
+        whatChanged: '저장된 기억과 과거 대화 맥락을 활용하되 memory summary, sources, 수정·삭제·끄기 흐름을 제공한다.',
+        useCriteria: '업무 기억은 편의 기능이면서 동시에 검증 가능한 관리 대상이어야 한다.',
+        verificationNotes: ['officialDate 2026.06.25', 'checkedDateKST 2026.06.26', 'ChatGPT Business 항목으로 제한'],
+        image: {
+          status: 'none',
+          caption: '업무 대화 → memory → source 확인 → 수정/삭제/끄기 흐름의 설명 이미지가 적합하다.',
+        },
+      },
+      {
+        id: 'github-copilot-for-jira-ga',
+        slug: 'github-copilot-for-jira-ga',
+        title: 'GitHub Copilot for Jira',
+        summary: 'Copilot이 Jira 이슈 관리와 팀 업무 흐름 안으로 들어간다.',
+        badges: ['Product Integration', 'Jira', 'Agent Sessions', 'Official Source'],
+        detailHref: '/ai-updates/2026-06-25#github-copilot-for-jira-ga',
+        source: {
+          label: 'GitHub Changelog',
+          url: 'https://github.blog/changelog/2026-06-25-github-copilot-for-jira-is-now-generally-available/',
+          description: 'GitHub Copilot for Jira GA 공식 changelog다.',
+        },
+        whatChanged: 'Copilot이 GitHub 내부 코드 보조를 넘어 Jira, Confluence context, agent session 흐름과 연결된다.',
+        useCriteria: 'AI가 이슈 관리 도구 안으로 들어갈수록 팀 규칙, 문서 맥락, 리뷰 요청이 함께 검증되어야 한다.',
+        verificationNotes: ['officialDate 2026.06.25', 'checkedDateKST 2026.06.26', '제품 통합 항목으로 분류'],
+        image: {
+          status: 'none',
+          caption: 'Jira Issue → Confluence Context → Copilot Agent Session → GitHub PR 흐름의 설명 이미지가 적합하다.',
+        },
+      },
+    ],
+  },
   {
     date: '2026-06-24',
     title: 'AI가 대화 품질, 컴퓨터 조작, 인프라, 외부 도구 연결로 확장된 날',

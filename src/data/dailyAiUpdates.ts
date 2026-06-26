@@ -14,6 +14,39 @@ export type DailyAiUpdates = {
 
 export const dailyAiUpdates: DailyAiUpdates[] = [
   {
+    date: '2026-06-25',
+    label: {
+      ko: '오늘의 AI 업데이트',
+      en: 'AI UPDATE',
+    },
+    updates: [
+      {
+        title: 'Codex Remote',
+        description: {
+          ko: '모바일과 원격 워크스페이스로 AI 코딩이 확장된다',
+          en: 'AI coding expands into mobile and remote workspaces',
+        },
+        href: '/ai-updates/2026-06-25',
+      },
+      {
+        title: 'Business Memory',
+        description: {
+          ko: '업무 맥락을 기억하되 사용자가 확인하고 관리한다',
+          en: 'work memory becomes visible and manageable',
+        },
+        href: '/ai-updates/2026-06-25',
+      },
+      {
+        title: 'Copilot for Jira',
+        description: {
+          ko: 'AI가 코드 밖의 이슈 관리 흐름으로 들어간다',
+          en: 'AI moves into issue-management workflows',
+        },
+        href: '/ai-updates/2026-06-25',
+      },
+    ],
+  },
+  {
     date: '2026-06-24',
     label: {
       ko: '오늘의 AI 업데이트',
