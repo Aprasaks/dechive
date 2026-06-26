@@ -19,8 +19,8 @@ const TEMPLATE_COVER_IMAGES: Record<DailyIssueLayout, string> = {
 const EMPTY_DAILY_AI_UPDATES: DailyAiUpdates = {
   date: '',
   label: {
-    ko: '오늘의 AI 업데이트',
-    en: 'AI UPDATE',
+    ko: '확인한 AI 업데이트',
+    en: 'VERIFIED AI UPDATES',
   },
   updates: [],
 };

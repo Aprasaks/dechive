@@ -27,7 +27,30 @@ function getLocalizedHref(href: string, lang: Lang) {
 }
 
 function getDailyAiUpdatesHref(dailyAiUpdates: DailyAiUpdates) {
-  return dailyAiUpdates.date ? `/ai-updates/${dailyAiUpdates.date}` : '/ai-updates';
+  const targetDate = dailyAiUpdates.officialDate ?? dailyAiUpdates.date;
+
+  return targetDate ? `/ai-updates/${targetDate}` : '/ai-updates';
+}
+
+function formatAiUpdateDate(date?: string) {
+  return date ? date.replaceAll('-', '.') : '';
+}
+
+function getDailyAiUpdatesMeta(dailyAiUpdates: DailyAiUpdates, lang: Lang) {
+  const officialDate = formatAiUpdateDate(dailyAiUpdates.officialDate);
+  const checkedDate = formatAiUpdateDate(dailyAiUpdates.checkedDateKST);
+
+  if (!officialDate) return '';
+
+  if (lang === 'ko') {
+    return checkedDate
+      ? `공식 ${officialDate} · 확인 ${checkedDate} KST`
+      : `공식 ${officialDate}`;
+  }
+
+  return checkedDate
+    ? `Official ${officialDate} · Checked ${checkedDate} KST`
+    : `Official ${officialDate}`;
 }
 
 function formatCoverDate(date: string) {
@@ -255,13 +278,20 @@ function DailyAiUpdatesSlot({
   const labelClassName = tone === 'light' ? 'text-[#d6a352]' : 'text-[#a24f16]';
   const titleClassName = tone === 'light' ? 'text-[#fffaf0]' : 'text-[#1f1712]';
   const descriptionClassName = tone === 'light' ? 'text-[#fffaf0]/70' : 'text-[#5f5144]';
+  const metaClassName = tone === 'light' ? 'text-[#fffaf0]/52' : 'text-[#5f5144]/72';
   const dailyUpdatesHref = getDailyAiUpdatesHref(dailyAiUpdates);
+  const metaText = getDailyAiUpdatesMeta(dailyAiUpdates, lang);
 
   return (
     <div>
       <Link href={dailyUpdatesHref} className={`inline-flex text-[clamp(12px,0.92vw,14px)] font-black tracking-[0.24em] uppercase transition-opacity hover:opacity-75 ${labelClassName}`}>
           {getText(dailyAiUpdates.label, lang)}
       </Link>
+      {metaText ? (
+        <p className={`mt-2 text-[10px] font-bold tracking-[0.14em] uppercase ${metaClassName}`}>
+          {metaText}
+        </p>
+      ) : null}
       {visibleUpdates.length ? (
         <ul className="mt-5 space-y-5 text-left">
           {visibleUpdates.map((update) => (
@@ -406,6 +436,7 @@ function DarkEditorialPanel({
 }) {
   const visibleUpdates = dailyAiUpdates.updates.slice(0, 3);
   const dailyUpdatesHref = getDailyAiUpdatesHref(dailyAiUpdates);
+  const aiUpdatesMeta = getDailyAiUpdatesMeta(dailyAiUpdates, lang);
 
   return (
     <aside className="absolute top-0 right-0 bottom-[4.35rem] z-10 hidden w-[28vw] min-w-[20rem] max-w-[28rem] bg-[#080806]/68 px-9 pt-[14vh] pb-10 text-[#fffaf0] shadow-[-26px_0_90px_rgba(0,0,0,0.18)] backdrop-blur-[2px] xl:block">
@@ -429,6 +460,11 @@ function DarkEditorialPanel({
           </DarkPanelSection>
         ) : null}
         <DarkPanelSection icon={<Sparkles size={18} strokeWidth={1.45} />} label={getText(dailyAiUpdates.label, lang)}>
+          {aiUpdatesMeta ? (
+            <p className="mt-2 text-[10px] font-bold tracking-[0.14em] text-[#fffaf0]/50 uppercase">
+              {aiUpdatesMeta}
+            </p>
+          ) : null}
           {visibleUpdates.length ? (
             <ul className="mt-4 space-y-3">
               {visibleUpdates.map((update) => (
@@ -586,6 +622,7 @@ function BigQuestionLayout({
 }) {
   const visibleUpdates = dailyAiUpdates.updates.slice(0, 3);
   const dailyUpdatesHref = getDailyAiUpdatesHref(dailyAiUpdates);
+  const aiUpdatesMeta = getDailyAiUpdatesMeta(dailyAiUpdates, lang);
 
   return (
     <>
@@ -630,8 +667,13 @@ function BigQuestionLayout({
           ) : null}
           <Link href={dailyUpdatesHref} className="group block transition-opacity hover:opacity-80">
             <p className="text-[13px] font-black tracking-[0.14em] text-[#d6a352] uppercase">
-              AI UPDATE <span className="text-[#fffaf0]/56">—</span>
+              {getText(dailyAiUpdates.label, lang)} <span className="text-[#fffaf0]/56">—</span>
             </p>
+            {aiUpdatesMeta ? (
+              <p className="mt-2 text-[10px] font-bold tracking-[0.14em] text-[#fffaf0]/50 uppercase">
+                {aiUpdatesMeta}
+              </p>
+            ) : null}
             <p className="mt-2 max-w-[58rem] text-[clamp(14px,1vw,17px)] leading-snug font-semibold text-[#fffaf0]/88">
               {visibleUpdates.map((update) => update.title).join(' / ')}
             </p>
@@ -673,6 +715,7 @@ function SideCoverLinesLayout({
 }) {
   const visibleUpdates = dailyAiUpdates.updates.slice(0, 3);
   const dailyUpdatesHref = getDailyAiUpdatesHref(dailyAiUpdates);
+  const aiUpdatesMeta = getDailyAiUpdatesMeta(dailyAiUpdates, lang);
 
   return (
     <>
@@ -729,6 +772,11 @@ function SideCoverLinesLayout({
             <Link href={dailyUpdatesHref} className="inline-flex text-[13px] font-black tracking-[0.16em] text-[#d6a352] uppercase transition-opacity hover:opacity-80">
               {getText(dailyAiUpdates.label, lang)}
             </Link>
+            {aiUpdatesMeta ? (
+              <p className="mt-2 text-[10px] font-bold tracking-[0.14em] text-[#fffaf0]/50 uppercase">
+                {aiUpdatesMeta}
+              </p>
+            ) : null}
             {visibleUpdates.length ? (
               <ul className={`mt-5 space-y-4 text-[clamp(18px,1.45vw,24px)] leading-[1.08] font-semibold text-[#fffaf0] [text-shadow:0_2px_18px_rgba(0,0,0,0.35)] ${heroSerifClassName}`}>
                 {visibleUpdates.map((update) => (
