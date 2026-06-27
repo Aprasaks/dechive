@@ -16,6 +16,41 @@ export type DailyAiUpdates = {
 
 export const dailyAiUpdates: DailyAiUpdates[] = [
   {
+    date: '2026-06-27',
+    officialDate: '2026-06-26',
+    checkedDateKST: '2026-06-27',
+    label: {
+      ko: '확인한 AI 업데이트',
+      en: 'VERIFIED AI UPDATES',
+    },
+    updates: [
+      {
+        title: 'GPT-5.6 Sol',
+        description: {
+          ko: '강한 모델을 제한 프리뷰와 안전장치 속에서 공개한다',
+          en: 'a stronger model enters limited preview with safeguards',
+        },
+        href: '/ai-updates/2026-06-26',
+      },
+      {
+        title: 'ChatGPT Dictation',
+        description: {
+          ko: '음성 입력 정확도가 다국어와 소음 환경에서 개선된다',
+          en: 'dictation improves across languages and noisy settings',
+        },
+        href: '/ai-updates/2026-06-26',
+      },
+      {
+        title: 'GitHub Desktop 3.6',
+        description: {
+          ko: 'Copilot이 커밋과 충돌 해결 흐름 안으로 들어간다',
+          en: 'Copilot moves into commits and merge conflict workflows',
+        },
+        href: '/ai-updates/2026-06-26',
+      },
+    ],
+  },
+  {
     date: '2026-06-26',
     officialDate: '2026-06-25',
     checkedDateKST: '2026-06-26',

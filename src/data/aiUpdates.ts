@@ -77,7 +77,29 @@ export type AiUpdateBadge =
   | 'Beta'
   | 'Feature Release'
   | 'AI Education'
-  | 'Funding';
+  | 'Funding'
+  | 'Model Preview'
+  | 'Frontier Model'
+  | 'Limited Preview'
+  | 'Safety'
+  | 'Model Retirement'
+  | 'Model Picker'
+  | 'UX Update'
+  | 'Reliability'
+  | 'CLI Fix'
+  | 'Voice Input'
+  | 'Coding Model'
+  | 'Copilot'
+  | 'Git Workflow'
+  | 'GitHub Desktop'
+  | 'Worktrees'
+  | 'Merge Conflict'
+  | 'Enterprise Analytics'
+  | 'AI Adoption Metrics'
+  | 'Backfill'
+  | 'Agent Governance'
+  | 'Needs Date Verification'
+  | 'Dictation';
 
 export interface AiUpdateItem {
   id: string;
@@ -143,6 +165,304 @@ export interface AiUpdateBriefingItem {
 export const AI_UPDATES_MONTH = '2026.06';
 
 export const aiUpdateDays: AiUpdateDay[] = [
+  {
+    date: '2026-06-26',
+    title: '강한 모델은 조심스럽게 공개되고, AI 도구는 실제 작업 흐름 안으로 들어간다',
+    subtitle: '오늘의 공식 업데이트는 GPT-5.6 Sol 제한 프리뷰처럼 더 강한 모델을 단계적으로 공개하는 흐름과, ChatGPT·Claude Code·GitHub Copilot이 음성 입력, 개발 환경, Git 작업, 기업 지표 안으로 더 깊게 들어가는 변화가 중심이다.',
+    quickSummary: [
+      '모델 업데이트는 GPT-5.6 Sol 제한 프리뷰다. 강한 모델일수록 성능뿐 아니라 공개 방식, 접근 제한, 안전장치를 함께 봐야 한다.',
+      '모델 종료와 제품 경험 업데이트는 GPT-4.5 ChatGPT 종료, ChatGPT dictation 개선으로 구분한다. 새 모델만이 아니라 사라지는 모델과 입력 방식도 사용자 경험을 바꾼다.',
+      '개발자·기업 업데이트는 Claude Code 2.1.195, GitHub Copilot MAI-Code-1-Flash, GitHub Desktop 3.6, Copilot usage metrics PR merge totals가 중심이다.',
+    ],
+    groups: [
+      {
+        name: 'OpenAI',
+        intro: 'GPT-5.6 Sol 제한 프리뷰와 GPT-4.5 ChatGPT 종료를 모델 공개와 모델 종료로 나누어 기록한다.',
+        updates: [
+          {
+            id: 'openai-gpt-5-6-sol-limited-preview',
+            title: 'OpenAI GPT-5.6 Sol — 더 강한 모델은 더 조심스럽게 공개된다',
+            officialDate: '2026.06.26',
+            checkedDateKST: '2026.06.27',
+            sourceType: 'Official Blog / Official Release',
+            officialSource: {
+              label: 'OpenAI — Previewing GPT-5.6 Sol',
+              url: 'https://openai.com/index/previewing-gpt-5-6-sol/',
+            },
+            updateType: 'Model Preview / Frontier Model / Limited Preview / Safety',
+            badges: ['Model Preview', 'Frontier Model', 'Limited Preview', 'Safety', 'Official Source', 'Explanation Image Recommended'],
+            summary: 'OpenAI는 GPT-5.6 시리즈의 제한 프리뷰를 공개했다. Sol은 flagship 모델, Terra는 일상 작업용 균형 모델, Luna는 빠르고 저렴한 모델로 소개된다. Sol은 코딩, 생물학, 사이버보안 쪽 장기 작업 능력을 강화한 모델로 설명된다.',
+            whatChanged: 'OpenAI가 GPT-5.6 Sol을 바로 일반 공개하지 않고, 제한된 파트너 대상 프리뷰와 강한 안전장치를 함께 둔 방식으로 공개했다.',
+            whyItMatters: '모델 성능이 강해질수록 공개 방식도 중요해진다. 특히 코딩, 생물학, 사이버보안처럼 고위험 가능성이 있는 영역에서 성능이 올라가면, 접근 권한, 사용 제한, 안전 평가, 단계적 배포가 함께 논의되어야 한다.',
+            dechiveView: '이 업데이트의 핵심은 “새 모델이 더 강하다”가 아니다. 더 강한 모델을 어떻게 공개할 것인가가 핵심이다. Dechive 관점에서는 모델 성능보다 공개 방식, 안전장치, 제한 프리뷰, 방어적 사용 가능성, 악용 방지 구조를 함께 기록해야 한다.',
+            readerTakeaway: '강한 AI 모델은 더 빠르게 공개되는 것이 아니라, 더 많은 안전장치와 단계적 접근 방식 속에서 공개되고 있다.',
+            screenMaterialStatus: 'OpenAI 공식 블로그의 GPT-5.6 Sol 관련 공식 이미지가 있으면 참고 가능하다. 화면 자료가 부족하면 “모델 성능 향상 → 제한 프리뷰 → 안전장치 → 단계적 공개” 흐름의 설명 이미지가 적합하다.',
+            cautionNote: 'GPT-5.6 Sol이 모든 사용자에게 일반 제공된 것처럼 쓰지 않는다. 제한 프리뷰이며 trusted partners 중심으로 시작했다는 점을 명확히 한다. 사이버보안 능력을 과장하거나 공격적 사용을 부추기는 표현은 피한다.',
+          },
+          {
+            id: 'openai-gpt-4-5-chatgpt-retirement',
+            title: 'OpenAI GPT-4.5 Retirement — AI 업데이트는 사라지는 모델도 봐야 한다',
+            officialDate: '2026.06.26',
+            checkedDateKST: '2026.06.27',
+            sourceType: 'Official Release Notes',
+            officialSource: {
+              label: 'OpenAI ChatGPT Release Notes',
+              url: 'https://help.openai.com/en/articles/6825453-chatgpt-release-notes',
+            },
+            updateType: 'Model Retirement / Effective Change',
+            badges: ['Model Retirement', 'Effective Change', 'Official Source'],
+            summary: 'OpenAI는 2026년 6월 26일부터 GPT-4.5를 ChatGPT에서 더 이상 사용할 수 없다고 안내했다. 이 변경은 custom GPT에도 적용되며, 기존 GPT-4.5 대화는 GPT-5.5로 계속 이어갈 수 있다.',
+            whatChanged: 'GPT-4.5가 ChatGPT와 custom GPT에서 더 이상 사용되지 않게 됐다. 기존 대화는 GPT-5.5로 이어진다.',
+            whyItMatters: 'AI 업데이트는 새 모델 출시만을 의미하지 않는다. 사용자가 쓰던 모델이 사라지는 것도 실제 사용 경험에 영향을 준다. 특정 모델의 답변 스타일이나 성능에 맞춰 작업 흐름을 만든 사람에게는 모델 종료가 중요한 변화다.',
+            dechiveView: 'Dechive에서는 모델 출시만큼 모델 종료도 기록해야 한다. 검증 가능한 AI 사용은 “무엇이 새로 생겼는가”뿐 아니라 “무엇이 사라졌는가”도 확인하는 일이다.',
+            readerTakeaway: 'AI 업데이트는 새 기능만이 아니라, 기존 모델이 사라지는 변화도 포함한다.',
+            screenMaterialStatus: 'OpenAI release notes 화면 외 별도 이미지는 필수 아님. 필요하다면 “GPT-4.5 → GPT-5.5로 기존 대화 이어짐” 흐름을 보여주는 설명 이미지가 적합하다.',
+            cautionNote: 'API까지 GPT-4.5가 종료된 것처럼 쓰지 않는다. 이 변경은 ChatGPT에만 적용되고 API에는 영향이 없다고 명확히 쓴다.',
+          },
+        ],
+      },
+      {
+        name: 'ChatGPT',
+        intro: '6월 26일 공식 release notes 기준으로 ChatGPT의 음성 입력 개선을 제품 경험 변화로 기록한다.',
+        updates: [
+          {
+            id: 'chatgpt-improved-dictation',
+            title: 'ChatGPT Dictation — 여러 언어와 조용한 환경의 음성 입력을 더 잘 알아듣다',
+            officialDate: '2026.06.26',
+            checkedDateKST: '2026.06.27',
+            sourceType: 'Official Release Notes',
+            officialSource: {
+              label: 'OpenAI ChatGPT Release Notes',
+              url: 'https://help.openai.com/en/articles/6825453-chatgpt-release-notes',
+            },
+            updateType: 'Product Update / Dictation / Voice Input / UX Update',
+            badges: ['Product Update', 'Dictation', 'Voice Input', 'UX Update', 'Official Source', 'Official Screen Not Confirmed'],
+            summary: 'OpenAI는 ChatGPT 전 플랜에 새로운 speech-to-text 모델을 적용해 dictation 정확도를 개선한다고 안내했다. 다국어 화자, 언어 전환, 소음이 있는 장소, 조용하거나 속삭이는 음성, 문자와 숫자 조합 전사에서 개선을 설명한다.',
+            whatChanged: 'ChatGPT의 음성 입력은 사용 방식이 크게 바뀌는 UI 업데이트가 아니라, 뒤에서 음성을 텍스트로 바꾸는 모델이 개선되는 형태로 업데이트됐다.',
+            whyItMatters: 'AI 사용은 키보드 입력만으로 이루어지지 않는다. 음성 입력이 정확해지면 이동 중 메모, 긴 설명, 다국어 대화, 업무 환경의 빠른 입력에서 AI를 쓰는 방식이 달라질 수 있다.',
+            dechiveView: '이 업데이트는 화려한 새 기능보다 입력 품질 개선에 가깝다. 하지만 AI가 실제 도구가 되려면 답변 품질뿐 아니라 사용자가 어떤 방식으로 맥락을 넣을 수 있는지도 중요하다.',
+            readerTakeaway: 'ChatGPT는 답변 모델뿐 아니라 사용자가 말로 입력하는 경로도 더 안정적으로 다듬고 있다.',
+            screenMaterialStatus: '공식 release notes 화면 외 별도 제품 이미지는 필수 아님. 설명 이미지가 필요하다면 “음성 입력 → speech-to-text → ChatGPT 대화” 흐름이 적합하다.',
+            cautionNote: '이 항목을 새로운 음성 대화 UI 출시처럼 쓰지 않는다. 공식 문서 기준으로는 dictation의 behind-the-scenes 정확도 개선이다.',
+          },
+        ],
+      },
+      {
+        name: 'Claude Code',
+        intro: '자동 작업 환경의 안정성 수정은 큰 기능보다 실제 사용 흐름의 안전성과 신뢰성을 기준으로 본다.',
+        updates: [
+          {
+            id: 'claude-code-2-1-195-reliability',
+            title: 'Claude Code 2.1.195 — 자동 작업 환경의 입력 안정성과 plugin 통제를 고치다',
+            officialDate: '2026.06.26',
+            checkedDateKST: '2026.06.27',
+            sourceType: 'Official Changelog',
+            officialSource: {
+              label: 'Claude Code changelog',
+              url: 'https://code.claude.com/docs/en/changelog',
+            },
+            updateType: 'Developer Tool / Reliability / CLI Fix / Voice Input / Plugin Control',
+            badges: ['Developer Tool', 'Reliability', 'CLI Fix', 'Voice Input', 'Plugin Control', 'Official Changelog'],
+            summary: 'Claude Code 2.1.195에는 mouse click 비활성화 환경변수, hook matcher 수정, macOS voice dictation 문제 수정, external plugins 설치 동의 처리 개선, background jobs와 background agent 관련 안정성 수정 등이 포함됐다.',
+            whatChanged: 'Claude Code가 자동 작업 환경에서 발생할 수 있는 입력, hook matching, voice dictation, plugin consent, background agent 안정성 문제를 다수 수정했다.',
+            whyItMatters: 'AI 코딩 도구가 실제 작업 환경에 깊게 들어갈수록 작은 입력 오류나 plugin 통제 문제, background agent 불안정성이 실제 작업 흐름을 망칠 수 있다. 이런 안정성 수정은 화려하지 않지만 실제 사용자에게 중요하다.',
+            dechiveView: 'Claude Code 2.1.195는 “새로운 큰 기능”보다 “AI 코딩 도구가 실제 작업 환경에서 덜 위험하고 덜 불안정하게 작동하도록 다듬는 업데이트”에 가깝다. Dechive에서는 이를 Reliability Update로 분류하는 것이 맞다.',
+            readerTakeaway: 'AI 코딩 도구는 강력한 기능만큼, 입력 안정성·plugin 통제·background 작업 안정성도 중요해지고 있다.',
+            screenMaterialStatus: 'Claude Code changelog 화면 외 별도 제품 이미지는 필수 아님. 설명 이미지가 필요하다면 “입력 / hook / plugin / background agent / voice dictation 안정성”을 묶은 구조 이미지가 적합하다.',
+            cautionNote: '2.1.193과 혼동하지 않는다. 2.1.193은 2026.06.25 항목이고, 이번 페이지에는 2026.06.26의 2.1.195를 사용한다.',
+          },
+        ],
+      },
+      {
+        name: 'GitHub Copilot',
+        intro: 'Copilot이 Microsoft 자체 코딩 모델과 기업용 모델 정책 안으로 확장되는 흐름을 기록한다.',
+        updates: [
+          {
+            id: 'github-copilot-mai-code-1-flash',
+            title: 'GitHub Copilot MAI-Code-1-Flash — Microsoft 자체 코딩 모델이 Copilot Business와 Enterprise에 들어오다',
+            officialDate: '2026.06.26',
+            checkedDateKST: '2026.06.27',
+            sourceType: 'Official Changelog',
+            officialSource: {
+              label: 'GitHub Changelog — MAI-Code-1-Flash',
+              url: 'https://github.blog/changelog/2026-06-26-mai-code-1-flash-for-copilot-business-and-copilot-enterprise/',
+            },
+            updateType: 'Coding Model / Copilot / Enterprise AI',
+            badges: ['Coding Model', 'Copilot', 'Enterprise AI', 'Official Source', 'Official Screen Not Confirmed'],
+            summary: 'GitHub은 Microsoft AI의 자체 코딩 모델 MAI-Code-1-Flash가 GitHub Copilot Business와 Copilot Enterprise에서 일반 제공된다고 발표했다.',
+            whatChanged: 'GitHub Copilot이 Microsoft 자체 코딩 모델을 Business와 Enterprise 고객에게 제공한다. Copilot 안의 모델 선택지가 더 다양해지는 흐름이다.',
+            whyItMatters: 'AI 코딩 도구는 하나의 모델에 의존하는 제품에서, 여러 모델을 작업에 맞게 선택하거나 라우팅하는 플랫폼으로 바뀌고 있다. 기업은 속도, 비용, 지연시간, 작업 유형에 따라 모델을 선택해야 한다.',
+            dechiveView: 'Copilot은 더 이상 “OpenAI 모델을 붙인 코드 보조 도구”로만 보기 어렵다. Microsoft 자체 코딩 모델이 들어오면서, Copilot은 모델 포트폴리오형 개발 도구로 이동하고 있다.',
+            readerTakeaway: 'GitHub Copilot은 Microsoft 자체 코딩 모델까지 포함하는 모델 포트폴리오형 코딩 도구로 확장되고 있다.',
+            screenMaterialStatus: 'GitHub 공식 changelog에 Copilot model picker 이미지가 있으면 공식 화면 참고 가능으로 표시한다. 공식 화면이 없으면 “Copilot → model picker → MAI-Code-1-Flash” 흐름을 보여주는 설명 이미지가 적합하다.',
+            cautionNote: '관리자가 정책을 활성화해야 사용할 수 있다는 점을 명확히 한다. 모든 사용자가 즉시 자동으로 쓰는 기능처럼 쓰지 않는다.',
+          },
+        ],
+      },
+      {
+        name: 'GitHub Desktop',
+        intro: 'AI가 코드 작성뿐 아니라 커밋 작성, 충돌 해결, worktree 기반 작업 흐름까지 들어가는 변화다.',
+        updates: [
+          {
+            id: 'github-desktop-3-6-copilot-worktrees',
+            title: 'GitHub Desktop 3.6 — Copilot이 커밋과 충돌 해결 흐름 안으로 들어가다',
+            officialDate: '2026.06.26',
+            checkedDateKST: '2026.06.27',
+            sourceType: 'Official Changelog',
+            officialSource: {
+              label: 'GitHub Changelog — GitHub Desktop 3.6',
+              url: 'https://github.blog/changelog/2026-06-26-github-desktop-3-6-worktrees-and-deeper-copilot-integration/',
+            },
+            updateType: 'Developer Tool / Git Workflow / GitHub Desktop / Copilot Integration / Worktrees',
+            badges: ['Developer Tool', 'Git Workflow', 'GitHub Desktop', 'Copilot', 'Worktrees', 'Merge Conflict', 'Official Source', 'Official Screen Available'],
+            summary: 'GitHub Desktop 3.6은 Git worktrees 지원을 추가하고, GitHub Copilot을 commit authoring과 merge conflict resolution 흐름에 더 깊게 통합했다.',
+            whatChanged: 'GitHub Desktop 안에서 Copilot이 커밋 작성, merge conflict 해결, worktree 기반 병렬 작업 흐름과 연결됐다.',
+            whyItMatters: '개발자는 코드를 쓰는 것뿐 아니라 커밋 메시지를 만들고, 충돌을 해결하고, 여러 브랜치를 오가며 작업한다. AI가 이 Git 흐름 안으로 들어오면 개발자의 실제 작업 과정이 바뀐다.',
+            dechiveView: 'AI 코딩 도구의 핵심은 더 이상 “코드를 대신 써주는가”만이 아니다. 커밋, 충돌 해결, 작업 트리 관리처럼 개발자의 현실적인 Git 순간을 얼마나 잘 돕는지가 중요해지고 있다.',
+            readerTakeaway: 'AI는 코드 작성뿐 아니라 커밋 작성, 충돌 해결, worktree 관리 같은 Git 작업 흐름 안으로 들어가고 있다.',
+            screenMaterialStatus: 'GitHub Desktop 공식 changelog에 worktree 메뉴, commit authoring, model picker 이미지가 있으므로 공식 화면 참고 가능으로 표시한다.',
+            cautionNote: 'Copilot-powered 기능은 GitHub Copilot 접근 권한이 필요하다는 점을 명확히 한다. GitHub Desktop 자체는 무료지만 Copilot 기능은 별도 권한이 필요하다.',
+          },
+        ],
+      },
+      {
+        name: 'Enterprise Metrics',
+        intro: '기업용 AI 도입은 사용량 지표에서 결과 지표로 이동하고 있다.',
+        updates: [
+          {
+            id: 'github-copilot-usage-metrics-pr-merge-totals',
+            title: 'GitHub Copilot Usage Metrics — AI 도입 단계를 PR merge 지표로 추적하다',
+            officialDate: '2026.06.26',
+            checkedDateKST: '2026.06.27',
+            sourceType: 'Official Changelog',
+            officialSource: {
+              label: 'GitHub Changelog — Copilot usage metrics',
+              url: 'https://github.blog/changelog/2026-06-26-track-total-merges-by-adoption-phase-in-enterprise-and-organization-reports/',
+            },
+            updateType: 'Enterprise Analytics / AI Adoption Metrics / Copilot Usage Metrics',
+            badges: ['Enterprise Analytics', 'AI Adoption Metrics', 'Copilot', 'Official Source', 'Explanation Image Recommended'],
+            summary: 'GitHub은 Copilot usage metrics API의 AI adoption phase cohorts에 total_pull_requests_merged 지표를 추가했다.',
+            whatChanged: '기업과 조직은 AI 도입 단계별로 PR merge 총량을 볼 수 있게 됐다. AI adoption phase별 업무 결과를 더 직접적으로 추적할 수 있다.',
+            whyItMatters: '기업에서 AI 도구 도입은 “몇 명이 쓰는가”만으로 평가하기 어렵다. 실제로 PR merge 같은 결과 지표가 어떻게 달라지는지 봐야 한다.',
+            dechiveView: 'AI 도입은 사용량 지표에서 결과 지표로 이동하고 있다. 앞으로 기업은 “Copilot을 켰는가”보다 “AI를 쓰는 팀이 실제로 어떤 결과를 내는가”를 더 보게 될 것이다.',
+            readerTakeaway: '기업은 AI 도입을 단순 사용량이 아니라 PR merge 같은 실제 개발 흐름 지표로 측정하기 시작하고 있다.',
+            screenMaterialStatus: 'GitHub reports 또는 usage metrics API 설명 이미지는 공식 화면이 제한적일 수 있다. 공식 화면이 없다면 “AI adoption phase → PR merge totals → enterprise report” 흐름을 보여주는 설명 이미지가 적합하다.',
+            cautionNote: '이 지표는 enterprise administrators와 organization owners가 Copilot usage metrics REST API 접근 권한이 있을 때 확인할 수 있다. 일반 사용자용 기능처럼 쓰지 않는다.',
+          },
+        ],
+      },
+      {
+        name: 'Backfill / Needs Verification',
+        intro: '날짜가 2026.06.26이 아니거나 날짜 확인이 필요한 항목은 메인 업데이트와 분리해 보류한다.',
+        updates: [
+          {
+            id: 'google-cloud-gemini-enterprise-agent-backfill',
+            title: 'Backfill Candidate — Google Cloud Gemini Enterprise Agent / MCP Governance',
+            officialDate: '2026.06.25',
+            checkedDateKST: '2026.06.27',
+            sourceType: 'Official Release Notes',
+            officialSource: {
+              label: 'Google Cloud release notes',
+              url: 'https://cloud.google.com/release-notes',
+            },
+            updateType: 'Backfill / Enterprise AI / Agent Governance / MCP',
+            badges: ['Backfill', 'Enterprise AI', 'Agent Governance', 'MCP', 'Official Source'],
+            summary: 'Gemini Enterprise release notes의 2026.06.25 항목에 Agent Registry를 통한 agents와 custom MCP servers 관리, Agent Gateway egress policies 관련 내용이 있는지 확인한다.',
+            whatChanged: '이 항목은 officialDate 2026.06.26이 아니므로 이번 페이지 메인에 넣지 않는다. 2026.06.25 페이지에서 빠졌다면 backfill 후보로 분리한다.',
+            whyItMatters: 'AI agent와 MCP server 관리, egress policy는 기업용 AI 거버넌스에서 중요한 주제지만 날짜 기준을 지켜야 기록의 신뢰성이 유지된다.',
+            dechiveView: 'Dechive에서는 흥미로운 항목도 공식 날짜가 맞지 않으면 메인에 섞지 않는다. 날짜 기준을 지키는 것이 업데이트 기록의 첫 번째 검증이다.',
+            readerTakeaway: '좋은 항목이어도 공식 날짜가 다르면 해당 날짜의 메인 업데이트로 다루지 않는다.',
+            screenMaterialStatus: '공식 release notes 화면 확인이 우선이다. 별도 설명 이미지는 backfill 확정 후 검토한다.',
+            cautionNote: '이번 2026.06.26 페이지 메인에 넣지 않는다. 날짜가 2026.06.25라면 Backfill / officialDate 2026.06.25로 분리한다.',
+          },
+          {
+            id: 'adobe-journey-optimizer-ai-assistant-date-verification',
+            title: 'Needs Date Verification — Adobe Journey Optimizer AI Assistant',
+            officialDate: 'Needs Verification',
+            checkedDateKST: '2026.06.27',
+            sourceType: 'Official Release Notes',
+            officialSource: {
+              label: 'Adobe Journey Optimizer release notes',
+              url: 'https://experienceleague.adobe.com/',
+            },
+            updateType: 'Needs Date Verification / Enterprise AI',
+            badges: ['Needs Date Verification', 'Enterprise AI', 'Official Screen Not Confirmed'],
+            summary: 'Adobe Journey Optimizer release notes 안의 AI Assistant 관련 항목은 날짜를 반드시 확인한다. 2026.06.26 신규 기능인지, 기존/coming soon 설명인지 분리되지 않으면 이번 페이지 메인에 넣지 않는다.',
+            whatChanged: '날짜가 명확하지 않으므로 변경 사항으로 확정하지 않는다.',
+            whyItMatters: 'release notes 안의 기능 설명은 오늘 새로 나온 기능, 이전 릴리즈, coming soon 항목이 섞일 수 있다. 날짜 확인 없이 메인 업데이트로 넣으면 기록이 흐려진다.',
+            dechiveView: 'Dechive에서는 “AI 관련 항목이 있다”보다 “오늘 공식 날짜로 확인됐는가”가 먼저다.',
+            readerTakeaway: '날짜가 불명확한 AI Assistant 항목은 보류하고, 공식 날짜가 확인된 뒤 기록한다.',
+            screenMaterialStatus: '날짜 확인 전에는 별도 이미지 필요 없음.',
+            cautionNote: '날짜가 명확하지 않으면 Needs Date Verification으로 보류한다.',
+          },
+        ],
+      },
+    ],
+    verificationNote: '이번 페이지는 2026.06.27 KST에 확인한 officialDate 2026.06.26 공식 업데이트를 정리한다. 한국 기준 발행일과 해외 공식 발표일을 구분한다. 오늘 메인 업데이트는 OpenAI GPT-5.6 Sol 제한 프리뷰, GPT-4.5 ChatGPT 종료, ChatGPT dictation 개선, Claude Code 2.1.195, GitHub Copilot MAI-Code-1-Flash, GitHub Desktop 3.6, GitHub Copilot usage metrics 업데이트다. 이번 페이지에서는 모델 프리뷰, 모델 종료, 제품 경험 변경, 개발자 도구 안정성 수정, 코딩 모델 제공, Git 워크플로우 개선, 기업용 AI 도입 지표를 서로 구분한다. 특히 GPT-5.6 Sol은 제한 프리뷰이며 일반 전체 출시가 아니다. GPT-4.5 종료는 ChatGPT에만 적용되고 API에는 영향이 없다. ChatGPT model picker 단순화는 공식 release notes 기준 2026.06.10 항목이므로 이번 2026.06.26 메인 업데이트에서 제외했다. Claude Code는 6월 26일 항목인 2.1.195를 사용하며, 6월 25일 항목인 2.1.193과 혼동하지 않는다.',
+    closingLine: 'AI는 더 강해지고 있지만, 동시에 더 조심스럽게 공개되고 있다. 그리고 AI 도구는 음성 입력, 커밋 작성, 충돌 해결, 기업 성과 지표처럼 실제 작업 흐름 안으로 들어간다. Dechive는 그 변화가 무엇을 가능하게 하고, 무엇을 검증해야 하는지 기록한다.',
+    updates: [
+      {
+        id: 'gpt-5-6-sol-preview',
+        slug: 'gpt-5-6-sol-preview',
+        title: 'GPT-5.6 Sol',
+        summary: '강한 모델을 제한 프리뷰와 안전장치 속에서 단계적으로 공개한다.',
+        badges: ['Model Preview', 'Frontier Model', 'Limited Preview', 'Safety', 'Official Source'],
+        detailHref: '/ai-updates/2026-06-26#openai-gpt-5-6-sol-limited-preview',
+        source: {
+          label: 'OpenAI official blog',
+          url: 'https://openai.com/index/previewing-gpt-5-6-sol/',
+          description: 'GPT-5.6 Sol 제한 프리뷰와 단계적 공개 방식을 설명하는 공식 블로그다.',
+        },
+        whatChanged: 'GPT-5.6 Sol이 trusted partners 중심 제한 프리뷰로 공개됐다.',
+        useCriteria: '모델 성능보다 접근 제한, 안전장치, 단계적 공개 여부를 함께 확인한다.',
+        verificationNotes: ['officialDate 2026.06.26', 'checkedDateKST 2026.06.27', '제한 프리뷰로 분류'],
+        image: {
+          status: 'none',
+          caption: '공식 발표 이미지가 없으면 모델 성능 향상 → 제한 프리뷰 → 안전장치 흐름의 설명 이미지가 적합하다.',
+        },
+      },
+      {
+        id: 'chatgpt-dictation',
+        slug: 'chatgpt-dictation',
+        title: 'ChatGPT Dictation',
+        summary: '새 speech-to-text 모델로 다국어와 소음 환경의 음성 입력 정확도가 개선된다.',
+        badges: ['Product Update', 'Dictation', 'Voice Input', 'Official Source'],
+        detailHref: '/ai-updates/2026-06-26#chatgpt-improved-dictation',
+        source: {
+          label: 'OpenAI ChatGPT Release Notes',
+          url: 'https://help.openai.com/en/articles/6825453-chatgpt-release-notes',
+          description: 'ChatGPT dictation 개선과 GPT-4.5 종료를 포함한 공식 릴리즈노트다.',
+        },
+        whatChanged: 'ChatGPT의 음성 입력 정확도가 뒤에서 개선되는 형태로 업데이트됐다.',
+        useCriteria: '새 UI 출시가 아니라 dictation 정확도 개선이라는 점을 구분한다.',
+        verificationNotes: ['officialDate 2026.06.26', 'checkedDateKST 2026.06.27', '제품 경험 업데이트로 분류'],
+        image: {
+          status: 'none',
+          caption: '음성 입력 → speech-to-text → ChatGPT 대화 흐름의 설명 이미지가 적합하다.',
+        },
+      },
+      {
+        id: 'github-desktop-3-6',
+        slug: 'github-desktop-3-6',
+        title: 'GitHub Desktop 3.6',
+        summary: 'Copilot이 커밋 작성, merge conflict 해결, worktree 흐름 안으로 들어간다.',
+        badges: ['GitHub Desktop', 'Git Workflow', 'Copilot', 'Worktrees', 'Official Source'],
+        detailHref: '/ai-updates/2026-06-26#github-desktop-3-6-copilot-worktrees',
+        source: {
+          label: 'GitHub Changelog',
+          url: 'https://github.blog/changelog/2026-06-26-github-desktop-3-6-worktrees-and-deeper-copilot-integration/',
+          description: 'GitHub Desktop 3.6의 worktrees와 Copilot 통합을 설명하는 공식 changelog다.',
+        },
+        whatChanged: 'GitHub Desktop에서 Copilot이 commit authoring과 merge conflict resolution에 더 깊게 통합됐다.',
+        useCriteria: 'GitHub Desktop 자체와 Copilot 권한이 필요한 기능을 구분한다.',
+        verificationNotes: ['officialDate 2026.06.26', 'checkedDateKST 2026.06.27', 'Git 워크플로우 업데이트로 분류'],
+        image: {
+          status: 'available',
+          caption: 'GitHub Desktop 공식 changelog의 worktree, commit authoring, model picker 화면을 참고할 수 있다.',
+        },
+      },
+    ],
+  },
   {
     date: '2026-06-25',
     title: 'AI가 원격 작업, 업무 기억, 코드 리뷰, 조직 도구 안으로 들어간 날',
