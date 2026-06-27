@@ -46,7 +46,7 @@ export default function DailyIssuesAlbumClient({ items }: DailyIssuesAlbumClient
   }[lang];
 
   return (
-    <main className="min-h-[calc(100vh-5rem)] bg-[#f8f6f1] px-5 py-12 text-[#19140f] sm:px-8 lg:py-16">
+    <main className="min-h-screen bg-[#f8f6f1] px-5 py-12 text-[#19140f] sm:px-8 lg:py-16">
       <div className="mx-auto w-full max-w-6xl">
         <div className="border-b border-[#2a211b]/10 pb-9">
           <p className="text-xs font-black tracking-[0.26em] text-[#9b5a18] uppercase">

@@ -2,11 +2,10 @@ import type { Metadata } from 'next';
 import { Geist, Noto_Serif_KR } from 'next/font/google';
 import './globals.css';
 import 'highlight.js/styles/atom-one-dark.css';
-import Header from '@/components/layout/Header';
-import Footer from '@/components/layout/Footer';
 import { MusicProvider } from '@/components/layout/MusicProvider';
 import { LangProvider } from '@/components/layout/LangProvider';
 import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
+import SiteChrome from '@/components/layout/SiteChrome';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -86,9 +85,9 @@ export default function RootLayout({
       >
         <MusicProvider>
           <LangProvider>
-            <Header />
-            {children}
-            <Footer />
+            <SiteChrome>
+              {children}
+            </SiteChrome>
             <GoogleAnalytics />
           </LangProvider>
         </MusicProvider>
