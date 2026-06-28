@@ -16,6 +16,41 @@ export type DailyAiUpdates = {
 
 export const dailyAiUpdates: DailyAiUpdates[] = [
   {
+    date: '2026-06-28',
+    officialDate: '2026-06-27',
+    checkedDateKST: '2026-06-28',
+    label: {
+      ko: '확인한 AI 업데이트',
+      en: 'VERIFIED AI UPDATES',
+    },
+    updates: [
+      {
+        title: 'No Major Launch',
+        description: {
+          ko: '대형 새 기능 출시가 확인되지 않은 날도 검증 로그로 남긴다',
+          en: 'a day without a major launch is still recorded as a verification log',
+        },
+        href: '/ai-updates/2026-06-27',
+      },
+      {
+        title: 'GPT-4.5 Retirement',
+        description: {
+          ko: 'ChatGPT 종료 시행과 공식 문서 날짜 차이를 함께 기록한다',
+          en: 'ChatGPT retirement and official date discrepancy are recorded together',
+        },
+        href: '/ai-updates/2026-06-27',
+      },
+      {
+        title: 'Opus 4.8 Status',
+        description: {
+          ko: 'elevated errors는 기능 출시가 아니라 안정성 이슈로 분리한다',
+          en: 'elevated errors are tracked as reliability status, not a feature launch',
+        },
+        href: '/ai-updates/2026-06-27',
+      },
+    ],
+  },
+  {
     date: '2026-06-27',
     officialDate: '2026-06-26',
     checkedDateKST: '2026-06-27',

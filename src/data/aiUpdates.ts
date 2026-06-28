@@ -99,7 +99,11 @@ export type AiUpdateBadge =
   | 'Backfill'
   | 'Agent Governance'
   | 'Needs Date Verification'
-  | 'Dictation';
+  | 'Dictation'
+  | 'No Major Product Launch'
+  | 'Date Discrepancy'
+  | 'Incident'
+  | 'Official Screen Not Required';
 
 export interface AiUpdateItem {
   id: string;
@@ -165,6 +169,168 @@ export interface AiUpdateBriefingItem {
 export const AI_UPDATES_MONTH = '2026.06';
 
 export const aiUpdateDays: AiUpdateDay[] = [
+  {
+    date: '2026-06-27',
+    title: 'AI 업데이트는 새 기능뿐 아니라 사라지는 모델과 장애 기록도 봐야 한다',
+    subtitle: '2026년 6월 27일 officialDate 기준으로 대형 새 기능 출시는 확인되지 않았다. 대신 GPT-4.5의 ChatGPT 종료 시행과 Anthropic Opus 4.8 상태 이슈를 기록한다.',
+    quickSummary: [
+      '2026년 6월 27일 officialDate 기준으로 Dechive 메인으로 다룰 만한 대형 새 모델 출시나 새 기능 출시는 확인되지 않았다.',
+      'OpenAI GPT-4.5는 ChatGPT에서 더 이상 사용할 수 없게 되는 종료 시행 항목으로 기록한다.',
+      'Anthropic Status에는 Opus 4.8 elevated errors 이슈가 기록되었으므로, 기능 업데이트가 아니라 Status Watch로 분리한다.',
+    ],
+    groups: [
+      {
+        name: 'No Major Product Launch',
+        intro: '새 기능을 억지로 만들지 않고, 대형 제품 출시가 확인되지 않은 날이라는 사실 자체를 검증 로그로 남긴다.',
+        updates: [
+          {
+            id: 'no-major-product-launch',
+            title: 'No Major Product Launch — 대형 새 기능 출시는 확인되지 않은 날',
+            officialDate: '2026.06.27',
+            checkedDateKST: '2026.06.28',
+            sourceType: 'Official Source Check',
+            updateType: 'No Major Product Launch / Verification Log',
+            badges: ['No Major Product Launch', 'Official Source', 'Official Screen Not Required'],
+            summary: '2026년 6월 27일 officialDate 기준으로 Dechive 메인으로 다룰 만한 대형 새 모델 출시나 새 기능 출시는 확인되지 않았다. 다만 모델 종료 시행과 서비스 상태 이슈는 기록할 가치가 있다.',
+            whatChanged: '새로운 메인 기능 출시보다는 기존 모델 종료와 서비스 안정성 기록이 중심인 날이다.',
+            whyItMatters: 'AI 업데이트를 매일 기록할 때 중요한 것은 억지로 새 기능을 찾는 것이 아니다. 새 기능이 없는 날에는 없는 것으로 기록하고, 대신 실제 사용자에게 영향을 줄 수 있는 종료 시행과 상태 이슈를 분리해 남겨야 한다.',
+            dechiveView: 'Dechive는 속보보다 검증을 우선한다. 업데이트가 없는 날에도 “확인했지만 대형 새 기능 출시는 없었다”고 남기는 것이 신뢰를 만든다.',
+            readerTakeaway: 'AI 업데이트는 매일 새로운 기능을 억지로 찾는 일이 아니라, 실제 변화가 있었는지 확인하는 일이다.',
+            screenMaterialStatus: '별도 이미지 필요 없음. 상태 카드 정도만 사용 가능하다.',
+            cautionNote: '이 항목을 빈 페이지처럼 만들지 말고, GPT-4.5 종료와 Anthropic Status Watch로 이어지는 검증 로그의 도입부로 사용한다.',
+          },
+        ],
+      },
+      {
+        name: 'OpenAI',
+        intro: 'GPT-4.5의 ChatGPT 종료 시행을 새 기능이 아니라 모델 종료와 날짜 표기 차이로 기록한다.',
+        updates: [
+          {
+            id: 'openai-gpt-4-5-retirement-date-discrepancy',
+            title: 'OpenAI GPT-4.5 Retirement — 사라지는 모델도 업데이트다',
+            officialDate: '2026.06.27 / ChatGPT Release Notes 2026.06.26',
+            checkedDateKST: '2026.06.28',
+            sourceType: 'Official Model Release Notes / Official ChatGPT Release Notes',
+            officialSource: {
+              label: 'OpenAI Model Release Notes',
+              url: 'https://help.openai.com/en/articles/9624314-model-release-notes',
+            },
+            updateType: 'Effective Change / Model Retirement / Date Discrepancy',
+            badges: ['Effective Change', 'Model Retirement', 'Date Discrepancy', 'Official Source'],
+            summary: 'OpenAI의 공식 문서 기준으로 GPT-4.5는 ChatGPT에서 더 이상 사용할 수 없게 되는 종료 시행 항목으로 기록한다. 다만 공식 문서 안에서 날짜 표기가 다르게 보일 수 있다. Model Release Notes에서는 2026년 6월 27일 종료로 보이고, ChatGPT Release Notes에서는 2026년 6월 26일 기준 종료로 안내될 수 있다.',
+            whatChanged: 'GPT-4.5가 ChatGPT와 Custom GPT에서 더 이상 사용되지 않는 방향으로 종료된다. 기존 GPT-4.5 대화는 GPT-5.5로 이어질 수 있다. 이 페이지에서는 ChatGPT에 한정된 변경으로 표기하고, API까지 종료된 것처럼 단정하지 않는다.',
+            whyItMatters: 'AI 사용자는 새 모델만 보는 것이 아니라, 자신이 쓰던 모델이 언제 사라지는지도 확인해야 한다. 특정 모델의 답변 스타일, 추론 방식, 작업 흐름에 의존하던 사용자에게 모델 종료는 실제 사용 경험의 변화다.',
+            dechiveView: 'Dechive 관점에서 이 항목은 매우 중요하다. 공식 문서끼리 날짜가 다르게 보일 때, 그 차이를 덮지 않고 기록해야 한다. AI 검증 아카이브는 “무엇이 새로 나왔나”뿐 아니라 “무엇이 사라졌고, 공식 문서가 어떻게 말하고 있는가”를 함께 봐야 한다.',
+            readerTakeaway: 'AI 업데이트는 새 기능만이 아니라, 기존 모델이 사라지는 변화도 포함한다.',
+            screenMaterialStatus: '별도 제품 이미지는 필수 아님. OpenAI 공식 릴리즈노트 화면 또는 GPT-4.5에서 GPT-5.5로 이어지는 전환 흐름을 보여주는 설명 이미지 정도가 적합하다.',
+            cautionNote: '공식 날짜 차이를 숨기지 않는다. Date Discrepancy 배지를 붙이고, Verification Note에서 OpenAI 공식 문서 기준 종료 날짜 표기가 6월 26일과 6월 27일로 다르게 보일 수 있음을 명확히 기록한다. API까지 종료된 것처럼 단정하지 않는다.',
+          },
+        ],
+      },
+      {
+        name: 'Anthropic Status',
+        intro: 'Opus 4.8 elevated errors는 기능 출시가 아니라 서비스 안정성 확인 항목으로 분리한다.',
+        updates: [
+          {
+            id: 'anthropic-opus-4-8-elevated-errors',
+            title: 'Anthropic Status — Opus 4.8 elevated errors',
+            officialDate: '2026.06.27',
+            checkedDateKST: '2026.06.28',
+            sourceType: 'Official Status Page',
+            officialSource: {
+              label: 'Anthropic Status',
+              url: 'https://status.anthropic.com/',
+            },
+            updateType: 'Status Watch / Reliability / Incident',
+            badges: ['Status Watch', 'Reliability', 'Incident', 'Official Source'],
+            summary: 'Anthropic Status에 2026년 6월 27일 Opus 4.8 elevated errors 이슈가 기록되었다. 이 항목은 새 기능 출시가 아니라 서비스 안정성 기록이다. 해결 또는 모니터링 상태는 공식 Status Page 기준으로 확인해 작성한다.',
+            whatChanged: 'Opus 4.8에서 elevated errors 이슈가 발생했고, 공식 상태 페이지에 기록되었다.',
+            whyItMatters: 'AI 서비스를 실제 업무에 쓰는 사람에게는 모델 성능만큼 서비스 안정성도 중요하다. 오류율 증가, 장애, 복구 상태는 사용자가 AI 도구를 신뢰할 수 있는지 판단하는 기준이 된다.',
+            dechiveView: 'Dechive에서는 상태 이슈를 기능 업데이트와 분리해야 한다. AI가 잘하는지뿐 아니라 안정적으로 작동했는지도 검증해야 한다. Status Watch는 AI 업데이트의 부록이 아니라, 실제 운영 신뢰성을 확인하는 기록이다.',
+            readerTakeaway: 'AI 서비스는 모델 성능뿐 아니라 오류율과 안정성도 함께 봐야 한다.',
+            screenMaterialStatus: 'Anthropic Status Page 화면을 참고할 수 있다. 별도 설명 이미지는 필수 아님.',
+            cautionNote: '기능 업데이트처럼 쓰지 않는다. Status Watch로 분류한다. 장애 범위나 영향은 공식 Status Page에 적힌 범위 이상으로 확대해서 쓰지 않는다.',
+          },
+        ],
+      },
+    ],
+    verificationNote: '이번 페이지는 2026.06.28 KST에 확인한 officialDate 2026.06.27 공식 업데이트 기록이다. 2026년 6월 27일 기준으로 대형 새 모델 출시나 새 기능 출시는 확인되지 않았다. 다만 GPT-4.5의 ChatGPT 종료 시행과 Anthropic Opus 4.8 elevated errors 이슈는 기록할 가치가 있다. GPT-4.5 종료 항목은 OpenAI 공식 문서 안에서 날짜 표기가 6월 26일과 6월 27일로 다르게 보일 수 있으므로, 날짜 차이를 숨기지 않고 Date Discrepancy로 기록한다. 이번 페이지에서는 새 기능 출시, 모델 종료, 상태 이슈를 서로 섞지 않는다. 새 기능이 없는 날에도 종료 시행과 안정성 이슈를 기록하는 것이 Dechive AI Updates의 검증 기준이다.',
+    closingLine: 'AI 업데이트는 새 기능만 기록하는 일이 아니다. 어떤 모델이 사라졌는지, 어떤 서비스가 불안정했는지, 공식 문서가 날짜를 어떻게 말하고 있는지까지 확인해야 한다. Dechive는 그 빈틈까지 기록한다.',
+    updates: [
+      {
+        id: 'no-major-product-launch',
+        slug: 'no-major-product-launch',
+        title: 'No Major Product Launch',
+        summary: '2026년 6월 27일 officialDate 기준으로 대형 새 모델 출시나 새 기능 출시는 확인되지 않았다.',
+        badges: ['No Major Product Launch', 'Official Source', 'Official Screen Not Required'],
+        detailHref: '/ai-updates/2026-06-27#no-major-product-launch',
+        source: {
+          label: 'Official Source Check',
+          url: 'https://dechive.dev/ai-updates/2026-06-27',
+          description: '공식 문서 확인 결과를 기반으로 대형 제품 출시가 없었던 날을 검증 로그로 기록합니다.',
+        },
+        whatChanged: '새로운 메인 기능 출시보다는 기존 모델 종료와 서비스 안정성 기록이 중심인 날입니다.',
+        useCriteria: '새 기능이 없는 날에도 없는 것으로 기록하고, 실제 사용자에게 영향을 주는 종료 시행과 상태 이슈를 분리해 봐야 합니다.',
+        verificationNotes: [
+          'officialDate 2026.06.27',
+          'checkedDateKST 2026.06.28',
+          '대형 새 기능 출시 없음으로 분류',
+        ],
+        image: {
+          status: 'none',
+          caption: '별도 이미지 필요 없음. 상태 카드 정도만 사용 가능합니다.',
+        },
+      },
+      {
+        id: 'openai-gpt-4-5-retirement-date-discrepancy',
+        slug: 'openai-gpt-4-5-retirement-date-discrepancy',
+        title: 'OpenAI GPT-4.5 Retirement',
+        summary: 'GPT-4.5는 ChatGPT에서 더 이상 사용할 수 없게 되는 종료 시행 항목이며, 공식 문서 안의 날짜 차이를 함께 기록한다.',
+        badges: ['Effective Change', 'Model Retirement', 'Date Discrepancy', 'Official Source'],
+        detailHref: '/ai-updates/2026-06-27#openai-gpt-4-5-retirement-date-discrepancy',
+        source: {
+          label: 'OpenAI Model Release Notes',
+          url: 'https://help.openai.com/en/articles/9624314-model-release-notes',
+          description: 'OpenAI Model Release Notes와 ChatGPT Release Notes의 GPT-4.5 종료 안내를 비교해 기록합니다.',
+        },
+        whatChanged: 'GPT-4.5가 ChatGPT와 Custom GPT에서 더 이상 사용되지 않는 방향으로 종료됩니다. 기존 GPT-4.5 대화는 GPT-5.5로 이어질 수 있습니다.',
+        useCriteria: '모델 종료는 사용자가 의존하던 답변 스타일, 추론 방식, 작업 흐름을 바꿀 수 있으므로 새 모델 출시만큼 확인해야 합니다.',
+        verificationNotes: [
+          'Model Release Notes 기준 2026.06.27',
+          'ChatGPT Release Notes 기준 2026.06.26으로 보일 수 있음',
+          'API 종료로 단정하지 않음',
+        ],
+        image: {
+          status: 'none',
+          caption: 'OpenAI 공식 릴리즈노트 화면 또는 GPT-4.5에서 GPT-5.5로 이어지는 전환 흐름의 설명 이미지가 적합합니다.',
+        },
+      },
+      {
+        id: 'anthropic-opus-4-8-elevated-errors',
+        slug: 'anthropic-opus-4-8-elevated-errors',
+        title: 'Anthropic Opus 4.8 elevated errors',
+        summary: 'Anthropic Status에 Opus 4.8 elevated errors 이슈가 기록되었으며, 기능 업데이트가 아니라 안정성 기록으로 분리한다.',
+        badges: ['Status Watch', 'Reliability', 'Incident', 'Official Source'],
+        detailHref: '/ai-updates/2026-06-27#anthropic-opus-4-8-elevated-errors',
+        source: {
+          label: 'Anthropic Status',
+          url: 'https://status.anthropic.com/',
+          description: 'Anthropic 공식 상태 페이지에 기록된 Opus 4.8 elevated errors 이슈를 기준으로 확인합니다.',
+        },
+        whatChanged: 'Opus 4.8에서 elevated errors 이슈가 발생했고, 공식 상태 페이지에 기록되었습니다.',
+        useCriteria: 'AI 서비스를 실제 업무에 쓸 때는 모델 성능뿐 아니라 오류율 증가, 장애, 복구 상태도 신뢰성 판단 기준으로 봐야 합니다.',
+        verificationNotes: [
+          'officialDate 2026.06.27',
+          'checkedDateKST 2026.06.28',
+          '기능 업데이트가 아니라 Status Watch로 분류',
+        ],
+        image: {
+          status: 'none',
+          caption: 'Anthropic Status Page 화면을 참고할 수 있습니다. 별도 설명 이미지는 필수 아닙니다.',
+        },
+      },
+    ],
+  },
   {
     date: '2026-06-26',
     title: '강한 모델은 조심스럽게 공개되고, AI 도구는 실제 작업 흐름 안으로 들어간다',
