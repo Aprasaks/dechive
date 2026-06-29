@@ -224,6 +224,11 @@ export default async function AiUpdateDatePage({ params }: PageProps) {
           <p className="text-xs font-semibold tracking-[0.24em] text-[#9a7342] uppercase">
             {formatDisplayDate(date)} AI Updates
           </p>
+          {day.checkedDateKST ? (
+            <p className="mt-3 text-xs font-semibold tracking-[0.16em] text-[#8a6a39] uppercase">
+              Checked {day.checkedDateKST} KST
+            </p>
+          ) : null}
           <h1 className="mt-4 max-w-4xl font-[family-name:var(--font-header-serif)] text-4xl leading-tight font-medium text-[#2a211b] sm:text-5xl">
             {getDailyTitle(day)}
           </h1>

@@ -101,6 +101,11 @@ export type AiUpdateBadge =
   | 'Needs Date Verification'
   | 'Dictation'
   | 'No Major Product Launch'
+  | 'Frontier Partnership'
+  | 'AI Operating Model'
+  | 'Deployment'
+  | 'Evaluation'
+  | 'No Incident'
   | 'Date Discrepancy'
   | 'Incident'
   | 'Official Screen Not Required';
@@ -130,6 +135,7 @@ export interface AiUpdateItem {
 
 export interface AiUpdateDay {
   date: string;
+  checkedDateKST?: string;
   title?: string;
   subtitle?: string;
   quickSummary?: string[];
@@ -169,6 +175,181 @@ export interface AiUpdateBriefingItem {
 export const AI_UPDATES_MONTH = '2026.06';
 
 export const aiUpdateDays: AiUpdateDay[] = [
+  {
+    date: '2026-06-28',
+    checkedDateKST: '2026.06.29',
+    title: 'AI가 파일럿을 넘어 기업 운영 모델로 들어간 날',
+    subtitle: '2026년 6월 28일 officialDate 기준으로 대형 새 모델 출시는 확인되지 않았다. 대신 OpenAI와 HP의 Frontier 전략 파트너십 사례를 통해 AI가 파일럿을 넘어 조직의 권한, 맥락, 배포, 평가 체계 안으로 들어가는 흐름을 기록한다.',
+    quickSummary: [
+      '2026년 6월 28일 officialDate 기준으로 Dechive 메인으로 다룰 만한 대형 새 모델 출시나 일반 사용자용 새 기능 출시는 확인되지 않았다.',
+      'OpenAI는 HP Inc.의 Frontier 전략 파트너십 사례를 공개했다. 이 항목은 제품 출시가 아니라 기업 AI 적용 사례로 분류한다.',
+      'Anthropic Status 기준으로 2026년 6월 28일에는 별도 신규 incident가 보고되지 않았으므로 Status Watch로 짧게 기록한다.',
+    ],
+    groups: [
+      {
+        name: 'No Major Product Launch',
+        intro: '새 모델이나 일반 사용자용 새 기능을 억지로 만들지 않고, 대형 제품 출시가 확인되지 않은 날이라는 사실 자체를 검증 로그로 남긴다.',
+        updates: [
+          {
+            id: 'no-major-product-launch-2026-06-28',
+            title: 'No Major Product Launch — 대형 새 모델 출시는 확인되지 않은 날',
+            officialDate: '2026.06.28',
+            checkedDateKST: '2026.06.29',
+            sourceType: 'Official Source Check',
+            updateType: 'No Major Product Launch / Verification Log',
+            badges: ['No Major Product Launch', 'Official Source', 'Official Screen Not Required'],
+            summary: '2026년 6월 28일 officialDate 기준으로 Dechive 메인으로 다룰 만한 대형 새 모델 출시나 새 기능 출시는 확인되지 않았다. 다만 OpenAI × HP Frontier 전략 파트너십 사례는 기업 AI 도입 흐름을 보여주는 공식 사례로 기록할 가치가 있다.',
+            whatChanged: '새 모델이나 일반 사용자용 기능 출시보다, 기업 AI 도입 사례와 상태 기록이 중심인 날이다.',
+            whyItMatters: 'AI Updates를 매일 기록할 때 중요한 것은 억지로 새 기능을 찾는 것이 아니다. 새 기능이 없는 날에는 없는 것으로 기록하고, 대신 실제 AI 도입 흐름을 보여주는 공식 사례가 있다면 그 성격을 정확히 구분해 남겨야 한다.',
+            dechiveView: 'Dechive는 속보보다 검증을 우선한다. 대형 업데이트가 없는 날에도 “확인했지만 대형 새 기능 출시는 없었다”고 남기는 것이 신뢰를 만든다.',
+            readerTakeaway: 'AI 업데이트는 매일 새로운 기능을 억지로 찾는 일이 아니라, 실제 변화가 있었는지 확인하는 일이다.',
+            screenMaterialStatus: '별도 이미지 필요 없음. 상태 카드 정도만 사용 가능하다.',
+            cautionNote: '이 항목을 빈 페이지처럼 만들지 말고, 아래의 OpenAI × HP 사례와 Anthropic Status Watch로 이어지는 검증 로그의 도입부로 사용한다.',
+          },
+        ],
+      },
+      {
+        name: 'OpenAI / HP Frontier Partnership',
+        intro: 'OpenAI × HP 사례는 새 제품 출시가 아니라, 파일럿을 기업 운영 모델로 확장하려는 Frontier 전략 파트너십 기록으로 분리한다.',
+        updates: [
+          {
+            id: 'openai-hp-frontier-partnership',
+            title: 'OpenAI × HP Frontier Partnership — AI는 파일럿을 넘어 기업 운영 모델로 들어간다',
+            officialDate: '2026.06.28',
+            checkedDateKST: '2026.06.29',
+            sourceType: 'Official Company Blog / Official Case Study',
+            officialSource: {
+              label: 'OpenAI — HP Inc. launches Frontier strategic partnership with OpenAI',
+              url: 'https://openai.com/index/hp-frontier-partnership/',
+            },
+            updateType: 'Company Update / Enterprise AI / Case Study / Frontier Partnership / AI Operating Model',
+            badges: [
+              'Company Update',
+              'Enterprise AI',
+              'Case Study',
+              'Frontier Partnership',
+              'AI Operating Model',
+              'Governance',
+              'Deployment',
+              'Evaluation',
+              'Official Source',
+              'Official Screen Available',
+              'Explanation Image Recommended',
+            ],
+            summary: 'OpenAI는 HP Inc.가 OpenAI Frontier 전략 파트너십을 확장하며 파일럿 단계에서 기업 전반 배포로 이동하고 있다고 소개했다. HP는 OpenAI Frontier를 통해 고객과 파트너 경험, 고객 텔레메트리 인사이트, 직원 생산성, 소프트웨어 개발 등 여러 영역에 AI를 확장하려 한다. OpenAI는 HP의 파일럿 사례로 엔지니어링, 보안, 내부 운영 등에서 AI가 실제 작업 흐름을 단축하고 지원한 사례를 소개했다.',
+            whatChanged: '이 항목은 새 제품 출시가 아니라 기업 AI 도입 사례다. 핵심 변화는 AI가 일부 팀의 실험에서 조직 전체 운영 모델로 확장되는 흐름이다. HP는 OpenAI Frontier를 통해 AI를 고객 경험, 개발, 보안, 내부 생산성 등 여러 업무 영역으로 확장하려 한다.',
+            whyItMatters: '기업에서 AI를 도입하는 것은 단순히 직원들에게 챗봇을 열어주는 일이 아니다. 어떤 데이터와 맥락을 AI가 사용할 수 있는지, 어떤 권한으로 실행되는지, 어느 팀에 어떻게 배포되는지, 결과를 어떻게 평가할지 정해야 한다. OpenAI × HP 사례는 AI 도입이 파일럿에서 운영 모델로 이동하는 흐름을 보여준다.',
+            dechiveView: 'Dechive 관점에서 중요한 것은 “HP가 AI를 쓴다”가 아니다. 중요한 것은 AI 도입이 이제 파일럿의 성공 사례를 넘어, 조직 전체의 권한·맥락·배포·평가 체계로 들어가고 있다는 점이다. AI는 더 이상 몇 명이 실험해보는 도구가 아니라, 기업 운영 방식 안에 배치되는 시스템이 되고 있다.',
+            readerTakeaway: 'AI 도입의 다음 단계는 사용량이 아니라 운영 모델이다. 기업은 AI를 어디에 배치하고, 어떤 맥락을 허용하고, 어떤 결과를 검증할지 정해야 한다.',
+            screenMaterialStatus: 'OpenAI 공식 블로그의 HP Frontier 관련 이미지가 있으므로 공식 이미지 참고 가능으로 표시한다. 제품 화면이 중심인 항목은 아니므로, 보조 자료가 필요하다면 “파일럿 → 권한/맥락/배포/평가 → 기업 운영 모델” 흐름을 보여주는 설명 이미지가 적합하다.',
+            cautionNote: '이 항목을 “OpenAI가 새 기능을 출시했다”처럼 쓰지 않는다. 제품 업데이트가 아니라 기업 AI 적용 사례 / Frontier Partnership으로 분류한다. HP 사례의 성과를 과장하지 말고, 공식 문서에 나온 범위 안에서만 작성한다.',
+          },
+        ],
+      },
+      {
+        name: 'Anthropic Status',
+        intro: 'Anthropic Status는 기능 업데이트가 아니라 서비스 안정성 확인 항목으로 짧게 분리한다.',
+        updates: [
+          {
+            id: 'anthropic-status-no-incident-2026-06-28',
+            title: 'Anthropic Status — 6월 28일 신규 incident 없음',
+            officialDate: '2026.06.28',
+            checkedDateKST: '2026.06.29',
+            sourceType: 'Official Status Page',
+            officialSource: {
+              label: 'Anthropic Status',
+              url: 'https://status.anthropic.com/',
+            },
+            updateType: 'Status Watch / Reliability / No Incident',
+            badges: ['Status Watch', 'Reliability', 'No Incident', 'Official Source'],
+            summary: 'Anthropic Status 기준으로 2026년 6월 28일에는 별도 incident가 보고되지 않았다. 전날인 6월 27일에는 Opus 4.8 elevated errors 이슈가 있었지만, 6월 28일 자체는 신규 incident가 없는 날로 기록한다.',
+            whatChanged: '기능 업데이트가 아니라 서비스 상태 기록이다.',
+            whyItMatters: 'AI 서비스를 실제 업무에 쓰는 사람에게는 모델 성능만큼 서비스 안정성도 중요하다. incident가 없는 날도 Status Watch로 짧게 기록할 수 있다.',
+            dechiveView: 'Dechive에서는 이 항목을 메인 업데이트가 아니라 Status Watch로 분리하는 것이 적절하다. AI는 잘하는 것뿐 아니라 안정적으로 작동하는지도 검증해야 한다.',
+            readerTakeaway: 'AI 서비스의 안정성도 업데이트 기록에서 함께 확인할 필요가 있다.',
+            screenMaterialStatus: 'Anthropic Status Page 화면을 참고할 수 있다. 별도 설명 이미지는 필수 아님.',
+            cautionNote: '기능 업데이트처럼 쓰지 않는다. Status Watch로만 짧게 다룬다. 전날 incident를 6월 28일 신규 incident처럼 쓰지 않는다.',
+          },
+        ],
+      },
+    ],
+    verificationNote: '이번 페이지는 2026.06.29 KST에 확인한 officialDate 2026.06.28 공식 업데이트 기록이다. 2026년 6월 28일 기준으로 대형 새 모델 출시나 일반 사용자용 새 기능 출시는 확인되지 않았다. 오늘의 메인 기록은 OpenAI × HP Frontier 전략 파트너십 사례다. 이 항목은 제품 업데이트가 아니라 기업 AI 적용 사례로 분류한다. 핵심은 AI가 파일럿을 넘어 기업의 권한, 맥락, 배포, 평가 체계 안으로 들어가는 흐름이다. Anthropic Status 기준으로 6월 28일 신규 incident는 보고되지 않았으므로 Status Watch로 짧게 기록한다. 이번 페이지에서는 새 기능 출시, 기업 사례, 상태 기록을 서로 섞지 않는다. 업데이트가 적은 날에도 공식 문서 기준으로 무엇이 있었고 무엇이 없었는지 남기는 것이 Dechive AI Updates의 검증 기준이다.',
+    closingLine: 'AI 도입은 더 이상 “몇 명이 써봤는가”의 문제가 아니다. 어떤 맥락을 허용하고, 어떤 권한으로 실행하며, 결과를 어떻게 평가할 것인가의 문제다. Dechive는 그 변화가 기업 운영 안에서 어떻게 자리 잡는지 기록한다.',
+    updates: [
+      {
+        id: 'no-major-product-launch-2026-06-28',
+        slug: 'no-major-product-launch-2026-06-28',
+        title: 'No Major Product Launch',
+        summary: '2026년 6월 28일 officialDate 기준으로 대형 새 모델 출시나 일반 사용자용 새 기능 출시는 확인되지 않았다.',
+        badges: ['No Major Product Launch', 'Official Source', 'Official Screen Not Required'],
+        detailHref: '/ai-updates/2026-06-28#no-major-product-launch-2026-06-28',
+        source: {
+          label: 'Official Source Check',
+          url: 'https://dechive.dev/ai-updates/2026-06-28',
+          description: '공식 문서 확인 결과를 기반으로 대형 제품 출시가 없었던 날을 검증 로그로 기록합니다.',
+        },
+        whatChanged: '새 모델이나 일반 사용자용 기능 출시보다, 기업 AI 도입 사례와 상태 기록이 중심인 날입니다.',
+        useCriteria: '새 기능이 없는 날에도 없는 것으로 기록하고, 공식 사례와 상태 기록을 제품 업데이트와 분리해 봐야 합니다.',
+        verificationNotes: [
+          'officialDate 2026.06.28',
+          'checkedDateKST 2026.06.29',
+          '대형 새 기능 출시 없음으로 분류',
+        ],
+        image: {
+          status: 'none',
+          caption: '별도 이미지 필요 없음. 상태 카드 정도만 사용 가능합니다.',
+        },
+      },
+      {
+        id: 'openai-hp-frontier-partnership',
+        slug: 'openai-hp-frontier-partnership',
+        title: 'OpenAI × HP Frontier Partnership',
+        summary: 'OpenAI × HP 사례는 제품 출시가 아니라, AI가 파일럿을 넘어 기업 운영 모델로 들어가는 흐름을 보여주는 공식 사례다.',
+        badges: ['Company Update', 'Enterprise AI', 'Case Study', 'Frontier Partnership', 'AI Operating Model', 'Official Source'],
+        detailHref: '/ai-updates/2026-06-28#openai-hp-frontier-partnership',
+        source: {
+          label: 'OpenAI — HP Frontier Partnership',
+          url: 'https://openai.com/index/hp-frontier-partnership/',
+          description: 'OpenAI 공식 블로그의 HP Inc. Frontier 전략 파트너십 사례를 기준으로 확인합니다.',
+        },
+        whatChanged: 'HP가 OpenAI Frontier를 통해 고객 경험, 개발, 보안, 내부 생산성 등 여러 업무 영역으로 AI 적용을 확장하려는 흐름입니다.',
+        useCriteria: '기업 AI 도입은 사용량보다 권한, 맥락, 배포, 평가 체계를 어떻게 운영 모델로 묶는지 기준으로 봐야 합니다.',
+        verificationNotes: [
+          'officialDate 2026.06.28',
+          'checkedDateKST 2026.06.29',
+          '제품 출시가 아니라 Company / Enterprise AI / Case Study / Frontier Partnership으로 분류',
+        ],
+        image: {
+          status: 'available',
+          caption: 'OpenAI 공식 블로그의 HP Frontier 관련 이미지가 있으므로 공식 이미지 참고 가능으로 표시합니다.',
+        },
+      },
+      {
+        id: 'anthropic-status-no-incident-2026-06-28',
+        slug: 'anthropic-status-no-incident-2026-06-28',
+        title: 'Anthropic Status — No incident',
+        summary: 'Anthropic Status 기준으로 2026년 6월 28일 신규 incident는 보고되지 않았다.',
+        badges: ['Status Watch', 'Reliability', 'No Incident', 'Official Source'],
+        detailHref: '/ai-updates/2026-06-28#anthropic-status-no-incident-2026-06-28',
+        source: {
+          label: 'Anthropic Status',
+          url: 'https://status.anthropic.com/',
+          description: 'Anthropic 공식 상태 페이지의 2026년 6월 28일 incident 기록을 기준으로 확인합니다.',
+        },
+        whatChanged: '기능 업데이트가 아니라 2026년 6월 28일 신규 incident 없음으로 기록하는 서비스 상태 항목입니다.',
+        useCriteria: 'AI 서비스를 업무에 쓸 때는 새 기능뿐 아니라 장애와 무장애 상태도 안정성 기록으로 확인해야 합니다.',
+        verificationNotes: [
+          'officialDate 2026.06.28',
+          'checkedDateKST 2026.06.29',
+          '전날 incident를 6월 28일 신규 incident처럼 기록하지 않음',
+        ],
+        image: {
+          status: 'none',
+          caption: 'Anthropic Status Page 화면을 참고할 수 있습니다. 별도 설명 이미지는 필수 아닙니다.',
+        },
+      },
+    ],
+  },
   {
     date: '2026-06-27',
     title: 'AI 업데이트는 새 기능뿐 아니라 사라지는 모델과 장애 기록도 봐야 한다',
