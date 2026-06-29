@@ -73,4 +73,23 @@ export const weeklyEditions: WeeklyEdition[] = [
       coverImage: '/images/books/2026-06-22.webp',
     },
   },
+  {
+    weekStart: '2026-06-29',
+    weekEnd: '2026-07-05',
+    label: {
+      ko: '6월 다섯째 주',
+      en: 'JUNE WEEK 05',
+    },
+    verification: {
+      label: {
+        ko: '검증 기록',
+        en: 'VERIFICATION',
+      },
+      title: {
+        ko: '배움은 AI가\n대신해줄 수 있을까?',
+        en: 'Can AI replace learning?',
+      },
+      href: '/deep-dive/can-ai-replace-learning',
+    },
+  },
 ];
