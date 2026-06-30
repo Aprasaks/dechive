@@ -11,10 +11,10 @@ const TEMPLATE_LAYOUTS: DailyIssueLayout[] = [
   'big-question',
   'side-cover-lines',
 ];
-const TEMPLATE_COVER_IMAGES: Record<DailyIssueLayout, string> = {
-  'classic-editorial': '/images/covers/2026-06/template-classic-editorial.webp',
-  'big-question': '/images/covers/2026-06/template-big-question.webp',
-  'side-cover-lines': '/images/covers/2026-06/template-side-cover-lines.webp',
+const TEMPLATE_COVER_FILENAMES: Record<DailyIssueLayout, string> = {
+  'classic-editorial': 'template-classic-editorial.webp',
+  'big-question': 'template-big-question.webp',
+  'side-cover-lines': 'template-side-cover-lines.webp',
 };
 const EMPTY_DAILY_AI_UPDATES: DailyAiUpdates = {
   date: '',
@@ -37,6 +37,13 @@ function getLayoutForDate(date: string): DailyIssueLayout {
   return TEMPLATE_LAYOUTS[day % TEMPLATE_LAYOUTS.length] ?? 'classic-editorial';
 }
 
+function getTemplateCoverImage(date: string, layout: DailyIssueLayout) {
+  const month = date.slice(0, 7);
+  const filename = TEMPLATE_COVER_FILENAMES[layout];
+
+  return `/images/covers/${month}/${filename}`;
+}
+
 function getLatestConfiguredIssueDate() {
   return [...dailyIssues].sort(compareIssueDateDesc)[0]?.date ?? '';
 }
@@ -56,7 +63,7 @@ function getAutoDailyIssuesFromArchivePosts(): DailyIssue[] {
       return {
         id: post.date,
         date: post.date,
-        coverImage: TEMPLATE_COVER_IMAGES[layout],
+        coverImage: getTemplateCoverImage(post.date, layout),
         layout,
         question: {
           label: {
