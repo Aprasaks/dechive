@@ -101,7 +101,7 @@ export const weeklyEditions: WeeklyEdition[] = [
         en: 'Knowing What We Know',
       },
       author: '사이먼 윈체스터',
-      href: '/book',
+      href: '/book/knowing-what-we-know',
       coverImage: '/images/books/2026-06-29.webp',
     },
   },
