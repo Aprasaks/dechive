@@ -91,5 +91,18 @@ export const weeklyEditions: WeeklyEdition[] = [
       },
       href: '/deep-dive/can-ai-replace-learning',
     },
+    book: {
+      label: {
+        ko: '도서',
+        en: 'BOOK',
+      },
+      title: {
+        ko: '지식의 탄생',
+        en: 'Knowing What We Know',
+      },
+      author: '사이먼 윈체스터',
+      href: '/book',
+      coverImage: '/images/books/2026-06-29.webp',
+    },
   },
 ];

@@ -16,6 +16,41 @@ export type DailyAiUpdates = {
 
 export const dailyAiUpdates: DailyAiUpdates[] = [
   {
+    date: '2026-06-29',
+    officialDate: '2026-06-28',
+    checkedDateKST: '2026-06-29',
+    label: {
+      ko: '확인한 AI 업데이트',
+      en: 'VERIFIED AI UPDATES',
+    },
+    updates: [
+      {
+        title: 'No Major Launch',
+        description: {
+          ko: '대형 새 모델이나 일반 사용자용 새 기능 출시는 확인되지 않았다',
+          en: 'no major new model or consumer product launch was confirmed',
+        },
+        href: '/ai-updates/2026-06-28',
+      },
+      {
+        title: 'OpenAI × HP Frontier',
+        description: {
+          ko: 'AI가 파일럿을 넘어 기업 운영 모델로 들어가는 사례로 기록한다',
+          en: 'AI moves from pilot usage into an enterprise operating model',
+        },
+        href: '/ai-updates/2026-06-28',
+      },
+      {
+        title: 'Anthropic Status',
+        description: {
+          ko: '6월 28일 신규 incident 없음으로 짧게 상태 기록을 남긴다',
+          en: 'June 28 is recorded as a no-incident status watch',
+        },
+        href: '/ai-updates/2026-06-28',
+      },
+    ],
+  },
+  {
     date: '2026-06-28',
     officialDate: '2026-06-27',
     checkedDateKST: '2026-06-28',
