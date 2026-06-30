@@ -4,15 +4,17 @@ import { useRouter, usePathname } from 'next/navigation';
 import { useLang } from './LangProvider';
 import type { Lang } from '@/lib/i18n';
 
-export default function LangToggle({ tone = 'dark' }: { tone?: 'dark' | 'light' }) {
+export default function LangToggle({ tone = 'dark' }: { tone?: 'dark' | 'light' | 'hero' }) {
   const { lang, setLang } = useLang();
   const router = useRouter();
   const pathname = usePathname();
-  const activeClass = tone === 'light' ? 'text-[#111111]' : 'text-white';
-  const inactiveClass = tone === 'light'
-    ? 'text-[#777777] hover:text-[#111111]'
-    : 'text-zinc-400 hover:text-zinc-200';
-  const separatorClass = tone === 'light' ? 'text-[#b7ad9e]' : 'text-zinc-500';
+  const activeClass = tone === 'hero' ? 'text-white' : tone === 'light' ? 'text-[#111111]' : 'text-white';
+  const inactiveClass = tone === 'hero'
+    ? 'text-white/70 hover:text-white'
+    : tone === 'light'
+      ? 'text-[#777777] hover:text-[#111111]'
+      : 'text-zinc-400 hover:text-zinc-200';
+  const separatorClass = tone === 'hero' ? 'text-white/55' : tone === 'light' ? 'text-[#b7ad9e]' : 'text-zinc-500';
 
   function toggle(next: Lang) {
     setLang(next);

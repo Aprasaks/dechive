@@ -271,7 +271,7 @@ function MobileHomeCover({
                 <TodayStamp />
                 <span className="h-px flex-1 bg-[#3a2416]/25" />
                 <div className="flex items-center gap-3">
-                  <LangToggle tone="light" />
+                  <LangToggle tone="hero" />
                   <MusicToggle tone="light" />
                 </div>
               </div>

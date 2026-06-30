@@ -846,7 +846,7 @@ export default function DailyIssueCover({
         className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-[42%] bg-linear-to-t from-[rgba(47,33,23,0.34)] via-[rgba(47,33,23,0.08)] to-transparent"
       />
       <div className="absolute top-5 right-5 z-20 flex items-center gap-3 opacity-70 transition-opacity hover:opacity-100 sm:right-8 lg:right-14">
-        <LangToggle tone="light" />
+        <LangToggle tone="hero" />
         <MusicToggle tone="light" />
       </div>
 
