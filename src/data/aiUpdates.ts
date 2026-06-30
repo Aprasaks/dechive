@@ -60,6 +60,9 @@ export type AiUpdateBadge =
   | 'Memory'
   | 'Personalization'
   | 'Research'
+  | 'Global Affairs'
+  | 'AI Jobs Transition'
+  | 'Planning Map'
   | 'Agentic Work'
   | 'AI Adoption'
   | 'Auto Mode'
@@ -81,6 +84,7 @@ export type AiUpdateBadge =
   | 'Model Preview'
   | 'Frontier Model'
   | 'Limited Preview'
+  | 'Fast Mode'
   | 'Safety'
   | 'Model Retirement'
   | 'Model Picker'
@@ -108,7 +112,11 @@ export type AiUpdateBadge =
   | 'No Incident'
   | 'Date Discrepancy'
   | 'Incident'
-  | 'Official Screen Not Required';
+  | 'Official Screen Not Required'
+  | 'Permission Control'
+  | 'Least Privilege'
+  | 'Data Store'
+  | 'Action Filtering';
 
 export interface AiUpdateItem {
   id: string;
@@ -175,6 +183,296 @@ export interface AiUpdateBriefingItem {
 export const AI_UPDATES_MONTH = '2026.06';
 
 export const aiUpdateDays: AiUpdateDay[] = [
+  {
+    date: '2026-06-29',
+    checkedDateKST: '2026.06.30',
+    title: 'AI가 노동시장 분석, 코딩 속도, 권한 통제 안으로 들어간 날',
+    subtitle: '오늘의 공식 업데이트는 새 챗봇 출시보다, AI가 노동시장 전환 분석, Copilot 모델 선택, Codex 최소 권한, Gemini Enterprise 데이터 연결, 서비스 안정성 기록 안으로 들어가는 변화가 중심이다.',
+    quickSummary: [
+      '연구/분석: OpenAI는 유럽 노동시장에서 AI가 어떤 직업군에 어떤 변화 압력을 만들 수 있는지 분석한 EU AI Workforce Opportunity 리포트를 공개했다.',
+      '개발자/권한: GitHub Copilot은 Claude Opus 4.8 fast mode preview를 열었고, Codex Permission Profiles beta는 작업별 최소 권한 경계를 다룬다.',
+      '기업/상태 기록: Gemini Enterprise는 data store와 action filtering 범위를 확장했고, Anthropic Status는 Opus 4.5 elevated errors를 기능 업데이트가 아닌 안정성 기록으로 남겼다.',
+    ],
+    groups: [
+      {
+        name: 'OpenAI Workforce Research',
+        intro: 'OpenAI 노동시장 리포트는 제품 업데이트가 아니라 Research / Global Affairs / AI Jobs Transition 항목으로 분리한다.',
+        updates: [
+          {
+            id: 'openai-europe-ai-workforce-opportunity',
+            title: 'OpenAI — 유럽 노동시장에서 AI 전환 지도를 그리다',
+            officialDate: '2026.06.29',
+            checkedDateKST: '2026.06.30',
+            sourceType: 'Official Blog / Research / Global Affairs',
+            officialSource: {
+              label: 'OpenAI — Mapping Europe’s AI Workforce Opportunity',
+              url: 'https://openai.com/index/mapping-europes-ai-workforce-opportunity/',
+            },
+            updateType: 'Research / Global Affairs / AI Jobs Transition / Planning Map',
+            badges: ['Research', 'Global Affairs', 'AI Jobs Transition', 'Planning Map', 'Official Source', 'Explanation Image Recommended'],
+            summary: 'OpenAI는 유럽 노동시장에서 AI가 어떤 직업군에 어떤 변화 압력을 만들 수 있는지 분석한 리포트를 공개했다. 이 리포트는 기존 미국 중심 AI Jobs Transition Framework를 EU 노동시장으로 확장한 자료이며, ESCO 직업 분류와 Eurostat 고용 데이터를 활용한다. OpenAI는 이 분석을 고용 예측이 아니라, AI로 인해 어떤 직업군이 성장·자동화·재조직·저변화 압력을 받을 수 있는지 보는 준비용 지도라고 설명한다.',
+            whatChanged: 'OpenAI가 AI의 노동시장 영향을 단순 예측이 아니라 직업군별 변화 압력과 제도적 맥락을 분석하는 프레임워크로 확장했다.',
+            whyItMatters: 'AI가 일자리에 미치는 영향은 “사라진다/늘어난다”로 단순히 나눌 수 없다. 국가별 직업 구조, 교육·자격 제도, 공공서비스, 돌봄, 법률, 의료 같은 제도적 맥락에 따라 AI가 미치는 변화는 달라진다.',
+            dechiveView: 'Dechive에서는 이 항목을 “AI가 일자리를 빼앗는다” 같은 단순한 이야기로 쓰면 안 된다. 핵심은 AI 노동시장 논의를 더 세밀한 직업군, 제도, 준비 지도로 옮기는 것이다. AI 변화는 기술만의 문제가 아니라 사회가 어떻게 준비하느냐의 문제다.',
+            readerTakeaway: 'AI 노동시장 변화는 단순한 예측이 아니라, 어떤 직업군이 어떤 압력을 받을지 미리 보는 준비 지도에 가깝다.',
+            screenMaterialStatus: 'OpenAI 공식 글의 직업군 전환 프레임워크 이미지나 차트가 있으면 공식 이미지 참고 가능으로 표시한다. 공식 이미지가 없다면 “직업군 → 변화 압력 → 정책/교육/기업 준비” 흐름을 보여주는 설명 이미지가 적합하다.',
+            cautionNote: '이 항목을 제품 업데이트처럼 쓰지 않는다. 고용 예측이나 확정된 미래처럼 단정하지 않는다. OpenAI가 제시한 것은 planning map 성격의 연구/분석 자료로 분류한다.',
+          },
+        ],
+      },
+      {
+        name: 'GitHub Copilot Model Preview',
+        intro: 'Copilot 모델 선택은 일반 공개 기능이 아니라 preview와 관리자 정책 조건을 함께 확인한다.',
+        updates: [
+          {
+            id: 'github-copilot-claude-opus-4-8-fast-mode',
+            title: 'GitHub Copilot — Claude Opus 4.8 fast mode를 프리뷰로 열다',
+            officialDate: '2026.06.29',
+            checkedDateKST: '2026.06.30',
+            sourceType: 'Official Changelog',
+            officialSource: {
+              label: 'GitHub Changelog — Claude Opus 4.8 fast mode',
+              url: 'https://github.blog/changelog/2026-06-29-claude-opus-4-8-fast-mode-is-now-in-preview-for-github-copilot/',
+            },
+            updateType: 'Model Preview / Developer Tool / Copilot / Fast Mode / Agentic Workflow',
+            badges: ['Model Preview', 'Developer Tool', 'Copilot', 'Fast Mode', 'Agentic Workflow', 'Official Source', 'Official Screen Available'],
+            summary: 'GitHub Copilot에 Claude Opus 4.8 fast mode가 프리뷰로 롤아웃되고 있다. GitHub은 fast mode가 Claude Opus 4.8의 intelligence를 유지하면서 출력 토큰 속도를 크게 높여, interactive coding과 agentic workflows에 적합하다고 설명한다. 사용 가능 대상은 Copilot Pro+, Max, Business, Enterprise이며, 여러 Copilot 표면에서 선택할 수 있다. Business와 Enterprise 관리자는 fast mode policy를 켜야 하며, 기본값은 off다.',
+            whatChanged: 'GitHub Copilot이 Claude Opus 4.8 fast mode를 프리뷰로 제공하며, 같은 모델 계열에서 더 빠른 상호작용형 코딩 경험을 제공하려는 방향을 보여준다.',
+            whyItMatters: 'AI 코딩 도구에서는 지능만큼 응답 속도도 중요하다. agentic workflow나 interactive coding에서는 사용자가 기다리는 시간이 길어지면 작업 흐름이 끊긴다. 따라서 빠른 출력 속도는 실제 개발 경험에 영향을 준다.',
+            dechiveView: 'AI 코딩 도구의 경쟁은 “가장 똑똑한 모델”만으로 끝나지 않는다. 같은 수준의 intelligence를 유지하면서 얼마나 빠르게 상호작용할 수 있는지가 중요해지고 있다. 하지만 fast mode는 비용, 권한, 관리자 정책까지 함께 봐야 한다.',
+            readerTakeaway: 'AI 코딩 모델은 더 똑똑해지는 것뿐 아니라, 더 빠르게 상호작용할 수 있는 방향으로도 조정되고 있다.',
+            screenMaterialStatus: 'GitHub 공식 changelog에 Copilot model picker 이미지가 있으므로 공식 화면 참고 가능으로 표시한다.',
+            cautionNote: '이 기능은 preview다. 모든 Copilot 사용자에게 자동 적용되는 일반 기능처럼 쓰지 않는다. Business/Enterprise는 관리자가 policy를 켜야 하며, 비용 구조도 일반 모델과 다를 수 있음을 명확히 한다.',
+          },
+        ],
+      },
+      {
+        name: 'OpenAI Codex Permission Control',
+        intro: 'Codex Permission Profiles beta는 AI 코딩 도구가 작업별 최소 권한 경계를 갖추는 흐름으로 기록한다.',
+        updates: [
+          {
+            id: 'codex-permission-profiles-beta',
+            title: 'Codex Permission Profiles — AI 코딩 도구에 최소 권한을 입히다',
+            officialDate: '2026.06.29',
+            checkedDateKST: '2026.06.30',
+            sourceType: 'OpenAI Developer Community / Official Developer Documentation',
+            officialSource: {
+              label: 'OpenAI Developers Documentation — Codex CLI',
+              url: 'https://developers.openai.com/codex/cli',
+            },
+            updateType: 'Beta / Codex / Permission Control / Security / Least Privilege',
+            badges: ['Beta', 'Codex', 'Permission Control', 'Security', 'Least Privilege', 'Official Source', 'Explanation Image Recommended'],
+            summary: 'OpenAI Developer Community에 Codex Permission Profiles beta release가 올라왔다. Permission profile은 Codex가 로컬 명령을 실행할 때 작업별 권한 경계를 적용할 수 있게 하는 구조다. profile은 파일시스템 규칙과 네트워크 규칙을 묶은 이름 있는 정책이며, read-only profile은 프로젝트를 읽기만 하게 하고, write-capable profile은 특정 workspace root에만 쓰기를 허용할 수 있다. built-in profile로 `:read-only`, `:workspace`, `:danger-full-access`가 제공되며, 관리자는 사용자가 선택 가능한 profile을 제한할 수 있다.',
+            whatChanged: 'Codex가 기존의 거친 sandbox mode보다 더 세밀한 permission profile 방식으로 작업별 권한을 제어할 수 있게 됐다.',
+            whyItMatters: 'AI 코딩 도구가 로컬 명령을 실행하고 파일을 읽고 쓸 수 있게 되면, 권한 경계가 매우 중요해진다. 모든 작업에 전체 권한을 주는 방식은 위험하다. 작업마다 읽기, 쓰기, 차단, 네트워크 접근 범위를 다르게 설정할 수 있어야 한다.',
+            dechiveView: '이건 Dechive에 매우 잘 맞는 업데이트다. AI에게 일을 맡긴다는 말은 곧 권한을 설계한다는 뜻이다. AI가 무엇을 할 수 있는지보다, 어디까지 읽고 어디까지 쓸 수 있으며 어떤 경로를 차단할 수 있는지가 더 중요해지고 있다.',
+            readerTakeaway: 'AI 코딩 도구는 강해질수록 전체 권한이 아니라 최소 권한 원칙을 적용해야 한다.',
+            screenMaterialStatus: '공식 문서의 permission profile 예시나 설정 화면이 있으면 참고 가능으로 표시한다. 공식 화면이 없다면 “Codex task → permission profile → read/write/deny/network rule” 흐름을 보여주는 설명 이미지가 적합하다.',
+            cautionNote: '이 항목은 beta다. 일반 안정 기능처럼 단정하지 않는다. OpenAI Developer Community 항목이므로, 공식 개발자 문서의 permission profiles 내용과 함께 확인해서 작성한다.',
+          },
+        ],
+      },
+      {
+        name: 'Google Cloud Gemini Enterprise',
+        intro: 'Gemini Enterprise는 데이터 연결과 실행 범위 통제를 GA와 Public Preview 상태로 나누어 기록한다.',
+        updates: [
+          {
+            id: 'google-cloud-gemini-enterprise-action-filtering',
+            title: 'Google Cloud Gemini Enterprise — Jira Data Center와 SharePoint/OneDrive action filtering',
+            officialDate: '2026.06.29',
+            checkedDateKST: '2026.06.30',
+            sourceType: 'Official Release Notes',
+            officialSource: {
+              label: 'Google Cloud Release Notes — Gemini Enterprise',
+              url: 'https://docs.cloud.google.com/gemini/enterprise/docs/release-notes',
+            },
+            updateType: 'Enterprise AI / Data Store / Action Filtering / Public Preview / Product Integration',
+            badges: ['Enterprise AI', 'Data Store', 'Action Filtering', 'Public Preview', 'Product Integration', 'Official Source', 'Official Screen Not Required'],
+            summary: 'Google Cloud 릴리즈노트에 Gemini Enterprise 관련 업데이트가 올라왔다. Jira Data Center federated data store가 일반 제공으로 제공되며, Microsoft SharePoint와 OneDrive data store에는 action-filtering support가 Public Preview로 추가됐다. SharePoint와 OneDrive data store에 설정된 필터는 search query뿐 아니라 action execution에도 적용되며, 지정된 SharePoint sites나 OneDrive paths 밖의 mutation 또는 retrieval은 실패하거나 결과를 반환하지 않는다.',
+            whatChanged: 'Gemini Enterprise가 Jira Data Center를 federated data store로 사용할 수 있게 되었고, SharePoint/OneDrive에서는 검색뿐 아니라 실행 행동까지 필터 범위 안에서 제한할 수 있게 됐다.',
+            whyItMatters: '기업 AI에서 중요한 것은 데이터를 연결하는 것만이 아니다. AI가 어떤 데이터에 접근할 수 있고, 어떤 데이터에 대해 action을 실행할 수 있는지를 제한해야 한다. 특히 SharePoint와 OneDrive처럼 민감한 업무 문서가 들어 있는 저장소에서는 retrieval과 mutation 범위를 정확히 통제해야 한다.',
+            dechiveView: 'AI 에이전트 시대의 핵심은 연결이 아니라 경계다. Gemini Enterprise 업데이트는 기업 AI가 데이터 저장소와 연결될 때, 검색과 실행 모두에 범위를 걸어야 한다는 흐름을 보여준다. Dechive에서는 이 항목을 “AI가 더 많은 데이터를 연결한다”보다 “AI가 연결된 데이터 안에서도 어디까지 행동할 수 있는지 제한한다”로 해석한다.',
+            readerTakeaway: '기업 AI는 데이터를 연결하는 것만으로 충분하지 않다. 검색과 실행이 허용되는 범위를 함께 통제해야 한다.',
+            screenMaterialStatus: '공식 Google Cloud 문서 화면 외 별도 이미지는 필수 아님. 설명 이미지가 필요하다면 “Gemini Enterprise → Jira Data Center / SharePoint / OneDrive → search filter / action filter” 구조를 보여주는 다이어그램이 적합하다.',
+            cautionNote: 'SharePoint/OneDrive action-filtering support는 Public Preview다. Jira Data Center federated data store GA와 Preview 항목을 구분한다. Security Command Center AI Protection의 6월 5일 항목과 혼동하지 않는다.',
+          },
+        ],
+      },
+      {
+        name: 'Anthropic Status Watch',
+        intro: 'Anthropic Status는 기능 업데이트가 아니라 서비스 안정성 확인 항목으로 분리한다.',
+        updates: [
+          {
+            id: 'anthropic-opus-4-5-elevated-errors',
+            title: 'Anthropic Status — Opus 4.5 elevated errors 기록',
+            officialDate: '2026.06.29',
+            checkedDateKST: '2026.06.30',
+            sourceType: 'Official Status Page',
+            officialSource: {
+              label: 'Anthropic Status',
+              url: 'https://status.anthropic.com/',
+            },
+            updateType: 'Status Watch / Reliability / Incident',
+            badges: ['Status Watch', 'Reliability', 'Incident', 'Official Source', 'Official Screen Available'],
+            summary: 'Anthropic Status에는 2026년 6월 29일 Opus 4.5 elevated errors 이슈가 기록되었다. 이슈는 같은 날 해결된 것으로 표시되며, 기능 업데이트가 아니라 서비스 안정성 기록으로 분리해야 한다.',
+            whatChanged: 'Opus 4.5에서 elevated errors 이슈가 발생했고, 공식 상태 페이지에 기록되었다.',
+            whyItMatters: 'AI 서비스를 실제 업무에 쓰는 사람에게는 모델 성능만큼 서비스 안정성도 중요하다. 오류율 증가, 장애, 복구 상태는 AI 도구 신뢰성을 판단하는 기준이 된다.',
+            dechiveView: 'Dechive에서는 상태 이슈를 기능 업데이트와 분리해야 한다. AI가 잘하는지뿐 아니라 안정적으로 작동했는지도 검증해야 한다. Status Watch는 AI 업데이트의 부록이 아니라 실제 운영 신뢰성을 확인하는 기록이다.',
+            readerTakeaway: 'AI 서비스는 모델 성능뿐 아니라 오류율과 안정성도 함께 봐야 한다.',
+            screenMaterialStatus: 'Anthropic Status Page 화면을 참고할 수 있다. 별도 설명 이미지는 필수 아님.',
+            cautionNote: '기능 업데이트처럼 쓰지 않는다. 장애 범위나 영향은 공식 Status Page에 적힌 범위 이상으로 확대해서 쓰지 않는다.',
+          },
+        ],
+      },
+      {
+        name: 'Excluded / Not Main',
+        intro: '이전 날짜에서 이미 다룬 항목이나 AI 중심성이 낮은 항목은 2026.06.29 메인 업데이트로 중복 작성하지 않는다.',
+        updates: [
+          {
+            id: 'excluded-not-main-2026-06-29',
+            title: 'Excluded / Not Main — 이전 날짜 항목은 다시 메인으로 쓰지 않는다',
+            officialDate: '2026.06.29 기준 검토',
+            checkedDateKST: '2026.06.30',
+            sourceType: 'Editorial Verification Boundary',
+            updateType: 'Excluded / Not Main',
+            badges: ['Official Screen Not Required'],
+            summary: 'OpenAI × HP Frontier Partnership, GPT-5.6 Sol 제한 프리뷰, GPT-4.5 ChatGPT 종료, ChatGPT model picker 단순화, Claude Code 2.1.195, GitHub Copilot MAI-Code-1-Flash, GitHub Desktop 3.6, Copilot usage metrics, OpenAI Codex Remote GA, ChatGPT Business Memory 개선, GitHub Copilot for Jira GA, Gemini API Computer Use Public Preview, Mistral OCR 4, Claude Tag 등은 이번 날짜의 메인 항목으로 다시 쓰지 않는다.',
+            whatChanged: '이번 페이지의 범위는 officialDate 2026.06.29에 새로 기록할 수 있는 공식 업데이트로 제한한다.',
+            whyItMatters: '날짜가 다른 업데이트를 다시 메인으로 끌어오면 AI Updates가 속보 나열처럼 흐려진다. Dechive의 기준은 공식 발표일과 KST 확인일을 분리해 기록하는 것이다.',
+            dechiveView: 'Dechive는 흥미로운 항목보다 날짜와 출처가 맞는 항목을 우선한다. 제외 항목을 명시하는 것은 누락이 아니라 기록의 경계를 분명히 하는 작업이다.',
+            readerTakeaway: '이번 페이지는 2026.06.29 공식 날짜에 해당하는 새 기록만 중심으로 읽어야 한다.',
+            screenMaterialStatus: '별도 이미지 필요 없음. 제외 기준을 보여주는 텍스트 기록으로 충분하다.',
+            cautionNote: '이 항목은 메인 업데이트가 아니다. 이전 날짜 항목을 재포장하지 않기 위한 범위 기록으로만 사용한다.',
+          },
+        ],
+      },
+    ],
+    verificationNote: '이번 페이지는 2026.06.30 KST에 확인한 officialDate 2026.06.29 공식 업데이트 기록이다. 오늘 메인 업데이트는 OpenAI의 유럽 AI 노동시장 전환 리포트, GitHub Copilot의 Claude Opus 4.8 fast mode 프리뷰, Codex Permission Profiles beta, Google Cloud Gemini Enterprise 데이터 연결/행동 필터링 업데이트, Anthropic Opus 4.5 Status Watch다. 이번 페이지에서는 연구/분석 자료, 모델 프리뷰, 권한 통제 베타, 엔터프라이즈 데이터 연결, 서비스 상태 이슈를 서로 섞지 않는다. 특히 OpenAI 노동시장 리포트는 제품 출시가 아니라 Research / Global Affairs 항목이다. GitHub Copilot Claude Opus 4.8 fast mode는 preview이며, Business/Enterprise에서는 관리자 policy가 필요하다. Codex Permission Profiles는 beta이고, OpenAI Developer Community와 공식 개발자 문서 기준으로 확인해야 한다. Google Cloud Gemini Enterprise 항목은 GA와 SharePoint/OneDrive action-filtering Preview를 구분해야 한다. Anthropic Status는 기능 업데이트가 아니라 안정성 기록이다.',
+    closingLine: 'AI는 더 많은 일을 맡기 전에 더 정확한 권한과 지표가 필요해지고 있다. 노동시장 전환을 지도화하고, 코딩 모델의 속도를 고르고, Codex의 파일 접근을 제한하고, 기업 데이터 안에서 실행 범위를 걸어야 한다. Dechive는 그 변화가 무엇을 가능하게 하고, 무엇을 검증해야 하는지 기록한다.',
+    updates: [
+      {
+        id: 'openai-europe-ai-workforce-opportunity',
+        slug: 'openai-europe-ai-workforce-opportunity',
+        title: 'OpenAI EU AI Workforce Opportunity',
+        summary: '유럽 노동시장에서 AI가 직업군별로 어떤 변화 압력을 만들 수 있는지 보는 준비용 지도로 분류한다.',
+        badges: ['Research', 'Global Affairs', 'AI Jobs Transition', 'Planning Map', 'Official Source'],
+        detailHref: '/ai-updates/2026-06-29#openai-europe-ai-workforce-opportunity',
+        source: {
+          label: 'OpenAI — Mapping Europe’s AI Workforce Opportunity',
+          url: 'https://openai.com/index/mapping-europes-ai-workforce-opportunity/',
+          description: 'OpenAI 공식 블로그의 유럽 AI 노동시장 전환 리포트를 기준으로 확인합니다.',
+        },
+        whatChanged: 'OpenAI가 AI의 노동시장 영향을 직업군별 변화 압력과 제도적 맥락을 분석하는 프레임워크로 확장했습니다.',
+        useCriteria: '고용 예측이나 확정된 미래가 아니라 직업군, 제도, 교육, 기업 준비를 위한 planning map으로 읽어야 합니다.',
+        verificationNotes: [
+          'officialDate 2026.06.29',
+          'checkedDateKST 2026.06.30',
+          '제품 업데이트가 아니라 Research / Global Affairs / AI Jobs Transition으로 분류',
+        ],
+        image: {
+          status: 'none',
+          caption: '공식 차트가 있으면 참고 가능하며, 없으면 “직업군 → 변화 압력 → 준비” 설명 이미지가 적합합니다.',
+        },
+      },
+      {
+        id: 'github-copilot-claude-opus-4-8-fast-mode',
+        slug: 'github-copilot-claude-opus-4-8-fast-mode',
+        title: 'GitHub Copilot Claude Opus 4.8 fast mode',
+        summary: 'Claude Opus 4.8 fast mode가 Copilot에서 preview로 롤아웃되며, interactive coding과 agentic workflow의 응답 속도를 강조한다.',
+        badges: ['Model Preview', 'Developer Tool', 'Copilot', 'Fast Mode', 'Agentic Workflow', 'Official Source'],
+        detailHref: '/ai-updates/2026-06-29#github-copilot-claude-opus-4-8-fast-mode',
+        source: {
+          label: 'GitHub Changelog',
+          url: 'https://github.blog/changelog/2026-06-29-claude-opus-4-8-fast-mode-is-now-in-preview-for-github-copilot/',
+          description: 'GitHub 공식 changelog의 Claude Opus 4.8 fast mode preview 안내를 기준으로 확인합니다.',
+        },
+        whatChanged: 'GitHub Copilot이 Claude Opus 4.8 fast mode를 preview로 제공하기 시작했습니다.',
+        useCriteria: 'AI 코딩 모델은 지능뿐 아니라 응답 속도, 비용, 관리자 정책까지 함께 봐야 합니다.',
+        verificationNotes: [
+          'officialDate 2026.06.29',
+          'checkedDateKST 2026.06.30',
+          'Business/Enterprise fast mode policy 기본값 off',
+        ],
+        image: {
+          status: 'available',
+          caption: 'GitHub 공식 changelog의 Copilot model picker 이미지가 있으므로 공식 화면 참고 가능으로 표시합니다.',
+        },
+      },
+      {
+        id: 'codex-permission-profiles-beta',
+        slug: 'codex-permission-profiles-beta',
+        title: 'Codex Permission Profiles beta',
+        summary: 'Codex가 작업별 read/write/deny/network 경계를 permission profile로 제어하는 beta 흐름을 기록한다.',
+        badges: ['Beta', 'Codex', 'Permission Control', 'Security', 'Least Privilege', 'Official Source'],
+        detailHref: '/ai-updates/2026-06-29#codex-permission-profiles-beta',
+        source: {
+          label: 'OpenAI Developers Documentation — Codex CLI',
+          url: 'https://developers.openai.com/codex/cli',
+          description: 'OpenAI Developer Community와 공식 개발자 문서의 Permission Profiles 내용을 함께 확인합니다.',
+        },
+        whatChanged: 'Codex가 작업별 권한 경계를 더 세밀하게 설정할 수 있는 permission profile beta를 제공했습니다.',
+        useCriteria: 'AI 코딩 도구가 로컬 파일과 명령을 다룰수록 전체 권한이 아니라 최소 권한 원칙을 적용해야 합니다.',
+        verificationNotes: [
+          'officialDate 2026.06.29',
+          'checkedDateKST 2026.06.30',
+          'Beta / Permission Control / Security로 분류',
+        ],
+        image: {
+          status: 'none',
+          caption: '공식 설정 예시가 있으면 참고 가능하며, 없으면 permission profile 흐름 설명 이미지가 적합합니다.',
+        },
+      },
+      {
+        id: 'google-cloud-gemini-enterprise-action-filtering',
+        slug: 'google-cloud-gemini-enterprise-action-filtering',
+        title: 'Gemini Enterprise Jira Data Center / action filtering',
+        summary: 'Jira Data Center federated data store GA와 SharePoint/OneDrive action-filtering Public Preview를 구분해 기록한다.',
+        badges: ['Enterprise AI', 'Data Store', 'Action Filtering', 'Public Preview', 'Product Integration', 'Official Source'],
+        detailHref: '/ai-updates/2026-06-29#google-cloud-gemini-enterprise-action-filtering',
+        source: {
+          label: 'Google Cloud Release Notes',
+          url: 'https://docs.cloud.google.com/gemini/enterprise/docs/release-notes',
+          description: 'Google Cloud Gemini Enterprise 공식 release notes의 2026년 6월 29일 항목을 기준으로 확인합니다.',
+        },
+        whatChanged: 'Gemini Enterprise가 Jira Data Center federated data store GA와 SharePoint/OneDrive action-filtering Public Preview를 기록했습니다.',
+        useCriteria: '기업 AI는 데이터 연결뿐 아니라 retrieval과 mutation이 허용되는 범위를 함께 통제해야 하며, GA와 Preview 상태를 구분해야 합니다.',
+        verificationNotes: [
+          'officialDate 2026.06.29',
+          'checkedDateKST 2026.06.30',
+          'Jira Data Center federated data store는 GA',
+          'SharePoint/OneDrive action-filtering support는 Public Preview',
+        ],
+        image: {
+          status: 'none',
+          caption: '공식 문서 화면 외 별도 이미지는 필수 아니며, 필요하면 search filter / action filter 구조 다이어그램이 적합합니다.',
+        },
+      },
+      {
+        id: 'anthropic-opus-4-5-elevated-errors',
+        slug: 'anthropic-opus-4-5-elevated-errors',
+        title: 'Anthropic Opus 4.5 elevated errors',
+        summary: 'Anthropic Status의 Opus 4.5 elevated errors 이슈는 기능 업데이트가 아니라 서비스 안정성 기록이다.',
+        badges: ['Status Watch', 'Reliability', 'Incident', 'Official Source'],
+        detailHref: '/ai-updates/2026-06-29#anthropic-opus-4-5-elevated-errors',
+        source: {
+          label: 'Anthropic Status',
+          url: 'https://status.anthropic.com/',
+          description: 'Anthropic 공식 상태 페이지에 기록된 Opus 4.5 elevated errors 이슈를 기준으로 확인합니다.',
+        },
+        whatChanged: 'Opus 4.5에서 elevated errors 이슈가 발생했고 공식 상태 페이지에 기록되었습니다.',
+        useCriteria: 'AI 서비스를 실제 업무에 쓸 때는 모델 성능뿐 아니라 오류율 증가, 장애, 복구 상태도 신뢰성 판단 기준으로 봐야 합니다.',
+        verificationNotes: [
+          'officialDate 2026.06.29',
+          'checkedDateKST 2026.06.30',
+          '기능 업데이트가 아니라 Status Watch / Reliability / Incident로 분류',
+        ],
+        image: {
+          status: 'none',
+          caption: 'Anthropic Status Page 화면을 참고할 수 있습니다. 별도 설명 이미지는 필수 아닙니다.',
+        },
+      },
+    ],
+  },
   {
     date: '2026-06-28',
     checkedDateKST: '2026.06.29',

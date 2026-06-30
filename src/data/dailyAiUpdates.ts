@@ -16,6 +16,41 @@ export type DailyAiUpdates = {
 
 export const dailyAiUpdates: DailyAiUpdates[] = [
   {
+    date: '2026-06-30',
+    officialDate: '2026-06-29',
+    checkedDateKST: '2026-06-30',
+    label: {
+      ko: '확인한 AI 업데이트',
+      en: 'VERIFIED AI UPDATES',
+    },
+    updates: [
+      {
+        title: 'OpenAI Workforce Research',
+        description: {
+          ko: '유럽 노동시장에서 AI가 만들 변화 압력을 제품 출시가 아닌 연구/분석 자료로 기록한다',
+          en: 'AI workforce pressure in Europe is recorded as research, not a product launch',
+        },
+        href: '/ai-updates/2026-06-29',
+      },
+      {
+        title: 'Copilot / Codex Control',
+        description: {
+          ko: 'Claude Opus 4.8 fast mode preview와 Codex Permission Profiles beta를 구분한다',
+          en: 'Claude Opus 4.8 fast mode preview and Codex Permission Profiles beta are separated',
+        },
+        href: '/ai-updates/2026-06-29',
+      },
+      {
+        title: 'Gemini / Anthropic Status',
+        description: {
+          ko: '기업 데이터 실행 범위와 Opus 4.5 안정성 이슈를 기능 업데이트와 분리해 본다',
+          en: 'enterprise action boundaries and Opus 4.5 reliability status are tracked separately',
+        },
+        href: '/ai-updates/2026-06-29',
+      },
+    ],
+  },
+  {
     date: '2026-06-29',
     officialDate: '2026-06-28',
     checkedDateKST: '2026-06-29',
