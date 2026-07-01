@@ -16,6 +16,41 @@ export type DailyAiUpdates = {
 
 export const dailyAiUpdates: DailyAiUpdates[] = [
   {
+    date: '2026-07-01',
+    officialDate: '2026-06-30',
+    checkedDateKST: '2026-07-01',
+    label: {
+      ko: '확인한 AI 업데이트',
+      en: 'VERIFIED AI UPDATES',
+    },
+    updates: [
+      {
+        title: 'Model / Agent',
+        description: {
+          ko: 'Claude Sonnet 5와 Copilot 모델 제공으로 에이전트형 AI가 일상 개발 도구 안으로 들어간다',
+          en: 'Claude Sonnet 5 and Copilot availability move agentic AI into everyday developer tools',
+        },
+        href: '/ai-updates/2026-06-30',
+      },
+      {
+        title: 'Research / Verification',
+        description: {
+          ko: 'Claude Science, GeneBench-Pro, Core dump epidemiology를 연구 작업대와 검증 기록으로 분리한다',
+          en: 'Claude Science, GeneBench-Pro, and core dump epidemiology are separated as research workbench and verification records',
+        },
+        href: '/ai-updates/2026-06-30',
+      },
+      {
+        title: 'Enterprise Control',
+        description: {
+          ko: 'Fable 5 재배포와 AI credit budget은 접근 정책과 비용 거버넌스 흐름으로 기록한다',
+          en: 'Fable 5 redeployment and AI credit budgets are tracked as access policy and cost governance',
+        },
+        href: '/ai-updates/2026-06-30',
+      },
+    ],
+  },
+  {
     date: '2026-06-30',
     officialDate: '2026-06-29',
     checkedDateKST: '2026-06-30',

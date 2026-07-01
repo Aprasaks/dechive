@@ -116,7 +116,29 @@ export type AiUpdateBadge =
   | 'Permission Control'
   | 'Least Privilege'
   | 'Data Store'
-  | 'Action Filtering';
+  | 'Action Filtering'
+  | 'Model Launch'
+  | 'Agentic Model'
+  | 'AI Workbench'
+  | 'Science'
+  | 'Research Tool'
+  | 'Model Access'
+  | 'Policy'
+  | 'Model Availability'
+  | 'IDE Integration'
+  | 'Developer Workflow'
+  | 'Benchmark'
+  | 'Scientific Reasoning'
+  | 'Engineering'
+  | 'Infrastructure Debugging'
+  | 'Cost Governance'
+  | 'Usage Control'
+  | 'Model Garden'
+  | 'Agent Platform'
+  | 'Pull Request Governance'
+  | 'Supply Chain Security'
+  | 'License Compliance'
+  | 'Not Main AI Update';
 
 export interface AiUpdateItem {
   id: string;
@@ -183,6 +205,383 @@ export interface AiUpdateBriefingItem {
 export const AI_UPDATES_MONTH = '2026.06';
 
 export const aiUpdateDays: AiUpdateDay[] = [
+  {
+    date: '2026-06-30',
+    checkedDateKST: '2026.07.01',
+    title: 'AI가 에이전트 모델, 과학 작업대, 기업 비용 통제 안으로 들어간 날',
+    subtitle: '오늘의 공식 업데이트는 Claude Sonnet 5와 Claude Science처럼 에이전트형 AI가 일상 모델과 연구 작업대 안으로 들어가고, GeneBench-Pro와 OpenAI 인프라 기록처럼 AI의 판단과 신뢰성을 더 정교하게 검증하려는 흐름이 중심이다.',
+    quickSummary: [
+      '모델/에이전트: Anthropic은 Claude Sonnet 5를 공개했고, GitHub Copilot은 Claude Sonnet 5를 여러 개발 표면의 모델 선택지로 일반 제공했다.',
+      '연구/검증: Claude Science는 과학 연구 작업대 베타로, GeneBench-Pro는 과학적 판단 벤치마크로, Core dump epidemiology는 인프라 신뢰성 기록으로 분리해 본다.',
+      '기업 운영: Fable 5 재배포, GitHub AI credit budget, Google Cloud Gemini Enterprise, Anthropic Status는 접근 정책, 비용 통제, 플랫폼 운영, 안정성 기록으로 구분한다.',
+    ],
+    groups: [
+      {
+        name: 'Anthropic Model Launch',
+        intro: 'Claude Sonnet 5는 에이전트 능력이 더 일상적인 Sonnet급 모델 영역으로 내려오는 흐름으로 기록한다.',
+        updates: [
+          {
+            id: 'anthropic-claude-sonnet-5',
+            title: 'Anthropic Claude Sonnet 5 — 에이전트 능력이 일상 모델로 내려오다',
+            officialDate: '2026.06.30',
+            checkedDateKST: '2026.07.01',
+            sourceType: 'Official Blog / Model Release',
+            officialSource: {
+              label: 'Anthropic — Introducing Claude Sonnet 5',
+              url: 'https://www.anthropic.com/news/claude-sonnet-5',
+            },
+            updateType: 'Model Launch / Agentic Model / Developer Tool',
+            badges: ['Model Launch', 'Agentic Model', 'Developer Tool', 'Official Source', 'Official Screen Available'],
+            summary: 'Anthropic은 Claude Sonnet 5를 공개했다. Sonnet 5는 브라우저와 터미널 같은 도구를 사용하고, 계획을 세우고, 더 자율적으로 작업하는 agentic Sonnet model로 설명된다. Free와 Pro에서는 기본 모델이 되고, Max, Team, Enterprise에서도 사용 가능하며, Claude Code와 Claude Platform에서도 제공된다. 개발자는 API에서 `claude-sonnet-5`를 사용할 수 있다.',
+            whatChanged: 'Anthropic의 Sonnet 라인업이 더 강한 에이전트형 작업 능력을 갖춘 모델로 업데이트됐다. 브라우저, 터미널, 계획 수립, 자율 작업 흐름이 핵심이다.',
+            whyItMatters: '에이전트 능력이 Opus 같은 고가/상위 모델에만 머무르지 않고 Sonnet급 일상 모델로 내려오면 더 많은 사용자가 자율 작업, 도구 사용, 장기 작업 흐름을 경험하게 된다.',
+            dechiveView: '이 업데이트의 핵심은 “새 모델이 나왔다”가 아니다. 강한 에이전트 능력이 더 일상적인 모델 영역으로 내려오고 있다는 점이다. AI가 더 자율적으로 움직일수록 사용자는 모델 성능뿐 아니라 도구 권한, 실행 로그, 멈춤 조건, 검증 기준을 함께 봐야 한다.',
+            readerTakeaway: 'Claude Sonnet 5는 에이전트형 AI 능력이 더 많은 사용자와 개발자 환경으로 확장되는 흐름을 보여준다.',
+            screenMaterialStatus: 'Anthropic 공식 블로그에 Claude Sonnet 5 대표 이미지, 벤치마크 표, cost-performance chart가 있어 공식 화면 참고 가능으로 표시한다. 별도 설명 이미지가 필요하면 “사용자 요청 → 계획 수립 → 브라우저/터미널 도구 사용 → 결과 검증” 흐름이 적합하다.',
+            cautionNote: 'Claude Sonnet 5가 모든 작업을 완전히 자율적으로 안전하게 처리한다고 쓰지 않는다. agentic model로 설명하되, 도구 사용과 자율 작업에는 검증 기준이 필요하다고 함께 기록한다.',
+          },
+        ],
+      },
+      {
+        name: 'Anthropic Science Workbench',
+        intro: 'Claude Science는 과학 연구를 자동 완성하는 도구가 아니라, 검증 가능한 산출물과 연구 환경 통합을 지원하는 베타 작업대로 분류한다.',
+        updates: [
+          {
+            id: 'anthropic-claude-science-workbench',
+            title: 'Anthropic Claude Science — 과학 연구에 검증 가능한 AI 작업대를 만들다',
+            officialDate: '2026.06.30',
+            checkedDateKST: '2026.07.01',
+            sourceType: 'Official Blog / Product Beta',
+            officialSource: {
+              label: 'Anthropic — Claude Science, an AI workbench for scientists',
+              url: 'https://www.anthropic.com/news/claude-science-ai-workbench',
+            },
+            updateType: 'AI Workbench / Science / Research Tool / Beta',
+            badges: ['AI Workbench', 'Science', 'Research Tool', 'Beta', 'Official Source', 'Official Screen Available'],
+            summary: 'Anthropic은 Claude Science를 공개했다. Claude Science는 과학자를 위한 AI 워크벤치로, 연구자가 자주 쓰는 도구와 패키지를 통합하고, 검증 가능한 산출물을 만들고, 로컬 macOS/Linux 또는 SSH/HPC 환경에서 사용할 수 있게 하는 앱이다. 현재 Pro, Max, Team, Enterprise 플랜에서 베타로 제공된다.',
+            whatChanged: 'Claude가 단순 연구 보조 챗봇을 넘어, 과학 연구 환경 안에서 데이터 처리, 도구 실행, 산출물 생성, 검증 가능한 작업 기록을 지원하는 워크벤치 형태로 확장됐다.',
+            whyItMatters: '과학 연구에서 중요한 것은 답변보다 재현 가능성과 검증 가능성이다. AI가 논문을 요약하거나 코드를 제안하는 것에서 끝나지 않고, 연구자가 실제로 사용하는 도구와 환경 안에서 작업을 수행하고 기록을 남길 수 있어야 한다.',
+            dechiveView: 'Claude Science는 Dechive에 매우 잘 맞는 업데이트다. AI가 연구를 대신하는 것이 아니라, 연구 과정의 산출물과 기록을 검증 가능한 형태로 남길 수 있는지가 핵심이다. AI 연구 도구의 가치는 “그럴듯한 설명”이 아니라, 연구자가 다시 확인할 수 있는 artifact에 있다.',
+            readerTakeaway: '과학 연구용 AI는 논문 요약을 넘어, 검증 가능한 작업 기록과 산출물을 남기는 연구 작업대로 이동하고 있다.',
+            screenMaterialStatus: 'Anthropic 공식 블로그에 Claude Science 대표 이미지와 제품 시작 링크가 있어 공식 화면 참고 가능으로 표시한다. 별도 설명 이미지가 필요하면 “문헌 분석 → 데이터 처리 → 도구 실행 → 산출물 → 검증 가능한 기록” 흐름이 적합하다.',
+            cautionNote: 'Claude Science가 과학 연구를 자동으로 완성한다고 쓰지 않는다. 베타 제품이며, 연구자를 위한 AI 워크벤치로 분류한다.',
+          },
+        ],
+      },
+      {
+        name: 'Anthropic Model Access / Policy',
+        intro: 'Fable 5 재배포는 기능 출시가 아니라 모델 접근 권한, 안전, 정책 변화가 실제 배포를 바꾸는 사례로 읽는다.',
+        updates: [
+          {
+            id: 'anthropic-fable-5-redeployment',
+            title: 'Anthropic Fable 5 재배포 — 강한 모델은 성능만으로 배포되지 않는다',
+            officialDate: '2026.06.30',
+            checkedDateKST: '2026.07.01',
+            sourceType: 'Official Blog / Policy Update',
+            officialSource: {
+              label: 'Anthropic — Redeploying Fable 5',
+              url: 'https://www.anthropic.com/news/redeploying-fable-5',
+            },
+            updateType: 'Model Access / Safety / Policy / Effective Change',
+            badges: ['Model Access', 'Safety', 'Policy', 'Effective Change', 'Official Source', 'Official Screen Not Required'],
+            summary: 'Anthropic은 Fable 5 재배포 계획을 발표했다. 6월 12일 미국 정부의 수출 통제 지시 때문에 Fable 5와 Mythos 5 접근이 중단됐지만, 6월 30일 기준 해당 수출 통제가 해제되었고 Fable 5는 7월 1일부터 글로벌 사용자에게 다시 제공될 예정이라고 밝혔다. Mythos 5는 미국 정부 승인에 따라 일부 미국 조직에 접근이 복구됐다.',
+            whatChanged: 'Fable 5의 접근 제한이 해제되고 글로벌 사용자에게 다시 제공될 예정이라는 변화가 발표됐다. Mythos 5는 제한적으로 일부 미국 조직에 접근이 복구됐다.',
+            whyItMatters: '강력한 AI 모델은 성능만으로 배포되지 않는다. 정부 규제, 수출 통제, 안전장치, 신뢰 프로그램, 지역별 접근 권한이 모델 제공 여부에 직접 영향을 준다.',
+            dechiveView: '이 항목은 기능 출시보다 모델 접근 정책 변화로 봐야 한다. AI 업데이트는 모델 성능뿐 아니라 누가 접근할 수 있고, 어떤 조건에서 다시 배포되는지도 기록해야 한다.',
+            readerTakeaway: '강력한 모델의 배포는 기술 문제가 아니라 정책, 안전, 접근 권한의 문제이기도 하다.',
+            screenMaterialStatus: '공식 블로그 화면 외 별도 이미지는 필수 아님. 필요하다면 “수출 통제 → 접근 중단 → 통제 해제 → 재배포” 흐름의 설명 이미지가 적합하다.',
+            cautionNote: 'Fable 5가 이미 모든 사용자에게 제공되었다고 단정하지 않는다. 7월 1일부터 글로벌 사용자에게 다시 제공될 예정이라는 표현과 Mythos 5의 제한적 접근 복구를 구분한다.',
+          },
+        ],
+      },
+      {
+        name: 'GitHub Copilot',
+        intro: 'GitHub Copilot 항목은 모델 제공과 IDE 에이전트 통합을 나눠 기록한다.',
+        updates: [
+          {
+            id: 'github-copilot-claude-sonnet-5-ga',
+            title: 'GitHub Copilot — Claude Sonnet 5를 모델 선택지로 넣다',
+            officialDate: '2026.06.30',
+            checkedDateKST: '2026.07.01',
+            sourceType: 'Official Changelog',
+            officialSource: {
+              label: 'GitHub Changelog — Claude Sonnet 5 is generally available for GitHub Copilot',
+              url: 'https://github.blog/changelog/2026-06-30-claude-sonnet-5-is-generally-available-for-github-copilot/',
+            },
+            updateType: 'Copilot / Model Availability / Developer Tool',
+            badges: ['Copilot', 'Model Availability', 'Developer Tool', 'Official Changelog', 'Official Source', 'Official Screen Not Confirmed'],
+            summary: 'GitHub은 Claude Sonnet 5를 GitHub Copilot에서 일반 제공한다고 발표했다. Copilot Pro, Pro+, Max, Business, Enterprise 사용자가 사용할 수 있고, VS Code, Visual Studio, Copilot CLI, Copilot cloud agent, GitHub Copilot App, github.com, GitHub Mobile, JetBrains, Xcode, Eclipse 등 여러 표면에서 모델 선택이 가능하다. Business와 Enterprise 관리자는 model policy에서 활성화해야 한다.',
+            whatChanged: 'Claude Sonnet 5가 GitHub Copilot의 모델 선택지로 추가됐다. Anthropic 모델이 GitHub Copilot의 다양한 개발 환경 안으로 들어왔다.',
+            whyItMatters: 'AI 코딩 도구는 이제 하나의 기본 모델을 쓰는 제품이 아니라, 여러 공급자의 모델을 작업별로 고르는 플랫폼으로 바뀌고 있다. 개발자는 IDE, CLI, 모바일, 클라우드 에이전트 등 여러 표면에서 모델을 선택하게 된다.',
+            dechiveView: 'Claude Sonnet 5가 Anthropic 자체 제품뿐 아니라 GitHub Copilot 안으로 바로 들어왔다는 점이 중요하다. 모델 경쟁은 모델 회사 안에서만 벌어지지 않는다. 개발 도구 플랫폼이 어떤 모델을 어떤 표면에 제공하느냐가 실제 사용 경험을 결정한다.',
+            readerTakeaway: 'GitHub Copilot은 여러 모델을 작업별로 선택하는 개발자용 AI 플랫폼으로 확장되고 있다.',
+            screenMaterialStatus: 'GitHub 공식 changelog의 본문을 기준으로 기록한다. 공식 화면이 명확하지 않으면 “Copilot surfaces → model picker → Claude Sonnet 5” 흐름의 설명 이미지가 적합하다.',
+            cautionNote: 'Business와 Enterprise는 관리자가 model policy에서 활성화해야 한다는 점을 명확히 한다. 모든 사용자가 자동으로 사용하는 기능처럼 쓰지 않는다.',
+          },
+          {
+            id: 'github-copilot-agent-jetbrains-ai-assistant',
+            title: 'GitHub Copilot Agent in JetBrains — IDE 안의 에이전트 선택지가 되다',
+            officialDate: '2026.06.30',
+            checkedDateKST: '2026.07.01',
+            sourceType: 'Official Changelog',
+            officialSource: {
+              label: 'GitHub Changelog — Copilot Agent is now available in JetBrains AI Assistant',
+              url: 'https://github.blog/changelog/2026-06-30-copilot-agent-is-now-available-in-jetbrains-ai-assistant/',
+            },
+            updateType: 'IDE Integration / Agentic Coding / Developer Workflow',
+            badges: ['IDE Integration', 'Agentic Coding', 'Developer Workflow', 'Copilot', 'Official Changelog', 'Official Source', 'Official Screen Not Confirmed'],
+            summary: 'GitHub과 JetBrains는 Copilot Agent가 JetBrains AI Assistant 안에서 사용할 수 있게 됐다고 발표했다. JetBrains AI Assistant의 agent picker에서 GitHub Copilot을 선택할 수 있고, Copilot 모델을 고르거나 reasoning depth를 조절할 수 있으며, 여러 단계의 실제 코딩 작업을 Copilot Agent에 맡길 수 있다. GitHub은 이 통합이 Agent Client Protocol 기반 흐름에서 한 단계 더 나아간 것이라고 설명한다.',
+            whatChanged: 'Copilot Agent가 JetBrains AI Assistant 안의 에이전트 선택지로 들어갔다. 사용자는 IDE 안에서 에이전트와 모델, reasoning depth를 선택하며 코딩 작업을 맡길 수 있다.',
+            whyItMatters: '개발자는 점점 IDE 안에서 여러 AI 에이전트 중 하나를 선택하게 된다. AI 코딩 도구는 별도 창이나 플러그인을 넘어, IDE의 기본 작업 흐름 안에 배치되고 있다.',
+            dechiveView: '이 업데이트는 개발 환경의 AI 통합이 더 깊어지고 있음을 보여준다. 앞으로 중요한 것은 “AI가 코드를 써주느냐”보다, 개발자가 어떤 IDE 안에서 어떤 에이전트를 어떤 추론 깊이로 호출할 수 있는지가 될 수 있다.',
+            readerTakeaway: 'AI 코딩 에이전트는 별도 도구가 아니라, IDE 안에서 선택하고 작업을 맡기는 구성 요소가 되고 있다.',
+            screenMaterialStatus: 'GitHub 또는 JetBrains 공식 화면이 있으면 공식 화면 참고 가능으로 표시한다. 공식 화면이 명확하지 않으면 “JetBrains IDE → AI Assistant → Agent picker → Copilot Agent → 코드 작업” 흐름의 설명 이미지가 적합하다.',
+            cautionNote: '이 기능을 모든 JetBrains 사용자에게 자동 제공되는 것처럼 쓰지 않는다. 필요한 플랜, 접근 조건, 지원 환경은 공식 문서 기준으로 확인해 작성한다.',
+          },
+        ],
+      },
+      {
+        name: 'OpenAI Research',
+        intro: 'GeneBench-Pro는 제품 출시가 아니라 과학적 판단을 평가하는 연구용 벤치마크다.',
+        updates: [
+          {
+            id: 'openai-genebench-pro',
+            title: 'OpenAI GeneBench-Pro — AI는 과학적 판단까지 검증받기 시작했다',
+            officialDate: '2026.06.30',
+            checkedDateKST: '2026.07.01',
+            sourceType: 'Official Research / Benchmark',
+            officialSource: {
+              label: 'OpenAI — Introducing GeneBench-Pro',
+              url: 'https://openai.com/index/introducing-genebench-pro/',
+            },
+            updateType: 'Research / Benchmark / Scientific Reasoning',
+            badges: ['Research', 'Benchmark', 'Scientific Reasoning', 'Official Source', 'Official Screen Available'],
+            summary: 'OpenAI는 GeneBench-Pro를 공개했다. GeneBench-Pro는 계산생물학에서 AI 에이전트가 모호한 데이터, 분석 경로 선택, 실험적 판단, 반복적 분석 같은 고차원 판단을 얼마나 잘 수행하는지 측정하는 연구용 벤치마크다. 129개 문제, 10개 도메인, 21개 하위 도메인을 포함하며, 단순 지식 테스트가 아니라 실제 연구 판단을 평가하는 벤치마크로 설명된다.',
+            whatChanged: 'OpenAI가 과학 분야에서 AI 에이전트의 단순 정답 능력보다 연구 판단 능력을 평가하는 벤치마크를 공개했다.',
+            whyItMatters: '과학 연구에서 중요한 것은 지식 암기가 아니다. 데이터가 질문을 지지하는지, 어떤 분석 경로가 맞는지, 언제 결과를 믿을 수 있는지 판단해야 한다. AI가 과학 연구에 들어가려면 이런 판단 능력도 평가되어야 한다.',
+            dechiveView: 'GeneBench-Pro는 Dechive 관점에서 매우 중요하다. AI 검증은 “정답을 맞혔나”에서 끝나지 않는다. 과학에서는 근거, 분석 경로, 불확실성, 반복 검토가 중요하다. 이 벤치마크는 AI가 과학적 판단까지 검증받기 시작했다는 신호다.',
+            readerTakeaway: 'AI는 단순 지식 테스트를 넘어, 과학적 판단과 분석 경로 선택까지 평가받기 시작했다.',
+            screenMaterialStatus: 'OpenAI 공식 글에 GeneBench-Pro 대표 이미지와 벤치마크 설명 자료가 있어 공식 이미지 참고 가능으로 표시한다. 별도 설명 이미지가 필요하면 “데이터 → 분석 경로 선택 → 판단 → 검증” 흐름이 적합하다.',
+            cautionNote: 'GeneBench-Pro를 일반 제품 출시처럼 쓰지 않는다. 연구용 벤치마크로 분류한다. AI가 과학 연구를 완전히 해결한다는 식의 표현은 피한다.',
+          },
+        ],
+      },
+      {
+        name: 'OpenAI Engineering',
+        intro: 'Core dump epidemiology는 AI 기능 출시가 아니라 AI 서비스를 지탱하는 데이터 인프라 신뢰성 기록이다.',
+        updates: [
+          {
+            id: 'openai-core-dump-epidemiology',
+            title: 'OpenAI Core dump epidemiology — AI 인프라 버그를 역학처럼 추적하다',
+            officialDate: '2026.06.30',
+            checkedDateKST: '2026.07.01',
+            sourceType: 'Official Engineering Blog',
+            officialSource: {
+              label: 'OpenAI — Core dump epidemiology: fixing an 18-year-old bug',
+              url: 'https://openai.com/index/core-dump-epidemiology-data-infrastructure-bug/',
+            },
+            updateType: 'Engineering / Reliability / Infrastructure Debugging',
+            badges: ['Engineering', 'Reliability', 'Infrastructure Debugging', 'Official Source', 'Official Screen Available'],
+            summary: 'OpenAI는 데이터 인프라에서 발생한 난해한 크래시를 해결한 엔지니어링 글을 공개했다. Rockset 기반 ChatGPT 데이터 인프라에서 발생한 문제를 분석했고, 처음에는 하나의 이상한 버그처럼 보였지만 실제로는 Azure 호스트의 조용한 하드웨어 오류와 GNU libunwind의 오래된 race condition이라는 두 문제가 겹친 것이었다고 설명한다. 핵심은 개별 사례를 깊게 보는 방식이 아니라, 전체 크래시 집단을 분석하는 역학적 진단으로 문제를 찾았다는 점이다.',
+            whatChanged: 'OpenAI가 AI 서비스 인프라의 난해한 장애를 어떻게 분석했는지 공개했다. 단일 버그 분석보다 집단적 패턴 분석을 통해 원인을 찾은 엔지니어링 사례다.',
+            whyItMatters: 'AI 서비스는 모델만으로 작동하지 않는다. 데이터 인프라, 검색 시스템, 하드웨어, 라이브러리, 크래시 분석 체계가 모두 안정적으로 움직여야 한다. 인프라가 불안정하면 AI 답변 경험도 흔들릴 수 있다.',
+            dechiveView: 'Dechive에서는 이 항목을 AI 제품 업데이트가 아니라 신뢰성 기록으로 다뤄야 한다. AI 답변의 품질은 모델 성능뿐 아니라 그 답변을 지탱하는 인프라의 안정성과 분석 능력에 달려 있다.',
+            readerTakeaway: 'AI 서비스 신뢰성은 모델만이 아니라, 데이터 인프라와 장애 분석 방식까지 포함한다.',
+            screenMaterialStatus: 'OpenAI 공식 글에 Rockset art card와 관련 설명 이미지가 있어 공식 이미지 참고 가능으로 표시한다. 별도 설명 이미지가 필요하면 “crash reports → pattern analysis → root cause → infrastructure fix” 흐름이 적합하다.',
+            cautionNote: '이 항목은 제품 기능 출시가 아니다. Engineering / Reliability 항목으로 분류한다.',
+          },
+        ],
+      },
+      {
+        name: 'GitHub Enterprise Governance',
+        intro: 'AI 사용량이 늘수록 기업은 기능 활성화뿐 아니라 비용센터별 사용량과 예산 통제를 함께 운영해야 한다.',
+        updates: [
+          {
+            id: 'github-ai-credit-budgets-cost-centers',
+            title: 'GitHub AI Credit Budgets — AI 사용량을 비용센터별로 통제하기 시작하다',
+            officialDate: '2026.06.30',
+            checkedDateKST: '2026.07.01',
+            sourceType: 'Official Changelog',
+            officialSource: {
+              label: 'GitHub Changelog — Per-user AI credit budgets available for cost centers',
+              url: 'https://github.blog/changelog/2026-06-30-per-user-ai-credit-budgets-available-for-cost-centers/',
+            },
+            updateType: 'Enterprise AI / Cost Governance / Usage Control',
+            badges: ['Enterprise AI', 'Cost Governance', 'Usage Control', 'Official Changelog', 'Official Source', 'Explanation Image Recommended'],
+            summary: 'GitHub은 기업 관리자를 위해 cost center 단위 per-user AI credit budget을 추가했다. 조직은 팀이나 비용센터마다 사용자 1인당 AI credit 예산을 다르게 줄 수 있고, 구성원이 이동하면 예산 적용도 따라간다. 이 기능은 현재 REST API로 만들 수 있으며, Billing UI 지원은 추후 제공될 예정이다.',
+            whatChanged: '기업이 GitHub AI credit 사용량을 cost center 단위로 관리할 수 있게 됐다. 팀이나 비용센터마다 사용자 1인당 예산을 다르게 설정할 수 있다.',
+            whyItMatters: 'AI 도입이 확대되면 비용 관리가 중요해진다. 기업은 누가 AI를 쓸 수 있는지뿐 아니라, 어느 팀이 얼마나 쓸 수 있는지, 비용을 어떻게 배분할지 관리해야 한다.',
+            dechiveView: 'AI 운영은 기능 문제가 아니라 비용과 거버넌스 문제로도 확장되고 있다. AI 사용량을 비용센터별로 관리하는 기능은 기업이 AI를 실제 운영 예산 안에 넣기 시작했다는 신호다.',
+            readerTakeaway: '기업 AI 운영은 이제 누가 쓸 수 있는가를 넘어, 누가 얼마나 쓸 수 있는가를 관리하는 단계로 가고 있다.',
+            screenMaterialStatus: 'GitHub Billing 또는 REST API 예시 화면이 있으면 참고 가능으로 표시한다. 공식 화면이 명확하지 않으면 “cost center → per-user AI credit budget → usage control” 흐름의 설명 이미지가 적합하다.',
+            cautionNote: '현재 REST API로 제공되고 Billing UI는 추후 제공 예정이라는 점을 구분한다. 모든 UI에서 바로 설정 가능한 기능처럼 쓰지 않는다.',
+          },
+        ],
+      },
+      {
+        name: 'Google Cloud',
+        intro: 'Google Cloud Gemini Enterprise 항목은 오늘의 메인 흐름을 보조하는 기업 AI 운영 기록으로 분리한다.',
+        updates: [
+          {
+            id: 'google-cloud-gemini-enterprise-agent-platform-2026-06-30',
+            title: 'Google Cloud Gemini Enterprise / Agent Platform — 기업 AI는 데이터 저장소, 지역, 모델 선택까지 운영한다',
+            officialDate: '2026.06.30',
+            checkedDateKST: '2026.07.01',
+            sourceType: 'Official Release Notes',
+            officialSource: {
+              label: 'Google Cloud Release Notes — June 30, 2026',
+              url: 'https://docs.cloud.google.com/release-notes',
+            },
+            updateType: 'Enterprise AI / Data Store / Model Garden / Agent Platform',
+            badges: ['Enterprise AI', 'Data Store', 'Model Garden', 'Agent Platform', 'Official Source', 'Explanation Image Recommended'],
+            summary: 'Google Cloud 릴리즈노트에는 2026년 6월 30일자로 Gemini Enterprise와 Agent Platform 관련 업데이트가 확인된다. Microsoft SharePoint federated data store 필터가 GA가 됐고, India/Singapore region 지원이 GA with allowlist로 제공되며, Gemini Enterprise Agent Platform의 Model Garden에서 Claude Sonnet 5가 제공된다.',
+            whatChanged: 'Gemini Enterprise와 Agent Platform이 기업 데이터 저장소 필터링, 지역 지원, Model Garden 안의 모델 선택 범위를 확장했다.',
+            whyItMatters: '기업 AI는 모델 성능만으로 운영되지 않는다. 어떤 데이터 저장소를 연결하고, 어떤 지역에서 처리하고, 어떤 모델을 플랫폼 안에서 사용할 수 있는지가 운영 조건이 된다.',
+            dechiveView: '이 항목은 보조 항목으로 다루는 것이 적절하다. 핵심은 기업 AI가 점점 데이터 연결, 지역, 모델 선택, 플랫폼 운영의 문제로 들어가고 있다는 점이다.',
+            readerTakeaway: '기업 AI는 모델만 고르는 것이 아니라, 데이터 저장소와 지역, 플랫폼 안의 모델 선택까지 함께 운영해야 한다.',
+            screenMaterialStatus: 'Google Cloud 공식 release notes 화면 외 별도 이미지는 필수 아님. 설명 이미지가 필요하다면 “Gemini Enterprise → SharePoint data store filter / regional support / Model Garden” 구조를 보여주는 다이어그램이 적합하다.',
+            cautionNote: 'Google Cloud 항목은 메인보다 보조로 다룬다. 6월 29일 Jira Data Center / SharePoint·OneDrive action-filtering 항목과 중복하지 않도록 주의한다.',
+          },
+        ],
+      },
+      {
+        name: 'Status Watch',
+        intro: '상태 페이지 항목은 기능 업데이트가 아니라 신뢰성과 오류율을 추적하는 기록으로 분리한다.',
+        updates: [
+          {
+            id: 'anthropic-status-opus-4-8-elevated-error-rates',
+            title: 'Anthropic Status — Opus 4.8 elevated error rates',
+            officialDate: '2026.06.30',
+            checkedDateKST: '2026.07.01',
+            sourceType: 'Official Status Page',
+            officialSource: {
+              label: 'Anthropic Status — Elevated error rates on Opus 4.8',
+              url: 'https://status.claude.com/',
+            },
+            updateType: 'Status Watch / Reliability / Incident',
+            badges: ['Status Watch', 'Reliability', 'Incident', 'Official Source', 'Official Screen Available'],
+            summary: 'Anthropic Status에는 2026년 6월 30일 Opus 4.8 elevated error rates 이슈가 기록되었다. 같은 날 resolved 상태로 표시되며, 기능 업데이트가 아니라 서비스 안정성 기록으로 분리해야 한다.',
+            whatChanged: 'Opus 4.8에서 elevated error rates 이슈가 발생했고, 공식 상태 페이지에 기록되었다.',
+            whyItMatters: 'AI 서비스를 실제 업무에 쓰는 사람에게는 모델 성능만큼 서비스 안정성도 중요하다. 오류율 증가와 복구 상태는 AI 도구 신뢰성을 판단하는 기준이 된다.',
+            dechiveView: 'Dechive에서는 상태 이슈를 기능 업데이트와 분리해야 한다. AI가 잘하는지뿐 아니라 안정적으로 작동했는지도 검증해야 한다.',
+            readerTakeaway: 'AI 서비스는 모델 성능뿐 아니라 오류율과 안정성도 함께 봐야 한다.',
+            screenMaterialStatus: 'Anthropic Status Page 화면을 참고할 수 있다. 별도 설명 이미지는 필수 아님.',
+            cautionNote: '기능 업데이트처럼 쓰지 않는다. 장애 범위나 영향은 공식 Status Page에 적힌 범위 이상으로 확대해서 쓰지 않는다.',
+          },
+        ],
+      },
+      {
+        name: 'Low Priority / Excluded',
+        intro: '2026년 6월 30일 공식 항목이더라도 AI Updates 메인 흐름과 직접 맞지 않으면 보조 또는 제외로 분리한다.',
+        updates: [
+          {
+            id: 'github-code-coverage-merge-protection-low-priority',
+            title: 'GitHub Code Coverage Merge Protection',
+            officialDate: '2026.06.30',
+            checkedDateKST: '2026.07.01',
+            sourceType: 'Official Changelog',
+            officialSource: {
+              label: 'GitHub Changelog',
+              url: 'https://github.blog/changelog/',
+            },
+            updateType: 'Code Quality / Pull Request Governance / Not Main AI Update',
+            badges: ['Code Quality', 'Pull Request Governance', 'Not Main AI Update', 'Official Changelog'],
+            summary: 'GitHub code coverage merge protection은 6월 30일 공식 changelog 항목이지만, AI Updates 메인으로는 약하다. 코드 품질과 PR 병합 규칙 맥락에서 보조 항목으로 짧게 언급할 수 있다.',
+            whatChanged: '코드 커버리지 기준을 PR 병합 보호 흐름에 연결하는 GitHub 업데이트가 확인됐다.',
+            whyItMatters: '코드 품질과 병합 기준에는 의미가 있지만, 오늘 페이지의 에이전트 모델, 연구 작업대, 과학 벤치마크, AI 비용 통제 흐름과는 직접성이 낮다.',
+            dechiveView: 'Dechive AI Updates에서는 AI 기능 업데이트처럼 크게 다루지 않고 Low Priority로 분리한다.',
+            readerTakeaway: 'AI Updates 메인 항목은 아니며, 코드 품질/PR 거버넌스 보조 기록으로 충분하다.',
+            screenMaterialStatus: '공식 changelog 화면 외 별도 이미지는 필수 아님.',
+            cautionNote: 'AI 기능 업데이트처럼 크게 다루지 않는다.',
+          },
+          {
+            id: 'github-open-source-license-compliance-low-priority',
+            title: 'GitHub Open Source License Compliance',
+            officialDate: '2026.06.30',
+            checkedDateKST: '2026.07.01',
+            sourceType: 'Official Changelog',
+            officialSource: {
+              label: 'GitHub Changelog',
+              url: 'https://github.blog/changelog/',
+            },
+            updateType: 'Supply Chain Security / License Compliance / Public Preview / Not Main AI Update',
+            badges: ['Supply Chain Security', 'License Compliance', 'Public Preview', 'Not Main AI Update', 'Official Changelog'],
+            summary: 'GitHub open source license compliance public preview는 ruleset 기반으로 비준수 의존성을 병합 전에 막는 기능이다. AI Updates 메인이라기보다는 코드 품질/공급망 보안 보조 항목으로 분리한다.',
+            whatChanged: '오픈소스 라이선스 준수 여부를 ruleset 기반으로 확인하고 병합 전에 통제하는 공개 프리뷰 항목이 확인됐다.',
+            whyItMatters: '공급망 보안과 라이선스 준수 측면에서는 중요하지만, 오늘의 AI 변화 흐름 자체를 설명하는 메인 항목은 아니다.',
+            dechiveView: 'AI 업데이트로 과장하지 않고, 공급망 보안/라이선스 준수 보조 기록으로 남긴다.',
+            readerTakeaway: 'AI Updates 메인보다는 개발 거버넌스 보조 항목으로 읽는 것이 맞다.',
+            screenMaterialStatus: '공식 changelog 화면 외 별도 이미지는 필수 아님.',
+            cautionNote: 'AI 기능 업데이트로 과장하지 않는다.',
+          },
+        ],
+      },
+    ],
+    verificationNote: '이번 페이지는 2026.07.01 KST에 확인한 officialDate 2026.06.30 공식 업데이트 기록이다. 오늘 메인 업데이트는 Anthropic Claude Sonnet 5, Claude Science, Fable 5 재배포, GitHub Copilot의 Claude Sonnet 5 일반 제공, Copilot Agent의 JetBrains AI Assistant 통합, OpenAI GeneBench-Pro, OpenAI Core dump epidemiology, GitHub AI credit budget이다. 이번 페이지에서는 모델 출시, 과학 연구 작업대, 모델 접근 정책, 개발자 도구 통합, 연구 벤치마크, 인프라 신뢰성 기록, 기업 비용 통제, 상태 이슈를 서로 섞지 않는다. 특히 Claude Science는 과학 연구를 자동으로 완성하는 도구가 아니라, 검증 가능한 산출물과 연구 환경 통합을 지원하는 베타 워크벤치로 다룬다. GeneBench-Pro는 제품 출시가 아니라 연구용 벤치마크다. OpenAI Core dump epidemiology는 AI 기능 업데이트가 아니라 인프라 신뢰성 기록이다. GitHub AI credit budget은 기업 비용 거버넌스 업데이트다. Anthropic Status는 기능 업데이트가 아니라 안정성 기록이다.',
+    closingLine: 'AI는 더 똑똑해지는 동시에 더 많이 검증되고, 더 세밀하게 관리되고 있다. 에이전트 모델은 일상 도구로 내려오고, 과학 연구는 검증 가능한 작업대로 옮겨가며, 기업은 AI 사용량과 비용을 통제하기 시작한다. Dechive는 그 변화가 무엇을 가능하게 하고, 무엇을 검증해야 하는지 기록한다.',
+    updates: [
+      {
+        id: 'anthropic-claude-sonnet-5',
+        slug: 'anthropic-claude-sonnet-5',
+        title: 'Claude Sonnet 5',
+        summary: '에이전트 능력이 Sonnet급 일상 모델로 내려오며 브라우저, 터미널, 계획 수립, 자율 작업 흐름을 더 넓은 사용자와 개발자 환경으로 확장한다.',
+        badges: ['Model Launch', 'Agentic Model', 'Developer Tool', 'Official Source'],
+        detailHref: '/ai-updates/2026-06-30#anthropic-claude-sonnet-5',
+        source: {
+          label: 'Official Blog',
+          url: 'https://www.anthropic.com/news/claude-sonnet-5',
+          description: 'Anthropic Claude Sonnet 5 release',
+        },
+        whatChanged: 'Claude Sonnet 5가 Free/Pro 기본 모델과 Claude Code, Claude Platform, API 모델로 제공된다.',
+        useCriteria: '에이전트 능력이 일상 모델로 내려올수록 도구 권한, 실행 로그, 멈춤 조건, 검증 기준이 함께 필요하다.',
+        verificationNotes: ['officialDate 2026.06.30', 'checkedDateKST 2026.07.01', 'Model Launch / Agentic Model로 분류'],
+        image: {
+          status: 'available',
+          caption: 'Anthropic 공식 블로그의 Claude Sonnet 5 이미지와 벤치마크 표 참고 가능.',
+        },
+      },
+      {
+        id: 'openai-genebench-pro',
+        slug: 'openai-genebench-pro',
+        title: 'OpenAI GeneBench-Pro',
+        summary: '계산생물학에서 AI 에이전트의 모호한 데이터 해석, 분석 경로 선택, 실험적 판단을 평가하는 연구용 벤치마크다.',
+        badges: ['Research', 'Benchmark', 'Scientific Reasoning', 'Official Source'],
+        detailHref: '/ai-updates/2026-06-30#openai-genebench-pro',
+        source: {
+          label: 'Official Research',
+          url: 'https://openai.com/index/introducing-genebench-pro/',
+          description: 'OpenAI GeneBench-Pro benchmark',
+        },
+        whatChanged: 'OpenAI가 단순 정답보다 과학적 판단 능력을 평가하는 벤치마크를 공개했다.',
+        useCriteria: '과학 연구에서 AI 검증은 근거, 분석 경로, 불확실성, 반복 검토까지 포함해야 한다.',
+        verificationNotes: ['officialDate 2026.06.30', 'checkedDateKST 2026.07.01', 'Research / Benchmark로 분류'],
+        image: {
+          status: 'available',
+          caption: 'OpenAI 공식 글의 GeneBench-Pro 대표 이미지와 벤치마크 설명 자료 참고 가능.',
+        },
+      },
+      {
+        id: 'github-ai-credit-budgets-cost-centers',
+        slug: 'github-ai-credit-budgets-cost-centers',
+        title: 'GitHub AI Credit Budgets',
+        summary: '기업 관리자가 cost center 단위로 사용자별 AI credit budget을 설정하며 AI 사용량과 비용을 운영 예산 안에서 통제하기 시작한다.',
+        badges: ['Enterprise AI', 'Cost Governance', 'Usage Control', 'Official Changelog'],
+        detailHref: '/ai-updates/2026-06-30#github-ai-credit-budgets-cost-centers',
+        source: {
+          label: 'Official Changelog',
+          url: 'https://github.blog/changelog/2026-06-30-per-user-ai-credit-budgets-available-for-cost-centers/',
+          description: 'GitHub AI credit budgets for cost centers',
+        },
+        whatChanged: 'GitHub AI credit 사용량을 cost center 단위 per-user budget으로 관리할 수 있게 됐다.',
+        useCriteria: 'AI 운영은 기능 활성화뿐 아니라 비용 배분, 사용량 제한, 거버넌스 관리로 확장된다.',
+        verificationNotes: ['officialDate 2026.06.30', 'checkedDateKST 2026.07.01', 'Enterprise AI / Cost Governance로 분류'],
+        image: {
+          status: 'none',
+          caption: '공식 화면이 명확하지 않으면 cost center와 AI credit budget 흐름의 설명 이미지가 적합하다.',
+        },
+      },
+    ],
+  },
   {
     date: '2026-06-29',
     checkedDateKST: '2026.06.30',
