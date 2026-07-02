@@ -41,10 +41,6 @@ const i18n = {
     guestBookPassword: '비밀번호',
     guestBookMessage: '질문, 피드백, 짧은 감상을 남겨주세요...',
     guestBookSubmit: '흔적 남기기',
-
-    // TableOfContents
-    tocTitle: '목차',
-
   },
 
   en: {
@@ -87,10 +83,6 @@ const i18n = {
     guestBookPassword: 'Password',
     guestBookMessage: 'Leave a question, feedback, or a short note...',
     guestBookSubmit: 'Leave a Note',
-
-    // TableOfContents
-    tocTitle: 'On this page',
-
   },
 } as const;
 
