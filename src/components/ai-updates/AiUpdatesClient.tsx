@@ -9,10 +9,24 @@ interface AiUpdatesClientProps {
   days: AiUpdateDay[];
 }
 
-const DAYS_IN_MONTH = 30;
+function getMonthFromDate(date: string) {
+  return date.slice(0, 7);
+}
 
-function getDateFromDay(day: number) {
-  return `2026-06-${String(day).padStart(2, '0')}`;
+function getDisplayMonth(month: string) {
+  return month.replace('-', '.');
+}
+
+function getDaysInMonth(month: string) {
+  const [year, monthIndex] = month.split('-').map(Number);
+
+  if (!year || !monthIndex) return 31;
+
+  return new Date(year, monthIndex, 0).getDate();
+}
+
+function getDateFromMonthDay(month: string, day: number) {
+  return `${month}-${String(day).padStart(2, '0')}`;
 }
 
 function formatDisplayDate(date: string) {
@@ -73,13 +87,30 @@ function UpdateCard({ update }: { update: AiUpdateItem }) {
 }
 
 export default function AiUpdatesClient({ month, days }: AiUpdatesClientProps) {
-  const [selectedDate, setSelectedDate] = React.useState(days[0]?.date ?? '2026-06-22');
+  const months = React.useMemo(() => {
+    const uniqueMonths = new Set(days.map((day) => getMonthFromDate(day.date)));
+
+    return [...uniqueMonths].sort((a, b) => b.localeCompare(a));
+  }, [days]);
+  const initialMonth = months.includes(month.replace('.', '-'))
+    ? month.replace('.', '-')
+    : months[0] ?? '2026-07';
+  const [selectedMonth, setSelectedMonth] = React.useState(initialMonth);
+  const [selectedDate, setSelectedDate] = React.useState(days[0]?.date ?? `${initialMonth}-01`);
   const recordedDates = React.useMemo(() => getRecordedDates(days), [days]);
   const selectedUpdates = getUpdatesForDate(days, selectedDate);
   const selectedDay = getDayForDate(days, selectedDate);
   const visibleUpdates = selectedUpdates.slice(0, 3);
   const hasMoreUpdates = selectedUpdates.length > visibleUpdates.length;
   const dateDetailHref = `/ai-updates/${selectedDate}`;
+  const daysInSelectedMonth = getDaysInMonth(selectedMonth);
+
+  function selectMonth(nextMonth: string) {
+    setSelectedMonth(nextMonth);
+
+    const firstRecordedDateInMonth = days.find((day) => getMonthFromDate(day.date) === nextMonth)?.date;
+    setSelectedDate(firstRecordedDateInMonth ?? `${nextMonth}-01`);
+  }
 
   return (
     <main className="min-h-[calc(100vh-5rem)] bg-[#f8f6f1] text-[#19140f]">
@@ -114,14 +145,37 @@ export default function AiUpdatesClient({ month, days }: AiUpdatesClientProps) {
                 </p>
               </div>
               <span className="shrink-0 rounded-sm border border-[#bda77e]/50 px-3 py-1.5 text-xs font-semibold tracking-[0.12em] text-[#5d4630]">
-                {month}
+                {getDisplayMonth(selectedMonth)}
               </span>
             </div>
 
+            {months.length > 1 ? (
+              <div className="mt-5 flex flex-wrap gap-2">
+                {months.map((availableMonth) => {
+                  const isSelectedMonth = selectedMonth === availableMonth;
+
+                  return (
+                    <button
+                      key={availableMonth}
+                      type="button"
+                      onClick={() => selectMonth(availableMonth)}
+                      className={`rounded-sm border px-3 py-1.5 text-xs font-semibold tracking-[0.12em] transition-colors ${
+                        isSelectedMonth
+                          ? 'border-[#8a6a39] bg-[#2a211b] text-[#f8f6f1]'
+                          : 'border-[#d8cdbd] bg-[#fbfaf7]/70 text-[#5f564d] hover:border-[#b08d57]/70 hover:bg-[#efe7da]'
+                      }`}
+                    >
+                      {getDisplayMonth(availableMonth)}
+                    </button>
+                  );
+                })}
+              </div>
+            ) : null}
+
             <div className="mt-5 grid grid-cols-6 gap-2 sm:grid-cols-10 lg:grid-cols-5">
-              {Array.from({ length: DAYS_IN_MONTH }, (_, index) => {
+              {Array.from({ length: daysInSelectedMonth }, (_, index) => {
                 const dayNumber = index + 1;
-                const date = getDateFromDay(dayNumber);
+                const date = getDateFromMonthDay(selectedMonth, dayNumber);
                 const hasRecord = recordedDates.has(date);
                 const isSelected = selectedDate === date;
 

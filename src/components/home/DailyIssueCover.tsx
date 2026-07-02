@@ -27,6 +27,8 @@ function getLocalizedHref(href: string, lang: Lang) {
 }
 
 function getDailyAiUpdatesHref(dailyAiUpdates: DailyAiUpdates) {
+  if (dailyAiUpdates.href) return dailyAiUpdates.href;
+
   const targetDate = dailyAiUpdates.officialDate ?? dailyAiUpdates.date;
 
   return targetDate ? `/ai-updates/${targetDate}` : '/ai-updates';
@@ -41,6 +43,20 @@ function getDailyAiUpdatesMeta(dailyAiUpdates: DailyAiUpdates, lang: Lang) {
   const checkedDate = formatAiUpdateDate(dailyAiUpdates.checkedDateKST);
 
   if (!officialDate) return '';
+
+  if (dailyAiUpdates.basis === 'global') {
+    const displayDate = checkedDate || formatAiUpdateDate(dailyAiUpdates.date);
+
+    if (lang === 'ko') {
+      return displayDate
+        ? `${displayDate} KST / ${officialDate} 글로벌 업데이트 기준`
+        : `${officialDate} 글로벌 업데이트 기준`;
+    }
+
+    return displayDate
+      ? `${displayDate} KST / ${officialDate} global update basis`
+      : `${officialDate} global update basis`;
+  }
 
   if (lang === 'ko') {
     return checkedDate

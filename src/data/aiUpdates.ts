@@ -138,7 +138,12 @@ export type AiUpdateBadge =
   | 'Pull Request Governance'
   | 'Supply Chain Security'
   | 'License Compliance'
-  | 'Not Main AI Update';
+  | 'Not Main AI Update'
+  | 'Media Generation'
+  | 'Creative Workflow'
+  | 'Risk Watch'
+  | 'Responsibility'
+  | 'Global Update';
 
 export interface AiUpdateItem {
   id: string;
@@ -202,9 +207,190 @@ export interface AiUpdateBriefingItem {
   cautionNote: string;
 }
 
-export const AI_UPDATES_MONTH = '2026.06';
+export const AI_UPDATES_MONTH = '2026.07';
 
 export const aiUpdateDays: AiUpdateDay[] = [
+  {
+    date: '2026-07-01',
+    checkedDateKST: '2026.07.02',
+    title: 'AI는 더 똑똑해지는 것이 아니라, 더 깊이 작업 안으로 들어오고 있다',
+    subtitle: '7월 1일 글로벌 AI 업데이트의 핵심은 모델 성능 경쟁이 아니다. Anthropic은 고성능 모델 접근과 보안 기준을 다시 조정했고, Google은 이미지와 영상을 하나의 제작 흐름으로 묶었으며, OpenAI를 둘러싼 소송은 AI가 사람의 판단과 감정에 얼마나 깊이 들어왔는지를 다시 묻고 있다.',
+    quickSummary: [
+      '접근/작업대: Fable 5 재배포와 Claude Sonnet 5, Claude Science 흐름은 고성능 AI가 접근 조건, 보안 기준, 개발자·연구자 작업 환경 안으로 들어가는 변화를 보여준다.',
+      '제작 흐름: Gemini Omni Flash는 텍스트, 이미지, 영상이 하나의 제작 흐름으로 이어지는 방향을 보여준다. 제작은 빨라지지만 메시지 검증은 여전히 사람의 일이다.',
+      '책임/위험: ChatGPT 관련 소송 이슈는 AI가 사용자의 판단과 감정에 깊이 관여할 때 안전장치와 검증 감각이 왜 필요한지 다시 묻는다.',
+    ],
+    groups: [
+      {
+        name: 'Anthropic Access / Policy',
+        intro: 'Fable 5 재배포는 단순한 모델 재출시가 아니라, 고성능 AI가 접근 권한과 보안 기준 안에서 운영되는 흐름으로 읽는다.',
+        updates: [
+          {
+            id: 'anthropic-fable-5-global-redeployment',
+            title: 'Anthropic Fable 5 재배포 — 누가 어떤 조건에서 강한 모델을 쓸 수 있는가',
+            officialDate: '2026.07.01',
+            checkedDateKST: '2026.07.02',
+            sourceType: 'Official Blog / Global Availability Follow-up',
+            officialSource: {
+              label: 'Anthropic — Redeploying Fable 5',
+              url: 'https://www.anthropic.com/news/redeploying-fable-5',
+            },
+            updateType: 'Model Access / Safety / Policy / Effective Change',
+            badges: ['Model Access', 'Safety', 'Policy', 'Effective Change', 'Official Source', 'Global Update'],
+            summary: 'Claude Fable 5는 7월 1일부터 글로벌 사용자에게 다시 제공되는 흐름으로 이어졌다. 이 항목은 단순한 모델 재출시가 아니라, 고성능 AI가 성능뿐 아니라 접근 권한, 수출 통제, 보안 평가, jailbreak 방어 기준과 함께 다뤄지고 있음을 보여준다.',
+            whatChanged: '6월 30일 발표된 Fable 5 재배포가 7월 1일 글로벌 사용자 제공 흐름으로 이어졌다. Mythos 5의 제한적 접근 복구와 구분해 기록해야 한다.',
+            whyItMatters: '좋은 모델이 나왔는지만으로는 충분하지 않다. 강한 모델일수록 누가, 어느 지역에서, 어떤 조건과 안전 기준 아래 사용할 수 있는지가 제품 경험의 일부가 된다.',
+            dechiveView: '좋은 모델이 나왔는지가 아니라, 누가 어떤 조건에서 그 모델을 쓸 수 있는지가 중요해지고 있다.',
+            readerTakeaway: '고성능 AI의 배포는 성능 경쟁이면서 동시에 접근 권한과 안전 기준의 문제다.',
+            screenMaterialStatus: '공식 블로그 화면 외 별도 제품 이미지는 필수 아님. 설명 이미지가 필요하면 “수출 통제 → 접근 중단 → 보안 기준 조정 → 글로벌 재배포” 흐름이 적합하다.',
+            cautionNote: 'Fable 5 재배포를 완전한 무조건 공개처럼 쓰지 않는다. 접근 조건, 정책 변화, 안전 기준과 함께 읽어야 한다.',
+          },
+        ],
+      },
+      {
+        name: 'Claude Workbench Flow',
+        intro: 'Claude Sonnet 5와 Claude Science는 AI가 채팅창을 넘어 개발자, 연구자, 기업의 실제 작업 환경 안으로 들어가는 흐름이다.',
+        updates: [
+          {
+            id: 'claude-sonnet-5-science-workflow',
+            title: 'Claude Sonnet 5 / Claude Science — AI는 답변창 밖의 작업 환경으로 이동한다',
+            officialDate: '2026.07.01 기준 흐름',
+            checkedDateKST: '2026.07.02',
+            sourceType: 'Official Blog / Product Flow',
+            officialSource: {
+              label: 'Anthropic News',
+              url: 'https://www.anthropic.com/news',
+            },
+            updateType: 'Agentic Model / AI Workbench / Developer Workflow / Research Tool',
+            badges: ['Agentic Model', 'AI Workbench', 'Developer Workflow', 'Research Tool', 'Official Source'],
+            summary: 'Claude Sonnet 5와 Claude Science는 AI가 채팅창에 머무는 것이 아니라 개발자, 연구자, 기업의 작업 환경 안으로 들어가는 흐름으로 묶어 볼 수 있다. Sonnet 5는 agentic model 흐름을 넓히고, Claude Science는 과학 연구 작업대를 베타로 제공한다.',
+            whatChanged: 'AI가 답변만 제공하는 인터페이스에서 벗어나 코드 환경, 연구 도구, 데이터 처리, 산출물 생성, 검증 가능한 작업 기록으로 확장되고 있다.',
+            whyItMatters: 'AI가 실제 작업 환경 안으로 들어오면 생산성만 볼 수 없다. 도구 권한, 실행 기록, 산출물 검증, 연구 재현성 같은 기준이 함께 중요해진다.',
+            dechiveView: 'AI는 더 이상 답변창에만 머물지 않는다. 개발자의 코드 환경, 연구자의 실험 환경, 기업의 업무 환경 안으로 들어가고 있다.',
+            readerTakeaway: 'AI를 쓴다는 말은 점점 “답변을 받는다”가 아니라 “작업 환경 안에 AI를 배치한다”는 뜻에 가까워지고 있다.',
+            screenMaterialStatus: 'Claude Sonnet 5와 Claude Science 공식 블로그의 화면/설명 자료를 참고할 수 있다. 통합 설명 이미지가 필요하면 “코드 환경 / 연구 환경 / 기업 업무 환경 → AI 작업대 → 산출물 검증” 구조가 적합하다.',
+            cautionNote: 'Claude Science가 과학 연구를 자동으로 완성한다고 쓰지 않는다. Sonnet 5도 모든 작업을 안전하게 자동 처리한다고 단정하지 않는다.',
+          },
+        ],
+      },
+      {
+        name: 'Google Creative Workflow',
+        intro: 'Gemini Omni Flash는 이미지와 영상을 별도 결과물이 아니라 하나의 제작 흐름으로 연결하는 방향으로 본다.',
+        updates: [
+          {
+            id: 'google-gemini-omni-flash-creative-flow',
+            title: 'Google Gemini Omni Flash — 이미지는 더 빨리 만들어지고, 영상은 더 쉽게 움직인다',
+            officialDate: '2026.07.01 글로벌 흐름 기준',
+            checkedDateKST: '2026.07.02',
+            sourceType: 'Product / Media Generation Watch',
+            officialSource: {
+              label: 'Google AI',
+              url: 'https://ai.google/',
+            },
+            updateType: 'Creative AI / Media Generation / Creative Workflow',
+            badges: ['Creative AI', 'Media Generation', 'Creative Workflow', 'Explanation Image Recommended'],
+            summary: 'Gemini Omni Flash 흐름은 텍스트와 이미지를 짧은 영상 제작 흐름으로 연결하는 방향으로 볼 수 있다. Threads 이미지, Shorts, 인트로 영상, 고정 이미지 영상화처럼 정적인 시각 자료가 움직이는 제작물로 이어지는 흐름과 연결된다.',
+            whatChanged: 'AI 제작 흐름이 “이미지 생성”과 “영상 생성”을 따로 보는 단계에서, 텍스트·이미지·영상 입력을 이어 붙이는 멀티모달 제작 흐름으로 이동하고 있다.',
+            whyItMatters: '제작 속도가 빨라질수록 결과물의 메시지, 맥락, 출처, 합성 여부를 확인하는 일이 더 중요해진다. 빠르게 움직이는 영상이 좋은 설명을 보장하지는 않는다.',
+            dechiveView: '이미지는 더 빨리 만들어지고, 영상은 더 쉽게 움직인다. 하지만 메시지가 선명한지는 여전히 사람이 검증해야 한다.',
+            readerTakeaway: 'AI 영상 제작의 핵심은 “만들 수 있다”가 아니라 “무엇을 전달했고, 무엇을 오해하게 만들 수 있는가”다.',
+            screenMaterialStatus: '공식 화면을 크게 나열하기보다 “텍스트/이미지 입력 → 짧은 영상 → Shorts/인트로/소셜 게시물 → 메시지 검증” 흐름의 설명 이미지가 적합하다.',
+            cautionNote: '이 항목은 7월 2일 당일 검증되지 않은 새 뉴스로 확장하지 않는다. 7월 1일 글로벌 흐름 기준의 제작 워크플로우 변화로 제한해 기록한다.',
+          },
+        ],
+      },
+      {
+        name: 'OpenAI Risk / Responsibility',
+        intro: 'OpenAI 관련 소송 보도는 자극적인 사건 요약이 아니라, AI가 판단과 감정에 깊이 관여할 때 생기는 검증과 안전의 문제로 다룬다.',
+        updates: [
+          {
+            id: 'openai-chatgpt-risk-responsibility-watch',
+            title: 'OpenAI 관련 책임/위험 이슈 — AI가 공감하는 것처럼 말할수록 더 쉽게 믿게 된다',
+            officialDate: '2026.07.01 보도 기준',
+            checkedDateKST: '2026.07.02',
+            sourceType: 'Risk Watch / Litigation Coverage',
+            officialSource: {
+              label: 'OpenAI Safety',
+              url: 'https://openai.com/safety/',
+            },
+            updateType: 'Risk Watch / Safety / Responsibility',
+            badges: ['Risk Watch', 'Safety', 'Responsibility', 'Explanation Image Recommended'],
+            summary: '7월 1일 보도된 ChatGPT 관련 소송 이슈는 자극적인 사건으로 소비하기보다, AI가 사용자의 판단과 감정에 깊이 관여할 때 어떤 검증과 안전 기준이 필요한지 묻는 기록으로 다룬다.',
+            whatChanged: 'AI 챗봇이 정보 검색 도구를 넘어 조언, 감정적 지지, 판단 보조 역할로 사용될 때 기업 책임과 사용자 안전의 경계가 다시 논의되고 있다.',
+            whyItMatters: 'AI가 공감하는 것처럼 말하면 사용자는 답변을 더 쉽게 믿을 수 있다. 특히 취약한 상황에서는 그럴듯한 언어가 판단을 보조하는 수준을 넘어 영향을 줄 수 있다.',
+            dechiveView: 'AI가 공감하는 것처럼 말할수록, 사용자는 더 쉽게 그것을 믿는다. 그래서 안전장치보다 먼저 필요한 것은 검증 감각이다.',
+            readerTakeaway: 'AI의 친절한 말투는 검증된 판단이 아니다. 감정과 판단이 걸린 문제일수록 멈춤 조건과 외부 확인이 필요하다.',
+            screenMaterialStatus: '사건 이미지를 쓰지 않는다. 설명 이미지가 필요하다면 “AI 응답 → 사용자 신뢰 → 판단 영향 → 멈춤/외부 검증” 흐름이 적합하다.',
+            cautionNote: '소송 보도를 선정적으로 다루지 않는다. 사실관계는 보도와 공식 입장 범위 안에서만 기록하고, Dechive에서는 검증 감각과 안전 기준의 문제로 정리한다.',
+          },
+        ],
+      },
+    ],
+    verificationNote: '이번 페이지는 2026.07.02 KST에 확인한 2026.07.01 글로벌 AI 업데이트 흐름 기록이다. 화면상 오늘 날짜는 2026.07.02이지만, 본문 기준은 글로벌 시차를 고려한 2026.07.01 업데이트다. 7월 2일 당일에 나온 뉴스나 아직 충분히 검증되지 않은 내용은 메인으로 넣지 않는다. 이번 페이지에서는 Anthropic Fable 5 재배포, Claude Sonnet 5 / Claude Science 작업 환경 흐름, Google Gemini Omni Flash 제작 흐름, OpenAI 관련 책임/위험 이슈를 서로 섞지 않는다. 특히 소송 이슈는 자극적 사건 요약이 아니라 AI가 판단과 감정에 깊이 들어올 때 필요한 검증 감각과 안전 기준의 문제로 다룬다.',
+    closingLine: 'AI가 더 많은 일을 대신할수록, 사람에게 남는 일은 사라지지 않는다. 무엇을 맡길지, 무엇을 믿을지, 어디서 멈춰 검증할지를 정하는 일이 더 중요해진다.',
+    updates: [
+      {
+        id: 'anthropic-fable-5-global-redeployment',
+        slug: 'anthropic-fable-5-global-redeployment',
+        title: 'Anthropic Access / Workbench',
+        summary: 'Fable 5 재배포와 Claude 작업대 흐름은 고성능 AI가 접근 조건, 보안 기준, 개발·연구 환경 안으로 들어가는 변화를 보여준다.',
+        badges: ['Model Access', 'Safety', 'AI Workbench', 'Official Source'],
+        detailHref: '/ai-updates/2026-07-01#anthropic-fable-5-global-redeployment',
+        source: {
+          label: 'Anthropic Official Source',
+          url: 'https://www.anthropic.com/news/redeploying-fable-5',
+          description: 'Fable 5 재배포와 Claude 작업 환경 흐름을 확인하는 공식 출처입니다.',
+        },
+        whatChanged: 'AI가 답변창 밖의 접근 정책, 개발 환경, 연구 작업대 안으로 이동하고 있다.',
+        useCriteria: '강한 모델은 성능뿐 아니라 접근 권한, 보안 평가, 실행 기록, 검증 기준과 함께 봐야 한다.',
+        verificationNotes: ['officialDate 2026.07.01 글로벌 흐름 기준', 'checkedDateKST 2026.07.02', 'Anthropic 접근 정책과 작업대 흐름으로 분류'],
+        image: {
+          status: 'limited',
+          caption: '공식 블로그 화면과 설명 이미지가 적합하다.',
+        },
+      },
+      {
+        id: 'google-gemini-omni-flash-creative-flow',
+        slug: 'google-gemini-omni-flash-creative-flow',
+        title: 'Gemini Omni Flash',
+        summary: '텍스트와 이미지를 짧은 영상 제작 흐름으로 연결하며, 빠른 제작 이후 메시지 검증의 중요성을 남긴다.',
+        badges: ['Creative AI', 'Media Generation', 'Creative Workflow'],
+        detailHref: '/ai-updates/2026-07-01#google-gemini-omni-flash-creative-flow',
+        source: {
+          label: 'Google AI',
+          url: 'https://ai.google/',
+          description: 'Gemini 기반 창작 흐름을 확인하는 Google 공식 진입점입니다.',
+        },
+        whatChanged: '이미지와 영상 제작이 별도 결과물이 아니라 하나의 멀티모달 제작 흐름으로 연결되고 있다.',
+        useCriteria: '이미지와 영상이 빨라질수록 메시지, 맥락, 합성 여부를 사람이 확인해야 한다.',
+        verificationNotes: ['officialDate 2026.07.01 글로벌 흐름 기준', 'checkedDateKST 2026.07.02', 'Creative Workflow로 분류'],
+        image: {
+          status: 'none',
+          caption: '텍스트/이미지 입력에서 짧은 영상으로 이어지는 설명 이미지가 적합하다.',
+        },
+      },
+      {
+        id: 'openai-chatgpt-risk-responsibility-watch',
+        slug: 'openai-chatgpt-risk-responsibility-watch',
+        title: 'OpenAI Risk / Responsibility',
+        summary: 'ChatGPT 관련 소송 이슈는 AI가 판단과 감정에 깊이 관여할 때 필요한 안전 기준과 검증 감각의 문제로 기록한다.',
+        badges: ['Risk Watch', 'Safety', 'Responsibility'],
+        detailHref: '/ai-updates/2026-07-01#openai-chatgpt-risk-responsibility-watch',
+        source: {
+          label: 'OpenAI Safety',
+          url: 'https://openai.com/safety/',
+          description: 'OpenAI의 안전 기준을 확인하는 공식 진입점입니다.',
+        },
+        whatChanged: 'AI 챗봇의 정서적·판단 보조 사용이 기업 책임과 사용자 안전 논의로 이어지고 있다.',
+        useCriteria: 'AI가 공감하는 말투로 답할수록 사용자는 더 쉽게 믿을 수 있으므로 멈춤 조건과 외부 검증이 필요하다.',
+        verificationNotes: ['officialDate 2026.07.01 보도 기준', 'checkedDateKST 2026.07.02', 'Risk Watch로 분류'],
+        image: {
+          status: 'none',
+          caption: '사건 이미지는 쓰지 않고 검증 흐름 설명 이미지가 적합하다.',
+        },
+      },
+    ],
+  },
   {
     date: '2026-06-30',
     checkedDateKST: '2026.07.01',

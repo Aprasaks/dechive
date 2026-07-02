@@ -10,11 +10,50 @@ export type DailyAiUpdates = {
   date: string;
   officialDate?: string;
   checkedDateKST?: string;
+  href?: string;
+  basis?: 'official' | 'global';
   label: LocalizedText;
   updates: DailyAiUpdateItem[];
 };
 
 export const dailyAiUpdates: DailyAiUpdates[] = [
+  {
+    date: '2026-07-02',
+    officialDate: '2026-07-01',
+    checkedDateKST: '2026-07-02',
+    href: '/ai-updates/2026-07-01',
+    basis: 'global',
+    label: {
+      ko: 'AI는 더 깊이 작업 안으로',
+      en: 'AI moves deeper into work',
+    },
+    updates: [
+      {
+        title: 'Anthropic Access / Workbench',
+        description: {
+          ko: 'Fable 5 재배포와 Sonnet 5, Claude Science는 고성능 AI가 접근 조건, 보안 기준, 개발·연구 환경 안으로 들어가는 흐름이다',
+          en: 'Fable 5 redeployment, Sonnet 5, and Claude Science show advanced AI moving into access rules, security criteria, and work environments',
+        },
+        href: '/ai-updates/2026-07-01#anthropic-fable-5-global-redeployment',
+      },
+      {
+        title: 'Gemini Omni Flash',
+        description: {
+          ko: '텍스트와 이미지는 짧은 영상 제작 흐름으로 연결된다. 이미지는 빨라지고 영상은 쉬워지지만, 메시지의 선명함은 사람이 검증해야 한다',
+          en: 'text and images connect into short video workflows; images get faster and video gets easier, but people still verify the message',
+        },
+        href: '/ai-updates/2026-07-01#google-gemini-omni-flash-creative-flow',
+      },
+      {
+        title: 'OpenAI Risk / Responsibility',
+        description: {
+          ko: 'ChatGPT 관련 소송 이슈는 AI가 판단과 감정에 깊이 관여할 때, 무엇을 믿고 어디서 멈춰 검증할지 다시 묻는다',
+          en: 'ChatGPT-related litigation asks what to trust and where to stop for verification when AI enters judgment and emotion',
+        },
+        href: '/ai-updates/2026-07-01#openai-chatgpt-risk-responsibility-watch',
+      },
+    ],
+  },
   {
     date: '2026-07-01',
     officialDate: '2026-06-30',
