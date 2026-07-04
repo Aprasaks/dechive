@@ -11,6 +11,9 @@ export type AiUpdateBadge =
   | 'Agentic Workflow'
   | 'Security / Governance'
   | 'Creative AI'
+  | 'AI Video'
+  | 'Generative Video'
+  | 'China AI'
   | 'MCP'
   | 'Platform Integration'
   | 'Documentation Update'
@@ -49,8 +52,14 @@ export type AiUpdateBadge =
   | 'Company Update'
   | 'Connectors'
   | 'Governance'
+  | 'Legal Framework'
+  | 'Human Oversight'
+  | 'Corporate Responsibility'
   | 'Admin Control'
   | 'Product Policy'
+  | 'Model Safety'
+  | 'Jailbreak Framework'
+  | 'Cyber Safeguards'
   | 'Model Selection'
   | 'Auto Routing'
   | 'Reliability Update'
@@ -62,11 +71,17 @@ export type AiUpdateBadge =
   | 'Research'
   | 'Global Affairs'
   | 'AI Jobs Transition'
+  | 'Labor Market'
+  | 'Workforce Shift'
+  | 'AI Hiring'
   | 'Planning Map'
   | 'Agentic Work'
   | 'AI Adoption'
   | 'Auto Mode'
   | 'Observability'
+  | 'Agent Observability'
+  | 'Session Streaming'
+  | 'REST API'
   | 'Jira'
   | 'Agent Sessions'
   | 'Code Review'
@@ -76,6 +91,8 @@ export type AiUpdateBadge =
   | 'Financial AI'
   | 'Effective Change'
   | 'Deprecation'
+  | 'Model Lifecycle'
+  | 'Model Deprecation'
   | 'Enterprise CMS'
   | 'Beta'
   | 'Feature Release'
@@ -127,12 +144,27 @@ export type AiUpdateBadge =
   | 'Model Availability'
   | 'IDE Integration'
   | 'Developer Workflow'
+  | 'AI Coding Tool'
+  | 'Compliance'
+  | 'Enterprise Security'
+  | 'US-China AI'
+  | 'AI Implementation'
+  | 'AI Engineering'
+  | 'Usage Metrics'
+  | 'Cost Attribution'
+  | 'Automation Security'
+  | 'GitHub Actions'
   | 'Benchmark'
   | 'Scientific Reasoning'
   | 'Engineering'
   | 'Infrastructure Debugging'
   | 'Cost Governance'
+  | 'AI Credits'
   | 'Usage Control'
+  | 'Managed Services'
+  | 'Data Center'
+  | 'Energy Demand'
+  | 'Physical Infrastructure'
   | 'Model Garden'
   | 'Agent Platform'
   | 'Pull Request Governance'
@@ -142,6 +174,10 @@ export type AiUpdateBadge =
   | 'Media Generation'
   | 'Creative Workflow'
   | 'Risk Watch'
+  | 'Reported Context'
+  | 'Reliable News'
+  | 'Market Watch'
+  | 'Capital Flow'
   | 'Responsibility'
   | 'Global Update';
 
@@ -210,6 +246,625 @@ export interface AiUpdateBriefingItem {
 export const AI_UPDATES_MONTH = '2026.07';
 
 export const aiUpdateDays: AiUpdateDay[] = [
+  {
+    date: '2026-07-03',
+    checkedDateKST: '2026.07.04',
+    title: 'AI가 자본, 노동, 법, 인프라의 문제로 번진 날',
+    subtitle: '오늘의 흐름은 공식 모델 출시보다 보도 기반 변화가 중심이다. Kling AI 투자 유치, 인도 IT 산업의 AI 채용 증가, 아르헨티나의 AI 운영 기업 법제 논의, Alibaba의 Claude Code 사용 금지 보도는 AI가 제품 업데이트를 넘어 자본, 노동, 책임, 기업 통제의 문제로 이동하고 있음을 보여준다.',
+    quickSummary: [
+      '자본/영상: Reuters는 Kuaishou의 Kling AI가 Alibaba, Tencent, Baidu 등이 참여한 대규모 투자를 받았다고 보도했다. AI 영상 생성은 제품 기능을 넘어 자본시장과 산업 인프라의 문제로 이동하고 있다.',
+      '노동/법/책임: 인도 IT 산업의 AI 채용 증가와 아르헨티나의 AI 운영 기업 법제 논의는 AI가 일자리 전체보다 역할 구조, 인간 감독, 법적 책임의 위치를 바꾸고 있음을 보여준다.',
+      '기업 보안/인프라: Alibaba의 Claude Code 사용 금지 보도, HCLTech의 AI-driven operating model 계약, Deutz의 AI 데이터센터 전력 수요 전망은 AI가 기업 통제, 운영 모델, 물리 인프라까지 확장되고 있음을 보여준다.',
+    ],
+    groups: [
+      {
+        name: 'AI Video / Capital Flow',
+        intro: 'AI 영상 생성은 단순한 생성 기능이 아니라 대형 플랫폼, 투자자, 유통 구조가 얽힌 산업 인프라로 평가받기 시작했다.',
+        updates: [
+          {
+            id: 'kuaishou-kling-ai-fundraise',
+            title: 'Kuaishou Kling AI 투자 유치 — AI 영상 생성은 자본시장과 산업 인프라로 이동한다',
+            officialDate: '2026.07.03 보도일',
+            checkedDateKST: '2026.07.04',
+            sourceType: 'Reliable News / Reuters / Reported Market Watch',
+            officialSource: {
+              label: "Reuters — Alibaba, Tencent back Kuaishou's Kling AI in $2.8 billion fundraise",
+              url: 'https://www.reuters.com/world/china/alibaba-tencent-back-kuaishous-kling-ai-28-billion-fundraise-2026-07-03/',
+            },
+            updateType: 'AI Video / Generative Video / Capital Flow / China AI',
+            badges: ['Reported Context', 'Reliable News', 'Market Watch', 'Capital Flow', 'AI Video', 'Generative Video', 'China AI', 'Explanation Image Recommended'],
+            summary: 'Reuters는 Kuaishou의 AI 비디오 부문 Kling AI가 Alibaba, Tencent, Baidu 등이 참여한 투자로 190억 위안 이상을 유치했다고 보도했다. 보도에 따르면 Kling AI의 사전 기업가치는 150억 달러로 평가됐고, Kuaishou의 지분은 100%에서 약 68%로 낮아진다.',
+            whatChanged: 'AI 영상 생성 서비스가 단순 제품 기능을 넘어 대형 플랫폼 기업과 자본시장이 참여하는 독립적 산업 단위로 평가받기 시작했다.',
+            whyItMatters: 'AI 영상 생성은 콘텐츠 제작 도구를 넘어 컴퓨팅, 데이터, 플랫폼 유통, 투자 구조가 결합된 산업 인프라가 되고 있다.',
+            dechiveView: 'Dechive는 AI 영상 생성 품질만 보지 않는다. 누가 그 인프라에 투자하고, 누가 소유권을 가져가며, 어떤 플랫폼이 영상 생성 생태계를 장악하는지까지 봐야 한다. AI 생성 기술의 힘은 모델 성능뿐 아니라 자본과 유통 구조에서 나온다.',
+            readerTakeaway: 'AI 영상 생성은 이제 재미있는 생성 도구가 아니라 대규모 자본이 들어가는 산업 인프라가 되고 있다.',
+            screenMaterialStatus: 'Reuters 보도 기반 항목이므로 공식 제품 화면은 필수 아님. 설명 이미지가 필요하다면 “AI video model → platform company → investment → content infrastructure” 흐름이 적합하다.',
+            cautionNote: 'Kling AI가 AI 영상 시장을 장악했다고 단정하지 않는다. Reuters 보도에 따른 투자 유치와 기업가치 평가로 제한한다.',
+          },
+        ],
+      },
+      {
+        name: 'AI Labor Market / Workforce Shift',
+        intro: 'AI 노동시장 변화는 일자리 전체가 한 방향으로 움직인다는 단순한 이야기보다, 어떤 역할과 역량이 재배치되는지를 봐야 한다.',
+        updates: [
+          {
+            id: 'india-it-ai-hiring-workforce-shift',
+            title: '인도 IT 산업 AI 채용 증가 — AI는 일자리 전체보다 역할 구조를 바꾼다',
+            officialDate: '2026.07.03 보도일',
+            checkedDateKST: '2026.07.04',
+            sourceType: 'Reliable News / Reuters / Reported Labor Market',
+            officialSource: {
+              label: 'Reuters — AI hiring outpaces overall IT recruitment in India, report shows',
+              url: 'https://www.reuters.com/world/india/ai-hiring-outpaces-overall-it-recruitment-india-report-shows-2026-07-03/',
+            },
+            updateType: 'AI Labor Market / Workforce Shift / AI Hiring',
+            badges: ['Reported Context', 'Reliable News', 'Labor Market', 'Workforce Shift', 'AI Hiring', 'Explanation Image Recommended'],
+            summary: 'Reuters는 인도 IT 산업에서 전체 IT 채용은 줄었지만 AI 관련 채용은 전년 대비 증가했다고 보도했다. 보도에 따르면 6월 기준 인도 IT 산업의 AI 관련 채용은 전년 대비 16% 증가했고, 전체 IT 채용은 3% 감소했다. 전체 14개 산업 기준으로는 AI·머신러닝 채용이 25% 증가했다.',
+            whatChanged: 'AI가 기존 IT 채용 전체를 단순히 늘리는 것이 아니라, 채용 수요를 AI 역량 중심으로 재배치하는 흐름이 확인됐다.',
+            whyItMatters: 'AI 시대의 노동시장 변화는 “일자리가 사라진다”만으로 설명할 수 없다. 어떤 역할은 줄고, 어떤 역량은 더 요구되며, 기업은 더 적은 인력으로 더 많은 성과를 내려 한다.',
+            dechiveView: 'Dechive는 AI 일자리 논쟁을 공포나 낙관으로 단순화하지 않는다. 검증해야 할 것은 전체 채용 숫자만이 아니라, 어떤 직무가 줄고 어떤 역량이 늘며, AI가 조직의 인력 구조를 어떻게 바꾸는가다.',
+            readerTakeaway: 'AI는 일자리를 한 방향으로만 줄이는 것이 아니라, 어떤 역량이 필요한지를 다시 정렬하고 있다.',
+            screenMaterialStatus: 'Reuters 보도 기반 항목이므로 공식 제품 화면 없음. 설명 이미지가 필요하다면 “overall IT hiring ↓ / AI hiring ↑ / role shift” 구조가 적합하다.',
+            cautionNote: 'AI가 인도 IT 일자리를 모두 대체한다고 쓰지 않는다. 보도된 채용 변화와 역할 재편 흐름으로 제한한다.',
+          },
+        ],
+      },
+      {
+        name: 'AI Governance / Legal Framework',
+        intro: 'AI가 기업 운영 의사결정에 들어갈수록, 법은 자동화보다 인간 감독과 책임의 위치를 다시 묻는다.',
+        updates: [
+          {
+            id: 'argentina-ai-run-companies-human-oversight',
+            title: '아르헨티나 AI 운영 기업 법제 논의 — 자동화가 깊어질수록 인간 책임은 사라지지 않는다',
+            officialDate: '2026.07.03 보도일',
+            checkedDateKST: '2026.07.04',
+            sourceType: 'Reliable News / Reuters / Analysis',
+            officialSource: {
+              label: "Reuters — Argentina's plan for AI-run companies can't avoid humans",
+              url: 'https://www.reuters.com/world/americas/argentinas-plan-ai-run-companies-cant-avoid-humans-2026-07-03/',
+            },
+            updateType: 'AI Governance / Legal Framework / Human Oversight / Corporate Responsibility',
+            badges: ['Reported Context', 'Reliable News', 'Governance', 'Legal Framework', 'Human Oversight', 'Corporate Responsibility', 'Explanation Image Recommended'],
+            summary: 'Reuters는 아르헨티나의 AI 운영 기업 법제 논의를 다뤘다. 겉으로는 AI-run company처럼 보일 수 있지만, 실제 법안은 인간 관리자의 감독과 회사 책임을 남기는 구조로 설명된다.',
+            whatChanged: 'AI가 기업 운영 의사결정에 들어가는 법적 구조가 논의되기 시작했지만, 인간 감독과 법적 책임은 여전히 핵심 조건으로 남아 있다.',
+            whyItMatters: 'AI 자동화가 깊어질수록 “누가 결정했는가”보다 “누가 감독하고 책임지는가”가 더 중요해진다. 법제도는 AI를 독립된 책임 주체로 쉽게 넘기지 않는다.',
+            dechiveView: 'AI가 회사를 운영한다는 말은 자극적이지만, Dechive가 봐야 할 것은 자동화의 매력이 아니라 책임의 위치다. AI가 의사결정에 들어갈수록 인간 감독, 법적 책임, 피해 구제 구조를 더 명확히 검증해야 한다.',
+            readerTakeaway: 'AI가 기업 운영에 들어가도 책임은 사라지지 않는다. 인간 감독은 여전히 핵심 조건이다.',
+            screenMaterialStatus: 'Reuters 분석 보도 기반 항목이므로 공식 제품 화면 없음. 설명 이미지가 필요하다면 “AI operation → human administrator → legal responsibility → accountability” 흐름이 적합하다.',
+            cautionNote: '아르헨티나가 완전한 AI-run company를 허용했다고 단정하지 않는다. Reuters 보도에 따른 법제 논의와 인간 감독 조건으로 제한한다.',
+          },
+        ],
+      },
+      {
+        name: 'AI Coding Tool / Compliance',
+        intro: 'AI 코딩 도구는 생산성 도구이면서 동시에 기업 보안, 접근 제한, 지정학 리스크의 대상이 되고 있다.',
+        updates: [
+          {
+            id: 'alibaba-claude-code-ban-compliance',
+            title: 'Alibaba의 Claude Code 사용 금지 보도 — AI 코딩 도구는 보안과 지정학의 문제가 된다',
+            officialDate: '2026.07.03 보도일',
+            checkedDateKST: '2026.07.04',
+            sourceType: 'Reliable News / Reuters / Reported Context',
+            officialSource: {
+              label: "Reuters — Alibaba to ban employees from using Anthropic's coding tool, source says",
+              url: 'https://www.reuters.com/world/china/alibaba-ban-claude-code-workplace-over-alleged-backdoor-risks-source-says-2026-07-03/',
+            },
+            updateType: 'AI Coding Tool / Compliance / Enterprise Security / US-China AI',
+            badges: ['Reported Context', 'Reliable News', 'AI Coding Tool', 'Compliance', 'Enterprise Security', 'US-China AI', 'Explanation Image Recommended'],
+            summary: 'Reuters는 Alibaba가 직원들에게 Anthropic의 Claude Code 사용을 금지하기로 했다고 보도했다. 보도는 소식통을 인용했으며, Claude Code의 중국 관련 사용자 식별 기능과 Anthropic·Alibaba 간의 모델 capability distillation 갈등이 배경으로 언급됐다.',
+            whatChanged: 'AI 코딩 도구가 단순 생산성 도구가 아니라 기업 보안, 접근 제한, 사용자 식별, 국가 간 AI 경쟁과 연결된 도구로 다뤄지고 있다.',
+            whyItMatters: '개발자가 쓰는 AI 도구에는 코드와 업무 맥락, 실행 환경 정보가 들어갈 수 있다. 기업은 생산성뿐 아니라 데이터 흐름, 도구의 감지 기능, 공급자와의 정책 갈등도 고려해야 한다.',
+            dechiveView: 'AI 코딩 도구를 쓸 때 중요한 것은 “코드를 얼마나 잘 써주느냐”만이 아니다. 어떤 환경 정보를 읽는지, 어떤 사용자를 제한하는지, 기업 내부 보안 정책과 충돌하는지까지 검증해야 한다. AI 도구는 생산성 도구이면서 동시에 정책과 보안의 대상이다.',
+            readerTakeaway: 'AI 코딩 도구는 생산성만이 아니라 보안, 접근권, 지정학 리스크까지 함께 봐야 한다.',
+            screenMaterialStatus: 'Reuters 보도 기반 항목이므로 공식 제품 화면 없음. 설명 이미지가 필요하다면 “developer tool → environment detection → enterprise policy → geopolitical risk” 흐름이 적합하다.',
+            cautionNote: 'Alibaba와 Anthropic의 입장을 공식 발표처럼 단정하지 않는다. Reuters가 소식통을 인용해 보도한 항목임을 명확히 한다.',
+          },
+        ],
+      },
+      {
+        name: 'Enterprise AI Services',
+        intro: '기업 AI는 개별 기능 도입을 넘어 운영 모델 전환과 관리형 서비스 계약으로 확장되고 있다.',
+        updates: [
+          {
+            id: 'hcltech-ai-driven-operating-model-deal',
+            title: 'HCLTech AI-driven operating model 계약 — 기업 AI는 운영 모델 전환 계약으로 확장된다',
+            officialDate: '2026.07.03 보도일',
+            checkedDateKST: '2026.07.04',
+            sourceType: 'Reliable News / Reuters / Reported Business',
+            officialSource: {
+              label: "Reuters — India's HCLTech wins $1.14 billion deal with European firm",
+              url: 'https://www.reuters.com/business/indias-hcltech-wins-114-billion-deal-with-european-firm-2026-07-03/',
+            },
+            updateType: 'Enterprise AI Services / AI Operating Model / Managed Services',
+            badges: ['Reported Context', 'Reliable News', 'Enterprise AI', 'AI Operating Model', 'Managed Services', 'Explanation Image Recommended'],
+            summary: 'Reuters는 HCLTech가 유럽 기업과 11.4억 달러 규모 계약을 체결했다고 보도했다. 보도에 따르면 이 계약은 글로벌 디지털 워크플레이스와 엔터프라이즈 네트워크를 AI-driven operating model로 전환하고 관리하는 내용을 포함한다.',
+            whatChanged: '기업 AI가 단순 소프트웨어 기능 도입을 넘어 운영 모델 전환과 관리형 서비스 계약으로 확장되는 흐름이 확인됐다.',
+            whyItMatters: '대기업의 AI 도입은 내부 업무 프로세스, 네트워크 운영, 디지털 워크플레이스, 관리형 서비스와 결합될 수 있다.',
+            dechiveView: '이 항목은 메인보다 보조 흐름에 가깝다. 그러나 기업 AI가 “모델을 쓰는 일”이 아니라 운영 모델 전체를 바꾸는 계약으로 이동하고 있다는 점은 기록할 가치가 있다.',
+            readerTakeaway: '기업 AI는 기능 도입을 넘어 운영 모델 전환과 장기 서비스 계약으로 확장되고 있다.',
+            screenMaterialStatus: '보도 기반 항목이므로 공식 제품 화면 없음. 설명 이미지가 필요하다면 “enterprise workplace → network operations → AI-driven operating model → managed service” 흐름이 적합하다.',
+            cautionNote: 'HCLTech 계약이 모든 기업 AI 도입의 표준이라고 쓰지 않는다. 특정 기업 계약 사례로 제한하고 보조 항목으로 다룬다.',
+          },
+        ],
+      },
+      {
+        name: 'AI Infrastructure / Data Center Energy',
+        intro: 'AI 수요는 모델과 소프트웨어를 넘어 데이터센터 전력, 백업 시스템, 물리 인프라 투자로 이어지고 있다.',
+        updates: [
+          {
+            id: 'deutz-ai-data-center-energy-demand',
+            title: 'Deutz AI 데이터센터 전력 수요 — AI는 물리 인프라 수요까지 밀어 올린다',
+            officialDate: '2026.07.03 보도일',
+            checkedDateKST: '2026.07.04',
+            sourceType: 'Reliable News / Reuters / Reported Infrastructure',
+            officialSource: {
+              label: "Reuters — Germany's Deutz expects to triple energy unit revenue on AI-driven demand",
+              url: 'https://www.reuters.com/business/energy/germanys-deutz-expects-triple-energy-unit-revenue-ai-driven-demand-2026-07-03/',
+            },
+            updateType: 'AI Infrastructure / Data Center Energy / Physical Infrastructure',
+            badges: ['Reported Context', 'Reliable News', 'Infrastructure', 'Data Center', 'Energy Demand', 'Physical Infrastructure', 'Explanation Image Recommended'],
+            summary: 'Reuters는 독일 Deutz가 AI와 데이터센터 수요 증가로 백업 전력 시스템 투자가 늘면서 에너지 사업 매출을 5년 안에 10억 유로 이상으로 키우려 한다고 보도했다.',
+            whatChanged: 'AI 수요가 모델과 소프트웨어를 넘어 데이터센터 전력, 백업 시스템, 안정적 전력 공급 수요로 이어지는 흐름이 확인됐다.',
+            whyItMatters: 'AI 서비스는 24시간 안정적인 컴퓨팅과 전력을 필요로 한다. 모델 성능 뒤에는 데이터센터, 전력, 냉각, 백업 시스템 같은 물리 인프라가 있다.',
+            dechiveView: 'AI 검증은 더 이상 모델 성능만의 문제가 아니다. AI를 돌리는 전력과 인프라가 얼마나 안정적이고 지속 가능한지도 함께 봐야 한다. AI의 비용은 구독료가 아니라 전력과 데이터센터 구조에도 숨어 있다.',
+            readerTakeaway: 'AI는 화면 속 모델만이 아니라 데이터센터와 전력 인프라 수요까지 바꾸고 있다.',
+            screenMaterialStatus: '보도 기반 항목이므로 공식 제품 화면 없음. 설명 이미지가 필요하다면 “AI demand → data center → backup power → energy business” 흐름이 적합하다.',
+            cautionNote: 'Deutz가 AI 기업이라고 쓰지 않는다. AI와 데이터센터 수요로 인한 전력 인프라 파급 효과로 다룬다.',
+          },
+        ],
+      },
+      {
+        name: 'Low Priority / Excluded',
+        intro: 'AI 카테고리에 걸릴 수 있어도 이번 페이지의 reportDate와 핵심 흐름에 맞지 않거나 직접성이 낮은 항목은 제외한다.',
+        updates: [
+          {
+            id: 'india-tata-data-leak-excluded',
+            title: 'India Tata data leak — AI Updates 메인에서 제외',
+            officialDate: '2026.07.03 검토 항목',
+            checkedDateKST: '2026.07.04',
+            sourceType: 'Verification Note / Excluded',
+            updateType: 'Data Leak / Supply Chain / Not Main AI Update',
+            badges: ['Needs Date Verification', 'Not Main AI Update', 'Security / Governance'],
+            summary: '핵심은 데이터 유출, 공급망, 제조 기밀 이슈에 가깝다. AI Updates 메인 흐름과 직접성이 낮으면 제외한다.',
+            whatChanged: '이번 날짜의 AI 자본, 노동, 법, 기업 보안, 인프라 흐름과 직접 연결되지 않는 항목으로 분류했다.',
+            whyItMatters: 'AI Updates는 넓은 기술 뉴스 전체가 아니라 AI 변화가 만드는 검증 기준을 기록하는 페이지다.',
+            dechiveView: '보안 이슈라도 AI 운영, 모델, 도구, 거버넌스와 직접 연결되지 않으면 메인 항목으로 올리지 않는다.',
+            readerTakeaway: 'AI Updates에는 AI 검증 기준과 직접 연결되는 항목만 메인으로 남긴다.',
+            screenMaterialStatus: '공식 화면 없음. 별도 설명 이미지 불필요.',
+            cautionNote: 'AI와 직접 연결되지 않은 보안/공급망 이슈를 AI 업데이트처럼 확대하지 않는다.',
+          },
+          {
+            id: 'china-low-cost-ai-model-analysis-excluded',
+            title: 'Reuters 중국 저비용 AI 모델 분석 — 이번 2026.07.03 메인에서 제외',
+            officialDate: '2026.07.02 보도일',
+            checkedDateKST: '2026.07.04',
+            sourceType: 'Reliable News / Date Mismatch / Excluded',
+            updateType: 'Reported Context / Date Mismatch',
+            badges: ['Reliable News', 'Date Discrepancy', 'Not Main AI Update'],
+            summary: '2026.07.02 보도이므로 2026.07.02 페이지 또는 별도 analysis context에 더 적합하다. 이번 2026.07.03 페이지 메인으로 반복하지 않는다.',
+            whatChanged: '날짜 기준과 중복 방지 원칙에 따라 이번 페이지 메인 항목에서 제외했다.',
+            whyItMatters: '날짜별 아카이브는 같은 흐름을 반복하기보다 기준일에 맞는 새 항목을 기록해야 한다.',
+            dechiveView: 'Dechive는 흥미로운 보도라도 reportDate와 페이지 기준이 맞지 않으면 메인으로 끌어오지 않는다.',
+            readerTakeaway: '날짜 기준은 업데이트 검증의 일부다.',
+            screenMaterialStatus: '공식 화면 없음. 별도 설명 이미지 불필요.',
+            cautionNote: '이전 날짜 항목을 2026.07.03 메인 흐름처럼 반복하지 않는다.',
+          },
+          {
+            id: 'general-business-market-reactions-excluded',
+            title: '일반 기업 계약/주가 반응 — 직접 연결되지 않으면 Low Priority',
+            officialDate: '2026.07.03 검토 항목',
+            checkedDateKST: '2026.07.04',
+            sourceType: 'Verification Note / Low Priority',
+            updateType: 'Business News / Low Priority',
+            badges: ['Market Watch', 'Not Main AI Update'],
+            summary: 'AI 운영 모델, AI 인프라, 노동시장 변화와 직접 연결되지 않으면 Low Priority로 둔다.',
+            whatChanged: '이번 페이지의 핵심 흐름과 직접 연결되는 항목만 메인으로 남겼다.',
+            whyItMatters: 'AI라는 단어가 포함된 일반 기업 뉴스와 AI 검증 아카이브의 핵심 기록은 구분해야 한다.',
+            dechiveView: 'Dechive는 주가 반응보다 AI가 어떤 검증 문제를 만드는지를 우선 기록한다.',
+            readerTakeaway: 'AI Updates의 기준은 화제성이 아니라 검증 가능성과 구조적 의미다.',
+            screenMaterialStatus: '공식 화면 없음. 별도 설명 이미지 불필요.',
+            cautionNote: 'AI와 직접 연결되지 않은 일반 기업 뉴스를 메인 AI 업데이트로 과장하지 않는다.',
+          },
+        ],
+      },
+    ],
+    verificationNote: '이번 페이지는 2026.07.04 KST에 확인한 reportDate 2026.07.03 AI 변화 기록이다. 오늘은 공식 모델 출시보다 보도 기반 흐름이 중심이다. Kling AI 투자 유치, 인도 IT 산업의 AI 채용 증가, 아르헨티나의 AI 운영 기업 법제 논의, Alibaba의 Claude Code 사용 금지 보도는 AI가 자본시장, 노동시장, 법제도, 기업 보안의 문제로 이동하고 있음을 보여준다.\n\n이번 페이지에서는 보도 기반 항목을 공식 업데이트처럼 쓰지 않는다. Reuters 보도 항목은 Reported Context, Market Watch, Governance Watch, Labor Market, Infrastructure Watch로 분리한다.\n\n특히 아르헨티나 AI 운영 기업 항목은 “AI가 회사를 완전히 운영한다”가 아니라, 인간 감독과 법적 책임이 여전히 남아 있다는 점을 중심으로 다룬다. Alibaba Claude Code 항목은 공식 발표가 아니라 Reuters가 소식통을 인용한 보도이므로 단정하지 않는다. Deutz 항목은 AI 기업 업데이트가 아니라 AI 데이터센터 수요가 물리 인프라와 전력 시장에 미치는 파급 효과로 다룬다.',
+    closingLine: 'AI는 더 이상 모델 업데이트만으로 설명되지 않는다. 자본은 생성 인프라로 이동하고, 노동시장은 AI 역량 중심으로 재편되며, 법은 인간 감독과 책임의 위치를 다시 묻기 시작했다. Dechive는 그 변화가 얼마나 빠른지보다, 그 변화가 무엇을 검증하게 만드는지 기록한다.',
+    updates: [
+      {
+        id: 'kuaishou-kling-ai-fundraise-summary',
+        slug: 'kuaishou-kling-ai-fundraise',
+        title: 'Kuaishou Kling AI 투자 유치',
+        summary: 'Reuters는 Kling AI가 대형 플랫폼 기업이 참여한 투자로 자본시장과 AI 영상 인프라의 중심에 놓였다고 보도했다.',
+        badges: ['Reported Context', 'Reliable News', 'Market Watch', 'Capital Flow', 'AI Video'],
+        detailHref: '/ai-updates/2026-07-03#kuaishou-kling-ai-fundraise',
+        source: {
+          label: "Reuters — Alibaba, Tencent back Kuaishou's Kling AI in $2.8 billion fundraise",
+          url: 'https://www.reuters.com/world/china/alibaba-tencent-back-kuaishous-kling-ai-28-billion-fundraise-2026-07-03/',
+          description: 'Kling AI 투자 유치와 기업가치 평가 보도',
+        },
+        whatChanged: 'AI 영상 생성이 독립적 산업 단위와 투자 대상으로 평가받는 흐름이 확인됐다.',
+        useCriteria: 'AI 영상 생성을 자본시장, 플랫폼 유통, 산업 인프라 관점으로 설명할 때 사용한다.',
+        verificationNotes: ['reportDate 2026.07.03 기준 Reuters 보도', '시장 장악이나 산업 완성으로 단정하지 않는다.'],
+        image: {
+          status: 'none',
+          caption: 'Reuters 보도 기반 항목. 공식 제품 화면은 필수 아님.',
+        },
+      },
+      {
+        id: 'india-it-ai-hiring-summary',
+        slug: 'india-it-ai-hiring-workforce-shift',
+        title: '인도 IT 산업 AI 채용 증가',
+        summary: '전체 IT 채용은 줄어도 AI 관련 채용은 늘었다는 보도는 노동시장이 AI 역량 중심으로 재편되는 흐름을 보여준다.',
+        badges: ['Reported Context', 'Reliable News', 'Labor Market', 'Workforce Shift', 'AI Hiring'],
+        detailHref: '/ai-updates/2026-07-03#india-it-ai-hiring-workforce-shift',
+        source: {
+          label: 'Reuters — AI hiring outpaces overall IT recruitment in India, report shows',
+          url: 'https://www.reuters.com/world/india/ai-hiring-outpaces-overall-it-recruitment-india-report-shows-2026-07-03/',
+          description: '인도 IT 산업 채용 구조 변화 보도',
+        },
+        whatChanged: 'AI 관련 채용 증가와 전체 IT 채용 감소가 동시에 보도됐다.',
+        useCriteria: 'AI 노동시장 변화를 일자리 총량보다 역할과 역량 재배치로 설명할 때 사용한다.',
+        verificationNotes: ['reportDate 2026.07.03 기준 Reuters 보도', 'AI가 모든 IT 일자리를 대체한다는 표현은 피한다.'],
+        image: {
+          status: 'none',
+          caption: 'Reuters 보도 기반 항목. 설명 이미지가 필요하면 역할 구조 변화를 보여주는 도식이 적합하다.',
+        },
+      },
+      {
+        id: 'ai-governance-security-infrastructure-summary',
+        slug: 'ai-governance-security-infrastructure',
+        title: 'AI governance / security / infrastructure watch',
+        summary: '아르헨티나 법제 논의, Alibaba Claude Code 사용 금지 보도, HCLTech 운영 모델 계약, Deutz 전력 수요 전망은 AI가 책임, 기업 통제, 운영 모델, 물리 인프라로 확장되는 흐름이다.',
+        badges: ['Reported Context', 'Governance', 'Enterprise Security', 'AI Operating Model', 'Infrastructure'],
+        detailHref: '/ai-updates/2026-07-03#argentina-ai-run-companies-human-oversight',
+        source: {
+          label: 'Reuters — 2026.07.03 governance, compliance, infrastructure reports',
+          url: 'https://www.reuters.com/',
+          description: '2026.07.03 Reuters 보도 기반 governance / compliance / infrastructure 흐름 묶음',
+        },
+        whatChanged: 'AI가 모델 업데이트를 넘어 법적 책임, 기업 보안, 운영 모델, 전력 인프라와 연결되는 흐름이 확인됐다.',
+        useCriteria: 'AI를 제품 기능이 아니라 책임 구조와 물리 인프라의 문제로 설명할 때 사용한다.',
+        verificationNotes: ['각 상세 항목의 Reuters canonical URL을 기준으로 확인한다.', '공식 발표가 아닌 보도 기반 항목임을 명확히 한다.'],
+        image: {
+          status: 'none',
+          caption: '보도 기반 묶음. 공식 제품 화면보다 설명 도식이 적합하다.',
+        },
+      },
+    ],
+  },
+  {
+    date: '2026-07-02',
+    checkedDateKST: '2026.07.03',
+    title: 'AI가 안전 프레임워크, 기업 구현, 개발자 도구 운영 통제 안으로 들어간 날',
+    subtitle: '오늘의 공식 업데이트는 Fable 5의 사이버 safeguard와 jailbreak 평가 기준, Microsoft Frontier Company의 기업 AI 구현 전략, GitHub Copilot의 에이전트 세션 관측·모델 생명주기·사용량 측정·비용 통제 흐름이 중심이다. 보도 기반 항목에서는 OpenAI의 정부 지분 논의와 Meta의 AI agent 개발 속도 이슈를 별도로 분리해 본다.',
+    quickSummary: [
+      '안전/정책: Anthropic은 Fable 5의 사이버 safeguard와 jailbreak severity framework를 공개하며, 강력한 모델을 신뢰하려면 성능뿐 아니라 차단 기준과 우회 시도 평가 기준을 함께 봐야 함을 보여줬다.',
+      '기업 구현: Microsoft Frontier Company는 AI 도입이 도구 구독이 아니라 기업 데이터, 업무 흐름, 보안, 거버넌스, ROI 관리까지 포함하는 구현 문제로 이동했음을 보여준다.',
+      '개발자 운영: GitHub Copilot 업데이트들은 agent session streaming, model deprecation, usage metrics, Actions 인증, AI credit pool을 통해 AI 개발 도구가 관측·생명주기·비용 통제 안으로 들어가는 흐름을 보여준다.',
+      '보도 기반 흐름: OpenAI 정부 지분 논의와 Meta agent 개발 속도 이슈는 공식 업데이트가 아니라 Reuters 보도 기반의 governance / market watch로 분리해 기록한다.',
+    ],
+    groups: [
+      {
+        name: 'Anthropic Safety / Model Policy',
+        intro: 'Fable 5 항목은 모델 성능 업데이트가 아니라, 강력한 모델을 배포할 때 safeguard와 jailbreak 평가 기준을 어떻게 설명하는지에 초점을 둔다.',
+        updates: [
+          {
+            id: 'anthropic-fable-5-safeguards-jailbreak-framework',
+            title: 'Anthropic Fable 5 safeguards — 강력한 모델은 jailbreak 기준까지 설명해야 한다',
+            officialDate: '2026.07.02',
+            checkedDateKST: '2026.07.03',
+            sourceType: 'Official Blog / Safety Update',
+            officialSource: {
+              label: "Anthropic 공식 블로그 — More details on Fable 5's cyber safeguards and our jailbreak framework",
+              url: 'https://www.anthropic.com/news/fable-safeguards-jailbreak-framework',
+            },
+            updateType: 'Model Safety / Cyber Safeguards / Jailbreak Framework',
+            badges: ['Model Safety', 'Jailbreak Framework', 'Cyber Safeguards', 'Policy', 'Official Source', 'Explanation Image Recommended'],
+            summary: 'Anthropic은 Fable 5의 사이버 보안 safeguard와 jailbreak severity framework를 공개했다. Fable 5가 글로벌 사용자에게 다시 제공되는 상황에서, Anthropic은 사이버 보안 요청을 어떻게 다루는지와 jailbreak 시도의 심각도를 어떻게 평가할 수 있는지 설명했다.',
+            whatChanged: 'Fable 5의 제공 여부만이 아니라, 강력한 모델을 배포할 때 어떤 safeguard가 붙고 어떤 jailbreak를 얼마나 위험하게 볼 것인지에 대한 기준이 공개됐다.',
+            whyItMatters: '고성능 모델은 더 넓은 작업을 도울 수 있지만, 동시에 위험한 요청을 더 강하게 수행할 수도 있다. 따라서 모델 성능만이 아니라 safeguard, 차단 기준, 우회 시도 평가 기준이 신뢰의 일부가 된다.',
+            dechiveView: '이 항목의 핵심은 “Fable 5가 다시 제공된다”가 아니다. 강력한 AI 모델을 믿으려면 모델이 무엇을 할 수 있는지뿐 아니라, 무엇을 막고 어떤 우회 시도를 위험으로 분류하는지도 함께 봐야 한다. Dechive는 모델 성능보다 검증 가능한 안전 기준을 더 중요하게 기록해야 한다.',
+            readerTakeaway: '강력한 모델일수록 성능표보다 safeguard와 jailbreak 평가 기준을 함께 봐야 한다.',
+            screenMaterialStatus: '공식 블로그 화면 참고 가능. 별도 제품 화면이 없으면 “모델 요청 → safeguard 판단 → jailbreak severity 평가 → 허용/차단” 흐름의 설명 이미지가 적합하다.',
+            cautionNote: 'Fable 5가 완전히 안전하다고 쓰지 않는다. Anthropic이 공개한 safeguard와 jailbreak framework를 설명한 것으로 제한한다.',
+          },
+        ],
+      },
+      {
+        name: 'Microsoft Enterprise AI Implementation',
+        intro: 'Microsoft Frontier Company는 기업 AI가 모델 선택보다 구현, 보안, 거버넌스, 성과 관리의 문제로 이동하고 있음을 보여준다.',
+        updates: [
+          {
+            id: 'microsoft-frontier-company-ai-engineering',
+            title: 'Microsoft Frontier Company — 기업 AI는 구현과 운영의 문제가 되다',
+            officialDate: '2026.07.02',
+            checkedDateKST: '2026.07.03',
+            sourceType: 'Official Blog / Enterprise AI',
+            officialSource: {
+              label: 'Microsoft 공식 블로그 — Microsoft Frontier Company: AI engineering that amplifies and protects your intelligence',
+              url: 'https://blogs.microsoft.com/blog/2026/07/02/microsoft-frontier-company-ai-engineering-that-amplifies-and-protects-your-intelligence/',
+            },
+            updateType: 'Enterprise AI / AI Implementation / AI Engineering / Governance',
+            badges: ['Enterprise AI', 'AI Implementation', 'AI Engineering', 'Governance', 'Official Source', 'Explanation Image Recommended'],
+            summary: 'Microsoft는 Microsoft Frontier Company를 발표했다. 이 조직은 기업 고객이 AI를 실제 비즈니스 환경 안에 구현하고, 관리하고, 보호하고, 성과로 연결할 수 있도록 돕는 AI engineering 중심 조직으로 설명된다.',
+            whatChanged: 'Microsoft는 AI 도입을 단순 제품 판매가 아니라 기업의 업무 흐름, 데이터, 보안, 거버넌스, ROI 관리까지 포함하는 구현 문제로 다루기 시작했다.',
+            whyItMatters: '기업 AI는 “어떤 모델을 쓰느냐”만으로 성공하지 않는다. 실제 데이터와 업무 흐름에 연결하고, 보안과 비용과 성과 기준을 함께 관리해야 한다.',
+            dechiveView: '이 업데이트는 AI가 SaaS 기능이 아니라 기업 운영 시스템으로 들어가고 있음을 보여준다. Dechive는 AI 도입을 볼 때 모델 성능보다 적용 조건, 관리 구조, 관측 가능성, 책임 소재를 함께 검증해야 한다.',
+            readerTakeaway: '기업 AI 도입은 이제 도구 구독이 아니라 구현·운영·보안·성과 관리의 문제다.',
+            screenMaterialStatus: 'Microsoft 공식 블로그 화면 참고 가능. 별도 화면이 부족하면 “기업 데이터 → AI engineering → 업무 프로세스 → 관리/보안/ROI” 흐름의 설명 이미지가 적합하다.',
+            cautionNote: 'Microsoft Frontier Company가 모든 기업의 AI 전환을 자동으로 해결한다고 쓰지 않는다. Microsoft가 제시한 기업 AI 구현 조직과 방향으로 제한한다.',
+          },
+        ],
+      },
+      {
+        name: 'GitHub Copilot Agent Observability',
+        intro: 'Copilot agent session streaming은 AI agent 검증이 결과물 확인에서 실행 과정 관측으로 확장되고 있음을 보여준다.',
+        updates: [
+          {
+            id: 'github-copilot-agent-session-streaming-public-preview',
+            title: 'GitHub Copilot agent session streaming — AI agent 활동을 관측 가능한 데이터로 만들다',
+            officialDate: '2026.07.02',
+            checkedDateKST: '2026.07.03',
+            sourceType: 'Official Changelog',
+            officialSource: {
+              label: 'GitHub Changelog — Copilot agent session streaming is now in public preview',
+              url: 'https://github.blog/changelog/2026-07-02-copilot-agent-session-streaming-is-now-in-public-preview/',
+            },
+            updateType: 'Copilot / Agent Observability / Session Streaming / REST API',
+            badges: ['Copilot', 'Agent Observability', 'Session Streaming', 'REST API', 'Public Preview', 'Official Changelog'],
+            summary: 'GitHub은 Copilot agent session streaming public preview를 발표했다. Enterprise Cloud 고객은 여러 Copilot 클라이언트에서 발생하는 Copilot agent session data에 접근할 수 있고, cloud agent, Copilot CLI, VS Code, Visual Studio, JetBrains, Eclipse 같은 표면의 agent 활동을 관측할 수 있다.',
+            whatChanged: 'Copilot agent의 활동이 단순 결과물만 남기는 것이 아니라, session data 형태로 접근 가능한 관측 대상이 됐다.',
+            whyItMatters: 'AI agent가 실제 개발 작업에 들어오면, 기업은 결과뿐 아니라 agent가 어떤 흐름으로 작업했는지, 어디서 실행됐는지, 어떤 표면에서 사용됐는지 확인할 필요가 있다.',
+            dechiveView: 'AI agent는 “시켜보니 됐다”로 끝나면 안 된다. 기업 환경에서는 agent의 실행 기록과 사용 경로를 관측할 수 있어야 한다. 이 업데이트는 AI agent 검증이 결과 검증에서 실행 과정 검증으로 확장되고 있음을 보여준다.',
+            readerTakeaway: 'AI agent를 업무에 쓰려면 결과뿐 아니라 session data와 실행 과정을 볼 수 있어야 한다.',
+            screenMaterialStatus: 'GitHub changelog의 공식 화면이나 REST API 예시가 있으면 공식 화면 참고 가능. 없다면 “Copilot client → agent session → streaming endpoint → enterprise monitoring” 흐름의 설명 이미지가 적합하다.',
+            cautionNote: 'Public preview 기능이다. 모든 고객에게 일반 제공되는 기능처럼 쓰지 않는다.',
+          },
+        ],
+      },
+      {
+        name: 'GitHub Copilot Model Lifecycle',
+        intro: '모델 출시만큼 모델 종료와 대체 일정도 AI 개발 도구 운영의 일부가 되고 있다.',
+        updates: [
+          {
+            id: 'github-copilot-gemini-model-deprecation',
+            title: 'GitHub Copilot model deprecation — AI 개발 도구도 모델 생명주기를 관리해야 한다',
+            officialDate: '2026.07.02',
+            checkedDateKST: '2026.07.03',
+            sourceType: 'Official Changelog',
+            officialSource: {
+              label: 'GitHub Changelog — Upcoming deprecation of Gemini 2.5 Pro and Gemini 3 Flash',
+              url: 'https://github.blog/changelog/2026-07-02-upcoming-deprecation-of-gemini-2-5-pro-and-gemini-3-flash/',
+            },
+            updateType: 'Copilot / Model Lifecycle / Model Deprecation / Developer Tool',
+            badges: ['Copilot', 'Model Lifecycle', 'Model Deprecation', 'Developer Tool', 'Official Changelog'],
+            summary: 'GitHub은 Copilot 경험 전반에서 Gemini 2.5 Pro와 Gemini 3 Flash를 2026년 7월 31일 deprecate할 예정이라고 공지했다. 대체 모델로 Gemini 3.1 Pro와 Gemini 3.5 Flash를 제안했다.',
+            whatChanged: 'Copilot 안에서 사용할 수 있는 모델 선택지가 고정된 것이 아니라, 특정 모델이 제거되고 새로운 대체 모델로 이동하는 생명주기 관리 대상이 됐다.',
+            whyItMatters: 'AI 개발 도구를 업무에 쓰는 조직은 “현재 어떤 모델을 쓰는가”뿐 아니라 “그 모델이 언제 사라지고 무엇으로 대체되는가”를 추적해야 한다.',
+            dechiveView: 'AI 도구의 안정성은 기능 유지뿐 아니라 모델 생명주기 관리에도 달려 있다. 모델이 바뀌면 답변 성향, 비용, 속도, 정확도, 개발자 경험이 바뀔 수 있다. Dechive는 모델 deprecation도 중요한 업데이트로 기록해야 한다.',
+            readerTakeaway: 'AI 개발 도구에서는 모델 출시만큼 모델 종료와 대체 일정도 중요하다.',
+            screenMaterialStatus: 'GitHub changelog 표 화면 참고 가능. 없으면 “current model → deprecation date → suggested alternative” 흐름의 설명 이미지가 적합하다.',
+            cautionNote: 'Gemini 모델 자체가 사라진다고 쓰지 않는다. GitHub Copilot 경험 안에서의 deprecation 공지로 제한한다.',
+          },
+        ],
+      },
+      {
+        name: 'GitHub Copilot Usage Metrics',
+        intro: 'Copilot usage metrics 개선은 기업 AI 운영에서 사용량 측정과 비용 귀속의 정확도가 검증 기준이 되고 있음을 보여준다.',
+        updates: [
+          {
+            id: 'github-copilot-usage-metrics-accuracy-coverage',
+            title: 'GitHub Copilot usage metrics — AI 사용량 측정의 빈틈을 줄이다',
+            officialDate: '2026.07.02',
+            checkedDateKST: '2026.07.03',
+            sourceType: 'Official Changelog',
+            officialSource: {
+              label: 'GitHub Changelog — Improved accuracy and coverage in Copilot usage metrics reports',
+              url: 'https://github.blog/changelog/2026-07-02-improved-accuracy-and-coverage-in-copilot-usage-metrics-reports/',
+            },
+            updateType: 'Copilot / Usage Metrics / Cost Attribution / Enterprise Reporting',
+            badges: ['Copilot', 'Usage Metrics', 'Cost Attribution', 'Enterprise Analytics', 'Official Changelog'],
+            summary: 'GitHub은 Copilot usage metrics reports의 정확도와 범위를 개선했다고 발표했다. Copilot CLI의 suggested lines of code가 보고에 포함되고, server-side telemetry만 보이던 사용자의 IDE 식별이 개선됐으며, AI credit consumption attribution이 더 완전하게 반영된다.',
+            whatChanged: 'Copilot 사용량 보고에서 CLI 활동, 서버 측 사용 흔적, AI credit attribution 관련 빈틈이 줄었다.',
+            whyItMatters: '기업은 AI 도구를 도입한 뒤 누가 얼마나 쓰고 어떤 비용이 발생했는지 알아야 한다. 사용량 측정이 부정확하면 AI 도입 효과와 비용 판단도 흔들린다.',
+            dechiveView: 'AI 도입 검증은 “개발자가 좋아한다”에서 끝나지 않는다. 실제 사용량, 코드 제안량, 비용 귀속, IDE별 사용 표면을 측정할 수 있어야 한다. 이 업데이트는 AI 사용을 감으로 운영하지 않고 데이터로 관리하려는 흐름이다.',
+            readerTakeaway: '기업 AI 운영에서는 사용량 측정과 비용 귀속의 정확도가 도입 성과 검증의 일부가 된다.',
+            screenMaterialStatus: 'GitHub usage metrics API 또는 보고 예시 화면이 있으면 공식 화면 참고 가능. 없으면 “Copilot usage → metrics API → AI credits → enterprise report” 흐름의 설명 이미지가 적합하다.',
+            cautionNote: '이 기능을 일반 사용자용 대시보드 개선처럼 쓰지 않는다. enterprise administrators / organization owners를 위한 usage metrics 개선으로 제한한다.',
+          },
+        ],
+      },
+      {
+        name: 'GitHub Copilot Automation Security',
+        intro: 'Copilot CLI의 Actions 인증 변화는 AI 자동화가 어떤 권한과 토큰으로 실행되는지까지 검증해야 한다는 점을 보여준다.',
+        updates: [
+          {
+            id: 'github-copilot-cli-actions-github-token',
+            title: 'Copilot CLI in GitHub Actions — AI 자동화에서 long-lived PAT 부담을 줄이다',
+            officialDate: '2026.07.02',
+            checkedDateKST: '2026.07.03',
+            sourceType: 'Official Changelog',
+            officialSource: {
+              label: 'GitHub Changelog — Copilot CLI no longer needs a personal access token in GitHub Actions',
+              url: 'https://github.blog/changelog/2026-07-02-copilot-cli-no-longer-needs-a-personal-access-token-in-github-actions/',
+            },
+            updateType: 'Copilot CLI / GitHub Actions / Automation Security / Developer Workflow',
+            badges: ['Copilot', 'Automation Security', 'GitHub Actions', 'Developer Workflow', 'Official Changelog'],
+            summary: 'GitHub은 Copilot CLI가 GitHub Actions에서 personal access token 없이 built-in GITHUB_TOKEN으로 실행될 수 있다고 발표했다. 조직 소유 repository에서 Copilot CLI 사용을 조직 billing으로 처리할 수 있으며, long-lived PAT 관리 부담을 줄이는 변화다.',
+            whatChanged: 'GitHub Actions에서 Copilot CLI를 실행할 때 별도의 개인 access token을 만들고 저장할 필요가 줄었다.',
+            whyItMatters: 'AI CLI가 CI/CD나 자동화 환경에 들어가면 인증 토큰 관리가 보안 리스크가 된다. built-in GITHUB_TOKEN을 사용할 수 있으면 운영 부담과 장기 토큰 노출 위험을 줄일 수 있다.',
+            dechiveView: 'AI 자동화는 “명령을 실행할 수 있다”보다 “어떤 권한으로 안전하게 실행되는가”가 중요하다. Copilot CLI가 Actions 안으로 들어갈수록, 인증 방식과 billing 조건까지 검증해야 한다.',
+            readerTakeaway: 'AI CLI 자동화에서는 기능보다 권한, 토큰, billing 정책이 먼저 검증되어야 한다.',
+            screenMaterialStatus: 'GitHub Actions 또는 changelog 화면 참고 가능. 공식 화면이 부족하면 “GitHub Actions → GITHUB_TOKEN → Copilot CLI → organization billing” 흐름의 설명 이미지가 적합하다.',
+            cautionNote: '모든 repository에서 자동으로 되는 것처럼 쓰지 않는다. 조직 정책, 권한, Copilot CLI 버전 조건을 공식 문서 기준으로 확인해야 한다.',
+          },
+        ],
+      },
+      {
+        name: 'GitHub Enterprise Cost Governance',
+        intro: 'AI credit pool cap은 기업 AI가 실제 운영 예산과 비용 배분 기준 안으로 들어가고 있음을 보여준다.',
+        updates: [
+          {
+            id: 'github-cost-center-ai-credit-pools',
+            title: 'GitHub cost center AI credit pools — 기업 AI 비용을 더 세밀하게 제한하다',
+            officialDate: '2026.07.02',
+            checkedDateKST: '2026.07.03',
+            sourceType: 'Official Changelog',
+            officialSource: {
+              label: 'GitHub Changelog — Cost centers now support AI credit pools',
+              url: 'https://github.blog/changelog/2026-07-02-cost-centers-now-support-included-usage-caps/',
+            },
+            updateType: 'Enterprise AI / Cost Governance / AI Credits / Usage Control',
+            badges: ['Enterprise AI', 'Cost Governance', 'AI Credits', 'Usage Control', 'Official Changelog'],
+            summary: 'GitHub은 cost center가 enterprise의 monthly included AI credits 중 사용할 수 있는 양을 cap할 수 있게 했다고 발표했다. 이 기능은 REST API로 제공되며, UI 관리는 추후 제공될 예정이다.',
+            whatChanged: '기업은 cost center 단위로 AI credit pool 사용량을 제한할 수 있게 됐다. 특정 cost center가 전체 shared pool을 과도하게 사용하는 문제를 줄이려는 기능이다.',
+            whyItMatters: 'AI 사용량이 늘어나면 기업은 예산 초과뿐 아니라 내부 비용 배분 문제를 관리해야 한다. AI credit pool cap은 AI가 실제 운영 예산 안에 들어가고 있음을 보여준다.',
+            dechiveView: 'AI 비용 통제는 단순한 billing 문제가 아니다. 기업이 AI를 조직 전체에 배포하려면 어느 팀이 얼마만큼 사용할 수 있는지, 공유된 credit pool을 누가 소모하는지 추적해야 한다. Dechive는 AI 도입을 기능이 아니라 운영 비용 구조까지 포함해 검증해야 한다.',
+            readerTakeaway: '기업 AI 운영은 누가 AI를 쓰는가를 넘어, 누가 공유 credit을 얼마나 쓰는가까지 관리하는 단계로 들어갔다.',
+            screenMaterialStatus: 'GitHub billing/cost center 관련 공식 화면이 있으면 참고 가능. 없으면 “enterprise included AI credits → cost center pool cap → REST API → future UI” 흐름의 설명 이미지가 적합하다.',
+            cautionNote: '현재 REST API 제공이며 cost center settings UI는 추후 제공 예정이라는 점을 구분한다.',
+          },
+        ],
+      },
+      {
+        name: 'Reported Governance / Market Watch',
+        intro: 'Reuters 보도 기반 항목은 공식 업데이트와 섞지 않고, governance / market watch로 분리해 기록한다.',
+        updates: [
+          {
+            id: 'reuters-openai-government-stake-discussion',
+            title: 'OpenAI government stake discussion — frontier AI 기업은 국가 거버넌스 문제로 이동한다',
+            officialDate: '2026.07.02 보도일',
+            checkedDateKST: '2026.07.03',
+            sourceType: 'Reliable News / Reuters / Reported Context',
+            officialSource: {
+              label: 'Reuters — OpenAI proposes handing Trump administration a 5% stake, FT reports',
+              url: 'https://www.reuters.com/business/openai-proposes-handing-trump-administration-5-stake-ft-reports-2026-07-02/',
+            },
+            updateType: 'Reported Governance / AI Company Ownership / Public Interest',
+            badges: ['Reported Context', 'Reliable News', 'Governance', 'Risk Watch'],
+            summary: 'Reuters는 Financial Times 보도를 인용해 OpenAI가 미국 정부에 5% 지분을 제공하는 방안을 논의했다고 보도했다. 이는 공식 발표가 아니라 보도 기반 항목이다.',
+            whatChanged: 'frontier AI 기업의 가치와 수익이 공공 이익, 정부 개입, 국가 정책과 어떻게 연결될 수 있는지에 대한 논의가 다시 부각됐다.',
+            whyItMatters: 'AI 기업은 단순한 기술 기업이 아니라 국가 전략, 경제적 분배, 공공 이익의 대상으로 다뤄지기 시작했다.',
+            dechiveView: '이 항목은 공식 업데이트가 아니라 governance watch로 다뤄야 한다. Dechive 관점에서 중요한 것은 OpenAI가 실제로 무엇을 결정했는가보다, frontier AI 기업의 소유권과 공공 이익 문제가 본격적인 검증 대상으로 올라왔다는 점이다.',
+            readerTakeaway: 'AI 기업의 미래는 모델 성능뿐 아니라 소유권, 공공 이익, 정부와의 관계까지 포함해 검증해야 한다.',
+            screenMaterialStatus: '뉴스 보도 기반이므로 공식 제품 화면 없음. 설명 이미지가 필요하다면 “frontier AI company → government stake discussion → public interest / governance” 흐름이 적합하다.',
+            cautionNote: 'OpenAI의 공식 발표처럼 쓰지 않는다. Reuters가 FT 보도를 인용해 보도한 항목임을 명확히 한다.',
+          },
+          {
+            id: 'reuters-meta-ai-agent-development-speed',
+            title: 'Meta AI agent development slower than expected — agent hype와 실제 구현 속도의 간극',
+            officialDate: '2026.07.02 보도일',
+            checkedDateKST: '2026.07.03',
+            sourceType: 'Reliable News / Reuters / Reported Context',
+            officialSource: {
+              label: 'Reuters — Zuckerberg says AI agent development going slower than expected',
+              url: 'https://www.reuters.com/business/zuckerberg-says-ai-agent-development-going-slower-than-expected-2026-07-02/',
+            },
+            updateType: 'Reported Context / Agent Reality Check / Enterprise Execution',
+            badges: ['Reported Context', 'Reliable News', 'Agentic Work', 'AI Operating Model', 'Risk Watch'],
+            summary: 'Reuters는 Meta 내부 타운홀에서 Zuckerberg가 AI agent 개발 속도가 예상보다 느리다고 말했다고 보도했다. Meta는 AI 인프라와 조직 개편에 큰 투자를 하고 있지만, agent 개발 속도는 기대만큼 빠르게 진전되지 않았다는 맥락이다.',
+            whatChanged: 'AI agent가 빠르게 모든 업무를 대체할 것이라는 기대와 달리, 대형 기술 기업 내부에서도 실제 개발과 조직 적용 속도는 더디다는 신호가 나왔다.',
+            whyItMatters: 'AI agent는 데모와 실제 운영 사이의 간극이 큰 영역이다. 기업이 대규모 투자를 하더라도 agent를 안정적으로 구현하고 조직에 적용하는 일은 단순하지 않다.',
+            dechiveView: 'Dechive는 agent hype를 그대로 받아들이지 않는다. 중요한 것은 “AI agent가 가능하다”가 아니라, 실제 조직 안에서 얼마나 안정적으로 구현되고 검증 가능한 결과를 내는가다.',
+            readerTakeaway: 'AI agent의 약속은 빠르지만, 실제 구현은 여전히 느리고 복잡할 수 있다.',
+            screenMaterialStatus: '뉴스 보도 기반이므로 공식 제품 화면 없음. 설명 이미지가 필요하다면 “agent promise → infrastructure investment → organizational friction → slower execution” 흐름이 적합하다.',
+            cautionNote: 'Meta가 AI agent 개발에 실패했다고 단정하지 않는다. Reuters 보도에 따르면 개발 속도가 예상보다 느리다는 내부 발언이 있었다고 표현한다.',
+          },
+        ],
+      },
+      {
+        name: 'Low Priority / Excluded',
+        intro: 'officialDate가 2026.07.02로 확인되더라도 이번 페이지 핵심 흐름과 직접성이 낮거나 날짜 확인이 필요한 항목은 보조로 분리한다.',
+        updates: [
+          {
+            id: 'google-cloud-gemini-enterprise-agent-platform-security-findings',
+            title: 'Google Cloud Gemini Enterprise Agent Platform security findings — 보조 확인 항목',
+            officialDate: '2026.07.02인지 공식 release notes에서 반드시 재확인',
+            checkedDateKST: '2026.07.03',
+            sourceType: 'Official Release Notes / Verification Needed',
+            officialSource: {
+              label: 'Google Cloud Release Notes',
+              url: 'https://docs.cloud.google.com/release-notes',
+            },
+            updateType: 'Enterprise AI / Agent Platform / Security Findings / Posture Management',
+            badges: ['Enterprise AI', 'Agent Platform', 'Security / Governance', 'Needs Date Verification', 'Not Main AI Update'],
+            summary: 'Google Cloud release notes에서 Gemini Enterprise Agent Platform의 AI security findings와 posture management summaries 관련 GA 항목이 확인될 수 있다. 단, officialDate가 2026.07.02인지 반드시 직접 확인한 뒤 사용한다.',
+            whatChanged: 'Agent Platform 안에서 AI security findings와 posture management summaries를 볼 수 있는 보안 관측 기능이 강화되는 흐름이다.',
+            whyItMatters: '기업 AI agent platform은 모델 실행뿐 아니라 보안 상태와 위험 발견을 함께 관리해야 한다.',
+            dechiveView: '이 항목은 보조 항목으로 다룬다. 기업 AI 플랫폼은 모델 선택보다 보안 관측과 posture 관리까지 포함하는 운영 인프라가 되고 있다.',
+            readerTakeaway: '기업 AI agent platform은 보안 관측과 posture management를 함께 요구한다.',
+            screenMaterialStatus: 'Google Cloud release notes 화면 참고 가능. 별도 이미지는 필수 아님.',
+            cautionNote: 'officialDate가 2026.07.02로 확인되지 않으면 메인에서 제외하고 Low Priority / Verification Needed로 이동한다.',
+          },
+        ],
+      },
+    ],
+    verificationNote: '이번 페이지는 2026.07.03 KST에 확인한 officialDate 2026.07.02 공식 업데이트 기록이다. 오늘 메인 업데이트는 Anthropic Fable 5 cyber safeguards와 jailbreak framework, Microsoft Frontier Company, GitHub Copilot agent session streaming, GitHub Copilot model deprecation, GitHub Copilot usage metrics 개선, Copilot CLI의 GitHub Actions GITHUB_TOKEN 지원, GitHub cost center AI credit pool이다.\n\n이번 페이지에서는 공식 업데이트와 보도 기반 항목을 섞지 않는다. Anthropic과 Microsoft, GitHub 항목은 공식 블로그 또는 공식 changelog 기준으로 다루고, OpenAI 정부 지분 논의와 Meta AI agent 개발 속도 이슈는 Reuters 보도 기반 Reported Governance / Market Watch로 분리한다.\n\n특히 Fable 5 safeguard 항목은 모델 성능 업데이트가 아니라 안전 기준과 jailbreak 평가 기준으로 다룬다. Microsoft Frontier Company는 기업 AI 구현과 운영의 문제로 분류한다. GitHub Copilot agent session streaming은 agent 관측성, model deprecation은 모델 생명주기, usage metrics는 사용량 측정, Copilot CLI in Actions는 자동화 보안, cost center AI credit pools는 비용 거버넌스로 구분한다.',
+    closingLine: 'AI는 더 강력해지는 동시에 더 많이 통제되고, 더 많이 관측되고, 더 많이 비용 기준 안으로 들어가고 있다. Dechive는 그 변화가 무엇을 가능하게 하는지보다, 그 변화를 어떤 기준으로 검증해야 하는지 기록한다.',
+    updates: [
+      {
+        id: 'anthropic-fable-5-safeguards-jailbreak-framework-summary',
+        slug: 'anthropic-fable-5-safeguards-jailbreak-framework',
+        title: 'Anthropic Fable 5 safeguards',
+        summary: '강력한 모델의 신뢰는 성능뿐 아니라 safeguard와 jailbreak 평가 기준으로 검증해야 한다.',
+        badges: ['Model Safety', 'Jailbreak Framework', 'Official Source'],
+        detailHref: '/ai-updates/2026-07-02#anthropic-fable-5-safeguards-jailbreak-framework',
+        source: {
+          label: "Anthropic 공식 블로그 — More details on Fable 5's cyber safeguards and our jailbreak framework",
+          url: 'https://www.anthropic.com/news/fable-safeguards-jailbreak-framework',
+          description: 'Fable 5 cyber safeguards와 jailbreak severity framework 공식 설명',
+        },
+        whatChanged: 'Fable 5의 safeguard와 jailbreak severity framework가 공식 블로그 기준으로 정리됐다.',
+        useCriteria: '모델 안전 정책, jailbreak 평가 기준, 사이버 safeguard를 설명할 때 사용한다.',
+        verificationNotes: ['officialDate 2026.07.02 기준', 'Fable 5가 완전히 안전하다는 단정 표현은 피한다.'],
+        image: {
+          status: 'limited',
+          caption: '공식 블로그 화면 참고 가능. 별도 제품 화면은 필수 아님.',
+        },
+      },
+      {
+        id: 'microsoft-frontier-company-ai-engineering-summary',
+        slug: 'microsoft-frontier-company-ai-engineering',
+        title: 'Microsoft Frontier Company',
+        summary: '기업 AI 도입은 도구 구독이 아니라 구현, 운영, 보안, 거버넌스, 성과 관리의 문제가 되고 있다.',
+        badges: ['Enterprise AI', 'AI Implementation', 'Governance', 'Official Source'],
+        detailHref: '/ai-updates/2026-07-02#microsoft-frontier-company-ai-engineering',
+        source: {
+          label: 'Microsoft 공식 블로그 — Microsoft Frontier Company',
+          url: 'https://blogs.microsoft.com/blog/2026/07/02/microsoft-frontier-company-ai-engineering-that-amplifies-and-protects-your-intelligence/',
+          description: '기업 AI 구현과 보호를 다루는 Microsoft 공식 발표',
+        },
+        whatChanged: 'Microsoft가 기업 고객의 AI 구현과 운영을 돕는 AI engineering 중심 조직을 발표했다.',
+        useCriteria: '기업 AI 도입을 모델 성능이 아니라 구현 조건과 운영 구조로 설명할 때 사용한다.',
+        verificationNotes: ['officialDate 2026.07.02 기준', '모든 기업 전환을 자동 해결한다는 표현은 피한다.'],
+        image: {
+          status: 'limited',
+          caption: '공식 블로그 화면 참고 가능. 구현 흐름 설명 이미지가 적합하다.',
+        },
+      },
+      {
+        id: 'github-copilot-operations-control-summary',
+        slug: 'github-copilot-operations-control',
+        title: 'GitHub Copilot 운영 통제 묶음',
+        summary: 'Copilot은 agent 관측성, 모델 생명주기, 사용량 측정, Actions 인증, AI credit cap을 통해 개발자 도구 운영 통제 안으로 들어가고 있다.',
+        badges: ['Copilot', 'Agent Observability', 'Model Lifecycle', 'Usage Metrics', 'Cost Governance', 'Official Changelog'],
+        detailHref: '/ai-updates/2026-07-02#github-copilot-agent-session-streaming-public-preview',
+        source: {
+          label: 'GitHub Changelog — 2026.07.02 Copilot updates',
+          url: 'https://github.blog/changelog/',
+          description: '2026.07.02 GitHub Copilot 관련 공식 changelog 묶음',
+        },
+        whatChanged: 'GitHub은 Copilot agent session streaming, Gemini 모델 deprecation, usage metrics 개선, Copilot CLI Actions 인증, cost center AI credit pool cap을 각각 공지했다.',
+        useCriteria: 'AI 개발 도구가 결과 생성에서 관측, 생명주기, 비용 통제의 대상으로 이동하는 흐름을 설명할 때 사용한다.',
+        verificationNotes: ['각 항목은 상세 그룹의 개별 GitHub Changelog canonical URL을 기준으로 확인한다.', 'Public preview, deprecation, REST API 제공 범위를 구분한다.'],
+        image: {
+          status: 'limited',
+          caption: '공식 changelog 화면 또는 운영 흐름 설명 이미지가 적합하다.',
+        },
+      },
+    ],
+  },
   {
     date: '2026-07-01',
     checkedDateKST: '2026.07.02',

@@ -18,6 +18,80 @@ export type DailyAiUpdates = {
 
 export const dailyAiUpdates: DailyAiUpdates[] = [
   {
+    date: '2026-07-04',
+    officialDate: '2026-07-03',
+    checkedDateKST: '2026-07-04',
+    href: '/ai-updates/2026-07-03',
+    basis: 'global',
+    label: {
+      ko: 'AI는 자본·노동·법·인프라로',
+      en: 'AI moves into capital, labor, law, and infrastructure',
+    },
+    updates: [
+      {
+        title: 'Capital / Video',
+        description: {
+          ko: 'Kling AI의 대규모 투자 유치는 AI 영상 생성이 자본시장과 산업 인프라 안으로 들어가고 있음을 보여준다',
+          en: 'Kling AI’s reported fundraise shows AI video generation moving into capital markets and industrial infrastructure',
+        },
+        href: '/ai-updates/2026-07-03#kuaishou-kling-ai-fundraise',
+      },
+      {
+        title: 'Labor / Governance',
+        description: {
+          ko: '인도 IT 산업의 AI 채용 증가와 아르헨티나 AI 운영 기업 법제 논의는 AI가 역할 구조, 인간 감독, 법적 책임을 다시 묻게 만든다',
+          en: 'India’s AI hiring shift and Argentina’s AI-run company debate ask how roles, human oversight, and legal responsibility change',
+        },
+        href: '/ai-updates/2026-07-03#india-it-ai-hiring-workforce-shift',
+      },
+      {
+        title: 'Security / Infrastructure',
+        description: {
+          ko: 'Alibaba의 Claude Code 사용 금지 보도와 Deutz의 전력 수요 전망은 AI가 기업 보안과 물리 인프라의 문제로 확장되고 있음을 보여준다',
+          en: 'Alibaba’s reported Claude Code ban and Deutz’s power-demand outlook show AI expanding into enterprise security and physical infrastructure',
+        },
+        href: '/ai-updates/2026-07-03#alibaba-claude-code-ban-compliance',
+      },
+    ],
+  },
+  {
+    date: '2026-07-03',
+    officialDate: '2026-07-02',
+    checkedDateKST: '2026-07-03',
+    href: '/ai-updates/2026-07-02',
+    basis: 'official',
+    label: {
+      ko: 'AI는 운영과 통제 안으로',
+      en: 'AI moves into operations and control',
+    },
+    updates: [
+      {
+        title: 'Safety / Policy',
+        description: {
+          ko: 'Anthropic은 Fable 5의 사이버 safeguard와 jailbreak 평가 기준을 공개하며 강한 모델의 신뢰가 안전 기준과 함께 검증되어야 함을 보여준다',
+          en: 'Anthropic detailed Fable 5 safeguards and jailbreak severity criteria, showing that stronger models must be verified through safety criteria as well as capability',
+        },
+        href: '/ai-updates/2026-07-02#anthropic-fable-5-safeguards-jailbreak-framework',
+      },
+      {
+        title: 'Enterprise Implementation',
+        description: {
+          ko: 'Microsoft Frontier Company는 기업 AI가 단순 도구 구독이 아니라 구현·보안·거버넌스·성과 관리의 문제로 이동했음을 보여준다',
+          en: 'Microsoft Frontier Company frames enterprise AI as implementation, security, governance, and outcome management rather than tool subscription',
+        },
+        href: '/ai-updates/2026-07-02#microsoft-frontier-company-ai-engineering',
+      },
+      {
+        title: 'Copilot Operations',
+        description: {
+          ko: 'GitHub Copilot 업데이트는 agent 관측성, 모델 생명주기, 사용량 측정, Actions 인증, AI credit 통제를 개발자 도구 운영 문제로 묶는다',
+          en: 'GitHub Copilot updates connect agent observability, model lifecycle, usage metrics, Actions auth, and AI credit control as developer-tool operations',
+        },
+        href: '/ai-updates/2026-07-02#github-copilot-agent-session-streaming-public-preview',
+      },
+    ],
+  },
+  {
     date: '2026-07-02',
     officialDate: '2026-07-01',
     checkedDateKST: '2026-07-02',
