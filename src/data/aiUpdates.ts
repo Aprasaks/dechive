@@ -176,6 +176,21 @@ export type AiUpdateBadge =
   | 'Risk Watch'
   | 'Reported Context'
   | 'Reliable News'
+  | 'Adoption Watch'
+  | 'Small Business'
+  | 'Productivity'
+  | 'Labor Economy'
+  | 'AI Copyright'
+  | 'Legal Discovery'
+  | 'Evidence'
+  | 'Media Industry'
+  | 'Culture Watch'
+  | 'Advertising'
+  | 'Public Perception'
+  | 'Google'
+  | 'Robotics'
+  | 'AI Competition'
+  | 'Public Demonstration'
   | 'Market Watch'
   | 'Capital Flow'
   | 'Responsibility'
@@ -246,6 +261,241 @@ export interface AiUpdateBriefingItem {
 export const AI_UPDATES_MONTH = '2026.07';
 
 export const aiUpdateDays: AiUpdateDay[] = [
+  {
+    date: '2026-07-04',
+    checkedDateKST: '2026.07.05',
+    title: 'AI가 창업, 저작권 소송, 문화적 반응의 문제로 드러난 날',
+    subtitle: '오늘은 대형 공식 모델 릴리즈보다 보도 기반 흐름이 중심이다. Reuters의 소규모 창업 AI 활용 사례는 AI가 비AI 기업의 실행 비용을 낮추고 있음을 보여주고, Midjourney 소송의 discovery 쟁점은 생성형 AI 사용 내역 자체가 법적 증거가 되고 있음을 드러낸다. Google의 독립기념일 AI 광고 반응은 AI가 인간 협업과 역사적 상징 안으로 들어갈 때 어떤 거부감이 생기는지도 보여준다.',
+    quickSummary: [
+      '창업/생산성: Reuters는 Here Now Health 사례를 통해 AI가 소규모 비AI 창업자의 학습, 사업계획, 투자자 피치 준비, 초기 실행 비용을 낮추는 흐름을 보도했다.',
+      '법/증거: TechCrunch는 Midjourney가 Disney, Universal, Warner Bros.와의 소송에서 스튜디오들의 AI 사용 내역 공개를 더 넓게 요구하고 있다고 보도했다.',
+      '문화/광고/로봇: TechCrunch의 Google 독립기념일 AI 광고 보도는 AI 문화 수용성 문제를 보여주고, RoboCup 2026 인천 자료는 AI가 물리 세계의 공공 실험장으로도 이어짐을 보여주는 보조 흐름이다.',
+    ],
+    groups: [
+      {
+        name: 'AI Adoption / Small Business',
+        intro: 'AI adoption은 대형 기술 기업의 제품 출시만으로 설명되지 않는다. 소규모 비AI 창업자가 학습, 문서화, 투자 준비, 초기 운영에서 어떤 비용을 낮추는지도 봐야 한다.',
+        updates: [
+          {
+            id: 'small-business-ai-quick-start-expansion',
+            title: 'AI가 소규모 창업의 실행 비용을 낮추다 — 비AI 기업도 AI로 더 빨리 시작한다',
+            officialDate: 'reportDate 2026.07.04',
+            checkedDateKST: '2026.07.05',
+            sourceType: 'Reliable News / Reuters / Reported Adoption Watch',
+            officialSource: {
+              label: 'Reuters — For one small business, AI was key to a quick start and expansion',
+              url: 'https://www.reuters.com/business/healthcare-pharmaceuticals/one-small-business-ai-was-key-quick-start-expansion-2026-07-04/',
+            },
+            updateType: 'AI Adoption / Small Business / Productivity / Labor Economy',
+            badges: ['Reported Context', 'Reliable News', 'Adoption Watch', 'Small Business', 'Productivity', 'Labor Economy', 'Official Screen Not Required', 'Explanation Image Recommended'],
+            summary: 'Reuters는 Here Now Health 사례를 통해 AI가 소규모 비AI 기업의 창업과 확장 과정에 어떻게 쓰였는지 보도했다. 보도에 따르면 창업자는 AI를 이용해 스타트업 문화, 사업계획, 투자자 피치 준비를 학습했고, 회사는 2025년 1월 출범 후 16명 규모로 성장했다.',
+            whatChanged: 'AI가 AI 기업의 제품 개발뿐 아니라, 비AI 창업자의 학습, 계획 수립, 투자 준비, 초기 운영 실행을 돕는 도구로 쓰이는 사례가 확인됐다.',
+            whyItMatters: 'AI의 경제적 영향은 대형 기술 기업의 생산성만으로 설명되지 않는다. 창업 진입 비용이 낮아지면 더 많은 개인과 소규모 팀이 이전보다 빠르게 사업을 시작할 수 있다. 동시에 노동 수요와 역할 구조도 달라질 수 있다.',
+            dechiveView: '이 항목에서 중요한 것은 “AI가 회사를 대신 만들었다”가 아니다. AI가 창업자가 몰랐던 지식과 문서 작업, 사업계획, 피치 준비의 장벽을 낮췄다는 점이다. Dechive는 AI adoption을 볼 때 결과만이 아니라 어떤 비용이 낮아졌고, 어떤 판단은 여전히 사람이 책임졌는지를 함께 기록해야 한다.',
+            readerTakeaway: 'AI는 비AI 창업자의 실행 비용을 낮추지만, 사업의 책임과 판단까지 대신하지는 않는다.',
+            screenMaterialStatus: 'Reuters 보도 기반 항목이므로 공식 제품 화면 없음. 설명 이미지가 필요하다면 “founder → AI-assisted learning → business plan → pitch → operating company” 흐름이 적합하다.',
+            cautionNote: 'AI가 창업을 자동으로 성공시킨다고 쓰지 않는다. Reuters가 보도한 특정 소규모 기업 사례와 AI 활용 흐름으로 제한한다.',
+          },
+        ],
+      },
+      {
+        name: 'AI Copyright / Legal Discovery',
+        intro: 'AI 저작권 논쟁은 모델 학습 데이터만의 문제가 아니다. 누가 어떤 생성형 AI 사용 기록을 갖고 있으며, 그 기록이 소송에서 어떻게 요구되는지도 검증 대상이 된다.',
+        updates: [
+          {
+            id: 'midjourney-hollywood-ai-usage-discovery',
+            title: 'Midjourney 소송 discovery 쟁점 — AI 사용 내역 자체가 법적 증거가 된다',
+            officialDate: 'reportDate 2026.07.04',
+            checkedDateKST: '2026.07.05',
+            sourceType: 'Reliable News / TechCrunch / Legal Watch',
+            officialSource: {
+              label: 'TechCrunch — Midjourney wants Hollywood studios to reveal the details of their AI usage',
+              url: 'https://techcrunch.com/2026/07/04/midjourney-wants-hollywood-studios-to-reveal-the-details-of-their-ai-usage/',
+            },
+            updateType: 'AI Copyright / Legal Discovery / Evidence / Media Industry',
+            badges: ['Reported Context', 'Reliable News', 'AI Copyright', 'Legal Discovery', 'Evidence', 'Media Industry', 'Official Screen Not Required', 'Explanation Image Recommended'],
+            summary: 'TechCrunch는 Midjourney가 Disney, Universal, Warner Bros.와의 저작권 소송 과정에서 스튜디오들이 생성형 AI를 어떻게 사용했는지 더 넓게 공개하도록 요구하고 있다고 보도했다. 쟁점은 스튜디오들이 소비자에게 공개한 결과물뿐 아니라 내부 기획, storyboarding, ideation 과정에서 어떤 AI 사용 내역을 갖고 있는지도 포함된다.',
+            whatChanged: 'AI 저작권 소송에서 생성형 AI 사용 내역, 프롬프트, 결과물, 내부 활용 방식이 discovery의 대상이 되고 있다.',
+            whyItMatters: 'AI 저작권 논쟁은 단순히 “AI 모델이 학습에 무엇을 썼는가”만의 문제가 아니다. 소송을 제기한 쪽이 내부적으로 AI를 어떻게 사용했는지, 그 사용 내역이 시장 피해 주장이나 공정 이용 주장과 어떻게 충돌하는지도 검증 대상이 된다.',
+            dechiveView: 'Dechive 관점에서 이 항목은 매우 중요하다. AI 시대의 법적 검증은 결과물만 보지 않는다. 누가 어떤 프롬프트를 썼고, 어떤 output을 얻었고, 그것을 어떤 맥락에서 사용했는지까지 기록이 필요하다. AI 사용 기록은 앞으로 법적 증거가 될 수 있다.',
+            readerTakeaway: 'AI 저작권 소송에서는 프롬프트와 결과물, 내부 사용 내역도 검증 대상이 된다.',
+            screenMaterialStatus: 'TechCrunch 보도 기반 항목이므로 공식 제품 화면 없음. 설명 이미지가 필요하다면 “AI prompt → generated output → internal use → legal discovery → evidence” 흐름이 적합하다.',
+            cautionNote: '법원의 최종 판단이 나온 것처럼 쓰지 않는다. Midjourney가 더 넓은 AI 사용 내역 공개를 요구하고 있다는 소송 과정의 쟁점으로 제한한다.',
+          },
+        ],
+      },
+      {
+        name: 'AI Culture / Advertising',
+        intro: 'AI adoption은 기능의 문제가 아니라 수용성의 문제이기도 하다. 역사적 상징과 인간 협업의 장면에 AI가 들어갈 때 생기는 반응을 별도로 기록한다.',
+        updates: [
+          {
+            id: 'google-declaration-independence-ai-ad-reaction',
+            title: 'Google 독립기념일 AI 광고 — AI는 문화적 상징 안에 들어갈 때 저항을 만난다',
+            officialDate: 'reportDate 2026.07.04',
+            checkedDateKST: '2026.07.05',
+            sourceType: 'Reliable News / TechCrunch / Culture Watch',
+            officialSource: {
+              label: 'TechCrunch — New Google commercial imagines a Declaration of Independence written with help from AI',
+              url: 'https://techcrunch.com/2026/07/04/new-google-commercial-imagines-a-declaration-of-independence-written-with-help-from-ai/',
+            },
+            updateType: 'AI Culture / Advertising / Public Perception / Google',
+            badges: ['Reported Context', 'Reliable News', 'Culture Watch', 'Advertising', 'Public Perception', 'Google', 'Explanation Image Recommended'],
+            summary: 'TechCrunch는 Google이 미국 독립선언문 작성 상황을 Google Workspace와 Gemini가 있는 세계로 상상한 독립기념일 광고를 공개했다고 보도했다. 광고에는 Google Docs, Calendar, Meet, Gemini가 등장하며, AI가 회의 노트와 시각화 등에 쓰이는 방식으로 연출된다. 반응은 엇갈렸고, 일부는 역사적 상징과 인간 협업을 AI 제품 광고로 다루는 방식에 비판적이었다.',
+            whatChanged: 'AI가 생산성 도구를 넘어 역사적 상징, 정치적 글쓰기, 인간 협업의 문화적 장면 안으로 들어가는 방식이 광고를 통해 드러났다.',
+            whyItMatters: 'AI adoption은 기능의 문제가 아니라 수용성의 문제이기도 하다. 사람들이 어떤 종류의 인간 활동에는 AI를 자연스럽게 받아들이고, 어떤 영역에서는 거부감을 느끼는지 봐야 한다.',
+            dechiveView: '이 항목은 제품 업데이트가 아니라 AI 문화 반응 기록이다. Dechive는 AI가 무엇을 할 수 있는지뿐 아니라, 사람들이 어떤 맥락에서 AI를 불편하게 느끼는지도 기록해야 한다. 특히 역사적 상징과 인간의 정치적 언어에 AI를 끼워 넣을 때는 기능보다 의미의 충돌이 더 크게 드러난다.',
+            readerTakeaway: 'AI 기능이 가능하다는 것과 사람들이 그 사용 맥락을 받아들이는 것은 다른 문제다.',
+            screenMaterialStatus: 'Google 광고 영상 또는 공식 캠페인 화면이 확인되면 공식 화면 참고 가능. 그렇지 않으면 “historical symbol → collaboration scene → AI assistant → public reaction” 흐름의 설명 이미지가 적합하다.',
+            cautionNote: 'Google 광고가 대중 전체에게 거부당했다고 단정하지 않는다. TechCrunch가 보도한 엇갈린 반응과 문화적 논쟁으로 제한한다.',
+          },
+        ],
+      },
+      {
+        name: 'Robotics / Public Demonstration',
+        intro: 'AI는 챗봇과 생성 모델을 넘어 로봇, 센서, 물리적 제어, 팀 기반 행동이 공개적으로 실험되는 장면으로도 이어진다.',
+        updates: [
+          {
+            id: 'robocup-2026-incheon-public-demonstration',
+            title: 'RoboCup 2026 인천 — AI는 로봇과 물리 세계의 공공 실험장으로도 이어진다',
+            officialDate: 'reportDate 2026.07.04',
+            checkedDateKST: '2026.07.05',
+            sourceType: 'Reuters Connect / Photo Material / Public Demonstration',
+            officialSource: {
+              label: 'Reuters Connect — RoboCup 2026 INCHEON, South Korea',
+              url: 'https://www.reutersconnect.com/item/robocup-2026-incheon-south-korea/dGFnOnJldXRlcnMuY29tLDIwMjY6bmV3c21sX01UMU5VUlBITzAwMFU4Ulc5WQ',
+            },
+            updateType: 'Robotics / AI Competition / Public Demonstration',
+            badges: ['Reported Context', 'Robotics', 'AI Competition', 'Public Demonstration', 'Official Screen Not Required'],
+            summary: 'Reuters Connect에는 2026년 7월 4일 인천 송도컨벤시아에서 열린 RoboCup 2026 사진 자료가 올라왔다. 자료 설명에 따르면 RoboCup은 인공지능과 로봇 기술을 통해 더 나은 미래를 만드는 글로벌 챌린지로 소개되며, 행사는 7월 2일부터 6일까지 진행된다.',
+            whatChanged: 'AI가 챗봇과 생성 모델을 넘어 로봇이 실제 공간에서 판단하고 움직이는 공개 실험장으로도 이어진다는 점을 보여주는 자료가 확인됐다.',
+            whyItMatters: 'AI의 발전은 화면 속 답변이나 생성물에만 머물지 않는다. 로봇, 센서, 물리적 제어, 팀 기반 행동은 AI가 물리 세계에서 어떤 한계를 갖는지 보여주는 중요한 실험장이다.',
+            dechiveView: '이 항목은 메인보다 보조 자료에 가깝다. 다만 Dechive는 AI를 텍스트와 이미지 생성만으로 좁게 보지 않는다. 물리 세계에서의 판단, 움직임, 실패, 협업도 AI 검증의 일부다.',
+            readerTakeaway: 'AI는 챗봇과 생성 모델을 넘어 로봇이 움직이는 물리 세계의 문제로 확장된다.',
+            screenMaterialStatus: 'Reuters Connect 사진 자료 참고 가능. 단, Reuters Connect 자료는 보조 사진 자료로만 사용하고 메인 이미지 중심 페이지로 만들지 않는다.',
+            cautionNote: 'Reuters Connect 자료는 사진/라이선스 자료 성격이 강하므로, 공식 기술 업데이트처럼 쓰지 않는다. RoboCup의 기술적 성과를 과장하지 않는다.',
+          },
+        ],
+      },
+      {
+        name: 'Low Priority / Excluded',
+        intro: 'AI 카테고리에 걸릴 수 있어도 이번 페이지의 reportDate와 핵심 흐름에 맞지 않거나 직접성이 낮은 항목은 메인에서 제외한다.',
+        updates: [
+          {
+            id: 'alibaba-claude-code-repost-excluded',
+            title: 'Alibaba Claude Code 사용 금지 재보도 — 2026.07.03 기준 항목으로 유지',
+            officialDate: '2026.07.04 검토 항목',
+            checkedDateKST: '2026.07.05',
+            sourceType: 'Date Boundary / Excluded',
+            updateType: 'Reported Context / Date Mismatch / Not Main AI Update',
+            badges: ['Reported Context', 'Date Discrepancy', 'Not Main AI Update'],
+            summary: 'TechCrunch가 2026.07.04에 다시 다뤘더라도 원 흐름은 2026.07.03 Reuters 보도 기반이다. 2026.07.03 상세 페이지에서 다루는 것이 맞다.',
+            whatChanged: '날짜 기준과 중복 방지 원칙에 따라 이번 2026.07.04 페이지 메인으로 반복하지 않았다.',
+            whyItMatters: '날짜별 아카이브는 같은 흐름을 다시 메인처럼 반복하지 않고, 기준일에 맞는 새 항목을 기록해야 한다.',
+            dechiveView: 'Dechive는 흥미로운 재보도라도 reportDate와 페이지 기준이 맞지 않으면 메인으로 끌어오지 않는다.',
+            readerTakeaway: '날짜 기준은 업데이트 검증의 일부다.',
+            screenMaterialStatus: '공식 화면 없음. 별도 설명 이미지 불필요.',
+            cautionNote: '2026.07.03 보도 흐름을 2026.07.04의 새 메인 업데이트처럼 쓰지 않는다.',
+          },
+          {
+            id: 'google-cloud-release-notes-low-priority',
+            title: 'Google Cloud 2026.07.04 release notes — AI 직접성이 약하면 제외',
+            officialDate: '2026.07.04 검토 항목',
+            checkedDateKST: '2026.07.05',
+            sourceType: 'Official Release Notes / Low Priority',
+            updateType: 'Cloud Release Notes / Not Main AI Update',
+            badges: ['Official Source', 'Not Main AI Update'],
+            summary: 'Google SecOps SOAR 등 일반 Cloud release notes 항목은 AI 모델, agent, Copilot, automation, governance와 직접 연결되지 않으면 AI Updates 메인에서 제외한다.',
+            whatChanged: 'AI 직접성이 약한 일반 클라우드 릴리즈노트는 이번 페이지 메인 흐름에서 제외했다.',
+            whyItMatters: 'AI Updates는 넓은 기술 릴리즈 전체가 아니라 AI 변화가 만드는 검증 기준을 기록하는 페이지다.',
+            dechiveView: '공식 문서라도 AI 검증 기준과 직접 연결되지 않으면 메인 항목으로 올리지 않는다.',
+            readerTakeaway: '공식 출처 여부와 AI Updates 메인 적합성은 별개의 기준이다.',
+            screenMaterialStatus: '공식 화면 없음. 별도 설명 이미지 불필요.',
+            cautionNote: 'AI 직접성이 약한 클라우드 항목을 AI 업데이트처럼 확대하지 않는다.',
+          },
+          {
+            id: 'general-business-market-news-excluded',
+            title: '단순 기업 주가/일반 기술 뉴스 — 직접 연결되지 않으면 Low Priority',
+            officialDate: '2026.07.04 검토 항목',
+            checkedDateKST: '2026.07.05',
+            sourceType: 'Verification Note / Low Priority',
+            updateType: 'Business News / Low Priority',
+            badges: ['Market Watch', 'Not Main AI Update'],
+            summary: 'AI adoption, legal discovery, culture watch, robotics/public demonstration과 직접 연결되지 않으면 제외한다.',
+            whatChanged: '이번 페이지의 핵심 흐름과 직접 연결되는 항목만 메인으로 남겼다.',
+            whyItMatters: 'AI라는 단어가 포함된 일반 기업 뉴스와 AI 검증 아카이브의 핵심 기록은 구분해야 한다.',
+            dechiveView: 'Dechive는 주가 반응보다 AI가 어떤 검증 문제를 만드는지를 우선 기록한다.',
+            readerTakeaway: 'AI Updates의 기준은 화제성이 아니라 검증 가능성과 구조적 의미다.',
+            screenMaterialStatus: '공식 화면 없음. 별도 설명 이미지 불필요.',
+            cautionNote: 'AI와 직접 연결되지 않은 일반 기업 뉴스를 메인 AI 업데이트로 과장하지 않는다.',
+          },
+        ],
+      },
+    ],
+    verificationNote: '이번 페이지는 2026.07.05 KST에 확인한 reportDate 2026.07.04 AI 변화 기록이다. 오늘은 공식 모델 출시보다 보도 기반 흐름이 중심이다. Reuters의 Here Now Health 사례는 AI가 비AI 창업자의 실행 비용을 낮추는 방식을 보여주고, TechCrunch의 Midjourney 소송 보도는 생성형 AI 사용 내역 자체가 법적 증거로 다뤄질 수 있음을 보여준다. Google의 독립기념일 AI 광고 보도는 AI가 역사적 상징과 인간 협업의 문화적 장면 안으로 들어갈 때 어떤 반응을 낳는지도 보여준다.\n\n이번 페이지에서는 보도 기반 항목을 공식 업데이트처럼 쓰지 않는다. Reuters와 TechCrunch 항목은 Reported Context, Adoption Watch, Legal Watch, Culture Watch로 분리한다.\n\n특히 소규모 창업 사례는 AI가 사업을 자동으로 성공시킨다는 뜻이 아니라, 창업자가 학습·문서화·피치 준비·초기 실행의 장벽을 낮추는 데 AI를 사용한 사례로 다룬다. Midjourney 소송 항목은 법원의 최종 판단이 아니라 discovery 과정의 쟁점이다. Google 광고 항목은 제품 성능 평가가 아니라 AI 문화 수용성의 문제로 다룬다.',
+    closingLine: 'AI는 오늘 새로운 모델보다 사용 방식의 문제로 드러났다. 창업자는 AI로 실행 비용을 낮추고, 법정은 AI 사용 기록을 증거로 요구하며, 대중은 역사적 상징 안에 들어온 AI를 불편하게 바라보기 시작했다. Dechive는 AI가 무엇을 할 수 있는지보다, 그 사용이 어떤 맥락에서 검증되어야 하는지 기록한다.',
+    updates: [
+      {
+        id: 'small-business-ai-adoption-summary',
+        slug: 'small-business-ai-quick-start-expansion',
+        title: 'AI는 소규모 창업자의 실행 비용을 낮춘다',
+        summary: 'Reuters는 AI가 소규모 비AI 창업자의 학습, 사업계획, 투자자 피치 준비를 도우며 실행 비용을 낮추는 사례를 보도했다.',
+        badges: ['Reported Context', 'Reliable News', 'Adoption Watch', 'Small Business', 'Productivity'],
+        detailHref: '/ai-updates/2026-07-04#small-business-ai-quick-start-expansion',
+        source: {
+          label: 'Reuters — For one small business, AI was key to a quick start and expansion',
+          url: 'https://www.reuters.com/business/healthcare-pharmaceuticals/one-small-business-ai-was-key-quick-start-expansion-2026-07-04/',
+          description: 'Here Now Health 사례를 통한 소규모 창업 AI 활용 보도',
+        },
+        whatChanged: 'AI가 비AI 창업자의 학습, 계획 수립, 투자 준비, 초기 운영 실행을 돕는 도구로 쓰이는 사례가 확인됐다.',
+        useCriteria: 'AI adoption을 대형 기술 기업 생산성이 아니라 창업 실행 비용과 역할 구조 변화로 설명할 때 사용한다.',
+        verificationNotes: ['reportDate 2026.07.04 기준 Reuters 보도', 'AI가 창업을 자동으로 성공시킨다는 표현은 피한다.'],
+        image: {
+          status: 'none',
+          caption: 'Reuters 보도 기반 항목. 공식 제품 화면 없음. 설명 이미지가 필요하면 창업 실행 흐름 도식이 적합하다.',
+        },
+      },
+      {
+        id: 'midjourney-legal-discovery-summary',
+        slug: 'midjourney-hollywood-ai-usage-discovery',
+        title: 'Midjourney 소송은 AI 사용 기록을 증거 문제로 만든다',
+        summary: 'TechCrunch는 Midjourney가 할리우드 스튜디오의 AI 사용 내역 공개를 더 넓게 요구하고 있다고 보도했다.',
+        badges: ['Reported Context', 'Reliable News', 'AI Copyright', 'Legal Discovery', 'Evidence'],
+        detailHref: '/ai-updates/2026-07-04#midjourney-hollywood-ai-usage-discovery',
+        source: {
+          label: 'TechCrunch — Midjourney wants Hollywood studios to reveal the details of their AI usage',
+          url: 'https://techcrunch.com/2026/07/04/midjourney-wants-hollywood-studios-to-reveal-the-details-of-their-ai-usage/',
+          description: 'Midjourney와 Hollywood studios 저작권 소송 discovery 쟁점 보도',
+        },
+        whatChanged: '생성형 AI 사용 내역, 프롬프트, 결과물, 내부 활용 방식이 discovery의 대상이 되고 있다.',
+        useCriteria: 'AI 저작권 소송을 학습 데이터뿐 아니라 사용 기록과 증거 보존 문제로 설명할 때 사용한다.',
+        verificationNotes: ['reportDate 2026.07.04 기준 TechCrunch 보도', '법원의 최종 판단처럼 쓰지 않는다.'],
+        image: {
+          status: 'none',
+          caption: 'TechCrunch 보도 기반 항목. 공식 제품 화면 없음. 설명 이미지가 필요하면 prompt → output → legal discovery 흐름이 적합하다.',
+        },
+      },
+      {
+        id: 'ai-culture-robotics-summary',
+        slug: 'google-declaration-independence-ai-ad-reaction',
+        title: 'AI는 문화적 상징과 물리 세계의 문제로도 드러난다',
+        summary: 'Google의 독립기념일 AI 광고 반응은 AI가 역사적 상징과 인간 협업 안으로 들어갈 때 생기는 문화적 긴장을 보여주고, RoboCup 2026 인천은 AI가 로봇과 물리 세계의 공공 실험장으로 이어지는 보조 흐름을 보여준다.',
+        badges: ['Reported Context', 'Culture Watch', 'Advertising', 'Public Perception', 'Robotics'],
+        detailHref: '/ai-updates/2026-07-04#google-declaration-independence-ai-ad-reaction',
+        source: {
+          label: 'TechCrunch / Reuters Connect — AI culture and robotics context',
+          url: 'https://techcrunch.com/2026/07/04/new-google-commercial-imagines-a-declaration-of-independence-written-with-help-from-ai/',
+          description: 'Google AI 광고 반응과 RoboCup 2026 인천 보조 자료',
+        },
+        whatChanged: 'AI가 생산성 도구를 넘어 역사적 상징, 인간 협업, 로봇 공개 실험장으로 확장되는 장면이 확인됐다.',
+        useCriteria: 'AI adoption을 기능 가능성뿐 아니라 사회적 수용성, 문화적 맥락, 물리 세계 실험으로 설명할 때 사용한다.',
+        verificationNotes: ['Google 광고 항목은 TechCrunch 보도 기준', 'RoboCup 항목은 Reuters Connect 사진 자료 기준', '문화 반응과 기술 성과를 과장하지 않는다.'],
+        image: {
+          status: 'limited',
+          caption: 'Google 광고 화면은 확인 가능할 수 있으나 본문 보조 자료로만 다룬다. RoboCup 사진 자료도 메인 이미지로 크게 쓰지 않는다.',
+        },
+      },
+    ],
+  },
   {
     date: '2026-07-03',
     checkedDateKST: '2026.07.04',

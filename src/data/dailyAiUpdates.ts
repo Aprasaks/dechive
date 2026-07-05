@@ -18,6 +18,43 @@ export type DailyAiUpdates = {
 
 export const dailyAiUpdates: DailyAiUpdates[] = [
   {
+    date: '2026-07-05',
+    officialDate: '2026-07-04',
+    checkedDateKST: '2026-07-05',
+    href: '/ai-updates/2026-07-04',
+    basis: 'global',
+    label: {
+      ko: 'AI는 사용 방식과 책임의 문제로',
+      en: 'AI moves into usage context and responsibility',
+    },
+    updates: [
+      {
+        title: 'Adoption / Small Business',
+        description: {
+          ko: 'Reuters는 AI가 소규모 비AI 창업자의 학습, 사업계획, 투자자 피치 준비를 도우며 실행 비용을 낮추는 사례를 보도했다',
+          en: 'Reuters reported how AI helped a small non-AI business lower the cost of learning, business planning, and investor pitch preparation',
+        },
+        href: '/ai-updates/2026-07-04#small-business-ai-quick-start-expansion',
+      },
+      {
+        title: 'Legal / Evidence',
+        description: {
+          ko: 'TechCrunch는 Midjourney가 할리우드 스튜디오의 AI 사용 내역 공개를 더 넓게 요구하고 있다고 보도했다',
+          en: 'TechCrunch reported that Midjourney is seeking broader disclosure of Hollywood studios’ AI usage in copyright litigation',
+        },
+        href: '/ai-updates/2026-07-04#midjourney-hollywood-ai-usage-discovery',
+      },
+      {
+        title: 'Culture / Advertising',
+        description: {
+          ko: 'Google의 독립기념일 AI 광고 반응은 AI가 역사적 상징과 인간 협업 안으로 들어갈 때 생기는 문화적 긴장을 보여준다',
+          en: 'Reactions to Google’s Independence Day AI ad show cultural tension when AI enters historical symbols and human collaboration',
+        },
+        href: '/ai-updates/2026-07-04#google-declaration-independence-ai-ad-reaction',
+      },
+    ],
+  },
+  {
     date: '2026-07-04',
     officialDate: '2026-07-03',
     checkedDateKST: '2026-07-04',
