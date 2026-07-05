@@ -3,7 +3,8 @@ import path from 'path';
 import { dailyIssues, type DailyIssue, type DailyIssueLayout } from '@/data/dailyIssues';
 import { dailyAiUpdates, type DailyAiUpdates } from '@/data/dailyAiUpdates';
 import { weeklyEditions, type WeeklyEdition } from '@/data/weeklyEditions';
-import { getArchivePosts, getPostBySlug } from '@/lib/posts';
+import { getArchivePosts, getDeepDivePosts, getPostBySlug } from '@/lib/posts';
+import type { Post } from '@/types/archive';
 
 const FALLBACK_COVER_IMAGE = '/images/bg.webp';
 const TEMPLATE_LAYOUTS: DailyIssueLayout[] = [
@@ -48,17 +49,32 @@ function getLatestConfiguredIssueDate() {
   return [...dailyIssues].sort(compareIssueDateDesc)[0]?.date ?? '';
 }
 
-function getAutoDailyIssuesFromArchivePosts(): DailyIssue[] {
+function getAutoDailyIssuesFromContentPosts(): DailyIssue[] {
   const configuredIssueDates = new Set(dailyIssues.map((issue) => issue.date));
   const latestConfiguredDate = getLatestConfiguredIssueDate();
+  const koPostsByDate = new Map<string, Post>();
   const enPostsBySlug = new Map(getArchivePosts('en').map((post) => [post.slug, post]));
+  const enDeepDivePostsBySlug = new Map(getDeepDivePosts('en').map((post) => [post.slug, post]));
 
-  return getArchivePosts('ko')
-    .filter((post) => post.date > latestConfiguredDate)
-    .filter((post) => !configuredIssueDates.has(post.date))
+  for (const post of getDeepDivePosts('ko')) {
+    if (post.date > latestConfiguredDate && !configuredIssueDates.has(post.date)) {
+      koPostsByDate.set(post.date, post);
+    }
+  }
+
+  for (const post of getArchivePosts('ko')) {
+    if (post.date > latestConfiguredDate && !configuredIssueDates.has(post.date)) {
+      koPostsByDate.set(post.date, post);
+    }
+  }
+
+  return Array.from(koPostsByDate.values())
     .map((post) => {
       const layout = getLayoutForDate(post.date);
-      const enPost = enPostsBySlug.get(post.slug);
+      const enPost = post.type === 'deepdive'
+        ? enDeepDivePostsBySlug.get(post.slug)
+        : enPostsBySlug.get(post.slug);
+      const hrefBase = post.type === 'deepdive' ? 'deep-dive' : 'archive';
 
       return {
         id: post.date,
@@ -74,7 +90,7 @@ function getAutoDailyIssuesFromArchivePosts(): DailyIssue[] {
             ko: post.title,
             en: enPost?.title ?? post.title,
           },
-          href: `/archive/${post.slug}`,
+          href: `/${hrefBase}/${post.slug}`,
         },
         theme: {
           text: '#1f1712',
@@ -88,7 +104,7 @@ function getAutoDailyIssuesFromArchivePosts(): DailyIssue[] {
 function getConfiguredAndAutoDailyIssues() {
   return [
     ...dailyIssues,
-    ...getAutoDailyIssuesFromArchivePosts(),
+    ...getAutoDailyIssuesFromContentPosts(),
   ];
 }
 
@@ -113,6 +129,65 @@ function getArchiveSlugFromHref(href: string) {
   const match = normalizedHref.match(/^\/archive\/([^/?#]+)/);
 
   return match?.[1] ?? null;
+}
+
+function getMonday(date: string) {
+  const currentDate = new Date(`${date}T00:00:00Z`);
+  const day = currentDate.getUTCDay();
+  const diff = day === 0 ? -6 : 1 - day;
+  currentDate.setUTCDate(currentDate.getUTCDate() + diff);
+
+  return currentDate.toISOString().slice(0, 10);
+}
+
+function addDays(date: string, days: number) {
+  const currentDate = new Date(`${date}T00:00:00Z`);
+  currentDate.setUTCDate(currentDate.getUTCDate() + days);
+
+  return currentDate.toISOString().slice(0, 10);
+}
+
+function getWeekLabel(weekStart: string) {
+  const startDate = new Date(`${weekStart}T00:00:00Z`);
+  const month = startDate.getUTCMonth() + 1;
+  const weekNumber = Math.floor((startDate.getUTCDate() - 1) / 7) + 1;
+  const koWeekLabels = ['첫째', '둘째', '셋째', '넷째', '다섯째', '여섯째'];
+  const enMonth = startDate.toLocaleString('en-US', { month: 'long', timeZone: 'UTC' }).toUpperCase();
+  const paddedWeekNumber = String(weekNumber).padStart(2, '0');
+
+  return {
+    ko: `${month}월 ${koWeekLabels[weekNumber - 1] ?? `${weekNumber}번째`} 주`,
+    en: `${enMonth} WEEK ${paddedWeekNumber}`,
+  };
+}
+
+function getAutoWeeklyEditionByDate(date: string): WeeklyEdition | null {
+  const weekStart = getMonday(date);
+  const weekEnd = addDays(weekStart, 6);
+  const koDeepDive = getDeepDivePosts('ko').find((post) =>
+    weekStart <= post.date && post.date <= weekEnd
+  );
+
+  if (!koDeepDive) return null;
+
+  const enDeepDive = getPostBySlug(koDeepDive.slug, 'en');
+
+  return {
+    weekStart,
+    weekEnd,
+    label: getWeekLabel(weekStart),
+    verification: {
+      label: {
+        ko: '검증 기록',
+        en: 'VERIFICATION',
+      },
+      title: {
+        ko: koDeepDive.title,
+        en: enDeepDive?.title ?? koDeepDive.title,
+      },
+      href: `/deep-dive/${koDeepDive.slug}`,
+    },
+  };
 }
 
 function resolveQuestionTitle(issue: DailyIssue): DailyIssue {
@@ -182,9 +257,13 @@ export function getNextDailyIssue(date: string): DailyIssue | null {
 }
 
 export function getWeeklyEditionByDate(date: string): WeeklyEdition | null {
-  return weeklyEditions.find((edition) =>
+  const configuredWeeklyEdition = weeklyEditions.find((edition) =>
     edition.weekStart <= date && date <= edition.weekEnd
-  ) ?? null;
+  );
+
+  if (configuredWeeklyEdition) return configuredWeeklyEdition;
+
+  return getAutoWeeklyEditionByDate(date);
 }
 
 export function getDailyAiUpdatesByDate(date: string): DailyAiUpdates {
