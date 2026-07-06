@@ -194,6 +194,24 @@ export type AiUpdateBadge =
   | 'Market Watch'
   | 'Capital Flow'
   | 'Responsibility'
+  | 'Infrastructure Watch'
+  | 'Semiconductor Watch'
+  | 'Memory Supply'
+  | 'AI Demand'
+  | 'Server Supply Chain'
+  | 'Manufacturing'
+  | 'Cloud Infrastructure'
+  | 'Geopolitical Risk'
+  | 'Human-in-the-loop'
+  | 'Data Labeling'
+  | 'Microtask Labor'
+  | 'Platform Lifecycle'
+  | 'AI Funding'
+  | 'Startup Market'
+  | 'Unicorn Watch'
+  | 'Physical AI'
+  | 'Humanoid Robotics'
+  | 'Capital Market'
   | 'Global Update';
 
 export interface AiUpdateItem {
@@ -240,10 +258,15 @@ export interface AiUpdateGroup {
 export interface AiUpdateBriefingItem {
   id: string;
   title: string;
-  officialDate: string;
+  officialDate?: string;
+  reportDate?: string;
   checkedDateKST?: string;
   sourceType: string;
   officialSource?: {
+    label: string;
+    url: string;
+  };
+  reportSource?: {
     label: string;
     url: string;
   };
@@ -261,6 +284,272 @@ export interface AiUpdateBriefingItem {
 export const AI_UPDATES_MONTH = '2026.07';
 
 export const aiUpdateDays: AiUpdateDay[] = [
+  {
+    date: '2026-07-05',
+    checkedDateKST: '2026.07.06',
+    title: 'AI가 메모리, 서버, 인간 노동 인프라의 문제로 드러난 날',
+    subtitle: '오늘의 흐름은 새로운 모델 출시보다 AI를 떠받치는 인프라의 변화가 중심이다. Samsung과 Foxconn 보도는 AI 수요가 메모리와 서버 제조 공급망을 밀어 올리고 있음을 보여주고, Amazon Mechanical Turk의 신규 고객 중단은 AI 뒤에 있던 인간 라벨링과 microtask 노동 인프라가 변화하고 있음을 보여준다.',
+    quickSummary: [
+      '메모리/반도체: Reuters는 Samsung Electronics의 실적 전망을 통해 AI 인프라 수요가 메모리 반도체 공급망을 밀어 올리고 있음을 보도했다.',
+      '서버/제조: Reuters는 Foxconn의 2분기 매출 증가를 통해 AI 서버와 cloud/networking 제품 수요가 제조 공급망에 직접 영향을 주고 있음을 보도했다.',
+      '인간 노동 인프라: Amazon Mechanical Turk는 2026년 7월 30일부터 신규 고객을 받지 않는다고 공지했고, TechCrunch는 이를 AI 데이터 라벨링과 human-in-the-loop 노동 인프라 변화로 다뤘다.',
+      '보조 흐름: TechCrunch의 신규 유니콘 목록과 humanoid robotics 보도는 AI 투자 열기와 physical AI 자본 흐름이 계속 이어지고 있음을 보여준다.',
+    ],
+    groups: [
+      {
+        name: 'AI Infrastructure / Memory Supply',
+        intro: 'AI 수요는 GPU와 모델 경쟁에만 머물지 않는다. inference와 agentic workload가 늘어나면 서버용 메모리, 저장장치, HBM, DRAM, NAND 공급망까지 함께 움직인다.',
+        updates: [
+          {
+            id: 'samsung-ai-memory-demand-supply-chain',
+            title: 'Samsung AI 메모리 수요 — AI는 메모리 공급망의 문제가 된다',
+            reportDate: '2026.07.05',
+            checkedDateKST: '2026.07.06',
+            sourceType: 'Reliable News / Reuters / Infrastructure Watch',
+            reportSource: {
+              label: 'Reuters — Samsung likely to post 18-fold jump in profit on surging AI demand for memory',
+              url: 'https://www.reuters.com/world/asia-pacific/samsung-likely-post-18-fold-jump-profit-surging-ai-demand-memory-2026-07-05/',
+            },
+            updateType: 'AI Infrastructure / Memory Supply / Semiconductor Watch',
+            badges: ['Reported Context', 'Reliable News', 'Infrastructure Watch', 'Semiconductor Watch', 'Memory Supply', 'AI Demand', 'Official Screen Not Required', 'Explanation Image Recommended'],
+            summary: 'Reuters는 Samsung Electronics의 2분기 영업이익이 AI 인프라 수요와 메모리 공급 부족으로 전년 대비 크게 증가할 것으로 예상된다고 보도했다. 보도는 AI inference와 agentic AI workload 확대가 HBM뿐 아니라 DRAM과 NAND 수요에도 영향을 주고 있다고 설명한다.',
+            whatChanged: 'AI 수요가 GPU나 모델 경쟁을 넘어 메모리 반도체 공급망과 가격 구조에 영향을 주는 흐름이 다시 확인됐다.',
+            whyItMatters: 'AI 서비스는 대규모 연산뿐 아니라 데이터를 저장하고 빠르게 불러오는 메모리 인프라에 의존한다. agentic AI와 inference workload가 늘어날수록 서버용 메모리와 저장장치 수요도 커진다.',
+            dechiveView: 'Dechive는 AI를 모델 이름으로만 보지 않는다. AI 성능 경쟁 뒤에는 메모리 공급, 서버 수요, 반도체 가격, 공급 부족이라는 물리적 조건이 있다. AI 검증은 모델이 얼마나 똑똑한지만이 아니라, 그 모델을 돌리는 인프라가 지속 가능한지도 함께 봐야 한다.',
+            readerTakeaway: 'AI 수요는 모델 회사뿐 아니라 메모리 반도체 공급망까지 밀어 올리고 있다.',
+            screenMaterialStatus: 'Reuters 보도 기반 항목이므로 공식 제품 화면 없음. 설명 이미지가 필요하다면 “AI inference / agentic workload → server memory → DRAM / NAND / HBM demand → semiconductor supply chain” 흐름이 적합하다.',
+            cautionNote: 'Samsung의 실적을 확정 결과처럼 쓰지 않는다. Reuters가 보도한 실적 전망과 AI 메모리 수요 흐름으로 제한한다.',
+          },
+        ],
+      },
+      {
+        name: 'AI Server Supply Chain / Manufacturing',
+        intro: 'AI 인프라는 칩을 사는 문제에서 끝나지 않는다. 서버 조립, 랙 구성, cloud/networking 장비, 제조 능력, 지정학적 리스크가 실제 공급 능력과 비용을 결정한다.',
+        updates: [
+          {
+            id: 'foxconn-ai-server-supply-chain-manufacturing',
+            title: 'Foxconn AI 서버 수요 — AI 인프라는 제조 공급망과 지정학 리스크를 함께 가진다',
+            reportDate: '2026.07.05',
+            checkedDateKST: '2026.07.06',
+            sourceType: 'Reliable News / Reuters / Infrastructure Watch',
+            reportSource: {
+              label: 'Reuters — Foxconn second-quarter revenue jumps 40% y/y',
+              url: 'https://www.reuters.com/world/asia-pacific/foxconn-second-quarter-revenue-jumps-40-yy-2026-07-05/',
+            },
+            updateType: 'AI Server Supply Chain / Manufacturing / Cloud Infrastructure / Geopolitical Risk',
+            badges: ['Reported Context', 'Reliable News', 'Infrastructure Watch', 'Server Supply Chain', 'Manufacturing', 'Cloud Infrastructure', 'Geopolitical Risk', 'Official Screen Not Required', 'Explanation Image Recommended'],
+            summary: 'Reuters는 Foxconn의 2분기 매출이 전년 대비 39.8% 증가했고, AI 제품 수요가 cloud and networking products 부문 성장을 이끌었다고 보도했다. Foxconn은 Nvidia의 주요 서버 제조사로도 언급되며, AI racks 성장세가 이어질 것으로 봤지만 지정학적 불확실성도 경계했다.',
+            whatChanged: 'AI 수요가 서버 제조, cloud/networking 장비, AI racks 같은 제조 공급망으로 확산되고 있음이 확인됐다.',
+            whyItMatters: 'AI 인프라는 칩만으로 작동하지 않는다. 서버 조립, 랙 구성, 네트워크 장비, 클라우드 인프라, 지정학적 리스크가 모두 공급 능력과 비용에 영향을 준다.',
+            dechiveView: 'AI 산업을 검증하려면 모델 성능뿐 아니라 누가 서버를 만들고, 어떤 지역과 공급망 리스크가 있으며, 실제 수요를 제조 생태계가 감당할 수 있는지도 봐야 한다. AI는 소프트웨어처럼 보이지만, 실제로는 거대한 제조 산업 위에서 돌아간다.',
+            readerTakeaway: 'AI 성장은 서버 제조와 cloud/networking 공급망까지 함께 밀어 올린다.',
+            screenMaterialStatus: 'Reuters 보도 기반 항목이므로 공식 제품 화면 없음. 설명 이미지가 필요하다면 “AI model demand → AI servers → racks / networking → manufacturing supply chain → geopolitical risk” 흐름이 적합하다.',
+            cautionNote: 'Foxconn의 매출 증가가 모두 AI 때문이라고 단정하지 않는다. Reuters가 보도한 cloud and networking products와 AI 수요 관련 흐름으로 제한한다.',
+          },
+        ],
+      },
+      {
+        name: 'Human-in-the-loop / Data Labeling',
+        intro: 'AI 뒤에는 데이터 라벨링, 검수, moderation, microtask 노동이 있었다. 플랫폼의 신규 고객 중단은 인간 노동이 사라졌다는 결론이 아니라, 그 인프라가 다른 형태로 이동하고 있을 수 있다는 신호다.',
+        updates: [
+          {
+            id: 'amazon-mechanical-turk-new-customers-closed',
+            title: 'Amazon Mechanical Turk 신규 고객 중단 — AI 뒤의 인간 노동 인프라가 바뀐다',
+            officialDate: '2026.07.05 확인 기준',
+            checkedDateKST: '2026.07.06',
+            sourceType: 'Official Site / TechCrunch / Platform Lifecycle',
+            officialSource: {
+              label: 'Amazon Mechanical Turk 공식 사이트',
+              url: 'https://www.mturk.com/',
+            },
+            reportSource: {
+              label: 'TechCrunch — Amazon will stop accepting new customers for Mechanical Turk',
+              url: 'https://techcrunch.com/2026/07/05/amazon-will-stop-accepting-new-customers-for-mechanical-turk/',
+            },
+            updateType: 'Human-in-the-loop / Data Labeling / Microtask Labor / Platform Lifecycle',
+            badges: ['Official Source', 'Reported Context', 'Reliable News', 'Human-in-the-loop', 'Data Labeling', 'Microtask Labor', 'Platform Lifecycle', 'Official Screen Available', 'Explanation Image Recommended'],
+            summary: 'Amazon Mechanical Turk 공식 사이트는 2026년 7월 30일부터 신규 고객을 받지 않으며, 기존 고객과 작업자는 영향을 받지 않는다고 공지했다. TechCrunch는 이 변화를 다루며 MTurk가 데이터 라벨링, human-in-the-loop workflow, AI 뒤의 숨은 인간 노동 논의와 연결되어 있었다고 설명했다.',
+            whatChanged: 'AI 데이터 라벨링과 microtask 노동 인프라로 오랫동안 쓰이던 MTurk가 신규 고객 접수를 중단하는 방향으로 바뀐다.',
+            whyItMatters: 'AI 산업은 오랫동안 인간 라벨러, 데이터 검수, moderation, microtask 노동에 의존해 왔다. AI가 발전할수록 “인간이 필요 없어졌다”는 말이 나오지만, 실제로는 인간 노동 인프라가 다른 형태로 이동하고 있을 수 있다.',
+            dechiveView: '이 항목은 Dechive에 매우 중요하다. AI를 검증하려면 모델 결과만 보는 것이 아니라, 그 모델을 만들고 평가하고 보정해온 인간 노동의 구조도 봐야 한다. MTurk 신규 고객 중단은 AI 뒤의 인간 노동 인프라가 어떻게 변하는지를 기록할 만한 신호다.',
+            readerTakeaway: 'AI는 인간 노동을 없애기만 한 것이 아니라, 인간이 보이지 않게 참여하던 데이터 작업 구조도 바꾸고 있다.',
+            screenMaterialStatus: 'Amazon Mechanical Turk 공식 사이트 공지 화면 참고 가능. 설명 이미지가 필요하다면 “microtask workers → data labeling / validation → AI workflow → platform lifecycle change” 흐름이 적합하다.',
+            cautionNote: 'MTurk가 완전히 종료된다고 쓰지 않는다. 공식 공지 기준으로는 신규 고객 접수 중단이며 기존 고객과 작업자는 영향을 받지 않는다고 구분한다.',
+          },
+        ],
+      },
+      {
+        name: 'AI Funding / Startup Market',
+        intro: 'AI는 기술 변화이자 투자 흐름이다. 다만 유니콘 수와 높은 기업가치는 검증된 문제 해결과 같은 뜻이 아니므로 자본시장 신호로 분리해 읽어야 한다.',
+        updates: [
+          {
+            id: 'ai-unicorn-funding-startup-market-2026',
+            title: 'AI 유니콘 증가 — AI 투자 열기는 여전히 자본시장을 움직인다',
+            reportDate: '2026.07.05',
+            checkedDateKST: '2026.07.06',
+            sourceType: 'Reliable News / TechCrunch / Capital Watch',
+            reportSource: {
+              label: 'TechCrunch — 2026 new unicorns list',
+              url: 'https://techcrunch.com/2026/07/05/almost-40-new-unicorns-have-been-minted-so-far-this-year-here-they-are/',
+            },
+            updateType: 'AI Funding / Startup Market / Capital Flow / Unicorn Watch',
+            badges: ['Reported Context', 'Reliable News', 'AI Funding', 'Startup Market', 'Capital Flow', 'Unicorn Watch', 'Official Screen Not Required', 'Explanation Image Recommended'],
+            summary: 'TechCrunch는 2026년에 새로 유니콘이 된 스타트업 목록을 정리하며, 다수가 AI 관련 기업이라고 보도했다. 이 목록은 AI 투자 열기가 스타트업 자본시장에 계속 영향을 주고 있음을 보여준다.',
+            whatChanged: 'AI 관련 스타트업이 여전히 고평가와 대규모 투자를 받으며 자본시장에서 중요한 축으로 남아 있다.',
+            whyItMatters: '어떤 기업이 유니콘이 되는지는 시장이 어떤 AI 문제와 인프라, 응용 영역에 자본을 배분하는지 보여준다.',
+            dechiveView: '이 항목은 메인보다 보조 흐름에 가깝다. Dechive는 AI 유니콘 수를 단순히 성공 신호로 보지 않는다. 투자 열기가 어떤 문제를 해결하고 있는지, 혹은 어떤 기대를 가격에 반영하고 있는지를 따로 검증해야 한다.',
+            readerTakeaway: 'AI 투자 열기는 계속되지만, 높은 기업가치가 곧 검증된 문제 해결을 의미하지는 않는다.',
+            screenMaterialStatus: 'TechCrunch 보도 기반 항목이므로 공식 제품 화면 없음. 설명 이미지가 필요하다면 “AI startup → funding round → unicorn valuation → market expectation” 흐름이 적합하다.',
+            cautionNote: 'AI 유니콘 증가를 곧바로 AI 산업의 안정적 성공으로 단정하지 않는다. 투자 시장 흐름으로 제한한다.',
+          },
+        ],
+      },
+      {
+        name: 'Robotics / Physical AI',
+        intro: 'Physical AI는 모델을 물리 세계로 옮기는 문제다. 로봇 하드웨어, 센서, 제조, 안전성, 실제 작업 환경이 함께 검증되어야 하므로 투자 열기와 실제 배포 가능성을 구분한다.',
+        updates: [
+          {
+            id: 'humanoid-robotics-capital-market-physical-ai',
+            title: 'Humanoid robotics 자본시장 — Physical AI는 아직 약속과 현실 사이에 있다',
+            reportDate: '2026.07.05',
+            checkedDateKST: '2026.07.06',
+            sourceType: 'Reliable News / TechCrunch / Robotics Watch',
+            reportSource: {
+              label: 'TechCrunch — This humanoid robotics company is going public, but its CEO isn’t promising a robot in your home anytime soon',
+              url: 'https://techcrunch.com/2026/07/05/this-humanoid-robotics-company-is-going-public-but-its-ceo-isnt-promising-a-robot-in-your-home-anytime-soon/',
+            },
+            updateType: 'Robotics / Physical AI / Humanoid Robotics / Capital Market',
+            badges: ['Reported Context', 'Reliable News', 'Robotics', 'Physical AI', 'Humanoid Robotics', 'Capital Market', 'Official Screen Not Required', 'Explanation Image Recommended'],
+            summary: 'TechCrunch는 Agility Robotics의 SPAC 상장 계획과 humanoid robotics 시장에 몰리는 자본 흐름을 다뤘다. 기사에서는 AI2 Robotics, Apptronik, Figure AI 등 humanoid robotics 기업들의 투자와 평가도 함께 언급된다.',
+            whatChanged: 'AI와 로봇이 결합된 physical AI 영역이 자본시장으로 더 강하게 이동하고 있다.',
+            whyItMatters: 'AI가 물리 세계에서 작동하려면 모델뿐 아니라 로봇 하드웨어, 센서, 제조, 안전성, 실제 작업 환경이 모두 필요하다. humanoid robotics는 기대가 크지만, 실제 가정 보급이나 일상 적용은 여전히 신중하게 봐야 한다.',
+            dechiveView: 'Dechive는 로봇 투자 열기를 그대로 미래 확정처럼 받아들이지 않는다. 중요한 것은 자본이 몰린다는 사실보다, physical AI가 어떤 실제 작업을 안정적으로 수행할 수 있는지와 그 한계가 어디인지다.',
+            readerTakeaway: 'Physical AI는 자본시장의 관심을 받지만, 가정용 로봇의 현실화는 여전히 검증이 필요하다.',
+            screenMaterialStatus: 'TechCrunch 보도 기반 항목이므로 공식 제품 화면 없음. 설명 이미지가 필요하다면 “AI model → robot body → real-world task → safety / deployment gap” 흐름이 적합하다.',
+            cautionNote: 'humanoid robotics가 곧 가정에 보급된다고 쓰지 않는다. 기사 제목의 취지처럼 실제 보급 약속에는 신중해야 한다.',
+          },
+        ],
+      },
+      {
+        name: 'Low Priority / Excluded',
+        intro: 'AI 카테고리에 걸릴 수 있어도 이번 페이지의 reportDate와 핵심 흐름에 맞지 않거나 직접성이 낮은 항목은 메인에서 제외한다.',
+        updates: [
+          {
+            id: 'un-ai-regulation-warning-next-date-candidate',
+            title: 'UN chief AI regulation warning — 2026.07.06 후보로 보류',
+            reportDate: '2026.07.06 후보',
+            checkedDateKST: '2026.07.06',
+            sourceType: 'Date Boundary / Excluded',
+            updateType: 'AI Regulation / Date Boundary / Not Main AI Update',
+            badges: ['Reported Context', 'Date Discrepancy', 'Not Main AI Update'],
+            summary: 'Reuters 보도일이 2026.07.06이면 다음 날짜인 2026.07.06 AI Updates 후보로 넘긴다.',
+            whatChanged: '이번 2026.07.05 페이지의 메인 흐름에는 포함하지 않았다.',
+            whyItMatters: '날짜 기준을 흐리면 AI Updates가 같은 흐름을 여러 날짜에 반복하는 뉴스 나열이 된다.',
+            dechiveView: 'Dechive는 reportDate와 checkedDateKST를 분리하고, 날짜가 다른 항목은 다음 기준일 후보로 남긴다.',
+            readerTakeaway: '날짜 경계는 업데이트 검증의 일부다.',
+            screenMaterialStatus: '공식 화면 없음. 별도 설명 이미지 불필요.',
+            cautionNote: '2026.07.06 보도 항목을 2026.07.05 메인 업데이트처럼 쓰지 않는다.',
+          },
+          {
+            id: 'general-market-tech-news-excluded-2026-07-05',
+            title: '단순 기업 주가/일반 기술 뉴스 — 직접 연결되지 않으면 제외',
+            reportDate: '2026.07.05 검토 항목',
+            checkedDateKST: '2026.07.06',
+            sourceType: 'Verification Note / Low Priority',
+            updateType: 'Business News / Low Priority',
+            badges: ['Market Watch', 'Not Main AI Update'],
+            summary: 'AI infrastructure, human-in-the-loop, capital flow, robotics와 직접 연결되지 않으면 이번 페이지 메인에서 제외한다.',
+            whatChanged: '이번 페이지의 핵심 흐름과 직접 연결되는 항목만 메인으로 남겼다.',
+            whyItMatters: 'AI라는 단어가 포함된 일반 기업 뉴스와 AI 검증 아카이브의 핵심 기록은 구분해야 한다.',
+            dechiveView: 'Dechive는 주가 반응보다 AI가 어떤 검증 문제를 만드는지를 우선 기록한다.',
+            readerTakeaway: 'AI Updates의 기준은 화제성이 아니라 검증 가능성과 구조적 의미다.',
+            screenMaterialStatus: '공식 화면 없음. 별도 설명 이미지 불필요.',
+            cautionNote: 'AI와 직접 연결되지 않은 일반 기업 뉴스를 메인 AI 업데이트로 과장하지 않는다.',
+          },
+          {
+            id: 'previous-date-items-not-repeated-2026-07-05',
+            title: '기존 2026.07.04 보도 재보도 — 반복하지 않음',
+            reportDate: '2026.07.05 검토 항목',
+            checkedDateKST: '2026.07.06',
+            sourceType: 'Date Boundary / Excluded',
+            updateType: 'Reported Context / Duplicate Avoidance / Not Main AI Update',
+            badges: ['Reported Context', 'Date Discrepancy', 'Not Main AI Update'],
+            summary: 'AI adoption, Midjourney discovery, Google AI advertising 등 2026.07.04 페이지에서 이미 다룬 항목은 이번 페이지 메인으로 반복하지 않는다.',
+            whatChanged: '이전 날짜에서 이미 메인으로 기록한 흐름은 2026.07.05 상세 페이지의 중심 항목에서 제외했다.',
+            whyItMatters: '날짜별 아카이브는 같은 보도를 다시 메인처럼 반복하지 않고, 기준일에 새로 확인된 흐름을 기록해야 한다.',
+            dechiveView: 'Dechive는 중복보다 날짜 기준과 검증 가능한 변화의 경계를 우선한다.',
+            readerTakeaway: '이미 기록한 항목을 새 날짜의 메인 업데이트처럼 반복하지 않는다.',
+            screenMaterialStatus: '공식 화면 없음. 별도 설명 이미지 불필요.',
+            cautionNote: '2026.07.04 페이지에서 다룬 항목을 2026.07.05의 새 메인 업데이트처럼 쓰지 않는다.',
+          },
+        ],
+      },
+    ],
+    verificationNote: '이번 페이지는 2026.07.06 KST에 확인한 reportDate 2026.07.05 AI 변화 기록이다. 오늘은 공식 모델 출시보다 AI를 떠받치는 인프라와 노동 구조의 변화가 중심이다. Samsung과 Foxconn 보도는 AI 수요가 메모리, 서버, cloud/networking 제품, 제조 공급망까지 밀어 올리고 있음을 보여준다. Amazon Mechanical Turk 신규 고객 중단은 AI 산업 뒤에 있던 human-in-the-loop, 데이터 라벨링, microtask 노동 인프라가 변화하고 있음을 보여준다.\n\n이번 페이지에서는 보도 기반 항목을 공식 업데이트처럼 쓰지 않는다. Reuters와 TechCrunch 항목은 Infrastructure Watch, Supply Chain Watch, Human-in-the-loop Watch, Capital Watch, Robotics Watch로 분리한다.\n\n특히 Samsung 항목은 실적 확정이 아니라 Reuters의 실적 전망 보도이며, Foxconn 항목은 매출 증가 전체가 AI 때문이라고 단정하지 않는다. Mechanical Turk 항목은 서비스 종료가 아니라 신규 고객 접수 중단으로 구분한다. AI 유니콘과 humanoid robotics 항목은 자본 흐름으로 다루되, 투자 열기를 기술 검증 완료로 보지 않는다.',
+    closingLine: 'AI는 모델만으로 작동하지 않는다. 메모리와 서버 공급망, 인간 라벨링 노동, 스타트업 자본, 로봇 제조 생태계가 함께 움직일 때 비로소 AI 산업이 굴러간다. Dechive는 AI가 무엇을 가능하게 하는지보다, 그 가능성을 떠받치는 구조가 무엇인지 기록한다.',
+    updates: [
+      {
+        id: 'ai-infrastructure-memory-server-labor-summary',
+        slug: 'samsung-ai-memory-demand-supply-chain',
+        title: 'AI는 메모리, 서버, 인간 노동 인프라 위에서 움직인다',
+        summary: 'Reuters의 Samsung과 Foxconn 보도는 AI 수요가 메모리 반도체, 서버 제조, cloud/networking 제품 공급망을 밀어 올리고 있음을 보여준다.',
+        badges: ['Reported Context', 'Reliable News', 'Infrastructure Watch', 'Memory Supply', 'Server Supply Chain'],
+        detailHref: '/ai-updates/2026-07-05#samsung-ai-memory-demand-supply-chain',
+        source: {
+          label: 'Reuters — AI memory and server supply chain reports',
+          url: 'https://www.reuters.com/world/asia-pacific/samsung-likely-post-18-fold-jump-profit-surging-ai-demand-memory-2026-07-05/',
+          description: 'Samsung 메모리 수요와 Foxconn AI 서버 공급망 보도',
+        },
+        whatChanged: 'AI 수요가 메모리 반도체와 서버 제조 공급망으로 확산되는 흐름이 확인됐다.',
+        useCriteria: 'AI 산업을 모델 출시가 아니라 인프라 수요와 공급망 조건으로 설명할 때 사용한다.',
+        verificationNotes: ['reportDate 2026.07.05 기준 Reuters 보도', '실적 전망과 매출 증가의 원인을 확정처럼 쓰지 않는다.'],
+        image: {
+          status: 'none',
+          caption: 'Reuters 보도 기반 항목. 공식 제품 화면 없음. 설명 이미지가 필요하면 메모리와 서버 공급망 도식이 적합하다.',
+        },
+      },
+      {
+        id: 'human-in-the-loop-platform-lifecycle-summary',
+        slug: 'amazon-mechanical-turk-new-customers-closed',
+        title: 'Mechanical Turk 신규 고객 중단은 인간 노동 인프라의 변화를 보여준다',
+        summary: 'Amazon Mechanical Turk는 2026년 7월 30일부터 신규 고객을 받지 않는다고 공지했고, TechCrunch는 이를 AI 데이터 라벨링과 human-in-the-loop 노동 인프라 변화로 다뤘다.',
+        badges: ['Official Source', 'Human-in-the-loop', 'Data Labeling', 'Microtask Labor', 'Platform Lifecycle'],
+        detailHref: '/ai-updates/2026-07-05#amazon-mechanical-turk-new-customers-closed',
+        source: {
+          label: 'Amazon Mechanical Turk / TechCrunch',
+          url: 'https://www.mturk.com/',
+          description: 'MTurk 신규 고객 중단 공식 공지와 TechCrunch 보도',
+        },
+        whatChanged: 'AI 뒤의 데이터 라벨링과 microtask 노동 인프라로 쓰이던 플랫폼이 신규 고객 접수를 중단한다.',
+        useCriteria: 'AI가 인간 노동을 대체했다는 단정이 아니라 human-in-the-loop 인프라가 어떻게 이동하는지 설명할 때 사용한다.',
+        verificationNotes: ['officialDate는 2026.07.05 확인 기준', '서비스 종료가 아니라 신규 고객 접수 중단으로 구분한다.'],
+        image: {
+          status: 'limited',
+          caption: 'Amazon Mechanical Turk 공식 사이트 공지 화면 참고 가능. 설명 이미지가 필요하면 microtask 노동과 AI workflow 흐름이 적합하다.',
+        },
+      },
+      {
+        id: 'ai-capital-robotics-market-summary',
+        slug: 'ai-unicorn-funding-startup-market-2026',
+        title: 'AI 자본은 스타트업과 humanoid robotics로도 흐른다',
+        summary: 'TechCrunch의 신규 유니콘 목록과 Agility Robotics 보도는 AI 투자 열기가 스타트업 자본시장과 physical AI 영역으로 이어지고 있음을 보여준다.',
+        badges: ['Reported Context', 'AI Funding', 'Startup Market', 'Capital Flow', 'Robotics', 'Physical AI'],
+        detailHref: '/ai-updates/2026-07-05#ai-unicorn-funding-startup-market-2026',
+        source: {
+          label: 'TechCrunch — AI funding and robotics market context',
+          url: 'https://techcrunch.com/2026/07/05/almost-40-new-unicorns-have-been-minted-so-far-this-year-here-they-are/',
+          description: 'AI 유니콘 목록과 humanoid robotics 자본시장 보도',
+        },
+        whatChanged: 'AI 관련 스타트업과 humanoid robotics 기업이 자본시장에서 계속 주목받고 있다.',
+        useCriteria: 'AI 투자 열기를 기술 검증 완료가 아니라 시장 기대와 자본 배분의 신호로 설명할 때 사용한다.',
+        verificationNotes: ['reportDate 2026.07.05 기준 TechCrunch 보도', '유니콘 증가와 로봇 상장을 안정적 기술 성공으로 단정하지 않는다.'],
+        image: {
+          status: 'none',
+          caption: 'TechCrunch 보도 기반 항목. 공식 제품 화면 없음. 설명 이미지가 필요하면 startup funding과 physical AI deployment gap 도식이 적합하다.',
+        },
+      },
+    ],
+  },
   {
     date: '2026-07-04',
     checkedDateKST: '2026.07.05',

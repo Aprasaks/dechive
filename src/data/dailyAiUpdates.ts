@@ -18,6 +18,43 @@ export type DailyAiUpdates = {
 
 export const dailyAiUpdates: DailyAiUpdates[] = [
   {
+    date: '2026-07-06',
+    officialDate: '2026-07-05',
+    checkedDateKST: '2026-07-06',
+    href: '/ai-updates/2026-07-05',
+    basis: 'global',
+    label: {
+      ko: 'AI는 메모리, 서버, 인간 노동 인프라 위에서 움직이고 있다',
+      en: 'AI runs on memory, servers, and human labor infrastructure',
+    },
+    updates: [
+      {
+        title: 'Memory / Server Supply',
+        description: {
+          ko: 'Reuters는 Samsung과 Foxconn 보도를 통해 AI 수요가 메모리 반도체, 서버 제조, cloud/networking 제품 공급망을 밀어 올리고 있음을 보여줬다',
+          en: 'Reuters reports on Samsung and Foxconn show AI demand pushing memory chips, server manufacturing, and cloud/networking supply chains',
+        },
+        href: '/ai-updates/2026-07-05#samsung-ai-memory-demand-supply-chain',
+      },
+      {
+        title: 'Human-in-the-loop Labor',
+        description: {
+          ko: 'Amazon Mechanical Turk의 신규 고객 중단은 AI 뒤에 있던 human-in-the-loop, 데이터 라벨링, microtask 노동 인프라가 변화하고 있음을 드러냈다',
+          en: 'Amazon Mechanical Turk closing to new customers shows a shift in the human-in-the-loop, data labeling, and microtask labor infrastructure behind AI',
+        },
+        href: '/ai-updates/2026-07-05#amazon-mechanical-turk-new-customers-closed',
+      },
+      {
+        title: 'Capital / Physical AI',
+        description: {
+          ko: 'AI 유니콘과 humanoid robotics 보도는 스타트업 자본과 로봇 제조 생태계가 AI 흐름 안에서 함께 움직이고 있음을 보여준다',
+          en: 'AI unicorn and humanoid robotics reports show startup capital and robotics manufacturing ecosystems moving alongside the AI market',
+        },
+        href: '/ai-updates/2026-07-05#ai-unicorn-funding-startup-market-2026',
+      },
+    ],
+  },
+  {
     date: '2026-07-05',
     officialDate: '2026-07-04',
     checkedDateKST: '2026-07-05',

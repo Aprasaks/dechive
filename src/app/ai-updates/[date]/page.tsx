@@ -128,13 +128,26 @@ function Field({
   );
 }
 
+function getUpdateMeta(update: AiUpdateBriefingItem) {
+  return [
+    update.reportDate ? `reportDate ${update.reportDate}` : '',
+    update.officialDate ? `officialDate ${update.officialDate}` : '',
+    update.checkedDateKST ? `Checked KST ${update.checkedDateKST}` : '',
+    update.sourceType,
+  ].filter(Boolean).join(' · ');
+}
+
 function UpdateCard({ update }: { update: AiUpdateBriefingItem }) {
+  const sourceLinks = [update.officialSource, update.reportSource].filter(
+    (source): source is NonNullable<typeof source> => Boolean(source)
+  );
+
   return (
     <article id={update.id} className="border-t border-[#d8cdbd] py-9 first:border-t-0 first:pt-0">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
         <div>
           <p className="text-[11px] font-semibold tracking-[0.2em] text-[#9a7342] uppercase">
-            {[update.officialDate, update.checkedDateKST ? `Checked KST ${update.checkedDateKST}` : '', update.sourceType].filter(Boolean).join(' · ')}
+            {getUpdateMeta(update)}
           </p>
           <h3 className="mt-3 font-[family-name:var(--font-header-serif)] text-2xl leading-tight font-medium text-[#2a211b] sm:text-3xl">
             {update.title}
@@ -146,15 +159,20 @@ function UpdateCard({ update }: { update: AiUpdateBriefingItem }) {
         <p className="shrink-0 text-xs font-semibold tracking-[0.14em] text-[#8a6a39] uppercase">
           {update.updateType}
         </p>
-        {update.officialSource ? (
-          <a
-            href={update.officialSource.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-3 inline-flex text-xs font-semibold tracking-[0.12em] text-[#8a6a39] uppercase underline decoration-[#b08d57]/35 underline-offset-4 transition-colors hover:text-[#2a211b]"
-          >
-            {update.officialSource.label}
-          </a>
+        {sourceLinks.length ? (
+          <div className="flex shrink-0 flex-col items-start gap-2 lg:items-end">
+            {sourceLinks.map((source) => (
+              <a
+                key={`${source.label}-${source.url}`}
+                href={source.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex text-xs font-semibold tracking-[0.12em] text-[#8a6a39] uppercase underline decoration-[#b08d57]/35 underline-offset-4 transition-colors hover:text-[#2a211b]"
+              >
+                {source.label}
+              </a>
+            ))}
+          </div>
         ) : null}
       </div>
 
