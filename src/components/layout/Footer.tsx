@@ -8,11 +8,11 @@ export default function Footer() {
   const pathname = usePathname();
   const { lang } = useLang();
   const rssHref = lang === 'en' ? '/en/feed.xml' : '/feed.xml';
-  const footerClassName = 'border-[#ded6c9] bg-[#f8f6f1] text-[#6f6257]';
-  const brandClassName = 'text-[#17120d]';
-  const accentClassName = 'text-[#8a6332]';
-  const copyrightClassName = 'text-[#8b8175]';
-  const linkClassName = 'text-[#6f6257] hover:text-[#17120d]';
+  const footerClassName = 'border-white/8 bg-[#030303] text-white/46';
+  const brandClassName = 'text-white/68';
+  const accentClassName = 'text-[#f6d29b]/70';
+  const copyrightClassName = 'text-white/36';
+  const linkClassName = 'text-white/48 hover:text-[#f6d29b]';
 
   if (pathname === '/' || pathname === '/about' || pathname.startsWith('/admin')) return null;
 

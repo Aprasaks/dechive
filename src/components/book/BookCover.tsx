@@ -16,13 +16,13 @@ export default function BookCover({
   if (!src) {
     return (
       <div
-        className={`aspect-[3/4] border border-[#d8c9b0] bg-[#efe7da] p-4 shadow-[0_18px_45px_rgba(42,33,27,0.08)] ${className}`}
+        className={`aspect-[3/4] border border-white/10 bg-white/[0.035] p-4 shadow-[0_18px_45px_rgba(0,0,0,0.22)] ${className}`}
       >
-        <div className="flex h-full flex-col justify-between border border-[#cbb899]/55 p-4">
-          <p className="text-[10px] font-semibold tracking-[0.2em] text-[#9a7342] uppercase">
+        <div className="flex h-full flex-col justify-between border border-[#d7ad73]/28 p-4">
+          <p className="text-[10px] font-semibold tracking-[0.2em] text-[#f6d29b]/72 uppercase">
             Dechive Book
           </p>
-          <p className="font-[family-name:var(--font-header-serif)] text-xl leading-tight text-[#2a211b]">
+          <p className="font-[family-name:var(--font-header-serif)] text-xl leading-tight text-[#f5ead5]">
             {title}
           </p>
         </div>
@@ -32,7 +32,7 @@ export default function BookCover({
 
   return (
     <div
-      className={`relative aspect-[3/4] overflow-hidden border border-[#d8c9b0] bg-[#efe7da] shadow-[0_18px_45px_rgba(42,33,27,0.08)] ${className}`}
+      className={`relative aspect-[3/4] overflow-hidden border border-white/10 bg-white/[0.035] shadow-[0_18px_45px_rgba(0,0,0,0.22)] ${className}`}
     >
       <Image
         src={src}

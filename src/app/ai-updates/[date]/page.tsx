@@ -103,7 +103,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 function Badge({ label }: { label: string }) {
   return (
-    <span className="inline-flex rounded-sm border border-[#bda77e]/45 bg-[#fbfaf7] px-2.5 py-1 text-[10px] font-semibold tracking-[0.12em] text-[#6d5634] uppercase">
+    <span className="inline-flex rounded-sm border border-[#d7ad73]/35 bg-[#d7ad73]/10 px-2.5 py-1 text-[10px] font-semibold tracking-[0.12em] text-[#f6d29b]/76 uppercase">
       {label}
     </span>
   );
@@ -117,11 +117,11 @@ function Field({
   children: ReactNode;
 }) {
   return (
-    <div className="border-t border-[#ded6c9] pt-5">
-      <p className="text-[11px] font-semibold tracking-[0.18em] text-[#9a7342] uppercase">
+    <div className="border-t border-white/10 pt-5">
+      <p className="text-[11px] font-semibold tracking-[0.18em] text-[#f6d29b]/72 uppercase">
         {label}
       </p>
-      <div className="mt-2 text-sm leading-7 text-[#50473f]">
+      <div className="mt-2 text-sm leading-7 text-[#e8dfcd]/72">
         {children}
       </div>
     </div>
@@ -143,20 +143,20 @@ function UpdateCard({ update }: { update: AiUpdateBriefingItem }) {
   );
 
   return (
-    <article id={update.id} className="border-t border-[#d8cdbd] py-9 first:border-t-0 first:pt-0">
+    <article id={update.id} className="border-t border-white/10 py-9 first:border-t-0 first:pt-0">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
         <div>
-          <p className="text-[11px] font-semibold tracking-[0.2em] text-[#9a7342] uppercase">
+          <p className="text-[11px] font-semibold tracking-[0.2em] text-[#f6d29b]/64 uppercase">
             {getUpdateMeta(update)}
           </p>
-          <h3 className="mt-3 font-[family-name:var(--font-header-serif)] text-2xl leading-tight font-medium text-[#2a211b] sm:text-3xl">
+          <h3 className="mt-3 font-[family-name:var(--font-header-serif)] text-2xl leading-tight font-medium text-[#f5ead5] sm:text-3xl">
             {update.title}
           </h3>
-          <p className="mt-4 max-w-3xl text-sm leading-7 text-[#5f564d]">
+          <p className="mt-4 max-w-3xl text-sm leading-7 text-[#e8dfcd]/68">
             {update.summary}
           </p>
         </div>
-        <p className="shrink-0 text-xs font-semibold tracking-[0.14em] text-[#8a6a39] uppercase">
+        <p className="shrink-0 text-xs font-semibold tracking-[0.14em] text-[#f6d29b]/68 uppercase">
           {update.updateType}
         </p>
         {sourceLinks.length ? (
@@ -167,7 +167,7 @@ function UpdateCard({ update }: { update: AiUpdateBriefingItem }) {
                 href={source.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex text-xs font-semibold tracking-[0.12em] text-[#8a6a39] uppercase underline decoration-[#b08d57]/35 underline-offset-4 transition-colors hover:text-[#2a211b]"
+                className="inline-flex text-xs font-semibold tracking-[0.12em] text-[#f6d29b]/72 uppercase underline decoration-[#d7ad73]/35 underline-offset-4 transition-colors hover:text-white"
               >
                 {source.label}
               </a>
@@ -198,19 +198,19 @@ function UpdateCard({ update }: { update: AiUpdateBriefingItem }) {
       </div>
 
       <div className="mt-6 grid gap-4 lg:grid-cols-2">
-        <div className="border border-[#ded6c9] bg-[#fbfaf7]/65 p-5">
-          <p className="text-[11px] font-semibold tracking-[0.18em] text-[#9a7342] uppercase">
+        <div className="border border-white/10 bg-white/[0.035] p-5">
+          <p className="text-[11px] font-semibold tracking-[0.18em] text-[#f6d29b]/72 uppercase">
             공식 화면/설명 자료
           </p>
-          <p className="mt-3 text-sm leading-7 text-[#5f564d]">
+          <p className="mt-3 text-sm leading-7 text-[#e8dfcd]/68">
             {update.screenMaterialStatus}
           </p>
         </div>
-        <div className="border border-[#ded6c9] bg-[#f3efe7]/70 p-5">
-          <p className="text-[11px] font-semibold tracking-[0.18em] text-[#9a7342] uppercase">
+        <div className="border border-white/10 bg-white/[0.035] p-5">
+          <p className="text-[11px] font-semibold tracking-[0.18em] text-[#f6d29b]/72 uppercase">
             주의 문장
           </p>
-          <p className="mt-3 text-sm leading-7 text-[#5f564d]">
+          <p className="mt-3 text-sm leading-7 text-[#e8dfcd]/68">
             {update.cautionNote}
           </p>
         </div>
@@ -229,40 +229,40 @@ export default async function AiUpdateDatePage({ params }: PageProps) {
   const quickSummary = getQuickSummary(day);
 
   return (
-    <main className="min-h-[calc(100vh-5rem)] bg-[#f8f6f1] px-6 py-12 text-[#19140f] sm:px-8 lg:py-16">
+    <main className="min-h-[calc(100vh-5rem)] bg-[#030303] px-6 py-12 text-[#f3eadb] sm:px-8 lg:py-16">
       <article className="mx-auto max-w-6xl">
         <Link
           href="/ai-updates"
-          className="text-xs font-semibold tracking-[0.16em] text-[#8a6a39] uppercase transition-colors hover:text-[#2a211b]"
+          className="text-xs font-semibold tracking-[0.16em] text-[#f6d29b]/72 uppercase transition-colors hover:text-[#f6d29b]"
         >
           ← AI-Update
         </Link>
 
-        <header className="mt-8 border-b border-[#ded6c9] pb-10">
-          <p className="text-xs font-semibold tracking-[0.24em] text-[#9a7342] uppercase">
+        <header className="mt-8 border-b border-white/10 pb-10">
+          <p className="text-xs font-semibold tracking-[0.24em] text-[#f6d29b]/72 uppercase">
             {formatDisplayDate(date)} AI Updates
           </p>
           {day.checkedDateKST ? (
-            <p className="mt-3 text-xs font-semibold tracking-[0.16em] text-[#8a6a39] uppercase">
+            <p className="mt-3 text-xs font-semibold tracking-[0.16em] text-[#f6d29b]/64 uppercase">
               Checked {day.checkedDateKST} KST
             </p>
           ) : null}
-          <h1 className="mt-4 max-w-4xl font-[family-name:var(--font-header-serif)] text-4xl leading-tight font-medium text-[#2a211b] sm:text-5xl">
+          <h1 className="mt-4 max-w-4xl font-[family-name:var(--font-header-serif)] text-4xl leading-tight font-medium text-[#f5ead5] sm:text-5xl">
             {getDailyTitle(day)}
           </h1>
-          <p className="mt-5 max-w-3xl text-base leading-8 text-[#5f564d]">
+          <p className="mt-5 max-w-3xl text-base leading-8 text-[#e8dfcd]/68">
             {getDailySubtitle(day)}
           </p>
         </header>
 
         {quickSummary.length ? (
-          <section className="border-b border-[#ded6c9] py-8">
-            <p className="text-xs font-semibold tracking-[0.2em] text-[#9a7342] uppercase">
+          <section className="border-b border-white/10 py-8">
+            <p className="text-xs font-semibold tracking-[0.2em] text-[#f6d29b]/72 uppercase">
               Quick Summary
             </p>
             <div className="mt-5 grid gap-4 md:grid-cols-3">
               {quickSummary.map((summary) => (
-                <p key={summary} className="border-t border-[#d8cdbd] pt-4 text-sm leading-7 text-[#50473f]">
+                <p key={summary} className="border-t border-white/10 pt-4 text-sm leading-7 text-[#e8dfcd]/68">
                   {summary}
                 </p>
               ))}
@@ -271,17 +271,17 @@ export default async function AiUpdateDatePage({ params }: PageProps) {
         ) : null}
 
         <section className="py-10">
-          <p className="text-xs font-semibold tracking-[0.2em] text-[#9a7342] uppercase">
+          <p className="text-xs font-semibold tracking-[0.2em] text-[#f6d29b]/72 uppercase">
             Update Groups
           </p>
           <div className="mt-6 space-y-14">
             {groups.map((group) => (
-              <section key={group.name} className="bg-[#fbfaf7]/45 px-5 py-7 sm:px-7">
-                <div className="border-b border-[#ded6c9] pb-6">
-                  <h2 className="font-[family-name:var(--font-header-serif)] text-3xl font-medium text-[#2a211b]">
+              <section key={group.name} className="border border-white/10 bg-white/[0.025] px-5 py-7 sm:px-7">
+                <div className="border-b border-white/10 pb-6">
+                  <h2 className="font-[family-name:var(--font-header-serif)] text-3xl font-medium text-[#f5ead5]">
                     {group.name}
                   </h2>
-                  <p className="mt-3 max-w-3xl text-sm leading-7 text-[#6f6257]">
+                  <p className="mt-3 max-w-3xl text-sm leading-7 text-[#e8dfcd]/68">
                     {group.intro}
                   </p>
                 </div>
@@ -295,17 +295,17 @@ export default async function AiUpdateDatePage({ params }: PageProps) {
           </div>
         </section>
 
-        <section className="border-t border-[#ded6c9] py-8">
-          <h2 className="font-[family-name:var(--font-header-serif)] text-2xl font-medium text-[#2a211b]">
+        <section className="border-t border-white/10 py-8">
+          <h2 className="font-[family-name:var(--font-header-serif)] text-2xl font-medium text-[#f5ead5]">
             Today&rsquo;s Verification Note
           </h2>
-          <p className="mt-4 max-w-4xl text-sm leading-8 text-[#5f564d]">
+          <p className="mt-4 max-w-4xl text-sm leading-8 text-[#e8dfcd]/68">
             {day.verificationNote ?? '이 날짜의 업데이트는 공식 출처로 확인된 범위 안에서만 기록합니다. 기능 출시, 문서 개정, 플랫폼 통합 여부를 구분해 읽어야 합니다.'}
           </p>
         </section>
 
-        <section className="border-t border-[#ded6c9] pt-8">
-          <p className="font-[family-name:var(--font-header-serif)] text-2xl leading-relaxed text-[#2a211b]">
+        <section className="border-t border-white/10 pt-8">
+          <p className="font-[family-name:var(--font-header-serif)] text-2xl leading-relaxed text-[#f5ead5]">
             {day.closingLine ?? 'AI는 답을 만든다. Dechive는 그 답이 어디까지 검증 가능한지 기록한다.'}
           </p>
         </section>

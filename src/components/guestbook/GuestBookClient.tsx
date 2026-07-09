@@ -101,23 +101,23 @@ export default function GuestBookClient() {
   };
 
   return (
-    <main className="flex min-h-[calc(100vh-5rem)] flex-1 items-center justify-center bg-[#f8f6f1] px-6 py-16 text-[#19140f]">
+    <main className="flex min-h-[calc(100vh-5rem)] flex-1 items-center justify-center bg-[#030303] px-6 py-16 text-[#f3eadb]">
       <section className="w-full max-w-3xl">
         <div className="mb-10 text-center">
-          <p className="mb-3 text-xs font-medium uppercase tracking-[0.34em] text-[#9a7a3f]">
+          <p className="mb-3 text-xs font-medium uppercase tracking-[0.34em] text-[#f6d29b]/72">
             Dechive
           </p>
-          <h1 className="font-[family-name:var(--font-header-serif)] text-4xl font-medium text-[#2a211b] sm:text-5xl">
+          <h1 className="font-[family-name:var(--font-header-serif)] text-4xl font-medium text-[#f5ead5] sm:text-5xl">
             {lang === 'en' ? 'Leave a Note' : '흔적 남기기'}
           </h1>
-          <p className="mx-auto mt-5 max-w-xl text-sm leading-relaxed text-[#6f6257]">
+          <p className="mx-auto mt-5 max-w-xl text-sm leading-relaxed text-[#e8dfcd]/64">
             {lang === 'en'
               ? 'Leave a question, feedback, a short impression, or a topic Dechive should examine next.'
               : '질문, 피드백, 짧은 감상, 다음에 다뤄볼 주제를 편하게 남겨주세요.'}
           </p>
         </div>
 
-        <div className="rounded-md border border-[#d8c9b0] bg-[#fbfaf7] p-5 shadow-[0_18px_60px_rgba(42,33,27,0.06)] sm:p-6">
+        <div className="rounded-md border border-white/10 bg-white/[0.035] p-5 shadow-[0_18px_60px_rgba(0,0,0,0.22)] sm:p-6">
           <div className="grid gap-3 sm:grid-cols-2">
             <input
               type="text"
@@ -125,7 +125,7 @@ export default function GuestBookClient() {
               placeholder={t.guestBookNickname}
               value={name}
               onChange={(event) => setName(event.target.value)}
-              className="rounded-md border border-[#ded6c9] bg-[#f8f6f1] px-4 py-3 text-sm text-[#19140f] outline-none placeholder:text-[#8b8175] focus:border-[#9a7a3f]/70"
+              className="rounded-md border border-white/10 bg-[#030303] px-4 py-3 text-sm text-[#f3eadb] outline-none placeholder:text-white/42 focus:border-[#f6d29b]/70"
             />
             <input
               type="password"
@@ -133,7 +133,7 @@ export default function GuestBookClient() {
               placeholder={t.guestBookPassword}
               value={password}
               onChange={(event) => setPassword(event.target.value)}
-              className="rounded-md border border-[#ded6c9] bg-[#f8f6f1] px-4 py-3 text-sm text-[#19140f] outline-none placeholder:text-[#8b8175] focus:border-[#9a7a3f]/70"
+              className="rounded-md border border-white/10 bg-[#030303] px-4 py-3 text-sm text-[#f3eadb] outline-none placeholder:text-white/42 focus:border-[#f6d29b]/70"
             />
           </div>
 
@@ -142,52 +142,52 @@ export default function GuestBookClient() {
             placeholder={t.guestBookMessage}
             value={message}
             onChange={(event) => setMessage(event.target.value)}
-            className="mt-3 w-full resize-none rounded-md border border-[#ded6c9] bg-[#f8f6f1] px-4 py-3 text-sm leading-relaxed text-[#19140f] outline-none placeholder:text-[#8b8175] focus:border-[#9a7a3f]/70"
+            className="mt-3 w-full resize-none rounded-md border border-white/10 bg-[#030303] px-4 py-3 text-sm leading-relaxed text-[#f3eadb] outline-none placeholder:text-white/42 focus:border-[#f6d29b]/70"
           />
 
           <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <p className="min-h-5 text-xs text-[#9a5f32]">
+            <p className="min-h-5 text-xs text-[#f6d29b]/72">
               {error}
             </p>
             <button
               type="button"
               onClick={handleSubmit}
               disabled={submitting}
-              className="inline-flex items-center justify-center gap-2 rounded-md border border-[#9a7a3f]/45 bg-[#2a211b] px-5 py-2.5 text-sm font-medium text-[#f8f6f1] transition-colors hover:bg-[#4b3827] disabled:cursor-not-allowed disabled:opacity-45"
+              className="inline-flex items-center justify-center gap-2 rounded-md border border-[#9a7a3f]/45 bg-[#d7ad73]/10 px-5 py-2.5 text-sm font-medium text-[#f6d29b] transition-colors hover:bg-[#d7ad73]/16 disabled:cursor-not-allowed disabled:opacity-45"
             >
-              <Feather size={15} className="text-[#efe7da]" />
+              <Feather size={15} className="text-[#f6d29b]" />
               {submitting ? (lang === 'en' ? 'Leaving...' : '남기는 중...') : t.guestBookSubmit}
             </button>
           </div>
         </div>
 
-        <div className="mt-10 rounded-md border border-[#d8c9b0] bg-[#f2eee6]/70 p-5 shadow-[0_18px_60px_rgba(42,33,27,0.05)] sm:p-6">
+        <div className="mt-10 rounded-md border border-white/10 bg-white/[0.035] p-5 shadow-[0_18px_60px_rgba(0,0,0,0.18)] sm:p-6">
           <div className="mb-5 flex items-center justify-between gap-4">
-            <h2 className="text-sm font-medium tracking-[0.18em] text-[#5d4630]">
+            <h2 className="text-sm font-medium tracking-[0.18em] text-[#f6d29b]/72">
               {lang === 'en' ? 'NOTES LEFT ON DECHIVE' : '남겨진 흔적'}
             </h2>
-            <span className="text-xs text-[#8b8175]">
+            <span className="text-xs text-white/42">
               {messages.length}
             </span>
           </div>
 
           {loading ? (
-            <p className="py-8 text-center text-sm text-[#8b8175]">
+            <p className="py-8 text-center text-sm text-white/42">
               {lang === 'en' ? 'Loading notes...' : '남겨진 글을 불러오는 중입니다...'}
             </p>
           ) : pageMessages.length === 0 ? (
-            <p className="py-8 text-center text-sm text-[#8b8175]">
+            <p className="py-8 text-center text-sm text-white/42">
               {lang === 'en' ? 'No notes have been left yet.' : '아직 남겨진 글이 없습니다.'}
             </p>
           ) : (
             <div className="flex flex-col gap-5">
               {pageMessages.map((guestMessage) => (
-                <article key={guestMessage.id} className="border-b border-[#d8c9b0] pb-5 last:border-b-0 last:pb-0">
+                <article key={guestMessage.id} className="border-b border-white/10 pb-5 last:border-b-0 last:pb-0">
                   <div className="mb-2 flex items-center gap-2">
-                    <span className="text-sm font-medium text-[#2a211b]">
+                    <span className="text-sm font-medium text-[#f5ead5]">
                       {guestMessage.name}
                     </span>
-                    <span className="text-[11px] text-[#8b8175]">
+                    <span className="text-[11px] text-white/42">
                       {new Date(guestMessage.created_at).toLocaleDateString(lang === 'en' ? 'en-US' : 'ko-KR', {
                         year: '2-digit',
                         month: '2-digit',
@@ -195,7 +195,7 @@ export default function GuestBookClient() {
                       })}
                     </span>
                   </div>
-                  <p className="whitespace-pre-line text-sm leading-relaxed text-[#3f342b]">
+                  <p className="whitespace-pre-line text-sm leading-relaxed text-[#e8dfcd]/72">
                     {guestMessage.message}
                   </p>
                 </article>
@@ -209,18 +209,18 @@ export default function GuestBookClient() {
                 type="button"
                 onClick={() => setPage((currentPage) => Math.max(0, currentPage - 1))}
                 disabled={page === 0}
-                className="rounded-md border border-[#d8c9b0] p-2 text-[#6f6257] transition-colors hover:border-[#9a7a3f]/70 hover:text-[#17120d] disabled:opacity-35"
+                className="rounded-md border border-white/10 p-2 text-[#e8dfcd]/64 transition-colors hover:border-[#f6d29b]/70 hover:text-[#f5ead5] disabled:opacity-35"
               >
                 <ChevronLeft size={16} />
               </button>
-              <span className="text-xs text-[#8b8175]">
+              <span className="text-xs text-white/42">
                 {page + 1} / {totalPages}
               </span>
               <button
                 type="button"
                 onClick={() => setPage((currentPage) => Math.min(totalPages - 1, currentPage + 1))}
                 disabled={page >= totalPages - 1}
-                className="rounded-md border border-[#d8c9b0] p-2 text-[#6f6257] transition-colors hover:border-[#9a7a3f]/70 hover:text-[#17120d] disabled:opacity-35"
+                className="rounded-md border border-white/10 p-2 text-[#e8dfcd]/64 transition-colors hover:border-[#f6d29b]/70 hover:text-[#f5ead5] disabled:opacity-35"
               >
                 <ChevronRight size={16} />
               </button>

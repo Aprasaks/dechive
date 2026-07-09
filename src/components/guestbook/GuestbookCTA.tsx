@@ -21,22 +21,22 @@ export default function GuestbookCTA({ lang }: GuestbookCTAProps) {
       };
 
   return (
-    <aside className="mt-16 border-y border-[#9a7a3f]/25 bg-[#efe7da]/55 px-5 py-7 sm:px-7">
-      <p className="text-xs font-semibold tracking-[0.22em] text-[#9a7a3f] uppercase">
+    <aside className="mt-16 border-y border-[#d7ad73]/24 bg-white/[0.035] px-5 py-7 sm:px-7">
+      <p className="text-xs font-semibold tracking-[0.22em] text-[#f6d29b]/72 uppercase">
         {copy.eyebrow}
       </p>
       <div className="mt-3 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
         <div className="max-w-xl">
-          <h2 className="font-[family-name:var(--font-header-serif)] text-2xl font-medium text-[#2a211b]">
+          <h2 className="font-[family-name:var(--font-header-serif)] text-2xl font-medium text-[#f5ead5]">
             {copy.title}
           </h2>
-          <p className="mt-3 text-sm leading-relaxed text-[#6f6257]">
+          <p className="mt-3 text-sm leading-relaxed text-[#e8dfcd]/68">
             {copy.body}
           </p>
         </div>
         <Link
           href="/guestbook"
-          className="inline-flex shrink-0 items-center justify-center rounded-sm border border-[#9a7a3f]/45 bg-[#2a211b] px-5 py-3 text-sm font-medium tracking-[0.12em] text-[#f8f6f1] transition hover:bg-[#4b3827]"
+          className="inline-flex shrink-0 items-center justify-center rounded-sm border border-[#d7ad73]/45 bg-[#d7ad73]/10 px-5 py-3 text-sm font-medium tracking-[0.12em] text-[#f6d29b] transition hover:border-[#f6d29b]/70 hover:bg-[#d7ad73]/16"
         >
           {copy.action}
         </Link>

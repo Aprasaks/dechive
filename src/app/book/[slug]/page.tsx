@@ -65,16 +65,16 @@ export default async function BookDetailPage({ params }: PageProps) {
   if (!book) notFound();
 
   return (
-    <main className="min-h-[calc(100vh-5rem)] bg-[#f8f6f1] px-6 py-12 text-[#19140f] sm:px-8 lg:py-16">
+    <main className="min-h-[calc(100vh-5rem)] bg-[#030303] px-6 py-12 text-[#f3eadb] sm:px-8 lg:py-16">
       <article className="mx-auto max-w-5xl">
         <Link
           href="/book"
-          className="text-xs font-semibold tracking-[0.16em] text-[#8a6a39] uppercase transition-colors hover:text-[#2a211b]"
+          className="text-xs font-semibold tracking-[0.16em] text-[#f6d29b]/72 uppercase transition-colors hover:text-[#f6d29b]"
         >
           ← Book
         </Link>
 
-        <header className="mt-8 grid gap-10 border-b border-[#ded6c9] pb-10 md:grid-cols-[13rem_1fr]">
+        <header className="mt-8 grid gap-10 border-b border-white/10 pb-10 md:grid-cols-[13rem_1fr]">
           <BookCover
             src={book.coverImage}
             title={book.title}
@@ -83,26 +83,26 @@ export default async function BookDetailPage({ params }: PageProps) {
           />
 
           <div>
-            <p className="text-xs font-semibold tracking-[0.24em] text-[#9a7342] uppercase">
+            <p className="text-xs font-semibold tracking-[0.24em] text-[#f6d29b]/72 uppercase">
               Reading Note
             </p>
-            <h1 className="mt-4 font-[family-name:var(--font-header-serif)] text-4xl leading-tight font-medium text-[#2a211b] sm:text-5xl">
+            <h1 className="mt-4 font-[family-name:var(--font-header-serif)] text-4xl leading-tight font-medium text-[#f5ead5] sm:text-5xl">
               {book.title}
             </h1>
-            <div className="mt-5 space-y-2 text-sm leading-7 text-[#5f564d]">
+            <div className="mt-5 space-y-2 text-sm leading-7 text-[#e8dfcd]/64">
               <p>저자: {book.author}</p>
               {book.publisher ? <p>출판사: {book.publisher}</p> : null}
               {book.readDate ? <p>읽은 날짜: {formatDate(book.readDate)}</p> : null}
               {book.date ? <p>기록 날짜: {formatDate(book.date)}</p> : null}
             </div>
-            <p className="mt-5 max-w-2xl text-sm leading-7 text-[#5f564d]">
+            <p className="mt-5 max-w-2xl text-sm leading-7 text-[#e8dfcd]/68">
               {book.summary}
             </p>
             <div className="mt-5 flex flex-wrap gap-2">
               {book.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="rounded-sm border border-[#bda77e]/40 px-2.5 py-1 text-[10px] font-semibold tracking-[0.12em] text-[#6d5634] uppercase"
+                  className="rounded-sm border border-[#d7ad73]/35 px-2.5 py-1 text-[10px] font-semibold tracking-[0.12em] text-[#f6d29b]/72 uppercase"
                 >
                   {tag}
                 </span>
@@ -114,13 +114,13 @@ export default async function BookDetailPage({ params }: PageProps) {
         <div className="mx-auto max-w-3xl">
           <BookContent content={book.content} />
 
-          <section className="mt-12 border-t border-[#ded6c9] pt-8">
-            <p className="rounded-sm border border-[#ded6c9] bg-[#fbfaf7]/70 px-5 py-4 text-xs leading-6 text-[#6f6257]">
+          <section className="mt-12 border-t border-white/10 pt-8">
+            <p className="rounded-sm border border-white/10 bg-white/[0.035] px-5 py-4 text-xs leading-6 text-[#e8dfcd]/62">
               {COPYRIGHT_NOTICE}
             </p>
             <Link
               href="/book"
-              className="mt-8 inline-flex text-xs font-semibold tracking-[0.16em] text-[#8a6a39] uppercase transition-colors hover:text-[#2a211b]"
+              className="mt-8 inline-flex text-xs font-semibold tracking-[0.16em] text-[#f6d29b]/72 uppercase transition-colors hover:text-[#f6d29b]"
             >
               목록으로 돌아가기
             </Link>

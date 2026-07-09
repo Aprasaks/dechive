@@ -14,7 +14,7 @@ export default function BookCard({ book }: BookCardProps) {
   return (
     <Link
       href={`/book/${book.slug}`}
-      className="group grid gap-5 rounded-md border border-[#f5ead5]/12 bg-[#101722]/92 p-5 transition-colors hover:border-[#c89b62]/45 hover:bg-[#121c28] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7fc6c0] sm:grid-cols-[8.5rem_1fr] sm:p-6"
+      className="group grid gap-5 rounded-md border border-[#f5ead5]/12 bg-[#090909]/92 p-5 transition-colors hover:border-[#c89b62]/45 hover:bg-[#101010] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f6d29b] sm:grid-cols-[8.5rem_1fr] sm:p-6"
     >
       <BookCover
         src={book.coverImage}

@@ -134,7 +134,7 @@ export default function DeepDiveLanding({
   }, [visibleDeepDives.length]);
 
   return (
-    <section className={`flex min-h-[calc(100vh-4.5rem)] flex-1 bg-[#050912] text-[#f3eadb] ${sansFontClassName}`}>
+    <section className={`flex min-h-[calc(100vh-4.5rem)] flex-1 bg-[#030303] text-[#f3eadb] ${sansFontClassName}`}>
       <div className="mx-auto w-full max-w-[92rem] px-5 pb-12 sm:px-8 lg:px-10">
         <DechiveSectionHeader
           eyebrow={isEnglish ? 'Deep Dive · Verified concepts' : 'Deep Dive · 검증된 개념'}
@@ -147,7 +147,7 @@ export default function DeepDiveLanding({
           meta={isEnglish ? 'Concepts · Evidence · Limits' : 'Concepts · Evidence · Verification'}
         />
 
-        <article className="relative z-10 mx-auto -mt-8 max-w-[76rem] overflow-hidden rounded-md border border-[#f5ead5]/12 bg-[#0b1018] text-[#f3eadb] shadow-[0_24px_70px_rgba(0,0,0,0.28)]">
+        <article className="relative z-10 mx-auto -mt-8 max-w-[76rem] overflow-hidden rounded-md border border-[#f5ead5]/12 bg-[#070707] text-[#f3eadb] shadow-[0_24px_70px_rgba(0,0,0,0.28)]">
           <Image
             src={featuredDeepDive.image}
             alt=""
@@ -155,9 +155,9 @@ export default function DeepDiveLanding({
             sizes="76rem"
             className="object-cover object-center"
           />
-          <div className="absolute inset-0 bg-[#050912]/50" />
+          <div className="absolute inset-0 bg-[#030303]/50" />
           <div className="relative min-h-[28rem] p-5 sm:p-7 lg:p-8">
-            <div className="flex min-h-[25.5rem] max-w-2xl flex-col justify-center rounded-md border border-[#f5ead5]/14 bg-[#101722]/82 px-6 py-8 shadow-[0_22px_70px_rgba(0,0,0,0.24)] backdrop-blur-md sm:px-8 lg:px-10">
+            <div className="flex min-h-[25.5rem] max-w-2xl flex-col justify-center rounded-md border border-[#f5ead5]/14 bg-[#090909]/82 px-6 py-8 shadow-[0_22px_70px_rgba(0,0,0,0.24)] backdrop-blur-md sm:px-8 lg:px-10">
             <div>
               <p className="text-[10px] font-semibold tracking-[0.28em] text-[#d7ad73] uppercase">
                 {copy.featured}
@@ -183,7 +183,7 @@ export default function DeepDiveLanding({
               </div>
               <Link
                 href={`${basePath}/${featuredDeepDive.slug}`}
-                className="mt-8 inline-flex items-center gap-3 rounded-sm border border-[#c89b62]/45 px-4 py-2 text-xs font-semibold tracking-[0.18em] text-[#f6d29b] uppercase transition-colors hover:border-[#c89b62]/70 hover:bg-[#c89b62]/12 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7fc6c0]"
+                className="mt-8 inline-flex items-center gap-3 rounded-sm border border-[#c89b62]/45 px-4 py-2 text-xs font-semibold tracking-[0.18em] text-[#f6d29b] uppercase transition-colors hover:border-[#c89b62]/70 hover:bg-[#c89b62]/12 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f6d29b]"
               >
                 {copy.read}
                 <ArrowUpRight size={15} strokeWidth={1.7} />
@@ -211,7 +211,7 @@ export default function DeepDiveLanding({
           </div>
         </article>
 
-        <section className="mx-auto mt-7 max-w-[76rem] rounded-md border border-[#f5ead5]/12 bg-[#0b1018]/94 px-4 py-4 shadow-[0_18px_55px_rgba(0,0,0,0.18)] sm:px-5">
+        <section className="mx-auto mt-7 max-w-[76rem] rounded-md border border-[#f5ead5]/12 bg-[#070707]/94 px-4 py-4 shadow-[0_18px_55px_rgba(0,0,0,0.18)] sm:px-5">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <p className="text-[10px] font-semibold tracking-[0.24em] text-[#d7ad73] uppercase">
               {copy.lens}
@@ -261,7 +261,7 @@ export default function DeepDiveLanding({
                 <Link
                   key={deepDive.slug}
                   href={`${basePath}/${deepDive.slug}`}
-                  className="group grid gap-4 rounded-md border border-[#f5ead5]/10 bg-[#101722]/82 p-5 transition-colors hover:border-[#c89b62]/42 hover:bg-[#121c28] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7fc6c0] sm:grid-cols-[3rem_1fr_auto]"
+                  className="group grid gap-4 rounded-md border border-[#f5ead5]/10 bg-[#090909]/82 p-5 transition-colors hover:border-[#c89b62]/42 hover:bg-[#101010] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f6d29b] sm:grid-cols-[3rem_1fr_auto]"
                 >
                   <span className="text-xs font-semibold tracking-[0.18em] text-[#d7ad73]">
                     {String(index + 1).padStart(2, '0')}
@@ -292,7 +292,7 @@ export default function DeepDiveLanding({
                     <ArrowUpRight
                       size={18}
                       strokeWidth={1.6}
-                      className="text-[#7fc6c0] transition-transform group-hover:translate-x-1 group-hover:text-[#f6d29b]"
+                      className="text-[#f6d29b] transition-transform group-hover:translate-x-1 group-hover:text-[#f6d29b]"
                     />
                   </span>
                 </Link>

@@ -12,14 +12,10 @@ export default function DechiveSectionHeader({
   meta,
 }: DechiveSectionHeaderProps) {
   return (
-    <section className="relative isolate overflow-hidden border-b border-[#f5ead5]/10 bg-[#050912] text-[#f3eadb]">
+    <section className="relative isolate overflow-hidden border-b border-[#d7ad73]/10 bg-[#030303] text-[#f3eadb]">
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_80%_18%,rgba(42,168,161,0.14),transparent_34%),radial-gradient(circle_at_16%_10%,rgba(185,137,78,0.14),transparent_28%),linear-gradient(180deg,#050912_0%,#08111c_100%)]"
-      />
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 -z-10 opacity-[0.08] [background-image:radial-gradient(circle_at_center,rgba(127,198,192,0.85)_1px,transparent_1.5px),linear-gradient(rgba(245,234,213,0.35)_1px,transparent_1px),linear-gradient(90deg,rgba(245,234,213,0.35)_1px,transparent_1px)] [background-size:88px_88px,44px_44px,44px_44px]"
+        className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_18%_18%,rgba(215,173,115,0.11),transparent_28%),radial-gradient(circle_at_82%_22%,rgba(255,255,255,0.035),transparent_30%),linear-gradient(180deg,#030303_0%,#050505_100%)]"
       />
       <div className="mx-auto max-w-[92rem] px-5 py-12 sm:px-8 sm:py-14 lg:px-10 lg:py-16">
         <div className="max-w-4xl">
@@ -33,7 +29,7 @@ export default function DechiveSectionHeader({
             {description}
           </p>
           {meta ? (
-            <p className="mt-7 text-[10px] font-semibold tracking-[0.22em] text-[#7fc6c0]/82 uppercase">
+            <p className="mt-7 text-[10px] font-semibold tracking-[0.22em] text-[#f6d29b]/74 uppercase">
               {meta}
             </p>
           ) : null}

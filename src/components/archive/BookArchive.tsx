@@ -57,7 +57,7 @@ export default function BookArchive({
 
   return (
     <section
-      className={`relative min-h-[calc(100vh-4.5rem)] flex-1 bg-[#050912] text-[#f3eadb] ${sansFontClassName}`}
+      className={`relative min-h-[calc(100vh-4.5rem)] flex-1 bg-[#030303] text-[#f3eadb] ${sansFontClassName}`}
     >
       <div className="mx-auto w-full max-w-[92rem] px-5 pb-10 sm:px-8 lg:px-10">
         <DechiveSectionHeader
@@ -71,7 +71,7 @@ export default function BookArchive({
           meta={lang === 'en' ? 'Questions · Notes · Traces' : 'Questions · Notes · Verification'}
         />
 
-        <section className="relative z-20 mx-auto -mt-8 max-w-[76rem] overflow-hidden rounded-md border border-[#f5ead5]/12 bg-[#0b1018]/96 shadow-[0_24px_70px_rgba(0,0,0,0.28)] backdrop-blur-sm">
+        <section className="relative z-20 mx-auto -mt-8 max-w-[76rem] overflow-hidden rounded-md border border-[#f5ead5]/12 bg-[#070707]/96 shadow-[0_24px_70px_rgba(0,0,0,0.28)] backdrop-blur-sm">
           <div className="flex flex-col gap-4 border-b border-[#f5ead5]/10 px-4 py-4 sm:px-5 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex flex-wrap gap-2">
                 <button
@@ -109,7 +109,7 @@ export default function BookArchive({
               <select
                 value={selectedYear}
                 onChange={(event) => setSelectedYear(event.target.value)}
-                className="h-9 rounded-sm border border-[#f5ead5]/14 bg-[#101722] px-3 text-[11px] font-semibold tracking-[0.16em] text-[#f3eadb] uppercase outline-none transition-colors hover:border-[#c89b62]/60 focus:border-[#7fc6c0]/70"
+                className="h-9 rounded-sm border border-[#f5ead5]/14 bg-[#090909] px-3 text-[11px] font-semibold tracking-[0.16em] text-[#f3eadb] uppercase outline-none transition-colors hover:border-[#c89b62]/60 focus:border-[#f6d29b]/70"
                 aria-label={lang === 'en' ? 'Select year' : '연도 선택'}
               >
                 <option value="all">{lang === 'en' ? 'ALL YEARS' : '전체 연도'}</option>
@@ -132,7 +132,7 @@ export default function BookArchive({
                   value={searchQuery}
                   onChange={(event) => setSearchQuery(event.target.value)}
                   placeholder={lang === 'en' ? 'Search questions' : '질문 검색'}
-                  className="h-9 w-full rounded-sm border border-[#f5ead5]/14 bg-[#101722] pr-3 pl-9 text-sm text-[#f3eadb] outline-none transition-colors placeholder:text-[#e8dfcd]/38 hover:border-[#c89b62]/60 focus:border-[#7fc6c0]/70"
+                  className="h-9 w-full rounded-sm border border-[#f5ead5]/14 bg-[#090909] pr-3 pl-9 text-sm text-[#f3eadb] outline-none transition-colors placeholder:text-[#e8dfcd]/38 hover:border-[#c89b62]/60 focus:border-[#f6d29b]/70"
                 />
               </label>
             </div>
@@ -166,7 +166,7 @@ export default function BookArchive({
                           ? `/en/archive/${post.slug}`
                           : `/archive/${post.slug}`
                       }
-                      className={`group relative overflow-hidden rounded-md border border-[#f5ead5]/12 bg-[#101722]/92 transition-colors hover:border-[#c89b62]/45 hover:bg-[#121c28] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7fc6c0] ${
+                      className={`group relative overflow-hidden rounded-md border border-[#f5ead5]/12 bg-[#090909]/92 transition-colors hover:border-[#c89b62]/45 hover:bg-[#101010] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f6d29b] ${
                         isFeatured ? 'lg:col-span-2 lg:grid lg:grid-cols-[1fr_0.55fr]' : ''
                       }`}
                     >
@@ -187,7 +187,7 @@ export default function BookArchive({
                           <span className="text-xs tracking-[0.08em] text-[#e8dfcd]/48">
                             {post.date.replaceAll('-', '.')}
                           </span>
-                          <span className="flex h-10 w-10 items-center justify-center rounded-full border border-[#f5ead5]/12 text-[#7fc6c0] transition-colors group-hover:border-[#c89b62]/55 group-hover:bg-[#c89b62]/12 group-hover:text-[#f6d29b]">
+                          <span className="flex h-10 w-10 items-center justify-center rounded-full border border-[#f5ead5]/12 text-[#f6d29b] transition-colors group-hover:border-[#c89b62]/55 group-hover:bg-[#c89b62]/12 group-hover:text-[#f6d29b]">
                             <ArrowUpRight size={16} strokeWidth={1.6} />
                           </span>
                         </span>
@@ -202,7 +202,7 @@ export default function BookArchive({
                             sizes="24rem"
                             className="object-cover object-center opacity-45 grayscale"
                           />
-                          <span className="absolute inset-0 bg-[#050912]/32" />
+                          <span className="absolute inset-0 bg-[#030303]/32" />
                         </span>
                       ) : null}
                     </Link>

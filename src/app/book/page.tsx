@@ -40,7 +40,7 @@ export default function BookPage() {
   const books = getAllBookNotes('ko');
 
   return (
-    <main className="min-h-[calc(100vh-5rem)] bg-[#050912] text-[#f3eadb]">
+    <main className="min-h-[calc(100vh-5rem)] bg-[#030303] text-[#f3eadb]">
       <DechiveSectionHeader
         eyebrow="Knowledge Base · 수집된 맥락"
         title="Materials collected to feed the archive."
@@ -55,7 +55,7 @@ export default function BookPage() {
               <BookCard key={book.slug} book={book} />
             ))
           ) : (
-            <p className="rounded-md border border-[#f5ead5]/10 bg-[#101722]/88 p-7 text-sm leading-7 text-[#e8dfcd]/62">
+            <p className="rounded-md border border-[#f5ead5]/10 bg-[#090909]/88 p-7 text-sm leading-7 text-[#e8dfcd]/62">
               아직 공개된 독서 기록이 없습니다.
             </p>
           )}

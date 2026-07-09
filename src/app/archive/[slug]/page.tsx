@@ -71,7 +71,7 @@ export default async function PostPage({ params, searchParams }: PageProps) {
   if (!post || post.type !== 'archive') notFound();
 
   return (
-    <main className="min-h-[calc(100vh-5rem)] bg-[#f8f6f1] px-5 py-12 text-[#19140f] sm:px-8 lg:py-16">
+    <main className="min-h-[calc(100vh-5rem)] bg-[#030303] px-5 py-12 text-[#f3eadb] sm:px-8 lg:py-16">
       {/* JSON-LD 구조화 데이터 */}
       <script
         type="application/ld+json"
@@ -115,22 +115,22 @@ export default async function PostPage({ params, searchParams }: PageProps) {
       <div className="mx-auto w-full max-w-[800px]">
         <Link
           href="/archive"
-          className="mb-10 inline-flex text-sm font-medium tracking-[0.16em] text-[#9a7a3f] transition hover:text-[#17120d]"
+          className="mb-10 inline-flex text-sm font-medium tracking-[0.16em] text-[#f6d29b]/72 transition hover:text-[#f6d29b]"
         >
           ← Archive
         </Link>
 
-        <article className="min-w-0 border-t border-[#2a211b]/10 pt-10">
+        <article className="min-w-0 border-t border-white/10 pt-10">
           <PostHeader post={post} />
           <PostContent content={post.content} />
         </article>
 
         <GuestbookCTA lang="ko" />
 
-        <div className="mt-16 border-t border-[#2a211b]/10 pt-8">
+        <div className="mt-16 border-t border-white/10 pt-8">
           <Link
             href="/archive"
-            className="inline-flex rounded-sm border border-[#9a7a3f]/35 px-5 py-3 text-sm font-medium tracking-[0.12em] text-[#5d4630] transition hover:border-[#9a7a3f]/70 hover:bg-[#efe7da]"
+            className="inline-flex rounded-sm border border-[#d7ad73]/35 px-5 py-3 text-sm font-medium tracking-[0.12em] text-[#f6d29b]/78 transition hover:border-[#f6d29b]/70 hover:bg-[#d7ad73]/10"
           >
             Archive로 돌아가기
           </Link>

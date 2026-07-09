@@ -58,11 +58,11 @@ function UpdateCard({ update }: { update: AiUpdateItem }) {
   return (
     <article
       id={update.id}
-      className="group rounded-md border border-[#f5ead5]/10 bg-[#101722]/88 p-5 transition-colors hover:border-[#c89b62]/42 hover:bg-[#121c28] sm:p-7"
+      className="group rounded-md border border-[#f5ead5]/10 bg-[#090909]/88 p-5 transition-colors hover:border-[#c89b62]/42 hover:bg-[#101010] sm:p-7"
     >
       <Link
         href={update.detailHref}
-        className="block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7fc6c0]"
+        className="block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f6d29b]"
       >
         <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
           <div>
@@ -76,7 +76,7 @@ function UpdateCard({ update }: { update: AiUpdateItem }) {
               {update.summary}
             </p>
           </div>
-          <span className="shrink-0 text-xs font-semibold tracking-[0.14em] text-[#7fc6c0] uppercase transition-colors group-hover:text-[#f6d29b]">
+          <span className="shrink-0 text-xs font-semibold tracking-[0.14em] text-[#f6d29b] uppercase transition-colors group-hover:text-[#f6d29b]">
             날짜 기록 보기
           </span>
         </div>
@@ -117,7 +117,7 @@ export default function AiUpdatesClient({ month, days }: AiUpdatesClientProps) {
   }
 
   return (
-    <main className="min-h-[calc(100vh-5rem)] bg-[#050912] text-[#f3eadb]">
+    <main className="min-h-[calc(100vh-5rem)] bg-[#030303] text-[#f3eadb]">
       <DechiveSectionHeader
         eyebrow="AI Update · 변화 관측실"
         title="Tracking how AI changes, so the archive can stay aware."
@@ -127,7 +127,7 @@ export default function AiUpdatesClient({ month, days }: AiUpdatesClientProps) {
 
       <section className="mx-auto grid max-w-7xl gap-8 px-6 py-8 sm:px-8 lg:grid-cols-[18rem_1fr] lg:gap-12 lg:py-12">
         <aside className="lg:sticky lg:top-28 lg:self-start">
-          <div className="rounded-md border border-[#f5ead5]/12 bg-[#0b1018]/94 p-5 shadow-[0_18px_55px_rgba(0,0,0,0.18)]">
+          <div className="rounded-md border border-[#f5ead5]/12 bg-[#070707]/94 p-5 shadow-[0_18px_55px_rgba(0,0,0,0.18)]">
             <div className="flex items-center justify-between gap-4 border-b border-[#f5ead5]/10 pb-4">
               <div>
                 <p className="font-[family-name:var(--font-header-serif)] text-xl font-medium text-[#f5ead5]">
@@ -155,7 +155,7 @@ export default function AiUpdatesClient({ month, days }: AiUpdatesClientProps) {
                       className={`rounded-sm border px-3 py-1.5 text-xs font-semibold tracking-[0.12em] transition-colors ${
                         isSelectedMonth
                           ? 'border-[#c89b62]/70 bg-[#c89b62]/16 text-[#f6d29b]'
-                          : 'border-[#f5ead5]/12 bg-[#101722] text-[#e8dfcd]/62 hover:border-[#c89b62]/55 hover:text-[#f3eadb]'
+                          : 'border-[#f5ead5]/12 bg-[#090909] text-[#e8dfcd]/62 hover:border-[#c89b62]/55 hover:text-[#f3eadb]'
                       }`}
                     >
                       {getDisplayMonth(availableMonth)}
@@ -180,7 +180,7 @@ export default function AiUpdatesClient({ month, days }: AiUpdatesClientProps) {
                     className={`relative h-10 rounded-sm border text-xs font-semibold transition-colors ${
                       isSelected
                         ? 'border-[#c89b62]/70 bg-[#c89b62]/16 text-[#f6d29b]'
-                        : 'border-[#f5ead5]/12 bg-[#101722] text-[#e8dfcd]/62 hover:border-[#c89b62]/55 hover:text-[#f3eadb]'
+                        : 'border-[#f5ead5]/12 bg-[#090909] text-[#e8dfcd]/62 hover:border-[#c89b62]/55 hover:text-[#f3eadb]'
                     }`}
                     aria-pressed={isSelected}
                     aria-label={`${formatDisplayDate(date)} AI updates`}
@@ -189,7 +189,7 @@ export default function AiUpdatesClient({ month, days }: AiUpdatesClientProps) {
                     {hasRecord ? (
                       <span
                         className={`absolute bottom-1.5 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full ${
-                          isSelected ? 'bg-[#f6d29b]' : 'bg-[#7fc6c0]'
+                          isSelected ? 'bg-[#f6d29b]' : 'bg-[#f6d29b]'
                         }`}
                         aria-hidden="true"
                       />
@@ -227,7 +227,7 @@ export default function AiUpdatesClient({ month, days }: AiUpdatesClientProps) {
                   <div className="border-t border-[#f5ead5]/10 pt-7">
                     <Link
                       href={dateDetailHref}
-                      className="inline-flex text-xs font-semibold tracking-[0.16em] text-[#d7ad73] uppercase transition-colors hover:text-[#f6d29b] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7fc6c0]"
+                      className="inline-flex text-xs font-semibold tracking-[0.16em] text-[#d7ad73] uppercase transition-colors hover:text-[#f6d29b] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f6d29b]"
                     >
                       {formatDisplayDate(selectedDate)} 전체 기록 보기
                     </Link>
@@ -235,7 +235,7 @@ export default function AiUpdatesClient({ month, days }: AiUpdatesClientProps) {
                 ) : null}
               </>
             ) : (
-              <div className="rounded-md border border-[#f5ead5]/10 bg-[#101722]/88 p-7">
+              <div className="rounded-md border border-[#f5ead5]/10 bg-[#090909]/88 p-7">
                 <p className="font-[family-name:var(--font-header-serif)] text-2xl font-medium text-[#f5ead5]">
                   이 날짜에는 기록된 AI 업데이트가 없습니다.
                 </p>
