@@ -43,11 +43,21 @@ function padTime(value: number) {
   return value.toString().padStart(2, '0');
 }
 
-function formatElapsedTime(elapsedTime: ElapsedTime) {
+function formatElapsedTime(elapsedTime: ElapsedTime, compact: boolean) {
+  if (compact) {
+    return `${elapsedTime.years}y · ${elapsedTime.days}d · ${padTime(elapsedTime.hours)}:${padTime(elapsedTime.minutes)}:${padTime(elapsedTime.seconds)}`;
+  }
+
   return `${elapsedTime.years}y · ${elapsedTime.days}d · ${padTime(elapsedTime.hours)}h · ${padTime(elapsedTime.minutes)}m · ${padTime(elapsedTime.seconds)}s`;
 }
 
-export default function LivingTimeCounter() {
+export default function LivingTimeCounter({
+  className = '',
+  compact = false,
+}: {
+  className?: string;
+  compact?: boolean;
+}) {
   const [elapsedTime, setElapsedTime] = React.useState<ElapsedTime | null>(null);
 
   React.useEffect(() => {
@@ -62,10 +72,10 @@ export default function LivingTimeCounter() {
 
   return (
     <p
-      className="font-mono text-[10px] leading-none tracking-[0.08em] whitespace-nowrap text-white/34 sm:text-[11px]"
+      className={`font-mono text-[10px] leading-none tracking-[0.08em] whitespace-nowrap text-white/34 sm:text-[11px] ${className}`}
       aria-label="Living time counter"
     >
-      {elapsedTime ? formatElapsedTime(elapsedTime) : '00y · 000d · 00h · 00m · 00s'}
+      {elapsedTime ? formatElapsedTime(elapsedTime, compact) : '00y · 000d · 00:00:00'}
     </p>
   );
 }

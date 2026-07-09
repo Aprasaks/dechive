@@ -3,7 +3,6 @@
 import * as React from 'react';
 import Link from 'next/link';
 import KnowledgeHelix from '@/components/home/KnowledgeHelix';
-import LivingTimeCounter from '@/components/home/LivingTimeCounter';
 import { Search, Sparkles } from 'lucide-react';
 
 const EXAMPLE_QUESTIONS = [
@@ -32,7 +31,7 @@ function ArchiveSearch() {
         <label htmlFor="ask-archive" className="sr-only">
           Ask Dechive
         </label>
-        <div className="group flex min-h-16 items-center gap-3 rounded-[12px] border border-white/20 bg-[#060606]/88 px-4 shadow-[0_0_72px_rgba(215,173,115,0.08)] transition-colors focus-within:border-[#d7ad73]/68 sm:min-h-18 sm:px-5">
+        <div className="group flex min-h-14 items-center gap-3 rounded-[12px] border border-white/20 bg-[#060606]/88 px-3 shadow-[0_0_72px_rgba(215,173,115,0.08)] transition-colors focus-within:border-[#d7ad73]/68 sm:min-h-18 sm:px-5">
           <Search size={22} className="shrink-0 text-white/86" />
           <input
             id="ask-archive"
@@ -44,16 +43,16 @@ function ArchiveSearch() {
           />
           <button
             type="submit"
-            className="inline-flex h-11 shrink-0 items-center justify-center rounded-full border border-[#c89b62]/44 px-4 text-[#f6d29b] transition-colors hover:border-[#f6d29b]/72 hover:bg-[#c89b62]/12 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f6d29b]"
+            className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#c89b62]/44 text-[#f6d29b] transition-colors hover:border-[#f6d29b]/72 hover:bg-[#c89b62]/12 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f6d29b] sm:h-11 sm:w-auto sm:px-4"
             aria-label="Submit placeholder archive question"
           >
             <Sparkles size={18} />
-            <span className="ml-2 text-[11px] font-semibold tracking-[0.14em] uppercase">
+            <span className="ml-2 hidden text-[11px] font-semibold tracking-[0.14em] uppercase sm:inline">
               Ask
             </span>
           </button>
         </div>
-        <p className="mt-4 text-sm leading-6 text-white/66">
+        <p className="mt-4 text-sm leading-6 break-keep text-white/66">
           Dechive는 정리되고 검증된 지식에서만 답을 합니다.
         </p>
         <p className="sr-only" aria-live="polite">
@@ -61,7 +60,7 @@ function ArchiveSearch() {
         </p>
       </form>
 
-      <div className="mt-5 flex gap-2 overflow-x-auto pb-1 sm:flex-wrap sm:overflow-visible">
+      <div className="mt-5 flex flex-wrap justify-center gap-2 pb-1 lg:justify-start">
         {EXAMPLE_QUESTIONS.map((question) => (
           <button
             key={question}
@@ -122,11 +121,7 @@ export function HeroSection({ heroSerifClassName }: { heroSerifClassName: string
         }}
       />
 
-      <div className="mx-auto grid min-h-[calc(100svh-4.25rem)] max-w-7xl items-center gap-10 px-4 py-10 sm:px-6 sm:py-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-start lg:gap-14 lg:px-8 lg:pt-32 lg:pb-8">
-        <div className="absolute top-5 right-8 hidden lg:block">
-          <LivingTimeCounter />
-        </div>
-
+      <div className="mx-auto grid min-h-[calc(100svh-4rem)] max-w-7xl items-start gap-10 px-4 pt-20 pb-12 sm:px-6 sm:pt-24 sm:pb-14 lg:grid-cols-[0.95fr_1.05fr] lg:items-start lg:gap-14 lg:px-8 lg:pt-32 lg:pb-8">
         <div className="order-2 hidden lg:order-1 lg:block">
           <KnowledgeHelix />
         </div>
@@ -136,11 +131,11 @@ export function HeroSection({ heroSerifClassName }: { heroSerifClassName: string
             Living Archive
           </p>
 
-          <h1 className={`mt-7 max-w-3xl font-semibold tracking-normal text-white ${heroSerifClassName}`}>
-            <span className="block whitespace-nowrap text-[1.85rem] leading-[1.08] min-[390px]:text-[2.1rem] sm:text-[3rem] lg:text-[3.25rem]">
+          <h1 className={`mx-auto mt-7 max-w-[22rem] font-semibold tracking-normal text-white sm:max-w-3xl lg:mx-0 ${heroSerifClassName}`}>
+            <span className="block text-[1.85rem] leading-[1.08] sm:text-[3rem] lg:text-[3.25rem]">
               AI creates answers.
             </span>
-            <span className="mt-1 block whitespace-nowrap text-[2.45rem] leading-[1.02] min-[390px]:text-[2.8rem] sm:text-[4.15rem] lg:text-[4.65rem]">
+            <span className="mt-1 block text-[2.12rem] leading-[1.04] sm:text-[4.15rem] lg:text-[4.65rem]">
               Humans verify them.
             </span>
           </h1>

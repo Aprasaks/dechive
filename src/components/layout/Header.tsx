@@ -5,17 +5,24 @@ import Link from 'next/link';
 import { Menu } from 'lucide-react';
 import HomeMobileMenu from '@/components/home/HomeMobileMenu';
 import HomeNavLink from '@/components/home/HomeNavLink';
-import { LEFT_NAV_ITEMS, RIGHT_NAV_ITEMS } from '@/components/home/homeNavigation';
+import LivingTimeCounter from '@/components/home/LivingTimeCounter';
+import { MOBILE_NAV_ITEMS } from '@/components/home/homeNavigation';
 
 export default function Header() {
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
     <header className="sticky top-0 z-50 border-b border-[#d7ad73]/10 bg-[#030303]/92 backdrop-blur-xl">
-      <div className="mx-auto grid min-h-17 max-w-7xl grid-cols-[2.5rem_1fr_2.5rem] items-center px-4 py-3 sm:min-h-18 sm:px-6 lg:grid-cols-[minmax(19rem,1fr)_auto_minmax(21rem,1fr)] lg:gap-10 lg:px-8 xl:gap-16">
-        <nav className="hidden justify-self-stretch lg:block" aria-label="Left navigation">
-          <ul className="flex items-center justify-between gap-6">
-            {LEFT_NAV_ITEMS.map((item) => (
+      <div className="mx-auto grid min-h-16 max-w-7xl grid-cols-[auto_minmax(0,1fr)_2.25rem] items-center gap-3 px-4 py-3 sm:min-h-18 sm:grid-cols-[auto_minmax(0,1fr)_2.5rem] sm:px-6 lg:grid-cols-[auto_1fr_auto] lg:gap-9 lg:px-8">
+        <Link href="/" className="group flex min-w-0 items-center" aria-label="Dechive home">
+          <span className="font-[family-name:var(--font-header-serif)] text-[1.45rem] leading-none font-medium tracking-[0.12em] text-white transition-colors group-hover:text-[#f6d29b] sm:text-[2rem]">
+            DECHIVE
+          </span>
+        </Link>
+
+        <nav className="hidden justify-self-center lg:block" aria-label="Main navigation">
+          <ul className="flex items-center justify-center gap-7 xl:gap-10">
+            {MOBILE_NAV_ITEMS.map((item) => (
               <li key={item.label}>
                 <HomeNavLink item={item} />
               </li>
@@ -23,22 +30,12 @@ export default function Header() {
           </ul>
         </nav>
 
-        <Link href="/" className="group col-start-2 mx-auto flex items-center" aria-label="Dechive home">
-          <span className="font-[family-name:var(--font-header-serif)] text-[1.55rem] leading-none font-medium tracking-[0.12em] text-white transition-colors group-hover:text-[#f6d29b] sm:text-[2rem]">
-            DECHIVE
-          </span>
-        </Link>
+        <div className="flex min-w-0 justify-end lg:hidden">
+          <LivingTimeCounter compact className="max-w-full text-[8px] tracking-[0.03em] text-white/30 min-[390px]:text-[9px]" />
+        </div>
 
-        <div className="hidden justify-self-stretch lg:block">
-          <nav aria-label="Right navigation">
-            <ul className="flex items-center justify-between gap-6">
-              {RIGHT_NAV_ITEMS.map((item) => (
-                <li key={item.label}>
-                  <HomeNavLink item={item} />
-                </li>
-              ))}
-            </ul>
-          </nav>
+        <div className="hidden justify-end lg:flex">
+          <LivingTimeCounter />
         </div>
 
         <div className="col-start-3 flex justify-end lg:hidden">
