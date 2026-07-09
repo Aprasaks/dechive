@@ -3,6 +3,7 @@
 import * as React from 'react';
 import Link from 'next/link';
 import type { AiUpdateDay, AiUpdateItem } from '@/data/aiUpdates';
+import DechiveSectionHeader from '@/components/layout/DechiveSectionHeader';
 
 interface AiUpdatesClientProps {
   month: string;
@@ -47,7 +48,7 @@ function getDayForDate(days: AiUpdateDay[], date: string) {
 
 function Badge({ label }: { label: string }) {
   return (
-    <span className="inline-flex rounded-sm border border-[#bda77e]/45 bg-[#fbfaf7] px-2.5 py-1 text-[10px] font-semibold tracking-[0.12em] text-[#6d5634] uppercase">
+    <span className="inline-flex rounded-sm border border-[#f5ead5]/12 bg-[#f5ead5]/5 px-2.5 py-1 text-[10px] font-semibold tracking-[0.12em] text-[#e8dfcd]/66 uppercase">
       {label}
     </span>
   );
@@ -57,22 +58,25 @@ function UpdateCard({ update }: { update: AiUpdateItem }) {
   return (
     <article
       id={update.id}
-      className="group border-t border-[#d8cdbd] py-7 first:border-t-0 first:pt-0"
+      className="group rounded-md border border-[#f5ead5]/10 bg-[#101722]/88 p-5 transition-colors hover:border-[#c89b62]/42 hover:bg-[#121c28] sm:p-7"
     >
-      <Link href={update.detailHref} className="block">
+      <Link
+        href={update.detailHref}
+        className="block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7fc6c0]"
+      >
         <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
           <div>
-            <p className="text-[11px] font-semibold tracking-[0.22em] text-[#9a7342] uppercase">
+            <p className="text-[11px] font-semibold tracking-[0.22em] text-[#d7ad73] uppercase">
               Verified Briefing
             </p>
-            <h2 className="mt-2 font-[family-name:var(--font-header-serif)] text-2xl leading-snug font-medium text-[#211812] transition-colors group-hover:text-[#7a5d2c] sm:text-3xl">
+            <h2 className="mt-2 font-[family-name:var(--font-header-serif)] text-2xl leading-snug font-medium text-[#f5ead5] transition-colors group-hover:text-[#f6d29b] sm:text-3xl">
               {update.title}
             </h2>
-            <p className="mt-3 max-w-2xl text-sm leading-7 text-[#655b51]">
+            <p className="mt-3 max-w-2xl text-sm leading-7 text-[#e8dfcd]/62">
               {update.summary}
             </p>
           </div>
-          <span className="shrink-0 text-xs font-semibold tracking-[0.14em] text-[#8a6a39] uppercase transition-colors group-hover:text-[#211812]">
+          <span className="shrink-0 text-xs font-semibold tracking-[0.14em] text-[#7fc6c0] uppercase transition-colors group-hover:text-[#f6d29b]">
             날짜 기록 보기
           </span>
         </div>
@@ -113,38 +117,27 @@ export default function AiUpdatesClient({ month, days }: AiUpdatesClientProps) {
   }
 
   return (
-    <main className="min-h-[calc(100vh-5rem)] bg-[#f8f6f1] text-[#19140f]">
-      <section className="border-b border-[#ded6c9] px-6 py-12 sm:px-8 lg:py-14">
-        <div className="mx-auto max-w-7xl">
-          <p className="text-xs font-semibold tracking-[0.24em] text-[#9a7342] uppercase">
-            Official AI Briefing Archive
-          </p>
-          <h1 className="mt-4 font-[family-name:var(--font-header-serif)] text-4xl font-medium text-[#2a211b] sm:text-5xl">
-            Ai-Update
-          </h1>
-          <p className="mt-5 max-w-2xl text-sm leading-7 text-[#6f6257]">
-            매일 공식 문서에서 확인한 AI 업데이트를 날짜별 브리핑으로 남깁니다.
-            <br />
-            Archive와 Deep Dive가 질문과 판단을 다룬다면,
-            <br />
-            이곳은 변화 자체를 검증 가능한 기록으로 정리합니다.
-          </p>
-        </div>
-      </section>
+    <main className="min-h-[calc(100vh-5rem)] bg-[#050912] text-[#f3eadb]">
+      <DechiveSectionHeader
+        eyebrow="AI Update · 변화 관측실"
+        title="Tracking how AI changes, so the archive can stay aware."
+        description="Signals, releases, shifts, and questions worth verifying are collected as dated records for future judgment."
+        meta="Signals · Releases · Questions"
+      />
 
       <section className="mx-auto grid max-w-7xl gap-8 px-6 py-8 sm:px-8 lg:grid-cols-[18rem_1fr] lg:gap-12 lg:py-12">
         <aside className="lg:sticky lg:top-28 lg:self-start">
-          <div className="border border-[#ded6c9] bg-[#f3efe7]/70 p-5">
-            <div className="flex items-center justify-between gap-4 border-b border-[#d8cdbd] pb-4">
+          <div className="rounded-md border border-[#f5ead5]/12 bg-[#0b1018]/94 p-5 shadow-[0_18px_55px_rgba(0,0,0,0.18)]">
+            <div className="flex items-center justify-between gap-4 border-b border-[#f5ead5]/10 pb-4">
               <div>
-                <p className="font-[family-name:var(--font-header-serif)] text-xl font-medium text-[#2a211b]">
+                <p className="font-[family-name:var(--font-header-serif)] text-xl font-medium text-[#f5ead5]">
                   Monthly Index
                 </p>
-                <p className="mt-1 text-xs font-semibold tracking-[0.16em] text-[#8a6a39] uppercase">
+                <p className="mt-1 text-xs font-semibold tracking-[0.16em] text-[#d7ad73] uppercase">
                   Official records
                 </p>
               </div>
-              <span className="shrink-0 rounded-sm border border-[#bda77e]/50 px-3 py-1.5 text-xs font-semibold tracking-[0.12em] text-[#5d4630]">
+              <span className="shrink-0 rounded-sm border border-[#c89b62]/36 bg-[#c89b62]/10 px-3 py-1.5 text-xs font-semibold tracking-[0.12em] text-[#f6d29b]">
                 {getDisplayMonth(selectedMonth)}
               </span>
             </div>
@@ -161,8 +154,8 @@ export default function AiUpdatesClient({ month, days }: AiUpdatesClientProps) {
                       onClick={() => selectMonth(availableMonth)}
                       className={`rounded-sm border px-3 py-1.5 text-xs font-semibold tracking-[0.12em] transition-colors ${
                         isSelectedMonth
-                          ? 'border-[#8a6a39] bg-[#2a211b] text-[#f8f6f1]'
-                          : 'border-[#d8cdbd] bg-[#fbfaf7]/70 text-[#5f564d] hover:border-[#b08d57]/70 hover:bg-[#efe7da]'
+                          ? 'border-[#c89b62]/70 bg-[#c89b62]/16 text-[#f6d29b]'
+                          : 'border-[#f5ead5]/12 bg-[#101722] text-[#e8dfcd]/62 hover:border-[#c89b62]/55 hover:text-[#f3eadb]'
                       }`}
                     >
                       {getDisplayMonth(availableMonth)}
@@ -186,8 +179,8 @@ export default function AiUpdatesClient({ month, days }: AiUpdatesClientProps) {
                     onClick={() => setSelectedDate(date)}
                     className={`relative h-10 rounded-sm border text-xs font-semibold transition-colors ${
                       isSelected
-                        ? 'border-[#8a6a39] bg-[#2a211b] text-[#f8f6f1]'
-                        : 'border-[#d8cdbd] bg-[#fbfaf7]/70 text-[#5f564d] hover:border-[#b08d57]/70 hover:bg-[#efe7da]'
+                        ? 'border-[#c89b62]/70 bg-[#c89b62]/16 text-[#f6d29b]'
+                        : 'border-[#f5ead5]/12 bg-[#101722] text-[#e8dfcd]/62 hover:border-[#c89b62]/55 hover:text-[#f3eadb]'
                     }`}
                     aria-pressed={isSelected}
                     aria-label={`${formatDisplayDate(date)} AI updates`}
@@ -196,7 +189,7 @@ export default function AiUpdatesClient({ month, days }: AiUpdatesClientProps) {
                     {hasRecord ? (
                       <span
                         className={`absolute bottom-1.5 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full ${
-                          isSelected ? 'bg-[#f8f6f1]' : 'bg-[#b08d57]'
+                          isSelected ? 'bg-[#f6d29b]' : 'bg-[#7fc6c0]'
                         }`}
                         aria-hidden="true"
                       />
@@ -209,16 +202,16 @@ export default function AiUpdatesClient({ month, days }: AiUpdatesClientProps) {
         </aside>
 
         <div className="min-w-0">
-          <div className="border-b border-[#ded6c9] pb-6">
-            <p className="text-xs font-semibold tracking-[0.22em] text-[#9a7342] uppercase">
+          <div className="border-b border-[#f5ead5]/10 pb-6">
+            <p className="text-xs font-semibold tracking-[0.22em] text-[#d7ad73] uppercase">
               {formatDisplayDate(selectedDate)}
             </p>
-            <p className="mt-3 text-sm leading-7 text-[#6f6257]">
+            <p className="mt-3 text-sm leading-7 text-[#e8dfcd]/62">
               공식 출처 확인 여부와 실제 화면 자료 존재 여부를 함께 기록합니다.
             </p>
           </div>
 
-          <div className="mt-7 bg-[#fbfaf7]/55 px-5 py-7 sm:px-7">
+          <div className="mt-7 grid gap-4">
             {selectedUpdates.length ? (
               <>
                 {visibleUpdates.map((update) => (
@@ -231,10 +224,10 @@ export default function AiUpdatesClient({ month, days }: AiUpdatesClientProps) {
                   />
                 ))}
                 {hasMoreUpdates || selectedDay?.groups?.length ? (
-                  <div className="border-t border-[#d8cdbd] pt-7">
+                  <div className="border-t border-[#f5ead5]/10 pt-7">
                     <Link
                       href={dateDetailHref}
-                      className="inline-flex text-xs font-semibold tracking-[0.16em] text-[#8a6a39] uppercase transition-colors hover:text-[#2a211b]"
+                      className="inline-flex text-xs font-semibold tracking-[0.16em] text-[#d7ad73] uppercase transition-colors hover:text-[#f6d29b] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7fc6c0]"
                     >
                       {formatDisplayDate(selectedDate)} 전체 기록 보기
                     </Link>
@@ -242,11 +235,11 @@ export default function AiUpdatesClient({ month, days }: AiUpdatesClientProps) {
                 ) : null}
               </>
             ) : (
-              <div className="border-t border-[#d8cdbd] py-10">
-                <p className="font-[family-name:var(--font-header-serif)] text-2xl font-medium text-[#2a211b]">
+              <div className="rounded-md border border-[#f5ead5]/10 bg-[#101722]/88 p-7">
+                <p className="font-[family-name:var(--font-header-serif)] text-2xl font-medium text-[#f5ead5]">
                   이 날짜에는 기록된 AI 업데이트가 없습니다.
                 </p>
-                <p className="mt-3 max-w-xl text-sm leading-7 text-[#6f6257]">
+                <p className="mt-3 max-w-xl text-sm leading-7 text-[#e8dfcd]/62">
                   공식 문서로 확인된 변화가 생기면 이 날짜 색인에 브리핑으로
                   추가됩니다.
                 </p>

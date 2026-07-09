@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { ArrowUpRight, Search } from 'lucide-react';
 import type { Post } from '@/types/archive';
 import { useLang } from '@/components/layout/LangProvider';
+import DechiveSectionHeader from '@/components/layout/DechiveSectionHeader';
 
 const ARCHIVE_HERO_IMAGE = '/images/archive/image.webp';
 
@@ -56,72 +57,30 @@ export default function BookArchive({
 
   return (
     <section
-      className={`relative min-h-[calc(100vh-4.5rem)] flex-1 bg-[#f5f5f2] text-[#181716] ${sansFontClassName}`}
+      className={`relative min-h-[calc(100vh-4.5rem)] flex-1 bg-[#050912] text-[#f3eadb] ${sansFontClassName}`}
     >
       <div className="mx-auto w-full max-w-[92rem] px-5 pb-10 sm:px-8 lg:px-10">
-        <section className="relative grid overflow-hidden border-b border-[#d8d6d0] bg-white/50 lg:min-h-[430px] lg:grid-cols-[0.38fr_0.62fr]">
-          <div className="relative z-10 flex flex-col justify-center px-6 py-10 sm:px-8 lg:px-12 lg:py-12">
-            <div>
-              <p className="text-[10px] font-semibold tracking-[0.26em] text-[#8a6a3a] uppercase">
-                WELCOME TO THE READING ROOM
-              </p>
-              <h1
-                className={`mt-7 max-w-xl text-[2.45rem] leading-[1.18] font-medium tracking-[-0.04em] text-[#181716] sm:text-5xl lg:text-[3.8rem] ${lang === 'en' ? 'lg:max-w-none lg:text-[3.35rem]' : ''} ${serifFontClassName}`}
-              >
-                {lang === 'en' ? (
-                  <>
-                    Good questions
-                    <br />
-                    change thought.
-                  </>
-                ) : (
-                  <>
-                    좋은 질문은
-                    <br />
-                    생각을 바꿉니다.
-                  </>
-                )}
-              </h1>
-              <p className="mt-6 max-w-md text-sm leading-7 text-[#6b6863] sm:text-[15px]">
-                {lang === 'en' ? (
-                  <>
-                    DECHIVE begins with one question
-                    <br className="hidden sm:block" />
-                    and keeps it as a record of reasoning that can be checked again.
-                  </>
-                ) : (
-                  <>
-                    DECHIVE는 하나의 질문에서 시작해,
-                    <br className="hidden sm:block" />
-                    다시 확인할 수 있는 추론의 기록으로 남깁니다.
-                  </>
-                )}
-              </p>
-            </div>
-          </div>
-          <div className="relative min-h-[245px] sm:min-h-[330px] lg:min-h-0">
-            <Image
-              src={ARCHIVE_HERO_IMAGE}
-              alt={lang === 'en' ? 'Dechive archive reading room visual' : 'Dechive 아카이브 열람실 비주얼'}
-              fill
-              loading="eager"
-              fetchPriority="high"
-              sizes="(min-width: 1024px) 58vw, 100vw"
-              className="object-cover object-center"
-            />
-          </div>
-        </section>
+        <DechiveSectionHeader
+          eyebrow={lang === 'en' ? 'Archive · Verified records' : 'Archive · 검증된 기록'}
+          title={lang === 'en' ? 'Records that become searchable memory.' : '검색 가능한 기억이 되는 기록들.'}
+          description={
+            lang === 'en'
+              ? 'Questions, notes, and traces accumulate into a memory layer that Dechive can reconnect and verify later.'
+              : '질문, 노트, 흔적이 Dechive 안에 축적되어 나중에 다시 연결하고 검증할 수 있는 기억의 층이 됩니다.'
+          }
+          meta={lang === 'en' ? 'Questions · Notes · Traces' : 'Questions · Notes · Verification'}
+        />
 
-        <section className="relative z-20 mx-auto -mt-8 max-w-[76rem] overflow-hidden rounded-md border border-[#d8d6d0] bg-white/82 shadow-[0_24px_70px_rgba(24,23,22,0.08)] backdrop-blur-sm">
-          <div className="flex flex-col gap-4 border-b border-[#d8d6d0] px-4 py-4 sm:px-5 lg:flex-row lg:items-center lg:justify-between">
+        <section className="relative z-20 mx-auto -mt-8 max-w-[76rem] overflow-hidden rounded-md border border-[#f5ead5]/12 bg-[#0b1018]/96 shadow-[0_24px_70px_rgba(0,0,0,0.28)] backdrop-blur-sm">
+          <div className="flex flex-col gap-4 border-b border-[#f5ead5]/10 px-4 py-4 sm:px-5 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex flex-wrap gap-2">
                 <button
                   type="button"
                   onClick={() => setSelectedCategory(null)}
                   className={`rounded-sm border px-3 py-2 text-[11px] font-semibold tracking-[0.16em] uppercase transition-colors ${
                     selectedCategory === null
-                      ? 'border-[#181716] bg-[#181716] text-[#f5f5f2]'
-                      : 'border-[#d8d6d0] text-[#6b6863] hover:border-[#8a6a3a]/60 hover:text-[#181716]'
+                      ? 'border-[#c89b62]/70 bg-[#c89b62]/16 text-[#f6d29b]'
+                      : 'border-[#f5ead5]/12 text-[#e8dfcd]/62 hover:border-[#c89b62]/55 hover:text-[#f3eadb]'
                   }`}
                 >
                   {allButtonLabel}
@@ -136,8 +95,8 @@ export default function BookArchive({
                       onClick={() => setSelectedCategory(label)}
                       className={`rounded-sm border px-3 py-2 text-[11px] font-semibold tracking-[0.16em] uppercase transition-colors ${
                         isSelected
-                          ? 'border-[#181716] bg-[#181716] text-[#f5f5f2]'
-                          : 'border-[#d8d6d0] text-[#6b6863] hover:border-[#8a6a3a]/60 hover:text-[#181716]'
+                          ? 'border-[#c89b62]/70 bg-[#c89b62]/16 text-[#f6d29b]'
+                          : 'border-[#f5ead5]/12 text-[#e8dfcd]/62 hover:border-[#c89b62]/55 hover:text-[#f3eadb]'
                       }`}
                     >
                       {label}
@@ -150,7 +109,7 @@ export default function BookArchive({
               <select
                 value={selectedYear}
                 onChange={(event) => setSelectedYear(event.target.value)}
-                className="h-9 rounded-sm border border-[#d8d6d0] bg-white/70 px-3 text-[11px] font-semibold tracking-[0.16em] text-[#181716] uppercase outline-none transition-colors hover:border-[#8a6a3a]/60"
+                className="h-9 rounded-sm border border-[#f5ead5]/14 bg-[#101722] px-3 text-[11px] font-semibold tracking-[0.16em] text-[#f3eadb] uppercase outline-none transition-colors hover:border-[#c89b62]/60 focus:border-[#7fc6c0]/70"
                 aria-label={lang === 'en' ? 'Select year' : '연도 선택'}
               >
                 <option value="all">{lang === 'en' ? 'ALL YEARS' : '전체 연도'}</option>
@@ -173,7 +132,7 @@ export default function BookArchive({
                   value={searchQuery}
                   onChange={(event) => setSearchQuery(event.target.value)}
                   placeholder={lang === 'en' ? 'Search questions' : '질문 검색'}
-                  className="h-9 w-full rounded-sm border border-[#d8d6d0] bg-white/70 pr-3 pl-9 text-sm text-[#181716] outline-none transition-colors placeholder:text-[#6b6863]/70 hover:border-[#8a6a3a]/60 focus:border-[#8a6a3a]"
+                  className="h-9 w-full rounded-sm border border-[#f5ead5]/14 bg-[#101722] pr-3 pl-9 text-sm text-[#f3eadb] outline-none transition-colors placeholder:text-[#e8dfcd]/38 hover:border-[#c89b62]/60 focus:border-[#7fc6c0]/70"
                 />
               </label>
             </div>
@@ -182,14 +141,14 @@ export default function BookArchive({
           <div id="archive-records" className="px-5 py-6 sm:px-7 lg:px-8 lg:py-8">
             <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <p className="text-[10px] font-semibold tracking-[0.24em] text-[#8a6a3a] uppercase">
+                <p className="text-[10px] font-semibold tracking-[0.24em] text-[#d7ad73] uppercase">
                   Latest Questions
                 </p>
-                <h2 className={`mt-2 text-2xl font-medium text-[#181716] sm:text-3xl ${serifFontClassName}`}>
+                <h2 className={`mt-2 text-2xl font-medium text-[#f5ead5] sm:text-3xl ${serifFontClassName}`}>
                   {lang === 'en' ? 'Question Records' : '질문 기록'}
                 </h2>
               </div>
-              <p className="text-sm text-[#6b6863]">
+              <p className="text-sm text-[#e8dfcd]/58">
                 {lang === 'en' ? `${visiblePosts.length} records` : `${visiblePosts.length}개의 기록`}
               </p>
             </div>
@@ -207,43 +166,43 @@ export default function BookArchive({
                           ? `/en/archive/${post.slug}`
                           : `/archive/${post.slug}`
                       }
-                      className={`group relative overflow-hidden rounded-md border border-[#e4e1da] bg-[#fffdf8]/78 transition-colors hover:border-[#c9b894] hover:bg-white ${
+                      className={`group relative overflow-hidden rounded-md border border-[#f5ead5]/12 bg-[#101722]/92 transition-colors hover:border-[#c89b62]/45 hover:bg-[#121c28] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7fc6c0] ${
                         isFeatured ? 'lg:col-span-2 lg:grid lg:grid-cols-[1fr_0.55fr]' : ''
                       }`}
                     >
                       <span className="flex min-h-[13rem] flex-col p-5 sm:p-6">
-                        <span className="flex items-center gap-5 text-[10px] font-semibold tracking-[0.18em] text-[#8a6a3a] uppercase">
+                        <span className="flex items-center gap-5 text-[10px] font-semibold tracking-[0.18em] text-[#d7ad73] uppercase">
                           <span>{String(index + 1).padStart(2, '0')}</span>
                           <span>{post.category}</span>
                         </span>
                         <span
-                          className={`mt-5 block text-[1.35rem] leading-snug font-medium text-[#181716] transition-colors group-hover:text-[#8a6a3a] ${serifFontClassName}`}
+                          className={`mt-5 block text-[1.35rem] leading-snug font-medium text-[#f5ead5] transition-colors group-hover:text-[#f6d29b] ${serifFontClassName}`}
                         >
                           {post.seoTitle ?? post.title}
                         </span>
-                        <span className="mt-4 block max-w-xl text-sm leading-7 text-[#6b6863]">
+                        <span className="mt-4 block max-w-xl text-sm leading-7 text-[#e8dfcd]/62">
                           {post.description}
                         </span>
                         <span className="mt-auto flex items-end justify-between gap-4 pt-7">
-                          <span className="text-xs tracking-[0.08em] text-[#6b6863]">
+                          <span className="text-xs tracking-[0.08em] text-[#e8dfcd]/48">
                             {post.date.replaceAll('-', '.')}
                           </span>
-                          <span className="flex h-10 w-10 items-center justify-center rounded-full border border-[#d8d6d0] text-[#8a6a3a] transition-colors group-hover:border-[#181716] group-hover:bg-[#181716] group-hover:text-[#fffdf8]">
+                          <span className="flex h-10 w-10 items-center justify-center rounded-full border border-[#f5ead5]/12 text-[#7fc6c0] transition-colors group-hover:border-[#c89b62]/55 group-hover:bg-[#c89b62]/12 group-hover:text-[#f6d29b]">
                             <ArrowUpRight size={16} strokeWidth={1.6} />
                           </span>
                         </span>
                       </span>
 
                       {isFeatured ? (
-                        <span className="relative hidden min-h-full border-l border-[#e4e1da] lg:block">
+                        <span className="relative hidden min-h-full border-l border-[#f5ead5]/10 lg:block">
                           <Image
                             src={ARCHIVE_HERO_IMAGE}
                             alt=""
                             fill
                             sizes="24rem"
-                            className="object-cover object-center opacity-80 grayscale"
+                            className="object-cover object-center opacity-45 grayscale"
                           />
-                          <span className="absolute inset-0 bg-white/15" />
+                          <span className="absolute inset-0 bg-[#050912]/32" />
                         </span>
                       ) : null}
                     </Link>
@@ -251,7 +210,7 @@ export default function BookArchive({
                 })}
               </div>
             ) : (
-              <p className="border-t border-[#d8d6d0] pt-8 text-sm text-[#6b6863]">
+              <p className="border-t border-[#f5ead5]/10 pt-8 text-sm text-[#e8dfcd]/62">
                 {lang === 'en'
                   ? 'No records in this category yet.'
                   : '이 조건에 맞는 기록이 없습니다.'}

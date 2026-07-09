@@ -11,7 +11,7 @@ import MusicToggle from './MusicToggle';
 const NAV_ITEMS = [
   { name: 'ARCHIVE', href: '/archive' },
   { name: 'DEEP DIVE', href: '/deep-dive' },
-  { name: 'BOOK', href: '/book' },
+  { name: 'KNOWLEDGE', href: '/library' },
   { name: 'AI UPDATE', href: '/ai-updates' },
   { name: 'ABOUT', href: '/about' },
 ];
@@ -39,7 +39,10 @@ export default function Header() {
       return pathname.startsWith('/deep-dive') || pathname.startsWith('/en/deep-dive');
     }
     if (href === '/book') {
-      return pathname.startsWith('/book');
+      return pathname.startsWith('/book') || pathname.startsWith('/library');
+    }
+    if (href === '/library') {
+      return pathname.startsWith('/book') || pathname.startsWith('/library');
     }
     if (href === '/ai-updates') {
       return pathname.startsWith('/ai-updates');
@@ -52,21 +55,21 @@ export default function Header() {
   return (
     <>
       <header className="sticky top-0 z-50 h-[4.5rem] w-full border-b border-[#d8d6d0] bg-[#fafaf7]/96 text-[#181716] backdrop-blur-sm">
-        <div className="relative grid h-full w-full grid-cols-[2rem_1fr_2rem] items-center px-6 sm:px-8 md:grid-cols-[minmax(12rem,18rem)_1fr_minmax(12rem,18rem)] md:px-10">
-          <div className="h-8 w-8 md:hidden" aria-hidden="true" />
+        <div className="relative grid h-full w-full grid-cols-[2rem_1fr_2rem] items-center px-6 sm:px-8 lg:grid-cols-[minmax(12rem,18rem)_1fr_minmax(12rem,18rem)] lg:px-10">
+          <div className="h-8 w-8 lg:hidden" aria-hidden="true" />
 
           <Link
             href="/"
             onClick={close}
-            className="group col-start-2 mx-auto flex flex-col items-center md:col-start-1 md:mx-0 md:items-start"
+            className="group col-start-2 mx-auto flex flex-col items-center lg:col-start-1 lg:mx-0 lg:items-start"
             aria-label="Dechive home"
           >
-            <span className="font-[family-name:var(--font-header-serif)] text-[2rem] leading-none font-medium tracking-[0.05em] text-[#181716] transition-colors group-hover:text-[#8a6a3a] md:text-[2.7rem] lg:text-[3.1rem]">
+              <span className="font-[family-name:var(--font-header-serif)] text-[2rem] leading-none font-medium tracking-[0.05em] text-[#181716] transition-colors group-hover:text-[#8a6a3a] lg:text-[3.1rem]">
               DECHIVE
             </span>
           </Link>
 
-          <nav className="hidden items-center justify-center md:flex" aria-label="Magazine sections">
+          <nav className="hidden items-center justify-center lg:flex" aria-label="Magazine sections">
             <ul className="flex items-center gap-5 lg:gap-7 xl:gap-9">
               {NAV_ITEMS.map((item) => (
                 <li key={item.name}>
@@ -85,7 +88,7 @@ export default function Header() {
             </ul>
           </nav>
 
-          <div className="hidden items-center justify-end gap-3 md:flex">
+          <div className="hidden items-center justify-end gap-3 lg:flex">
             <Link
               href="/guestbook"
               className={`rounded-sm border px-3 py-1.5 text-[11px] font-semibold tracking-[0.14em] uppercase transition-colors ${
@@ -103,7 +106,7 @@ export default function Header() {
             </div>
           </div>
 
-          <div className="flex h-8 w-8 items-center justify-end md:hidden">
+          <div className="flex h-8 w-8 items-center justify-end lg:hidden">
             <button
               className="text-[#6b6863] transition-colors hover:text-[#181716]"
               onClick={() => setIsOpen(true)}
@@ -117,7 +120,7 @@ export default function Header() {
 
       {/* 모바일 풀스크린 오버레이 */}
       <div
-        className={`fixed inset-0 z-[999] bg-[#fafaf7] transition-all duration-500 ease-in-out md:hidden ${
+        className={`fixed inset-0 z-[999] bg-[#fafaf7] transition-all duration-500 ease-in-out lg:hidden ${
           isOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0 pointer-events-none'
         }`}
       >
@@ -134,7 +137,7 @@ export default function Header() {
             DECHIVE
           </span>
           <span className="mt-1 block text-[9px] font-semibold tracking-[0.22em] text-[#6b6863] uppercase">
-            Digital daily magazine
+            Living knowledge system
           </span>
         </Link>
 

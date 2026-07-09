@@ -1,9 +1,6 @@
 import type { Metadata } from 'next';
 import { Noto_Serif_KR } from 'next/font/google';
 import HomeClient from '@/components/home/HomeClient';
-import { getDailyAiUpdatesByDate, getLatestDailyIssue, getWeeklyEditionByDate } from '@/lib/dailyIssues';
-import { getArchivePosts, getDeepDivePosts } from '@/lib/posts';
-import type { PostLang } from '@/types/archive';
 
 const notoSerifKR = Noto_Serif_KR({
   weight: ['500'],
@@ -13,14 +10,14 @@ const notoSerifKR = Noto_Serif_KR({
 });
 
 export const metadata: Metadata = {
-  title: 'Dechive — 검증을 넘어 추론까지',
+  title: 'Dechive — A living archive built from verified knowledge',
   description:
-    'Dechive는 하나의 질문을 독립된 기록으로 남기는 Archive와 깊은 질문을 길게 추적하는 Deep Dive로 AI 시대의 답을 검증합니다.',
+    'Dechive is a personal knowledge system where records, sources, questions, and verified thoughts become searchable context for your AI.',
   alternates: { canonical: 'https://dechive.dev', languages: { 'x-default': 'https://dechive.dev' } },
   openGraph: {
-    title: 'Dechive — 검증을 넘어 추론까지',
+    title: 'Dechive — A living archive built from verified knowledge',
     description:
-      'Dechive는 하나의 질문을 독립된 기록으로 남기는 Archive와 깊은 질문을 길게 추적하는 Deep Dive로 AI 시대의 답을 검증합니다.',
+      'Dechive is a personal knowledge system where records, sources, questions, and verified thoughts become searchable context for your AI.',
     url: 'https://dechive.dev',
     siteName: 'Dechive',
     locale: 'ko_KR',
@@ -30,15 +27,15 @@ export const metadata: Metadata = {
         url: 'https://dechive.dev/images/thumb.webp',
         width: 1200,
         height: 630,
-        alt: 'Dechive — 검증을 넘어 추론까지',
+        alt: 'Dechive — A living archive built from verified knowledge',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Dechive — 검증을 넘어 추론까지',
+    title: 'Dechive — A living archive built from verified knowledge',
     description:
-      'Dechive는 하나의 질문을 독립된 기록으로 남기는 Archive와 깊은 질문을 길게 추적하는 Deep Dive로 AI 시대의 답을 검증합니다.',
+      'Dechive is a personal knowledge system where records, sources, questions, and verified thoughts become searchable context for your AI.',
     images: ['https://dechive.dev/images/thumb.webp'],
   },
 };
@@ -52,53 +49,14 @@ const jsonLd = {
   sameAs: ['https://github.com/Aprasaks'],
 };
 
-const FEATURED_DEEP_DIVE_SLUG = 'ai-era-agile-verification';
-
 export default function Home() {
-  function getHomePosts(lang: PostLang) {
-    const archivePosts = getArchivePosts(lang);
-    const deepDivePosts = getDeepDivePosts(lang);
-    const featuredPost = deepDivePosts.find((post) => post.slug === FEATURED_DEEP_DIVE_SLUG) ?? deepDivePosts[0];
-    const latestPosts = [...archivePosts].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 5).map((post) => ({
-      slug: post.slug,
-      title: post.title,
-      description: post.description,
-      category: post.category,
-      seoTitle: post.seoTitle,
-    }));
-
-    return {
-      featuredPost: featuredPost ? {
-        slug: featuredPost.slug,
-        title: featuredPost.title,
-        description: featuredPost.description,
-        category: featuredPost.category,
-        seoTitle: featuredPost.seoTitle,
-      } : null,
-      latestPosts,
-    };
-  }
-
-  const koHome = getHomePosts('ko');
-  const enHome = getHomePosts('en');
-  const latestIssue = getLatestDailyIssue();
-  const latestWeeklyEdition = getWeeklyEditionByDate(latestIssue.date);
-  const latestAiUpdates = getDailyAiUpdatesByDate(latestIssue.date);
-
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <HomeClient
-        featuredPosts={{ ko: koHome.featuredPost, en: enHome.featuredPost }}
-        latestPosts={{ ko: koHome.latestPosts, en: enHome.latestPosts }}
-        latestIssue={latestIssue}
-        latestWeeklyEdition={latestWeeklyEdition}
-        latestAiUpdates={latestAiUpdates}
-        heroSerifClassName={notoSerifKR.className}
-      />
+      <HomeClient heroSerifClassName={notoSerifKR.className} />
     </>
   );
 }

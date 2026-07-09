@@ -1,18 +1,19 @@
 import type { Metadata } from 'next';
 import BookCard from '@/components/book/BookCard';
+import DechiveSectionHeader from '@/components/layout/DechiveSectionHeader';
 import { getAllBookNotes } from '@/lib/books';
 
 const BOOK_DESCRIPTION =
-  '책에서 만난 문장과 그 문장에서 출발한 생각을 남기는 Dechive 독서 기록 서가입니다.';
+  '수집한 자료와 독서 기록을 Dechive의 장기 참조와 지식 맥락으로 남기는 공간입니다.';
 
 export const metadata: Metadata = {
-  title: 'Book',
+  title: 'Knowledge Base',
   description: BOOK_DESCRIPTION,
   alternates: {
     canonical: 'https://dechive.dev/book',
   },
   openGraph: {
-    title: 'Book | Dechive',
+    title: 'Knowledge Base | Dechive',
     description: BOOK_DESCRIPTION,
     url: 'https://dechive.dev/book',
     siteName: 'Dechive',
@@ -23,13 +24,13 @@ export const metadata: Metadata = {
         url: 'https://dechive.dev/images/thumb.webp',
         width: 1200,
         height: 630,
-        alt: 'Dechive Book',
+        alt: 'Dechive Knowledge Base',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Book | Dechive',
+    title: 'Knowledge Base | Dechive',
     description: BOOK_DESCRIPTION,
     images: ['https://dechive.dev/images/thumb.webp'],
   },
@@ -39,29 +40,22 @@ export default function BookPage() {
   const books = getAllBookNotes('ko');
 
   return (
-    <main className="min-h-[calc(100vh-5rem)] bg-[#f8f6f1] px-6 py-16 text-[#19140f] sm:px-8 lg:py-20">
-      <section className="mx-auto max-w-6xl">
-        <div className="border-b border-[#ded6c9] pb-10">
-          <p className="text-xs font-medium tracking-[0.24em] text-[#9a7a3f] uppercase">
-            Dechive Book
-          </p>
-          <h1 className="mt-5 font-[family-name:var(--font-header-serif)] text-4xl font-medium text-[#2a211b] sm:text-5xl">
-            인용과 생각의 서가
-          </h1>
-          <p className="mt-5 max-w-2xl text-sm leading-7 text-[#6f6257]">
-            책의 내용을 대신하지 않고, 책에서 붙잡은 짧은 문장과 그 문장에서 출발한 생각을 남깁니다.
-            <br className="hidden sm:block" />
-            이곳은 요약본이 아니라 생각이 기록으로 남는 독서 기록입니다.
-          </p>
-        </div>
+    <main className="min-h-[calc(100vh-5rem)] bg-[#050912] text-[#f3eadb]">
+      <DechiveSectionHeader
+        eyebrow="Knowledge Base · 수집된 맥락"
+        title="Materials collected to feed the archive."
+        description="The archive grows from what is collected, kept, and returned to. These records become source material for future questions."
+        meta="Materials · References · Context"
+      />
 
-        <div className="mt-8">
+      <section className="mx-auto max-w-6xl px-6 py-10 sm:px-8 lg:py-12">
+        <div className="grid gap-4">
           {books.length ? (
             books.map((book) => (
               <BookCard key={book.slug} book={book} />
             ))
           ) : (
-            <p className="py-10 text-sm leading-7 text-[#6f6257]">
+            <p className="rounded-md border border-[#f5ead5]/10 bg-[#101722]/88 p-7 text-sm leading-7 text-[#e8dfcd]/62">
               아직 공개된 독서 기록이 없습니다.
             </p>
           )}

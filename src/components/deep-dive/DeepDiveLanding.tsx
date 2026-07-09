@@ -14,6 +14,7 @@ import {
   PackageCheck,
   Sparkles,
 } from 'lucide-react';
+import DechiveSectionHeader from '@/components/layout/DechiveSectionHeader';
 
 export interface DeepDivePost {
   slug: string;
@@ -133,43 +134,20 @@ export default function DeepDiveLanding({
   }, [visibleDeepDives.length]);
 
   return (
-    <section className={`flex min-h-[calc(100vh-4.5rem)] flex-1 bg-[#f5f5f2] text-[#181716] ${sansFontClassName}`}>
+    <section className={`flex min-h-[calc(100vh-4.5rem)] flex-1 bg-[#050912] text-[#f3eadb] ${sansFontClassName}`}>
       <div className="mx-auto w-full max-w-[92rem] px-5 pb-12 sm:px-8 lg:px-10">
-        <section className="grid overflow-hidden border-b border-[#d8d6d0] bg-white/54 lg:min-h-[430px] lg:grid-cols-[0.42fr_0.58fr]">
-          <div className="flex flex-col justify-center px-6 py-10 sm:px-8 lg:px-12 lg:py-12">
-            <p className="text-[10px] font-semibold tracking-[0.28em] text-[#8a6a3a] uppercase">
-              DEEP DIVE
-            </p>
-            <h1
-              className={`mt-7 max-w-xl whitespace-pre-line text-[2.4rem] leading-[1.16] font-medium tracking-[-0.04em] text-[#181716] sm:text-5xl lg:text-[3.65rem] ${serifFontClassName}`}
-            >
-              {copy.heroTitle}
-            </h1>
-            <p className="mt-6 max-w-xl text-sm leading-7 text-[#6b6863] sm:text-[15px]">
-              {copy.heroBody}
-            </p>
-            <Link
-              href="#deep-dive-dossiers"
-              className="mt-8 inline-flex w-fit items-center gap-2 border-b border-[#8a6a3a]/60 pb-1 text-xs font-semibold tracking-[0.18em] text-[#181716] uppercase transition-colors hover:border-[#181716] hover:text-[#8a6a3a]"
-            >
-              {copy.guide}
-              <ArrowUpRight size={14} strokeWidth={1.6} />
-            </Link>
-          </div>
-          <div className="relative min-h-[250px] sm:min-h-[330px] lg:min-h-0">
-            <Image
-              src="/images/deep-dive/deep-dive-hero.webp"
-              alt={isEnglish ? 'Dechive Deep Dive research dossier visual' : 'Dechive Deep Dive 심층 문서관 비주얼'}
-              fill
-              loading="eager"
-              fetchPriority="high"
-              sizes="(min-width: 1024px) 58vw, 100vw"
-              className="object-cover object-right"
-            />
-          </div>
-        </section>
+        <DechiveSectionHeader
+          eyebrow={isEnglish ? 'Deep Dive · Verified concepts' : 'Deep Dive · 검증된 개념'}
+          title={isEnglish ? 'Concepts examined beyond the first answer.' : '첫 답을 넘어 검증되는 개념들.'}
+          description={
+            isEnglish
+              ? 'Follow the structure, evidence, mistakes, and limits behind an idea until it becomes reusable knowledge.'
+              : '하나의 아이디어 뒤에 있는 구조, 근거, 실수, 한계를 따라가며 다시 쓸 수 있는 지식으로 만듭니다.'
+          }
+          meta={isEnglish ? 'Concepts · Evidence · Limits' : 'Concepts · Evidence · Verification'}
+        />
 
-        <article className="relative z-10 mx-auto -mt-8 max-w-[76rem] overflow-hidden rounded-md border border-[#d8d6d0] bg-white/84 text-[#181716] shadow-[0_24px_64px_rgba(24,22,20,0.09)]">
+        <article className="relative z-10 mx-auto -mt-8 max-w-[76rem] overflow-hidden rounded-md border border-[#f5ead5]/12 bg-[#0b1018] text-[#f3eadb] shadow-[0_24px_70px_rgba(0,0,0,0.28)]">
           <Image
             src={featuredDeepDive.image}
             alt=""
@@ -177,27 +155,27 @@ export default function DeepDiveLanding({
             sizes="76rem"
             className="object-cover object-center"
           />
-          <div className="absolute inset-0 bg-white/18" />
+          <div className="absolute inset-0 bg-[#050912]/50" />
           <div className="relative min-h-[28rem] p-5 sm:p-7 lg:p-8">
-            <div className="flex min-h-[25.5rem] max-w-2xl flex-col justify-center rounded-md border border-white/55 bg-white/58 px-6 py-8 shadow-[0_22px_70px_rgba(24,23,22,0.10)] backdrop-blur-md sm:px-8 lg:px-10">
+            <div className="flex min-h-[25.5rem] max-w-2xl flex-col justify-center rounded-md border border-[#f5ead5]/14 bg-[#101722]/82 px-6 py-8 shadow-[0_22px_70px_rgba(0,0,0,0.24)] backdrop-blur-md sm:px-8 lg:px-10">
             <div>
-              <p className="text-[10px] font-semibold tracking-[0.28em] text-[#c7a160] uppercase">
+              <p className="text-[10px] font-semibold tracking-[0.28em] text-[#d7ad73] uppercase">
                 {copy.featured}
               </p>
-              <p className="mt-5 text-[11px] font-semibold tracking-[0.18em] text-[#6b6863] uppercase">
+              <p className="mt-5 text-[11px] font-semibold tracking-[0.18em] text-[#e8dfcd]/50 uppercase">
                 {featuredDeepDive.meta} · Verification · Dossier
               </p>
               <h2 className={`mt-5 max-w-3xl text-3xl leading-tight font-medium tracking-[-0.04em] sm:text-4xl lg:text-5xl ${serifFontClassName}`}>
                 {featuredDeepDive.title}
               </h2>
-              <p className="mt-5 max-w-2xl text-sm leading-7 text-[#6b6863]">
+              <p className="mt-5 max-w-2xl text-sm leading-7 text-[#e8dfcd]/64">
                 {featuredDeepDive.description}
               </p>
               <div className="mt-6 flex flex-wrap gap-2">
                 {featuredTags.map((tag) => (
                   <span
                     key={tag}
-                    className="rounded-full border border-[#d8d6d0] px-3 py-1 text-xs text-[#6b6863]"
+                    className="rounded-full border border-[#f5ead5]/12 bg-[#f5ead5]/5 px-3 py-1 text-xs text-[#e8dfcd]/68"
                   >
                     {tag}
                   </span>
@@ -205,7 +183,7 @@ export default function DeepDiveLanding({
               </div>
               <Link
                 href={`${basePath}/${featuredDeepDive.slug}`}
-                className="mt-8 inline-flex items-center gap-3 rounded-sm border border-[#8a6a3a]/60 px-4 py-2 text-xs font-semibold tracking-[0.18em] text-[#181716] uppercase transition-colors hover:border-[#181716] hover:bg-[#181716] hover:text-[#f5f5f2]"
+                className="mt-8 inline-flex items-center gap-3 rounded-sm border border-[#c89b62]/45 px-4 py-2 text-xs font-semibold tracking-[0.18em] text-[#f6d29b] uppercase transition-colors hover:border-[#c89b62]/70 hover:bg-[#c89b62]/12 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7fc6c0]"
               >
                 {copy.read}
                 <ArrowUpRight size={15} strokeWidth={1.7} />
@@ -219,8 +197,8 @@ export default function DeepDiveLanding({
                       onClick={() => setFeaturedIndex(index)}
                       className={`h-1.5 rounded-full transition-all ${
                         featuredIndex === index
-                          ? 'w-8 bg-[#8a6a3a]'
-                          : 'w-3 bg-[#d8d6d0] hover:bg-[#8a6a3a]/45'
+                          ? 'w-8 bg-[#c89b62]'
+                          : 'w-3 bg-[#f5ead5]/18 hover:bg-[#c89b62]/45'
                       }`}
                       aria-label={`${index + 1}: ${deepDive.title}`}
                       aria-pressed={featuredIndex === index}
@@ -233,9 +211,9 @@ export default function DeepDiveLanding({
           </div>
         </article>
 
-        <section className="mx-auto mt-7 max-w-[76rem] rounded-md border border-[#d8d6d0] bg-white/74 px-4 py-4 sm:px-5">
+        <section className="mx-auto mt-7 max-w-[76rem] rounded-md border border-[#f5ead5]/12 bg-[#0b1018]/94 px-4 py-4 shadow-[0_18px_55px_rgba(0,0,0,0.18)] sm:px-5">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-            <p className="text-[10px] font-semibold tracking-[0.24em] text-[#8a6a3a] uppercase">
+            <p className="text-[10px] font-semibold tracking-[0.24em] text-[#d7ad73] uppercase">
               {copy.lens}
             </p>
             <div className="flex flex-wrap gap-2">
@@ -249,8 +227,8 @@ export default function DeepDiveLanding({
                     onClick={() => setSelectedLens(key)}
                     className={`inline-flex items-center gap-2 rounded-sm border px-3 py-2 text-[11px] font-semibold tracking-[0.14em] uppercase transition-colors ${
                       isSelected
-                        ? 'border-[#181716] bg-[#181716] text-[#f5f5f2]'
-                        : 'border-[#d8d6d0] text-[#6b6863] hover:border-[#8a6a3a]/60 hover:text-[#181716]'
+                        ? 'border-[#c89b62]/70 bg-[#c89b62]/16 text-[#f6d29b]'
+                        : 'border-[#f5ead5]/12 text-[#e8dfcd]/62 hover:border-[#c89b62]/55 hover:text-[#f3eadb]'
                     }`}
                   >
                     <Icon size={13} strokeWidth={1.7} />
@@ -263,50 +241,50 @@ export default function DeepDiveLanding({
         </section>
 
         <section id="deep-dive-dossiers" className="mx-auto mt-10 max-w-[76rem]">
-          <div className="mb-4 flex items-end justify-between border-b border-[#d8d6d0] pb-5">
+          <div className="mb-4 flex items-end justify-between border-b border-[#f5ead5]/10 pb-5">
             <div>
-              <p className="text-[10px] font-semibold tracking-[0.24em] text-[#8a6a3a] uppercase">
+              <p className="text-[10px] font-semibold tracking-[0.24em] text-[#d7ad73] uppercase">
                 {copy.all}
               </p>
-              <h2 className={`mt-2 text-3xl font-medium text-[#181716] ${serifFontClassName}`}>
+              <h2 className={`mt-2 text-3xl font-medium text-[#f5ead5] ${serifFontClassName}`}>
                 Research Dossiers
               </h2>
             </div>
-            <p className="text-sm text-[#6b6863]">
+            <p className="text-sm text-[#e8dfcd]/58">
               {filteredDeepDives.length} docs
             </p>
           </div>
 
-          <div className="divide-y divide-[#d8d6d0]">
+          <div className="grid gap-3">
             {filteredDeepDives.length > 0 ? (
               filteredDeepDives.map((deepDive, index) => (
                 <Link
                   key={deepDive.slug}
                   href={`${basePath}/${deepDive.slug}`}
-                  className="group grid gap-4 py-6 transition-colors hover:bg-white/55 sm:grid-cols-[3rem_1fr_auto]"
+                  className="group grid gap-4 rounded-md border border-[#f5ead5]/10 bg-[#101722]/82 p-5 transition-colors hover:border-[#c89b62]/42 hover:bg-[#121c28] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7fc6c0] sm:grid-cols-[3rem_1fr_auto]"
                 >
-                  <span className="text-xs font-semibold tracking-[0.18em] text-[#8a6a3a]">
+                  <span className="text-xs font-semibold tracking-[0.18em] text-[#d7ad73]">
                     {String(index + 1).padStart(2, '0')}
                   </span>
                   <span>
-                    <span className={`block text-2xl leading-snug font-medium text-[#181716] transition-colors group-hover:text-[#8a6a3a] ${serifFontClassName}`}>
+                    <span className={`block text-2xl leading-snug font-medium text-[#f5ead5] transition-colors group-hover:text-[#f6d29b] ${serifFontClassName}`}>
                       {deepDive.title}
                     </span>
-                    <span className="mt-3 block max-w-3xl text-sm leading-7 text-[#6b6863]">
+                    <span className="mt-3 block max-w-3xl text-sm leading-7 text-[#e8dfcd]/62">
                       {deepDive.description}
                     </span>
                     <span className="mt-4 flex flex-wrap gap-2">
                       {deepDive.tags.slice(0, 4).map((tag) => (
                         <span
                           key={tag}
-                          className="border border-[#d8d6d0] px-2 py-1 text-[10px] font-semibold tracking-[0.14em] text-[#6b6863] uppercase"
+                          className="border border-[#f5ead5]/12 bg-[#f5ead5]/5 px-2 py-1 text-[10px] font-semibold tracking-[0.14em] text-[#e8dfcd]/62 uppercase"
                         >
                           {tag}
                         </span>
                       ))}
                     </span>
                   </span>
-                  <span className="flex items-center gap-5 text-sm text-[#6b6863] sm:justify-end">
+                  <span className="flex items-center gap-5 text-sm text-[#e8dfcd]/54 sm:justify-end">
                     <span>{formatDisplayDate(deepDive.date)}</span>
                     <span>
                       {deepDive.readingTime} {copy.minRead}
@@ -314,13 +292,13 @@ export default function DeepDiveLanding({
                     <ArrowUpRight
                       size={18}
                       strokeWidth={1.6}
-                      className="text-[#8a6a3a] transition-transform group-hover:translate-x-1"
+                      className="text-[#7fc6c0] transition-transform group-hover:translate-x-1 group-hover:text-[#f6d29b]"
                     />
                   </span>
                 </Link>
               ))
             ) : (
-              <p className="py-8 text-sm text-[#6b6863]">{copy.noResult}</p>
+              <p className="py-8 text-sm text-[#e8dfcd]/62">{copy.noResult}</p>
             )}
           </div>
         </section>

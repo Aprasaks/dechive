@@ -14,7 +14,7 @@ export default function BookCard({ book }: BookCardProps) {
   return (
     <Link
       href={`/book/${book.slug}`}
-      className="group grid gap-5 border-t border-[#ded6c9] py-7 transition-colors hover:border-[#b08d57] sm:grid-cols-[8.5rem_1fr]"
+      className="group grid gap-5 rounded-md border border-[#f5ead5]/12 bg-[#101722]/92 p-5 transition-colors hover:border-[#c89b62]/45 hover:bg-[#121c28] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7fc6c0] sm:grid-cols-[8.5rem_1fr] sm:p-6"
     >
       <BookCover
         src={book.coverImage}
@@ -23,16 +23,16 @@ export default function BookCard({ book }: BookCardProps) {
       />
       <div className="flex flex-col justify-between">
         <div>
-          <p className="text-xs font-semibold tracking-[0.18em] text-[#9a7342] uppercase">
+          <p className="text-xs font-semibold tracking-[0.18em] text-[#d7ad73] uppercase">
             {formatDate(book.readDate || book.date)}
           </p>
-          <h2 className="mt-3 font-[family-name:var(--font-header-serif)] text-2xl leading-tight font-medium text-[#2a211b] transition-colors group-hover:text-[#7a5d2c]">
+          <h2 className="mt-3 font-[family-name:var(--font-header-serif)] text-2xl leading-tight font-medium text-[#f5ead5] transition-colors group-hover:text-[#f6d29b]">
             {book.title}
           </h2>
-          <p className="mt-2 text-sm text-[#6f6257]">
+          <p className="mt-2 text-sm text-[#e8dfcd]/52">
             {book.author}
           </p>
-          <p className="mt-4 max-w-2xl text-sm leading-7 text-[#5f564d]">
+          <p className="mt-4 max-w-2xl text-sm leading-7 text-[#e8dfcd]/62">
             {book.summary}
           </p>
         </div>
@@ -40,7 +40,7 @@ export default function BookCard({ book }: BookCardProps) {
           {book.tags.map((tag) => (
             <span
               key={tag}
-              className="rounded-sm border border-[#bda77e]/40 px-2.5 py-1 text-[10px] font-semibold tracking-[0.12em] text-[#6d5634] uppercase"
+              className="rounded-sm border border-[#f5ead5]/12 bg-[#f5ead5]/5 px-2.5 py-1 text-[10px] font-semibold tracking-[0.12em] text-[#e8dfcd]/62 uppercase"
             >
               {tag}
             </span>
