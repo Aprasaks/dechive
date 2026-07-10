@@ -74,7 +74,7 @@ export default function BookArchive({
 
   const copy = {
     eyebrow: lang === 'en' ? 'Archive' : 'Archive',
-    title: lang === 'en' ? 'Questions that became records.' : '질문이 기록이 되는 곳.',
+    title: 'Questions do not disappear. They become records.',
     description:
       lang === 'en'
         ? 'Every record begins with one question. Dechive stores it as a unit of knowledge for future answers.'
@@ -145,7 +145,7 @@ export default function BookArchive({
       <div className="relative mx-auto w-full max-w-[92rem] px-4 pt-12 pb-10 sm:px-6 lg:px-8 lg:pt-16">
         <section className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_25rem] lg:items-start">
           <div>
-            <p className="text-[10px] font-semibold tracking-[0.26em] text-[#d7ad73] uppercase">
+            <p className="text-[10px] font-semibold tracking-[0.26em] text-white/42 uppercase">
               {copy.eyebrow}
             </p>
             <h1 className={`mt-5 max-w-3xl text-4xl leading-tight font-medium text-white sm:text-5xl lg:text-[3.4rem] ${serifFontClassName}`}>
