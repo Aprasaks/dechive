@@ -13,8 +13,8 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-[#d7ad73]/10 bg-[#030303]/92 backdrop-blur-xl">
-      <div className="mx-auto grid min-h-16 max-w-7xl grid-cols-[auto_minmax(0,1fr)_2.25rem] items-center gap-3 px-4 py-3 sm:min-h-18 sm:grid-cols-[auto_minmax(0,1fr)_2.5rem] sm:px-6 lg:grid-cols-[auto_1fr_auto] lg:gap-9 lg:px-8">
-        <Link href="/" className="group flex min-w-0 items-center" aria-label="Dechive home">
+      <div className="relative mx-auto grid min-h-16 max-w-7xl grid-cols-[2.25rem_minmax(0,1fr)_2.25rem] items-center gap-3 px-4 py-3 sm:min-h-18 sm:grid-cols-[2.5rem_minmax(0,1fr)_2.5rem] sm:px-6 lg:grid-cols-[auto_1fr_auto] lg:gap-9 lg:px-8">
+        <Link href="/" className="group col-start-2 flex min-w-0 items-center justify-center lg:col-start-1 lg:justify-start" aria-label="Dechive home">
           <span className="font-[family-name:var(--font-header-serif)] text-[1.45rem] leading-none font-medium tracking-[0.12em] text-white transition-colors group-hover:text-[#f6d29b] sm:text-[2rem]">
             DECHIVE
           </span>
@@ -29,10 +29,6 @@ export default function Header() {
             ))}
           </ul>
         </nav>
-
-        <div className="flex min-w-0 justify-end lg:hidden">
-          <LivingTimeCounter compact className="max-w-full text-[8px] tracking-[0.03em] text-white/30 min-[390px]:text-[9px]" />
-        </div>
 
         <div className="hidden justify-end lg:flex">
           <LivingTimeCounter />
