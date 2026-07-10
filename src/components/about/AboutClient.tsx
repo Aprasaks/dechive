@@ -8,7 +8,7 @@ const copy = {
     headlineTop: 'AI creates answers.',
     headlineBottom: 'Humans verify them.',
     lead:
-      'AI가 답을 내뱉어 주지만 지식을 걸러주지는 않는다. 무수히 많은 지식 속에서 진실된 지식을 찾는 것은 오로지 사람의 능력이자 권한이다.',
+      'AI는 답을 만든다. 그러나 답이 곧 지식은 아니다. 무수한 정보 속에서 무엇을 믿고 남길지 결정하는 일은 여전히 사람의 몫이다.',
     note:
       'Dechive는 그 권한을 포기하지 않기 위해 만든 개인 지식 아카이브입니다. 질문, 출처, 생각, 검증의 흔적을 남기고 다시 찾을 수 있게 쌓아둡니다.',
     principleEyebrow: 'What Dechive Keeps',
