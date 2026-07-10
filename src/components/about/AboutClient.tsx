@@ -29,10 +29,7 @@ const copy = {
     ],
     searchLabel: 'Ask my archive',
     searchPlaceholder: '내 기록 안에서 먼저 묻기',
-    closingTitle: 'Dechive is a living private library for verified knowledge.',
-    closingBody:
-      'AI는 연결을 돕고, 사람은 검증합니다. Dechive는 그 사이에 쌓이는 기록의 장소입니다.',
-    links: ['Archive', 'Deep Dive', 'AI Update', 'Library'],
+    links: ['Archive', 'Deep Dive', 'AI Update'],
   },
   en: {
     eyebrow: 'About Dechive',
@@ -59,10 +56,7 @@ const copy = {
     ],
     searchLabel: 'Ask my archive',
     searchPlaceholder: 'Ask inside my records first',
-    closingTitle: 'Dechive is a living private library for verified knowledge.',
-    closingBody:
-      'AI helps connect. Humans verify. Dechive is the place where that process becomes a record.',
-    links: ['Archive', 'Deep Dive', 'AI Update', 'Library'],
+    links: ['Archive', 'Deep Dive', 'AI Update'],
   },
 } as const;
 
@@ -82,15 +76,15 @@ export default function AboutClient() {
           className="absolute inset-x-0 top-0 -z-10 h-px bg-linear-to-r from-transparent via-[#f6d29b]/38 to-transparent"
         />
 
-        <div className="mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-[1.02fr_0.98fr] lg:px-8 lg:py-28">
+        <div className="mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-[minmax(0,0.64fr)_minmax(22rem,0.36fr)] lg:gap-14 lg:px-8 lg:py-24">
           <div className="max-w-3xl">
             <p className="inline-flex rounded-full border border-[#c89b62]/28 bg-[#c89b62]/8 px-3 py-1.5 text-[10px] font-semibold tracking-[0.22em] text-[#f6d29b] uppercase">
               {t.eyebrow}
             </p>
 
-            <h1 className="mt-8 font-[family-name:var(--font-header-serif)] text-[3rem] leading-[1.02] font-semibold tracking-normal text-white sm:text-[4.7rem] lg:text-[5.8rem]">
-              <span className="block">{t.headlineTop}</span>
-              <span className="mt-2 block text-[#f6d29b]">{t.headlineBottom}</span>
+            <h1 className="mt-8 max-w-4xl font-[family-name:var(--font-header-serif)] text-[2.65rem] leading-[1.08] font-semibold tracking-normal text-white sm:text-[4rem] lg:text-[4rem] xl:text-[4.35rem]">
+              <span className="block lg:whitespace-nowrap">{t.headlineTop}</span>
+              <span className="mt-2 block text-white lg:whitespace-nowrap">{t.headlineBottom}</span>
             </h1>
 
             <div className="mt-8 max-w-2xl space-y-5 text-base leading-8 text-[#e8dfcd]/76 sm:text-lg sm:leading-9">
@@ -99,7 +93,7 @@ export default function AboutClient() {
             </div>
           </div>
 
-          <aside className="relative self-end rounded-md border border-white/10 bg-[#070707]/88 p-5 shadow-[0_24px_80px_rgba(0,0,0,0.28)] sm:p-6 lg:mb-2">
+          <aside className="relative self-start rounded-md border border-white/10 bg-[#070707]/88 p-5 shadow-[0_24px_80px_rgba(0,0,0,0.28)] sm:p-6 lg:mt-14">
             <div
               aria-hidden="true"
               className="pointer-events-none absolute inset-0 rounded-md bg-[radial-gradient(circle_at_80%_12%,rgba(246,210,155,0.12),transparent_30%)]"
@@ -147,7 +141,7 @@ export default function AboutClient() {
                 <p className="font-mono text-xs text-[#d7ad73]">
                   {String(index + 1).padStart(2, '0')}
                 </p>
-                <h2 className="mt-5 font-[family-name:var(--font-header-serif)] text-2xl leading-tight text-[#f5ead5]">
+                <h2 className="mt-5 font-[family-name:var(--font-header-serif)] text-xl leading-tight text-white sm:text-[1.45rem] lg:text-xl xl:text-[1.35rem]">
                   {item.title}
                 </h2>
                 <p className="mt-4 text-sm leading-7 text-[#e8dfcd]/64">
@@ -156,22 +150,6 @@ export default function AboutClient() {
               </article>
             ))}
           </div>
-        </div>
-      </section>
-
-      <section className="px-4 py-14 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl rounded-md border border-[#d7ad73]/16 bg-[#070707] px-5 py-8 sm:px-8 lg:flex lg:items-end lg:justify-between lg:gap-10">
-          <div className="max-w-3xl">
-            <p className="font-[family-name:var(--font-header-serif)] text-3xl leading-tight text-white sm:text-4xl">
-              {t.closingTitle}
-            </p>
-            <p className="mt-4 max-w-2xl text-sm leading-7 text-[#e8dfcd]/62">
-              {t.closingBody}
-            </p>
-          </div>
-          <p className="mt-8 text-[10px] font-semibold tracking-[0.24em] text-[#d7ad73] uppercase lg:mt-0">
-            always recording · always becoming
-          </p>
         </div>
       </section>
     </main>
