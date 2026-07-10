@@ -1,14 +1,22 @@
 'use client';
 
-import { useState } from 'react';
-import Image from 'next/image';
+import { useMemo, useState } from 'react';
 import Link from 'next/link';
-import { ArrowUpRight, Search } from 'lucide-react';
+import {
+  ArrowRight,
+  Bookmark,
+  ChevronDown,
+  CircleDot,
+  Command,
+  Grid2X2,
+  List,
+  Search,
+  Sparkles,
+  Sun,
+  Tag,
+} from 'lucide-react';
 import type { Post } from '@/types/archive';
 import { useLang } from '@/components/layout/LangProvider';
-import DechiveSectionHeader from '@/components/layout/DechiveSectionHeader';
-
-const ARCHIVE_HERO_IMAGE = '/images/archive/image.webp';
 
 interface BookArchiveProps {
   posts: Post[];
@@ -16,8 +24,41 @@ interface BookArchiveProps {
   sansFontClassName: string;
 }
 
-function getYear(date: string) {
-  return date.slice(0, 4) || 'Unknown';
+type SortMode = 'latest' | 'oldest';
+type ViewMode = 'list' | 'grid';
+
+const PAGE_SIZE = 8;
+
+function formatDate(date: string) {
+  return date.replaceAll('-', '.');
+}
+
+function getPostHref(post: Post) {
+  return post.lang === 'en' ? `/en/archive/${post.slug}` : `/archive/${post.slug}`;
+}
+
+function getChipLabels(post: Post) {
+  const labels = [post.category, ...post.tags, ...post.concepts]
+    .map((label) => label.trim())
+    .filter(Boolean);
+
+  return Array.from(new Set(labels)).slice(0, 5);
+}
+
+function isString(value: string | undefined): value is string {
+  return Boolean(value);
+}
+
+function getPageNumbers(currentPage: number, totalPages: number) {
+  if (totalPages <= 5) {
+    return Array.from({ length: totalPages }, (_, index) => index + 1);
+  }
+
+  const pages = new Set([1, totalPages, currentPage]);
+  if (currentPage > 1) pages.add(currentPage - 1);
+  if (currentPage < totalPages) pages.add(currentPage + 1);
+
+  return Array.from(pages).sort((a, b) => a - b);
 }
 
 export default function BookArchive({
@@ -26,198 +67,292 @@ export default function BookArchive({
   sansFontClassName,
 }: BookArchiveProps) {
   const { lang } = useLang();
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [selectedYear, setSelectedYear] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const discoveredCategories = Array.from(
-    new Set(posts.map((post) => post.category.toUpperCase()).filter(Boolean)),
-  );
-  const preferredCategories = ['AI', 'DATA', 'PRODUCT', 'CULTURE', 'WORK'];
-  const indexCategories = [
-    ...preferredCategories.filter((category) => discoveredCategories.includes(category)),
-    ...discoveredCategories.filter((category) => !preferredCategories.includes(category)),
-  ];
-  const years = Array.from(new Set(posts.map((post) => getYear(post.date))));
-  const filteredPosts = selectedCategory
-    ? posts.filter((post) => post.category.toUpperCase() === selectedCategory)
-    : posts;
-  const normalizedQuery = searchQuery.trim().toLowerCase();
-  const visiblePosts = filteredPosts.filter((post) => {
-    const matchesYear = selectedYear === 'all' || getYear(post.date) === selectedYear;
-    const searchableText = [post.title, post.seoTitle, post.description, post.category].filter(
-      (value): value is string => Boolean(value),
-    );
-    const matchesSearch =
-      !normalizedQuery ||
-      searchableText.some((value) => value.toLowerCase().includes(normalizedQuery));
+  const [sortMode, setSortMode] = useState<SortMode>('latest');
+  const [viewMode, setViewMode] = useState<ViewMode>('list');
+  const [currentPage, setCurrentPage] = useState(1);
 
-    return matchesYear && matchesSearch;
-  });
-  const allButtonLabel = lang === 'en' ? 'ALL' : '전체';
+  const copy = {
+    eyebrow: lang === 'en' ? 'Archive' : 'Archive',
+    title: lang === 'en' ? 'Questions that became records.' : '질문이 기록이 되는 곳.',
+    description:
+      lang === 'en'
+        ? 'Every record begins with one question. Dechive stores it as a unit of knowledge for future answers.'
+        : '모든 기록은 하나의 질문에서 시작됩니다. Dechive는 그것을 나중에 다시 찾을 수 있는 지식으로 남깁니다.',
+    sideTitle: lang === 'en' ? 'Each record stands on its own.' : '각 기록은 하나의 질문으로 남습니다.',
+    sideBody:
+      lang === 'en'
+        ? 'Independent questions, stored over time. Dechive revisits them when answering later.'
+        : '독립된 질문들이 시간 위에 저장되고, 나중에 다시 답할 때 Dechive 안에서 연결됩니다.',
+    searchPlaceholder: lang === 'en' ? 'Search by question...' : '질문으로 기록 찾기...',
+    ask: lang === 'en' ? 'Ask' : 'Ask',
+    latest: lang === 'en' ? 'Latest first' : '최신순',
+    oldest: lang === 'en' ? 'Oldest first' : '오래된순',
+    empty:
+      lang === 'en'
+        ? 'No records match this question yet.'
+        : '이 질문에 맞는 기록이 아직 없습니다.',
+  };
+
+  const normalizedQuery = searchQuery.trim().toLowerCase();
+  const filteredPosts = useMemo(() => {
+    const matchedPosts = posts.filter((post) => {
+      if (!normalizedQuery) return true;
+
+      const searchableText = [
+        post.title,
+        post.seoTitle,
+        post.description,
+        post.category,
+        ...post.tags,
+        ...post.concepts,
+      ].filter(isString);
+
+      return searchableText.some((value) => value.toLowerCase().includes(normalizedQuery));
+    });
+
+    return [...matchedPosts].sort((a, b) => {
+      const diff = a.date.localeCompare(b.date);
+      return sortMode === 'latest' ? -diff : diff;
+    });
+  }, [normalizedQuery, posts, sortMode]);
+
+  const totalPages = Math.max(1, Math.ceil(filteredPosts.length / PAGE_SIZE));
+  const safeCurrentPage = Math.min(currentPage, totalPages);
+  const pageStart = (safeCurrentPage - 1) * PAGE_SIZE;
+  const visiblePosts = filteredPosts.slice(pageStart, pageStart + PAGE_SIZE);
+  const pageNumbers = getPageNumbers(safeCurrentPage, totalPages);
+
+  const setQuery = (nextQuery: string) => {
+    setSearchQuery(nextQuery);
+    setCurrentPage(1);
+  };
+
+  const setSort = (nextSortMode: SortMode) => {
+    setSortMode(nextSortMode);
+    setCurrentPage(1);
+  };
 
   return (
     <section
-      className={`relative min-h-[calc(100vh-4.5rem)] flex-1 bg-[#030303] text-[#f3eadb] ${sansFontClassName}`}
+      className={`relative min-h-[calc(100vh-4.5rem)] flex-1 overflow-hidden bg-[#030303] text-[#f3eadb] ${sansFontClassName}`}
     >
-      <div className="mx-auto w-full max-w-[92rem] px-5 pb-10 sm:px-8 lg:px-10">
-        <DechiveSectionHeader
-          eyebrow={lang === 'en' ? 'Archive · Verified records' : 'Archive · 검증된 기록'}
-          title={lang === 'en' ? 'Records that become searchable memory.' : '검색 가능한 기억이 되는 기록들.'}
-          description={
-            lang === 'en'
-              ? 'Questions, notes, and traces accumulate into a memory layer that Dechive can reconnect and verify later.'
-              : '질문, 노트, 흔적이 Dechive 안에 축적되어 나중에 다시 연결하고 검증할 수 있는 기억의 층이 됩니다.'
-          }
-          meta={lang === 'en' ? 'Questions · Notes · Traces' : 'Questions · Notes · Verification'}
-        />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_12%,rgba(246,210,155,0.08),transparent_28%),radial-gradient(circle_at_80%_18%,rgba(127,198,192,0.055),transparent_28%),linear-gradient(180deg,#030303_0%,#050505_52%,#030303_100%)]"
+      />
 
-        <section className="relative z-20 mx-auto -mt-8 max-w-[76rem] overflow-hidden rounded-md border border-[#f5ead5]/12 bg-[#070707]/96 shadow-[0_24px_70px_rgba(0,0,0,0.28)] backdrop-blur-sm">
-          <div className="flex flex-col gap-4 border-b border-[#f5ead5]/10 px-4 py-4 sm:px-5 lg:flex-row lg:items-center lg:justify-between">
-            <div className="flex flex-wrap gap-2">
-                <button
-                  type="button"
-                  onClick={() => setSelectedCategory(null)}
-                  className={`rounded-sm border px-3 py-2 text-[11px] font-semibold tracking-[0.16em] uppercase transition-colors ${
-                    selectedCategory === null
-                      ? 'border-[#c89b62]/70 bg-[#c89b62]/16 text-[#f6d29b]'
-                      : 'border-[#f5ead5]/12 text-[#e8dfcd]/62 hover:border-[#c89b62]/55 hover:text-[#f3eadb]'
-                  }`}
-                >
-                  {allButtonLabel}
-                </button>
-                {indexCategories.map((label) => {
-                  const isSelected = selectedCategory === label;
-
-                  return (
-                    <button
-                      key={label}
-                      type="button"
-                      onClick={() => setSelectedCategory(label)}
-                      className={`rounded-sm border px-3 py-2 text-[11px] font-semibold tracking-[0.16em] uppercase transition-colors ${
-                        isSelected
-                          ? 'border-[#c89b62]/70 bg-[#c89b62]/16 text-[#f6d29b]'
-                          : 'border-[#f5ead5]/12 text-[#e8dfcd]/62 hover:border-[#c89b62]/55 hover:text-[#f3eadb]'
-                      }`}
-                    >
-                      {label}
-                    </button>
-                  );
-                })}
-            </div>
-
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-              <select
-                value={selectedYear}
-                onChange={(event) => setSelectedYear(event.target.value)}
-                className="h-9 rounded-sm border border-[#f5ead5]/14 bg-[#090909] px-3 text-[11px] font-semibold tracking-[0.16em] text-[#f3eadb] uppercase outline-none transition-colors hover:border-[#c89b62]/60 focus:border-[#f6d29b]/70"
-                aria-label={lang === 'en' ? 'Select year' : '연도 선택'}
-              >
-                <option value="all">{lang === 'en' ? 'ALL YEARS' : '전체 연도'}</option>
-                {years.map((year) => (
-                  <option key={year} value={year}>
-                    {year}
-                  </option>
-                ))}
-              </select>
-              <label className="relative block sm:w-64">
-                <span className="sr-only">
-                  {lang === 'en' ? 'Search archive records' : '아카이브 기록 검색'}
-                </span>
-                <Search
-                  size={14}
-                  strokeWidth={1.7}
-                  className="pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 text-[#8a6a3a]"
-                />
-                <input
-                  value={searchQuery}
-                  onChange={(event) => setSearchQuery(event.target.value)}
-                  placeholder={lang === 'en' ? 'Search questions' : '질문 검색'}
-                  className="h-9 w-full rounded-sm border border-[#f5ead5]/14 bg-[#090909] pr-3 pl-9 text-sm text-[#f3eadb] outline-none transition-colors placeholder:text-[#e8dfcd]/38 hover:border-[#c89b62]/60 focus:border-[#f6d29b]/70"
-                />
-              </label>
-            </div>
+      <div className="relative mx-auto w-full max-w-[92rem] px-4 pt-12 pb-10 sm:px-6 lg:px-8 lg:pt-16">
+        <section className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_25rem] lg:items-start">
+          <div>
+            <p className="text-[10px] font-semibold tracking-[0.26em] text-[#d7ad73] uppercase">
+              {copy.eyebrow}
+            </p>
+            <h1 className={`mt-5 max-w-3xl text-4xl leading-tight font-medium text-white sm:text-5xl lg:text-[3.4rem] ${serifFontClassName}`}>
+              {copy.title}
+            </h1>
+            <p className="mt-4 max-w-2xl text-base leading-8 text-[#e8dfcd]/66">
+              {copy.description}
+            </p>
           </div>
 
-          <div id="archive-records" className="px-5 py-6 sm:px-7 lg:px-8 lg:py-8">
-            <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <aside className="rounded-md border border-white/10 bg-[#080808]/82 p-5 shadow-[0_22px_70px_rgba(0,0,0,0.2)]">
+            <div className="grid grid-cols-[auto_1fr] gap-4">
+              <Sun size={22} strokeWidth={1.6} className="mt-1 text-[#f6d29b]" />
               <div>
-                <p className="text-[10px] font-semibold tracking-[0.24em] text-[#d7ad73] uppercase">
-                  Latest Questions
-                </p>
-                <h2 className={`mt-2 text-2xl font-medium text-[#f5ead5] sm:text-3xl ${serifFontClassName}`}>
-                  {lang === 'en' ? 'Question Records' : '질문 기록'}
+                <h2 className={`text-lg leading-snug text-white ${serifFontClassName}`}>
+                  {copy.sideTitle}
                 </h2>
+                <p className="mt-2 text-sm leading-6 text-[#e8dfcd]/62">
+                  {copy.sideBody}
+                </p>
               </div>
-              <p className="text-sm text-[#e8dfcd]/58">
-                {lang === 'en' ? `${visiblePosts.length} records` : `${visiblePosts.length}개의 기록`}
-              </p>
             </div>
+          </aside>
+        </section>
 
-            {visiblePosts.length > 0 ? (
-              <div className="grid gap-4 lg:grid-cols-3">
-                {visiblePosts.map((post, index) => {
-                  const isFeatured = index === 0;
+        <section className="mt-8">
+          <form
+            onSubmit={(event) => event.preventDefault()}
+            className="flex min-h-15 items-center rounded-md border border-white/12 bg-[#070707]/86 shadow-[0_16px_50px_rgba(0,0,0,0.2)] transition-colors focus-within:border-[#d7ad73]/58"
+          >
+            <label htmlFor="archive-search" className="sr-only">
+              {copy.searchPlaceholder}
+            </label>
+            <Search size={24} strokeWidth={1.6} className="ml-5 shrink-0 text-white/82" />
+            <input
+              id="archive-search"
+              value={searchQuery}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder={copy.searchPlaceholder}
+              className="min-w-0 flex-1 bg-transparent px-4 text-base text-white outline-none placeholder:text-[#e8dfcd]/34 sm:text-lg"
+            />
+            <div className="mr-3 hidden h-11 items-center overflow-hidden rounded-full border border-white/10 sm:flex">
+              <button
+                type="submit"
+                className="inline-flex h-full items-center gap-2 border-r border-white/10 px-4 text-xs font-semibold tracking-[0.16em] text-[#f6d29b] uppercase transition-colors hover:bg-[#c89b62]/10"
+              >
+                <Sparkles size={16} strokeWidth={1.7} />
+                {copy.ask}
+              </button>
+              <span className="inline-flex h-full items-center gap-2 px-4 text-xs text-white/50">
+                <Command size={14} strokeWidth={1.6} />
+                K
+              </span>
+            </div>
+          </form>
+        </section>
 
-                  return (
-                    <Link
-                      key={post.slug}
-                      href={
-                        post.lang === 'en'
-                          ? `/en/archive/${post.slug}`
-                          : `/archive/${post.slug}`
-                      }
-                      className={`group relative overflow-hidden rounded-md border border-[#f5ead5]/12 bg-[#090909]/92 transition-colors hover:border-[#c89b62]/45 hover:bg-[#101010] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f6d29b] ${
-                        isFeatured ? 'lg:col-span-2 lg:grid lg:grid-cols-[1fr_0.55fr]' : ''
-                      }`}
-                    >
-                      <span className="flex min-h-[13rem] flex-col p-5 sm:p-6">
-                        <span className="flex items-center gap-5 text-[10px] font-semibold tracking-[0.18em] text-[#d7ad73] uppercase">
-                          <span>{String(index + 1).padStart(2, '0')}</span>
-                          <span>{post.category}</span>
-                        </span>
-                        <span
-                          className={`mt-5 block text-[1.35rem] leading-snug font-medium text-[#f5ead5] transition-colors group-hover:text-[#f6d29b] ${serifFontClassName}`}
-                        >
-                          {post.seoTitle ?? post.title}
-                        </span>
-                        <span className="mt-4 block max-w-xl text-sm leading-7 text-[#e8dfcd]/62">
-                          {post.description}
-                        </span>
-                        <span className="mt-auto flex items-end justify-between gap-4 pt-7">
-                          <span className="text-xs tracking-[0.08em] text-[#e8dfcd]/48">
-                            {post.date.replaceAll('-', '.')}
-                          </span>
-                          <span className="flex h-10 w-10 items-center justify-center rounded-full border border-[#f5ead5]/12 text-[#f6d29b] transition-colors group-hover:border-[#c89b62]/55 group-hover:bg-[#c89b62]/12 group-hover:text-[#f6d29b]">
-                            <ArrowUpRight size={16} strokeWidth={1.6} />
-                          </span>
-                        </span>
-                      </span>
+        <section className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-sm text-[#e8dfcd]/50">
+            {lang === 'en' ? `${filteredPosts.length} records` : `${filteredPosts.length}개의 기록`}
+          </p>
+          <div className="flex items-center gap-3">
+            <label className="relative block">
+              <span className="sr-only">{lang === 'en' ? 'Sort records' : '정렬'}</span>
+              <select
+                value={sortMode}
+                onChange={(event) => setSort(event.target.value as SortMode)}
+                className="h-10 appearance-none rounded-md border border-white/10 bg-[#080808] pr-9 pl-4 text-sm text-[#e8dfcd]/62 outline-none transition-colors hover:border-[#d7ad73]/36 focus:border-[#d7ad73]/58"
+              >
+                <option value="latest">{copy.latest}</option>
+                <option value="oldest">{copy.oldest}</option>
+              </select>
+              <ChevronDown
+                size={16}
+                strokeWidth={1.6}
+                className="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-[#e8dfcd]/44"
+              />
+            </label>
 
-                      {isFeatured ? (
-                        <span className="relative hidden min-h-full border-l border-[#f5ead5]/10 lg:block">
-                          <Image
-                            src={ARCHIVE_HERO_IMAGE}
-                            alt=""
-                            fill
-                            sizes="24rem"
-                            className="object-cover object-center opacity-45 grayscale"
-                          />
-                          <span className="absolute inset-0 bg-[#030303]/32" />
-                        </span>
-                      ) : null}
-                    </Link>
-                  );
-                })}
-              </div>
-            ) : (
-              <p className="border-t border-[#f5ead5]/10 pt-8 text-sm text-[#e8dfcd]/62">
-                {lang === 'en'
-                  ? 'No records in this category yet.'
-                  : '이 조건에 맞는 기록이 없습니다.'}
-              </p>
-            )}
+            <div className="flex h-10 overflow-hidden rounded-md border border-white/10 bg-[#080808]">
+              <button
+                type="button"
+                onClick={() => setViewMode('list')}
+                className={`inline-flex w-12 items-center justify-center transition-colors ${
+                  viewMode === 'list' ? 'bg-[#d7ad73]/12 text-[#f6d29b]' : 'text-white/44 hover:text-white'
+                }`}
+                aria-label={lang === 'en' ? 'List view' : '리스트 보기'}
+              >
+                <List size={18} strokeWidth={1.7} />
+              </button>
+              <button
+                type="button"
+                onClick={() => setViewMode('grid')}
+                className={`inline-flex w-12 items-center justify-center border-l border-white/10 transition-colors ${
+                  viewMode === 'grid' ? 'bg-[#d7ad73]/12 text-[#f6d29b]' : 'text-white/44 hover:text-white'
+                }`}
+                aria-label={lang === 'en' ? 'Grid view' : '그리드 보기'}
+              >
+                <Grid2X2 size={17} strokeWidth={1.7} />
+              </button>
+            </div>
           </div>
         </section>
+
+        <section className="mt-4">
+          {visiblePosts.length > 0 ? (
+            <div className={`grid gap-3 ${viewMode === 'list' ? 'lg:grid-cols-2' : 'sm:grid-cols-2 xl:grid-cols-3'}`}>
+              {visiblePosts.map((post) => {
+                const chips = getChipLabels(post);
+
+                return (
+                  <Link
+                    key={post.slug}
+                    href={getPostHref(post)}
+                    className="group relative rounded-md border border-white/10 bg-[#080808]/86 p-5 transition-colors hover:border-[#d7ad73]/42 hover:bg-[#101010] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f6d29b]"
+                  >
+                    <div className="flex min-h-[8.7rem] flex-col">
+                      <div className="flex items-start justify-between gap-5">
+                        <h2 className={`text-[1.35rem] leading-snug font-medium text-white transition-colors group-hover:text-[#f6d29b] ${serifFontClassName}`}>
+                          {post.seoTitle ?? post.title}
+                        </h2>
+                        <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-white/10 text-[#e8dfcd]/52 transition-colors group-hover:border-[#d7ad73]/36 group-hover:text-[#f6d29b]">
+                          <Bookmark size={17} strokeWidth={1.6} />
+                        </span>
+                      </div>
+
+                      <div className="mt-4 flex flex-wrap gap-2">
+                        {chips.map((chip, index) => (
+                          <span
+                            key={`${post.slug}-${chip}`}
+                            className="inline-flex h-8 items-center gap-2 rounded-md border border-[#d7ad73]/16 bg-[#d7ad73]/6 px-3 text-xs text-[#f6d29b]/82"
+                          >
+                            {index === 0 ? (
+                              <Tag size={14} strokeWidth={1.6} />
+                            ) : (
+                              <CircleDot size={13} strokeWidth={1.6} />
+                            )}
+                            {chip}
+                          </span>
+                        ))}
+                      </div>
+
+                      <div className="mt-auto flex items-center justify-between gap-4 pt-5">
+                        <time dateTime={post.date} className="text-xs tracking-[0.08em] text-[#e8dfcd]/42">
+                          {formatDate(post.date)}
+                        </time>
+                        <ArrowRight
+                          size={16}
+                          strokeWidth={1.6}
+                          className="text-[#f6d29b]/60 transition-transform group-hover:translate-x-1 group-hover:text-[#f6d29b]"
+                        />
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          ) : (
+            <p className="rounded-md border border-white/10 bg-[#080808]/86 px-5 py-10 text-sm text-[#e8dfcd]/62">
+              {copy.empty}
+            </p>
+          )}
+        </section>
+
+        {totalPages > 1 ? (
+          <nav className="mt-6 flex items-center justify-center gap-2" aria-label={lang === 'en' ? 'Archive pagination' : '아카이브 페이지'}>
+            <button
+              type="button"
+              onClick={() => setCurrentPage(Math.max(1, safeCurrentPage - 1))}
+              disabled={safeCurrentPage === 1}
+              className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-white/10 text-[#e8dfcd]/50 transition-colors hover:border-[#d7ad73]/36 hover:text-white disabled:pointer-events-none disabled:opacity-35"
+              aria-label={lang === 'en' ? 'Previous page' : '이전 페이지'}
+            >
+              ‹
+            </button>
+            {pageNumbers.map((pageNumber, index) => {
+              const previousPage = pageNumbers[index - 1];
+              const shouldShowGap = previousPage && pageNumber - previousPage > 1;
+
+              return (
+                <span key={pageNumber} className="inline-flex items-center gap-2">
+                  {shouldShowGap ? <span className="text-sm text-[#e8dfcd]/38">...</span> : null}
+                  <button
+                    type="button"
+                    onClick={() => setCurrentPage(pageNumber)}
+                    className={`inline-flex h-9 min-w-9 items-center justify-center rounded-md border px-3 text-sm transition-colors ${
+                      safeCurrentPage === pageNumber
+                        ? 'border-[#d7ad73]/50 bg-[#d7ad73]/12 text-[#f6d29b]'
+                        : 'border-white/10 text-[#e8dfcd]/50 hover:border-[#d7ad73]/36 hover:text-white'
+                    }`}
+                  >
+                    {pageNumber}
+                  </button>
+                </span>
+              );
+            })}
+            <button
+              type="button"
+              onClick={() => setCurrentPage(Math.min(totalPages, safeCurrentPage + 1))}
+              disabled={safeCurrentPage === totalPages}
+              className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-white/10 text-[#e8dfcd]/50 transition-colors hover:border-[#d7ad73]/36 hover:text-white disabled:pointer-events-none disabled:opacity-35"
+              aria-label={lang === 'en' ? 'Next page' : '다음 페이지'}
+            >
+              ›
+            </button>
+          </nav>
+        ) : null}
       </div>
     </section>
   );
