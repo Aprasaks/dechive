@@ -2,53 +2,56 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useLang } from '@/components/layout/LangProvider';
 
 export default function Footer() {
   const pathname = usePathname();
-  const { lang } = useLang();
-  const rssHref = lang === 'en' ? '/en/feed.xml' : '/feed.xml';
-  const footerClassName = 'border-white/8 bg-[#030303] text-white/46';
-  const brandClassName = 'text-white/68';
-  const accentClassName = 'text-[#f6d29b]/70';
-  const copyrightClassName = 'text-white/36';
-  const linkClassName = 'text-white/48 hover:text-[#f6d29b]';
 
-  if (pathname === '/' || pathname === '/about' || pathname.startsWith('/admin')) return null;
+  if (pathname.startsWith('/admin')) return null;
 
   return (
-    <footer className={`w-full border-t px-6 py-10 sm:px-8 ${footerClassName}`}>
-      <div className="mx-auto flex max-w-7xl flex-col gap-8 md:flex-row md:items-end md:justify-between">
-        <div>
-          <p className={`text-sm font-semibold tracking-[0.38em] uppercase ${brandClassName}`}>
-            Dechive
-          </p>
-          <p className={`mt-3 text-xs font-medium tracking-[0.22em] uppercase ${accentClassName}`}>
-            Verify. Archive. Elevate.
-          </p>
-          <p className={`mt-5 text-xs ${copyrightClassName}`}>
-            © 2026 Demian. All rights reserved.
-          </p>
-        </div>
-        <nav className="flex flex-wrap items-center gap-x-6 gap-y-3">
-          <Link
-            href="/guestbook"
-            className={`text-xs font-medium transition-colors ${linkClassName}`}
-          >
-            Guestbook
-          </Link>
-          <Link
-            href={rssHref}
-            className={`text-xs font-medium transition-colors ${linkClassName}`}
-          >
-            RSS
-          </Link>
-          <Link
-            href="/privacy-policy"
-            className={`text-xs font-medium transition-colors ${linkClassName}`}
-          >
-            Privacy Policy
-          </Link>
+    <footer className="border-t border-white/8 bg-[#030303] px-4 py-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex max-w-7xl flex-col justify-center gap-2 text-xs leading-none text-white/46 sm:min-h-8 sm:flex-row sm:items-center sm:justify-between">
+        <p className="font-[family-name:var(--font-header-serif)] tracking-[0.18em] text-white/58">
+          DECHIVE
+        </p>
+
+        <nav aria-label="Footer navigation">
+          <ul className="flex flex-wrap items-center gap-x-4 gap-y-2">
+            <li>
+              <Link
+                href="/privacy-policy"
+                className="transition-colors hover:text-[#f6d29b] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f6d29b]"
+              >
+                Policy
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/terms"
+                className="transition-colors hover:text-[#f6d29b] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f6d29b]"
+              >
+                Terms
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/contact"
+                className="transition-colors hover:text-[#f6d29b] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f6d29b]"
+              >
+                Contact
+              </Link>
+            </li>
+            <li>
+              <a
+                href="https://studio.dechive.dev"
+                target="_blank"
+                rel="noreferrer"
+                className="transition-colors hover:text-[#f6d29b] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f6d29b]"
+              >
+                studio.dechive.dev
+              </a>
+            </li>
+          </ul>
         </nav>
       </div>
     </footer>
