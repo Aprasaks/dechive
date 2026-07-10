@@ -19,7 +19,7 @@ function ArchiveSearch() {
   }, []);
 
   return (
-    <div className="mt-8 w-full">
+    <div className="mx-auto mt-8 w-full max-w-[22.5rem] lg:mx-0 lg:max-w-none">
       <form
         className="w-full"
         onSubmit={(event) => {
@@ -30,7 +30,7 @@ function ArchiveSearch() {
         <label htmlFor="ask-archive" className="sr-only">
           Ask Dechive
         </label>
-        <div className="group flex min-h-14 items-center gap-3 rounded-[12px] border border-white/20 bg-[#060606]/88 px-3 shadow-[0_0_72px_rgba(215,173,115,0.08)] transition-colors focus-within:border-[#d7ad73]/68 sm:min-h-18 sm:px-5">
+        <div className="group flex min-h-14 w-full items-center gap-3 rounded-[12px] border border-white/20 bg-[#060606]/88 px-3 shadow-[0_0_72px_rgba(215,173,115,0.08)] transition-colors focus-within:border-[#d7ad73]/68 sm:min-h-18 sm:px-5">
           <Search size={22} className="shrink-0 text-white/86" />
           <input
             id="ask-archive"
@@ -51,7 +51,7 @@ function ArchiveSearch() {
             </span>
           </button>
         </div>
-        <p className="mt-4 text-sm leading-6 break-keep text-white/66">
+        <p className="mx-auto mt-4 max-w-[21rem] text-sm leading-6 break-keep text-white/66 lg:mx-0 lg:max-w-none">
           Dechive는 정리되고 검증된 지식에서만 답을 합니다.
         </p>
         <p className="sr-only" aria-live="polite">
@@ -59,7 +59,7 @@ function ArchiveSearch() {
         </p>
       </form>
 
-      <div className="mt-5 flex flex-wrap justify-center gap-2 pb-1 lg:justify-start">
+      <div className="mx-auto mt-5 flex max-w-[22.5rem] flex-wrap justify-center gap-2 pb-1 lg:mx-0 lg:max-w-none lg:justify-start">
         {EXAMPLE_QUESTIONS.map((question) => (
           <button
             key={question}
@@ -125,7 +125,7 @@ export function HeroSection({ heroSerifClassName }: { heroSerifClassName: string
           <KnowledgeHelix />
         </div>
 
-        <div className="order-1 text-center lg:order-2 lg:translate-y-10 lg:text-left">
+        <div className="order-1 mx-auto w-full max-w-[23.5rem] text-center lg:order-2 lg:mx-0 lg:max-w-none lg:translate-y-10 lg:text-left">
           <p className="inline-flex rounded-full border border-[#c89b62]/28 bg-[#c89b62]/8 px-3 py-1.5 text-[10px] font-semibold tracking-[0.22em] text-[#f6d29b] uppercase">
             Living Archive
           </p>
