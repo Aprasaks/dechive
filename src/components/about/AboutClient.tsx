@@ -1,168 +1,177 @@
 'use client';
 
+import { ArrowUpRight, Check, Search, Sparkles } from 'lucide-react';
 import { useLang } from '@/components/layout/LangProvider';
-import i18n from '@/lib/i18n';
 
-type EditorialItem = {
-  number: string;
-  title: string;
-  body: string;
-};
-
-const promiseCopy = {
+const copy = {
   ko: {
-    kicker: 'Our Promise',
-    title: '우리는 자극적인 주장보다,\n검증된 기록을 남깁니다.',
-    points: [
-      '출처를 남깁니다',
-      '맥락을 설명합니다',
-      '한계를 인정합니다',
-      '다시 검토할 수 있도록 기록합니다',
+    eyebrow: 'About Dechive',
+    headlineTop: 'AI creates answers.',
+    headlineBottom: 'Humans verify them.',
+    lead:
+      'AI가 답을 내뱉어 주지만 지식을 걸러주지는 않는다. 무수히 많은 지식 속에서 진실된 지식을 찾는 것은 오로지 사람의 능력이자 권한이다.',
+    note:
+      'Dechive는 그 권한을 포기하지 않기 위해 만든 개인 지식 아카이브입니다. 질문, 출처, 생각, 검증의 흔적을 남기고 다시 찾을 수 있게 쌓아둡니다.',
+    principleEyebrow: 'What Dechive Keeps',
+    principles: [
+      {
+        title: 'Answers are not knowledge yet.',
+        body: '답은 시작점입니다. Dechive는 답을 그대로 믿기보다 출처와 맥락, 한계를 함께 남깁니다.',
+      },
+      {
+        title: 'Verification belongs to humans.',
+        body: '무엇을 믿을지, 무엇을 보류할지, 무엇을 다시 물을지는 사람의 판단으로 결정합니다.',
+      },
+      {
+        title: 'A private archive comes first.',
+        body: '외부 검색보다 먼저 내가 쌓아둔 기록 안에서 찾고, 연결하고, 다시 검토합니다.',
+      },
     ],
+    searchLabel: 'Ask my archive',
+    searchPlaceholder: '내 기록 안에서 먼저 묻기',
+    closingTitle: 'Dechive is a living private library for verified knowledge.',
+    closingBody:
+      'AI는 연결을 돕고, 사람은 검증합니다. Dechive는 그 사이에 쌓이는 기록의 장소입니다.',
+    links: ['Archive', 'Deep Dive', 'AI Update', 'Library'],
   },
   en: {
-    kicker: 'Our Promise',
-    title: 'We leave verified records,\nnot louder claims.',
-    points: [
-      'Leave the source',
-      'Explain the context',
-      'Admit the limits',
-      'Keep records that can be checked again',
+    eyebrow: 'About Dechive',
+    headlineTop: 'AI creates answers.',
+    headlineBottom: 'Humans verify them.',
+    lead:
+      'AI can produce answers, but it does not filter knowledge for truth. In a flood of information, finding what is true remains a human ability and a human authority.',
+    note:
+      'Dechive is a private knowledge archive built to keep that authority intact. It stores questions, sources, thoughts, and traces of verification so they can be found again.',
+    principleEyebrow: 'What Dechive Keeps',
+    principles: [
+      {
+        title: 'Answers are not knowledge yet.',
+        body: 'An answer is only a starting point. Dechive keeps the source, context, and limits beside it.',
+      },
+      {
+        title: 'Verification belongs to humans.',
+        body: 'What to trust, what to hold, and what to ask again remains a human decision.',
+      },
+      {
+        title: 'A private archive comes first.',
+        body: 'Before searching outside, Dechive returns to the records already collected inside.',
+      },
     ],
+    searchLabel: 'Ask my archive',
+    searchPlaceholder: 'Ask inside my records first',
+    closingTitle: 'Dechive is a living private library for verified knowledge.',
+    closingBody:
+      'AI helps connect. Humans verify. Dechive is the place where that process becomes a record.',
+    links: ['Archive', 'Deep Dive', 'AI Update', 'Library'],
   },
-};
+} as const;
 
 export default function AboutClient() {
   const { lang } = useLang();
-  const t = i18n[lang];
-  const promise = promiseCopy[lang];
-  const editorialItems: EditorialItem[] = [
-    {
-      number: '01',
-      title: t.aboutWhyTitle,
-      body: `${t.aboutWhyDescription}\n\n${
-        lang === 'ko'
-          ? 'Dechive는 그 과정을 기록하고,\n검증의 궤적을 남깁니다.'
-          : 'Dechive records that process\nand leaves a trail of verification.'
-      }`,
-    },
-    {
-      number: '02',
-      title: t.aboutHowTitle,
-      body: `${t.aboutHowDescription}\n\n${
-        lang === 'ko'
-          ? '정리하고, 고도화하고, 연결하며\n생각의 흐름을 보존합니다.'
-          : 'It organizes, deepens, connects,\nand preserves the flow of thought.'
-      }`,
-    },
-    {
-      number: '03',
-      title: t.aboutArchiveTitle,
-      body: t.aboutArchiveDescription,
-    },
-    {
-      number: '04',
-      title: t.aboutDeepDiveTitle,
-      body: t.aboutDeepDiveDescription,
-    },
-  ];
+  const t = copy[lang];
 
   return (
-    <main className="bg-[#f4efe6] text-[#1c1712]">
-      <section className="relative overflow-hidden border-b border-[#3b2a1e]/12">
-        <div className="grid min-h-[420px] lg:grid-cols-[44%_56%]">
-          <div className="relative z-10 flex flex-col justify-center px-6 py-12 sm:px-10 lg:px-16 xl:px-20">
-            <p className="text-[11px] font-semibold tracking-[0.22em] text-[#9a6f35] uppercase">
-              {t.aboutKicker}
+    <main className="min-h-screen bg-[#030303] text-[#f3eadb]">
+      <section className="relative isolate overflow-hidden border-b border-[#d7ad73]/10">
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_22%_22%,rgba(246,210,155,0.11),transparent_28%),radial-gradient(circle_at_78%_48%,rgba(127,198,192,0.08),transparent_32%),linear-gradient(180deg,#030303_0%,#060606_52%,#030303_100%)]"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 top-0 -z-10 h-px bg-linear-to-r from-transparent via-[#f6d29b]/38 to-transparent"
+        />
+
+        <div className="mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-[1.02fr_0.98fr] lg:px-8 lg:py-28">
+          <div className="max-w-3xl">
+            <p className="inline-flex rounded-full border border-[#c89b62]/28 bg-[#c89b62]/8 px-3 py-1.5 text-[10px] font-semibold tracking-[0.22em] text-[#f6d29b] uppercase">
+              {t.eyebrow}
             </p>
-            <h1 className="mt-5 max-w-[500px] font-[family-name:var(--font-header-serif)] text-[clamp(28px,2.8vw,42px)] leading-[1.12] font-semibold tracking-[-0.03em] text-[#1c1712]">
-              {t.aboutTitle}
+
+            <h1 className="mt-8 font-[family-name:var(--font-header-serif)] text-[3rem] leading-[1.02] font-semibold tracking-normal text-white sm:text-[4.7rem] lg:text-[5.8rem]">
+              <span className="block">{t.headlineTop}</span>
+              <span className="mt-2 block text-[#f6d29b]">{t.headlineBottom}</span>
             </h1>
-            <div className="mt-6 max-w-[500px] space-y-4 text-[clamp(14px,1vw,16px)] leading-[1.75] text-[#332820]">
-              <p className="whitespace-pre-line">{t.aboutDefinition}</p>
-              <div className="h-px w-9 bg-[#9a6f35]/55" />
-              <p className="text-[clamp(13px,0.92vw,15px)] whitespace-pre-line text-[#5e5146]">
-                {t.aboutPurpose}
-              </p>
+
+            <div className="mt-8 max-w-2xl space-y-5 text-base leading-8 text-[#e8dfcd]/76 sm:text-lg sm:leading-9">
+              <p>{t.lead}</p>
+              <p className="text-[#e8dfcd]/58">{t.note}</p>
             </div>
           </div>
-          <div className="relative min-h-[320px] lg:min-h-[420px]">
+
+          <aside className="relative self-end rounded-md border border-white/10 bg-[#070707]/88 p-5 shadow-[0_24px_80px_rgba(0,0,0,0.28)] sm:p-6 lg:mb-2">
             <div
               aria-hidden="true"
-              className="absolute inset-0 bg-cover bg-center"
-              style={{
-                backgroundImage: "url('/images/about/about-hero.webp')",
-              }}
+              className="pointer-events-none absolute inset-0 rounded-md bg-[radial-gradient(circle_at_80%_12%,rgba(246,210,155,0.12),transparent_30%)]"
             />
-            <div
-              aria-hidden="true"
-              className="absolute inset-y-0 left-0 w-[42%] bg-linear-to-r from-[#f4efe6] via-[#f4efe6]/74 to-transparent"
-            />
-            <div
-              aria-hidden="true"
-              className="absolute inset-0 bg-[#23180f]/8"
-            />
+            <div className="relative">
+              <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-4">
+                <p className="text-[10px] font-semibold tracking-[0.22em] text-[#d7ad73] uppercase">
+                  {t.searchLabel}
+                </p>
+                <Sparkles size={17} className="text-[#f6d29b]" />
+              </div>
+
+              <div className="mt-5 flex min-h-14 items-center gap-3 rounded-[12px] border border-white/14 bg-black/40 px-4">
+                <Search size={19} className="shrink-0 text-white/70" />
+                <p className="min-w-0 flex-1 truncate text-sm text-white/40">
+                  {t.searchPlaceholder}
+                </p>
+                <ArrowUpRight size={17} className="shrink-0 text-[#f6d29b]/78" />
+              </div>
+
+              <ul className="mt-5 grid gap-3 text-sm leading-6 text-[#e8dfcd]/68">
+                {t.links.map((item) => (
+                  <li key={item} className="flex items-center gap-3">
+                    <Check size={15} className="shrink-0 text-[#f6d29b]/76" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section className="border-b border-white/8 bg-[#030303] px-4 py-12 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <p className="text-[10px] font-semibold tracking-[0.24em] text-[#d7ad73] uppercase">
+            {t.principleEyebrow}
+          </p>
+          <div className="mt-5 grid gap-3 lg:grid-cols-3">
+            {t.principles.map((item, index) => (
+              <article
+                key={item.title}
+                className="rounded-md border border-white/10 bg-white/[0.025] p-5 transition-colors hover:border-[#c89b62]/34 hover:bg-white/[0.04] sm:p-6"
+              >
+                <p className="font-mono text-xs text-[#d7ad73]">
+                  {String(index + 1).padStart(2, '0')}
+                </p>
+                <h2 className="mt-5 font-[family-name:var(--font-header-serif)] text-2xl leading-tight text-[#f5ead5]">
+                  {item.title}
+                </h2>
+                <p className="mt-4 text-sm leading-7 text-[#e8dfcd]/64">
+                  {item.body}
+                </p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
 
-      <section className="grid border-b border-[#3b2a1e]/12 bg-[#f7f1e8] lg:grid-cols-4">
-        {editorialItems.map((item) => (
-          <article
-            key={item.number}
-            className="min-h-[210px] border-b border-[#3b2a1e]/12 px-6 py-7 sm:px-10 lg:border-r lg:border-b-0 lg:px-9 lg:py-6 xl:px-12"
-          >
-            <div className="flex items-start justify-between gap-6">
-              <div>
-                <p className="font-[family-name:var(--font-header-serif)] text-[13px] tracking-[0.14em] text-[#4f3926]">
-                  {item.number}
-                </p>
-                <div className="mt-2 h-px w-4 bg-[#9a6f35]/55" />
-              </div>
-            </div>
-            <h2 className="mt-5 text-[13px] font-semibold tracking-[0.28em] text-[#6f4f2d] uppercase">
-              {item.title}
-            </h2>
-            <p className="mt-4 text-[13px] leading-[1.7] whitespace-pre-line text-[#3d332b]">
-              {item.body}
+      <section className="px-4 py-14 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl rounded-md border border-[#d7ad73]/16 bg-[#070707] px-5 py-8 sm:px-8 lg:flex lg:items-end lg:justify-between lg:gap-10">
+          <div className="max-w-3xl">
+            <p className="font-[family-name:var(--font-header-serif)] text-3xl leading-tight text-white sm:text-4xl">
+              {t.closingTitle}
             </p>
-          </article>
-        ))}
-      </section>
-
-      <section className="relative overflow-hidden bg-[#0d0d0a] text-[#f8f1e6]">
-        <div
-          aria-hidden="true"
-          className="absolute inset-y-0 left-0 w-full bg-cover bg-center opacity-[0.68] md:w-[44%]"
-          style={{ backgroundImage: "url('/images/about/about-promise.webp')" }}
-        />
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 bg-linear-to-r from-[#080806]/36 via-[#080806]/68 to-[#080806]/86"
-        />
-        <div className="relative grid min-h-[210px] items-center gap-8 px-6 py-9 sm:px-10 lg:grid-cols-[36%_34%_30%] lg:px-16 xl:px-20">
-          <div className="hidden lg:block" />
-          <div>
-            <p className="text-[11px] font-semibold tracking-[0.24em] text-[#b99255] uppercase">
-              {promise.kicker}
-            </p>
-            <p className="mt-4 font-[family-name:var(--font-header-serif)] text-[clamp(24px,1.9vw,34px)] leading-[1.2] whitespace-pre-line text-[#f6efe3]">
-              {promise.title}
+            <p className="mt-4 max-w-2xl text-sm leading-7 text-[#e8dfcd]/62">
+              {t.closingBody}
             </p>
           </div>
-          <ul className="space-y-3 text-[13px] leading-none text-[#d8c9b8]/84">
-            {promise.points.map((point) => (
-              <li
-                key={point}
-                className="grid grid-cols-[auto_1fr] items-center gap-4"
-              >
-                <span className="h-1 w-1 rounded-full bg-[#b99255]" />
-                <span className="border-b border-[#f8f1e6]/14 pb-2">
-                  {point}
-                </span>
-              </li>
-            ))}
-          </ul>
+          <p className="mt-8 text-[10px] font-semibold tracking-[0.24em] text-[#d7ad73] uppercase lg:mt-0">
+            always recording · always becoming
+          </p>
         </div>
       </section>
     </main>

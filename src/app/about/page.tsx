@@ -4,7 +4,7 @@ import AboutClient from '@/components/about/AboutClient';
 export const metadata: Metadata = {
   title: 'About',
   description:
-    'Dechive는 하나의 질문을 독립 기록으로 남기는 Archive와 깊은 질문을 끝까지 밀고 가는 Deep Dive로 지식을 검증하는 개인 아카이브입니다.',
+    'Dechive는 AI가 만든 답을 사람의 검증으로 걸러내고, 진실된 지식을 다시 찾을 수 있게 쌓아두는 개인 지식 아카이브입니다.',
   alternates: {
     canonical: 'https://dechive.dev/about',
     languages: {
@@ -13,9 +13,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'About | Dechive — 검증을 넘어 추론까지',
+    title: 'About | Dechive — AI creates answers. Humans verify them.',
     description:
-      'Dechive는 하나의 질문을 독립 기록으로 남기는 Archive와 깊은 질문을 끝까지 밀고 가는 Deep Dive로 지식을 검증하는 개인 아카이브입니다.',
+      'AI가 답을 내뱉어 주지만 지식을 걸러주지는 않습니다. Dechive는 사람이 검증한 지식을 쌓아두는 개인 아카이브입니다.',
     url: 'https://dechive.dev/about',
     siteName: 'Dechive',
     locale: 'ko_KR',
@@ -31,9 +31,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'About | Dechive — 검증을 넘어 추론까지',
+    title: 'About | Dechive — AI creates answers. Humans verify them.',
     description:
-      'Dechive는 하나의 질문을 독립 기록으로 남기는 Archive와 깊은 질문을 끝까지 밀고 가는 Deep Dive로 지식을 검증하는 개인 아카이브입니다.',
+      'AI가 답을 내뱉어 주지만 지식을 걸러주지는 않습니다. Dechive는 사람이 검증한 지식을 쌓아두는 개인 아카이브입니다.',
     images: ['https://dechive.dev/images/thumb.webp'],
   },
 };
