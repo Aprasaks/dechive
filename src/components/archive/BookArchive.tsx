@@ -37,16 +37,25 @@ function getPostHref(post: Post) {
   return post.lang === 'en' ? `/en/archive/${post.slug}` : `/archive/${post.slug}`;
 }
 
-function getChipLabels(post: Post) {
-  const labels = [post.category, ...post.tags, ...post.concepts]
+function getSafeLabels(values: Array<string | null | undefined>) {
+  return values
+    .filter((value): value is string => typeof value === 'string')
     .map((label) => label.trim())
     .filter(Boolean);
-
-  return Array.from(new Set(labels)).slice(0, 5);
 }
 
-function isString(value: string | undefined): value is string {
-  return Boolean(value);
+function getPostTags(post: Post) {
+  return Array.isArray(post.tags) ? post.tags : [];
+}
+
+function getPostConcepts(post: Post) {
+  return Array.isArray(post.concepts) ? post.concepts : [];
+}
+
+function getChipLabels(post: Post) {
+  const labels = getSafeLabels([post.category, ...getPostTags(post), ...getPostConcepts(post)]);
+
+  return Array.from(new Set(labels)).slice(0, 5);
 }
 
 function getPageNumbers(currentPage: number, totalPages: number) {
@@ -99,14 +108,14 @@ export default function BookArchive({
     const matchedPosts = posts.filter((post) => {
       if (!normalizedQuery) return true;
 
-      const searchableText = [
+      const searchableText = getSafeLabels([
         post.title,
         post.seoTitle,
         post.description,
         post.category,
-        ...post.tags,
-        ...post.concepts,
-      ].filter(isString);
+        ...getPostTags(post),
+        ...getPostConcepts(post),
+      ]);
 
       return searchableText.some((value) => value.toLowerCase().includes(normalizedQuery));
     });
