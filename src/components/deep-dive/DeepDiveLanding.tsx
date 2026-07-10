@@ -115,6 +115,7 @@ export default function DeepDiveLanding({
                 src={featuredDeepDive.image}
                 alt=""
                 fill
+                priority
                 sizes="(min-width: 1024px) 44rem, 100vw"
                 className="object-cover object-center opacity-78 grayscale-[0.18] transition duration-500 group-hover:scale-[1.03] group-hover:opacity-90"
               />
