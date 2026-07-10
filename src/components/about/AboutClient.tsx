@@ -5,7 +5,6 @@ import { useLang } from '@/components/layout/LangProvider';
 
 const copy = {
   ko: {
-    eyebrow: 'About Dechive',
     headlineTop: 'AI creates answers.',
     headlineBottom: 'Humans verify them.',
     lead:
@@ -32,7 +31,6 @@ const copy = {
     links: ['Archive', 'Deep Dive', 'AI Update'],
   },
   en: {
-    eyebrow: 'About Dechive',
     headlineTop: 'AI creates answers.',
     headlineBottom: 'Humans verify them.',
     lead:
@@ -78,11 +76,7 @@ export default function AboutClient() {
 
         <div className="mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-[minmax(0,0.64fr)_minmax(22rem,0.36fr)] lg:gap-14 lg:px-8 lg:py-24">
           <div className="max-w-3xl">
-            <p className="inline-flex rounded-full border border-[#c89b62]/28 bg-[#c89b62]/8 px-3 py-1.5 text-[10px] font-semibold tracking-[0.22em] text-[#f6d29b] uppercase">
-              {t.eyebrow}
-            </p>
-
-            <h1 className="mt-8 max-w-4xl font-[family-name:var(--font-header-serif)] text-[2.65rem] leading-[1.08] font-semibold tracking-normal text-white sm:text-[4rem] lg:text-[4rem] xl:text-[4.35rem]">
+            <h1 className="max-w-4xl font-[family-name:var(--font-header-serif)] text-[2.65rem] leading-[1.08] font-semibold tracking-normal text-white sm:text-[4rem] lg:text-[4rem] xl:text-[4.35rem]">
               <span className="block lg:whitespace-nowrap">{t.headlineTop}</span>
               <span className="mt-2 block text-white lg:whitespace-nowrap">{t.headlineBottom}</span>
             </h1>
