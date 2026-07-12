@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
-import type { ReactNode } from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { ArrowLeft, ArrowUpRight, CalendarDays, ExternalLink, ShieldCheck } from 'lucide-react';
 import {
   getAiUpdateDayByDate,
   getAiUpdateDayStaticParams,
@@ -21,12 +21,24 @@ function formatDisplayDate(date: string) {
   return date.replaceAll('-', '.');
 }
 
+function cleanDateLabel(value?: string) {
+  if (!value) return '';
+
+  return value
+    .replace('officialDate', '')
+    .replace('reportDate', '')
+    .replace('기준 흐름', '')
+    .replace('보도일', '')
+    .replace('확인 기준', '')
+    .trim();
+}
+
 function getDailyTitle(day: AiUpdateDay) {
   return day.title ?? `${formatDisplayDate(day.date)} AI Updates`;
 }
 
 function getDailySubtitle(day: AiUpdateDay) {
-  return day.subtitle ?? '공식 문서 기준으로 확인한 오늘의 AI 업데이트 기록입니다.';
+  return day.subtitle ?? '공식 출처 날짜를 확인한 뒤 다음날 KST에 기록한 AI 변화 카드입니다.';
 }
 
 function getQuickSummary(day: AiUpdateDay) {
@@ -35,13 +47,17 @@ function getQuickSummary(day: AiUpdateDay) {
   return day.updates.slice(0, 3).map((update) => update.summary);
 }
 
-function toBriefingItem(update: AiUpdateDay['updates'][number]): AiUpdateBriefingItem {
+function toBriefingItem(update: AiUpdateDay['updates'][number], day: AiUpdateDay): AiUpdateBriefingItem {
   return {
     id: update.id,
     title: update.title,
-    officialDate: '',
-    checkedDateKST: '',
+    officialDate: formatDisplayDate(day.date),
+    checkedDateKST: day.checkedDateKST ?? formatDisplayDate(day.date),
     sourceType: update.source.label,
+    officialSource: {
+      label: update.source.label,
+      url: update.source.url,
+    },
     updateType: update.badges.slice(0, 2).join(' / ') || 'Official Update',
     badges: update.badges,
     summary: update.summary,
@@ -54,16 +70,18 @@ function toBriefingItem(update: AiUpdateDay['updates'][number]): AiUpdateBriefin
   };
 }
 
-function getGroups(day: AiUpdateDay) {
-  if (day.groups?.length) return day.groups;
+function getUpdates(day: AiUpdateDay) {
+  if (day.groups?.length) return day.groups.flatMap((group) => group.updates);
 
-  return [
-    {
-      name: 'Daily Briefing',
-      intro: '이 날짜에 확인한 공식 문서 기반 AI 업데이트입니다.',
-      updates: day.updates.map(toBriefingItem),
-    },
-  ];
+  return day.updates.map((update) => toBriefingItem(update, day));
+}
+
+function getSource(update: AiUpdateBriefingItem) {
+  return update.officialSource ?? update.reportSource ?? null;
+}
+
+function getOfficialDate(day: AiUpdateDay, update?: AiUpdateBriefingItem) {
+  return cleanDateLabel(update?.officialDate ?? update?.reportDate) || formatDisplayDate(day.date);
 }
 
 export function generateStaticParams() {
@@ -103,117 +121,93 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 function Badge({ label }: { label: string }) {
   return (
-    <span className="inline-flex rounded-sm border border-[#d7ad73]/35 bg-[#d7ad73]/10 px-2.5 py-1 text-[10px] font-semibold tracking-[0.12em] text-[#f6d29b]/76 uppercase">
+    <span className="rounded-full border border-white/10 bg-white/[0.035] px-2.5 py-1 text-[11px] text-[#e8dfcd]/58">
       {label}
     </span>
   );
 }
 
-function Field({
+function SlideCard({
   label,
-  children,
+  title,
+  body,
 }: {
   label: string;
-  children: ReactNode;
+  title: string;
+  body: string;
 }) {
   return (
-    <div className="border-t border-white/10 pt-5">
-      <p className="text-[11px] font-semibold tracking-[0.18em] text-[#f6d29b]/72 uppercase">
+    <section className="flex aspect-[4/5] min-h-[17rem] flex-col rounded-md border border-white/10 bg-[#080808]/86 p-5">
+      <p className="text-[10px] font-semibold tracking-[0.22em] text-white/38 uppercase">
         {label}
       </p>
-      <div className="mt-2 text-sm leading-7 text-[#e8dfcd]/72">
-        {children}
-      </div>
-    </div>
+      <h4 className="mt-5 font-[family-name:var(--font-header-serif)] text-2xl leading-tight text-white">
+        {title}
+      </h4>
+      <p className="mt-auto text-sm leading-7 text-[#e8dfcd]/66">
+        {body}
+      </p>
+    </section>
   );
 }
 
-function getUpdateMeta(update: AiUpdateBriefingItem) {
-  return [
-    update.reportDate ? `reportDate ${update.reportDate}` : '',
-    update.officialDate ? `officialDate ${update.officialDate}` : '',
-    update.checkedDateKST ? `Checked KST ${update.checkedDateKST}` : '',
-    update.sourceType,
-  ].filter(Boolean).join(' · ');
-}
-
-function UpdateCard({ update }: { update: AiUpdateBriefingItem }) {
-  const sourceLinks = [update.officialSource, update.reportSource].filter(
-    (source): source is NonNullable<typeof source> => Boolean(source)
-  );
+function UpdateStory({ day, update }: { day: AiUpdateDay; update: AiUpdateBriefingItem }) {
+  const source = getSource(update);
+  const officialDate = getOfficialDate(day, update);
+  const recordedDate = update.checkedDateKST ?? day.checkedDateKST ?? formatDisplayDate(day.date);
 
   return (
-    <article id={update.id} className="border-t border-white/10 py-9 first:border-t-0 first:pt-0">
-      <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+    <article id={update.id} className="scroll-mt-28 border-t border-white/10 py-10 first:border-t-0 first:pt-0">
+      <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-start">
         <div>
-          <p className="text-[11px] font-semibold tracking-[0.2em] text-[#f6d29b]/64 uppercase">
-            {getUpdateMeta(update)}
-          </p>
-          <h3 className="mt-3 font-[family-name:var(--font-header-serif)] text-2xl leading-tight font-medium text-[#f5ead5] sm:text-3xl">
+          <div className="flex flex-wrap gap-2">
+            <span className="rounded-full border border-[#d7ad73]/18 bg-[#d7ad73]/8 px-3 py-1.5 text-[11px] text-[#f6d29b]/78">
+              Official {officialDate}
+            </span>
+            <span className="rounded-full border border-white/10 bg-white/[0.035] px-3 py-1.5 text-[11px] text-[#e8dfcd]/58">
+              Recorded {recordedDate} KST
+            </span>
+          </div>
+          <h2 className="mt-5 max-w-4xl font-[family-name:var(--font-header-serif)] text-3xl leading-tight font-medium text-white sm:text-4xl">
             {update.title}
-          </h3>
-          <p className="mt-4 max-w-3xl text-sm leading-7 text-[#e8dfcd]/68">
+          </h2>
+          <p className="mt-4 max-w-3xl text-sm leading-7 text-[#e8dfcd]/64 sm:text-base sm:leading-8">
             {update.summary}
           </p>
         </div>
-        <p className="shrink-0 text-xs font-semibold tracking-[0.14em] text-[#f6d29b]/68 uppercase">
-          {update.updateType}
-        </p>
-        {sourceLinks.length ? (
-          <div className="flex shrink-0 flex-col items-start gap-2 lg:items-end">
-            {sourceLinks.map((source) => (
-              <a
-                key={`${source.label}-${source.url}`}
-                href={source.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex text-xs font-semibold tracking-[0.12em] text-[#f6d29b]/72 uppercase underline decoration-[#d7ad73]/35 underline-offset-4 transition-colors hover:text-white"
-              >
-                {source.label}
-              </a>
-            ))}
-          </div>
-        ) : null}
+
+        <aside className="rounded-md border border-white/10 bg-[#080808]/86 p-5">
+          <p className="text-[10px] font-semibold tracking-[0.22em] text-white/38 uppercase">
+            Source
+          </p>
+          <p className="mt-3 text-sm leading-6 text-[#e8dfcd]/64">
+            {source?.label ?? update.sourceType}
+          </p>
+          {source ? (
+            <a
+              href={source.url}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-4 inline-flex items-center gap-2 text-xs font-semibold tracking-[0.16em] text-[#f6d29b]/72 uppercase transition-colors hover:text-[#f6d29b]"
+            >
+              Open source
+              <ExternalLink size={13} strokeWidth={1.7} />
+            </a>
+          ) : null}
+        </aside>
+      </div>
+
+      <div className="mt-7 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <SlideCard label="Card 01" title="What changed?" body={update.whatChanged} />
+        <SlideCard label="Card 02" title="Why it matters" body={update.whyItMatters} />
+        <SlideCard label="Card 03" title="What to verify" body={update.cautionNote} />
+        <SlideCard label="Card 04" title="Dechive note" body={update.dechiveView || update.readerTakeaway} />
       </div>
 
       <div className="mt-5 flex flex-wrap gap-2">
-        {update.badges.map((badge) => (
+        {update.badges.slice(0, 6).map((badge) => (
           <Badge key={badge} label={badge} />
         ))}
-      </div>
-
-      <div className="mt-7 grid gap-6 lg:grid-cols-2">
-        <Field label="무엇이 바뀌었나">
-          <p>{update.whatChanged}</p>
-        </Field>
-        <Field label="왜 중요한가">
-          <p>{update.whyItMatters}</p>
-        </Field>
-        <Field label="Dechive 해석">
-          <p>{update.dechiveView}</p>
-        </Field>
-        <Field label="독자가 기억할 한 문장">
-          <p>{update.readerTakeaway}</p>
-        </Field>
-      </div>
-
-      <div className="mt-6 grid gap-4 lg:grid-cols-2">
-        <div className="border border-white/10 bg-white/[0.035] p-5">
-          <p className="text-[11px] font-semibold tracking-[0.18em] text-[#f6d29b]/72 uppercase">
-            공식 화면/설명 자료
-          </p>
-          <p className="mt-3 text-sm leading-7 text-[#e8dfcd]/68">
-            {update.screenMaterialStatus}
-          </p>
-        </div>
-        <div className="border border-white/10 bg-white/[0.035] p-5">
-          <p className="text-[11px] font-semibold tracking-[0.18em] text-[#f6d29b]/72 uppercase">
-            주의 문장
-          </p>
-          <p className="mt-3 text-sm leading-7 text-[#e8dfcd]/68">
-            {update.cautionNote}
-          </p>
-        </div>
       </div>
     </article>
   );
@@ -225,44 +219,57 @@ export default async function AiUpdateDatePage({ params }: PageProps) {
 
   if (!day) notFound();
 
-  const groups = getGroups(day);
+  const updates = getUpdates(day);
   const quickSummary = getQuickSummary(day);
 
   return (
-    <main className="min-h-[calc(100vh-5rem)] bg-[#030303] px-6 py-12 text-[#f3eadb] sm:px-8 lg:py-16">
-      <article className="mx-auto max-w-6xl">
+    <main className="min-h-[calc(100vh-5rem)] bg-[#030303] text-[#f3eadb]">
+      <article className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
         <Link
           href="/ai-updates"
-          className="text-xs font-semibold tracking-[0.16em] text-[#f6d29b]/72 uppercase transition-colors hover:text-[#f6d29b]"
+          className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.16em] text-[#e8dfcd]/52 uppercase transition-colors hover:text-[#f6d29b]"
         >
-          ← AI-Update
+          <ArrowLeft size={14} strokeWidth={1.7} />
+          AI Update
         </Link>
 
-        <header className="mt-8 border-b border-white/10 pb-10">
-          <p className="text-xs font-semibold tracking-[0.24em] text-[#f6d29b]/72 uppercase">
-            {formatDisplayDate(date)} AI Updates
-          </p>
-          {day.checkedDateKST ? (
-            <p className="mt-3 text-xs font-semibold tracking-[0.16em] text-[#f6d29b]/64 uppercase">
-              Checked {day.checkedDateKST} KST
+        <header className="mt-8 grid gap-8 border-b border-white/10 pb-10 lg:grid-cols-[minmax(0,1fr)_24rem] lg:items-end">
+          <div>
+            <p className="text-[10px] font-semibold tracking-[0.24em] text-white/42 uppercase">
+              Official {formatDisplayDate(day.date)}
             </p>
-          ) : null}
-          <h1 className="mt-4 max-w-4xl font-[family-name:var(--font-header-serif)] text-4xl leading-tight font-medium text-[#f5ead5] sm:text-5xl">
-            {getDailyTitle(day)}
-          </h1>
-          <p className="mt-5 max-w-3xl text-base leading-8 text-[#e8dfcd]/68">
-            {getDailySubtitle(day)}
-          </p>
+            <h1 className="mt-5 max-w-4xl font-[family-name:var(--font-header-serif)] text-4xl leading-tight font-medium text-white sm:text-5xl">
+              {getDailyTitle(day)}
+            </h1>
+            <p className="mt-5 max-w-3xl text-base leading-8 text-[#e8dfcd]/64">
+              {getDailySubtitle(day)}
+            </p>
+          </div>
+
+          <aside className="rounded-md border border-white/10 bg-[#080808]/86 p-5">
+            <div className="flex items-start gap-4">
+              <CalendarDays size={22} strokeWidth={1.6} className="mt-1 text-[#f6d29b]/78" />
+              <div>
+                <p className="font-[family-name:var(--font-header-serif)] text-xl text-white">
+                  Recorded {day.checkedDateKST ?? formatDisplayDate(day.date)} KST
+                </p>
+                <p className="mt-2 text-sm leading-7 text-[#e8dfcd]/62">
+                  공식 출처 날짜를 기준으로 다음날 한국 시간에 확인한 기록입니다.
+                </p>
+              </div>
+            </div>
+          </aside>
         </header>
 
         {quickSummary.length ? (
           <section className="border-b border-white/10 py-8">
-            <p className="text-xs font-semibold tracking-[0.2em] text-[#f6d29b]/72 uppercase">
-              Quick Summary
+            <p className="inline-flex items-center gap-2 text-[10px] font-semibold tracking-[0.24em] text-white/42 uppercase">
+              <ShieldCheck size={14} strokeWidth={1.7} />
+              Briefing notes
             </p>
             <div className="mt-5 grid gap-4 md:grid-cols-3">
-              {quickSummary.map((summary) => (
-                <p key={summary} className="border-t border-white/10 pt-4 text-sm leading-7 text-[#e8dfcd]/68">
+              {quickSummary.slice(0, 3).map((summary) => (
+                <p key={summary} className="rounded-md border border-white/10 bg-[#080808]/72 p-4 text-sm leading-7 text-[#e8dfcd]/64">
                   {summary}
                 </p>
               ))}
@@ -271,43 +278,38 @@ export default async function AiUpdateDatePage({ params }: PageProps) {
         ) : null}
 
         <section className="py-10">
-          <p className="text-xs font-semibold tracking-[0.2em] text-[#f6d29b]/72 uppercase">
-            Update Groups
-          </p>
-          <div className="mt-6 space-y-14">
-            {groups.map((group) => (
-              <section key={group.name} className="border border-white/10 bg-white/[0.025] px-5 py-7 sm:px-7">
-                <div className="border-b border-white/10 pb-6">
-                  <h2 className="font-[family-name:var(--font-header-serif)] text-3xl font-medium text-[#f5ead5]">
-                    {group.name}
-                  </h2>
-                  <p className="mt-3 max-w-3xl text-sm leading-7 text-[#e8dfcd]/68">
-                    {group.intro}
-                  </p>
-                </div>
-                <div className="mt-8">
-                  {group.updates.map((update) => (
-                    <UpdateCard key={update.id} update={update} />
-                  ))}
-                </div>
-              </section>
-            ))}
+          <div className="mb-6 flex items-end justify-between border-b border-white/10 pb-4">
+            <p className="text-[10px] font-semibold tracking-[0.24em] text-white/42 uppercase">
+              Change cards
+            </p>
+            <p className="text-sm text-[#e8dfcd]/46">{updates.length} changes</p>
           </div>
+
+          {updates.map((update) => (
+            <UpdateStory key={update.id} day={day} update={update} />
+          ))}
         </section>
 
         <section className="border-t border-white/10 py-8">
-          <h2 className="font-[family-name:var(--font-header-serif)] text-2xl font-medium text-[#f5ead5]">
-            Today&rsquo;s Verification Note
+          <h2 className="font-[family-name:var(--font-header-serif)] text-2xl font-medium text-white">
+            Verification note
           </h2>
-          <p className="mt-4 max-w-4xl text-sm leading-8 text-[#e8dfcd]/68">
+          <p className="mt-4 max-w-4xl text-sm leading-8 text-[#e8dfcd]/64">
             {day.verificationNote ?? '이 날짜의 업데이트는 공식 출처로 확인된 범위 안에서만 기록합니다. 기능 출시, 문서 개정, 플랫폼 통합 여부를 구분해 읽어야 합니다.'}
           </p>
         </section>
 
         <section className="border-t border-white/10 pt-8">
-          <p className="font-[family-name:var(--font-header-serif)] text-2xl leading-relaxed text-[#f5ead5]">
+          <p className="font-[family-name:var(--font-header-serif)] text-2xl leading-relaxed text-white">
             {day.closingLine ?? 'AI는 답을 만든다. Dechive는 그 답이 어디까지 검증 가능한지 기록한다.'}
           </p>
+          <Link
+            href="/ai-updates"
+            className="mt-6 inline-flex items-center gap-2 text-xs font-semibold tracking-[0.16em] text-[#f6d29b]/72 uppercase transition-colors hover:text-[#f6d29b]"
+          >
+            Back to change cards
+            <ArrowUpRight size={14} strokeWidth={1.7} />
+          </Link>
         </section>
       </article>
     </main>

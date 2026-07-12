@@ -3,16 +3,16 @@ import AiUpdatesClient from '@/components/ai-updates/AiUpdatesClient';
 import { AI_UPDATES_MONTH, aiUpdateDays } from '@/data/aiUpdates';
 
 const AI_UPDATES_DESCRIPTION =
-  '매일 공식 문서 기반 AI 업데이트를 날짜별 브리핑으로 기록하는 Dechive AiUpdate 페이지입니다.';
+  '공식 출처 날짜를 확인하고 다음날 KST에 기록하는 Dechive AI Update 변화 카드입니다.';
 
 export const metadata: Metadata = {
-  title: 'AiUpdate',
+  title: 'AI Update',
   description: AI_UPDATES_DESCRIPTION,
   alternates: {
     canonical: 'https://dechive.dev/ai-updates',
   },
   openGraph: {
-    title: 'AiUpdate | Dechive',
+    title: 'AI Update | Dechive',
     description: AI_UPDATES_DESCRIPTION,
     url: 'https://dechive.dev/ai-updates',
     siteName: 'Dechive',
@@ -23,13 +23,13 @@ export const metadata: Metadata = {
         url: 'https://dechive.dev/images/thumb.webp',
         width: 1200,
         height: 630,
-        alt: 'Dechive AiUpdate',
+        alt: 'Dechive AI Update',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AiUpdate | Dechive',
+    title: 'AI Update | Dechive',
     description: AI_UPDATES_DESCRIPTION,
     images: ['https://dechive.dev/images/thumb.webp'],
   },
