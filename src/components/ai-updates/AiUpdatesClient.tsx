@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { ArrowUpRight, CalendarDays, CheckCircle2, ExternalLink } from 'lucide-react';
+import { ArrowUpRight, CalendarDays, ExternalLink } from 'lucide-react';
 import type { AiUpdateBriefingItem, AiUpdateDay, AiUpdateItem } from '@/data/aiUpdates';
 
 interface AiUpdatesClientProps {
@@ -16,17 +16,33 @@ type ChangeRecord = {
   summary: string;
   sourceLabel: string;
   sourceUrl?: string;
-  sourceType: string;
   officialDate: string;
   recordedDate: string;
   href: string;
-  badges: string[];
 };
-
-const VISIBLE_CHANGE_LIMIT = 9;
 
 function formatDisplayDate(date: string) {
   return date.replaceAll('-', '.');
+}
+
+function getMonthFromDate(date: string) {
+  return date.slice(0, 7);
+}
+
+function getDisplayMonth(month: string) {
+  return month.replace('-', '.');
+}
+
+function getDaysInMonth(month: string) {
+  const [year, monthIndex] = month.split('-').map(Number);
+
+  if (!year || !monthIndex) return 31;
+
+  return new Date(year, monthIndex, 0).getDate();
+}
+
+function getDateFromMonthDay(month: string, day: number) {
+  return `${month}-${String(day).padStart(2, '0')}`;
 }
 
 function cleanDateLabel(value?: string) {
@@ -47,7 +63,6 @@ function getSourceFromBriefing(update: AiUpdateBriefingItem) {
 
 function fromBriefingItem(day: AiUpdateDay, update: AiUpdateBriefingItem): ChangeRecord {
   const source = getSourceFromBriefing(update);
-  const officialDate = cleanDateLabel(update.officialDate ?? update.reportDate) || formatDisplayDate(day.date);
 
   return {
     id: `${day.date}-${update.id}`,
@@ -55,11 +70,9 @@ function fromBriefingItem(day: AiUpdateDay, update: AiUpdateBriefingItem): Chang
     summary: update.summary,
     sourceLabel: source?.label ?? update.sourceType,
     sourceUrl: source?.url,
-    sourceType: update.sourceType,
-    officialDate,
+    officialDate: cleanDateLabel(update.officialDate ?? update.reportDate) || formatDisplayDate(day.date),
     recordedDate: update.checkedDateKST ?? day.checkedDateKST ?? formatDisplayDate(day.date),
     href: `/ai-updates/${day.date}#${update.id}`,
-    badges: update.badges.slice(0, 3),
   };
 }
 
@@ -70,69 +83,55 @@ function fromLegacyItem(day: AiUpdateDay, update: AiUpdateItem): ChangeRecord {
     summary: update.summary,
     sourceLabel: update.source.label,
     sourceUrl: update.source.url,
-    sourceType: update.source.description,
     officialDate: formatDisplayDate(day.date),
     recordedDate: day.checkedDateKST ?? formatDisplayDate(day.date),
     href: `/ai-updates/${day.date}#${update.id}`,
-    badges: update.badges.slice(0, 3),
   };
 }
 
-function flattenChanges(days: AiUpdateDay[]) {
-  return days.flatMap((day) => {
-    if (day.groups?.length) {
-      return day.groups.flatMap((group) => group.updates.map((update) => fromBriefingItem(day, update)));
-    }
+function getChangesForDay(day: AiUpdateDay | null) {
+  if (!day) return [];
 
-    return day.updates.map((update) => fromLegacyItem(day, update));
-  });
+  if (day.groups?.length) {
+    return day.groups.flatMap((group) => group.updates.map((update) => fromBriefingItem(day, update)));
+  }
+
+  return day.updates.map((update) => fromLegacyItem(day, update));
 }
 
-function ChangeCard({ change }: { change: ChangeRecord }) {
+function ChangeRow({ change }: { change: ChangeRecord }) {
   return (
-    <article className="group rounded-md border border-white/10 bg-[#080808]/86 p-5 transition-colors hover:border-[#d7ad73]/38 hover:bg-[#101010] sm:p-6">
+    <article className="rounded-md border border-white/10 bg-[#080808]/86 p-4 transition-colors hover:border-[#d7ad73]/34 hover:bg-[#101010] sm:p-5">
       <Link
         href={change.href}
-        className="block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f6d29b]"
+        className="group block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f6d29b]"
       >
-        <div className="flex items-start justify-between gap-5">
+        <div className="flex items-start justify-between gap-4">
           <div className="min-w-0">
-            <p className="text-[10px] font-semibold tracking-[0.22em] text-white/42 uppercase">
-              Official {change.officialDate}
+            <p className="text-xs text-[#e8dfcd]/44">
+              Official {change.officialDate} · Recorded {change.recordedDate} KST
             </p>
-            <h2 className="mt-4 font-[family-name:var(--font-header-serif)] text-2xl leading-tight font-medium text-white transition-colors group-hover:text-[#f6d29b]">
+            <h3 className="mt-3 font-[family-name:var(--font-header-serif)] text-2xl leading-tight font-medium text-white transition-colors group-hover:text-[#f6d29b]">
               {change.title}
-            </h2>
+            </h3>
           </div>
-          <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-white/10 text-[#f6d29b]/70 transition-colors group-hover:border-[#d7ad73]/36 group-hover:text-[#f6d29b]">
-            <ArrowUpRight size={17} strokeWidth={1.7} />
-          </span>
+          <ArrowUpRight
+            size={17}
+            strokeWidth={1.7}
+            className="mt-1 shrink-0 text-[#f6d29b]/68 transition-transform group-hover:translate-x-1 group-hover:text-[#f6d29b]"
+          />
         </div>
-
-        <p className="mt-4 line-clamp-3 text-sm leading-7 text-[#e8dfcd]/62">
+        <p className="mt-3 line-clamp-2 text-sm leading-7 text-[#e8dfcd]/62">
           {change.summary}
         </p>
-
-        <div className="mt-5 grid gap-3 border-t border-white/10 pt-4 text-xs text-[#e8dfcd]/52 sm:grid-cols-2">
-          <p>
-            <span className="block font-semibold tracking-[0.14em] text-white/36 uppercase">Recorded</span>
-            <span className="mt-1 block">{change.recordedDate} KST</span>
-          </p>
-          <p>
-            <span className="block font-semibold tracking-[0.14em] text-white/36 uppercase">Source</span>
-            <span className="mt-1 block truncate">{change.sourceLabel}</span>
-          </p>
-        </div>
-
-        <div className="mt-5 flex flex-wrap gap-2">
-          {change.badges.map((badge) => (
-            <span
-              key={badge}
-              className="rounded-full border border-white/10 bg-white/[0.035] px-2.5 py-1 text-[11px] text-[#e8dfcd]/58"
-            >
-              {badge}
+        <div className="mt-4 flex items-center justify-between gap-4 border-t border-white/10 pt-3 text-xs text-[#e8dfcd]/46">
+          <span className="min-w-0 truncate">출처: {change.sourceLabel}</span>
+          {change.sourceUrl ? (
+            <span className="inline-flex shrink-0 items-center gap-1 text-[#f6d29b]/62">
+              source
+              <ExternalLink size={12} strokeWidth={1.7} />
             </span>
-          ))}
+          ) : null}
         </div>
       </Link>
     </article>
@@ -140,10 +139,27 @@ function ChangeCard({ change }: { change: ChangeRecord }) {
 }
 
 export default function AiUpdatesClient({ month, days }: AiUpdatesClientProps) {
-  const changes = React.useMemo(() => flattenChanges(days), [days]);
-  const visibleChanges = changes.slice(0, VISIBLE_CHANGE_LIMIT);
-  const latestDays = days.slice(0, 6);
-  const monthLabel = month.replace('.', '-').replace('-', '.');
+  const months = React.useMemo(() => {
+    const uniqueMonths = new Set(days.map((day) => getMonthFromDate(day.date)));
+
+    return [...uniqueMonths].sort((a, b) => b.localeCompare(a));
+  }, [days]);
+  const initialMonth = months.includes(month.replace('.', '-'))
+    ? month.replace('.', '-')
+    : months[0] ?? '2026-07';
+  const [selectedMonth, setSelectedMonth] = React.useState(initialMonth);
+  const firstRecordedDate = days.find((day) => getMonthFromDate(day.date) === initialMonth)?.date ?? days[0]?.date;
+  const [selectedDate, setSelectedDate] = React.useState(firstRecordedDate ?? `${initialMonth}-01`);
+  const recordedDates = React.useMemo(() => new Set(days.map((day) => day.date)), [days]);
+  const selectedDay = days.find((day) => day.date === selectedDate) ?? null;
+  const selectedChanges = getChangesForDay(selectedDay);
+  const daysInSelectedMonth = getDaysInMonth(selectedMonth);
+  const monthDays = days.filter((day) => getMonthFromDate(day.date) === selectedMonth);
+
+  function selectMonth(nextMonth: string) {
+    setSelectedMonth(nextMonth);
+    setSelectedDate(days.find((day) => getMonthFromDate(day.date) === nextMonth)?.date ?? `${nextMonth}-01`);
+  }
 
   return (
     <main className="min-h-[calc(100vh-5rem)] bg-[#030303] text-[#f3eadb]">
@@ -152,95 +168,144 @@ export default function AiUpdatesClient({ month, days }: AiUpdatesClientProps) {
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_10%,rgba(246,210,155,0.08),transparent_30%),radial-gradient(circle_at_80%_22%,rgba(127,198,192,0.055),transparent_28%)]"
         />
-        <div className="relative mx-auto grid max-w-7xl gap-8 lg:grid-cols-[minmax(0,1fr)_27rem] lg:items-end">
-          <div>
-            <p className="text-[10px] font-semibold tracking-[0.24em] text-white/42 uppercase">
-              AI Update · {monthLabel}
-            </p>
-            <h1 className="mt-5 max-w-3xl font-[family-name:var(--font-header-serif)] text-4xl leading-tight font-medium text-white sm:text-5xl lg:text-[3.4rem]">
-              AI changes, verified one day later.
-            </h1>
-            <p className="mt-4 max-w-2xl text-base leading-8 text-[#e8dfcd]/64">
-              공식 출처 날짜를 먼저 확인하고, 다음날 KST에 기록합니다. 빠르게 지나가는 AI 변화 중 나중에 다시 확인할 가치가 있는 신호만 남깁니다.
-            </p>
-          </div>
-
-          <aside className="rounded-md border border-white/10 bg-[#080808]/86 p-5">
-            <div className="flex items-start gap-4">
-              <CalendarDays size={22} strokeWidth={1.6} className="mt-1 text-[#f6d29b]/80" />
-              <div>
-                <p className="font-[family-name:var(--font-header-serif)] text-xl leading-snug text-white">
-                  Official date + KST D+1
-                </p>
-                <p className="mt-2 text-sm leading-7 text-[#e8dfcd]/62">
-                  속보보다 검증을 우선합니다. 날짜가 애매한 정보는 Watch로 분리하거나 기록하지 않습니다.
-                </p>
-              </div>
-            </div>
-          </aside>
+        <div className="relative mx-auto max-w-7xl">
+          <p className="text-[10px] font-semibold tracking-[0.24em] text-white/42 uppercase">
+            AI Update · {getDisplayMonth(selectedMonth)}
+          </p>
+          <h1 className="mt-5 max-w-3xl font-[family-name:var(--font-header-serif)] text-4xl leading-tight font-medium text-white sm:text-5xl lg:text-[3.4rem]">
+            오늘 확인한 AI 변화
+          </h1>
+          <p className="mt-4 max-w-2xl text-base leading-8 text-[#e8dfcd]/64">
+            공식 출처 날짜를 먼저 확인하고, 다음날 KST에 기록합니다. 날짜를 선택하면 그날 남긴 변화만 짧게 볼 수 있습니다.
+          </p>
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-        <section className="mb-8 rounded-md border border-white/10 bg-[#080808]/72 p-4 sm:p-5">
-          <p className="text-[10px] font-semibold tracking-[0.24em] text-white/42 uppercase">
-            Recent briefing dates
-          </p>
-          <div className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-            {latestDays.map((day) => (
-              <Link
-                key={day.date}
-                href={`/ai-updates/${day.date}`}
-                className="group rounded-md border border-white/10 bg-[#030303]/62 p-4 transition-colors hover:border-[#d7ad73]/38 hover:bg-[#101010]"
-              >
-                <span className="text-xs text-[#e8dfcd]/46">Official {formatDisplayDate(day.date)}</span>
-                <span className="mt-2 block font-[family-name:var(--font-header-serif)] text-xl leading-tight text-white transition-colors group-hover:text-[#f6d29b]">
-                  {day.title ?? `${formatDisplayDate(day.date)} AI Updates`}
-                </span>
-                <span className="mt-3 block text-xs text-[#e8dfcd]/42">
-                  Recorded {day.checkedDateKST ?? formatDisplayDate(day.date)} KST · {day.groups?.reduce((count, group) => count + group.updates.length, 0) ?? day.updates.length} changes
-                </span>
-              </Link>
-            ))}
+      <section className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 lg:grid-cols-[21rem_minmax(0,1fr)] lg:px-8">
+        <aside className="lg:sticky lg:top-28 lg:self-start">
+          <div className="rounded-md border border-white/10 bg-[#080808]/86 p-4 sm:p-5">
+            <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-4">
+              <div>
+                <p className="font-[family-name:var(--font-header-serif)] text-xl text-white">
+                  {getDisplayMonth(selectedMonth)}
+                </p>
+                <p className="mt-1 text-xs text-[#e8dfcd]/46">
+                  표시된 날짜에 기록이 있습니다.
+                </p>
+              </div>
+              <CalendarDays size={22} strokeWidth={1.6} className="text-[#f6d29b]/70" />
+            </div>
+
+            {months.length > 1 ? (
+              <div className="mt-4 flex flex-wrap gap-2">
+                {months.map((availableMonth) => (
+                  <button
+                    key={availableMonth}
+                    type="button"
+                    onClick={() => selectMonth(availableMonth)}
+                    className={`rounded-md border px-3 py-1.5 text-xs transition-colors ${
+                      selectedMonth === availableMonth
+                        ? 'border-[#d7ad73]/48 bg-[#d7ad73]/12 text-[#f6d29b]'
+                        : 'border-white/10 text-[#e8dfcd]/54 hover:border-[#d7ad73]/34 hover:text-white'
+                    }`}
+                  >
+                    {getDisplayMonth(availableMonth)}
+                  </button>
+                ))}
+              </div>
+            ) : null}
+
+            <div className="mt-5 hidden grid-cols-7 gap-2 lg:grid">
+              {Array.from({ length: daysInSelectedMonth }, (_, index) => {
+                const dayNumber = index + 1;
+                const date = getDateFromMonthDay(selectedMonth, dayNumber);
+                const hasRecord = recordedDates.has(date);
+                const isSelected = selectedDate === date;
+
+                return (
+                  <button
+                    key={date}
+                    type="button"
+                    onClick={() => hasRecord && setSelectedDate(date)}
+                    disabled={!hasRecord}
+                    className={`relative h-10 rounded-md border text-xs font-semibold transition-colors ${
+                      isSelected
+                        ? 'border-[#d7ad73]/58 bg-[#d7ad73]/14 text-[#f6d29b]'
+                        : hasRecord
+                          ? 'border-white/10 bg-[#030303]/74 text-[#e8dfcd]/62 hover:border-[#d7ad73]/34 hover:text-white'
+                          : 'border-white/5 text-white/16'
+                    }`}
+                    aria-pressed={isSelected}
+                  >
+                    {String(dayNumber).padStart(2, '0')}
+                    {hasRecord ? (
+                      <span className="absolute bottom-1 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-[#f6d29b]/72" />
+                    ) : null}
+                  </button>
+                );
+              })}
+            </div>
+
+            <div className="mt-5 flex gap-2 overflow-x-auto pb-1 lg:hidden">
+              {monthDays.map((day) => (
+                <button
+                  key={day.date}
+                  type="button"
+                  onClick={() => setSelectedDate(day.date)}
+                  className={`shrink-0 rounded-full border px-3 py-2 text-xs transition-colors ${
+                    selectedDate === day.date
+                      ? 'border-[#d7ad73]/58 bg-[#d7ad73]/14 text-[#f6d29b]'
+                      : 'border-white/10 text-[#e8dfcd]/58'
+                  }`}
+                >
+                  {formatDisplayDate(day.date).slice(5)}
+                </button>
+              ))}
+            </div>
+          </div>
+        </aside>
+
+        <section className="min-w-0">
+          <div className="border-b border-white/10 pb-5">
+            <p className="text-[10px] font-semibold tracking-[0.24em] text-white/42 uppercase">
+              Selected date
+            </p>
+            <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <h2 className="font-[family-name:var(--font-header-serif)] text-3xl leading-tight text-white sm:text-4xl">
+                  Official {formatDisplayDate(selectedDate)}
+                </h2>
+                <p className="mt-2 text-sm text-[#e8dfcd]/52">
+                  Recorded {selectedDay?.checkedDateKST ?? formatDisplayDate(selectedDate)} KST · {selectedChanges.length} changes
+                </p>
+              </div>
+              {selectedDay ? (
+                <Link
+                  href={`/ai-updates/${selectedDay.date}`}
+                  className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.16em] text-[#f6d29b]/72 uppercase transition-colors hover:text-[#f6d29b]"
+                >
+                  날짜 상세 보기
+                  <ArrowUpRight size={14} strokeWidth={1.7} />
+                </Link>
+              ) : null}
+            </div>
+          </div>
+
+          <div className="mt-5 grid gap-3">
+            {selectedChanges.length ? (
+              selectedChanges.map((change) => <ChangeRow key={change.id} change={change} />)
+            ) : (
+              <div className="rounded-md border border-white/10 bg-[#080808]/86 p-6">
+                <p className="font-[family-name:var(--font-header-serif)] text-2xl text-white">
+                  이 날짜에는 기록된 업데이트가 없습니다.
+                </p>
+                <p className="mt-3 text-sm leading-7 text-[#e8dfcd]/62">
+                  공식 출처로 확인된 변화가 있으면 다음날 KST 기준으로 이 달력에 표시됩니다.
+                </p>
+              </div>
+            )}
           </div>
         </section>
-
-        <div className="mb-5 flex items-end justify-between border-b border-white/10 pb-4">
-          <div>
-            <p className="text-[10px] font-semibold tracking-[0.24em] text-white/42 uppercase">
-              Latest change cards
-            </p>
-            <p className="mt-2 text-sm text-[#e8dfcd]/52">
-              Showing latest {visibleChanges.length} of {changes.length} recorded changes
-            </p>
-          </div>
-          <p className="hidden items-center gap-2 text-xs text-[#e8dfcd]/46 sm:inline-flex">
-            <CheckCircle2 size={14} strokeWidth={1.6} />
-            Source first
-          </p>
-        </div>
-
-        <div className="grid gap-4 lg:grid-cols-2 xl:grid-cols-3">
-          {visibleChanges.map((change) => (
-            <ChangeCard key={change.id} change={change} />
-          ))}
-        </div>
-
-        <div className="mt-8 rounded-md border border-white/10 bg-[#080808]/72 p-5 text-sm leading-7 text-[#e8dfcd]/56">
-          <p className="font-semibold tracking-[0.14em] text-white/42 uppercase">Recording rule</p>
-          <p className="mt-2">
-            Official date는 원문 출처의 날짜입니다. Recorded date는 Dechive가 한국 시간 기준으로 다음날 확인해 기록한 날짜입니다.
-          </p>
-          <a
-            href="https://platform.openai.com/docs/changelog"
-            target="_blank"
-            rel="noreferrer"
-            className="mt-3 inline-flex items-center gap-2 text-xs font-semibold tracking-[0.16em] text-[#f6d29b]/72 uppercase transition-colors hover:text-[#f6d29b]"
-          >
-            Example source
-            <ExternalLink size={13} strokeWidth={1.7} />
-          </a>
-        </div>
       </section>
     </main>
   );
