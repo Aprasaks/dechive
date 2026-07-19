@@ -13,8 +13,8 @@ async function apply(url: string) {
       checksum text NOT NULL,
       applied_at timestamptz NOT NULL DEFAULT now()
     )`);
-    const names = (await readdir(path.resolve('drizzle'))).filter((name) => /^000[0-6].*\.sql$/.test(name)).sort();
-    if (names.length !== 7) throw new Error('blocked_expected_migration_set_missing');
+    const names = (await readdir(path.resolve('drizzle'))).filter((name) => /^000[0-7].*\.sql$/.test(name)).sort();
+    if (names.length !== 8) throw new Error('blocked_expected_migration_set_missing');
     for (const name of names) {
       const raw = await readFile(path.resolve('drizzle', name), 'utf8');
       const checksum = createHash('sha256').update(raw).digest('hex');
@@ -36,7 +36,7 @@ async function apply(url: string) {
     }
     const status = await pool.query<{ count: string; checksum: string }>(`SELECT count(*)::text AS count,
       md5(string_agg(name || ':' || checksum, ',' ORDER BY name)) AS checksum
-      FROM schema_migrations WHERE name ~ '^000[0-6]'`);
+      FROM schema_migrations WHERE name ~ '^000[0-7]'`);
     const objects = await pool.query<{ tables: string; indexes: string; triggers: string; constraints: string }>(`SELECT
       (SELECT count(*)::text FROM information_schema.tables WHERE table_schema='public') AS tables,
       (SELECT count(*)::text FROM pg_indexes WHERE schemaname='public') AS indexes,
@@ -60,7 +60,7 @@ async function main() {
     const report = { target: 'user-confirmed Neon staging', directConnectionUsed: true, first, second, secondRunNoOp: second.appliedNow.length === 0, credentialsLogged: false };
     await writeFile(path.join(outputDirectory, 'neon-migration-report.json'), `${JSON.stringify(report, null, 2)}\n`, { mode: 0o600 });
     console.log(`Neon staging migrations: applied ${first.appliedNow.length}; second run no-op ${report.secondRunNoOp}`);
-    if (first.migrationCount !== 7 || !report.secondRunNoOp) process.exitCode = 2;
+    if (first.migrationCount !== 8 || !report.secondRunNoOp) process.exitCode = 2;
   } catch (error) {
     console.error(`Neon staging migrations: ${error instanceof Error && error.message.startsWith('blocked_') ? error.message : safeError(error)}; credentials redacted`);
     process.exitCode = 2;

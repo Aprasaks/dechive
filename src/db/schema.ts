@@ -122,8 +122,8 @@ export const practices = pgTable('practices', {
 }, (t) => [check('practice_outcome_status_valid', sql`${t.outcomeStatus} is null or ${t.outcomeStatus} in ('verified','partially_verified','not_verified','failed','inconclusive')`), index('practice_related_knowledge_idx').on(t.relatedKnowledgeId), index('practice_outcome_status_idx').on(t.outcomeStatus)]);
 export const aiUpdates = pgTable('ai_updates', {
   localizationId: uuid('localization_id').primaryKey().references(() => contentLocalizations.id, { onDelete: 'cascade' }),
-  vendor: text('vendor'), product: text('product'), announcedAt: timestamp('announced_at', { withTimezone: true }), occurredAt: timestamp('occurred_at', { withTimezone: true }), checkedAt: timestamp('checked_at', { withTimezone: true }), changeSummary: text('change_summary').notNull(), impact: text('impact'), sourceConfidence: text('source_confidence'),
-});
+  vendor: text('vendor'), product: text('product'), announcedAt: timestamp('announced_at', { withTimezone: true }), occurredAt: timestamp('occurred_at', { withTimezone: true }), checkedAt: timestamp('checked_at', { withTimezone: true }), changeSummary: text('change_summary').notNull(), impact: text('impact'), sourceConfidence: text('source_confidence'), officialUpdatedAt: timestamp('official_updated_at', { withTimezone: true }), lastVerifiedAt: timestamp('last_verified_at', { withTimezone: true }),
+}, (t) => [index('ai_updates_official_updated_idx').on(t.officialUpdatedAt)]);
 export const updateDigests = pgTable('update_digests', {
   id: uuid('id').primaryKey().defaultRandom(), digestDate: date('digest_date').notNull(), locale: text('locale').notNull(), title: text('title').notNull(), editorialSummary: text('editorial_summary').notNull().default(''), createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
 }, (t) => [uniqueIndex('digest_date_locale_uq').on(t.digestDate, t.locale)]);
