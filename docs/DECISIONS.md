@@ -1,5 +1,9 @@
 # Decisions
 
+## D-62 — Practice는 적용·관찰·검증 기록이다
+
+Practice는 Knowledge를 실제로 적용한 결과를 기록하며 성공만 요구하지 않는다. `verified`, `partially_verified`, `not_verified`, `failed`, `inconclusive` 결과를 모두 허용한다. Knowledge 연결은 선택적 하나이며 Lecture 직접 관계와 다대다 relation은 만들지 않는다. 과거 상태 복구는 독립 rollback API가 아니라 새 immutable revision 저장 후 재발행으로 수행한다.
+
 - **Status:** Living decision register
 - **Last Updated:** 2026-07-18
 - **Authority:** 승인된 결정과 미결정 gate의 단일 기록

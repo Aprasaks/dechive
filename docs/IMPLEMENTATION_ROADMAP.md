@@ -1,5 +1,9 @@
 # Implementation Roadmap
 
+## Stage 25 상태
+
+Practice CMS는 기존 `practices` table을 additive migration `0006`으로 확장했다. Draft/version/published pointer와 owner transaction을 재사용하고, outcome status·선택적 Knowledge 관계·immutable references를 지원한다. `/practice`와 `/practice/{slug}`는 published-only query를 사용한다.
+
 - **Status:** Proposed phased roadmap
 - **Last Updated:** 2026-07-18
 - **Authority:** 구현 순서·완료·rollback 기준

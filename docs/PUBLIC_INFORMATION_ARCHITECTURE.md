@@ -1,5 +1,7 @@
 # Public Information Architecture
 
+Practice는 `/practice`와 `/practice/{slug}`에서 published version만 공개한다. 목록은 title, summary, outcome status와 공개 가능한 관련 Knowledge를 표시하며, Draft와 unpublished Practice는 제외한다.
+
 Dechive의 공개 Header는 Knowledge, Lecture, Practice, AI Update, Books만 사용한다. Footer는 Privacy Policy, Terms, Contact, About만 사용한다.
 
 공개 route는 `/`, `/knowledge`, `/lecture`, `/practice`, `/ai-update`, `/books`, `/privacy-policy`, `/terms`, `/contact`, `/about` 및 실제 published Knowledge/Lecture detail이다. Practice, AI Update, Books는 CMS가 준비되기 전 foundation/empty state만 제공한다.

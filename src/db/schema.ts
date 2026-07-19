@@ -118,8 +118,8 @@ export const courseModuleItems = pgTable('course_module_items', {
 }, (t) => [uniqueIndex('module_item_order_uq').on(t.moduleId, t.order), uniqueIndex('module_lesson_uq').on(t.moduleId, t.lessonLocalizationId)]);
 export const practices = pgTable('practices', {
   localizationId: uuid('localization_id').primaryKey().references(() => contentLocalizations.id, { onDelete: 'cascade' }),
-  practiceType: text('practice_type').notNull(), objective: text('objective').notNull(), difficulty: text('difficulty'), durationMinutes: integer('duration_minutes'), evaluationCriteria: jsonb('evaluation_criteria').default([]).notNull(), completionMode: text('completion_mode').notNull(),
-});
+  practiceType: text('practice_type').notNull(), objective: text('objective').notNull(), difficulty: text('difficulty'), durationMinutes: integer('duration_minutes'), evaluationCriteria: jsonb('evaluation_criteria').default([]).notNull(), completionMode: text('completion_mode').notNull(), outcomeStatus: text('outcome_status'), relatedKnowledgeId: uuid('related_knowledge_id').references(() => contents.id, { onDelete: 'restrict' }),
+}, (t) => [check('practice_outcome_status_valid', sql`${t.outcomeStatus} is null or ${t.outcomeStatus} in ('verified','partially_verified','not_verified','failed','inconclusive')`), index('practice_related_knowledge_idx').on(t.relatedKnowledgeId), index('practice_outcome_status_idx').on(t.outcomeStatus)]);
 export const aiUpdates = pgTable('ai_updates', {
   localizationId: uuid('localization_id').primaryKey().references(() => contentLocalizations.id, { onDelete: 'cascade' }),
   vendor: text('vendor'), product: text('product'), announcedAt: timestamp('announced_at', { withTimezone: true }), occurredAt: timestamp('occurred_at', { withTimezone: true }), checkedAt: timestamp('checked_at', { withTimezone: true }), changeSummary: text('change_summary').notNull(), impact: text('impact'), sourceConfidence: text('source_confidence'),
