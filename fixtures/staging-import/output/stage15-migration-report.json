@@ -1,0 +1,27 @@
+{
+  "status": "stage15_migration_applied",
+  "target": "0004_knowledge_and_lectures.sql",
+  "priorMigrationsPreserved": true,
+  "existingDataPreserved": true,
+  "before": {
+    "identities": 18,
+    "localizations": 24,
+    "versions": 26,
+    "published": 0,
+    "pointer_checksum": "a678b7dcdd71436669aa838b558ba658"
+  },
+  "after": {
+    "identities": 18,
+    "localizations": 24,
+    "versions": 26,
+    "published": 0,
+    "pointer_checksum": "a678b7dcdd71436669aa838b558ba658"
+  },
+  "schema": {
+    "lecture_kind": true,
+    "lecture_table": true,
+    "migration_count": 5
+  },
+  "credentialsLogged": false,
+  "productionUsed": false
+}

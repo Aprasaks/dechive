@@ -1,0 +1,66 @@
+{
+  "environment": "local macOS process to Neon Singapore staging",
+  "region": "AWS Singapore ap-southeast-1 (user-confirmed)",
+  "vercelSin1": "blocked_not_configured",
+  "measurements": [
+    {
+      "name": "direct_connection_cold_select_1",
+      "samples": 5,
+      "medianMs": 557.15,
+      "p95Ms": 578.37,
+      "minMs": 546.21,
+      "maxMs": 578.37
+    },
+    {
+      "name": "pooled_connection_cold_select_1",
+      "samples": 5,
+      "medianMs": 545.23,
+      "p95Ms": 548.18,
+      "minMs": 540.45,
+      "maxMs": 548.18
+    },
+    {
+      "name": "pooled_warm_select_1",
+      "samples": 20,
+      "medianMs": 77.01,
+      "p95Ms": 77.66,
+      "minMs": 75.78,
+      "maxMs": 77.73
+    },
+    {
+      "name": "route_lookup",
+      "samples": 20,
+      "medianMs": 77.08,
+      "p95Ms": 77.46,
+      "minMs": 76.34,
+      "maxMs": 77.73
+    },
+    {
+      "name": "knowledge_detail",
+      "samples": 20,
+      "medianMs": 77.36,
+      "p95Ms": 78.13,
+      "minMs": 76.22,
+      "maxMs": 78.52
+    },
+    {
+      "name": "digest_query",
+      "samples": 20,
+      "medianMs": 77.22,
+      "p95Ms": 78.01,
+      "minMs": 76.49,
+      "maxMs": 79.9
+    },
+    {
+      "name": "short_readonly_transaction",
+      "samples": 20,
+      "medianMs": 230.69,
+      "p95Ms": 232.57,
+      "minMs": 229.12,
+      "maxMs": 235.4
+    }
+  ],
+  "controlledPublishTransaction": "not_run_to_avoid_staging_published_write",
+  "credentialsLogged": false,
+  "disclaimer": "Development measurement; not an SLA."
+}

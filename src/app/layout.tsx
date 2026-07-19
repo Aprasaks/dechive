@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { Geist, Noto_Serif_KR } from 'next/font/google';
 import './globals.css';
 import 'highlight.js/styles/atom-one-dark.css';
-import { MusicProvider } from '@/components/layout/MusicProvider';
 import { LangProvider } from '@/components/layout/LangProvider';
 import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
 import SiteChrome from '@/components/layout/SiteChrome';
@@ -23,14 +22,14 @@ const headerSerif = Noto_Serif_KR({
 const BASE_URL = 'https://dechive.dev';
 
 export const metadata: Metadata = {
-  title: { default: 'Dechive — 검증을 넘어 추론까지', template: '%s | Dechive' },
+  title: { default: 'Dechive — 공부하고, 검증하고, 다시 설명하는 AI', template: '%s | Dechive' },
   description:
-    'Dechive는 하나의 질문에서 출발한 Archive와 깊은 질문을 끝까지 밀고 가는 Deep Dive로 AI 시대의 답을 검증하는 지식 아카이브입니다.',
+    'Dechive는 사람이 직접 이해한 내용을 지식, 강의, 실습과 AI 변화 기록으로 다시 구성합니다.',
   metadataBase: new URL(BASE_URL),
   openGraph: {
-    title: 'Dechive — 검증을 넘어 추론까지',
+    title: 'Dechive',
     description:
-      'Dechive는 하나의 질문에서 출발한 Archive와 깊은 질문을 끝까지 밀고 가는 Deep Dive로 AI 시대의 답을 검증하는 지식 아카이브입니다.',
+      '공부하고, 검증하고, 다시 설명하는 AI',
     url: BASE_URL,
     siteName: 'Dechive',
     images: [
@@ -41,9 +40,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Dechive — 검증을 넘어 추론까지',
-    description:
-      'Dechive는 하나의 질문에서 출발한 Archive와 깊은 질문을 끝까지 밀고 가는 Deep Dive로 AI 시대의 답을 검증하는 지식 아카이브입니다.',
+      title: 'Dechive',
+      description:
+      '공부하고, 검증하고, 다시 설명하는 AI',
     images: ['/images/thumb.webp'],
   },
   robots: { index: true, follow: true },
@@ -60,20 +59,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" className="dark">
+    <html lang="ko">
       <head>
-        <link
-          rel="alternate"
-          type="application/rss+xml"
-          title="Dechive"
-          href={`${BASE_URL}/feed.xml`}
-        />
-        <link
-          rel="alternate"
-          type="application/rss+xml"
-          title="Dechive English"
-          href={`${BASE_URL}/en/feed.xml`}
-        />
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4611005224374273"
@@ -81,16 +68,10 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${headerSerif.variable} flex min-h-screen flex-col overflow-x-clip bg-black font-sans text-zinc-100 antialiased`}
+        className={`${geistSans.variable} ${headerSerif.variable} flex min-h-screen flex-col overflow-x-clip bg-background font-sans text-foreground antialiased`}
       >
-        <MusicProvider>
-          <LangProvider>
-            <SiteChrome>
-              {children}
-            </SiteChrome>
-            <GoogleAnalytics />
-          </LangProvider>
-        </MusicProvider>
+        <LangProvider><SiteChrome>{children}</SiteChrome></LangProvider>
+        <GoogleAnalytics />
       </body>
     </html>
   );

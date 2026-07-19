@@ -1,54 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { aiUpdateDays } from '@/data/aiUpdates';
-import { getAllBookNotes } from '@/lib/books';
-import { getArchivePosts, getDeepDivePosts } from '@/lib/posts';
-
-const BASE_URL = 'https://dechive.dev';
-
-export default function sitemap(): MetadataRoute.Sitemap {
-  const koPosts = [...getArchivePosts('ko'), ...getDeepDivePosts('ko')];
-  const enPosts = [...getArchivePosts('en'), ...getDeepDivePosts('en')];
-  const posts = [...koPosts, ...enPosts];
-  const books = getAllBookNotes('ko');
-
-  const postUrls: MetadataRoute.Sitemap = posts.map((post) => ({
-    url: post.type === 'deepdive'
-      ? `${BASE_URL}${post.lang === 'en' ? '/en' : ''}/deep-dive/${post.slug}`
-      : `${BASE_URL}${post.lang === 'en' ? '/en' : ''}/archive/${post.slug}`,
-    lastModified: post.date ? new Date(post.date) : new Date(),
-    changeFrequency: 'monthly',
-    priority: 0.7,
-  }));
-  const aiUpdateUrls: MetadataRoute.Sitemap = aiUpdateDays.flatMap((day) =>
-    [
-      {
-        url: `${BASE_URL}/ai-updates/${day.date}`,
-        lastModified: new Date(`${day.date}T00:00:00+09:00`),
-        changeFrequency: 'monthly' as const,
-        priority: 0.6,
-      },
-    ],
-  );
-  const bookUrls: MetadataRoute.Sitemap = books.map((book) => ({
-    url: `${BASE_URL}/book/${book.slug}`,
-    lastModified: book.date ? new Date(book.date) : new Date(),
-    changeFrequency: 'monthly',
-    priority: 0.5,
-  }));
-
-  return [
-    { url: BASE_URL, lastModified: new Date(), changeFrequency: 'weekly', priority: 1 },
-    { url: `${BASE_URL}/archive`, lastModified: new Date(), changeFrequency: 'daily', priority: 0.9 },
-    { url: `${BASE_URL}/en/archive`, lastModified: new Date(), changeFrequency: 'daily', priority: 0.8 },
-    { url: `${BASE_URL}/deep-dive`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE_URL}/en/deep-dive`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
-    { url: `${BASE_URL}/book`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.6 },
-    { url: `${BASE_URL}/ai-updates`, lastModified: new Date(), changeFrequency: 'daily', priority: 0.6 },
-    { url: `${BASE_URL}/about`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.6 },
-    { url: `${BASE_URL}/guestbook`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.4 },
-    { url: `${BASE_URL}/privacy-policy`, lastModified: new Date(), changeFrequency: 'yearly', priority: 0.3 },
-    ...postUrls,
-    ...bookUrls,
-    ...aiUpdateUrls,
-  ];
-}
+import { createPublishedKnowledgeDatabase, listPublishedKnowledge } from '@/services/published-knowledge';
+import { createPublishedLectureDatabase, listPublishedLectures } from '@/services/published-lectures';
+const base='https://dechive.dev';
+export default async function sitemap():Promise<MetadataRoute.Sitemap>{const knowledgeDb=createPublishedKnowledgeDatabase(),lectureDb=createPublishedLectureDatabase();try{const [knowledge,lectures]=await Promise.all([listPublishedKnowledge(knowledgeDb.pool),listPublishedLectures(lectureDb.pool)]);return [{url:base},{url:`${base}/knowledge`},{url:`${base}/lecture`},{url:`${base}/practice`},{url:`${base}/ai-update`},{url:`${base}/books`},{url:`${base}/privacy-policy`},{url:`${base}/terms`},{url:`${base}/contact`},{url:`${base}/about`},...knowledge.map(item=>({url:`${base}/knowledge/${item.slug}`,lastModified:new Date(item.publishedAt)})),...lectures.map(item=>({url:`${base}/lecture/${item.slug}`,lastModified:new Date(item.publishedAt)}))]}finally{await knowledgeDb.pool.end();await lectureDb.pool.end()}}

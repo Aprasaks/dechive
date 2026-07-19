@@ -1,0 +1,18 @@
+{
+  "formatVersion": 1,
+  "algorithms": {
+    "content": "sha256"
+  },
+  "counts": {
+    "identities": 16,
+    "digests": 2,
+    "issues": 2,
+    "sources": 6,
+    "media": 29,
+    "routes": 18
+  },
+  "portableExportChecksum": "b6888cd9ba96326943da2f4e5ff4ab3560ed9dfbe9484e9850b1bbf495e4c7c6",
+  "logicalBackupChecksum": "b6ae173a3fe45286612ccfbd6db43115b8529be65f9ca0b556b98d5505a45c82",
+  "migrationCount": 4,
+  "secretsIncluded": false
+}

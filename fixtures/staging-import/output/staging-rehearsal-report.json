@@ -1,0 +1,132 @@
+{
+  "environment": "local PostgreSQL rehearsal; Neon credentials unavailable",
+  "cloudExecuted": false,
+  "import": {
+    "sourceIdentities": 18,
+    "localizations": 22,
+    "statuses": [
+      {
+        "id": "archive-ko",
+        "status": "imported_with_warnings"
+      },
+      {
+        "id": "archive-en",
+        "status": "imported_with_warnings"
+      },
+      {
+        "id": "prompt-ko",
+        "status": "imported_with_warnings"
+      },
+      {
+        "id": "prompt-en",
+        "status": "imported_with_warnings"
+      },
+      {
+        "id": "learn-ko",
+        "status": "imported_with_warnings"
+      },
+      {
+        "id": "learn-en",
+        "status": "imported_with_warnings"
+      },
+      {
+        "id": "llm-ko",
+        "status": "imported_with_warnings"
+      },
+      {
+        "id": "llm-en",
+        "status": "imported_with_warnings"
+      },
+      {
+        "id": "deep-ko",
+        "status": "imported_with_warnings"
+      },
+      {
+        "id": "deep-en",
+        "status": "imported_with_warnings"
+      },
+      {
+        "id": "data-ko",
+        "status": "imported_with_warnings"
+      },
+      {
+        "id": "data-en",
+        "status": "imported_with_warnings"
+      },
+      {
+        "id": "replace-ko",
+        "status": "imported_with_warnings"
+      },
+      {
+        "id": "replace-en",
+        "status": "imported_with_warnings"
+      },
+      {
+        "id": "book-ko",
+        "status": "imported_with_warnings"
+      },
+      {
+        "id": "dual-brain-ko",
+        "status": "imported_with_warnings"
+      },
+      {
+        "id": "ai-digest-2026-07-02",
+        "status": "imported_with_warnings"
+      },
+      {
+        "id": "ai-digest-2026-07-03",
+        "status": "imported_with_warnings"
+      }
+    ]
+  },
+  "issues": 2,
+  "backup": {
+    "postgresLogical": "data-only custom format, secret-free",
+    "portableFormatVersion": 1
+  },
+  "restore": {
+    "countsBefore": {
+      "contents": 15,
+      "content_localizations": 22,
+      "content_versions": 22,
+      "knowledge_details": 16,
+      "ai_updates": 6,
+      "update_digests": 2,
+      "update_digest_items": 6,
+      "content_routes": 18,
+      "sources": 6,
+      "content_sources": 6,
+      "media_assets": 29,
+      "media_usages": 29,
+      "legacy_identities": 18,
+      "import_batches": 1,
+      "import_items": 18,
+      "editorial_issues": 2,
+      "editorial_issue_items": 2
+    },
+    "countsAfter": {
+      "contents": 15,
+      "content_localizations": 22,
+      "content_versions": 22,
+      "knowledge_details": 16,
+      "ai_updates": 6,
+      "update_digests": 2,
+      "update_digest_items": 6,
+      "content_routes": 18,
+      "sources": 6,
+      "content_sources": 6,
+      "media_assets": 29,
+      "media_usages": 29,
+      "legacy_identities": 18,
+      "import_batches": 1,
+      "import_items": 18,
+      "editorial_issues": 2,
+      "editorial_issue_items": 2
+    },
+    "equal": true,
+    "integrityChecksumBefore": "a9afa5db6a428f91a8b71d63db0eef27",
+    "integrityChecksumAfter": "a9afa5db6a428f91a8b71d63db0eef27",
+    "checksumEqual": true
+  },
+  "credentialsRedacted": true
+}

@@ -1,6 +1,6 @@
-import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { ADMIN_SESSION_COOKIE, isValidAdminSession } from '@/lib/adminAuth';
+import { getAuthorizedOwnerActor } from '@/features/admin/owner-auth';
+import { createAdminDatabase } from '@/services/knowledge-drafts';
 import { resolveAnalyticsDateRange } from '@/lib/analyticsDateRange';
 import { getAnalytics } from '@/lib/ga4Client';
 import DateRangeControls from './DateRangeControls';
@@ -86,12 +86,8 @@ function downloadInterpretation(downloadSummary) {
 }
 
 export default async function AdminAnalyticsPage({ searchParams }) {
-  const cookieStore = await cookies();
-  const session = cookieStore.get(ADMIN_SESSION_COOKIE)?.value;
-
-  if (!isValidAdminSession(session)) {
-    redirect('/admin/login');
-  }
+  const { pool } = createAdminDatabase();
+  try { if (!(await getAuthorizedOwnerActor(pool))) redirect('/admin/login'); } finally { await pool.end(); }
 
   const params = await searchParams;
   const dateRange = resolveAnalyticsDateRange(params);

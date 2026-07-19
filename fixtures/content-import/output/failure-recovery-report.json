@@ -1,0 +1,47 @@
+{
+  "cloudStatus": "blocked_missing_credentials",
+  "firstRun": {
+    "status": "partial_failure",
+    "failed": [
+      {
+        "id": "prompt-ko",
+        "error": "injected_parse_failure"
+      },
+      {
+        "id": "learn-ko",
+        "error": "new row for relation \"content_routes\" violates check constraint \"route_exactly_one_target\""
+      },
+      {
+        "id": "llm-ko",
+        "error": "injected_source_attach_failure"
+      },
+      {
+        "id": "deep-ko",
+        "error": "injected_media_usage_failure"
+      },
+      {
+        "id": "data-ko",
+        "error": "duplicate key value violates unique constraint \"content_route_uq\""
+      },
+      {
+        "id": "replace-ko",
+        "error": "injected_transaction_abort"
+      }
+    ],
+    "successful": 12
+  },
+  "reportWriteFailure": "injected_and_isolated",
+  "recovery": {
+    "staleRunningBatch": true,
+    "recoveryCount": 1,
+    "status": "completed_with_warnings",
+    "failedItemsRemaining": 0
+  },
+  "retry": {
+    "status": "completed_with_warnings",
+    "identities": 18,
+    "localizations": 22,
+    "duplicateRoutes": 0
+  },
+  "credentialsRedacted": true
+}

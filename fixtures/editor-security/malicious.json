@@ -1,0 +1,13 @@
+{
+  "cases": [
+    {"id":"script","html":"<p>safe</p><script>window.__xss=1</script>"},
+    {"id":"img-onerror","html":"<img src=\"/images/posts/x.webp\" onerror=\"window.__xss=2\">"},
+    {"id":"javascript-link","html":"<a href=\"javascript:alert(1)\">bad</a>"},
+    {"id":"data-html","html":"<a href=\"data:text/html,<script>alert(1)</script>\">bad</a>"},
+    {"id":"iframe","html":"<iframe src=\"https://tracker.example\"></iframe>"},
+    {"id":"svg-event","html":"<svg onload=\"window.__xss=3\"><script>alert(1)</script></svg>"},
+    {"id":"style","html":"<style>body{display:none}</style><p style=\"background:url(javascript:alert(1))\">safe</p>"},
+    {"id":"malformed-table","html":"<table><tr><td>A<tr><td onclick=\"alert(1)\">B</table>"},
+    {"id":"external-image","html":"<img src=\"https://tracker.example/pixel.gif\" alt=\"pixel\">"}
+  ]
+}

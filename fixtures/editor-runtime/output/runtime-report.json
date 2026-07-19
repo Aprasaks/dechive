@@ -1,0 +1,169 @@
+{
+  "version": 1,
+  "environment": {
+    "node": "v24.7.0",
+    "note": "Node/server measurements; browser editor creation and interaction are measured separately."
+  },
+  "fixtures": [
+    {
+      "id": "short-archive",
+      "characters": 1585,
+      "headings": 4,
+      "codeBlocks": 0,
+      "tables": 0,
+      "figures": 1,
+      "htmlLength": 2082,
+      "markdownLength": 1682,
+      "plainTextLength": 1476,
+      "jsonSaveLoadEqual": true,
+      "unknownNodes": 0
+    },
+    {
+      "id": "code-heavy-archive",
+      "characters": 10607,
+      "headings": 62,
+      "codeBlocks": 45,
+      "tables": 0,
+      "figures": 0,
+      "htmlLength": 12607,
+      "markdownLength": 11512,
+      "plainTextLength": 9683,
+      "jsonSaveLoadEqual": true,
+      "unknownNodes": 0
+    },
+    {
+      "id": "table-image-archive",
+      "characters": 3462,
+      "headings": 5,
+      "codeBlocks": 9,
+      "tables": 1,
+      "figures": 3,
+      "htmlLength": 5751,
+      "markdownLength": 3494,
+      "plainTextLength": 2920,
+      "jsonSaveLoadEqual": true,
+      "unknownNodes": 0
+    },
+    {
+      "id": "heading-heavy-ko",
+      "characters": 41570,
+      "headings": 104,
+      "codeBlocks": 3,
+      "tables": 0,
+      "figures": 2,
+      "htmlLength": 49315,
+      "markdownLength": 43765,
+      "plainTextLength": 39759,
+      "jsonSaveLoadEqual": true,
+      "unknownNodes": 0
+    },
+    {
+      "id": "heading-heavy-en",
+      "characters": 36869,
+      "headings": 43,
+      "codeBlocks": 4,
+      "tables": 0,
+      "figures": 1,
+      "htmlLength": 41234,
+      "markdownLength": 38629,
+      "plainTextLength": 35979,
+      "jsonSaveLoadEqual": true,
+      "unknownNodes": 0
+    },
+    {
+      "id": "book-note",
+      "characters": 691,
+      "headings": 5,
+      "codeBlocks": 0,
+      "tables": 0,
+      "figures": 0,
+      "htmlLength": 927,
+      "markdownLength": 740,
+      "plainTextLength": 617,
+      "jsonSaveLoadEqual": true,
+      "unknownNodes": 0
+    },
+    {
+      "id": "multi-image",
+      "characters": 49132,
+      "headings": 50,
+      "codeBlocks": 1,
+      "tables": 7,
+      "figures": 5,
+      "htmlLength": 62427,
+      "markdownLength": 48994,
+      "plainTextLength": 45038,
+      "jsonSaveLoadEqual": true,
+      "unknownNodes": 0
+    },
+    {
+      "id": "synthetic-scale-source",
+      "characters": 101480,
+      "headings": 50,
+      "codeBlocks": 1,
+      "tables": 7,
+      "figures": 5,
+      "htmlLength": 116971,
+      "markdownLength": 102764,
+      "plainTextLength": 97233,
+      "jsonSaveLoadEqual": true,
+      "unknownNodes": 0
+    },
+    {
+      "id": "ai-update-example",
+      "characters": 0,
+      "headings": 1,
+      "codeBlocks": 0,
+      "tables": 0,
+      "figures": 0,
+      "htmlLength": 380,
+      "markdownLength": 144,
+      "plainTextLength": 90,
+      "jsonSaveLoadEqual": true,
+      "unknownNodes": 0
+    },
+    {
+      "id": "migration-v2",
+      "characters": 0,
+      "headings": 4,
+      "codeBlocks": 0,
+      "tables": 0,
+      "figures": 1,
+      "htmlLength": 2009,
+      "markdownLength": 1646,
+      "plainTextLength": 1476,
+      "jsonSaveLoadEqual": true,
+      "unknownNodes": 0
+    },
+    {
+      "id": "mixed-table-export",
+      "characters": 0,
+      "headings": 1,
+      "codeBlocks": 0,
+      "tables": 2,
+      "figures": 0,
+      "htmlLength": 462,
+      "markdownLength": 157,
+      "plainTextLength": 44,
+      "jsonSaveLoadEqual": true,
+      "unknownNodes": 0
+    }
+  ],
+  "invariants": {
+    "schemaValidation": true,
+    "stableExistingAnchor": true,
+    "duplicateAnchorPrevention": true,
+    "jsonSaveLoad": true,
+    "deterministicMarkdown": true,
+    "htmlOutput": true,
+    "customNodeHtml": true,
+    "unknownPayloadPreserved": true,
+    "unknownPublishBlocked": true,
+    "unknownPlainTextFallback": true
+  },
+  "syntheticLongDocument": {
+    "characters": 119279,
+    "htmlLength": 149334,
+    "markdownLength": 132686
+  }
+}

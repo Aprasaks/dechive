@@ -1,0 +1,3218 @@
+{
+  "benchmarkVersion": 1,
+  "deterministicInputs": true,
+  "generatedFrom": "read-only legacy sources",
+  "fixtures": [
+    {
+      "id": "short-archive",
+      "path": "content/posts/can-we-learn-directly-from-ai-answers.ko.md",
+      "kind": "markdown",
+      "risks": [
+        "missing_source_urls"
+      ],
+      "sourceHash": "8a018b82ef4a1611c4531373b47d355d888efb057031bced9ced1786d28f50d4",
+      "frontmatter": {
+        "keys": [
+          "category",
+          "date",
+          "description",
+          "lang",
+          "seoTitle",
+          "slug",
+          "status",
+          "tags",
+          "title",
+          "type"
+        ],
+        "nullTagCount": 0
+      },
+      "original": {
+        "headings": [
+          {
+            "level": 2,
+            "anchorId": "잘-설명하는-답이-항상-맞는-답은-아니다"
+          },
+          {
+            "level": 2,
+            "anchorId": "설명이-유창하면-이해한-것처럼-느껴진다"
+          },
+          {
+            "level": 2,
+            "anchorId": "배움은-답을-받는-순간에-끝나지-않는다"
+          },
+          {
+            "level": 2,
+            "anchorId": "ai의-답을-지식으로-바꾸는-기준"
+          }
+        ],
+        "paragraphs": 17,
+        "lists": 0,
+        "codeBlocks": [],
+        "tables": 0,
+        "images": [
+          "./ai-learning-verification-desk.webp"
+        ],
+        "links": 0,
+        "blockquotes": 0,
+        "textHash": "4b29e0c20031df08639b8172f2bff77e8ff5201acc98add936ae820291aca409"
+      },
+      "roundTrip": {
+        "headings": [
+          {
+            "level": 2,
+            "anchorId": "잘-설명하는-답이-항상-맞는-답은-아니다"
+          },
+          {
+            "level": 2,
+            "anchorId": "설명이-유창하면-이해한-것처럼-느껴진다"
+          },
+          {
+            "level": 2,
+            "anchorId": "배움은-답을-받는-순간에-끝나지-않는다"
+          },
+          {
+            "level": 2,
+            "anchorId": "ai의-답을-지식으로-바꾸는-기준"
+          }
+        ],
+        "paragraphs": 17,
+        "lists": 0,
+        "codeBlocks": [],
+        "tables": 0,
+        "images": [
+          "./ai-learning-verification-desk.webp"
+        ],
+        "links": 0,
+        "blockquotes": 0,
+        "textHash": "4b29e0c20031df08639b8172f2bff77e8ff5201acc98add936ae820291aca409"
+      },
+      "checks": {
+        "headings": true,
+        "paragraphs": true,
+        "lists": true,
+        "codeBlocks": true,
+        "tables": true,
+        "images": true,
+        "links": true,
+        "blockquotes": true,
+        "textHash": true
+      },
+      "normalizedMarkdownHash": "c13bb0ad063a099afb5d2b867e39bde3f499ce4c48b6738d21177fda65fdf5b1",
+      "neutralDocumentHash": "56c89ebbdb10bf519f1b69ce1cf16346201b7b947b920614b81d0e559b79ac55",
+      "unknownNodes": 0,
+      "grade": "preserved"
+    },
+    {
+      "id": "code-heavy-archive",
+      "path": "content/posts/prompt-real-world-guide.ko.md",
+      "kind": "markdown",
+      "risks": [
+        "many_code_blocks",
+        "many_headings",
+        "missing_source_urls"
+      ],
+      "sourceHash": "26ac6687ec545a4e9d80e45efcd4446ed42020f21fe78b155acedcd9f89357b5",
+      "frontmatter": {
+        "keys": [
+          "category",
+          "date",
+          "description",
+          "lang",
+          "seoTitle",
+          "slug",
+          "status",
+          "tags",
+          "title",
+          "type"
+        ],
+        "nullTagCount": 0
+      },
+      "original": {
+        "headings": [
+          {
+            "level": 2,
+            "anchorId": "1-코드-수정-디버깅"
+          },
+          {
+            "level": 3,
+            "anchorId": "흐릿한-요청"
+          },
+          {
+            "level": 3,
+            "anchorId": "기준을-넣은-요청"
+          },
+          {
+            "level": 3,
+            "anchorId": "바로-쓸-수-있는-틀"
+          },
+          {
+            "level": 2,
+            "anchorId": "2-코드-리뷰"
+          },
+          {
+            "level": 3,
+            "anchorId": "흐릿한-요청-2"
+          },
+          {
+            "level": 3,
+            "anchorId": "기준을-넣은-요청-2"
+          },
+          {
+            "level": 3,
+            "anchorId": "바로-쓸-수-있는-틀-2"
+          },
+          {
+            "level": 2,
+            "anchorId": "3-글쓰기-블로그-아티클"
+          },
+          {
+            "level": 3,
+            "anchorId": "흐릿한-요청-3"
+          },
+          {
+            "level": 3,
+            "anchorId": "기준을-넣은-요청-3"
+          },
+          {
+            "level": 3,
+            "anchorId": "바로-쓸-수-있는-틀-3"
+          },
+          {
+            "level": 2,
+            "anchorId": "4-sns-소셜-미디어-콘텐츠"
+          },
+          {
+            "level": 3,
+            "anchorId": "흐릿한-요청-4"
+          },
+          {
+            "level": 3,
+            "anchorId": "기준을-넣은-요청-4"
+          },
+          {
+            "level": 3,
+            "anchorId": "바로-쓸-수-있는-틀-4"
+          },
+          {
+            "level": 2,
+            "anchorId": "5-유튜브-쇼츠-대본"
+          },
+          {
+            "level": 3,
+            "anchorId": "흐릿한-요청-5"
+          },
+          {
+            "level": 3,
+            "anchorId": "기준을-넣은-요청-5"
+          },
+          {
+            "level": 3,
+            "anchorId": "바로-쓸-수-있는-틀-5"
+          },
+          {
+            "level": 2,
+            "anchorId": "6-이메일-업무-문서-작성"
+          },
+          {
+            "level": 3,
+            "anchorId": "흐릿한-요청-6"
+          },
+          {
+            "level": 3,
+            "anchorId": "기준을-넣은-요청-6"
+          },
+          {
+            "level": 3,
+            "anchorId": "바로-쓸-수-있는-틀-6"
+          },
+          {
+            "level": 2,
+            "anchorId": "7-요약"
+          },
+          {
+            "level": 3,
+            "anchorId": "흐릿한-요청-7"
+          },
+          {
+            "level": 3,
+            "anchorId": "기준을-넣은-요청-7"
+          },
+          {
+            "level": 3,
+            "anchorId": "바로-쓸-수-있는-틀-7"
+          },
+          {
+            "level": 2,
+            "anchorId": "8-번역"
+          },
+          {
+            "level": 3,
+            "anchorId": "흐릿한-요청-8"
+          },
+          {
+            "level": 3,
+            "anchorId": "기준을-넣은-요청-8"
+          },
+          {
+            "level": 3,
+            "anchorId": "바로-쓸-수-있는-틀-8"
+          },
+          {
+            "level": 2,
+            "anchorId": "9-이미지-분석"
+          },
+          {
+            "level": 3,
+            "anchorId": "흐릿한-요청-9"
+          },
+          {
+            "level": 3,
+            "anchorId": "기준을-넣은-요청-9"
+          },
+          {
+            "level": 3,
+            "anchorId": "바로-쓸-수-있는-틀-9"
+          },
+          {
+            "level": 2,
+            "anchorId": "10-브레인스토밍-아이디어-발상"
+          },
+          {
+            "level": 3,
+            "anchorId": "흐릿한-요청-10"
+          },
+          {
+            "level": 3,
+            "anchorId": "기준을-넣은-요청-10"
+          },
+          {
+            "level": 3,
+            "anchorId": "바로-쓸-수-있는-틀-10"
+          },
+          {
+            "level": 2,
+            "anchorId": "11-데이터-분석-엑셀"
+          },
+          {
+            "level": 3,
+            "anchorId": "흐릿한-요청-11"
+          },
+          {
+            "level": 3,
+            "anchorId": "기준을-넣은-요청-11"
+          },
+          {
+            "level": 3,
+            "anchorId": "바로-쓸-수-있는-틀-11"
+          },
+          {
+            "level": 2,
+            "anchorId": "12-학습-개념-이해"
+          },
+          {
+            "level": 3,
+            "anchorId": "흐릿한-요청-12"
+          },
+          {
+            "level": 3,
+            "anchorId": "기준을-넣은-요청-12"
+          },
+          {
+            "level": 3,
+            "anchorId": "바로-쓸-수-있는-틀-12"
+          },
+          {
+            "level": 2,
+            "anchorId": "13-면접-준비"
+          },
+          {
+            "level": 3,
+            "anchorId": "흐릿한-요청-13"
+          },
+          {
+            "level": 3,
+            "anchorId": "기준을-넣은-요청-13"
+          },
+          {
+            "level": 3,
+            "anchorId": "바로-쓸-수-있는-틀-13"
+          },
+          {
+            "level": 2,
+            "anchorId": "14-회의록-작성-정리"
+          },
+          {
+            "level": 3,
+            "anchorId": "흐릿한-요청-14"
+          },
+          {
+            "level": 3,
+            "anchorId": "기준을-넣은-요청-14"
+          },
+          {
+            "level": 2,
+            "anchorId": "15-프레젠테이션-발표-자료"
+          },
+          {
+            "level": 3,
+            "anchorId": "흐릿한-요청-15"
+          },
+          {
+            "level": 3,
+            "anchorId": "기준을-넣은-요청-15"
+          },
+          {
+            "level": 2,
+            "anchorId": "16-글-교정-피드백"
+          },
+          {
+            "level": 3,
+            "anchorId": "흐릿한-요청-16"
+          },
+          {
+            "level": 3,
+            "anchorId": "기준을-넣은-요청-16"
+          },
+          {
+            "level": 2,
+            "anchorId": "좋은-프롬프트의-공통-기준"
+          }
+        ],
+        "paragraphs": 26,
+        "lists": 0,
+        "codeBlocks": [
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          }
+        ],
+        "tables": 0,
+        "images": [],
+        "links": 0,
+        "blockquotes": 0,
+        "textHash": "e27e0f5be4eeac65b0f475164b4e7d630588d478d6630fc8f7a1c4d6f26c3db4"
+      },
+      "roundTrip": {
+        "headings": [
+          {
+            "level": 2,
+            "anchorId": "1-코드-수정-디버깅"
+          },
+          {
+            "level": 3,
+            "anchorId": "흐릿한-요청"
+          },
+          {
+            "level": 3,
+            "anchorId": "기준을-넣은-요청"
+          },
+          {
+            "level": 3,
+            "anchorId": "바로-쓸-수-있는-틀"
+          },
+          {
+            "level": 2,
+            "anchorId": "2-코드-리뷰"
+          },
+          {
+            "level": 3,
+            "anchorId": "흐릿한-요청-2"
+          },
+          {
+            "level": 3,
+            "anchorId": "기준을-넣은-요청-2"
+          },
+          {
+            "level": 3,
+            "anchorId": "바로-쓸-수-있는-틀-2"
+          },
+          {
+            "level": 2,
+            "anchorId": "3-글쓰기-블로그-아티클"
+          },
+          {
+            "level": 3,
+            "anchorId": "흐릿한-요청-3"
+          },
+          {
+            "level": 3,
+            "anchorId": "기준을-넣은-요청-3"
+          },
+          {
+            "level": 3,
+            "anchorId": "바로-쓸-수-있는-틀-3"
+          },
+          {
+            "level": 2,
+            "anchorId": "4-sns-소셜-미디어-콘텐츠"
+          },
+          {
+            "level": 3,
+            "anchorId": "흐릿한-요청-4"
+          },
+          {
+            "level": 3,
+            "anchorId": "기준을-넣은-요청-4"
+          },
+          {
+            "level": 3,
+            "anchorId": "바로-쓸-수-있는-틀-4"
+          },
+          {
+            "level": 2,
+            "anchorId": "5-유튜브-쇼츠-대본"
+          },
+          {
+            "level": 3,
+            "anchorId": "흐릿한-요청-5"
+          },
+          {
+            "level": 3,
+            "anchorId": "기준을-넣은-요청-5"
+          },
+          {
+            "level": 3,
+            "anchorId": "바로-쓸-수-있는-틀-5"
+          },
+          {
+            "level": 2,
+            "anchorId": "6-이메일-업무-문서-작성"
+          },
+          {
+            "level": 3,
+            "anchorId": "흐릿한-요청-6"
+          },
+          {
+            "level": 3,
+            "anchorId": "기준을-넣은-요청-6"
+          },
+          {
+            "level": 3,
+            "anchorId": "바로-쓸-수-있는-틀-6"
+          },
+          {
+            "level": 2,
+            "anchorId": "7-요약"
+          },
+          {
+            "level": 3,
+            "anchorId": "흐릿한-요청-7"
+          },
+          {
+            "level": 3,
+            "anchorId": "기준을-넣은-요청-7"
+          },
+          {
+            "level": 3,
+            "anchorId": "바로-쓸-수-있는-틀-7"
+          },
+          {
+            "level": 2,
+            "anchorId": "8-번역"
+          },
+          {
+            "level": 3,
+            "anchorId": "흐릿한-요청-8"
+          },
+          {
+            "level": 3,
+            "anchorId": "기준을-넣은-요청-8"
+          },
+          {
+            "level": 3,
+            "anchorId": "바로-쓸-수-있는-틀-8"
+          },
+          {
+            "level": 2,
+            "anchorId": "9-이미지-분석"
+          },
+          {
+            "level": 3,
+            "anchorId": "흐릿한-요청-9"
+          },
+          {
+            "level": 3,
+            "anchorId": "기준을-넣은-요청-9"
+          },
+          {
+            "level": 3,
+            "anchorId": "바로-쓸-수-있는-틀-9"
+          },
+          {
+            "level": 2,
+            "anchorId": "10-브레인스토밍-아이디어-발상"
+          },
+          {
+            "level": 3,
+            "anchorId": "흐릿한-요청-10"
+          },
+          {
+            "level": 3,
+            "anchorId": "기준을-넣은-요청-10"
+          },
+          {
+            "level": 3,
+            "anchorId": "바로-쓸-수-있는-틀-10"
+          },
+          {
+            "level": 2,
+            "anchorId": "11-데이터-분석-엑셀"
+          },
+          {
+            "level": 3,
+            "anchorId": "흐릿한-요청-11"
+          },
+          {
+            "level": 3,
+            "anchorId": "기준을-넣은-요청-11"
+          },
+          {
+            "level": 3,
+            "anchorId": "바로-쓸-수-있는-틀-11"
+          },
+          {
+            "level": 2,
+            "anchorId": "12-학습-개념-이해"
+          },
+          {
+            "level": 3,
+            "anchorId": "흐릿한-요청-12"
+          },
+          {
+            "level": 3,
+            "anchorId": "기준을-넣은-요청-12"
+          },
+          {
+            "level": 3,
+            "anchorId": "바로-쓸-수-있는-틀-12"
+          },
+          {
+            "level": 2,
+            "anchorId": "13-면접-준비"
+          },
+          {
+            "level": 3,
+            "anchorId": "흐릿한-요청-13"
+          },
+          {
+            "level": 3,
+            "anchorId": "기준을-넣은-요청-13"
+          },
+          {
+            "level": 3,
+            "anchorId": "바로-쓸-수-있는-틀-13"
+          },
+          {
+            "level": 2,
+            "anchorId": "14-회의록-작성-정리"
+          },
+          {
+            "level": 3,
+            "anchorId": "흐릿한-요청-14"
+          },
+          {
+            "level": 3,
+            "anchorId": "기준을-넣은-요청-14"
+          },
+          {
+            "level": 2,
+            "anchorId": "15-프레젠테이션-발표-자료"
+          },
+          {
+            "level": 3,
+            "anchorId": "흐릿한-요청-15"
+          },
+          {
+            "level": 3,
+            "anchorId": "기준을-넣은-요청-15"
+          },
+          {
+            "level": 2,
+            "anchorId": "16-글-교정-피드백"
+          },
+          {
+            "level": 3,
+            "anchorId": "흐릿한-요청-16"
+          },
+          {
+            "level": 3,
+            "anchorId": "기준을-넣은-요청-16"
+          },
+          {
+            "level": 2,
+            "anchorId": "좋은-프롬프트의-공통-기준"
+          }
+        ],
+        "paragraphs": 26,
+        "lists": 0,
+        "codeBlocks": [
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          }
+        ],
+        "tables": 0,
+        "images": [],
+        "links": 0,
+        "blockquotes": 0,
+        "textHash": "e27e0f5be4eeac65b0f475164b4e7d630588d478d6630fc8f7a1c4d6f26c3db4"
+      },
+      "checks": {
+        "headings": true,
+        "paragraphs": true,
+        "lists": true,
+        "codeBlocks": true,
+        "tables": true,
+        "images": true,
+        "links": true,
+        "blockquotes": true,
+        "textHash": true
+      },
+      "normalizedMarkdownHash": "6866376ff2f5e5ddadefd012c7d30e4ff22e34a25ad6ba544dc4cbe9bb50a1a6",
+      "neutralDocumentHash": "1548fbbb06439e50a0ee27b0d99957f068b59fa215012321b447d511b02a680b",
+      "unknownNodes": 0,
+      "grade": "preserved"
+    },
+    {
+      "id": "table-null-images",
+      "path": "content/posts/what-null-leaves-behind.ko.md",
+      "kind": "markdown",
+      "risks": [
+        "yaml_null_tag",
+        "relative_image_paths",
+        "table",
+        "code"
+      ],
+      "sourceHash": "d44ec2bc5c6ae500cfb5531f5cbbf8aae7a0ad9765bd5068fe01790bdc96c031",
+      "frontmatter": {
+        "keys": [
+          "category",
+          "date",
+          "description",
+          "lang",
+          "seoTitle",
+          "slug",
+          "status",
+          "tags",
+          "title",
+          "type"
+        ],
+        "nullTagCount": 1
+      },
+      "original": {
+        "headings": [
+          {
+            "level": 2,
+            "anchorId": "null은-비어-있음이-아니다"
+          },
+          {
+            "level": 2,
+            "anchorId": "등호로-비교할-수-없는-이유"
+          },
+          {
+            "level": 2,
+            "anchorId": "알-수-없음은-전파된다"
+          },
+          {
+            "level": 2,
+            "anchorId": "집계에서는-다르게-다뤄진다"
+          },
+          {
+            "level": 2,
+            "anchorId": "비어-있는-값이-남기는-문제"
+          }
+        ],
+        "paragraphs": 33,
+        "lists": 0,
+        "codeBlocks": [
+          {
+            "language": "sql",
+            "meta": null
+          },
+          {
+            "language": "sql",
+            "meta": null
+          },
+          {
+            "language": "sql",
+            "meta": null
+          },
+          {
+            "language": "sql",
+            "meta": null
+          },
+          {
+            "language": "sql",
+            "meta": null
+          },
+          {
+            "language": "sql",
+            "meta": null
+          },
+          {
+            "language": "sql",
+            "meta": null
+          },
+          {
+            "language": "sql",
+            "meta": null
+          },
+          {
+            "language": "sql",
+            "meta": null
+          }
+        ],
+        "tables": 1,
+        "images": [
+          "null-vs-zero-vs-empty.webp",
+          "null-propagation.webp",
+          "count-star-vs-count-col.webp"
+        ],
+        "links": 0,
+        "blockquotes": 0,
+        "textHash": "260e05319c08a395cfb7216fbd23f8218f01876e2d1410cdf80ff4d57292875a"
+      },
+      "roundTrip": {
+        "headings": [
+          {
+            "level": 2,
+            "anchorId": "null은-비어-있음이-아니다"
+          },
+          {
+            "level": 2,
+            "anchorId": "등호로-비교할-수-없는-이유"
+          },
+          {
+            "level": 2,
+            "anchorId": "알-수-없음은-전파된다"
+          },
+          {
+            "level": 2,
+            "anchorId": "집계에서는-다르게-다뤄진다"
+          },
+          {
+            "level": 2,
+            "anchorId": "비어-있는-값이-남기는-문제"
+          }
+        ],
+        "paragraphs": 33,
+        "lists": 0,
+        "codeBlocks": [
+          {
+            "language": "sql",
+            "meta": null
+          },
+          {
+            "language": "sql",
+            "meta": null
+          },
+          {
+            "language": "sql",
+            "meta": null
+          },
+          {
+            "language": "sql",
+            "meta": null
+          },
+          {
+            "language": "sql",
+            "meta": null
+          },
+          {
+            "language": "sql",
+            "meta": null
+          },
+          {
+            "language": "sql",
+            "meta": null
+          },
+          {
+            "language": "sql",
+            "meta": null
+          },
+          {
+            "language": "sql",
+            "meta": null
+          }
+        ],
+        "tables": 1,
+        "images": [
+          "null-vs-zero-vs-empty.webp",
+          "null-propagation.webp",
+          "count-star-vs-count-col.webp"
+        ],
+        "links": 0,
+        "blockquotes": 0,
+        "textHash": "260e05319c08a395cfb7216fbd23f8218f01876e2d1410cdf80ff4d57292875a"
+      },
+      "checks": {
+        "headings": true,
+        "paragraphs": true,
+        "lists": true,
+        "codeBlocks": true,
+        "tables": true,
+        "images": true,
+        "links": true,
+        "blockquotes": true,
+        "textHash": true
+      },
+      "normalizedMarkdownHash": "d9f71a355d55813d63c39fd000aef97efbf4612abb03c928b1749e2fedd13b02",
+      "neutralDocumentHash": "193208251d8b709e887fcd74061360880daebbbf841eb153d7df6451af7fc451",
+      "unknownNodes": 0,
+      "grade": "preserved"
+    },
+    {
+      "id": "multi-image-deep-dive",
+      "path": "content/posts/data-analysis-beyond-business.ko.md",
+      "kind": "markdown",
+      "risks": [
+        "relative_image_paths",
+        "large_document",
+        "missing_source_urls"
+      ],
+      "sourceHash": "e97bce75b41e5ea2031b1dd628d0409abaad9590753d9a2935bd7403f673f673",
+      "frontmatter": {
+        "keys": [
+          "category",
+          "concepts",
+          "coverImage",
+          "date",
+          "description",
+          "lang",
+          "seoTitle",
+          "slug",
+          "status",
+          "tags",
+          "title",
+          "type"
+        ],
+        "nullTagCount": 0
+      },
+      "original": {
+        "headings": [
+          {
+            "level": 2,
+            "anchorId": "1-데이터-분석이라는-말은-왜-어렵게-느껴지는가"
+          },
+          {
+            "level": 2,
+            "anchorId": "2-데이터란-무엇인가"
+          },
+          {
+            "level": 2,
+            "anchorId": "3-기업에서-데이터-분석은-무엇을-하는가"
+          },
+          {
+            "level": 2,
+            "anchorId": "4-기업-데이터-분석의-핵심-질문들"
+          },
+          {
+            "level": 3,
+            "anchorId": "41-무슨-일이-일어났는가"
+          },
+          {
+            "level": 3,
+            "anchorId": "42-왜-일어났는가"
+          },
+          {
+            "level": 3,
+            "anchorId": "43-이-변화는-우연인가-반복되는-신호인가"
+          },
+          {
+            "level": 3,
+            "anchorId": "44-어떤-선택이-이-결과를-만들었는가"
+          },
+          {
+            "level": 3,
+            "anchorId": "45-다음에는-무엇을-바꿔야-하는가"
+          },
+          {
+            "level": 2,
+            "anchorId": "5-데이터-지표-kpi는-어떻게-다른가"
+          },
+          {
+            "level": 2,
+            "anchorId": "6-데이터-분석의-기본-흐름"
+          },
+          {
+            "level": 3,
+            "anchorId": "61-질문"
+          },
+          {
+            "level": 3,
+            "anchorId": "62-가설"
+          },
+          {
+            "level": 3,
+            "anchorId": "63-데이터"
+          },
+          {
+            "level": 3,
+            "anchorId": "64-해석"
+          },
+          {
+            "level": 3,
+            "anchorId": "65-판단"
+          },
+          {
+            "level": 3,
+            "anchorId": "66-다음-행동"
+          },
+          {
+            "level": 2,
+            "anchorId": "7-기업-데이터-분석과-개인-데이터-분석은-어떻게-다른가"
+          },
+          {
+            "level": 2,
+            "anchorId": "8-개인에게도-데이터-분석이-필요한-이유"
+          },
+          {
+            "level": 2,
+            "anchorId": "9-ai-시대에-데이터-분석은-왜-더-중요해졌는가"
+          },
+          {
+            "level": 2,
+            "anchorId": "10-데이터는-무엇을-보여주고-무엇을-보여주지-못하는가"
+          },
+          {
+            "level": 2,
+            "anchorId": "11-정량-데이터와-정성-데이터"
+          },
+          {
+            "level": 2,
+            "anchorId": "12-데이터-분석의-함정"
+          },
+          {
+            "level": 3,
+            "anchorId": "121-조회수의-함정"
+          },
+          {
+            "level": 3,
+            "anchorId": "122-클릭률의-함정"
+          },
+          {
+            "level": 3,
+            "anchorId": "123-평균의-함정"
+          },
+          {
+            "level": 3,
+            "anchorId": "124-작은-표본의-함정"
+          },
+          {
+            "level": 3,
+            "anchorId": "125-상관관계와-인과관계의-혼동"
+          },
+          {
+            "level": 3,
+            "anchorId": "126-측정-가능한-것만-중요해지는-문제"
+          },
+          {
+            "level": 3,
+            "anchorId": "127-데이터가-목표가-되는-문제"
+          },
+          {
+            "level": 3,
+            "anchorId": "128-대시보드가-현실을-대신하는-문제"
+          },
+          {
+            "level": 3,
+            "anchorId": "129-내가-보고-싶은-숫자만-보는-문제"
+          },
+          {
+            "level": 3,
+            "anchorId": "1210-데이터-없는-영역을-무시하는-문제"
+          },
+          {
+            "level": 3,
+            "anchorId": "1211-허영-지표에-속는-문제"
+          },
+          {
+            "level": 2,
+            "anchorId": "13-데이터도-검증의-대상이다"
+          },
+          {
+            "level": 2,
+            "anchorId": "14-개인은-어떻게-데이터-분석을-시작할-수-있는가"
+          },
+          {
+            "level": 3,
+            "anchorId": "141-질문을-먼저-적는다"
+          },
+          {
+            "level": 3,
+            "anchorId": "142-가설을-적는다"
+          },
+          {
+            "level": 3,
+            "anchorId": "143-확인할-지표를-하나만-고른다"
+          },
+          {
+            "level": 3,
+            "anchorId": "144-숫자와-맥락을-함께-기록한다"
+          },
+          {
+            "level": 3,
+            "anchorId": "145-일정-기간을-정한다"
+          },
+          {
+            "level": 3,
+            "anchorId": "146-너무-빨리-결론-내리지-않는다"
+          },
+          {
+            "level": 3,
+            "anchorId": "147-다음-행동을-바꾼다"
+          },
+          {
+            "level": 3,
+            "anchorId": "148-다시-기록한다"
+          },
+          {
+            "level": 2,
+            "anchorId": "15-개인-데이터-분석에-자주-쓰는-도구들"
+          },
+          {
+            "level": 2,
+            "anchorId": "16-dechive식-데이터-분석-체크리스트"
+          },
+          {
+            "level": 2,
+            "anchorId": "17-데이터-분석-능력은-어떻게-쌓이는가"
+          },
+          {
+            "level": 2,
+            "anchorId": "18-데이터-분석은-기업에만-필요한-것인가"
+          },
+          {
+            "level": 2,
+            "anchorId": "19-데이터-분석에-대한-자주-묻는-오해"
+          },
+          {
+            "level": 2,
+            "anchorId": "20-결론-데이터는-판단을-대신하지-않는다"
+          }
+        ],
+        "paragraphs": 700,
+        "lists": 24,
+        "codeBlocks": [
+          {
+            "language": null,
+            "meta": null
+          }
+        ],
+        "tables": 7,
+        "images": [
+          "./data-analysis-map.webp",
+          "./data-analysis-flow.webp",
+          "./business-vs-personal-data-analysis.webp",
+          "./prelaunch-feedback-loop.webp",
+          "./data-analysis-traps.webp"
+        ],
+        "links": 0,
+        "blockquotes": 13,
+        "textHash": "d20a0e7e9951038de17d0a2dedde6bcf313299b719c13f4b4cad2aabed7850a1"
+      },
+      "roundTrip": {
+        "headings": [
+          {
+            "level": 2,
+            "anchorId": "1-데이터-분석이라는-말은-왜-어렵게-느껴지는가"
+          },
+          {
+            "level": 2,
+            "anchorId": "2-데이터란-무엇인가"
+          },
+          {
+            "level": 2,
+            "anchorId": "3-기업에서-데이터-분석은-무엇을-하는가"
+          },
+          {
+            "level": 2,
+            "anchorId": "4-기업-데이터-분석의-핵심-질문들"
+          },
+          {
+            "level": 3,
+            "anchorId": "41-무슨-일이-일어났는가"
+          },
+          {
+            "level": 3,
+            "anchorId": "42-왜-일어났는가"
+          },
+          {
+            "level": 3,
+            "anchorId": "43-이-변화는-우연인가-반복되는-신호인가"
+          },
+          {
+            "level": 3,
+            "anchorId": "44-어떤-선택이-이-결과를-만들었는가"
+          },
+          {
+            "level": 3,
+            "anchorId": "45-다음에는-무엇을-바꿔야-하는가"
+          },
+          {
+            "level": 2,
+            "anchorId": "5-데이터-지표-kpi는-어떻게-다른가"
+          },
+          {
+            "level": 2,
+            "anchorId": "6-데이터-분석의-기본-흐름"
+          },
+          {
+            "level": 3,
+            "anchorId": "61-질문"
+          },
+          {
+            "level": 3,
+            "anchorId": "62-가설"
+          },
+          {
+            "level": 3,
+            "anchorId": "63-데이터"
+          },
+          {
+            "level": 3,
+            "anchorId": "64-해석"
+          },
+          {
+            "level": 3,
+            "anchorId": "65-판단"
+          },
+          {
+            "level": 3,
+            "anchorId": "66-다음-행동"
+          },
+          {
+            "level": 2,
+            "anchorId": "7-기업-데이터-분석과-개인-데이터-분석은-어떻게-다른가"
+          },
+          {
+            "level": 2,
+            "anchorId": "8-개인에게도-데이터-분석이-필요한-이유"
+          },
+          {
+            "level": 2,
+            "anchorId": "9-ai-시대에-데이터-분석은-왜-더-중요해졌는가"
+          },
+          {
+            "level": 2,
+            "anchorId": "10-데이터는-무엇을-보여주고-무엇을-보여주지-못하는가"
+          },
+          {
+            "level": 2,
+            "anchorId": "11-정량-데이터와-정성-데이터"
+          },
+          {
+            "level": 2,
+            "anchorId": "12-데이터-분석의-함정"
+          },
+          {
+            "level": 3,
+            "anchorId": "121-조회수의-함정"
+          },
+          {
+            "level": 3,
+            "anchorId": "122-클릭률의-함정"
+          },
+          {
+            "level": 3,
+            "anchorId": "123-평균의-함정"
+          },
+          {
+            "level": 3,
+            "anchorId": "124-작은-표본의-함정"
+          },
+          {
+            "level": 3,
+            "anchorId": "125-상관관계와-인과관계의-혼동"
+          },
+          {
+            "level": 3,
+            "anchorId": "126-측정-가능한-것만-중요해지는-문제"
+          },
+          {
+            "level": 3,
+            "anchorId": "127-데이터가-목표가-되는-문제"
+          },
+          {
+            "level": 3,
+            "anchorId": "128-대시보드가-현실을-대신하는-문제"
+          },
+          {
+            "level": 3,
+            "anchorId": "129-내가-보고-싶은-숫자만-보는-문제"
+          },
+          {
+            "level": 3,
+            "anchorId": "1210-데이터-없는-영역을-무시하는-문제"
+          },
+          {
+            "level": 3,
+            "anchorId": "1211-허영-지표에-속는-문제"
+          },
+          {
+            "level": 2,
+            "anchorId": "13-데이터도-검증의-대상이다"
+          },
+          {
+            "level": 2,
+            "anchorId": "14-개인은-어떻게-데이터-분석을-시작할-수-있는가"
+          },
+          {
+            "level": 3,
+            "anchorId": "141-질문을-먼저-적는다"
+          },
+          {
+            "level": 3,
+            "anchorId": "142-가설을-적는다"
+          },
+          {
+            "level": 3,
+            "anchorId": "143-확인할-지표를-하나만-고른다"
+          },
+          {
+            "level": 3,
+            "anchorId": "144-숫자와-맥락을-함께-기록한다"
+          },
+          {
+            "level": 3,
+            "anchorId": "145-일정-기간을-정한다"
+          },
+          {
+            "level": 3,
+            "anchorId": "146-너무-빨리-결론-내리지-않는다"
+          },
+          {
+            "level": 3,
+            "anchorId": "147-다음-행동을-바꾼다"
+          },
+          {
+            "level": 3,
+            "anchorId": "148-다시-기록한다"
+          },
+          {
+            "level": 2,
+            "anchorId": "15-개인-데이터-분석에-자주-쓰는-도구들"
+          },
+          {
+            "level": 2,
+            "anchorId": "16-dechive식-데이터-분석-체크리스트"
+          },
+          {
+            "level": 2,
+            "anchorId": "17-데이터-분석-능력은-어떻게-쌓이는가"
+          },
+          {
+            "level": 2,
+            "anchorId": "18-데이터-분석은-기업에만-필요한-것인가"
+          },
+          {
+            "level": 2,
+            "anchorId": "19-데이터-분석에-대한-자주-묻는-오해"
+          },
+          {
+            "level": 2,
+            "anchorId": "20-결론-데이터는-판단을-대신하지-않는다"
+          }
+        ],
+        "paragraphs": 700,
+        "lists": 24,
+        "codeBlocks": [
+          {
+            "language": null,
+            "meta": null
+          }
+        ],
+        "tables": 7,
+        "images": [
+          "./data-analysis-map.webp",
+          "./data-analysis-flow.webp",
+          "./business-vs-personal-data-analysis.webp",
+          "./prelaunch-feedback-loop.webp",
+          "./data-analysis-traps.webp"
+        ],
+        "links": 0,
+        "blockquotes": 13,
+        "textHash": "d20a0e7e9951038de17d0a2dedde6bcf313299b719c13f4b4cad2aabed7850a1"
+      },
+      "checks": {
+        "headings": true,
+        "paragraphs": true,
+        "lists": true,
+        "codeBlocks": true,
+        "tables": true,
+        "images": true,
+        "links": true,
+        "blockquotes": true,
+        "textHash": true
+      },
+      "normalizedMarkdownHash": "ac4ec2a1f5ff29327fe8401d49edf5324d8e62ad6fd99b4997f856cb7e800952",
+      "neutralDocumentHash": "f90178a95c7c632092b5c44cb6dc9364f4b3cf49b792d918a7abdb7f3fbc16bf",
+      "unknownNodes": 0,
+      "grade": "preserved"
+    },
+    {
+      "id": "heading-heavy-deep-dive-ko",
+      "path": "content/posts/ai-era-agile-verification.ko.md",
+      "kind": "markdown",
+      "translationGroup": "ai-era-agile-verification",
+      "risks": [
+        "104_headings",
+        "relative_image_paths",
+        "missing_source_urls"
+      ],
+      "sourceHash": "f8ef16f72f0971de91434f2f81278a9b9ad32121d80a35999e3fa2c41e543717",
+      "frontmatter": {
+        "keys": [
+          "category",
+          "concepts",
+          "coverImage",
+          "date",
+          "description",
+          "lang",
+          "seoTitle",
+          "slug",
+          "status",
+          "tags",
+          "title",
+          "type"
+        ],
+        "nullTagCount": 0
+      },
+      "original": {
+        "headings": [
+          {
+            "level": 2,
+            "anchorId": "이-글을-읽는-방법"
+          },
+          {
+            "level": 2,
+            "anchorId": "2026년에-agile을-다시-묻는-이유"
+          },
+          {
+            "level": 3,
+            "anchorId": "바이브-코딩-시대의-개발-루프"
+          },
+          {
+            "level": 3,
+            "anchorId": "생성-속도보다-검증-능력이-병목이-됐다"
+          },
+          {
+            "level": 3,
+            "anchorId": "ai-에이전트가-들어온-팀의-새로운-긴장"
+          },
+          {
+            "level": 3,
+            "anchorId": "그래서-agile은-2026년에-더-필요하다"
+          },
+          {
+            "level": 2,
+            "anchorId": "agile-이전-waterfall이-만들어낸-문제"
+          },
+          {
+            "level": 3,
+            "anchorId": "늦은-피드백이-만드는-비용"
+          },
+          {
+            "level": 3,
+            "anchorId": "chaos-report와-소프트웨어-프로젝트-실패율"
+          },
+          {
+            "level": 3,
+            "anchorId": "문서가-현실을-대체한-문제"
+          },
+          {
+            "level": 2,
+            "anchorId": "agile-manifesto-원문이-실제로-말하는-것"
+          },
+          {
+            "level": 3,
+            "anchorId": "4가지-가치"
+          },
+          {
+            "level": 3,
+            "anchorId": "12가지-원칙"
+          },
+          {
+            "level": 3,
+            "anchorId": "manifesto가-나온-맥락"
+          },
+          {
+            "level": 2,
+            "anchorId": "agile의-주요-방법론들"
+          },
+          {
+            "level": 3,
+            "anchorId": "scrum"
+          },
+          {
+            "level": 3,
+            "anchorId": "kanban"
+          },
+          {
+            "level": 3,
+            "anchorId": "xp-extreme-programming"
+          },
+          {
+            "level": 3,
+            "anchorId": "safe와-대규모-agile의-문제"
+          },
+          {
+            "level": 2,
+            "anchorId": "agile이-빠른-개발-방법론으로-오해된-이유"
+          },
+          {
+            "level": 3,
+            "anchorId": "도구가-목적을-대체한-문제"
+          },
+          {
+            "level": 3,
+            "anchorId": "certified-scrum-master의-확산"
+          },
+          {
+            "level": 3,
+            "anchorId": "agile-transformation이라는-이름의-리브랜딩"
+          },
+          {
+            "level": 3,
+            "anchorId": "속도-압박과-agile의-왜곡"
+          },
+          {
+            "level": 2,
+            "anchorId": "중요한-것은-스프린트-주기가-아니라-피드백-루프다"
+          },
+          {
+            "level": 3,
+            "anchorId": "피드백의-종류"
+          },
+          {
+            "level": 3,
+            "anchorId": "피드백-루프의-속도"
+          },
+          {
+            "level": 2,
+            "anchorId": "ai-시대와-agile-어떻게-달라졌나"
+          },
+          {
+            "level": 3,
+            "anchorId": "ai-이전-구현이-병목이었다"
+          },
+          {
+            "level": 3,
+            "anchorId": "ai-이후-방향이-병목이-됐다"
+          },
+          {
+            "level": 3,
+            "anchorId": "ai와-함께-일할-때의-방향-확인-위험"
+          },
+          {
+            "level": 3,
+            "anchorId": "ai가-agile-루프의-어느-부분을-바꾸는가"
+          },
+          {
+            "level": 3,
+            "anchorId": "ai가-만든-코드의-검증-문제"
+          },
+          {
+            "level": 2,
+            "anchorId": "기업에서-agile은-무엇을-다시-검증해야-하는가"
+          },
+          {
+            "level": 3,
+            "anchorId": "ai-도입은-팀을-agile하게-만들지-않는다"
+          },
+          {
+            "level": 3,
+            "anchorId": "더-많은-티켓-처리량은-더-나은-제품을-의미하지-않는다"
+          },
+          {
+            "level": 3,
+            "anchorId": "product-owner의-역할은-더-중요해진다"
+          },
+          {
+            "level": 3,
+            "anchorId": "ai가-만든-산출물의-definition-of-done을-다시-써야-한다"
+          },
+          {
+            "level": 3,
+            "anchorId": "sprint-review는-데모가-아니라-방향-검증의-자리여야-한다"
+          },
+          {
+            "level": 3,
+            "anchorId": "기업-agile의-진짜-병목은-의사결정-속도다"
+          },
+          {
+            "level": 2,
+            "anchorId": "1인-개발자와-solo-saas에서의-agile"
+          },
+          {
+            "level": 3,
+            "anchorId": "혼자일-때-방향이-틀리기-더-쉽다"
+          },
+          {
+            "level": 3,
+            "anchorId": "내가-만드는-것에-빠지는-문제"
+          },
+          {
+            "level": 3,
+            "anchorId": "혼자서-방향을-확인하는-방법들"
+          },
+          {
+            "level": 3,
+            "anchorId": "solo-saas에서-agile-루프를-어떻게-돌리는가"
+          },
+          {
+            "level": 2,
+            "anchorId": "창업자에게-agile은-사업-가설을-검증하는-방식이다"
+          },
+          {
+            "level": 3,
+            "anchorId": "창업자가-순서대로-확인해야-하는-가설들"
+          },
+          {
+            "level": 3,
+            "anchorId": "mvp는-작은-제품이-아니라-작은-증거다"
+          },
+          {
+            "level": 3,
+            "anchorId": "출시가-아니라-학습이-sprint의-끝이다"
+          },
+          {
+            "level": 3,
+            "anchorId": "수익이-생기기-전과-후의-agile은-다르다"
+          },
+          {
+            "level": 3,
+            "anchorId": "1인-saas의-주간-agile-루프"
+          },
+          {
+            "level": 2,
+            "anchorId": "ai가-만든-결과를-agile하게-검증하는-기준"
+          },
+          {
+            "level": 3,
+            "anchorId": "방향-검증을-위한-질문들"
+          },
+          {
+            "level": 3,
+            "anchorId": "기능-검증을-위한-실용적-방법들"
+          },
+          {
+            "level": 3,
+            "anchorId": "개인-개발자를-위한-ai-산출물-검증-체크리스트"
+          },
+          {
+            "level": 3,
+            "anchorId": "팀이-ai-산출물을-agile하게-검토하는-기준"
+          },
+          {
+            "level": 2,
+            "anchorId": "작은-agile-루프-질문-가설-구현-관찰-수정"
+          },
+          {
+            "level": 3,
+            "anchorId": "질문"
+          },
+          {
+            "level": 3,
+            "anchorId": "가설"
+          },
+          {
+            "level": 3,
+            "anchorId": "구현"
+          },
+          {
+            "level": 3,
+            "anchorId": "관찰"
+          },
+          {
+            "level": 3,
+            "anchorId": "수정"
+          },
+          {
+            "level": 2,
+            "anchorId": "agile의-자주-하는-실수들"
+          },
+          {
+            "level": 3,
+            "anchorId": "의식이-되어버린-agile"
+          },
+          {
+            "level": 3,
+            "anchorId": "backlog가-무덤이-되는-문제"
+          },
+          {
+            "level": 3,
+            "anchorId": "velocity를-목표로-삼는-문제"
+          },
+          {
+            "level": 3,
+            "anchorId": "사용자-없는-sprint-review"
+          },
+          {
+            "level": 3,
+            "anchorId": "완료됐지만-안-쓰이는-기능들"
+          },
+          {
+            "level": 3,
+            "anchorId": "retrospective에서-아무것도-안-바뀌는-문제"
+          },
+          {
+            "level": 3,
+            "anchorId": "agile을-도구로-쓰는-문제"
+          },
+          {
+            "level": 2,
+            "anchorId": "agile의-한계"
+          },
+          {
+            "level": 3,
+            "anchorId": "명확한-방향이-있을-때"
+          },
+          {
+            "level": 3,
+            "anchorId": "하드웨어와-물리적-제품"
+          },
+          {
+            "level": 3,
+            "anchorId": "규제가-강한-산업"
+          },
+          {
+            "level": 3,
+            "anchorId": "대규모-인프라-변경"
+          },
+          {
+            "level": 3,
+            "anchorId": "agile이-회사-정치의-도구가-될-때"
+          },
+          {
+            "level": 3,
+            "anchorId": "agile이-팀에-맞지-않을-때"
+          },
+          {
+            "level": 2,
+            "anchorId": "인접-방법론과의-비교"
+          },
+          {
+            "level": 3,
+            "anchorId": "lean"
+          },
+          {
+            "level": 3,
+            "anchorId": "shape-up-basecamp"
+          },
+          {
+            "level": 3,
+            "anchorId": "okr"
+          },
+          {
+            "level": 3,
+            "anchorId": "design-thinking"
+          },
+          {
+            "level": 3,
+            "anchorId": "six-sigma"
+          },
+          {
+            "level": 2,
+            "anchorId": "agile-지표-무엇을-보고-판단하는가"
+          },
+          {
+            "level": 3,
+            "anchorId": "velocity"
+          },
+          {
+            "level": 3,
+            "anchorId": "cycle-time"
+          },
+          {
+            "level": 3,
+            "anchorId": "lead-time"
+          },
+          {
+            "level": 3,
+            "anchorId": "sprint-burndown-chart"
+          },
+          {
+            "level": 3,
+            "anchorId": "cumulative-flow-diagram-cfd"
+          },
+          {
+            "level": 3,
+            "anchorId": "nps-net-promoter-score"
+          },
+          {
+            "level": 3,
+            "anchorId": "1인-개발자가-실제로-볼-수-있는-지표들"
+          },
+          {
+            "level": 2,
+            "anchorId": "agile에서-흔히-혼동하는-개념들"
+          },
+          {
+            "level": 3,
+            "anchorId": "mvp-minimum-viable-product"
+          },
+          {
+            "level": 3,
+            "anchorId": "sprint와-iteration"
+          },
+          {
+            "level": 3,
+            "anchorId": "scrum-master와-프로젝트-매니저"
+          },
+          {
+            "level": 3,
+            "anchorId": "product-owner와-프로덕트-매니저"
+          },
+          {
+            "level": 3,
+            "anchorId": "done의-의미"
+          },
+          {
+            "level": 2,
+            "anchorId": "agile과-기술적-실천들"
+          },
+          {
+            "level": 3,
+            "anchorId": "기술-부채와-agile"
+          },
+          {
+            "level": 3,
+            "anchorId": "자동화-테스트"
+          },
+          {
+            "level": 3,
+            "anchorId": "지속적인-통합과-배포-cicd"
+          },
+          {
+            "level": 3,
+            "anchorId": "리팩토링"
+          },
+          {
+            "level": 2,
+            "anchorId": "마지막으로-속도는-도구고-방향은-판단이다"
+          },
+          {
+            "level": 2,
+            "anchorId": "참고자료"
+          }
+        ],
+        "paragraphs": 542,
+        "lists": 8,
+        "codeBlocks": [
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          }
+        ],
+        "tables": 0,
+        "images": [
+          "./agile-waterfall-vs-agile.webp",
+          "./agile-feedback-loop.webp"
+        ],
+        "links": 0,
+        "blockquotes": 4,
+        "textHash": "2c312bd9561899ed71d25e63aaf28446186510204a844fcad0cda688ad1969e6"
+      },
+      "roundTrip": {
+        "headings": [
+          {
+            "level": 2,
+            "anchorId": "이-글을-읽는-방법"
+          },
+          {
+            "level": 2,
+            "anchorId": "2026년에-agile을-다시-묻는-이유"
+          },
+          {
+            "level": 3,
+            "anchorId": "바이브-코딩-시대의-개발-루프"
+          },
+          {
+            "level": 3,
+            "anchorId": "생성-속도보다-검증-능력이-병목이-됐다"
+          },
+          {
+            "level": 3,
+            "anchorId": "ai-에이전트가-들어온-팀의-새로운-긴장"
+          },
+          {
+            "level": 3,
+            "anchorId": "그래서-agile은-2026년에-더-필요하다"
+          },
+          {
+            "level": 2,
+            "anchorId": "agile-이전-waterfall이-만들어낸-문제"
+          },
+          {
+            "level": 3,
+            "anchorId": "늦은-피드백이-만드는-비용"
+          },
+          {
+            "level": 3,
+            "anchorId": "chaos-report와-소프트웨어-프로젝트-실패율"
+          },
+          {
+            "level": 3,
+            "anchorId": "문서가-현실을-대체한-문제"
+          },
+          {
+            "level": 2,
+            "anchorId": "agile-manifesto-원문이-실제로-말하는-것"
+          },
+          {
+            "level": 3,
+            "anchorId": "4가지-가치"
+          },
+          {
+            "level": 3,
+            "anchorId": "12가지-원칙"
+          },
+          {
+            "level": 3,
+            "anchorId": "manifesto가-나온-맥락"
+          },
+          {
+            "level": 2,
+            "anchorId": "agile의-주요-방법론들"
+          },
+          {
+            "level": 3,
+            "anchorId": "scrum"
+          },
+          {
+            "level": 3,
+            "anchorId": "kanban"
+          },
+          {
+            "level": 3,
+            "anchorId": "xp-extreme-programming"
+          },
+          {
+            "level": 3,
+            "anchorId": "safe와-대규모-agile의-문제"
+          },
+          {
+            "level": 2,
+            "anchorId": "agile이-빠른-개발-방법론으로-오해된-이유"
+          },
+          {
+            "level": 3,
+            "anchorId": "도구가-목적을-대체한-문제"
+          },
+          {
+            "level": 3,
+            "anchorId": "certified-scrum-master의-확산"
+          },
+          {
+            "level": 3,
+            "anchorId": "agile-transformation이라는-이름의-리브랜딩"
+          },
+          {
+            "level": 3,
+            "anchorId": "속도-압박과-agile의-왜곡"
+          },
+          {
+            "level": 2,
+            "anchorId": "중요한-것은-스프린트-주기가-아니라-피드백-루프다"
+          },
+          {
+            "level": 3,
+            "anchorId": "피드백의-종류"
+          },
+          {
+            "level": 3,
+            "anchorId": "피드백-루프의-속도"
+          },
+          {
+            "level": 2,
+            "anchorId": "ai-시대와-agile-어떻게-달라졌나"
+          },
+          {
+            "level": 3,
+            "anchorId": "ai-이전-구현이-병목이었다"
+          },
+          {
+            "level": 3,
+            "anchorId": "ai-이후-방향이-병목이-됐다"
+          },
+          {
+            "level": 3,
+            "anchorId": "ai와-함께-일할-때의-방향-확인-위험"
+          },
+          {
+            "level": 3,
+            "anchorId": "ai가-agile-루프의-어느-부분을-바꾸는가"
+          },
+          {
+            "level": 3,
+            "anchorId": "ai가-만든-코드의-검증-문제"
+          },
+          {
+            "level": 2,
+            "anchorId": "기업에서-agile은-무엇을-다시-검증해야-하는가"
+          },
+          {
+            "level": 3,
+            "anchorId": "ai-도입은-팀을-agile하게-만들지-않는다"
+          },
+          {
+            "level": 3,
+            "anchorId": "더-많은-티켓-처리량은-더-나은-제품을-의미하지-않는다"
+          },
+          {
+            "level": 3,
+            "anchorId": "product-owner의-역할은-더-중요해진다"
+          },
+          {
+            "level": 3,
+            "anchorId": "ai가-만든-산출물의-definition-of-done을-다시-써야-한다"
+          },
+          {
+            "level": 3,
+            "anchorId": "sprint-review는-데모가-아니라-방향-검증의-자리여야-한다"
+          },
+          {
+            "level": 3,
+            "anchorId": "기업-agile의-진짜-병목은-의사결정-속도다"
+          },
+          {
+            "level": 2,
+            "anchorId": "1인-개발자와-solo-saas에서의-agile"
+          },
+          {
+            "level": 3,
+            "anchorId": "혼자일-때-방향이-틀리기-더-쉽다"
+          },
+          {
+            "level": 3,
+            "anchorId": "내가-만드는-것에-빠지는-문제"
+          },
+          {
+            "level": 3,
+            "anchorId": "혼자서-방향을-확인하는-방법들"
+          },
+          {
+            "level": 3,
+            "anchorId": "solo-saas에서-agile-루프를-어떻게-돌리는가"
+          },
+          {
+            "level": 2,
+            "anchorId": "창업자에게-agile은-사업-가설을-검증하는-방식이다"
+          },
+          {
+            "level": 3,
+            "anchorId": "창업자가-순서대로-확인해야-하는-가설들"
+          },
+          {
+            "level": 3,
+            "anchorId": "mvp는-작은-제품이-아니라-작은-증거다"
+          },
+          {
+            "level": 3,
+            "anchorId": "출시가-아니라-학습이-sprint의-끝이다"
+          },
+          {
+            "level": 3,
+            "anchorId": "수익이-생기기-전과-후의-agile은-다르다"
+          },
+          {
+            "level": 3,
+            "anchorId": "1인-saas의-주간-agile-루프"
+          },
+          {
+            "level": 2,
+            "anchorId": "ai가-만든-결과를-agile하게-검증하는-기준"
+          },
+          {
+            "level": 3,
+            "anchorId": "방향-검증을-위한-질문들"
+          },
+          {
+            "level": 3,
+            "anchorId": "기능-검증을-위한-실용적-방법들"
+          },
+          {
+            "level": 3,
+            "anchorId": "개인-개발자를-위한-ai-산출물-검증-체크리스트"
+          },
+          {
+            "level": 3,
+            "anchorId": "팀이-ai-산출물을-agile하게-검토하는-기준"
+          },
+          {
+            "level": 2,
+            "anchorId": "작은-agile-루프-질문-가설-구현-관찰-수정"
+          },
+          {
+            "level": 3,
+            "anchorId": "질문"
+          },
+          {
+            "level": 3,
+            "anchorId": "가설"
+          },
+          {
+            "level": 3,
+            "anchorId": "구현"
+          },
+          {
+            "level": 3,
+            "anchorId": "관찰"
+          },
+          {
+            "level": 3,
+            "anchorId": "수정"
+          },
+          {
+            "level": 2,
+            "anchorId": "agile의-자주-하는-실수들"
+          },
+          {
+            "level": 3,
+            "anchorId": "의식이-되어버린-agile"
+          },
+          {
+            "level": 3,
+            "anchorId": "backlog가-무덤이-되는-문제"
+          },
+          {
+            "level": 3,
+            "anchorId": "velocity를-목표로-삼는-문제"
+          },
+          {
+            "level": 3,
+            "anchorId": "사용자-없는-sprint-review"
+          },
+          {
+            "level": 3,
+            "anchorId": "완료됐지만-안-쓰이는-기능들"
+          },
+          {
+            "level": 3,
+            "anchorId": "retrospective에서-아무것도-안-바뀌는-문제"
+          },
+          {
+            "level": 3,
+            "anchorId": "agile을-도구로-쓰는-문제"
+          },
+          {
+            "level": 2,
+            "anchorId": "agile의-한계"
+          },
+          {
+            "level": 3,
+            "anchorId": "명확한-방향이-있을-때"
+          },
+          {
+            "level": 3,
+            "anchorId": "하드웨어와-물리적-제품"
+          },
+          {
+            "level": 3,
+            "anchorId": "규제가-강한-산업"
+          },
+          {
+            "level": 3,
+            "anchorId": "대규모-인프라-변경"
+          },
+          {
+            "level": 3,
+            "anchorId": "agile이-회사-정치의-도구가-될-때"
+          },
+          {
+            "level": 3,
+            "anchorId": "agile이-팀에-맞지-않을-때"
+          },
+          {
+            "level": 2,
+            "anchorId": "인접-방법론과의-비교"
+          },
+          {
+            "level": 3,
+            "anchorId": "lean"
+          },
+          {
+            "level": 3,
+            "anchorId": "shape-up-basecamp"
+          },
+          {
+            "level": 3,
+            "anchorId": "okr"
+          },
+          {
+            "level": 3,
+            "anchorId": "design-thinking"
+          },
+          {
+            "level": 3,
+            "anchorId": "six-sigma"
+          },
+          {
+            "level": 2,
+            "anchorId": "agile-지표-무엇을-보고-판단하는가"
+          },
+          {
+            "level": 3,
+            "anchorId": "velocity"
+          },
+          {
+            "level": 3,
+            "anchorId": "cycle-time"
+          },
+          {
+            "level": 3,
+            "anchorId": "lead-time"
+          },
+          {
+            "level": 3,
+            "anchorId": "sprint-burndown-chart"
+          },
+          {
+            "level": 3,
+            "anchorId": "cumulative-flow-diagram-cfd"
+          },
+          {
+            "level": 3,
+            "anchorId": "nps-net-promoter-score"
+          },
+          {
+            "level": 3,
+            "anchorId": "1인-개발자가-실제로-볼-수-있는-지표들"
+          },
+          {
+            "level": 2,
+            "anchorId": "agile에서-흔히-혼동하는-개념들"
+          },
+          {
+            "level": 3,
+            "anchorId": "mvp-minimum-viable-product"
+          },
+          {
+            "level": 3,
+            "anchorId": "sprint와-iteration"
+          },
+          {
+            "level": 3,
+            "anchorId": "scrum-master와-프로젝트-매니저"
+          },
+          {
+            "level": 3,
+            "anchorId": "product-owner와-프로덕트-매니저"
+          },
+          {
+            "level": 3,
+            "anchorId": "done의-의미"
+          },
+          {
+            "level": 2,
+            "anchorId": "agile과-기술적-실천들"
+          },
+          {
+            "level": 3,
+            "anchorId": "기술-부채와-agile"
+          },
+          {
+            "level": 3,
+            "anchorId": "자동화-테스트"
+          },
+          {
+            "level": 3,
+            "anchorId": "지속적인-통합과-배포-cicd"
+          },
+          {
+            "level": 3,
+            "anchorId": "리팩토링"
+          },
+          {
+            "level": 2,
+            "anchorId": "마지막으로-속도는-도구고-방향은-판단이다"
+          },
+          {
+            "level": 2,
+            "anchorId": "참고자료"
+          }
+        ],
+        "paragraphs": 542,
+        "lists": 8,
+        "codeBlocks": [
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          }
+        ],
+        "tables": 0,
+        "images": [
+          "./agile-waterfall-vs-agile.webp",
+          "./agile-feedback-loop.webp"
+        ],
+        "links": 0,
+        "blockquotes": 4,
+        "textHash": "2c312bd9561899ed71d25e63aaf28446186510204a844fcad0cda688ad1969e6"
+      },
+      "checks": {
+        "headings": true,
+        "paragraphs": true,
+        "lists": true,
+        "codeBlocks": true,
+        "tables": true,
+        "images": true,
+        "links": true,
+        "blockquotes": true,
+        "textHash": true
+      },
+      "normalizedMarkdownHash": "598aec2d9ded139c11e2241ce62a81c84670be6176db5befb789a35294899407",
+      "neutralDocumentHash": "266285ca948b4a0a1687e2488551e0784529681a1f9219d3dd5cae31319b1aa8",
+      "unknownNodes": 0,
+      "grade": "preserved"
+    },
+    {
+      "id": "heading-heavy-deep-dive-en",
+      "path": "content/posts/ai-era-agile-verification.en.md",
+      "kind": "markdown",
+      "translationGroup": "ai-era-agile-verification",
+      "risks": [
+        "ko_en_heading_drift",
+        "relative_image_paths",
+        "missing_source_urls"
+      ],
+      "sourceHash": "92bd5a09e477d972892904607e940a2d5b78af6d17917a3b8f0bea6e851da7f9",
+      "frontmatter": {
+        "keys": [
+          "category",
+          "concepts",
+          "coverImage",
+          "date",
+          "description",
+          "lang",
+          "seoTitle",
+          "slug",
+          "status",
+          "tags",
+          "title",
+          "type"
+        ],
+        "nullTagCount": 0
+      },
+      "original": {
+        "headings": [
+          {
+            "level": 2,
+            "anchorId": "how-to-read-this-document"
+          },
+          {
+            "level": 2,
+            "anchorId": "why-we-question-agile-again-in-2026"
+          },
+          {
+            "level": 3,
+            "anchorId": "the-development-loop-in-the-age-of-vibe-coding"
+          },
+          {
+            "level": 3,
+            "anchorId": "generation-speed-became-the-bottleneck-not-verification-capability"
+          },
+          {
+            "level": 3,
+            "anchorId": "new-tensions-in-teams-where-ai-agents-have-arrived"
+          },
+          {
+            "level": 3,
+            "anchorId": "so-agile-is-even-more-needed-in-2026"
+          },
+          {
+            "level": 2,
+            "anchorId": "before-agile-problems-created-by-waterfall"
+          },
+          {
+            "level": 3,
+            "anchorId": "late-feedback-creates-costs"
+          },
+          {
+            "level": 3,
+            "anchorId": "chaos-report-and-software-project-failure-rates"
+          },
+          {
+            "level": 3,
+            "anchorId": "the-problem-of-documents-replacing-reality"
+          },
+          {
+            "level": 2,
+            "anchorId": "agile-manifesto-what-the-original-text-actually-says"
+          },
+          {
+            "level": 3,
+            "anchorId": "four-values"
+          },
+          {
+            "level": 3,
+            "anchorId": "twelve-principles"
+          },
+          {
+            "level": 3,
+            "anchorId": "context-of-the-manifesto"
+          },
+          {
+            "level": 2,
+            "anchorId": "major-agile-methodologies"
+          },
+          {
+            "level": 3,
+            "anchorId": "scrum"
+          },
+          {
+            "level": 3,
+            "anchorId": "kanban"
+          },
+          {
+            "level": 3,
+            "anchorId": "xp-extreme-programming"
+          },
+          {
+            "level": 3,
+            "anchorId": "safe-and-the-problem-of-large-scale-agile"
+          },
+          {
+            "level": 2,
+            "anchorId": "why-agile-was-misunderstood-as-fast-development-methodology"
+          },
+          {
+            "level": 3,
+            "anchorId": "the-problem-of-tools-replacing-purpose"
+          },
+          {
+            "level": 3,
+            "anchorId": "spread-of-certified-scrum-master"
+          },
+          {
+            "level": 3,
+            "anchorId": "rebranding-disguised-as-agile-transformation"
+          },
+          {
+            "level": 3,
+            "anchorId": "speed-pressure-and-agile-distortion"
+          },
+          {
+            "level": 2,
+            "anchorId": "what-matters-is-feedback-loop-not-sprint-cycle"
+          },
+          {
+            "level": 3,
+            "anchorId": "types-of-feedback"
+          },
+          {
+            "level": 3,
+            "anchorId": "speed-of-feedback-loop"
+          },
+          {
+            "level": 2,
+            "anchorId": "agile-and-the-ai-era-what-changed"
+          },
+          {
+            "level": 3,
+            "anchorId": "before-ai-implementation-was-the-bottleneck"
+          },
+          {
+            "level": 3,
+            "anchorId": "after-ai-direction-became-the-bottleneck"
+          },
+          {
+            "level": 3,
+            "anchorId": "the-direction-verification-risk-in-working-with-ai"
+          },
+          {
+            "level": 3,
+            "anchorId": "ai-agents-in-teams-with-new-tensions"
+          },
+          {
+            "level": 3,
+            "anchorId": "so-agile-is-even-more-needed-in-2026-2"
+          },
+          {
+            "level": 2,
+            "anchorId": "what-must-agile-verify-again-in-enterprises"
+          },
+          {
+            "level": 3,
+            "anchorId": "ai-adoption-does-not-make-teams-agile"
+          },
+          {
+            "level": 3,
+            "anchorId": "product-owners-role-becomes-more-important"
+          },
+          {
+            "level": 3,
+            "anchorId": "must-rewrite-definition-of-done-for-ai-created-outputs"
+          },
+          {
+            "level": 3,
+            "anchorId": "sprint-review-must-be-direction-verification-not-demo"
+          },
+          {
+            "level": 3,
+            "anchorId": "real-bottleneck-in-enterprise-agile-is-decision-speed"
+          },
+          {
+            "level": 2,
+            "anchorId": "agile-for-1-person-developers-and-solo-saas"
+          },
+          {
+            "level": 3,
+            "anchorId": "getting-direction-wrong-is-easier-when-alone"
+          },
+          {
+            "level": 3,
+            "anchorId": "the-problem-of-becoming-attached-to-what-you-make"
+          },
+          {
+            "level": 3,
+            "anchorId": "how-solo-developers-verify-direction"
+          }
+        ],
+        "paragraphs": 254,
+        "lists": 0,
+        "codeBlocks": [
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          }
+        ],
+        "tables": 0,
+        "images": [
+          "./agile-waterfall-vs-agile.webp"
+        ],
+        "links": 0,
+        "blockquotes": 3,
+        "textHash": "63f6a51ccae5628a218ec751be2dc9522183d3630f7365be4660d37138155082"
+      },
+      "roundTrip": {
+        "headings": [
+          {
+            "level": 2,
+            "anchorId": "how-to-read-this-document"
+          },
+          {
+            "level": 2,
+            "anchorId": "why-we-question-agile-again-in-2026"
+          },
+          {
+            "level": 3,
+            "anchorId": "the-development-loop-in-the-age-of-vibe-coding"
+          },
+          {
+            "level": 3,
+            "anchorId": "generation-speed-became-the-bottleneck-not-verification-capability"
+          },
+          {
+            "level": 3,
+            "anchorId": "new-tensions-in-teams-where-ai-agents-have-arrived"
+          },
+          {
+            "level": 3,
+            "anchorId": "so-agile-is-even-more-needed-in-2026"
+          },
+          {
+            "level": 2,
+            "anchorId": "before-agile-problems-created-by-waterfall"
+          },
+          {
+            "level": 3,
+            "anchorId": "late-feedback-creates-costs"
+          },
+          {
+            "level": 3,
+            "anchorId": "chaos-report-and-software-project-failure-rates"
+          },
+          {
+            "level": 3,
+            "anchorId": "the-problem-of-documents-replacing-reality"
+          },
+          {
+            "level": 2,
+            "anchorId": "agile-manifesto-what-the-original-text-actually-says"
+          },
+          {
+            "level": 3,
+            "anchorId": "four-values"
+          },
+          {
+            "level": 3,
+            "anchorId": "twelve-principles"
+          },
+          {
+            "level": 3,
+            "anchorId": "context-of-the-manifesto"
+          },
+          {
+            "level": 2,
+            "anchorId": "major-agile-methodologies"
+          },
+          {
+            "level": 3,
+            "anchorId": "scrum"
+          },
+          {
+            "level": 3,
+            "anchorId": "kanban"
+          },
+          {
+            "level": 3,
+            "anchorId": "xp-extreme-programming"
+          },
+          {
+            "level": 3,
+            "anchorId": "safe-and-the-problem-of-large-scale-agile"
+          },
+          {
+            "level": 2,
+            "anchorId": "why-agile-was-misunderstood-as-fast-development-methodology"
+          },
+          {
+            "level": 3,
+            "anchorId": "the-problem-of-tools-replacing-purpose"
+          },
+          {
+            "level": 3,
+            "anchorId": "spread-of-certified-scrum-master"
+          },
+          {
+            "level": 3,
+            "anchorId": "rebranding-disguised-as-agile-transformation"
+          },
+          {
+            "level": 3,
+            "anchorId": "speed-pressure-and-agile-distortion"
+          },
+          {
+            "level": 2,
+            "anchorId": "what-matters-is-feedback-loop-not-sprint-cycle"
+          },
+          {
+            "level": 3,
+            "anchorId": "types-of-feedback"
+          },
+          {
+            "level": 3,
+            "anchorId": "speed-of-feedback-loop"
+          },
+          {
+            "level": 2,
+            "anchorId": "agile-and-the-ai-era-what-changed"
+          },
+          {
+            "level": 3,
+            "anchorId": "before-ai-implementation-was-the-bottleneck"
+          },
+          {
+            "level": 3,
+            "anchorId": "after-ai-direction-became-the-bottleneck"
+          },
+          {
+            "level": 3,
+            "anchorId": "the-direction-verification-risk-in-working-with-ai"
+          },
+          {
+            "level": 3,
+            "anchorId": "ai-agents-in-teams-with-new-tensions"
+          },
+          {
+            "level": 3,
+            "anchorId": "so-agile-is-even-more-needed-in-2026-2"
+          },
+          {
+            "level": 2,
+            "anchorId": "what-must-agile-verify-again-in-enterprises"
+          },
+          {
+            "level": 3,
+            "anchorId": "ai-adoption-does-not-make-teams-agile"
+          },
+          {
+            "level": 3,
+            "anchorId": "product-owners-role-becomes-more-important"
+          },
+          {
+            "level": 3,
+            "anchorId": "must-rewrite-definition-of-done-for-ai-created-outputs"
+          },
+          {
+            "level": 3,
+            "anchorId": "sprint-review-must-be-direction-verification-not-demo"
+          },
+          {
+            "level": 3,
+            "anchorId": "real-bottleneck-in-enterprise-agile-is-decision-speed"
+          },
+          {
+            "level": 2,
+            "anchorId": "agile-for-1-person-developers-and-solo-saas"
+          },
+          {
+            "level": 3,
+            "anchorId": "getting-direction-wrong-is-easier-when-alone"
+          },
+          {
+            "level": 3,
+            "anchorId": "the-problem-of-becoming-attached-to-what-you-make"
+          },
+          {
+            "level": 3,
+            "anchorId": "how-solo-developers-verify-direction"
+          }
+        ],
+        "paragraphs": 254,
+        "lists": 0,
+        "codeBlocks": [
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          },
+          {
+            "language": null,
+            "meta": null
+          }
+        ],
+        "tables": 0,
+        "images": [
+          "./agile-waterfall-vs-agile.webp"
+        ],
+        "links": 0,
+        "blockquotes": 3,
+        "textHash": "63f6a51ccae5628a218ec751be2dc9522183d3630f7365be4660d37138155082"
+      },
+      "checks": {
+        "headings": true,
+        "paragraphs": true,
+        "lists": true,
+        "codeBlocks": true,
+        "tables": true,
+        "images": true,
+        "links": true,
+        "blockquotes": true,
+        "textHash": true
+      },
+      "normalizedMarkdownHash": "deea2204eb181e58ac76675d3d44c7775c8721c5baffeabef73066bd41aabc88",
+      "neutralDocumentHash": "65d72185838a414c96b65c451b3091a1aef67f8071f338a92343aff13169e708",
+      "unknownNodes": 0,
+      "grade": "preserved"
+    },
+    {
+      "id": "book-note",
+      "path": "src/content/books/knowing-what-we-know.ko.md",
+      "kind": "markdown",
+      "risks": [
+        "quote_locator_missing",
+        "bibliographic_metadata"
+      ],
+      "sourceHash": "7b47da856739d801f1ce0420e5ddbb7a9cf398410166deeb98fa6ed5a5685041",
+      "frontmatter": {
+        "keys": [
+          "author",
+          "coverImage",
+          "date",
+          "lang",
+          "publisher",
+          "readDate",
+          "slug",
+          "status",
+          "summary",
+          "tags",
+          "title"
+        ],
+        "nullTagCount": 0
+      },
+      "original": {
+        "headings": [
+          {
+            "level": 2,
+            "anchorId": "이-책을-펼친-이유"
+          },
+          {
+            "level": 2,
+            "anchorId": "붙잡은-질문"
+          },
+          {
+            "level": 2,
+            "anchorId": "내-생각"
+          },
+          {
+            "level": 2,
+            "anchorId": "남은-질문"
+          },
+          {
+            "level": 2,
+            "anchorId": "연결된-기록"
+          }
+        ],
+        "paragraphs": 9,
+        "lists": 2,
+        "codeBlocks": [],
+        "tables": 0,
+        "images": [],
+        "links": 1,
+        "blockquotes": 0,
+        "textHash": "3d33e8171b4ac5511bd8f9d91af9b3ea174cb14ce5c4b34ed02bbde901934574"
+      },
+      "roundTrip": {
+        "headings": [
+          {
+            "level": 2,
+            "anchorId": "이-책을-펼친-이유"
+          },
+          {
+            "level": 2,
+            "anchorId": "붙잡은-질문"
+          },
+          {
+            "level": 2,
+            "anchorId": "내-생각"
+          },
+          {
+            "level": 2,
+            "anchorId": "남은-질문"
+          },
+          {
+            "level": 2,
+            "anchorId": "연결된-기록"
+          }
+        ],
+        "paragraphs": 9,
+        "lists": 2,
+        "codeBlocks": [],
+        "tables": 0,
+        "images": [],
+        "links": 1,
+        "blockquotes": 0,
+        "textHash": "3d33e8171b4ac5511bd8f9d91af9b3ea174cb14ce5c4b34ed02bbde901934574"
+      },
+      "checks": {
+        "headings": true,
+        "paragraphs": true,
+        "lists": true,
+        "codeBlocks": true,
+        "tables": true,
+        "images": true,
+        "links": true,
+        "blockquotes": true,
+        "textHash": true
+      },
+      "normalizedMarkdownHash": "99f9fbc43deb59885b679e9993a394b178e15d8b019d41904c3b94ecc1098d9c",
+      "neutralDocumentHash": "54e91ce9faa1d0a47953e6227745e4d1295583f3967a12abb1be4cbb1b33291b",
+      "unknownNodes": 0,
+      "grade": "preserved"
+    },
+    {
+      "id": "ai-update-digest",
+      "path": "src/data/aiUpdates.ts",
+      "kind": "typescript-data",
+      "date": "2026-07-02",
+      "risks": [
+        "multiple_changes_per_item",
+        "source_granularity"
+      ],
+      "sourceHash": "0dd1dd5ec726e0377cd7119a957045a6725fbd41d125a1ff407f1433dd94542e",
+      "selectedSliceHash": "8d0e777ddc1863fe0c18d33c27066e24fb14eb9a5e2afde031346b21b13a612d",
+      "observed": {
+        "dateFound": true,
+        "sourceUrls": 0,
+        "updateSlugs": 3
+      },
+      "grade": "transformable",
+      "needsReview": true
+    }
+  ],
+  "translationDrift": {
+    "group": "ai-era-agile-verification",
+    "koHeadings": 104,
+    "enHeadings": 43,
+    "sameStructure": false
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "target": "user-confirmed Neon staging",
+  "directConnectionUsed": true,
+  "first": {
+    "appliedNow": [
+      "0000_initial.sql",
+      "0001_legacy_import.sql",
+      "0002_staging_operations.sql",
+      "0003_import_batch_recovery.sql"
+    ],
+    "migrationCount": 4,
+    "checksumVerified": true,
+    "objects": {
+      "tables": "31",
+      "indexes": "59",
+      "triggers": "7",
+      "constraints": "291"
+    }
+  },
+  "second": {
+    "appliedNow": [],
+    "migrationCount": 4,
+    "checksumVerified": true,
+    "objects": {
+      "tables": "31",
+      "indexes": "59",
+      "triggers": "7",
+      "constraints": "291"
+    }
+  },
+  "secondRunNoOp": true,
+  "credentialsLogged": false
+}

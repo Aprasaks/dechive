@@ -1,0 +1,292 @@
+{
+  "version": 1,
+  "sanitizer": {
+    "package": "sanitize-html",
+    "policyVersion": "1.0.0"
+  },
+  "securityResults": [
+    {
+      "id": "script",
+      "changed": true,
+      "warnings": [],
+      "safe": true,
+      "text": "safe"
+    },
+    {
+      "id": "img-onerror",
+      "changed": true,
+      "warnings": [],
+      "safe": true,
+      "text": ""
+    },
+    {
+      "id": "javascript-link",
+      "changed": true,
+      "warnings": [
+        "unsafe_link_removed"
+      ],
+      "safe": true,
+      "text": "bad"
+    },
+    {
+      "id": "data-html",
+      "changed": true,
+      "warnings": [
+        "unsafe_link_removed"
+      ],
+      "safe": true,
+      "text": "bad"
+    },
+    {
+      "id": "iframe",
+      "changed": true,
+      "warnings": [],
+      "safe": true,
+      "text": ""
+    },
+    {
+      "id": "svg-event",
+      "changed": true,
+      "warnings": [],
+      "safe": true,
+      "text": ""
+    },
+    {
+      "id": "style",
+      "changed": true,
+      "warnings": [],
+      "safe": true,
+      "text": "safe"
+    },
+    {
+      "id": "malformed-table",
+      "changed": true,
+      "warnings": [],
+      "safe": true,
+      "text": "A\nB"
+    },
+    {
+      "id": "external-image",
+      "changed": true,
+      "warnings": [
+        "external_or_invalid_image_quarantined"
+      ],
+      "safe": true,
+      "text": ""
+    }
+  ],
+  "jsonThreats": [
+    {
+      "id": "unknown-html-payload",
+      "draft": "needs_review",
+      "publish": "rejected"
+    },
+    {
+      "id": "source-html-note",
+      "draft": "rejected",
+      "publish": "rejected"
+    },
+    {
+      "id": "callout-markup-title",
+      "draft": "rejected",
+      "publish": "rejected"
+    },
+    {
+      "id": "deep-list",
+      "draft": "rejected",
+      "publish": "rejected"
+    },
+    {
+      "id": "oversized-attribute",
+      "draft": "rejected",
+      "publish": "rejected"
+    },
+    {
+      "id": "invalid-media",
+      "draft": "rejected",
+      "publish": "rejected"
+    },
+    {
+      "id": "external-media",
+      "draft": "needs_review",
+      "publish": "needs_review"
+    },
+    {
+      "id": "javascript-json-link",
+      "draft": "rejected",
+      "publish": "rejected"
+    }
+  ],
+  "tableResults": [
+    {
+      "id": "simple",
+      "mode": "gfm",
+      "warnings": [],
+      "fallbackNodeCount": 0,
+      "reimportRoot": "doc",
+      "reimportTableCount": 0
+    },
+    {
+      "id": "inline-bold-link",
+      "mode": "gfm",
+      "warnings": [],
+      "fallbackNodeCount": 0,
+      "reimportRoot": "doc",
+      "reimportTableCount": 0
+    },
+    {
+      "id": "inline-code",
+      "mode": "gfm",
+      "warnings": [],
+      "fallbackNodeCount": 0,
+      "reimportRoot": "doc",
+      "reimportTableCount": 0
+    },
+    {
+      "id": "multiple-paragraphs",
+      "mode": "mixed_gfm_html",
+      "warnings": [
+        "complex_table_exported_as_sanitized_html"
+      ],
+      "fallbackNodeCount": 1,
+      "reimportRoot": "doc",
+      "reimportTableCount": 1
+    },
+    {
+      "id": "list-cell",
+      "mode": "mixed_gfm_html",
+      "warnings": [
+        "complex_table_exported_as_sanitized_html"
+      ],
+      "fallbackNodeCount": 1,
+      "reimportRoot": "doc",
+      "reimportTableCount": 1
+    },
+    {
+      "id": "image-cell",
+      "mode": "mixed_gfm_html",
+      "warnings": [
+        "complex_table_exported_as_sanitized_html"
+      ],
+      "fallbackNodeCount": 1,
+      "reimportRoot": "doc",
+      "reimportTableCount": 1
+    },
+    {
+      "id": "spans",
+      "mode": "mixed_gfm_html",
+      "warnings": [
+        "complex_table_exported_as_sanitized_html"
+      ],
+      "fallbackNodeCount": 1,
+      "reimportRoot": "doc",
+      "reimportTableCount": 1
+    }
+  ],
+  "malformedTable": "rejected",
+  "pasteResults": [
+    {
+      "id": "google-docs",
+      "changed": true,
+      "warnings": [],
+      "validation": "valid",
+      "safe": true,
+      "textLength": 8
+    },
+    {
+      "id": "word",
+      "changed": true,
+      "warnings": [],
+      "validation": "valid",
+      "safe": true,
+      "textLength": 9
+    },
+    {
+      "id": "web",
+      "changed": true,
+      "warnings": [],
+      "validation": "valid",
+      "safe": true,
+      "textLength": 10
+    },
+    {
+      "id": "markdown-source",
+      "changed": false,
+      "warnings": [],
+      "validation": "valid",
+      "safe": true,
+      "textLength": 17
+    },
+    {
+      "id": "code",
+      "changed": true,
+      "warnings": [],
+      "validation": "valid",
+      "safe": true,
+      "textLength": 18
+    },
+    {
+      "id": "table",
+      "changed": false,
+      "warnings": [],
+      "validation": "valid",
+      "safe": true,
+      "textLength": 3
+    },
+    {
+      "id": "image",
+      "changed": true,
+      "warnings": [
+        "external_or_invalid_image_quarantined"
+      ],
+      "validation": "valid",
+      "safe": true,
+      "textLength": 3
+    },
+    {
+      "id": "nested-list",
+      "changed": false,
+      "warnings": [],
+      "validation": "needs_review",
+      "safe": true,
+      "textLength": 5
+    },
+    {
+      "id": "styled",
+      "changed": true,
+      "warnings": [],
+      "validation": "valid",
+      "safe": true,
+      "textLength": 6
+    },
+    {
+      "id": "malicious",
+      "changed": true,
+      "warnings": [
+        "unsafe_link_removed"
+      ],
+      "validation": "valid",
+      "safe": true,
+      "textLength": 9
+    }
+  ],
+  "migration": {
+    "status": "migrated",
+    "sourceVersion": 1,
+    "targetVersion": 2,
+    "log": {
+      "from": 1,
+      "to": 2,
+      "changes": [
+        "callout_kind_to_tone",
+        "figure_media_envelope",
+        "structured_source_locator"
+      ],
+      "checksumBefore": "cbdde8ef7c059625744ff2e6b095aae4c35487c68aa8dc9721ff948646cf4a10",
+      "checksumAfter": "77bc3ced4f653a86213b91a6d0a77afe31e9af2a00443cef1bab47d0393b9604"
+    },
+    "htmlLength": 557,
+    "markdownLength": 88,
+    "sourceImmutable": true
+  }
+}

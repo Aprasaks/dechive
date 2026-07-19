@@ -1,0 +1,55 @@
+{
+  "environment": "Neon staging (user-confirmed)",
+  "connection": {
+    "pooledRuntime": true,
+    "directMigration": false,
+    "credentialsLogged": false
+  },
+  "failureInjection": {
+    "status": "partial_failure",
+    "failed": 6,
+    "successfulItemsPreserved": 12
+  },
+  "retry": {
+    "status": "completed_with_warnings",
+    "failedRemaining": 0,
+    "identities": 18,
+    "localizations": 22
+  },
+  "repeat": {
+    "skipped": 18,
+    "duplicateCreated": 0
+  },
+  "changeDetection": {
+    "detected": true,
+    "automaticOverwrite": false
+  },
+  "workflow": {
+    "invalidStatuses": 0,
+    "publishedPointers": 0
+  },
+  "duplicates": {
+    "content": 0,
+    "routes": 0
+  },
+  "repositoryQueries": {
+    "route": true,
+    "knowledge": true,
+    "currentDraft": true,
+    "currentPublishedNull": true,
+    "versionHistory": 1,
+    "translationSiblings": 2,
+    "knowledgeDetails": true,
+    "digestItems": 3,
+    "issues": 2,
+    "sourceQuery": true,
+    "sourceRows": 0,
+    "mediaQuery": true,
+    "mediaRows": 3,
+    "relationQuery": true,
+    "relationRows": 0,
+    "legacyIdentity": true,
+    "importBatchItems": 18
+  },
+  "resultChecksum": "ec350e646d12edaf3b5aa199b52b9ada66bb59c696ee952181711c57ac94cb7b"
+}

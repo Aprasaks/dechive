@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "fixtures": [
+    {"id":"short-archive","path":"content/posts/can-we-learn-directly-from-ai-answers.ko.md","kind":"markdown","risks":["missing_source_urls"]},
+    {"id":"code-heavy-archive","path":"content/posts/prompt-real-world-guide.ko.md","kind":"markdown","risks":["many_code_blocks","many_headings","missing_source_urls"]},
+    {"id":"table-null-images","path":"content/posts/what-null-leaves-behind.ko.md","kind":"markdown","risks":["yaml_null_tag","relative_image_paths","table","code"]},
+    {"id":"multi-image-deep-dive","path":"content/posts/data-analysis-beyond-business.ko.md","kind":"markdown","risks":["relative_image_paths","large_document","missing_source_urls"]},
+    {"id":"heading-heavy-deep-dive-ko","path":"content/posts/ai-era-agile-verification.ko.md","kind":"markdown","translationGroup":"ai-era-agile-verification","risks":["104_headings","relative_image_paths","missing_source_urls"]},
+    {"id":"heading-heavy-deep-dive-en","path":"content/posts/ai-era-agile-verification.en.md","kind":"markdown","translationGroup":"ai-era-agile-verification","risks":["ko_en_heading_drift","relative_image_paths","missing_source_urls"]},
+    {"id":"book-note","path":"src/content/books/knowing-what-we-know.ko.md","kind":"markdown","risks":["quote_locator_missing","bibliographic_metadata"]},
+    {"id":"ai-update-digest","path":"src/data/aiUpdates.ts","kind":"typescript-data","date":"2026-07-02","risks":["multiple_changes_per_item","source_granularity"]}
+  ]
+}

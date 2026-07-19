@@ -1,4 +1,8 @@
+'use client';
+
+import * as React from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { ArrowRight, X } from 'lucide-react';
 import { MOBILE_NAV_ITEMS } from '@/components/home/homeNavigation';
 
@@ -9,51 +13,77 @@ export default function HomeMobileMenu({
   isOpen: boolean;
   onClose: () => void;
 }) {
+  const pathname = usePathname();
+  const closeButtonRef = React.useRef<HTMLButtonElement>(null);
+
+  React.useEffect(() => {
+    if (!isOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    closeButtonRef.current?.focus();
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onClose();
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen, onClose]);
+
   return (
     <div
-      className={`fixed inset-0 z-[999] min-h-dvh overflow-y-auto border-b border-[#d7ad73]/10 bg-[rgba(3,3,3,0.98)] px-5 py-5 shadow-[0_24px_80px_rgba(0,0,0,0.55)] backdrop-blur-xl transition duration-300 lg:hidden ${
-        isOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0 pointer-events-none'
-      }`}
+      className={`${isOpen ? 'fixed' : 'hidden'} inset-0 z-[999] overflow-y-auto bg-surface-elevated px-5 py-5 lg:hidden`}
+      role="dialog"
+      aria-modal="true"
+      aria-label="모바일 메뉴"
+      aria-hidden={!isOpen}
+      inert={!isOpen ? true : undefined}
     >
-      <div className="flex items-start justify-between gap-4">
-        <Link href="/" onClick={onClose} className="inline-flex">
-          <span className="font-[family-name:var(--font-header-serif)] text-[1.9rem] leading-none tracking-[0.1em] text-white">
+      <div className="mx-auto max-w-lg">
+        <div className="flex items-center justify-between border-b border-border-subtle pb-5">
+          <Link href="/" onClick={onClose} className="text-xl font-bold tracking-[0.14em]">
             DECHIVE
-          </span>
-        </Link>
-        <button
-          type="button"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/12 text-white/78 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f6d29b]"
-          onClick={onClose}
-          aria-label="Close navigation"
-        >
-          <X size={20} />
-        </button>
-      </div>
+          </Link>
+          <button
+            ref={closeButtonRef}
+            type="button"
+            className="inline-flex h-11 w-11 items-center justify-center border border-border text-secondary-foreground transition-colors hover:border-accent hover:text-accent"
+            onClick={onClose}
+            aria-label="메뉴 닫기"
+          >
+            <X size={20} />
+          </button>
+        </div>
 
-      <nav className="mt-14 flex flex-col gap-3 border-t border-[#d7ad73]/10" aria-label="Mobile navigation">
-        {MOBILE_NAV_ITEMS.map((item) => (
-          item.disabled ? (
-            <span
-              key={item.label}
-              className="flex items-center justify-between border-b border-[#d7ad73]/10 py-5 text-sm font-semibold tracking-[0.18em] text-white/28 uppercase"
-              aria-disabled="true"
-            >
-              {item.label}
-            </span>
-          ) : (
-            <Link
-              key={item.label}
-              href={item.href}
-              onClick={onClose}
-              className="flex items-center justify-between border-b border-[#d7ad73]/10 py-5 text-sm font-semibold tracking-[0.18em] text-white/82 uppercase focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f6d29b]"
-            >
-              {item.label}
-              <ArrowRight size={16} className="text-[#c89b62]" />
-            </Link>
-          )
-        ))}
-      </nav>
+        <nav className="mt-8" aria-label="모바일 주 메뉴">
+          <ul className="border-t border-border-subtle">
+            {MOBILE_NAV_ITEMS.map((item) => (
+              <li key={item.label} className="border-b border-border-subtle">
+                {item.disabled ? (
+                  <span className="flex min-h-16 cursor-not-allowed items-center justify-between text-base text-muted-foreground" aria-disabled="true">
+                    <span>{item.label}</span>
+                    <span className="text-xs">준비 중</span>
+                  </span>
+                ) : (
+                  <Link
+                    href={item.href ?? '/'}
+                    onClick={onClose}
+                    aria-current={pathname === item.href || pathname.startsWith(`${item.href}/`) ? 'page' : undefined}
+                    className={`flex min-h-16 items-center justify-between text-base font-medium transition-colors hover:text-accent ${pathname === item.href || pathname.startsWith(`${item.href}/`) ? 'text-accent' : 'text-foreground'}`}
+                  >
+                    {item.label}
+                    <ArrowRight size={17} aria-hidden="true" />
+                  </Link>
+                )}
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
     </div>
   );
 }

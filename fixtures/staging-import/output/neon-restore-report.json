@@ -1,0 +1,29 @@
+{
+  "source": "Neon staging logical backup",
+  "target": "isolated local PostgreSQL restore database",
+  "neonTemporaryRestoreBranch": "blocked_not_provisioned",
+  "countsEqual": true,
+  "checksumEqual": true,
+  "immutableTriggerEqual": true,
+  "counts": {
+    "schema_migrations": 4,
+    "contents": 15,
+    "content_localizations": 22,
+    "content_versions": 22,
+    "knowledge_details": 16,
+    "ai_updates": 6,
+    "update_digests": 2,
+    "update_digest_items": 6,
+    "content_routes": 18,
+    "sources": 6,
+    "content_sources": 6,
+    "media_assets": 29,
+    "media_usages": 29,
+    "legacy_identities": 18,
+    "import_batches": 2,
+    "import_items": 36,
+    "editorial_issues": 2,
+    "editorial_issue_items": 2
+  },
+  "credentialsLogged": false
+}

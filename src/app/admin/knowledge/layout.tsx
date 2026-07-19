@@ -1,0 +1,5 @@
+import type { ReactNode } from 'react';
+import { requireOwnerPage } from '@/features/admin/owner-auth';
+import { createAdminDatabase } from '@/services/knowledge-drafts';
+export const dynamic='force-dynamic';
+export default async function KnowledgeAdminLayout({children}:{children:ReactNode}){const {pool}=createAdminDatabase();try{await requireOwnerPage(pool);return children}finally{await pool.end()}}

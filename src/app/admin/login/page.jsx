@@ -1,6 +1,6 @@
-import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { ADMIN_SESSION_COOKIE, isValidAdminSession } from '@/lib/adminAuth';
+import { getAuthorizedOwnerActor } from '@/features/admin/owner-auth';
+import { createAdminDatabase } from '@/services/knowledge-drafts';
 import LoginForm from './LoginForm';
 
 export const metadata = {
@@ -11,12 +11,8 @@ export const metadata = {
 export const dynamic = 'force-dynamic';
 
 export default async function AdminLoginPage() {
-  const cookieStore = await cookies();
-  const session = cookieStore.get(ADMIN_SESSION_COOKIE)?.value;
-
-  if (isValidAdminSession(session)) {
-    redirect('/admin/analytics');
-  }
+  const { pool } = createAdminDatabase();
+  try { if (await getAuthorizedOwnerActor(pool)) redirect('/admin'); } finally { await pool.end(); }
 
   return (
     <main className="min-h-dvh bg-stone-950 text-zinc-100">
@@ -28,7 +24,7 @@ export default async function AdminLoginPage() {
           관리자 입장
         </h1>
         <p className="mt-5 text-sm leading-7 text-zinc-500">
-          오늘 Dechive에 남은 방문 흔적을 확인하기 위한 조용한 관측실입니다.
+          Dechive 콘텐츠와 방문 분석을 관리하는 owner 전용 공간입니다.
         </p>
         <LoginForm />
       </div>

@@ -1,0 +1,14 @@
+{
+  "cases": [
+    {"id":"google-docs","html":"<b style=\"font-weight:700\">제목</b><p style=\"margin:0\">문단</p><ul><li>항목</li></ul>"},
+    {"id":"word","html":"<p class=\"MsoNormal\"><span style=\"font-family:Calibri\">Word 문단</span></p><table style=\"width:100%\"><tr><td>셀</td></tr></table>"},
+    {"id":"web","html":"<article><h2>웹 제목</h2><p>본문 <a href=\"https://example.com\">링크</a></p></article>"},
+    {"id":"markdown-source","html":"<pre><code># Markdown source</code></pre>"},
+    {"id":"code","html":"<pre><code class=\"language-js\">const safe = true;</code></pre>"},
+    {"id":"table","html":"<table><thead><tr><th>A</th></tr></thead><tbody><tr><td>B</td></tr></tbody></table>"},
+    {"id":"image","html":"<p>이미지 <img src=\"https://tracker.example/a.png\" alt=\"외부\"></p>"},
+    {"id":"nested-list","html":"<ol><li>상위<ul><li>하위</li></ul></li></ol>"},
+    {"id":"styled","html":"<h3 style=\"color:red\" onclick=\"alert(1)\">스타일 제목</h3>"},
+    {"id":"malicious","html":"<p onmouseover=\"alert(1)\">안전 텍스트</p><script>alert(1)</script><a href=\"javascript:alert(1)\">링크</a>"}
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "target": "about-20-localizations",
+  "knowledge": [
+    {"kind":"archive","slug":"what-null-leaves-behind","locales":["ko","en"],"risks":["yaml_null","table","code","relative_images"]},
+    {"kind":"archive","slug":"prompt-real-world-guide","locales":["ko","en"],"risks":["45_code_blocks","long"]},
+    {"kind":"archive","slug":"can-we-learn-directly-from-ai-answers","locales":["ko","en"],"risks":["source_missing","relative_image"]},
+    {"kind":"archive","slug":"llm-architecture","locales":["ko","en"],"risks":["code","technical"]},
+    {"kind":"deep_dive","slug":"ai-era-agile-verification","locales":["ko","en"],"risks":["104_headings","translation_drift","relative_images"]},
+    {"kind":"deep_dive","slug":"data-analysis-beyond-business","locales":["ko","en"],"risks":["longest_document","multiple_images"]},
+    {"kind":"deep_dive","slug":"can-ai-replace-learning","locales":["ko","en"],"risks":["source_missing"]},
+    {"kind":"book","slug":"knowing-what-we-know","locales":["ko"],"risks":["locator_missing"]},
+    {"kind":"book","slug":"dual-brain","locales":["ko"],"risks":["publisher_missing"]}
+  ],
+  "digests": ["2026-07-02", "2026-07-03"],
+  "issues": ["2026-06-15", "2026-06-16"]
+}

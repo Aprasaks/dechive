@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 
 export default function LoginForm() {
   const router = useRouter();
-  const [id, setId] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -19,7 +19,7 @@ export default function LoginForm() {
       const response = await fetch('/api/admin/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id, password }),
+        body: JSON.stringify({ email, password }),
       });
 
       if (!response.ok) {
@@ -27,7 +27,7 @@ export default function LoginForm() {
         return;
       }
 
-      router.push('/admin/analytics');
+      router.push('/admin');
       router.refresh();
     } catch {
       setError('잠시 후 다시 시도해 주세요.');
@@ -39,14 +39,15 @@ export default function LoginForm() {
   return (
     <form onSubmit={handleSubmit} className="mt-10 space-y-5">
       <label className="block">
-        <span className="text-xs font-medium tracking-[0.18em] text-zinc-500 uppercase">ID</span>
+        <span className="text-xs font-medium tracking-[0.18em] text-zinc-500 uppercase">Email</span>
         <input
-          name="id"
-          value={id}
-          onChange={(event) => setId(event.target.value)}
+          name="email"
+          type="email"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
           autoComplete="username"
           className="mt-2 w-full border border-white/10 bg-black/30 px-4 py-3 text-sm text-zinc-100 outline-none transition-colors placeholder:text-zinc-700 focus:border-amber-500/45"
-          placeholder="admin"
+          placeholder="owner@example.com"
           required
         />
       </label>

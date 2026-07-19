@@ -1,23 +1,37 @@
+'use client';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import type { HomeNavItem } from '@/components/home/homeNavigation';
 
-export default function HomeNavLink({ item, onClick }: { item: HomeNavItem; onClick?: () => void }) {
+export default function HomeNavLink({
+  item,
+  onClick,
+}: {
+  item: HomeNavItem;
+  onClick?: () => void;
+}) {
+  const pathname = usePathname();
   if (item.disabled) {
     return (
       <span
-        className="inline-flex min-h-10 cursor-default items-center rounded-full px-3 text-[11px] font-semibold tracking-[0.14em] text-white/28 uppercase"
+        className="text-muted-foreground inline-flex min-h-11 cursor-not-allowed items-center px-2 text-sm font-medium"
         aria-disabled="true"
+        title="준비 중"
       >
         {item.label}
       </span>
     );
   }
 
+  const active =
+    item.href !== null &&
+    (pathname === item.href || pathname.startsWith(`${item.href}/`));
   return (
     <Link
-      href={item.href}
+      href={item.href ?? '/'}
       onClick={onClick}
-      className="inline-flex min-h-10 items-center rounded-full px-3 text-[11px] font-semibold tracking-[0.14em] text-white/62 uppercase transition-colors hover:bg-white/6 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f6d29b]"
+      aria-current={active ? 'page' : undefined}
+      className={`inline-flex min-h-11 items-center border-b-2 px-2 text-sm font-medium transition-colors ${active ? 'border-accent text-accent' : 'text-secondary-foreground hover:text-accent border-transparent'}`}
     >
       {item.label}
     </Link>

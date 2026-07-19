@@ -1,0 +1,36 @@
+{
+  "status": "safe_for_staging",
+  "credentials": {
+    "pooled": "configured",
+    "direct": "configured",
+    "valuesLogged": false
+  },
+  "connectionRoles": {
+    "pooledMarker": true,
+    "directMarker": true,
+    "sameEndpoint": true,
+    "sameDatabase": true,
+    "sameRole": true,
+    "sslRequired": true
+  },
+  "connection": {
+    "pooledReachable": true,
+    "directReachable": true,
+    "databaseIdentityMatches": true,
+    "roleIdentityMatches": true,
+    "postgresMajor": 17,
+    "recoveryState": false
+  },
+  "safetyEvidence": {
+    "userDeclaredProject": "dechive-content",
+    "userDeclaredBranch": "staging",
+    "userDeclaredParent": "production",
+    "userDeclaredRegion": "AWS Singapore ap-southeast-1",
+    "endpointPairMatches": true,
+    "databaseAndRoleMatch": true,
+    "productionEnvironmentVariablesUsed": false,
+    "databaseNameContainsProductionMarker": false,
+    "roleNameContainsProductionMarker": false
+  },
+  "safeForStaging": true
+}

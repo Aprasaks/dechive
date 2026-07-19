@@ -5,23 +5,29 @@ import Link from 'next/link';
 import { Menu } from 'lucide-react';
 import HomeMobileMenu from '@/components/home/HomeMobileMenu';
 import HomeNavLink from '@/components/home/HomeNavLink';
-import LivingTimeCounter from '@/components/home/LivingTimeCounter';
 import { MOBILE_NAV_ITEMS } from '@/components/home/homeNavigation';
 
 export default function Header() {
   const [isOpen, setIsOpen] = React.useState(false);
+  const menuButtonRef = React.useRef<HTMLButtonElement>(null);
+
+  const closeMenu = React.useCallback(() => {
+    setIsOpen(false);
+    window.requestAnimationFrame(() => menuButtonRef.current?.focus());
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-[#d7ad73]/10 bg-[#030303]/92 backdrop-blur-xl">
-      <div className="relative mx-auto grid min-h-16 max-w-7xl grid-cols-[2.25rem_minmax(0,1fr)_2.25rem] items-center gap-3 px-4 py-3 sm:min-h-18 sm:grid-cols-[2.5rem_minmax(0,1fr)_2.5rem] sm:px-6 lg:grid-cols-[auto_1fr_auto] lg:gap-9 lg:px-8">
-        <Link href="/" className="group col-start-2 flex min-w-0 items-center justify-center lg:col-start-1 lg:justify-start" aria-label="Dechive home">
-          <span className="font-[family-name:var(--font-header-serif)] text-[1.45rem] leading-none font-medium tracking-[0.12em] text-white transition-colors group-hover:text-[#f6d29b] sm:text-[2rem]">
-            DECHIVE
-          </span>
+    <header className="sticky top-0 z-50 border-b border-border-subtle bg-background/95 text-foreground backdrop-blur-md">
+      <a href="#main-content" className="sr-only z-[1000] bg-surface-elevated px-4 py-3 text-accent focus:not-sr-only focus:absolute focus:left-4 focus:top-4">
+        본문으로 바로가기
+      </a>
+      <div className="page-shell flex min-h-18 items-center justify-between gap-4 py-3">
+        <Link href="/" className="shrink-0 text-[1.25rem] font-bold leading-none tracking-[0.14em] sm:text-[1.4rem]" aria-label="Dechive 홈">
+          DECHIVE
         </Link>
 
-        <nav className="hidden justify-self-center lg:block" aria-label="Main navigation">
-          <ul className="flex items-center justify-center gap-7 xl:gap-10">
+        <nav className="hidden min-w-0 lg:block" aria-label="주 메뉴">
+          <ul className="flex items-center gap-3 xl:gap-6">
             {MOBILE_NAV_ITEMS.map((item) => (
               <li key={item.label}>
                 <HomeNavLink item={item} />
@@ -30,16 +36,13 @@ export default function Header() {
           </ul>
         </nav>
 
-        <div className="hidden justify-end lg:flex">
-          <LivingTimeCounter />
-        </div>
-
-        <div className="col-start-3 flex justify-end lg:hidden">
+        <div className="flex items-center lg:hidden">
           <button
+            ref={menuButtonRef}
             type="button"
-            className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/12 text-white/78 transition-colors hover:border-[#c89b62]/60 hover:text-[#f6d29b] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f6d29b] sm:h-10 sm:w-10"
+            className="inline-flex h-11 w-11 items-center justify-center border border-border text-secondary-foreground transition-colors hover:border-accent hover:text-accent"
             onClick={() => setIsOpen(true)}
-            aria-label="Open navigation"
+            aria-label="메뉴 열기"
             aria-expanded={isOpen}
           >
             <Menu size={20} />
@@ -47,7 +50,7 @@ export default function Header() {
         </div>
       </div>
 
-      <HomeMobileMenu isOpen={isOpen} onClose={() => setIsOpen(false)} />
+      <HomeMobileMenu isOpen={isOpen} onClose={closeMenu} />
     </header>
   );
 }

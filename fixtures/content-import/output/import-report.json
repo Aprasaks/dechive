@@ -1,0 +1,4391 @@
+{
+  "batchId": "63aa5dfc-97f5-442c-b65b-a2b37c9fed56",
+  "batchKey": "stage8-dry-run",
+  "importerVersion": "1.0.0-stage8",
+  "selectedSources": [
+    {
+      "id": "archive-ko",
+      "status": "imported_with_warnings",
+      "sourceChecksum": "d44ec2bc5c6ae500cfb5531f5cbbf8aae7a0ad9765bd5068fe01790bdc96c031",
+      "stableKey": "archive:ko:what-null-leaves-behind",
+      "sourcePath": "content/posts/what-null-leaves-behind.ko.md",
+      "createdIds": {
+        "contentId": "75390544-6cb3-4cd8-ba5d-38940c516c09",
+        "localizationId": "0dd01053-887d-48b5-9709-fe9b8fa96841",
+        "versionId": "96b53df0-d761-4790-9ee3-d20dd7fc73b2"
+      },
+      "warnings": [
+        "YAML null tag: needs_review",
+        "source_missing",
+        "unresolved_media_reference"
+      ],
+      "errors": [],
+      "counts": {
+        "headings": 5,
+        "headingLevels": [
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "anchors": [
+          "null은-비어-있음이-아니다",
+          "등호로-비교할-수-없는-이유",
+          "알-수-없음은-전파된다",
+          "집계에서는-다르게-다뤄진다",
+          "비어-있는-값이-남기는-문제"
+        ],
+        "codeBlocks": 9,
+        "codeLanguages": [
+          "sql",
+          "sql",
+          "sql",
+          "sql",
+          "sql",
+          "sql",
+          "sql",
+          "sql",
+          "sql"
+        ],
+        "tables": 1,
+        "images": 3,
+        "imagePaths": [
+          "null-vs-zero-vs-empty.webp",
+          "null-propagation.webp",
+          "count-star-vs-count-col.webp"
+        ],
+        "links": 0,
+        "textHash": "260e05319c08a395cfb7216fbd23f8218f01876e2d1410cdf80ff4d57292875a"
+      },
+      "route": "/archive/what-null-leaves-behind",
+      "slug": "what-null-leaves-behind",
+      "locale": "ko",
+      "legacyPublishedAt": "2026-05-10T00:00:00.000Z"
+    },
+    {
+      "id": "archive-en",
+      "status": "imported_with_warnings",
+      "sourceChecksum": "e098126429e1e51bb8ba61588578d665529226bc511bf9f243934742af630f2a",
+      "stableKey": "archive:en:what-null-leaves-behind",
+      "sourcePath": "content/posts/what-null-leaves-behind.en.md",
+      "createdIds": {
+        "contentId": "75390544-6cb3-4cd8-ba5d-38940c516c09",
+        "localizationId": "b77652e3-74f0-4d9a-9a9c-92624ee4cf73",
+        "versionId": "dcbe1931-2f42-42d7-b72f-f163ebe91942"
+      },
+      "warnings": [
+        "YAML null tag: needs_review",
+        "source_missing",
+        "unresolved_media_reference"
+      ],
+      "errors": [],
+      "counts": {
+        "headings": 6,
+        "headingLevels": [
+          1,
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "anchors": [
+          "creating-a-table-and-inserting-member-data",
+          "null-is-not-empty",
+          "why-you-cant-compare-with-equals",
+          "unknown-propagates",
+          "aggregate-functions-handle-it-differently",
+          "problems-left-by-empty-values"
+        ],
+        "codeBlocks": 9,
+        "codeLanguages": [
+          "sql",
+          "sql",
+          "sql",
+          "sql",
+          "sql",
+          "sql",
+          "sql",
+          "sql",
+          "sql"
+        ],
+        "tables": 1,
+        "images": 3,
+        "imagePaths": [
+          "null-vs-zero-vs-empty.webp",
+          "null-propagation.webp",
+          "count-star-vs-count-col.webp"
+        ],
+        "links": 0,
+        "textHash": "b796beb573af5e9716562802eae57a716b7bed76d76782f77bca3825ad2baead"
+      },
+      "route": "/en/archive/what-null-leaves-behind",
+      "slug": "what-null-leaves-behind",
+      "locale": "en",
+      "legacyPublishedAt": "2026-05-10T00:00:00.000Z"
+    },
+    {
+      "id": "prompt-ko",
+      "status": "imported_with_warnings",
+      "sourceChecksum": "26ac6687ec545a4e9d80e45efcd4446ed42020f21fe78b155acedcd9f89357b5",
+      "stableKey": "archive:ko:prompt-real-world-guide",
+      "sourcePath": "content/posts/prompt-real-world-guide.ko.md",
+      "createdIds": {
+        "contentId": "453b40af-b9c0-44a5-95bb-7348365e5537",
+        "localizationId": "e44f62b3-955a-4140-8b0f-93dce171d170",
+        "versionId": "79201db2-6e78-4139-808b-91a530515177"
+      },
+      "warnings": [
+        "source_missing"
+      ],
+      "errors": [],
+      "counts": {
+        "headings": 62,
+        "headingLevels": [
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          2,
+          3,
+          3,
+          2,
+          3,
+          3,
+          2
+        ],
+        "anchors": [
+          "1-코드-수정-디버깅",
+          "흐릿한-요청",
+          "기준을-넣은-요청",
+          "바로-쓸-수-있는-틀",
+          "2-코드-리뷰",
+          "흐릿한-요청-2",
+          "기준을-넣은-요청-2",
+          "바로-쓸-수-있는-틀-2",
+          "3-글쓰기-블로그-아티클",
+          "흐릿한-요청-3",
+          "기준을-넣은-요청-3",
+          "바로-쓸-수-있는-틀-3",
+          "4-sns-소셜-미디어-콘텐츠",
+          "흐릿한-요청-4",
+          "기준을-넣은-요청-4",
+          "바로-쓸-수-있는-틀-4",
+          "5-유튜브-쇼츠-대본",
+          "흐릿한-요청-5",
+          "기준을-넣은-요청-5",
+          "바로-쓸-수-있는-틀-5",
+          "6-이메일-업무-문서-작성",
+          "흐릿한-요청-6",
+          "기준을-넣은-요청-6",
+          "바로-쓸-수-있는-틀-6",
+          "7-요약",
+          "흐릿한-요청-7",
+          "기준을-넣은-요청-7",
+          "바로-쓸-수-있는-틀-7",
+          "8-번역",
+          "흐릿한-요청-8",
+          "기준을-넣은-요청-8",
+          "바로-쓸-수-있는-틀-8",
+          "9-이미지-분석",
+          "흐릿한-요청-9",
+          "기준을-넣은-요청-9",
+          "바로-쓸-수-있는-틀-9",
+          "10-브레인스토밍-아이디어-발상",
+          "흐릿한-요청-10",
+          "기준을-넣은-요청-10",
+          "바로-쓸-수-있는-틀-10",
+          "11-데이터-분석-엑셀",
+          "흐릿한-요청-11",
+          "기준을-넣은-요청-11",
+          "바로-쓸-수-있는-틀-11",
+          "12-학습-개념-이해",
+          "흐릿한-요청-12",
+          "기준을-넣은-요청-12",
+          "바로-쓸-수-있는-틀-12",
+          "13-면접-준비",
+          "흐릿한-요청-13",
+          "기준을-넣은-요청-13",
+          "바로-쓸-수-있는-틀-13",
+          "14-회의록-작성-정리",
+          "흐릿한-요청-14",
+          "기준을-넣은-요청-14",
+          "15-프레젠테이션-발표-자료",
+          "흐릿한-요청-15",
+          "기준을-넣은-요청-15",
+          "16-글-교정-피드백",
+          "흐릿한-요청-16",
+          "기준을-넣은-요청-16",
+          "좋은-프롬프트의-공통-기준"
+        ],
+        "codeBlocks": 45,
+        "codeLanguages": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "tables": 0,
+        "images": 0,
+        "imagePaths": [],
+        "links": 0,
+        "textHash": "e27e0f5be4eeac65b0f475164b4e7d630588d478d6630fc8f7a1c4d6f26c3db4"
+      },
+      "route": "/archive/prompt-real-world-guide",
+      "slug": "prompt-real-world-guide",
+      "locale": "ko",
+      "legacyPublishedAt": "2026-04-26T00:00:00.000Z"
+    },
+    {
+      "id": "prompt-en",
+      "status": "imported_with_warnings",
+      "sourceChecksum": "b4f0151101d6a26f81bacb474e6e3af35058ce763f65cab178d1944093db148b",
+      "stableKey": "archive:en:prompt-real-world-guide",
+      "sourcePath": "content/posts/prompt-real-world-guide.en.md",
+      "createdIds": {
+        "contentId": "453b40af-b9c0-44a5-95bb-7348365e5537",
+        "localizationId": "35fd5a00-09c2-4f19-bc71-458ea127ea21",
+        "versionId": "a0574170-aed1-42e6-8345-c6c730560d81"
+      },
+      "warnings": [
+        "source_missing"
+      ],
+      "errors": [],
+      "counts": {
+        "headings": 62,
+        "headingLevels": [
+          1,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          2,
+          3,
+          3,
+          2,
+          3,
+          3,
+          2,
+          3,
+          3,
+          2
+        ],
+        "anchors": [
+          "asking-ai-questions-well",
+          "1-code-fixes-debugging",
+          "vague-request",
+          "request-with-criteria",
+          "ready-to-use-template",
+          "2-code-review",
+          "vague-request-2",
+          "request-with-criteria-2",
+          "ready-to-use-template-2",
+          "3-writing-blog-articles",
+          "vague-request-3",
+          "request-with-criteria-3",
+          "ready-to-use-template-3",
+          "4-sns-social-media-content",
+          "vague-request-4",
+          "request-with-criteria-4",
+          "ready-to-use-template-4",
+          "5-youtube-shorts-script",
+          "vague-request-5",
+          "request-with-criteria-5",
+          "ready-to-use-template-5",
+          "6-email-business-documents",
+          "vague-request-6",
+          "request-with-criteria-6",
+          "ready-to-use-template-6",
+          "7-summarization",
+          "vague-request-7",
+          "request-with-criteria-7",
+          "ready-to-use-template-7",
+          "8-translation",
+          "vague-request-8",
+          "request-with-criteria-8",
+          "ready-to-use-template-8",
+          "9-image-analysis",
+          "vague-request-9",
+          "request-with-criteria-9",
+          "ready-to-use-template-9",
+          "10-brainstorming-ideation",
+          "vague-request-10",
+          "request-with-criteria-10",
+          "ready-to-use-template-10",
+          "11-data-analysis-excel",
+          "vague-request-11",
+          "request-with-criteria-11",
+          "ready-to-use-template-11",
+          "12-learning-concept-understanding",
+          "vague-request-12",
+          "request-with-criteria-12",
+          "ready-to-use-template-12",
+          "13-interview-preparation",
+          "vague-request-13",
+          "request-with-criteria-13",
+          "14-meeting-notes-organization",
+          "vague-request-14",
+          "request-with-criteria-14",
+          "15-presentation-presentation-materials",
+          "vague-request-15",
+          "request-with-criteria-15",
+          "16-proofreading-feedback",
+          "vague-request-16",
+          "request-with-criteria-16",
+          "common-standards-for-good-prompts"
+        ],
+        "codeBlocks": 44,
+        "codeLanguages": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "tables": 0,
+        "images": 0,
+        "imagePaths": [],
+        "links": 0,
+        "textHash": "2a89816231a52355c55e752bcabf72274e06bb4588bc58b35db53c9fd43db81e"
+      },
+      "route": "/en/archive/prompt-real-world-guide",
+      "slug": "prompt-real-world-guide",
+      "locale": "en",
+      "legacyPublishedAt": "2026-04-26T00:00:00.000Z"
+    },
+    {
+      "id": "learn-ko",
+      "status": "imported_with_warnings",
+      "sourceChecksum": "8a018b82ef4a1611c4531373b47d355d888efb057031bced9ced1786d28f50d4",
+      "stableKey": "archive:ko:can-we-learn-directly-from-ai-answers",
+      "sourcePath": "content/posts/can-we-learn-directly-from-ai-answers.ko.md",
+      "createdIds": {
+        "contentId": "df6b1f8f-ba9a-475d-9c9d-426dd2a3c059",
+        "localizationId": "35ec8cff-2d79-4a8b-86ff-45d418b441c8",
+        "versionId": "677358a7-6dd3-449c-ba7a-093aa8f21d66"
+      },
+      "warnings": [
+        "source_missing",
+        "unresolved_media_reference"
+      ],
+      "errors": [],
+      "counts": {
+        "headings": 4,
+        "headingLevels": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "anchors": [
+          "잘-설명하는-답이-항상-맞는-답은-아니다",
+          "설명이-유창하면-이해한-것처럼-느껴진다",
+          "배움은-답을-받는-순간에-끝나지-않는다",
+          "ai의-답을-지식으로-바꾸는-기준"
+        ],
+        "codeBlocks": 0,
+        "codeLanguages": [],
+        "tables": 0,
+        "images": 1,
+        "imagePaths": [
+          "./ai-learning-verification-desk.webp"
+        ],
+        "links": 0,
+        "textHash": "4b29e0c20031df08639b8172f2bff77e8ff5201acc98add936ae820291aca409"
+      },
+      "route": "/archive/can-we-learn-directly-from-ai-answers",
+      "slug": "can-we-learn-directly-from-ai-answers",
+      "locale": "ko",
+      "legacyPublishedAt": "2026-06-26T00:00:00.000Z"
+    },
+    {
+      "id": "learn-en",
+      "status": "imported_with_warnings",
+      "sourceChecksum": "c3c68bf1ff79b65b53e2ff43b5833f76ab78d86c79484aea29584b02e512f83a",
+      "stableKey": "archive:en:can-we-learn-directly-from-ai-answers",
+      "sourcePath": "content/posts/can-we-learn-directly-from-ai-answers.en.md",
+      "createdIds": {
+        "contentId": "df6b1f8f-ba9a-475d-9c9d-426dd2a3c059",
+        "localizationId": "bd9d68d5-d3e1-471e-9a96-a8d5df4bbfb1",
+        "versionId": "7e7d1d39-daf1-4463-a06c-407e3bdaf86c"
+      },
+      "warnings": [
+        "source_missing",
+        "unresolved_media_reference"
+      ],
+      "errors": [],
+      "counts": {
+        "headings": 4,
+        "headingLevels": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "anchors": [
+          "a-well-explained-answer-is-not-always-a-correct-answer",
+          "a-fluent-explanation-feels-like-understanding",
+          "learning-does-not-end-when-you-receive-an-answer",
+          "criteria-for-turning-ai-answers-into-knowledge"
+        ],
+        "codeBlocks": 0,
+        "codeLanguages": [],
+        "tables": 0,
+        "images": 1,
+        "imagePaths": [
+          "./ai-learning-verification-desk.webp"
+        ],
+        "links": 0,
+        "textHash": "3e91523f461fa80613af28aff3889f1f19dd0ed4893a0eef5acb7f754d50257f"
+      },
+      "route": "/en/archive/can-we-learn-directly-from-ai-answers",
+      "slug": "can-we-learn-directly-from-ai-answers",
+      "locale": "en",
+      "legacyPublishedAt": "2026-06-26T00:00:00.000Z"
+    },
+    {
+      "id": "llm-ko",
+      "status": "imported_with_warnings",
+      "sourceChecksum": "5e8dfb4c02beb570175e672f8b7047898dbfe0536675c93e379cc07478c5185c",
+      "stableKey": "archive:ko:llm-architecture",
+      "sourcePath": "content/posts/llm-architecture.ko.md",
+      "createdIds": {
+        "contentId": "3b0e14bc-6d4e-4087-af77-7d882f611b6b",
+        "localizationId": "88acd96d-71ca-4cdd-848e-40d96a97b2bd",
+        "versionId": "7b9a04b5-34a6-41b4-9f58-966f9de84eb5"
+      },
+      "warnings": [
+        "source_missing"
+      ],
+      "errors": [],
+      "counts": {
+        "headings": 4,
+        "headingLevels": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "anchors": [
+          "llm은-문장을-사람처럼-읽지-않는다",
+          "모든-단어가-서로를-본다",
+          "같은-질문에-다른-답이-나오는-이유",
+          "프롬프트가-작동하는-이유"
+        ],
+        "codeBlocks": 0,
+        "codeLanguages": [],
+        "tables": 0,
+        "images": 0,
+        "imagePaths": [],
+        "links": 0,
+        "textHash": "0b59c0850c6630aeb314d6a221b4ea51311a6a12e8893f4ec15e35d1fbcb98da"
+      },
+      "route": "/archive/llm-architecture",
+      "slug": "llm-architecture",
+      "locale": "ko",
+      "legacyPublishedAt": "2026-04-05T00:00:00.000Z"
+    },
+    {
+      "id": "llm-en",
+      "status": "imported_with_warnings",
+      "sourceChecksum": "0d6b1ae81da0b32099bdca8a11914a75f16401ec8067707809abb49d70ae5c08",
+      "stableKey": "archive:en:llm-architecture",
+      "sourcePath": "content/posts/llm-architecture.en.md",
+      "createdIds": {
+        "contentId": "3b0e14bc-6d4e-4087-af77-7d882f611b6b",
+        "localizationId": "4e56edb7-f663-4db5-92de-c7f15df6c63b",
+        "versionId": "3a1e25fb-b183-4a08-b856-da2158905095"
+      },
+      "warnings": [
+        "source_missing"
+      ],
+      "errors": [],
+      "counts": {
+        "headings": 5,
+        "headingLevels": [
+          1,
+          2,
+          2,
+          2,
+          2
+        ],
+        "anchors": [
+          "understanding-how-llm-actually-works",
+          "llm-does-not-read-sentences-like-humans-do",
+          "every-word-sees-every-other-word",
+          "why-the-same-question-produces-different-answers",
+          "why-prompts-work"
+        ],
+        "codeBlocks": 0,
+        "codeLanguages": [],
+        "tables": 0,
+        "images": 0,
+        "imagePaths": [],
+        "links": 0,
+        "textHash": "7b347c1a18a0f3bddc0c8efc17721a1530aa5f4f18e9c60a3842120044b3162f"
+      },
+      "route": "/en/archive/llm-architecture",
+      "slug": "llm-architecture",
+      "locale": "en",
+      "legacyPublishedAt": "2026-04-05T00:00:00.000Z"
+    },
+    {
+      "id": "deep-ko",
+      "status": "imported_with_warnings",
+      "sourceChecksum": "f8ef16f72f0971de91434f2f81278a9b9ad32121d80a35999e3fa2c41e543717",
+      "stableKey": "deep_dive:ko:ai-era-agile-verification",
+      "sourcePath": "content/posts/ai-era-agile-verification.ko.md",
+      "createdIds": {
+        "contentId": "cb470011-c9b9-4252-91ab-7748996134de",
+        "localizationId": "b68771a5-66e9-4a97-b95a-8c1fb4c47207",
+        "versionId": "dc42f1ab-1a08-48ec-b248-12aa1e89453f"
+      },
+      "warnings": [
+        "source_missing",
+        "unresolved_media_reference"
+      ],
+      "errors": [],
+      "counts": {
+        "headings": 104,
+        "headingLevels": [
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          2,
+          2
+        ],
+        "anchors": [
+          "이-글을-읽는-방법",
+          "2026년에-agile을-다시-묻는-이유",
+          "바이브-코딩-시대의-개발-루프",
+          "생성-속도보다-검증-능력이-병목이-됐다",
+          "ai-에이전트가-들어온-팀의-새로운-긴장",
+          "그래서-agile은-2026년에-더-필요하다",
+          "agile-이전-waterfall이-만들어낸-문제",
+          "늦은-피드백이-만드는-비용",
+          "chaos-report와-소프트웨어-프로젝트-실패율",
+          "문서가-현실을-대체한-문제",
+          "agile-manifesto-원문이-실제로-말하는-것",
+          "4가지-가치",
+          "12가지-원칙",
+          "manifesto가-나온-맥락",
+          "agile의-주요-방법론들",
+          "scrum",
+          "kanban",
+          "xp-extreme-programming",
+          "safe와-대규모-agile의-문제",
+          "agile이-빠른-개발-방법론으로-오해된-이유",
+          "도구가-목적을-대체한-문제",
+          "certified-scrum-master의-확산",
+          "agile-transformation이라는-이름의-리브랜딩",
+          "속도-압박과-agile의-왜곡",
+          "중요한-것은-스프린트-주기가-아니라-피드백-루프다",
+          "피드백의-종류",
+          "피드백-루프의-속도",
+          "ai-시대와-agile-어떻게-달라졌나",
+          "ai-이전-구현이-병목이었다",
+          "ai-이후-방향이-병목이-됐다",
+          "ai와-함께-일할-때의-방향-확인-위험",
+          "ai가-agile-루프의-어느-부분을-바꾸는가",
+          "ai가-만든-코드의-검증-문제",
+          "기업에서-agile은-무엇을-다시-검증해야-하는가",
+          "ai-도입은-팀을-agile하게-만들지-않는다",
+          "더-많은-티켓-처리량은-더-나은-제품을-의미하지-않는다",
+          "product-owner의-역할은-더-중요해진다",
+          "ai가-만든-산출물의-definition-of-done을-다시-써야-한다",
+          "sprint-review는-데모가-아니라-방향-검증의-자리여야-한다",
+          "기업-agile의-진짜-병목은-의사결정-속도다",
+          "1인-개발자와-solo-saas에서의-agile",
+          "혼자일-때-방향이-틀리기-더-쉽다",
+          "내가-만드는-것에-빠지는-문제",
+          "혼자서-방향을-확인하는-방법들",
+          "solo-saas에서-agile-루프를-어떻게-돌리는가",
+          "창업자에게-agile은-사업-가설을-검증하는-방식이다",
+          "창업자가-순서대로-확인해야-하는-가설들",
+          "mvp는-작은-제품이-아니라-작은-증거다",
+          "출시가-아니라-학습이-sprint의-끝이다",
+          "수익이-생기기-전과-후의-agile은-다르다",
+          "1인-saas의-주간-agile-루프",
+          "ai가-만든-결과를-agile하게-검증하는-기준",
+          "방향-검증을-위한-질문들",
+          "기능-검증을-위한-실용적-방법들",
+          "개인-개발자를-위한-ai-산출물-검증-체크리스트",
+          "팀이-ai-산출물을-agile하게-검토하는-기준",
+          "작은-agile-루프-질문-가설-구현-관찰-수정",
+          "질문",
+          "가설",
+          "구현",
+          "관찰",
+          "수정",
+          "agile의-자주-하는-실수들",
+          "의식이-되어버린-agile",
+          "backlog가-무덤이-되는-문제",
+          "velocity를-목표로-삼는-문제",
+          "사용자-없는-sprint-review",
+          "완료됐지만-안-쓰이는-기능들",
+          "retrospective에서-아무것도-안-바뀌는-문제",
+          "agile을-도구로-쓰는-문제",
+          "agile의-한계",
+          "명확한-방향이-있을-때",
+          "하드웨어와-물리적-제품",
+          "규제가-강한-산업",
+          "대규모-인프라-변경",
+          "agile이-회사-정치의-도구가-될-때",
+          "agile이-팀에-맞지-않을-때",
+          "인접-방법론과의-비교",
+          "lean",
+          "shape-up-basecamp",
+          "okr",
+          "design-thinking",
+          "six-sigma",
+          "agile-지표-무엇을-보고-판단하는가",
+          "velocity",
+          "cycle-time",
+          "lead-time",
+          "sprint-burndown-chart",
+          "cumulative-flow-diagram-cfd",
+          "nps-net-promoter-score",
+          "1인-개발자가-실제로-볼-수-있는-지표들",
+          "agile에서-흔히-혼동하는-개념들",
+          "mvp-minimum-viable-product",
+          "sprint와-iteration",
+          "scrum-master와-프로젝트-매니저",
+          "product-owner와-프로덕트-매니저",
+          "done의-의미",
+          "agile과-기술적-실천들",
+          "기술-부채와-agile",
+          "자동화-테스트",
+          "지속적인-통합과-배포-cicd",
+          "리팩토링",
+          "마지막으로-속도는-도구고-방향은-판단이다",
+          "참고자료"
+        ],
+        "codeBlocks": 3,
+        "codeLanguages": [
+          null,
+          null,
+          null
+        ],
+        "tables": 0,
+        "images": 2,
+        "imagePaths": [
+          "./agile-waterfall-vs-agile.webp",
+          "./agile-feedback-loop.webp"
+        ],
+        "links": 0,
+        "textHash": "2c312bd9561899ed71d25e63aaf28446186510204a844fcad0cda688ad1969e6"
+      },
+      "route": "/deep-dive/ai-era-agile-verification",
+      "slug": "ai-era-agile-verification",
+      "locale": "ko",
+      "legacyPublishedAt": "2026-05-18T00:00:00.000Z"
+    },
+    {
+      "id": "deep-en",
+      "status": "imported_with_warnings",
+      "sourceChecksum": "92bd5a09e477d972892904607e940a2d5b78af6d17917a3b8f0bea6e851da7f9",
+      "stableKey": "deep_dive:en:ai-era-agile-verification",
+      "sourcePath": "content/posts/ai-era-agile-verification.en.md",
+      "createdIds": {
+        "contentId": "cb470011-c9b9-4252-91ab-7748996134de",
+        "localizationId": "bf1cb3f0-9226-45ba-89ff-3a83ae4495fa",
+        "versionId": "e2aa21a7-3a7d-429b-b575-041e773d932b"
+      },
+      "warnings": [
+        "source_missing",
+        "unresolved_media_reference"
+      ],
+      "errors": [],
+      "counts": {
+        "headings": 43,
+        "headingLevels": [
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3
+        ],
+        "anchors": [
+          "how-to-read-this-document",
+          "why-we-question-agile-again-in-2026",
+          "the-development-loop-in-the-age-of-vibe-coding",
+          "generation-speed-became-the-bottleneck-not-verification-capability",
+          "new-tensions-in-teams-where-ai-agents-have-arrived",
+          "so-agile-is-even-more-needed-in-2026",
+          "before-agile-problems-created-by-waterfall",
+          "late-feedback-creates-costs",
+          "chaos-report-and-software-project-failure-rates",
+          "the-problem-of-documents-replacing-reality",
+          "agile-manifesto-what-the-original-text-actually-says",
+          "four-values",
+          "twelve-principles",
+          "context-of-the-manifesto",
+          "major-agile-methodologies",
+          "scrum",
+          "kanban",
+          "xp-extreme-programming",
+          "safe-and-the-problem-of-large-scale-agile",
+          "why-agile-was-misunderstood-as-fast-development-methodology",
+          "the-problem-of-tools-replacing-purpose",
+          "spread-of-certified-scrum-master",
+          "rebranding-disguised-as-agile-transformation",
+          "speed-pressure-and-agile-distortion",
+          "what-matters-is-feedback-loop-not-sprint-cycle",
+          "types-of-feedback",
+          "speed-of-feedback-loop",
+          "agile-and-the-ai-era-what-changed",
+          "before-ai-implementation-was-the-bottleneck",
+          "after-ai-direction-became-the-bottleneck",
+          "the-direction-verification-risk-in-working-with-ai",
+          "ai-agents-in-teams-with-new-tensions",
+          "so-agile-is-even-more-needed-in-2026-2",
+          "what-must-agile-verify-again-in-enterprises",
+          "ai-adoption-does-not-make-teams-agile",
+          "product-owners-role-becomes-more-important",
+          "must-rewrite-definition-of-done-for-ai-created-outputs",
+          "sprint-review-must-be-direction-verification-not-demo",
+          "real-bottleneck-in-enterprise-agile-is-decision-speed",
+          "agile-for-1-person-developers-and-solo-saas",
+          "getting-direction-wrong-is-easier-when-alone",
+          "the-problem-of-becoming-attached-to-what-you-make",
+          "how-solo-developers-verify-direction"
+        ],
+        "codeBlocks": 4,
+        "codeLanguages": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "tables": 0,
+        "images": 1,
+        "imagePaths": [
+          "./agile-waterfall-vs-agile.webp"
+        ],
+        "links": 0,
+        "textHash": "63f6a51ccae5628a218ec751be2dc9522183d3630f7365be4660d37138155082"
+      },
+      "route": "/en/deep-dive/ai-era-agile-verification",
+      "slug": "ai-era-agile-verification",
+      "locale": "en",
+      "legacyPublishedAt": "2026-05-18T00:00:00.000Z"
+    },
+    {
+      "id": "data-ko",
+      "status": "imported_with_warnings",
+      "sourceChecksum": "e97bce75b41e5ea2031b1dd628d0409abaad9590753d9a2935bd7403f673f673",
+      "stableKey": "deep_dive:ko:data-analysis-beyond-business",
+      "sourcePath": "content/posts/data-analysis-beyond-business.ko.md",
+      "createdIds": {
+        "contentId": "955ce484-3585-40a0-9055-5d9ca4e0afef",
+        "localizationId": "adad8caa-a5c0-4443-9c12-fab89922babb",
+        "versionId": "6bfc62f0-85c4-4ffe-bd96-b470242fdc1e"
+      },
+      "warnings": [
+        "source_missing",
+        "unresolved_media_reference"
+      ],
+      "errors": [],
+      "counts": {
+        "headings": 50,
+        "headingLevels": [
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "anchors": [
+          "1-데이터-분석이라는-말은-왜-어렵게-느껴지는가",
+          "2-데이터란-무엇인가",
+          "3-기업에서-데이터-분석은-무엇을-하는가",
+          "4-기업-데이터-분석의-핵심-질문들",
+          "41-무슨-일이-일어났는가",
+          "42-왜-일어났는가",
+          "43-이-변화는-우연인가-반복되는-신호인가",
+          "44-어떤-선택이-이-결과를-만들었는가",
+          "45-다음에는-무엇을-바꿔야-하는가",
+          "5-데이터-지표-kpi는-어떻게-다른가",
+          "6-데이터-분석의-기본-흐름",
+          "61-질문",
+          "62-가설",
+          "63-데이터",
+          "64-해석",
+          "65-판단",
+          "66-다음-행동",
+          "7-기업-데이터-분석과-개인-데이터-분석은-어떻게-다른가",
+          "8-개인에게도-데이터-분석이-필요한-이유",
+          "9-ai-시대에-데이터-분석은-왜-더-중요해졌는가",
+          "10-데이터는-무엇을-보여주고-무엇을-보여주지-못하는가",
+          "11-정량-데이터와-정성-데이터",
+          "12-데이터-분석의-함정",
+          "121-조회수의-함정",
+          "122-클릭률의-함정",
+          "123-평균의-함정",
+          "124-작은-표본의-함정",
+          "125-상관관계와-인과관계의-혼동",
+          "126-측정-가능한-것만-중요해지는-문제",
+          "127-데이터가-목표가-되는-문제",
+          "128-대시보드가-현실을-대신하는-문제",
+          "129-내가-보고-싶은-숫자만-보는-문제",
+          "1210-데이터-없는-영역을-무시하는-문제",
+          "1211-허영-지표에-속는-문제",
+          "13-데이터도-검증의-대상이다",
+          "14-개인은-어떻게-데이터-분석을-시작할-수-있는가",
+          "141-질문을-먼저-적는다",
+          "142-가설을-적는다",
+          "143-확인할-지표를-하나만-고른다",
+          "144-숫자와-맥락을-함께-기록한다",
+          "145-일정-기간을-정한다",
+          "146-너무-빨리-결론-내리지-않는다",
+          "147-다음-행동을-바꾼다",
+          "148-다시-기록한다",
+          "15-개인-데이터-분석에-자주-쓰는-도구들",
+          "16-dechive식-데이터-분석-체크리스트",
+          "17-데이터-분석-능력은-어떻게-쌓이는가",
+          "18-데이터-분석은-기업에만-필요한-것인가",
+          "19-데이터-분석에-대한-자주-묻는-오해",
+          "20-결론-데이터는-판단을-대신하지-않는다"
+        ],
+        "codeBlocks": 1,
+        "codeLanguages": [
+          null
+        ],
+        "tables": 7,
+        "images": 5,
+        "imagePaths": [
+          "./data-analysis-map.webp",
+          "./data-analysis-flow.webp",
+          "./business-vs-personal-data-analysis.webp",
+          "./prelaunch-feedback-loop.webp",
+          "./data-analysis-traps.webp"
+        ],
+        "links": 0,
+        "textHash": "d20a0e7e9951038de17d0a2dedde6bcf313299b719c13f4b4cad2aabed7850a1"
+      },
+      "route": "/deep-dive/data-analysis-beyond-business",
+      "slug": "data-analysis-beyond-business",
+      "locale": "ko",
+      "legacyPublishedAt": "2026-06-21T00:00:00.000Z"
+    },
+    {
+      "id": "data-en",
+      "status": "imported_with_warnings",
+      "sourceChecksum": "e6ff82c6617a42e1dabea089dd3fc5f6a71280cdd9425a48268be23f7f1116cd",
+      "stableKey": "deep_dive:en:data-analysis-beyond-business",
+      "sourcePath": "content/posts/data-analysis-beyond-business.en.md",
+      "createdIds": {
+        "contentId": "955ce484-3585-40a0-9055-5d9ca4e0afef",
+        "localizationId": "db419e88-ebbc-4c07-b047-4d1b0ea2dbb6",
+        "versionId": "ede190f4-53f7-4d5a-b432-f6cc2a618964"
+      },
+      "warnings": [
+        "source_missing",
+        "unresolved_media_reference"
+      ],
+      "errors": [],
+      "counts": {
+        "headings": 50,
+        "headingLevels": [
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "anchors": [
+          "1-why-does-the-term-data-analysis-feel-difficult",
+          "2-what-is-data",
+          "3-what-does-data-analysis-do-in-a-business",
+          "4-core-questions-in-business-data-analysis",
+          "41-what-happened",
+          "42-why-did-it-happen",
+          "43-is-this-change-coincidence-or-a-repeating-signal",
+          "44-what-choice-created-this-result",
+          "45-what-should-we-change-next",
+          "5-how-data-metrics-and-kpis-differ",
+          "6-basic-flow-of-data-analysis",
+          "61-question",
+          "62-hypothesis",
+          "63-data",
+          "64-interpretation",
+          "65-judgment",
+          "66-next-action",
+          "7-how-are-corporate-data-analysis-and-personal-data-analysis-different",
+          "8-why-data-analysis-is-necessary-for-individuals",
+          "9-why-data-analysis-became-more-important-in-the-ai-era",
+          "10-what-data-shows-and-what-it-cannot-show",
+          "11-quantitative-data-and-qualitative-data",
+          "12-pitfalls-in-data-analysis",
+          "121-the-trap-of-view-counts",
+          "122-the-trap-of-click-through-rate",
+          "123-the-trap-of-averages",
+          "124-the-trap-of-small-samples",
+          "125-confusion-between-correlation-and-causation",
+          "126-the-problem-of-only-measuring-what-is-measurable",
+          "127-the-problem-of-data-becoming-the-goal",
+          "128-the-problem-of-dashboard-replacing-reality",
+          "129-the-problem-of-only-seeing-numbers-you-want-to-see",
+          "1210-the-problem-of-ignoring-data-free-areas",
+          "1211-the-problem-of-being-deceived-by-vanity-metrics",
+          "13-data-is-also-subject-to-verification",
+          "14-how-can-individuals-start-data-analysis",
+          "141-write-down-your-question-first",
+          "142-write-down-your-hypothesis",
+          "143-choose-only-one-metric-to-check",
+          "144-record-numbers-and-context-together",
+          "145-set-a-time-period",
+          "146-do-not-reach-conclusions-too-quickly",
+          "147-change-your-next-action",
+          "148-record-again",
+          "15-tools-commonly-used-for-personal-data-analysis",
+          "16-dechive-style-data-analysis-checklist",
+          "17-how-data-analysis-skills-are-built",
+          "18-is-data-analysis-only-needed-for-businesses",
+          "19-common-misconceptions-about-data-analysis",
+          "20-conclusion-data-does-not-replace-judgment"
+        ],
+        "codeBlocks": 1,
+        "codeLanguages": [
+          null
+        ],
+        "tables": 7,
+        "images": 5,
+        "imagePaths": [
+          "./data-analysis-map.webp",
+          "./data-analysis-flow.webp",
+          "./business-vs-personal-data-analysis.webp",
+          "./prelaunch-feedback-loop.webp",
+          "./data-analysis-traps.webp"
+        ],
+        "links": 0,
+        "textHash": "96b0abbc7c1a536cbf1f23d80e237aa37c6722564589f005c1aad752c1d2d0af"
+      },
+      "route": "/en/deep-dive/data-analysis-beyond-business",
+      "slug": "data-analysis-beyond-business",
+      "locale": "en",
+      "legacyPublishedAt": "2026-06-21T00:00:00.000Z"
+    },
+    {
+      "id": "replace-ko",
+      "status": "imported_with_warnings",
+      "sourceChecksum": "7a738d50c0ff203806f19ddd8358d2516c560ae66574cc10a6d1c2ee01316ba4",
+      "stableKey": "deep_dive:ko:can-ai-replace-learning",
+      "sourcePath": "content/posts/can-ai-replace-learning.ko.md",
+      "createdIds": {
+        "contentId": "da8ebf72-5b24-4abc-ab76-444998a52215",
+        "localizationId": "7a471b0c-8eca-4f4d-be20-24f03306bc68",
+        "versionId": "d39094c8-ed4d-4809-8060-8a89c9d93d6c"
+      },
+      "warnings": [
+        "source_missing",
+        "unresolved_media_reference"
+      ],
+      "errors": [],
+      "counts": {
+        "headings": 37,
+        "headingLevels": [
+          2,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3
+        ],
+        "anchors": [
+          "part-1-ai는-배움의-무엇을-바꾸었는가",
+          "질문의-비용이-낮아졌다",
+          "설명의-접근성이-높아졌다",
+          "반복-학습의-문턱이-낮아졌다",
+          "배움의-속도와-착각의-속도가-함께-빨라졌다",
+          "part-2-왜-답을-받는-것만으로는-배우는-것이-아닌가",
+          "설명을-따라간-감각은-이해가-아니다",
+          "요약은-기억을-줄여주지만-판단을-대신하지-않는다",
+          "예시는-이해를-돕지만-검증을-끝내지-않는다",
+          "ai의-확신은-학습자의-확신으로-옮겨갈-수-있다",
+          "part-3-질문은-어떻게-배움이-되는가",
+          "질문은-많이-하는-것이-아니라-좁혀가는-것이다",
+          "좋은-질문은-답을-늘리지-않고-모르는-위치를-드러낸다",
+          "질문의-기록이-곧-학습의-지도다",
+          "끝없는-질문은-끝없는-소비가-아니다",
+          "part-4-검증은-왜-학습의-일부가-되었는가",
+          "예전에는-검증이-공부-이후의-일이었다",
+          "공식-문서와-교재는-왜-여전히-필요한가",
+          "검증은-의심이-아니라-책임이다",
+          "ai가-틀렸을-때-책임은-누구에게-남는가",
+          "part-5-정리는-왜-저장이-아니라-구조인가",
+          "ai와-나눈-대화는-날것의-재료다",
+          "채팅창은-생각이-태어나는-곳이지-머무는-곳은-아니다",
+          "second-brain은-내-대신-생각하는-뇌가-아니다",
+          "모든-지식을-넣어두면-ai가-알아서-꺼내줄까",
+          "다시-질문할-수-있어야-지식이다",
+          "part-6-ai-시대의-배움은-어떤-구조를-가져야-하는가",
+          "ai-학습-루프",
+          "네-가지-기록-단위",
+          "검증-질문",
+          "멈춤-조건",
+          "part-7-ai는-배움을-대신하지-않고-배움의-책임을-더-선명하게-만든다",
+          "ai가-대신할-수-있는-것",
+          "ai가-대신할-수-없는-것",
+          "배움은-답의-소유가-아니라-판단의-형성이다",
+          "dechive의-관점",
+          "정리-배움은-끝나는-것이-아니라-다시-질문할-수-있게-되는-것이다"
+        ],
+        "codeBlocks": 0,
+        "codeLanguages": [],
+        "tables": 0,
+        "images": 4,
+        "imagePaths": [
+          "./explanation-is-not-understanding.webp",
+          "./verification-is-responsibility.webp",
+          "./storage-is-not-judgment.webp",
+          "./ai-learning-loop.webp"
+        ],
+        "links": 0,
+        "textHash": "c5d819d4b7a666ceae9385ab92d1d5ff843d248c3f0e54961a2adfba2ad00d2a"
+      },
+      "route": "/deep-dive/can-ai-replace-learning",
+      "slug": "can-ai-replace-learning",
+      "locale": "ko",
+      "legacyPublishedAt": "2026-06-29T00:00:00.000Z"
+    },
+    {
+      "id": "replace-en",
+      "status": "imported_with_warnings",
+      "sourceChecksum": "af37d68809b948f315bd7a4925bcef2db0ff0ffd339aeb1b211b3a2e66dbdaf7",
+      "stableKey": "deep_dive:en:can-ai-replace-learning",
+      "sourcePath": "content/posts/can-ai-replace-learning.en.md",
+      "createdIds": {
+        "contentId": "da8ebf72-5b24-4abc-ab76-444998a52215",
+        "localizationId": "81d0f250-6b66-436b-8080-f65f26c994d7",
+        "versionId": "6ccd2e0c-4664-48f7-b52b-5b21e4c12d9b"
+      },
+      "warnings": [
+        "source_missing",
+        "unresolved_media_reference"
+      ],
+      "errors": [],
+      "counts": {
+        "headings": 37,
+        "headingLevels": [
+          2,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3
+        ],
+        "anchors": [
+          "part-1-what-ai-has-changed-about-learning",
+          "the-cost-of-asking-questions-has-decreased",
+          "the-accessibility-of-explanations-has-increased",
+          "the-threshold-for-repetitive-learning-has-lowered",
+          "the-speed-of-learning-and-the-speed-of-misconception-have-accelerated-together",
+          "part-2-why-receiving-an-answer-is-not-the-same-as-learning",
+          "following-an-explanation-is-not-understanding",
+          "summaries-reduce-memory-burden-but-do-not-replace-judgment",
+          "examples-aid-understanding-but-do-not-complete-verification",
+          "ais-confidence-can-transfer-to-the-learners-confidence",
+          "part-3-how-questions-become-learning",
+          "questions-are-about-narrowing-down-not-multiplying",
+          "good-questions-reveal-where-you-dont-know-not-multiply-answers",
+          "a-record-of-questions-is-a-map-of-learning",
+          "endless-questions-are-not-endless-consumption",
+          "part-4-why-verification-became-part-of-learning",
+          "in-the-past-verification-was-something-that-came-after-studying",
+          "why-are-official-documents-and-textbooks-still-necessary",
+          "verification-is-not-doubt-but-responsibility",
+          "when-ai-gets-it-wrong-who-bears-the-responsibility",
+          "part-5-why-organization-is-structure-not-storage",
+          "ai-conversations-are-raw-material-not-finished-knowledge",
+          "the-chat-window-is-where-thinking-is-born-not-where-it-stays",
+          "second-brain-is-not-a-brain-that-thinks-instead-of-me",
+          "will-ai-automatically-retrieve-everything-if-i-put-all-knowledge-in-it",
+          "knowledge-requires-being-able-to-question-again",
+          "part-6-what-structure-should-learning-have-in-the-ai-era",
+          "ai-learning-loop",
+          "four-recording-units",
+          "verification-questions",
+          "stopping-conditions",
+          "part-7-ai-does-not-replace-learning-it-makes-the-responsibility-of-learning-clearer",
+          "what-ai-can-actually-help-with",
+          "what-ai-cannot-replace",
+          "learning-is-not-owning-answers-it-is-forming-judgment",
+          "dechives-perspective",
+          "summary-learning-doesnt-end-it-becomes-possible-to-question-again"
+        ],
+        "codeBlocks": 0,
+        "codeLanguages": [],
+        "tables": 0,
+        "images": 4,
+        "imagePaths": [
+          "./explanation-is-not-understanding.webp",
+          "./verification-is-responsibility.webp",
+          "./storage-is-not-judgment.webp",
+          "./ai-learning-loop.webp"
+        ],
+        "links": 0,
+        "textHash": "a1ee667a6b7721362170dabdde1d01bc198dfbc02347ff292e8d2aeaab13e9c3"
+      },
+      "route": "/en/deep-dive/can-ai-replace-learning",
+      "slug": "can-ai-replace-learning",
+      "locale": "en",
+      "legacyPublishedAt": "2026-06-29T00:00:00.000Z"
+    },
+    {
+      "id": "book-ko",
+      "status": "imported_with_warnings",
+      "sourceChecksum": "7b47da856739d801f1ce0420e5ddbb7a9cf398410166deeb98fa6ed5a5685041",
+      "stableKey": "book:ko:knowing-what-we-know",
+      "sourcePath": "src/content/books/knowing-what-we-know.ko.md",
+      "createdIds": {
+        "contentId": "b0842b0c-bd41-40b2-a434-52471694f8c4",
+        "localizationId": "fe0f2bdf-df56-438b-8420-480414dbf87e",
+        "versionId": "67882b6e-2d36-4fd3-823c-8cf9b2a9445f"
+      },
+      "warnings": [
+        "source_missing"
+      ],
+      "errors": [],
+      "counts": {
+        "headings": 5,
+        "headingLevels": [
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "anchors": [
+          "이-책을-펼친-이유",
+          "붙잡은-질문",
+          "내-생각",
+          "남은-질문",
+          "연결된-기록"
+        ],
+        "codeBlocks": 0,
+        "codeLanguages": [],
+        "tables": 0,
+        "images": 0,
+        "imagePaths": [],
+        "links": 1,
+        "textHash": "3d33e8171b4ac5511bd8f9d91af9b3ea174cb14ce5c4b34ed02bbde901934574"
+      },
+      "route": "/book/knowing-what-we-know",
+      "slug": "knowing-what-we-know",
+      "locale": "ko",
+      "legacyPublishedAt": "2026-06-29T00:00:00.000Z"
+    },
+    {
+      "id": "dual-brain-ko",
+      "status": "imported_with_warnings",
+      "sourceChecksum": "0e947f9ccfbcee33e6479d790dd7f30390e8ca64ca7bab6eeb464e6c68db079e",
+      "stableKey": "book:ko:dual-brain",
+      "sourcePath": "src/content/books/dual-brain.ko.md",
+      "createdIds": {
+        "contentId": "c984a0f3-6204-4ded-a825-bb1f2c184166",
+        "localizationId": "697f8219-7df3-4edf-a005-dd7e4a3ca276",
+        "versionId": "c1790075-145d-4c43-a3f7-4201293a3f9b"
+      },
+      "warnings": [
+        "source_missing"
+      ],
+      "errors": [],
+      "counts": {
+        "headings": 5,
+        "headingLevels": [
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "anchors": [
+          "이-책을-펼친-이유",
+          "붙잡은-문장",
+          "내-생각",
+          "남은-질문",
+          "연결된-기록"
+        ],
+        "codeBlocks": 0,
+        "codeLanguages": [],
+        "tables": 0,
+        "images": 0,
+        "imagePaths": [],
+        "links": 1,
+        "textHash": "c37b582e17d5c7cdda1e647c22977fdb94699554f265b3172c92e7ec0e8e4b83"
+      },
+      "route": "/book/dual-brain",
+      "slug": "dual-brain",
+      "locale": "ko",
+      "legacyPublishedAt": "2026-06-22T00:00:00.000Z"
+    },
+    {
+      "id": "ai-digest-2026-07-02",
+      "status": "imported_with_warnings",
+      "sourceChecksum": "17d6d8cff02e02adf3e002fc0f6a36dedf169f5357ee5baecd894ebad40f53a8",
+      "stableKey": "ai_digest:2026-07-02",
+      "sourcePath": "src/data/aiUpdates.ts#2026-07-02",
+      "createdIds": {
+        "digestId": "4b500e6d-b6f1-4e54-a770-3552b500c0a4"
+      },
+      "warnings": [
+        "slug_candidates_not_routes",
+        "items_require_editor_review"
+      ],
+      "errors": [],
+      "items": [
+        {
+          "legacyAnchor": "anthropic-fable-5-safeguards-jailbreak-framework",
+          "slugCandidate": "anthropic-fable-5-safeguards-jailbreak-framework",
+          "order": 0,
+          "source": "https://www.anthropic.com/news/fable-safeguards-jailbreak-framework",
+          "localizationId": "d23ec8ad-adf1-48f8-857f-3ebc066b9e6c"
+        },
+        {
+          "legacyAnchor": "microsoft-frontier-company-ai-engineering",
+          "slugCandidate": "microsoft-frontier-company-ai-engineering",
+          "order": 1,
+          "source": "https://blogs.microsoft.com/blog/2026/07/02/microsoft-frontier-company-ai-engineering-that-amplifies-and-protects-your-intelligence/",
+          "localizationId": "cb7e34a6-2a29-4619-92f6-3e5953bf04c5"
+        },
+        {
+          "legacyAnchor": "github-copilot-agent-session-streaming-public-preview",
+          "slugCandidate": "github-copilot-agent-session-streaming-public-preview",
+          "order": 2,
+          "source": "https://github.blog/changelog/2026-07-02-copilot-agent-session-streaming-is-now-in-public-preview/",
+          "localizationId": "6ec5163d-f82d-44d6-96c7-2ea810aebe67"
+        }
+      ],
+      "route": "/ai-updates/2026-07-02",
+      "reviewClassification": "needs_editor_review"
+    },
+    {
+      "id": "ai-digest-2026-07-03",
+      "status": "imported_with_warnings",
+      "sourceChecksum": "0b76d7e3488830d1b98c7db16048e98b48d7a21063afbcf9715cb2269ec38472",
+      "stableKey": "ai_digest:2026-07-03",
+      "sourcePath": "src/data/aiUpdates.ts#2026-07-02",
+      "createdIds": {
+        "digestId": "18c0bfb4-ce7b-4491-985d-8b25b7e18cb6"
+      },
+      "warnings": [
+        "slug_candidates_not_routes",
+        "items_require_editor_review"
+      ],
+      "errors": [],
+      "items": [
+        {
+          "legacyAnchor": "kuaishou-kling-ai-fundraise",
+          "slugCandidate": "kuaishou-kling-ai-fundraise",
+          "order": 0,
+          "source": "https://www.reuters.com/world/china/alibaba-tencent-back-kuaishous-kling-ai-28-billion-fundraise-2026-07-03/",
+          "localizationId": "4fef031f-216b-4184-9814-6b7d223a4817"
+        },
+        {
+          "legacyAnchor": "india-it-ai-hiring-workforce-shift",
+          "slugCandidate": "india-it-ai-hiring-workforce-shift",
+          "order": 1,
+          "source": "https://www.reuters.com/world/india/ai-hiring-outpaces-overall-it-recruitment-india-report-shows-2026-07-03/",
+          "localizationId": "00f15936-7bb9-438b-a689-7c1ab237766a"
+        },
+        {
+          "legacyAnchor": "argentina-ai-run-companies-human-oversight",
+          "slugCandidate": "argentina-ai-run-companies-human-oversight",
+          "order": 2,
+          "source": "https://www.reuters.com/world/americas/argentinas-plan-ai-run-companies-cant-avoid-humans-2026-07-03/",
+          "localizationId": "22291998-90be-43a4-9c2a-4181b14b208e"
+        }
+      ],
+      "route": "/ai-updates/2026-07-03",
+      "reviewClassification": "needs_editor_review"
+    }
+  ],
+  "retry": {
+    "batchId": "63aa5dfc-97f5-442c-b65b-a2b37c9fed56",
+    "statuses": [
+      {
+        "id": "archive-ko",
+        "status": "skipped"
+      },
+      {
+        "id": "archive-en",
+        "status": "skipped"
+      },
+      {
+        "id": "prompt-ko",
+        "status": "skipped"
+      },
+      {
+        "id": "prompt-en",
+        "status": "skipped"
+      },
+      {
+        "id": "learn-ko",
+        "status": "skipped"
+      },
+      {
+        "id": "learn-en",
+        "status": "skipped"
+      },
+      {
+        "id": "llm-ko",
+        "status": "skipped"
+      },
+      {
+        "id": "llm-en",
+        "status": "skipped"
+      },
+      {
+        "id": "deep-ko",
+        "status": "skipped"
+      },
+      {
+        "id": "deep-en",
+        "status": "skipped"
+      },
+      {
+        "id": "data-ko",
+        "status": "skipped"
+      },
+      {
+        "id": "data-en",
+        "status": "skipped"
+      },
+      {
+        "id": "replace-ko",
+        "status": "skipped"
+      },
+      {
+        "id": "replace-en",
+        "status": "skipped"
+      },
+      {
+        "id": "book-ko",
+        "status": "skipped"
+      },
+      {
+        "id": "dual-brain-ko",
+        "status": "skipped"
+      },
+      {
+        "id": "ai-digest-2026-07-02",
+        "status": "skipped"
+      },
+      {
+        "id": "ai-digest-2026-07-03",
+        "status": "skipped"
+      }
+    ],
+    "duplicateCount": 0
+  },
+  "changedChecksumDetection": "change_detected_without_overwrite",
+  "readBack": [
+    {
+      "id": "archive-ko",
+      "classification": "exact",
+      "route": {
+        "route": "/archive/what-null-leaves-behind",
+        "routeType": "legacy_canonical"
+      },
+      "metadata": {
+        "slug": "what-null-leaves-behind",
+        "locale": "ko",
+        "legacyPublishedAt": "2026-05-10T00:00:00.000Z",
+        "translationSiblings": [
+          {
+            "id": "b77652e3-74f0-4d9a-9a9c-92624ee4cf73",
+            "locale": "en",
+            "slug": "what-null-leaves-behind",
+            "title": "The Problem Left by Empty Values"
+          },
+          {
+            "id": "0dd01053-887d-48b5-9709-fe9b8fa96841",
+            "locale": "ko",
+            "slug": "what-null-leaves-behind",
+            "title": "비어 있는 값이 남기는 문제"
+          }
+        ]
+      },
+      "structuralCounts": {
+        "headings": 5,
+        "headingLevels": [
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "anchors": [
+          "null은-비어-있음이-아니다",
+          "등호로-비교할-수-없는-이유",
+          "알-수-없음은-전파된다",
+          "집계에서는-다르게-다뤄진다",
+          "비어-있는-값이-남기는-문제"
+        ],
+        "codeBlocks": 9,
+        "codeLanguages": [
+          "sql",
+          "sql",
+          "sql",
+          "sql",
+          "sql",
+          "sql",
+          "sql",
+          "sql",
+          "sql"
+        ],
+        "tables": 1,
+        "images": 3,
+        "imagePaths": [
+          "null-vs-zero-vs-empty.webp",
+          "null-propagation.webp",
+          "count-star-vs-count-col.webp"
+        ],
+        "links": 0,
+        "textHash": "260e05319c08a395cfb7216fbd23f8218f01876e2d1410cdf80ff4d57292875a"
+      },
+      "sources": [],
+      "mediaReferences": [
+        {
+          "id": "5393d4e7-0475-4e2e-bcc3-af702b5eb04d",
+          "status": "pending",
+          "sourceUrl": "null-vs-zero-vs-empty.webp",
+          "usageType": "legacy_body",
+          "alt": "",
+          "caption": null,
+          "metadata": {
+            "legacyPath": "null-vs-zero-vs-empty.webp",
+            "unresolved": true
+          }
+        },
+        {
+          "id": "0a778dc4-a329-44c9-8a16-64466351cb38",
+          "status": "pending",
+          "sourceUrl": "null-propagation.webp",
+          "usageType": "legacy_body",
+          "alt": "",
+          "caption": null,
+          "metadata": {
+            "legacyPath": "null-propagation.webp",
+            "unresolved": true
+          }
+        },
+        {
+          "id": "8443b46c-1d2d-4046-9e12-e10ea9b2ed98",
+          "status": "pending",
+          "sourceUrl": "count-star-vs-count-col.webp",
+          "usageType": "legacy_body",
+          "alt": "",
+          "caption": null,
+          "metadata": {
+            "legacyPath": "count-star-vs-count-col.webp",
+            "unresolved": true
+          }
+        }
+      ],
+      "relatedContent": [],
+      "artifactChecksums": {
+        "document": "b435e85bf312e1f56b0fcfdb3a9b24ca2b3f0f7f392be52fa70556d4bbcc011b",
+        "markdown": "31d980d0588fd5abdeb84319356f58d1af41bcaba4f32daeaba440349985bba5",
+        "html": "c1c70fa760455d8fdc7adb25e4c3149fb07a6dd1560a2711546a8e2c87525dc5",
+        "text": "f36b1a8d4c83a7caf843cf1d9c00396f00b9d4a64870af918ed590bd43761069"
+      },
+      "markdownMetadata": {
+        "markdownExportMode": "mixed_gfm_html",
+        "exportWarnings": [
+          "complex_table_exported_as_sanitized_html"
+        ],
+        "fallbackNodeCount": 1,
+        "exporterVersion": "1.0.0"
+      }
+    },
+    {
+      "id": "archive-en",
+      "classification": "exact",
+      "route": {
+        "route": "/en/archive/what-null-leaves-behind",
+        "routeType": "legacy_canonical"
+      },
+      "metadata": {
+        "slug": "what-null-leaves-behind",
+        "locale": "en",
+        "legacyPublishedAt": "2026-05-10T00:00:00.000Z",
+        "translationSiblings": [
+          {
+            "id": "b77652e3-74f0-4d9a-9a9c-92624ee4cf73",
+            "locale": "en",
+            "slug": "what-null-leaves-behind",
+            "title": "The Problem Left by Empty Values"
+          },
+          {
+            "id": "0dd01053-887d-48b5-9709-fe9b8fa96841",
+            "locale": "ko",
+            "slug": "what-null-leaves-behind",
+            "title": "비어 있는 값이 남기는 문제"
+          }
+        ]
+      },
+      "structuralCounts": {
+        "headings": 6,
+        "headingLevels": [
+          1,
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "anchors": [
+          "creating-a-table-and-inserting-member-data",
+          "null-is-not-empty",
+          "why-you-cant-compare-with-equals",
+          "unknown-propagates",
+          "aggregate-functions-handle-it-differently",
+          "problems-left-by-empty-values"
+        ],
+        "codeBlocks": 9,
+        "codeLanguages": [
+          "sql",
+          "sql",
+          "sql",
+          "sql",
+          "sql",
+          "sql",
+          "sql",
+          "sql",
+          "sql"
+        ],
+        "tables": 1,
+        "images": 3,
+        "imagePaths": [
+          "null-vs-zero-vs-empty.webp",
+          "null-propagation.webp",
+          "count-star-vs-count-col.webp"
+        ],
+        "links": 0,
+        "textHash": "b796beb573af5e9716562802eae57a716b7bed76d76782f77bca3825ad2baead"
+      },
+      "sources": [],
+      "mediaReferences": [
+        {
+          "id": "b5865a14-b638-4fa0-987b-42edd08096f9",
+          "status": "pending",
+          "sourceUrl": "null-vs-zero-vs-empty.webp",
+          "usageType": "legacy_body",
+          "alt": "",
+          "caption": null,
+          "metadata": {
+            "legacyPath": "null-vs-zero-vs-empty.webp",
+            "unresolved": true
+          }
+        },
+        {
+          "id": "8ed82e32-11d3-47f7-ac03-2fefc4845ed1",
+          "status": "pending",
+          "sourceUrl": "null-propagation.webp",
+          "usageType": "legacy_body",
+          "alt": "",
+          "caption": null,
+          "metadata": {
+            "legacyPath": "null-propagation.webp",
+            "unresolved": true
+          }
+        },
+        {
+          "id": "3986af27-bb5e-41c8-baeb-3f0c90d8c8d9",
+          "status": "pending",
+          "sourceUrl": "count-star-vs-count-col.webp",
+          "usageType": "legacy_body",
+          "alt": "",
+          "caption": null,
+          "metadata": {
+            "legacyPath": "count-star-vs-count-col.webp",
+            "unresolved": true
+          }
+        }
+      ],
+      "relatedContent": [],
+      "artifactChecksums": {
+        "document": "dc0d7a778d3ac207fb287a815ed827a5268a90efe7a83b72e11a896b5c939672",
+        "markdown": "d837523230564e606cb9e1b3241ae8ed6e00ad3fe915f76a67c1349100f4fbc0",
+        "html": "b55c2967f8b052377933b2a9f935678e6a3a460be62bb84eeff1c6663945e518",
+        "text": "fddcf58c4fb6f2048cbfe9fc2e2b4a3833fb3ce5f9785976ab6c61453e17ef94"
+      },
+      "markdownMetadata": {
+        "markdownExportMode": "mixed_gfm_html",
+        "exportWarnings": [
+          "complex_table_exported_as_sanitized_html"
+        ],
+        "fallbackNodeCount": 1,
+        "exporterVersion": "1.0.0"
+      }
+    },
+    {
+      "id": "prompt-ko",
+      "classification": "exact",
+      "route": {
+        "route": "/archive/prompt-real-world-guide",
+        "routeType": "legacy_canonical"
+      },
+      "metadata": {
+        "slug": "prompt-real-world-guide",
+        "locale": "ko",
+        "legacyPublishedAt": "2026-04-26T00:00:00.000Z",
+        "translationSiblings": [
+          {
+            "id": "35fd5a00-09c2-4f19-bc71-458ea127ea21",
+            "locale": "en",
+            "slug": "prompt-real-world-guide",
+            "title": "Practical Notebook for Asking AI the Right Way"
+          },
+          {
+            "id": "e44f62b3-955a-4140-8b0f-93dce171d170",
+            "locale": "ko",
+            "slug": "prompt-real-world-guide",
+            "title": "AI에게 제대로 묻기 위한 실전 노트"
+          }
+        ]
+      },
+      "structuralCounts": {
+        "headings": 62,
+        "headingLevels": [
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          2,
+          3,
+          3,
+          2,
+          3,
+          3,
+          2
+        ],
+        "anchors": [
+          "1-코드-수정-디버깅",
+          "흐릿한-요청",
+          "기준을-넣은-요청",
+          "바로-쓸-수-있는-틀",
+          "2-코드-리뷰",
+          "흐릿한-요청-2",
+          "기준을-넣은-요청-2",
+          "바로-쓸-수-있는-틀-2",
+          "3-글쓰기-블로그-아티클",
+          "흐릿한-요청-3",
+          "기준을-넣은-요청-3",
+          "바로-쓸-수-있는-틀-3",
+          "4-sns-소셜-미디어-콘텐츠",
+          "흐릿한-요청-4",
+          "기준을-넣은-요청-4",
+          "바로-쓸-수-있는-틀-4",
+          "5-유튜브-쇼츠-대본",
+          "흐릿한-요청-5",
+          "기준을-넣은-요청-5",
+          "바로-쓸-수-있는-틀-5",
+          "6-이메일-업무-문서-작성",
+          "흐릿한-요청-6",
+          "기준을-넣은-요청-6",
+          "바로-쓸-수-있는-틀-6",
+          "7-요약",
+          "흐릿한-요청-7",
+          "기준을-넣은-요청-7",
+          "바로-쓸-수-있는-틀-7",
+          "8-번역",
+          "흐릿한-요청-8",
+          "기준을-넣은-요청-8",
+          "바로-쓸-수-있는-틀-8",
+          "9-이미지-분석",
+          "흐릿한-요청-9",
+          "기준을-넣은-요청-9",
+          "바로-쓸-수-있는-틀-9",
+          "10-브레인스토밍-아이디어-발상",
+          "흐릿한-요청-10",
+          "기준을-넣은-요청-10",
+          "바로-쓸-수-있는-틀-10",
+          "11-데이터-분석-엑셀",
+          "흐릿한-요청-11",
+          "기준을-넣은-요청-11",
+          "바로-쓸-수-있는-틀-11",
+          "12-학습-개념-이해",
+          "흐릿한-요청-12",
+          "기준을-넣은-요청-12",
+          "바로-쓸-수-있는-틀-12",
+          "13-면접-준비",
+          "흐릿한-요청-13",
+          "기준을-넣은-요청-13",
+          "바로-쓸-수-있는-틀-13",
+          "14-회의록-작성-정리",
+          "흐릿한-요청-14",
+          "기준을-넣은-요청-14",
+          "15-프레젠테이션-발표-자료",
+          "흐릿한-요청-15",
+          "기준을-넣은-요청-15",
+          "16-글-교정-피드백",
+          "흐릿한-요청-16",
+          "기준을-넣은-요청-16",
+          "좋은-프롬프트의-공통-기준"
+        ],
+        "codeBlocks": 45,
+        "codeLanguages": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "tables": 0,
+        "images": 0,
+        "imagePaths": [],
+        "links": 0,
+        "textHash": "e27e0f5be4eeac65b0f475164b4e7d630588d478d6630fc8f7a1c4d6f26c3db4"
+      },
+      "sources": [],
+      "mediaReferences": [],
+      "relatedContent": [],
+      "artifactChecksums": {
+        "document": "2a6251f7fb64d0e6e9f8991eb3fbebd4decd9763192c3ef40347456413e9a177",
+        "markdown": "4d8751c97d452143e01415395d2c847a0af3155bd9432bf6eeb76b1febb8771f",
+        "html": "349c3fc972845929852d72ee77d4b108697bcb99f9ac5ee8a8ed52262291afb3",
+        "text": "9c963a7f2fd0d279315a980519b38e306586acb705252ff2b7ba21bcd8d59fec"
+      },
+      "markdownMetadata": {
+        "markdownExportMode": "gfm",
+        "exportWarnings": [],
+        "fallbackNodeCount": 0,
+        "exporterVersion": "1.0.0"
+      }
+    },
+    {
+      "id": "prompt-en",
+      "classification": "exact",
+      "route": {
+        "route": "/en/archive/prompt-real-world-guide",
+        "routeType": "legacy_canonical"
+      },
+      "metadata": {
+        "slug": "prompt-real-world-guide",
+        "locale": "en",
+        "legacyPublishedAt": "2026-04-26T00:00:00.000Z",
+        "translationSiblings": [
+          {
+            "id": "35fd5a00-09c2-4f19-bc71-458ea127ea21",
+            "locale": "en",
+            "slug": "prompt-real-world-guide",
+            "title": "Practical Notebook for Asking AI the Right Way"
+          },
+          {
+            "id": "e44f62b3-955a-4140-8b0f-93dce171d170",
+            "locale": "ko",
+            "slug": "prompt-real-world-guide",
+            "title": "AI에게 제대로 묻기 위한 실전 노트"
+          }
+        ]
+      },
+      "structuralCounts": {
+        "headings": 62,
+        "headingLevels": [
+          1,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          2,
+          3,
+          3,
+          2,
+          3,
+          3,
+          2,
+          3,
+          3,
+          2
+        ],
+        "anchors": [
+          "asking-ai-questions-well",
+          "1-code-fixes-debugging",
+          "vague-request",
+          "request-with-criteria",
+          "ready-to-use-template",
+          "2-code-review",
+          "vague-request-2",
+          "request-with-criteria-2",
+          "ready-to-use-template-2",
+          "3-writing-blog-articles",
+          "vague-request-3",
+          "request-with-criteria-3",
+          "ready-to-use-template-3",
+          "4-sns-social-media-content",
+          "vague-request-4",
+          "request-with-criteria-4",
+          "ready-to-use-template-4",
+          "5-youtube-shorts-script",
+          "vague-request-5",
+          "request-with-criteria-5",
+          "ready-to-use-template-5",
+          "6-email-business-documents",
+          "vague-request-6",
+          "request-with-criteria-6",
+          "ready-to-use-template-6",
+          "7-summarization",
+          "vague-request-7",
+          "request-with-criteria-7",
+          "ready-to-use-template-7",
+          "8-translation",
+          "vague-request-8",
+          "request-with-criteria-8",
+          "ready-to-use-template-8",
+          "9-image-analysis",
+          "vague-request-9",
+          "request-with-criteria-9",
+          "ready-to-use-template-9",
+          "10-brainstorming-ideation",
+          "vague-request-10",
+          "request-with-criteria-10",
+          "ready-to-use-template-10",
+          "11-data-analysis-excel",
+          "vague-request-11",
+          "request-with-criteria-11",
+          "ready-to-use-template-11",
+          "12-learning-concept-understanding",
+          "vague-request-12",
+          "request-with-criteria-12",
+          "ready-to-use-template-12",
+          "13-interview-preparation",
+          "vague-request-13",
+          "request-with-criteria-13",
+          "14-meeting-notes-organization",
+          "vague-request-14",
+          "request-with-criteria-14",
+          "15-presentation-presentation-materials",
+          "vague-request-15",
+          "request-with-criteria-15",
+          "16-proofreading-feedback",
+          "vague-request-16",
+          "request-with-criteria-16",
+          "common-standards-for-good-prompts"
+        ],
+        "codeBlocks": 44,
+        "codeLanguages": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "tables": 0,
+        "images": 0,
+        "imagePaths": [],
+        "links": 0,
+        "textHash": "2a89816231a52355c55e752bcabf72274e06bb4588bc58b35db53c9fd43db81e"
+      },
+      "sources": [],
+      "mediaReferences": [],
+      "relatedContent": [],
+      "artifactChecksums": {
+        "document": "b80eedcaca16e33e9640a6b25b4ee6696838643786171f1d1211ecf1d53d1a90",
+        "markdown": "2f1cf6971fa2b28a90947ba3abb14ff8d8de613ad5f46cbf2435096b5f6f7998",
+        "html": "51e27b536200335255dc3edf3ff90b063725f0885efad4df79971850356a9d77",
+        "text": "2352ba3e91d9991d9ebd9748b222d8ad9df0f72a026add48a0c64894ff8fad77"
+      },
+      "markdownMetadata": {
+        "markdownExportMode": "gfm",
+        "exportWarnings": [],
+        "fallbackNodeCount": 0,
+        "exporterVersion": "1.0.0"
+      }
+    },
+    {
+      "id": "learn-ko",
+      "classification": "exact",
+      "route": {
+        "route": "/archive/can-we-learn-directly-from-ai-answers",
+        "routeType": "legacy_canonical"
+      },
+      "metadata": {
+        "slug": "can-we-learn-directly-from-ai-answers",
+        "locale": "ko",
+        "legacyPublishedAt": "2026-06-26T00:00:00.000Z",
+        "translationSiblings": [
+          {
+            "id": "bd9d68d5-d3e1-471e-9a96-a8d5df4bbfb1",
+            "locale": "en",
+            "slug": "can-we-learn-directly-from-ai-answers",
+            "title": "Is it okay to just learn the answer as AI told it to me?"
+          },
+          {
+            "id": "35ec8cff-2d79-4a8b-86ff-45d418b441c8",
+            "locale": "ko",
+            "slug": "can-we-learn-directly-from-ai-answers",
+            "title": "AI가 알려준 답을 그대로 배워도 될까?"
+          }
+        ]
+      },
+      "structuralCounts": {
+        "headings": 4,
+        "headingLevels": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "anchors": [
+          "잘-설명하는-답이-항상-맞는-답은-아니다",
+          "설명이-유창하면-이해한-것처럼-느껴진다",
+          "배움은-답을-받는-순간에-끝나지-않는다",
+          "ai의-답을-지식으로-바꾸는-기준"
+        ],
+        "codeBlocks": 0,
+        "codeLanguages": [],
+        "tables": 0,
+        "images": 1,
+        "imagePaths": [
+          "./ai-learning-verification-desk.webp"
+        ],
+        "links": 0,
+        "textHash": "4b29e0c20031df08639b8172f2bff77e8ff5201acc98add936ae820291aca409"
+      },
+      "sources": [],
+      "mediaReferences": [
+        {
+          "id": "ad9ac76d-294d-4635-89ce-937a1c8ef3f6",
+          "status": "pending",
+          "sourceUrl": "./ai-learning-verification-desk.webp",
+          "usageType": "legacy_body",
+          "alt": "",
+          "caption": null,
+          "metadata": {
+            "legacyPath": "./ai-learning-verification-desk.webp",
+            "unresolved": true
+          }
+        }
+      ],
+      "relatedContent": [],
+      "artifactChecksums": {
+        "document": "89058176462d9044b5dffe66615191dbe902053a348049c2f043b23aa50501e6",
+        "markdown": "0ec5537109446c6987aeea4d19292a74980275452b27b21991244b81965f1ae4",
+        "html": "49fc699284fc4b14a2afec4568c420be4b0d86659bd10b918b9fb4d940171521",
+        "text": "3bf6cfb537ae508fab21a43f657627b5e26339e9c146aa9e33a43cc63d8637db"
+      },
+      "markdownMetadata": {
+        "markdownExportMode": "gfm",
+        "exportWarnings": [],
+        "fallbackNodeCount": 0,
+        "exporterVersion": "1.0.0"
+      }
+    },
+    {
+      "id": "learn-en",
+      "classification": "exact",
+      "route": {
+        "route": "/en/archive/can-we-learn-directly-from-ai-answers",
+        "routeType": "legacy_canonical"
+      },
+      "metadata": {
+        "slug": "can-we-learn-directly-from-ai-answers",
+        "locale": "en",
+        "legacyPublishedAt": "2026-06-26T00:00:00.000Z",
+        "translationSiblings": [
+          {
+            "id": "bd9d68d5-d3e1-471e-9a96-a8d5df4bbfb1",
+            "locale": "en",
+            "slug": "can-we-learn-directly-from-ai-answers",
+            "title": "Is it okay to just learn the answer as AI told it to me?"
+          },
+          {
+            "id": "35ec8cff-2d79-4a8b-86ff-45d418b441c8",
+            "locale": "ko",
+            "slug": "can-we-learn-directly-from-ai-answers",
+            "title": "AI가 알려준 답을 그대로 배워도 될까?"
+          }
+        ]
+      },
+      "structuralCounts": {
+        "headings": 4,
+        "headingLevels": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "anchors": [
+          "a-well-explained-answer-is-not-always-a-correct-answer",
+          "a-fluent-explanation-feels-like-understanding",
+          "learning-does-not-end-when-you-receive-an-answer",
+          "criteria-for-turning-ai-answers-into-knowledge"
+        ],
+        "codeBlocks": 0,
+        "codeLanguages": [],
+        "tables": 0,
+        "images": 1,
+        "imagePaths": [
+          "./ai-learning-verification-desk.webp"
+        ],
+        "links": 0,
+        "textHash": "3e91523f461fa80613af28aff3889f1f19dd0ed4893a0eef5acb7f754d50257f"
+      },
+      "sources": [],
+      "mediaReferences": [
+        {
+          "id": "036985b1-cc50-42e7-b2d7-57b195d2fb8a",
+          "status": "pending",
+          "sourceUrl": "./ai-learning-verification-desk.webp",
+          "usageType": "legacy_body",
+          "alt": "",
+          "caption": null,
+          "metadata": {
+            "legacyPath": "./ai-learning-verification-desk.webp",
+            "unresolved": true
+          }
+        }
+      ],
+      "relatedContent": [],
+      "artifactChecksums": {
+        "document": "6ce6aef8823d98724c9de1c1760794c3f573c1054a10186b8c33e31e90d34290",
+        "markdown": "62c723e2d73473f2baa6cb6a5bc7cc35d885c36cd31606b50700fed7c966d050",
+        "html": "adcca34ecaa6e662d8e2fd8e80d8f7d1125d2e165fb86e6dec90536ff80b248d",
+        "text": "e4f10da87486df13b94bcb39e6dfd4d751f381c5cf26f12db6fa028d59a9c247"
+      },
+      "markdownMetadata": {
+        "markdownExportMode": "gfm",
+        "exportWarnings": [],
+        "fallbackNodeCount": 0,
+        "exporterVersion": "1.0.0"
+      }
+    },
+    {
+      "id": "llm-ko",
+      "classification": "exact",
+      "route": {
+        "route": "/archive/llm-architecture",
+        "routeType": "legacy_canonical"
+      },
+      "metadata": {
+        "slug": "llm-architecture",
+        "locale": "ko",
+        "legacyPublishedAt": "2026-04-05T00:00:00.000Z",
+        "translationSiblings": [
+          {
+            "id": "4e56edb7-f663-4db5-92de-c7f15df6c63b",
+            "locale": "en",
+            "slug": "llm-architecture",
+            "title": "How Does an LLM Generate Answers"
+          },
+          {
+            "id": "88acd96d-71ca-4cdd-848e-40d96a97b2bd",
+            "locale": "ko",
+            "slug": "llm-architecture",
+            "title": "LLM은 어떻게 답을 만들어내는가"
+          }
+        ]
+      },
+      "structuralCounts": {
+        "headings": 4,
+        "headingLevels": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "anchors": [
+          "llm은-문장을-사람처럼-읽지-않는다",
+          "모든-단어가-서로를-본다",
+          "같은-질문에-다른-답이-나오는-이유",
+          "프롬프트가-작동하는-이유"
+        ],
+        "codeBlocks": 0,
+        "codeLanguages": [],
+        "tables": 0,
+        "images": 0,
+        "imagePaths": [],
+        "links": 0,
+        "textHash": "0b59c0850c6630aeb314d6a221b4ea51311a6a12e8893f4ec15e35d1fbcb98da"
+      },
+      "sources": [],
+      "mediaReferences": [],
+      "relatedContent": [],
+      "artifactChecksums": {
+        "document": "57f4718004557614f29c7eff76c4e256a97eaadb73aacda14db2abfc97d259e8",
+        "markdown": "438d0c63d37658a466b9621fc7172e60739839eb02e30edc62cd89130bd9d658",
+        "html": "9a56f35b250b7d6a78d852f40e6fa8d32076d2a93079eff3aae9dc3c9f7f2fbd",
+        "text": "343922e23120fc514548dec9fb0fa1ce78c628e5da9d66ccf7cf4baa58297e02"
+      },
+      "markdownMetadata": {
+        "markdownExportMode": "gfm",
+        "exportWarnings": [],
+        "fallbackNodeCount": 0,
+        "exporterVersion": "1.0.0"
+      }
+    },
+    {
+      "id": "llm-en",
+      "classification": "exact",
+      "route": {
+        "route": "/en/archive/llm-architecture",
+        "routeType": "legacy_canonical"
+      },
+      "metadata": {
+        "slug": "llm-architecture",
+        "locale": "en",
+        "legacyPublishedAt": "2026-04-05T00:00:00.000Z",
+        "translationSiblings": [
+          {
+            "id": "4e56edb7-f663-4db5-92de-c7f15df6c63b",
+            "locale": "en",
+            "slug": "llm-architecture",
+            "title": "How Does an LLM Generate Answers"
+          },
+          {
+            "id": "88acd96d-71ca-4cdd-848e-40d96a97b2bd",
+            "locale": "ko",
+            "slug": "llm-architecture",
+            "title": "LLM은 어떻게 답을 만들어내는가"
+          }
+        ]
+      },
+      "structuralCounts": {
+        "headings": 5,
+        "headingLevels": [
+          1,
+          2,
+          2,
+          2,
+          2
+        ],
+        "anchors": [
+          "understanding-how-llm-actually-works",
+          "llm-does-not-read-sentences-like-humans-do",
+          "every-word-sees-every-other-word",
+          "why-the-same-question-produces-different-answers",
+          "why-prompts-work"
+        ],
+        "codeBlocks": 0,
+        "codeLanguages": [],
+        "tables": 0,
+        "images": 0,
+        "imagePaths": [],
+        "links": 0,
+        "textHash": "7b347c1a18a0f3bddc0c8efc17721a1530aa5f4f18e9c60a3842120044b3162f"
+      },
+      "sources": [],
+      "mediaReferences": [],
+      "relatedContent": [],
+      "artifactChecksums": {
+        "document": "4f199bbe2ee80a40bc6af56f6206913ddd5250beef620eb5ebd2e961d4c0b745",
+        "markdown": "380faa529a756fdd2ef0468882e1e211cb562f11ba75789a605cf23f8441171c",
+        "html": "d19d164891484268bb639ca32fd532f4d78310ceddaf3466b9a525690a31430c",
+        "text": "f641f5f66e38cf00a2b360c8f8b5ad250f95d7753adbe59f4fe9c76a7746bca5"
+      },
+      "markdownMetadata": {
+        "markdownExportMode": "gfm",
+        "exportWarnings": [],
+        "fallbackNodeCount": 0,
+        "exporterVersion": "1.0.0"
+      }
+    },
+    {
+      "id": "deep-ko",
+      "classification": "exact",
+      "route": {
+        "route": "/deep-dive/ai-era-agile-verification",
+        "routeType": "legacy_canonical"
+      },
+      "metadata": {
+        "slug": "ai-era-agile-verification",
+        "locale": "ko",
+        "legacyPublishedAt": "2026-05-18T00:00:00.000Z",
+        "translationSiblings": [
+          {
+            "id": "bf1cb3f0-9226-45ba-89ff-3a83ae4495fa",
+            "locale": "en",
+            "slug": "ai-era-agile-verification",
+            "title": "Agile is a method for verifying direction, not speed."
+          },
+          {
+            "id": "b68771a5-66e9-4a97-b95a-8c1fb4c47207",
+            "locale": "ko",
+            "slug": "ai-era-agile-verification",
+            "title": "Agile은 속도가 아니라 방향을 검증하는 방식이다"
+          }
+        ]
+      },
+      "structuralCounts": {
+        "headings": 104,
+        "headingLevels": [
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          2,
+          2
+        ],
+        "anchors": [
+          "이-글을-읽는-방법",
+          "2026년에-agile을-다시-묻는-이유",
+          "바이브-코딩-시대의-개발-루프",
+          "생성-속도보다-검증-능력이-병목이-됐다",
+          "ai-에이전트가-들어온-팀의-새로운-긴장",
+          "그래서-agile은-2026년에-더-필요하다",
+          "agile-이전-waterfall이-만들어낸-문제",
+          "늦은-피드백이-만드는-비용",
+          "chaos-report와-소프트웨어-프로젝트-실패율",
+          "문서가-현실을-대체한-문제",
+          "agile-manifesto-원문이-실제로-말하는-것",
+          "4가지-가치",
+          "12가지-원칙",
+          "manifesto가-나온-맥락",
+          "agile의-주요-방법론들",
+          "scrum",
+          "kanban",
+          "xp-extreme-programming",
+          "safe와-대규모-agile의-문제",
+          "agile이-빠른-개발-방법론으로-오해된-이유",
+          "도구가-목적을-대체한-문제",
+          "certified-scrum-master의-확산",
+          "agile-transformation이라는-이름의-리브랜딩",
+          "속도-압박과-agile의-왜곡",
+          "중요한-것은-스프린트-주기가-아니라-피드백-루프다",
+          "피드백의-종류",
+          "피드백-루프의-속도",
+          "ai-시대와-agile-어떻게-달라졌나",
+          "ai-이전-구현이-병목이었다",
+          "ai-이후-방향이-병목이-됐다",
+          "ai와-함께-일할-때의-방향-확인-위험",
+          "ai가-agile-루프의-어느-부분을-바꾸는가",
+          "ai가-만든-코드의-검증-문제",
+          "기업에서-agile은-무엇을-다시-검증해야-하는가",
+          "ai-도입은-팀을-agile하게-만들지-않는다",
+          "더-많은-티켓-처리량은-더-나은-제품을-의미하지-않는다",
+          "product-owner의-역할은-더-중요해진다",
+          "ai가-만든-산출물의-definition-of-done을-다시-써야-한다",
+          "sprint-review는-데모가-아니라-방향-검증의-자리여야-한다",
+          "기업-agile의-진짜-병목은-의사결정-속도다",
+          "1인-개발자와-solo-saas에서의-agile",
+          "혼자일-때-방향이-틀리기-더-쉽다",
+          "내가-만드는-것에-빠지는-문제",
+          "혼자서-방향을-확인하는-방법들",
+          "solo-saas에서-agile-루프를-어떻게-돌리는가",
+          "창업자에게-agile은-사업-가설을-검증하는-방식이다",
+          "창업자가-순서대로-확인해야-하는-가설들",
+          "mvp는-작은-제품이-아니라-작은-증거다",
+          "출시가-아니라-학습이-sprint의-끝이다",
+          "수익이-생기기-전과-후의-agile은-다르다",
+          "1인-saas의-주간-agile-루프",
+          "ai가-만든-결과를-agile하게-검증하는-기준",
+          "방향-검증을-위한-질문들",
+          "기능-검증을-위한-실용적-방법들",
+          "개인-개발자를-위한-ai-산출물-검증-체크리스트",
+          "팀이-ai-산출물을-agile하게-검토하는-기준",
+          "작은-agile-루프-질문-가설-구현-관찰-수정",
+          "질문",
+          "가설",
+          "구현",
+          "관찰",
+          "수정",
+          "agile의-자주-하는-실수들",
+          "의식이-되어버린-agile",
+          "backlog가-무덤이-되는-문제",
+          "velocity를-목표로-삼는-문제",
+          "사용자-없는-sprint-review",
+          "완료됐지만-안-쓰이는-기능들",
+          "retrospective에서-아무것도-안-바뀌는-문제",
+          "agile을-도구로-쓰는-문제",
+          "agile의-한계",
+          "명확한-방향이-있을-때",
+          "하드웨어와-물리적-제품",
+          "규제가-강한-산업",
+          "대규모-인프라-변경",
+          "agile이-회사-정치의-도구가-될-때",
+          "agile이-팀에-맞지-않을-때",
+          "인접-방법론과의-비교",
+          "lean",
+          "shape-up-basecamp",
+          "okr",
+          "design-thinking",
+          "six-sigma",
+          "agile-지표-무엇을-보고-판단하는가",
+          "velocity",
+          "cycle-time",
+          "lead-time",
+          "sprint-burndown-chart",
+          "cumulative-flow-diagram-cfd",
+          "nps-net-promoter-score",
+          "1인-개발자가-실제로-볼-수-있는-지표들",
+          "agile에서-흔히-혼동하는-개념들",
+          "mvp-minimum-viable-product",
+          "sprint와-iteration",
+          "scrum-master와-프로젝트-매니저",
+          "product-owner와-프로덕트-매니저",
+          "done의-의미",
+          "agile과-기술적-실천들",
+          "기술-부채와-agile",
+          "자동화-테스트",
+          "지속적인-통합과-배포-cicd",
+          "리팩토링",
+          "마지막으로-속도는-도구고-방향은-판단이다",
+          "참고자료"
+        ],
+        "codeBlocks": 3,
+        "codeLanguages": [
+          null,
+          null,
+          null
+        ],
+        "tables": 0,
+        "images": 2,
+        "imagePaths": [
+          "./agile-waterfall-vs-agile.webp",
+          "./agile-feedback-loop.webp"
+        ],
+        "links": 0,
+        "textHash": "2c312bd9561899ed71d25e63aaf28446186510204a844fcad0cda688ad1969e6"
+      },
+      "sources": [],
+      "mediaReferences": [
+        {
+          "id": "c4a68d59-ef26-4f77-851a-7edb449052bb",
+          "status": "pending",
+          "sourceUrl": "./agile-waterfall-vs-agile.webp",
+          "usageType": "legacy_body",
+          "alt": "",
+          "caption": null,
+          "metadata": {
+            "legacyPath": "./agile-waterfall-vs-agile.webp",
+            "unresolved": true
+          }
+        },
+        {
+          "id": "606c8ae1-8fb3-4f25-908b-01c59b4586cc",
+          "status": "pending",
+          "sourceUrl": "./agile-feedback-loop.webp",
+          "usageType": "legacy_body",
+          "alt": "",
+          "caption": null,
+          "metadata": {
+            "legacyPath": "./agile-feedback-loop.webp",
+            "unresolved": true
+          }
+        }
+      ],
+      "relatedContent": [],
+      "artifactChecksums": {
+        "document": "dfb773e5c282702a37b465ac7d790a298e18a06900a0fb59be36ab590564a2e7",
+        "markdown": "5000cc97a96fafa66ad63f59462c86b8e08687eaa2aaeb42d2eaa93db1fa45f3",
+        "html": "bbd4f65c6a9c9745ab2c7ab39fef28891b54287c589e98c1c08e2825c1fbfde0",
+        "text": "f99bb083545b5ac61033f0501a7c0aa21faea683eece3035f2656e23578457c9"
+      },
+      "markdownMetadata": {
+        "markdownExportMode": "gfm",
+        "exportWarnings": [],
+        "fallbackNodeCount": 0,
+        "exporterVersion": "1.0.0"
+      }
+    },
+    {
+      "id": "deep-en",
+      "classification": "exact",
+      "route": {
+        "route": "/en/deep-dive/ai-era-agile-verification",
+        "routeType": "legacy_canonical"
+      },
+      "metadata": {
+        "slug": "ai-era-agile-verification",
+        "locale": "en",
+        "legacyPublishedAt": "2026-05-18T00:00:00.000Z",
+        "translationSiblings": [
+          {
+            "id": "bf1cb3f0-9226-45ba-89ff-3a83ae4495fa",
+            "locale": "en",
+            "slug": "ai-era-agile-verification",
+            "title": "Agile is a method for verifying direction, not speed."
+          },
+          {
+            "id": "b68771a5-66e9-4a97-b95a-8c1fb4c47207",
+            "locale": "ko",
+            "slug": "ai-era-agile-verification",
+            "title": "Agile은 속도가 아니라 방향을 검증하는 방식이다"
+          }
+        ]
+      },
+      "structuralCounts": {
+        "headings": 43,
+        "headingLevels": [
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3
+        ],
+        "anchors": [
+          "how-to-read-this-document",
+          "why-we-question-agile-again-in-2026",
+          "the-development-loop-in-the-age-of-vibe-coding",
+          "generation-speed-became-the-bottleneck-not-verification-capability",
+          "new-tensions-in-teams-where-ai-agents-have-arrived",
+          "so-agile-is-even-more-needed-in-2026",
+          "before-agile-problems-created-by-waterfall",
+          "late-feedback-creates-costs",
+          "chaos-report-and-software-project-failure-rates",
+          "the-problem-of-documents-replacing-reality",
+          "agile-manifesto-what-the-original-text-actually-says",
+          "four-values",
+          "twelve-principles",
+          "context-of-the-manifesto",
+          "major-agile-methodologies",
+          "scrum",
+          "kanban",
+          "xp-extreme-programming",
+          "safe-and-the-problem-of-large-scale-agile",
+          "why-agile-was-misunderstood-as-fast-development-methodology",
+          "the-problem-of-tools-replacing-purpose",
+          "spread-of-certified-scrum-master",
+          "rebranding-disguised-as-agile-transformation",
+          "speed-pressure-and-agile-distortion",
+          "what-matters-is-feedback-loop-not-sprint-cycle",
+          "types-of-feedback",
+          "speed-of-feedback-loop",
+          "agile-and-the-ai-era-what-changed",
+          "before-ai-implementation-was-the-bottleneck",
+          "after-ai-direction-became-the-bottleneck",
+          "the-direction-verification-risk-in-working-with-ai",
+          "ai-agents-in-teams-with-new-tensions",
+          "so-agile-is-even-more-needed-in-2026-2",
+          "what-must-agile-verify-again-in-enterprises",
+          "ai-adoption-does-not-make-teams-agile",
+          "product-owners-role-becomes-more-important",
+          "must-rewrite-definition-of-done-for-ai-created-outputs",
+          "sprint-review-must-be-direction-verification-not-demo",
+          "real-bottleneck-in-enterprise-agile-is-decision-speed",
+          "agile-for-1-person-developers-and-solo-saas",
+          "getting-direction-wrong-is-easier-when-alone",
+          "the-problem-of-becoming-attached-to-what-you-make",
+          "how-solo-developers-verify-direction"
+        ],
+        "codeBlocks": 4,
+        "codeLanguages": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "tables": 0,
+        "images": 1,
+        "imagePaths": [
+          "./agile-waterfall-vs-agile.webp"
+        ],
+        "links": 0,
+        "textHash": "63f6a51ccae5628a218ec751be2dc9522183d3630f7365be4660d37138155082"
+      },
+      "sources": [],
+      "mediaReferences": [
+        {
+          "id": "e83f7213-f352-4ae3-833b-cc44f22cb828",
+          "status": "pending",
+          "sourceUrl": "./agile-waterfall-vs-agile.webp",
+          "usageType": "legacy_body",
+          "alt": "",
+          "caption": null,
+          "metadata": {
+            "legacyPath": "./agile-waterfall-vs-agile.webp",
+            "unresolved": true
+          }
+        }
+      ],
+      "relatedContent": [],
+      "artifactChecksums": {
+        "document": "18e7545bbcc95fb600f0c40d1895a02ceb42650716e234380146230866ed6216",
+        "markdown": "42fb383f3a4d0f9bc7a219360fd946cce604b677870c2ad8981170c796a8982d",
+        "html": "56fa5e07fdcdd1a5ae5618379b125a2d0217e781e9e2185703dfae2b28fb33a0",
+        "text": "09b8ac48f69b61b0e32bd415bd34fb96bdf6c4f8ad6b6ce738f4f15f3f2e8796"
+      },
+      "markdownMetadata": {
+        "markdownExportMode": "gfm",
+        "exportWarnings": [],
+        "fallbackNodeCount": 0,
+        "exporterVersion": "1.0.0"
+      }
+    },
+    {
+      "id": "data-ko",
+      "classification": "exact",
+      "route": {
+        "route": "/deep-dive/data-analysis-beyond-business",
+        "routeType": "legacy_canonical"
+      },
+      "metadata": {
+        "slug": "data-analysis-beyond-business",
+        "locale": "ko",
+        "legacyPublishedAt": "2026-06-21T00:00:00.000Z",
+        "translationSiblings": [
+          {
+            "id": "db419e88-ebbc-4c07-b047-4d1b0ea2dbb6",
+            "locale": "en",
+            "slug": "data-analysis-beyond-business",
+            "title": "Is Data Analysis Only Necessary for Corporations?"
+          },
+          {
+            "id": "adad8caa-a5c0-4443-9c12-fab89922babb",
+            "locale": "ko",
+            "slug": "data-analysis-beyond-business",
+            "title": "데이터 분석은 기업에만 필요한 것인가?"
+          }
+        ]
+      },
+      "structuralCounts": {
+        "headings": 50,
+        "headingLevels": [
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "anchors": [
+          "1-데이터-분석이라는-말은-왜-어렵게-느껴지는가",
+          "2-데이터란-무엇인가",
+          "3-기업에서-데이터-분석은-무엇을-하는가",
+          "4-기업-데이터-분석의-핵심-질문들",
+          "41-무슨-일이-일어났는가",
+          "42-왜-일어났는가",
+          "43-이-변화는-우연인가-반복되는-신호인가",
+          "44-어떤-선택이-이-결과를-만들었는가",
+          "45-다음에는-무엇을-바꿔야-하는가",
+          "5-데이터-지표-kpi는-어떻게-다른가",
+          "6-데이터-분석의-기본-흐름",
+          "61-질문",
+          "62-가설",
+          "63-데이터",
+          "64-해석",
+          "65-판단",
+          "66-다음-행동",
+          "7-기업-데이터-분석과-개인-데이터-분석은-어떻게-다른가",
+          "8-개인에게도-데이터-분석이-필요한-이유",
+          "9-ai-시대에-데이터-분석은-왜-더-중요해졌는가",
+          "10-데이터는-무엇을-보여주고-무엇을-보여주지-못하는가",
+          "11-정량-데이터와-정성-데이터",
+          "12-데이터-분석의-함정",
+          "121-조회수의-함정",
+          "122-클릭률의-함정",
+          "123-평균의-함정",
+          "124-작은-표본의-함정",
+          "125-상관관계와-인과관계의-혼동",
+          "126-측정-가능한-것만-중요해지는-문제",
+          "127-데이터가-목표가-되는-문제",
+          "128-대시보드가-현실을-대신하는-문제",
+          "129-내가-보고-싶은-숫자만-보는-문제",
+          "1210-데이터-없는-영역을-무시하는-문제",
+          "1211-허영-지표에-속는-문제",
+          "13-데이터도-검증의-대상이다",
+          "14-개인은-어떻게-데이터-분석을-시작할-수-있는가",
+          "141-질문을-먼저-적는다",
+          "142-가설을-적는다",
+          "143-확인할-지표를-하나만-고른다",
+          "144-숫자와-맥락을-함께-기록한다",
+          "145-일정-기간을-정한다",
+          "146-너무-빨리-결론-내리지-않는다",
+          "147-다음-행동을-바꾼다",
+          "148-다시-기록한다",
+          "15-개인-데이터-분석에-자주-쓰는-도구들",
+          "16-dechive식-데이터-분석-체크리스트",
+          "17-데이터-분석-능력은-어떻게-쌓이는가",
+          "18-데이터-분석은-기업에만-필요한-것인가",
+          "19-데이터-분석에-대한-자주-묻는-오해",
+          "20-결론-데이터는-판단을-대신하지-않는다"
+        ],
+        "codeBlocks": 1,
+        "codeLanguages": [
+          null
+        ],
+        "tables": 7,
+        "images": 5,
+        "imagePaths": [
+          "./data-analysis-map.webp",
+          "./data-analysis-flow.webp",
+          "./business-vs-personal-data-analysis.webp",
+          "./prelaunch-feedback-loop.webp",
+          "./data-analysis-traps.webp"
+        ],
+        "links": 0,
+        "textHash": "d20a0e7e9951038de17d0a2dedde6bcf313299b719c13f4b4cad2aabed7850a1"
+      },
+      "sources": [],
+      "mediaReferences": [
+        {
+          "id": "564edb86-6747-4a81-a665-f2ed9bc324c2",
+          "status": "pending",
+          "sourceUrl": "./data-analysis-map.webp",
+          "usageType": "legacy_body",
+          "alt": "",
+          "caption": null,
+          "metadata": {
+            "legacyPath": "./data-analysis-map.webp",
+            "unresolved": true
+          }
+        },
+        {
+          "id": "5965f8e8-8c80-4ecb-9d16-fe0e31279db5",
+          "status": "pending",
+          "sourceUrl": "./data-analysis-flow.webp",
+          "usageType": "legacy_body",
+          "alt": "",
+          "caption": null,
+          "metadata": {
+            "legacyPath": "./data-analysis-flow.webp",
+            "unresolved": true
+          }
+        },
+        {
+          "id": "c897fb0e-3540-4eb4-a0c8-592494b1f1cf",
+          "status": "pending",
+          "sourceUrl": "./business-vs-personal-data-analysis.webp",
+          "usageType": "legacy_body",
+          "alt": "",
+          "caption": null,
+          "metadata": {
+            "legacyPath": "./business-vs-personal-data-analysis.webp",
+            "unresolved": true
+          }
+        },
+        {
+          "id": "0b3d1d57-36a5-43ac-ba6c-e7a269f99e0c",
+          "status": "pending",
+          "sourceUrl": "./prelaunch-feedback-loop.webp",
+          "usageType": "legacy_body",
+          "alt": "",
+          "caption": null,
+          "metadata": {
+            "legacyPath": "./prelaunch-feedback-loop.webp",
+            "unresolved": true
+          }
+        },
+        {
+          "id": "27aa7795-debc-488d-9150-33b5149dd0de",
+          "status": "pending",
+          "sourceUrl": "./data-analysis-traps.webp",
+          "usageType": "legacy_body",
+          "alt": "",
+          "caption": null,
+          "metadata": {
+            "legacyPath": "./data-analysis-traps.webp",
+            "unresolved": true
+          }
+        }
+      ],
+      "relatedContent": [],
+      "artifactChecksums": {
+        "document": "afe5f4090794d60c339ef0eaa33a451c4f5ef290ac423daaf277af297a0a2ced",
+        "markdown": "1852fa6eff23249768a59b539f711466b0bc6b9b1ff55a1e231cdf9aefdb92e2",
+        "html": "1cbff0390148a09a039af8b5d2530e031a0487a35fcf0d57006c64e3cd57fb59",
+        "text": "cde0a82771c23141ca7d66b1a0a701eab66b86fc9b8583ba928db1e98cb72269"
+      },
+      "markdownMetadata": {
+        "markdownExportMode": "mixed_gfm_html",
+        "exportWarnings": [
+          "complex_table_exported_as_sanitized_html",
+          "complex_table_exported_as_sanitized_html",
+          "complex_table_exported_as_sanitized_html",
+          "complex_table_exported_as_sanitized_html",
+          "complex_table_exported_as_sanitized_html",
+          "complex_table_exported_as_sanitized_html",
+          "complex_table_exported_as_sanitized_html"
+        ],
+        "fallbackNodeCount": 7,
+        "exporterVersion": "1.0.0"
+      }
+    },
+    {
+      "id": "data-en",
+      "classification": "exact",
+      "route": {
+        "route": "/en/deep-dive/data-analysis-beyond-business",
+        "routeType": "legacy_canonical"
+      },
+      "metadata": {
+        "slug": "data-analysis-beyond-business",
+        "locale": "en",
+        "legacyPublishedAt": "2026-06-21T00:00:00.000Z",
+        "translationSiblings": [
+          {
+            "id": "db419e88-ebbc-4c07-b047-4d1b0ea2dbb6",
+            "locale": "en",
+            "slug": "data-analysis-beyond-business",
+            "title": "Is Data Analysis Only Necessary for Corporations?"
+          },
+          {
+            "id": "adad8caa-a5c0-4443-9c12-fab89922babb",
+            "locale": "ko",
+            "slug": "data-analysis-beyond-business",
+            "title": "데이터 분석은 기업에만 필요한 것인가?"
+          }
+        ]
+      },
+      "structuralCounts": {
+        "headings": 50,
+        "headingLevels": [
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "anchors": [
+          "1-why-does-the-term-data-analysis-feel-difficult",
+          "2-what-is-data",
+          "3-what-does-data-analysis-do-in-a-business",
+          "4-core-questions-in-business-data-analysis",
+          "41-what-happened",
+          "42-why-did-it-happen",
+          "43-is-this-change-coincidence-or-a-repeating-signal",
+          "44-what-choice-created-this-result",
+          "45-what-should-we-change-next",
+          "5-how-data-metrics-and-kpis-differ",
+          "6-basic-flow-of-data-analysis",
+          "61-question",
+          "62-hypothesis",
+          "63-data",
+          "64-interpretation",
+          "65-judgment",
+          "66-next-action",
+          "7-how-are-corporate-data-analysis-and-personal-data-analysis-different",
+          "8-why-data-analysis-is-necessary-for-individuals",
+          "9-why-data-analysis-became-more-important-in-the-ai-era",
+          "10-what-data-shows-and-what-it-cannot-show",
+          "11-quantitative-data-and-qualitative-data",
+          "12-pitfalls-in-data-analysis",
+          "121-the-trap-of-view-counts",
+          "122-the-trap-of-click-through-rate",
+          "123-the-trap-of-averages",
+          "124-the-trap-of-small-samples",
+          "125-confusion-between-correlation-and-causation",
+          "126-the-problem-of-only-measuring-what-is-measurable",
+          "127-the-problem-of-data-becoming-the-goal",
+          "128-the-problem-of-dashboard-replacing-reality",
+          "129-the-problem-of-only-seeing-numbers-you-want-to-see",
+          "1210-the-problem-of-ignoring-data-free-areas",
+          "1211-the-problem-of-being-deceived-by-vanity-metrics",
+          "13-data-is-also-subject-to-verification",
+          "14-how-can-individuals-start-data-analysis",
+          "141-write-down-your-question-first",
+          "142-write-down-your-hypothesis",
+          "143-choose-only-one-metric-to-check",
+          "144-record-numbers-and-context-together",
+          "145-set-a-time-period",
+          "146-do-not-reach-conclusions-too-quickly",
+          "147-change-your-next-action",
+          "148-record-again",
+          "15-tools-commonly-used-for-personal-data-analysis",
+          "16-dechive-style-data-analysis-checklist",
+          "17-how-data-analysis-skills-are-built",
+          "18-is-data-analysis-only-needed-for-businesses",
+          "19-common-misconceptions-about-data-analysis",
+          "20-conclusion-data-does-not-replace-judgment"
+        ],
+        "codeBlocks": 1,
+        "codeLanguages": [
+          null
+        ],
+        "tables": 7,
+        "images": 5,
+        "imagePaths": [
+          "./data-analysis-map.webp",
+          "./data-analysis-flow.webp",
+          "./business-vs-personal-data-analysis.webp",
+          "./prelaunch-feedback-loop.webp",
+          "./data-analysis-traps.webp"
+        ],
+        "links": 0,
+        "textHash": "96b0abbc7c1a536cbf1f23d80e237aa37c6722564589f005c1aad752c1d2d0af"
+      },
+      "sources": [],
+      "mediaReferences": [
+        {
+          "id": "f6a9c1ed-7bff-4857-b232-763feaddb698",
+          "status": "pending",
+          "sourceUrl": "./data-analysis-map.webp",
+          "usageType": "legacy_body",
+          "alt": "",
+          "caption": null,
+          "metadata": {
+            "legacyPath": "./data-analysis-map.webp",
+            "unresolved": true
+          }
+        },
+        {
+          "id": "e0c98b6b-7ef8-49b1-bc3a-0d578ae7db0b",
+          "status": "pending",
+          "sourceUrl": "./data-analysis-flow.webp",
+          "usageType": "legacy_body",
+          "alt": "",
+          "caption": null,
+          "metadata": {
+            "legacyPath": "./data-analysis-flow.webp",
+            "unresolved": true
+          }
+        },
+        {
+          "id": "18808202-f90b-4f32-b877-3955d97b2712",
+          "status": "pending",
+          "sourceUrl": "./business-vs-personal-data-analysis.webp",
+          "usageType": "legacy_body",
+          "alt": "",
+          "caption": null,
+          "metadata": {
+            "legacyPath": "./business-vs-personal-data-analysis.webp",
+            "unresolved": true
+          }
+        },
+        {
+          "id": "0519d806-fccc-4bd8-b217-7eea3e0b62b1",
+          "status": "pending",
+          "sourceUrl": "./prelaunch-feedback-loop.webp",
+          "usageType": "legacy_body",
+          "alt": "",
+          "caption": null,
+          "metadata": {
+            "legacyPath": "./prelaunch-feedback-loop.webp",
+            "unresolved": true
+          }
+        },
+        {
+          "id": "a2713c36-6596-4a9c-84cf-93a9536f4422",
+          "status": "pending",
+          "sourceUrl": "./data-analysis-traps.webp",
+          "usageType": "legacy_body",
+          "alt": "",
+          "caption": null,
+          "metadata": {
+            "legacyPath": "./data-analysis-traps.webp",
+            "unresolved": true
+          }
+        }
+      ],
+      "relatedContent": [],
+      "artifactChecksums": {
+        "document": "febfc15bb9c46b3ded41d30ebd17908628cbbc88278e651862a75fda160cc81d",
+        "markdown": "6db50888e50f10d67c2b62c9ec5e8778aa5abfb543944cdc708e1f4d8b90527f",
+        "html": "c18f5249911795de39626b6383ebe1d79a60bd71538cd621bbaddbc8f275784e",
+        "text": "afcf49d3a93a66fee3f4c68a065aaba54f8758d3c795772e13b89401093ced43"
+      },
+      "markdownMetadata": {
+        "markdownExportMode": "mixed_gfm_html",
+        "exportWarnings": [
+          "complex_table_exported_as_sanitized_html",
+          "complex_table_exported_as_sanitized_html",
+          "complex_table_exported_as_sanitized_html",
+          "complex_table_exported_as_sanitized_html",
+          "complex_table_exported_as_sanitized_html",
+          "complex_table_exported_as_sanitized_html",
+          "complex_table_exported_as_sanitized_html"
+        ],
+        "fallbackNodeCount": 7,
+        "exporterVersion": "1.0.0"
+      }
+    },
+    {
+      "id": "replace-ko",
+      "classification": "exact",
+      "route": {
+        "route": "/deep-dive/can-ai-replace-learning",
+        "routeType": "legacy_canonical"
+      },
+      "metadata": {
+        "slug": "can-ai-replace-learning",
+        "locale": "ko",
+        "legacyPublishedAt": "2026-06-29T00:00:00.000Z",
+        "translationSiblings": [
+          {
+            "id": "81d0f250-6b66-436b-8080-f65f26c994d7",
+            "locale": "en",
+            "slug": "can-ai-replace-learning",
+            "title": "Can AI Replace Learning?"
+          },
+          {
+            "id": "7a471b0c-8eca-4f4d-be20-24f03306bc68",
+            "locale": "ko",
+            "slug": "can-ai-replace-learning",
+            "title": "배움은 AI가 대신해줄 수 있을까?"
+          }
+        ]
+      },
+      "structuralCounts": {
+        "headings": 37,
+        "headingLevels": [
+          2,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3
+        ],
+        "anchors": [
+          "part-1-ai는-배움의-무엇을-바꾸었는가",
+          "질문의-비용이-낮아졌다",
+          "설명의-접근성이-높아졌다",
+          "반복-학습의-문턱이-낮아졌다",
+          "배움의-속도와-착각의-속도가-함께-빨라졌다",
+          "part-2-왜-답을-받는-것만으로는-배우는-것이-아닌가",
+          "설명을-따라간-감각은-이해가-아니다",
+          "요약은-기억을-줄여주지만-판단을-대신하지-않는다",
+          "예시는-이해를-돕지만-검증을-끝내지-않는다",
+          "ai의-확신은-학습자의-확신으로-옮겨갈-수-있다",
+          "part-3-질문은-어떻게-배움이-되는가",
+          "질문은-많이-하는-것이-아니라-좁혀가는-것이다",
+          "좋은-질문은-답을-늘리지-않고-모르는-위치를-드러낸다",
+          "질문의-기록이-곧-학습의-지도다",
+          "끝없는-질문은-끝없는-소비가-아니다",
+          "part-4-검증은-왜-학습의-일부가-되었는가",
+          "예전에는-검증이-공부-이후의-일이었다",
+          "공식-문서와-교재는-왜-여전히-필요한가",
+          "검증은-의심이-아니라-책임이다",
+          "ai가-틀렸을-때-책임은-누구에게-남는가",
+          "part-5-정리는-왜-저장이-아니라-구조인가",
+          "ai와-나눈-대화는-날것의-재료다",
+          "채팅창은-생각이-태어나는-곳이지-머무는-곳은-아니다",
+          "second-brain은-내-대신-생각하는-뇌가-아니다",
+          "모든-지식을-넣어두면-ai가-알아서-꺼내줄까",
+          "다시-질문할-수-있어야-지식이다",
+          "part-6-ai-시대의-배움은-어떤-구조를-가져야-하는가",
+          "ai-학습-루프",
+          "네-가지-기록-단위",
+          "검증-질문",
+          "멈춤-조건",
+          "part-7-ai는-배움을-대신하지-않고-배움의-책임을-더-선명하게-만든다",
+          "ai가-대신할-수-있는-것",
+          "ai가-대신할-수-없는-것",
+          "배움은-답의-소유가-아니라-판단의-형성이다",
+          "dechive의-관점",
+          "정리-배움은-끝나는-것이-아니라-다시-질문할-수-있게-되는-것이다"
+        ],
+        "codeBlocks": 0,
+        "codeLanguages": [],
+        "tables": 0,
+        "images": 4,
+        "imagePaths": [
+          "./explanation-is-not-understanding.webp",
+          "./verification-is-responsibility.webp",
+          "./storage-is-not-judgment.webp",
+          "./ai-learning-loop.webp"
+        ],
+        "links": 0,
+        "textHash": "c5d819d4b7a666ceae9385ab92d1d5ff843d248c3f0e54961a2adfba2ad00d2a"
+      },
+      "sources": [],
+      "mediaReferences": [
+        {
+          "id": "0005e773-6dc9-4cac-bd8c-c0110c500876",
+          "status": "pending",
+          "sourceUrl": "./explanation-is-not-understanding.webp",
+          "usageType": "legacy_body",
+          "alt": "",
+          "caption": null,
+          "metadata": {
+            "legacyPath": "./explanation-is-not-understanding.webp",
+            "unresolved": true
+          }
+        },
+        {
+          "id": "8f96de17-06df-4d4c-b32b-7ab6f59a72b8",
+          "status": "pending",
+          "sourceUrl": "./verification-is-responsibility.webp",
+          "usageType": "legacy_body",
+          "alt": "",
+          "caption": null,
+          "metadata": {
+            "legacyPath": "./verification-is-responsibility.webp",
+            "unresolved": true
+          }
+        },
+        {
+          "id": "e4780d39-8496-43ef-9b04-d80d1de77c1a",
+          "status": "pending",
+          "sourceUrl": "./storage-is-not-judgment.webp",
+          "usageType": "legacy_body",
+          "alt": "",
+          "caption": null,
+          "metadata": {
+            "legacyPath": "./storage-is-not-judgment.webp",
+            "unresolved": true
+          }
+        },
+        {
+          "id": "a41d524b-3461-4476-9f24-2ce25b677e8e",
+          "status": "pending",
+          "sourceUrl": "./ai-learning-loop.webp",
+          "usageType": "legacy_body",
+          "alt": "",
+          "caption": null,
+          "metadata": {
+            "legacyPath": "./ai-learning-loop.webp",
+            "unresolved": true
+          }
+        }
+      ],
+      "relatedContent": [],
+      "artifactChecksums": {
+        "document": "d06eec0d00389cef1b14fe746cc52b523ee0d25bd1ee55f6565f38527e26450b",
+        "markdown": "474255fd213266cc08ad4bfa2f28f2d2fa8440a619f069b586a1ea481ba4a710",
+        "html": "766566d27f13a11970b218beecc689d94c7b14d6bee61e37588ee970cbecd056",
+        "text": "c0f680a4cc6d0f1ca9d221237b498855cf086c40b2ef5ea6c498aa9ea567d807"
+      },
+      "markdownMetadata": {
+        "markdownExportMode": "gfm",
+        "exportWarnings": [],
+        "fallbackNodeCount": 0,
+        "exporterVersion": "1.0.0"
+      }
+    },
+    {
+      "id": "replace-en",
+      "classification": "exact",
+      "route": {
+        "route": "/en/deep-dive/can-ai-replace-learning",
+        "routeType": "legacy_canonical"
+      },
+      "metadata": {
+        "slug": "can-ai-replace-learning",
+        "locale": "en",
+        "legacyPublishedAt": "2026-06-29T00:00:00.000Z",
+        "translationSiblings": [
+          {
+            "id": "81d0f250-6b66-436b-8080-f65f26c994d7",
+            "locale": "en",
+            "slug": "can-ai-replace-learning",
+            "title": "Can AI Replace Learning?"
+          },
+          {
+            "id": "7a471b0c-8eca-4f4d-be20-24f03306bc68",
+            "locale": "ko",
+            "slug": "can-ai-replace-learning",
+            "title": "배움은 AI가 대신해줄 수 있을까?"
+          }
+        ]
+      },
+      "structuralCounts": {
+        "headings": 37,
+        "headingLevels": [
+          2,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3
+        ],
+        "anchors": [
+          "part-1-what-ai-has-changed-about-learning",
+          "the-cost-of-asking-questions-has-decreased",
+          "the-accessibility-of-explanations-has-increased",
+          "the-threshold-for-repetitive-learning-has-lowered",
+          "the-speed-of-learning-and-the-speed-of-misconception-have-accelerated-together",
+          "part-2-why-receiving-an-answer-is-not-the-same-as-learning",
+          "following-an-explanation-is-not-understanding",
+          "summaries-reduce-memory-burden-but-do-not-replace-judgment",
+          "examples-aid-understanding-but-do-not-complete-verification",
+          "ais-confidence-can-transfer-to-the-learners-confidence",
+          "part-3-how-questions-become-learning",
+          "questions-are-about-narrowing-down-not-multiplying",
+          "good-questions-reveal-where-you-dont-know-not-multiply-answers",
+          "a-record-of-questions-is-a-map-of-learning",
+          "endless-questions-are-not-endless-consumption",
+          "part-4-why-verification-became-part-of-learning",
+          "in-the-past-verification-was-something-that-came-after-studying",
+          "why-are-official-documents-and-textbooks-still-necessary",
+          "verification-is-not-doubt-but-responsibility",
+          "when-ai-gets-it-wrong-who-bears-the-responsibility",
+          "part-5-why-organization-is-structure-not-storage",
+          "ai-conversations-are-raw-material-not-finished-knowledge",
+          "the-chat-window-is-where-thinking-is-born-not-where-it-stays",
+          "second-brain-is-not-a-brain-that-thinks-instead-of-me",
+          "will-ai-automatically-retrieve-everything-if-i-put-all-knowledge-in-it",
+          "knowledge-requires-being-able-to-question-again",
+          "part-6-what-structure-should-learning-have-in-the-ai-era",
+          "ai-learning-loop",
+          "four-recording-units",
+          "verification-questions",
+          "stopping-conditions",
+          "part-7-ai-does-not-replace-learning-it-makes-the-responsibility-of-learning-clearer",
+          "what-ai-can-actually-help-with",
+          "what-ai-cannot-replace",
+          "learning-is-not-owning-answers-it-is-forming-judgment",
+          "dechives-perspective",
+          "summary-learning-doesnt-end-it-becomes-possible-to-question-again"
+        ],
+        "codeBlocks": 0,
+        "codeLanguages": [],
+        "tables": 0,
+        "images": 4,
+        "imagePaths": [
+          "./explanation-is-not-understanding.webp",
+          "./verification-is-responsibility.webp",
+          "./storage-is-not-judgment.webp",
+          "./ai-learning-loop.webp"
+        ],
+        "links": 0,
+        "textHash": "a1ee667a6b7721362170dabdde1d01bc198dfbc02347ff292e8d2aeaab13e9c3"
+      },
+      "sources": [],
+      "mediaReferences": [
+        {
+          "id": "70882f93-abf7-409e-b49a-f986920969f2",
+          "status": "pending",
+          "sourceUrl": "./explanation-is-not-understanding.webp",
+          "usageType": "legacy_body",
+          "alt": "",
+          "caption": null,
+          "metadata": {
+            "legacyPath": "./explanation-is-not-understanding.webp",
+            "unresolved": true
+          }
+        },
+        {
+          "id": "50185a7e-239f-4d15-a5e9-be4af548bf2b",
+          "status": "pending",
+          "sourceUrl": "./verification-is-responsibility.webp",
+          "usageType": "legacy_body",
+          "alt": "",
+          "caption": null,
+          "metadata": {
+            "legacyPath": "./verification-is-responsibility.webp",
+            "unresolved": true
+          }
+        },
+        {
+          "id": "ea4afe78-e008-4502-828d-5a952e6d654c",
+          "status": "pending",
+          "sourceUrl": "./storage-is-not-judgment.webp",
+          "usageType": "legacy_body",
+          "alt": "",
+          "caption": null,
+          "metadata": {
+            "legacyPath": "./storage-is-not-judgment.webp",
+            "unresolved": true
+          }
+        },
+        {
+          "id": "99a5a81a-7ee6-4164-a794-9bf099615e36",
+          "status": "pending",
+          "sourceUrl": "./ai-learning-loop.webp",
+          "usageType": "legacy_body",
+          "alt": "",
+          "caption": null,
+          "metadata": {
+            "legacyPath": "./ai-learning-loop.webp",
+            "unresolved": true
+          }
+        }
+      ],
+      "relatedContent": [],
+      "artifactChecksums": {
+        "document": "86e57e9703f66c02c9125ce9e79e916282286d1552a84bb253eaf494335b0f36",
+        "markdown": "151212b65101c3f0ca9635978d559ee01391204c4e70380337f948083cbd4a54",
+        "html": "ed1ef7c7a9418a79f99c5db2b9095e6d29fbe660e6d1dc7b86c376cadce19240",
+        "text": "645d778adf522b53f951d5c02c91508df6f384d10473da49a36814025fc52001"
+      },
+      "markdownMetadata": {
+        "markdownExportMode": "gfm",
+        "exportWarnings": [],
+        "fallbackNodeCount": 0,
+        "exporterVersion": "1.0.0"
+      }
+    },
+    {
+      "id": "book-ko",
+      "classification": "exact",
+      "route": {
+        "route": "/book/knowing-what-we-know",
+        "routeType": "legacy_canonical"
+      },
+      "metadata": {
+        "slug": "knowing-what-we-know",
+        "locale": "ko",
+        "legacyPublishedAt": "2026-06-29T00:00:00.000Z",
+        "translationSiblings": [
+          {
+            "id": "fe0f2bdf-df56-438b-8420-480414dbf87e",
+            "locale": "ko",
+            "slug": "knowing-what-we-know",
+            "title": "지식의 탄생"
+          }
+        ]
+      },
+      "structuralCounts": {
+        "headings": 5,
+        "headingLevels": [
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "anchors": [
+          "이-책을-펼친-이유",
+          "붙잡은-질문",
+          "내-생각",
+          "남은-질문",
+          "연결된-기록"
+        ],
+        "codeBlocks": 0,
+        "codeLanguages": [],
+        "tables": 0,
+        "images": 0,
+        "imagePaths": [],
+        "links": 1,
+        "textHash": "3d33e8171b4ac5511bd8f9d91af9b3ea174cb14ce5c4b34ed02bbde901934574"
+      },
+      "sources": [],
+      "mediaReferences": [],
+      "relatedContent": [],
+      "artifactChecksums": {
+        "document": "21f1a452924eab4b072a2fdcdfdb83b15db5d7ef96ad1e324d24116464625397",
+        "markdown": "6b3e107e8f46b8cf03625a87ca885371dd04dd03a852c78f399c511d15850f1f",
+        "html": "9187380c59470bc0c3a7d79a4c28a3490de0cc0c95993067e34b30c6e2e64770",
+        "text": "8aa9b4025ccc39f21d72be8a0e03a614791f96ed2712617306dc8c713e9200a0"
+      },
+      "markdownMetadata": {
+        "markdownExportMode": "gfm",
+        "exportWarnings": [],
+        "fallbackNodeCount": 0,
+        "exporterVersion": "1.0.0"
+      }
+    },
+    {
+      "id": "dual-brain-ko",
+      "classification": "exact",
+      "route": {
+        "route": "/book/dual-brain",
+        "routeType": "legacy_canonical"
+      },
+      "metadata": {
+        "slug": "dual-brain",
+        "locale": "ko",
+        "legacyPublishedAt": "2026-06-22T00:00:00.000Z",
+        "translationSiblings": [
+          {
+            "id": "697f8219-7df3-4edf-a005-dd7e4a3ca276",
+            "locale": "ko",
+            "slug": "dual-brain",
+            "title": "듀얼 브레인"
+          }
+        ]
+      },
+      "structuralCounts": {
+        "headings": 5,
+        "headingLevels": [
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "anchors": [
+          "이-책을-펼친-이유",
+          "붙잡은-문장",
+          "내-생각",
+          "남은-질문",
+          "연결된-기록"
+        ],
+        "codeBlocks": 0,
+        "codeLanguages": [],
+        "tables": 0,
+        "images": 0,
+        "imagePaths": [],
+        "links": 1,
+        "textHash": "c37b582e17d5c7cdda1e647c22977fdb94699554f265b3172c92e7ec0e8e4b83"
+      },
+      "sources": [],
+      "mediaReferences": [],
+      "relatedContent": [],
+      "artifactChecksums": {
+        "document": "aa9ab7565d9f408eabaabc0d1a4c528ea9a65463a4e37c0819bfa5de45793cb0",
+        "markdown": "9f465ddc8da0762617e4f657015befacf228e07c71b495aab0b5a4c02030e168",
+        "html": "d14e5222de7881ebdd0f70b39ef95f896496d9cb5984b2398d7905a5be3a89db",
+        "text": "c890e982fcbcdceec524dfd3e7037a265022342128d971e7ff6152a6e755ab76"
+      },
+      "markdownMetadata": {
+        "markdownExportMode": "gfm",
+        "exportWarnings": [],
+        "fallbackNodeCount": 0,
+        "exporterVersion": "1.0.0"
+      }
+    }
+  ],
+  "digests": [
+    {
+      "id": "ai-digest-2026-07-02",
+      "status": "imported_with_warnings",
+      "sourceChecksum": "17d6d8cff02e02adf3e002fc0f6a36dedf169f5357ee5baecd894ebad40f53a8",
+      "stableKey": "ai_digest:2026-07-02",
+      "sourcePath": "src/data/aiUpdates.ts#2026-07-02",
+      "createdIds": {
+        "digestId": "4b500e6d-b6f1-4e54-a770-3552b500c0a4"
+      },
+      "warnings": [
+        "slug_candidates_not_routes",
+        "items_require_editor_review"
+      ],
+      "errors": [],
+      "items": [
+        {
+          "legacyAnchor": "anthropic-fable-5-safeguards-jailbreak-framework",
+          "slugCandidate": "anthropic-fable-5-safeguards-jailbreak-framework",
+          "order": 0,
+          "source": "https://www.anthropic.com/news/fable-safeguards-jailbreak-framework",
+          "localizationId": "d23ec8ad-adf1-48f8-857f-3ebc066b9e6c"
+        },
+        {
+          "legacyAnchor": "microsoft-frontier-company-ai-engineering",
+          "slugCandidate": "microsoft-frontier-company-ai-engineering",
+          "order": 1,
+          "source": "https://blogs.microsoft.com/blog/2026/07/02/microsoft-frontier-company-ai-engineering-that-amplifies-and-protects-your-intelligence/",
+          "localizationId": "cb7e34a6-2a29-4619-92f6-3e5953bf04c5"
+        },
+        {
+          "legacyAnchor": "github-copilot-agent-session-streaming-public-preview",
+          "slugCandidate": "github-copilot-agent-session-streaming-public-preview",
+          "order": 2,
+          "source": "https://github.blog/changelog/2026-07-02-copilot-agent-session-streaming-is-now-in-public-preview/",
+          "localizationId": "6ec5163d-f82d-44d6-96c7-2ea810aebe67"
+        }
+      ],
+      "route": "/ai-updates/2026-07-02",
+      "reviewClassification": "needs_editor_review",
+      "orderedItems": [
+        {
+          "order": 0,
+          "localizationId": "d23ec8ad-adf1-48f8-857f-3ebc066b9e6c",
+          "slug": "anthropic-fable-5-safeguards-jailbreak-framework",
+          "title": "Anthropic Fable 5 safeguards — 강력한 모델은 jailbreak 기준까지 설명해야 한다",
+          "vendor": "Anthropic",
+          "product": null,
+          "changeSummary": "Fable 5의 제공 여부만이 아니라, 강력한 모델을 배포할 때 어떤 safeguard가 붙고 어떤 jailbreak를 얼마나 위험하게 볼 것인지에 대한 기준이 공개됐다.",
+          "sourceUrl": "https://www.anthropic.com/news/fable-safeguards-jailbreak-framework"
+        },
+        {
+          "order": 1,
+          "localizationId": "cb7e34a6-2a29-4619-92f6-3e5953bf04c5",
+          "slug": "microsoft-frontier-company-ai-engineering",
+          "title": "Microsoft Frontier Company — 기업 AI는 구현과 운영의 문제가 되다",
+          "vendor": "Microsoft",
+          "product": null,
+          "changeSummary": "Microsoft는 AI 도입을 단순 제품 판매가 아니라 기업의 업무 흐름, 데이터, 보안, 거버넌스, ROI 관리까지 포함하는 구현 문제로 다루기 시작했다.",
+          "sourceUrl": "https://blogs.microsoft.com/blog/2026/07/02/microsoft-frontier-company-ai-engineering-that-amplifies-and-protects-your-intelligence/"
+        },
+        {
+          "order": 2,
+          "localizationId": "6ec5163d-f82d-44d6-96c7-2ea810aebe67",
+          "slug": "github-copilot-agent-session-streaming-public-preview",
+          "title": "GitHub Copilot agent session streaming — AI agent 활동을 관측 가능한 데이터로 만들다",
+          "vendor": "GitHub",
+          "product": null,
+          "changeSummary": "Copilot agent의 활동이 단순 결과물만 남기는 것이 아니라, session data 형태로 접근 가능한 관측 대상이 됐다.",
+          "sourceUrl": "https://github.blog/changelog/2026-07-02-copilot-agent-session-streaming-is-now-in-public-preview/"
+        }
+      ]
+    },
+    {
+      "id": "ai-digest-2026-07-03",
+      "status": "imported_with_warnings",
+      "sourceChecksum": "0b76d7e3488830d1b98c7db16048e98b48d7a21063afbcf9715cb2269ec38472",
+      "stableKey": "ai_digest:2026-07-03",
+      "sourcePath": "src/data/aiUpdates.ts#2026-07-02",
+      "createdIds": {
+        "digestId": "18c0bfb4-ce7b-4491-985d-8b25b7e18cb6"
+      },
+      "warnings": [
+        "slug_candidates_not_routes",
+        "items_require_editor_review"
+      ],
+      "errors": [],
+      "items": [
+        {
+          "legacyAnchor": "kuaishou-kling-ai-fundraise",
+          "slugCandidate": "kuaishou-kling-ai-fundraise",
+          "order": 0,
+          "source": "https://www.reuters.com/world/china/alibaba-tencent-back-kuaishous-kling-ai-28-billion-fundraise-2026-07-03/",
+          "localizationId": "4fef031f-216b-4184-9814-6b7d223a4817"
+        },
+        {
+          "legacyAnchor": "india-it-ai-hiring-workforce-shift",
+          "slugCandidate": "india-it-ai-hiring-workforce-shift",
+          "order": 1,
+          "source": "https://www.reuters.com/world/india/ai-hiring-outpaces-overall-it-recruitment-india-report-shows-2026-07-03/",
+          "localizationId": "00f15936-7bb9-438b-a689-7c1ab237766a"
+        },
+        {
+          "legacyAnchor": "argentina-ai-run-companies-human-oversight",
+          "slugCandidate": "argentina-ai-run-companies-human-oversight",
+          "order": 2,
+          "source": "https://www.reuters.com/world/americas/argentinas-plan-ai-run-companies-cant-avoid-humans-2026-07-03/",
+          "localizationId": "22291998-90be-43a4-9c2a-4181b14b208e"
+        }
+      ],
+      "route": "/ai-updates/2026-07-03",
+      "reviewClassification": "needs_editor_review",
+      "orderedItems": [
+        {
+          "order": 0,
+          "localizationId": "4fef031f-216b-4184-9814-6b7d223a4817",
+          "slug": "kuaishou-kling-ai-fundraise",
+          "title": "Kuaishou Kling AI 투자 유치 — AI 영상 생성은 자본시장과 산업 인프라로 이동한다",
+          "vendor": "AI",
+          "product": null,
+          "changeSummary": "AI 영상 생성 서비스가 단순 제품 기능을 넘어 대형 플랫폼 기업과 자본시장이 참여하는 독립적 산업 단위로 평가받기 시작했다.",
+          "sourceUrl": "https://www.reuters.com/world/china/alibaba-tencent-back-kuaishous-kling-ai-28-billion-fundraise-2026-07-03/"
+        },
+        {
+          "order": 1,
+          "localizationId": "00f15936-7bb9-438b-a689-7c1ab237766a",
+          "slug": "india-it-ai-hiring-workforce-shift",
+          "title": "인도 IT 산업 AI 채용 증가 — AI는 일자리 전체보다 역할 구조를 바꾼다",
+          "vendor": "AI",
+          "product": null,
+          "changeSummary": "AI가 기존 IT 채용 전체를 단순히 늘리는 것이 아니라, 채용 수요를 AI 역량 중심으로 재배치하는 흐름이 확인됐다.",
+          "sourceUrl": "https://www.reuters.com/world/india/ai-hiring-outpaces-overall-it-recruitment-india-report-shows-2026-07-03/"
+        },
+        {
+          "order": 2,
+          "localizationId": "22291998-90be-43a4-9c2a-4181b14b208e",
+          "slug": "argentina-ai-run-companies-human-oversight",
+          "title": "아르헨티나 AI 운영 기업 법제 논의 — 자동화가 깊어질수록 인간 책임은 사라지지 않는다",
+          "vendor": "AI",
+          "product": null,
+          "changeSummary": "AI가 기업 운영 의사결정에 들어가는 법적 구조가 논의되기 시작했지만, 인간 감독과 법적 책임은 여전히 핵심 조건으로 남아 있다.",
+          "sourceUrl": "https://www.reuters.com/world/americas/argentinas-plan-ai-run-companies-cant-avoid-humans-2026-07-03/"
+        }
+      ]
+    }
+  ],
+  "deterministicComparison": true
+}

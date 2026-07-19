@@ -1,0 +1,24 @@
+{
+  "status": "stage15_pre_0004_backup_restored",
+  "source": "Neon staging",
+  "target": "isolated local PostgreSQL",
+  "format": "PostgreSQL 17 custom",
+  "dumpChecksum": "07013bcb3db1e49a20a6c992caa8f532159e63247dcd66fa47fe071112a2ed83",
+  "counts": {
+    "schema_migrations": 4,
+    "actors": 2,
+    "external_identities": 1,
+    "actor_role_memberships": 1,
+    "contents": 17,
+    "content_localizations": 24,
+    "content_versions": 26,
+    "knowledge_details": 18,
+    "content_relations": 0,
+    "content_routes": 20,
+    "revision_events": 4
+  },
+  "countsEqual": true,
+  "integrityChecksumEqual": true,
+  "secretsIncluded": false,
+  "productionUsed": false
+}
