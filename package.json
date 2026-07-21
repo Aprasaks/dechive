@@ -46,6 +46,7 @@
     "verify:lecture-publish": "npm run db:reset && npm run db:migrate && tsx scripts/admin/verify-lecture-publish.ts",
     "verify:practice-publish": "npm run db:reset && npm run db:migrate && tsx scripts/admin/verify-practice-publish.ts",
     "verify:ai-update-publish": "npm run db:reset && npm run db:migrate && tsx scripts/admin/verify-ai-update-publish.ts",
+    "verify:book-publish": "npm run db:reset && npm run db:migrate && tsx scripts/admin/verify-book-publish.ts",
     "verify:admin-browser": "npm run db:reset && npm run db:migrate && playwright test scripts/admin/knowledge-browser.spec.ts --reporter=line --workers=1",
     "verify:admin-edit-browser": "playwright test scripts/admin/knowledge-edit-browser.spec.ts --reporter=line --workers=1",
     "verify:admin-auth": "npm run db:reset && npm run db:migrate && tsx scripts/admin/verify-auth-browser.ts",
@@ -53,7 +54,6 @@
   },
   "dependencies": {
     "@google-analytics/data": "^6.0.0",
-    "@supabase/supabase-js": "^2.103.2",
     "@tailwindcss/typography": "^0.5.19",
     "@tiptap/extension-table": "^3.28.0",
     "@tiptap/html": "^3.28.0",

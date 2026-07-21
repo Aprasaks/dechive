@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { Geist, Noto_Serif_KR } from 'next/font/google';
 import './globals.css';
 import 'highlight.js/styles/atom-one-dark.css';
-import { LangProvider } from '@/components/layout/LangProvider';
 import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
 import SiteChrome from '@/components/layout/SiteChrome';
 
@@ -70,7 +69,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${headerSerif.variable} flex min-h-screen flex-col overflow-x-clip bg-background font-sans text-foreground antialiased`}
       >
-        <LangProvider><SiteChrome>{children}</SiteChrome></LangProvider>
+        <SiteChrome>{children}</SiteChrome>
         <GoogleAnalytics />
       </body>
     </html>

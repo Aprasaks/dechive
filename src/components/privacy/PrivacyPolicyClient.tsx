@@ -1,7 +1,3 @@
-'use client';
-
-import { useLang } from '@/components/layout/LangProvider';
-
 const ADS_SETTINGS_URL = 'https://www.google.com/settings/ads';
 const GOOGLE_PARTNER_DATA_URL = 'https://policies.google.com/technologies/partner-sites';
 const ABOUT_ADS_URL = 'https://www.aboutads.info/';
@@ -20,103 +16,6 @@ function PolicyLink({ href, children }: { href: string; children: React.ReactNod
 }
 
 export default function PrivacyPolicyClient() {
-  const { lang } = useLang();
-
-  if (lang === 'en') {
-    return (
-      <main className="min-h-[calc(100vh-5rem)] bg-[#030303] px-6 py-12 text-[#f3eadb]">
-        <article className="mx-auto max-w-3xl">
-        <h1 className="mb-8 text-3xl font-extrabold tracking-tight text-[#f5ead5]">
-          Privacy Policy
-        </h1>
-
-        <div className="flex flex-col gap-8 text-[#e8dfcd]/76">
-          <section>
-            <p className="text-sm text-white/42">Last updated: May 6, 2026</p>
-            <p className="mt-4 leading-relaxed">
-              Dechive operates the website dechive.dev. This Privacy Policy explains what information may be collected, how it is used, and how third-party services such as Google AdSense and Google Analytics may process data when you use this website.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="mb-3 text-xl font-bold text-[#f5ead5]">Information We Collect</h2>
-            <p className="leading-relaxed">
-              Dechive may collect limited information that you provide directly, such as guestbook entries. Third-party services used on this website may also collect certain information automatically.
-            </p>
-            <ul className="mt-3 flex flex-col gap-2 pl-5 text-sm leading-relaxed text-[#e8dfcd]/70">
-              <li className="list-disc">Guestbook name, message, and password hash for guestbook posting.</li>
-              <li className="list-disc">Log data such as IP address, browser type, pages visited, and usage time.</li>
-              <li className="list-disc">Cookies, identifiers, and usage data collected through Google AdSense and Google Analytics.</li>
-            </ul>
-          </section>
-
-          <section>
-            <h2 className="mb-3 text-xl font-bold text-[#f5ead5]">Google AdSense & Advertising</h2>
-            <p className="leading-relaxed">
-              This website uses Google AdSense to display advertisements. Third-party vendors, including Google, use cookies to serve ads based on a user&apos;s prior visits to this website or other websites. Google&apos;s use of advertising cookies enables Google and its partners to serve ads based on visits to this site and/or other sites on the Internet.
-            </p>
-            <p className="mt-3 leading-relaxed">
-              You may opt out of personalized advertising by visiting{' '}
-              <PolicyLink href={ADS_SETTINGS_URL}>Google Ads Settings</PolicyLink>. You may also learn more about how Google uses data when you use partner sites or apps at{' '}
-              <PolicyLink href={GOOGLE_PARTNER_DATA_URL}>How Google uses information from sites or apps that use our services</PolicyLink>.
-            </p>
-            <p className="mt-3 leading-relaxed">
-              If third-party ad vendors or ad networks serve ads on this website, they may also use cookies for personalized advertising where permitted. You can visit those vendors&apos; websites to opt out if they provide that option, or visit{' '}
-              <PolicyLink href={ABOUT_ADS_URL}>aboutads.info</PolicyLink> for additional opt-out choices.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="mb-3 text-xl font-bold text-[#f5ead5]">Cookies</h2>
-            <p className="leading-relaxed">
-              Cookies are small files stored on your device. Dechive and third-party services may use cookies, web beacons, IP addresses, or other identifiers to provide ads, measure traffic, analyze site usage, prevent abuse, and improve the service. You can configure your browser to refuse cookies, but some features may not work properly.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="mb-3 text-xl font-bold text-[#f5ead5]">Google Analytics</h2>
-            <p className="leading-relaxed">
-              Dechive uses Google Analytics to understand how visitors use the website. Google Analytics may collect usage data such as visited pages, approximate location, device information, browser information, and interaction data.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="mb-3 text-xl font-bold text-[#f5ead5]">Third-Party Links</h2>
-            <p className="leading-relaxed">
-              This website may contain links to third-party websites. Dechive has no control over those websites and is not responsible for their content or privacy practices. Please review the privacy policies of any third-party sites you visit.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="mb-3 text-xl font-bold text-[#f5ead5]">Children&apos;s Privacy</h2>
-            <p className="leading-relaxed">
-              This website is not directed to children under the age of 13. Dechive does not knowingly collect personally identifiable information from children.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="mb-3 text-xl font-bold text-[#f5ead5]">Changes to This Policy</h2>
-            <p className="leading-relaxed">
-              This Privacy Policy may be updated from time to time. Any changes will be posted on this page with an updated revision date.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="mb-3 text-xl font-bold text-[#f5ead5]">Contact</h2>
-            <p className="leading-relaxed">
-              If you have any questions about this Privacy Policy, please contact{' '}
-              <a href="mailto:heavenis0113@gmail.com" className="text-[#f6d29b] underline underline-offset-4 transition-colors hover:text-[#f5ead5]">
-                heavenis0113@gmail.com
-              </a>
-              .
-            </p>
-          </section>
-        </div>
-        </article>
-      </main>
-    );
-  }
-
   return (
     <main className="min-h-[calc(100vh-5rem)] bg-[#030303] px-6 py-12 text-[#f3eadb]">
       <article className="mx-auto max-w-3xl">
@@ -135,10 +34,9 @@ export default function PrivacyPolicyClient() {
         <section>
           <h2 className="mb-3 text-xl font-bold text-[#f5ead5]">수집하는 정보</h2>
           <p className="leading-relaxed">
-            Dechive는 방명록 작성처럼 사용자가 직접 제공하는 제한적인 정보를 수집할 수 있습니다. 또한 이 웹사이트에서 사용하는 제3자 서비스가 일부 정보를 자동으로 수집할 수 있습니다.
+            Dechive는 이 웹사이트에서 사용하는 제3자 서비스를 통해 일부 정보를 자동으로 수집할 수 있습니다.
           </p>
           <ul className="mt-3 flex flex-col gap-2 pl-5 text-sm leading-relaxed text-[#e8dfcd]/70">
-            <li className="list-disc">방명록 작성을 위한 이름, 메시지, 비밀번호 해시</li>
             <li className="list-disc">IP 주소, 브라우저 종류, 방문한 페이지, 이용 시간 등 로그 데이터</li>
             <li className="list-disc">Google AdSense 및 Google Analytics를 통해 수집되는 쿠키, 식별자, 사용 데이터</li>
           </ul>
