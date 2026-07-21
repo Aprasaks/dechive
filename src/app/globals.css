@@ -19,6 +19,7 @@
   --accent: #173f6b;
   --accent-hover: #0e3157;
   --accent-soft: #e8f0f7;
+  --accent-warm: #a0522d;
   --success: #27704a;
   --warning: #9a6114;
   --danger: #a6403c;
@@ -69,6 +70,7 @@
 @theme inline {
   --font-heading: var(--font-geist-sans);
   --font-sans: var(--font-geist-sans);
+  --font-serif: var(--font-header-serif);
   --color-background: var(--background);
   --color-surface: var(--surface);
   --color-surface-elevated: var(--surface-elevated);
@@ -80,6 +82,7 @@
   --color-accent: var(--accent);
   --color-accent-hover: var(--accent-hover);
   --color-accent-soft: var(--accent-soft);
+  --color-accent-warm: var(--accent-warm);
   --color-success: var(--success);
   --color-warning: var(--warning);
   --color-danger: var(--danger);

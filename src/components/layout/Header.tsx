@@ -7,7 +7,7 @@ import HomeMobileMenu from '@/components/home/HomeMobileMenu';
 import HomeNavLink from '@/components/home/HomeNavLink';
 import { MOBILE_NAV_ITEMS } from '@/components/home/homeNavigation';
 
-export default function Header() {
+export default function Header({ overlay = false }: { overlay?: boolean }) {
   const [isOpen, setIsOpen] = React.useState(false);
   const menuButtonRef = React.useRef<HTMLButtonElement>(null);
 
@@ -17,11 +17,17 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border-subtle bg-background/95 text-foreground backdrop-blur-md">
+    <header
+      className={`z-50 text-foreground ${
+        overlay
+          ? 'absolute inset-x-0 top-0 border-b border-transparent bg-transparent backdrop-blur-[2px]'
+          : 'sticky top-0 border-b border-border-subtle bg-background/95 backdrop-blur-md'
+      }`}
+    >
       <a href="#main-content" className="sr-only z-[1000] bg-surface-elevated px-4 py-3 text-accent focus:not-sr-only focus:absolute focus:left-4 focus:top-4">
         본문으로 바로가기
       </a>
-      <div className="page-shell flex min-h-18 items-center justify-between gap-4 py-3">
+      <div className={`page-shell flex items-center justify-between gap-4 ${overlay ? 'min-h-16 py-2.5' : 'min-h-18 py-3'}`}>
         <Link href="/" className="shrink-0 text-[1.25rem] font-bold leading-none tracking-[0.14em] sm:text-[1.4rem]" aria-label="Dechive 홈">
           DECHIVE
         </Link>

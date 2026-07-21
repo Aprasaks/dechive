@@ -14,7 +14,7 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
 
   return (
     <>
-      <Header />
+      <Header overlay={pathname === '/'} />
       {children}
       <Footer />
     </>
