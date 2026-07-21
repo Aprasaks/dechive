@@ -1,7 +1,7 @@
 import { sql } from 'drizzle-orm';
 import { boolean, check, date, index, integer, jsonb, pgEnum, pgTable, text, timestamp, uniqueIndex, uuid } from 'drizzle-orm/pg-core';
 
-export const contentKind = pgEnum('content_kind', ['knowledge', 'course', 'lesson', 'practice', 'ai_update', 'lecture']);
+export const contentKind = pgEnum('content_kind', ['knowledge', 'course', 'lesson', 'practice', 'ai_update', 'lecture', 'book']);
 export const workflowStatus = pgEnum('workflow_status', ['draft', 'review', 'scheduled', 'published', 'archived', 'needs_review']);
 export const validationStatus = pgEnum('validation_status', ['valid', 'valid_with_warnings', 'needs_review', 'rejected']);
 export const artifactType = pgEnum('artifact_type', ['rendered_html', 'normalized_markdown', 'plain_text']);
@@ -124,6 +124,9 @@ export const aiUpdates = pgTable('ai_updates', {
   localizationId: uuid('localization_id').primaryKey().references(() => contentLocalizations.id, { onDelete: 'cascade' }),
   vendor: text('vendor'), product: text('product'), announcedAt: timestamp('announced_at', { withTimezone: true }), occurredAt: timestamp('occurred_at', { withTimezone: true }), checkedAt: timestamp('checked_at', { withTimezone: true }), changeSummary: text('change_summary').notNull(), impact: text('impact'), sourceConfidence: text('source_confidence'), officialUpdatedAt: timestamp('official_updated_at', { withTimezone: true }), lastVerifiedAt: timestamp('last_verified_at', { withTimezone: true }),
 }, (t) => [index('ai_updates_official_updated_idx').on(t.officialUpdatedAt)]);
+export const bookDetails = pgTable('book_details', {
+  localizationId: uuid('localization_id').primaryKey().references(() => contentLocalizations.id, { onDelete: 'cascade' }), publicationStatus: text('publication_status').notNull(), accessType: text('access_type').notNull(), ...audit,
+}, (t) => [check('book_publication_status_valid', sql`${t.publicationStatus} in ('coming_soon','available','unavailable')`), check('book_access_type_valid', sql`${t.accessType} in ('free','paid')`), index('book_details_publication_status_idx').on(t.publicationStatus)]);
 export const updateDigests = pgTable('update_digests', {
   id: uuid('id').primaryKey().defaultRandom(), digestDate: date('digest_date').notNull(), locale: text('locale').notNull(), title: text('title').notNull(), editorialSummary: text('editorial_summary').notNull().default(''), createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
 }, (t) => [uniqueIndex('digest_date_locale_uq').on(t.digestDate, t.locale)]);

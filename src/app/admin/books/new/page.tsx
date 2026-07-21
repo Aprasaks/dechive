@@ -1,0 +1,1 @@
+import {redirect} from 'next/navigation';import {requireOwnerPage} from '@/features/admin/owner-auth';import {createBookAdminDatabase} from '@/services/book-drafts';export default async function Page(){const {pool}=createBookAdminDatabase();try{await requireOwnerPage(pool);redirect('/admin/books')}finally{await pool.end()}}
