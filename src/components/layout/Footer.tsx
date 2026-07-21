@@ -6,7 +6,6 @@ import { usePathname } from 'next/navigation';
 const links = [
   ['Privacy Policy', '/privacy-policy'],
   ['Terms', '/terms'],
-  ['Contact', '/contact'],
   ['About', '/about'],
 ] as const;
 

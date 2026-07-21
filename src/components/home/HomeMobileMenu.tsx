@@ -36,7 +36,7 @@ export default function HomeMobileMenu({
 
   return (
     <div
-      className={`${isOpen ? 'fixed' : 'hidden'} inset-0 z-[999] overflow-y-auto bg-surface-elevated px-5 py-5 lg:hidden`}
+      className={`${isOpen ? 'fixed' : 'hidden'} inset-0 z-[999] overflow-y-auto bg-surface-elevated px-5 py-5 md:hidden`}
       role="dialog"
       aria-modal="true"
       aria-label="모바일 메뉴"

@@ -16,7 +16,20 @@ export default function Header({ overlay = false }: { overlay?: boolean }) {
     window.requestAnimationFrame(() => menuButtonRef.current?.focus());
   }, []);
 
+  // 메뉴가 열린 채 viewport가 md 이상으로 커지면 메뉴는 숨겨지지만 scroll lock이 남으므로 닫아준다
+  React.useEffect(() => {
+    if (!isOpen) return;
+    const media = window.matchMedia('(min-width: 48rem)');
+    const handleChange = () => {
+      if (media.matches) setIsOpen(false);
+    };
+    handleChange();
+    media.addEventListener('change', handleChange);
+    return () => media.removeEventListener('change', handleChange);
+  }, [isOpen]);
+
   return (
+    <>
     <header
       className={`z-50 text-foreground ${
         overlay
@@ -32,8 +45,8 @@ export default function Header({ overlay = false }: { overlay?: boolean }) {
           DECHIVE
         </Link>
 
-        <nav className="hidden min-w-0 lg:block" aria-label="주 메뉴">
-          <ul className="flex items-center gap-3 xl:gap-6">
+        <nav className="hidden min-w-0 md:block" aria-label="주 메뉴">
+          <ul className="flex items-center gap-2 lg:gap-3 xl:gap-6">
             {MOBILE_NAV_ITEMS.map((item) => (
               <li key={item.label}>
                 <HomeNavLink item={item} />
@@ -42,7 +55,7 @@ export default function Header({ overlay = false }: { overlay?: boolean }) {
           </ul>
         </nav>
 
-        <div className="flex items-center lg:hidden">
+        <div className="flex items-center md:hidden">
           <button
             ref={menuButtonRef}
             type="button"
@@ -56,7 +69,9 @@ export default function Header({ overlay = false }: { overlay?: boolean }) {
         </div>
       </div>
 
-      <HomeMobileMenu isOpen={isOpen} onClose={closeMenu} />
     </header>
+    {/* backdrop-blur 헤더 내부에서는 fixed 메뉴가 헤더를 containing block으로 삼아 갇히므로 형제로 렌더링한다 */}
+    <HomeMobileMenu isOpen={isOpen} onClose={closeMenu} />
+    </>
   );
 }
