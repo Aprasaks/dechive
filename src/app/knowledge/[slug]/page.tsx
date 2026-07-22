@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { DechiveDocumentRenderer } from '@/features/admin/DechiveDocumentRenderer';
 import { KnowledgeShareButton } from '@/features/admin/KnowledgeShareButton';
+import { formatKnowledgeDateTime } from '@/features/knowledge/date-format';
 import {
   createPublishedKnowledgeDatabase,
   getPublishedKnowledge,
@@ -12,12 +13,6 @@ import styles from '../knowledge.module.css';
 
 const BASE_URL = 'https://dechive.dev';
 export const revalidate = 300;
-const date = (value: string) =>
-  new Intl.DateTimeFormat('ko-KR', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  }).format(new Date(value));
 export async function generateMetadata({
   params,
 }: {
@@ -88,7 +83,7 @@ export default async function KnowledgeDetailPage({
               <p className={styles.summary}>{knowledge.summary}</p>
               <div className={styles.detailMeta}>
                 <time dateTime={knowledge.publishedAt}>
-                  발행일 · {date(knowledge.publishedAt)}
+                  발행일 · {formatKnowledgeDateTime(knowledge.publishedAt)}
                 </time>
               </div>
             </header>
@@ -106,9 +101,9 @@ export default async function KnowledgeDetailPage({
             <footer className={styles.detailFooter}>
               {knowledge.tags.length ? <ul className={styles.tags} aria-label="태그">{knowledge.tags.map((tag) => <li className={styles.tag} key={tag}>{tag}</li>)}</ul> : null}
               <dl className={styles.publicDates}>
-                <div><dt>작성일</dt><dd><time dateTime={knowledge.createdAt}>{date(knowledge.createdAt)}</time></dd></div>
-                <div><dt>발행일</dt><dd><time dateTime={knowledge.publishedAt}>{date(knowledge.publishedAt)}</time></dd></div>
-                <div><dt>최종 수정일</dt><dd><time dateTime={knowledge.updatedAt}>{date(knowledge.updatedAt)}</time></dd></div>
+                <div><dt>작성일</dt><dd><time dateTime={knowledge.createdAt}>{formatKnowledgeDateTime(knowledge.createdAt)}</time></dd></div>
+                <div><dt>발행일</dt><dd><time dateTime={knowledge.publishedAt}>{formatKnowledgeDateTime(knowledge.publishedAt)}</time></dd></div>
+                <div><dt>최종 수정일</dt><dd><time dateTime={knowledge.updatedAt}>{formatKnowledgeDateTime(knowledge.updatedAt)}</time></dd></div>
               </dl>
               <KnowledgeShareButton url={`${BASE_URL}/knowledge/${knowledge.slug}`} />
             </footer>

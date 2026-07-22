@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { formatKnowledgeDateTime } from '../../src/features/knowledge/date-format';
 import {
   normalizeKnowledgeTags,
   validateKnowledgePublishReadiness,
@@ -19,6 +20,10 @@ const document = {
 assert.deepEqual(
   normalizeKnowledgeTags(['  검증 ', '검증', '', '이미지']),
   ['검증', '이미지'],
+);
+assert.equal(
+  formatKnowledgeDateTime('2026-07-22T15:21:00Z'),
+  '2026년 7월 23일 오전 12:21',
 );
 assert.throws(
   () => normalizeKnowledgeTags(Array.from({ length: 13 }, (_, index) => `tag-${index}`)),

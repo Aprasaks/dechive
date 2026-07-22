@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { formatKnowledgeDateTime } from '@/features/knowledge/date-format';
 import { createAdminDatabase, listKnowledgeDrafts } from '@/services/knowledge-drafts';
 import { KnowledgeListActions } from '@/features/admin/KnowledgeListActions';
 import styles from '@/features/admin/KnowledgeEditor.module.css';
@@ -12,10 +13,6 @@ const workflowLabels = {
   withdrawn: '발행 취소됨',
   archived: '보관됨',
 } as const;
-
-const date = (value: string) => new Intl.DateTimeFormat('ko-KR', {
-  year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit',
-}).format(new Date(value));
 
 export default async function Page({ searchParams }: { searchParams: Promise<{ locale?: string; status?: string }> }) {
   const filters = await searchParams;
@@ -42,8 +39,8 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ l
                     <td>{item.locale === 'ko' ? '한국어' : 'English'}</td>
                     <td>{workflowLabels[item.workflowStatus]}{item.hasUnpublishedChanges ? ' · 변경 있음' : ''}</td>
                     <td>{item.versionNumber}</td>
-                    <td>{date(item.createdAt)}</td>
-                    <td>{date(item.updatedAt)}</td>
+                    <td>{formatKnowledgeDateTime(item.createdAt)}</td>
+                    <td>{formatKnowledgeDateTime(item.updatedAt)}</td>
                     <td><KnowledgeListActions item={item} /></td>
                   </tr>
                 ))}

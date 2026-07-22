@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { formatKnowledgeDateTime } from '@/features/knowledge/date-format';
 import {
   createPublishedKnowledgeDatabase,
   listPublishedKnowledge,
@@ -19,12 +20,6 @@ export const metadata: Metadata = {
   },
 };
 export const revalidate = 300;
-const date = (value: string) =>
-  new Intl.DateTimeFormat('ko-KR', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  }).format(new Date(value));
 export default async function KnowledgeIndexPage() {
   const { pool } = createPublishedKnowledgeDatabase();
   try {
@@ -58,10 +53,10 @@ export default async function KnowledgeIndexPage() {
                     <p className={styles.itemSummary}>{item.summary}</p>
                     <div className={styles.meta}>
                       <time dateTime={item.publishedAt}>
-                        발행일 · {date(item.publishedAt)}
+                        발행일 · {formatKnowledgeDateTime(item.publishedAt)}
                       </time>
                       <time dateTime={item.updatedAt}>
-                        최종 수정일 · {date(item.updatedAt)}
+                        최종 수정일 · {formatKnowledgeDateTime(item.updatedAt)}
                       </time>
                       {item.tags.length ? (
                         <ul className={styles.tags} aria-label="태그">

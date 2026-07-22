@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { archiveKnowledgeAction, publishKnowledgeDraftAction, withdrawKnowledgeAction } from '@/app/admin/knowledge/actions';
+import { formatKnowledgeDateTime } from '@/features/knowledge/date-format';
 import { KnowledgeShareButton } from './KnowledgeShareButton';
 import styles from './KnowledgeEditor.module.css';
 
@@ -36,7 +37,6 @@ export function KnowledgePublishPanel({
   >('idle');
   const [message, setMessage] = useState('');
   const isCurrentPublished = workflowStatus === 'published' && publishedVersionNumber === draftVersionNumber;
-  const date = (value: string) => new Intl.DateTimeFormat('ko-KR', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' }).format(new Date(value));
   const labels: Record<string, string> = {
     title_required: '제목을 입력해 주세요.', summary_required: '요약을 입력해 주세요.', slug_invalid: 'slug를 영문 소문자·숫자·하이픈으로 입력해 주세요.',
     body_required: '본문을 입력해 주세요.', media_alt_missing: '이미지의 대체 텍스트를 입력해 주세요.', media_alt_required: '이미지의 대체 텍스트를 입력해 주세요.',
@@ -71,9 +71,9 @@ export function KnowledgePublishPanel({
           : `버전 ${publishedVersionNumber}`}
       </p>
       <dl className={styles.dateList}>
-        <div><dt>작성일</dt><dd>{date(createdAt)}</dd></div>
-        <div><dt>발행일</dt><dd>{publishedAt ? date(publishedAt) : '아직 발행되지 않음'}</dd></div>
-        <div><dt>최종 수정일</dt><dd>{lastPublishedAt ? date(lastPublishedAt) : '아직 발행되지 않음'}</dd></div>
+        <div><dt>작성일</dt><dd>{formatKnowledgeDateTime(createdAt)}</dd></div>
+        <div><dt>발행일</dt><dd>{publishedAt ? formatKnowledgeDateTime(publishedAt) : '아직 발행되지 않음'}</dd></div>
+        <div><dt>최종 수정일</dt><dd>{lastPublishedAt ? formatKnowledgeDateTime(lastPublishedAt) : '아직 발행되지 않음'}</dd></div>
       </dl>
       {isCurrentPublished ? (
         <p className={styles.notice}>
