@@ -13,7 +13,7 @@ Stage 9 운영 기준은 Neon Singapore + Vercel `sin1`, direct migration/pooled
 
 ## 현재
 
-Vercel이 Git submodule을 인증 token으로 checkout하고 `npm run build`를 실행한다. 콘텐츠 DB/object store/migration runner/backup/error tracking/uptime check/Docker는 없다. Supabase는 방명록에만 사용한다.
+Vercel이 Git submodule을 인증 token으로 checkout하고 `npm run build`를 실행한다. 콘텐츠 DB는 PostgreSQL, 운영 object storage는 Cloudflare R2, 로컬 object storage는 Docker volume을 사용한다. migration runner/backup/error tracking/uptime check는 별도 운영 작업으로 남아 있다. Supabase는 방명록에만 사용한다.
 
 ## 목표 환경
 
@@ -21,7 +21,7 @@ development/staging/production을 분리하고 env schema validation, least-priv
 
 ## Docker
 
-Docker Compose는 PostgreSQL/object store/search를 로컬에서 재현해야 할 때 도입 가치가 있다. Vercel production 때문에 무조건 containerize하지 않는다. 선택 시 pinned image, healthcheck, named volume, initialization/migration, ARM 지원, backup example을 포함한다.
+현재 앱은 호스트에서 `npm run dev`로 실행되므로 Docker Compose의 `media-volume`은 `${MEDIA_LOCAL_HOST_ROOT:-./.data/media}` bind volume을 `/data/media`에 연결한다. 호스트의 Next.js 프로세스는 `.env.local`의 `MEDIA_LOCAL_ROOT=./.data/media`를 사용하므로 Docker가 준비한 동일한 호스트 경로를 직접 소비한다. 향후 애플리케이션 컨테이너를 사용할 때는 같은 경로를 `/data/media`로 mount하고 `MEDIA_LOCAL_ROOT=/data/media`를 사용한다. `media-volume`은 애플리케이션을 실행하는 서비스가 아니라 영속 디렉터리를 준비하고 보존하는 소비 주체다. Vercel production 때문에 무조건 containerize하지 않는다. 선택 시 pinned image, healthcheck, volume, initialization/migration, ARM 지원, backup example을 포함한다.
 
 ## 백업과 복구
 

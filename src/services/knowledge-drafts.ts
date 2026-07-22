@@ -9,6 +9,12 @@ import {
 } from '@/features/editor-lab/document';
 import { validateDechiveDocument } from '@/features/editor-lab/security';
 import { isAuthorizedOwner } from '@/features/admin/owner-auth';
+import {
+  getKnowledgeHero,
+  resolveKnowledgeDocument,
+  saveKnowledgeMediaUsages,
+  type KnowledgeHero,
+} from './media-assets';
 
 type Locale = 'ko' | 'en';
 type DraftStatus = 'draft' | 'needs_review';
@@ -29,7 +35,22 @@ export type KnowledgeReference = {
 };
 export type KnowledgeDraftInput = BaseDraftInput & {
   tags: string[];
-  references: KnowledgeReference[];
+  references?: KnowledgeReference[];
+  hero?: KnowledgeHero | null;
+};
+export type KnowledgeWorkflowStatus = 'draft' | 'published' | 'withdrawn' | 'archived';
+export type KnowledgeListItem = {
+  id: string;
+  slug: string;
+  title: string;
+  locale: Locale;
+  workflowStatus: KnowledgeWorkflowStatus;
+  versionNumber: number;
+  publishedVersionNumber: number | null;
+  hasUnpublishedChanges: boolean;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string | null;
 };
 export type LectureDraftInput = BaseDraftInput & {
   primarySourceKnowledgeId: string;
@@ -56,6 +77,14 @@ export type KnowledgeDraft = KnowledgeDraftInput & {
   status: DraftStatus;
   route: string;
   updatedAt: string;
+  createdAt: string;
+  publishedAt: string | null;
+  lastPublishedAt: string | null;
+  publishedVersionId: string | null;
+  publishedVersionNumber: number | null;
+  workflowStatus: KnowledgeWorkflowStatus;
+  hero: KnowledgeHero | null;
+  heroImageUrl: string | null;
   legacyMetadata: {
     topic: string;
     recommendedOrder: number | null;
@@ -69,6 +98,10 @@ export type KnowledgePublishState = {
   draftVersionNumber: number;
   publishedVersionId: string | null;
   publishedVersionNumber: number | null;
+  createdAt: string;
+  publishedAt: string | null;
+  lastPublishedAt: string | null;
+  workflowStatus: KnowledgeWorkflowStatus;
   readiness: ReturnType<typeof validateKnowledgePublishReadiness>;
 };
 export type LecturePublishState = {
@@ -187,10 +220,21 @@ export function normalizeKnowledgeReferences(values: KnowledgeReference[]) {
 }
 function normalizeKnowledge(input: KnowledgeDraftInput) {
   const base = normalizeBase(input);
+  if (input.hero && (!input.hero.mediaId.trim() || !input.hero.alt.trim()))
+    throw new Error('hero_media_alt_required');
   return {
     ...base,
     tags: normalizeKnowledgeTags(input.tags),
-    references: normalizeKnowledgeReferences(input.references),
+    // Legacy reference payloads are retained on old immutable versions, but
+    // the current Knowledge editor no longer accepts or validates references.
+    references: [],
+    hero: input.hero
+      ? {
+          mediaId: input.hero.mediaId.trim(),
+          alt: input.hero.alt.trim(),
+          caption: input.hero.caption.trim(),
+        }
+      : null,
   };
 }
 export function validateKnowledgePublishReadiness(input: KnowledgeDraftInput) {
@@ -205,16 +249,8 @@ export function validateKnowledgePublishReadiness(input: KnowledgeDraftInput) {
     );
   }
   if (normalized) {
-    if (!normalized.document.content?.length)
+    if (!plainText(normalized.document))
       blockingErrors.push('body_required');
-    if (
-      !normalized.references.some(
-        (reference) =>
-          reference.type === 'external' ||
-          reference.type === 'direct_verification',
-      )
-    )
-      blockingErrors.push('reference_required');
     if (!normalized.tags.length) warnings.push('tags_missing');
     const publishDocument = validateDechiveDocument(
       normalized.document,
@@ -320,6 +356,7 @@ function knowledgeVersionMetadata(
       summary: input.summary,
       tags: input.tags,
       references: input.references,
+      hero: input.hero,
     },
   };
 }
@@ -387,7 +424,7 @@ async function insertVersion(
         `${kind} draft ${versionNumber === 1 ? 'created' : 'revised'}`,
         JSON.stringify(
           kind === 'knowledge'
-            ? ['title', 'slug', 'summary', 'body', 'tags', 'references']
+            ? ['title', 'slug', 'summary', 'body', 'tags', 'references', 'hero']
             : ['title', 'slug', 'summary', 'body'],
         ),
         actorId,
@@ -456,7 +493,14 @@ async function finalize(
   );
   if (conflict.rowCount) throw new Error('route_conflict');
   await tx.query(
-    `UPDATE content_localizations SET title=$1,summary=$2,slug=$3,current_draft_version_id=$4,updated_at=now() WHERE id=$5`,
+    `UPDATE content_localizations
+     SET title=$1,summary=$2,slug=$3,current_draft_version_id=$4,
+         workflow_status=CASE
+           WHEN current_published_version_id IS NULL AND workflow_status IN ('withdrawn','archived') THEN 'draft'
+           ELSE workflow_status
+         END,
+         updated_at=now()
+     WHERE id=$5`,
     [input.title, input.summary, input.slug, saved.versionId, localizationId],
   );
   if (current)
@@ -509,6 +553,7 @@ export async function createKnowledgeDraft(
       null,
       knowledgeVersionMetadata(input),
     );
+    await saveKnowledgeMediaUsages(tx, saved.versionId, input.document, input.hero);
     if (options.failAfterVersion)
       throw new Error('injected_draft_transaction_failure');
     return { ...base, ...saved };
@@ -540,18 +585,17 @@ export async function updateKnowledgeDraft(
       `UPDATE knowledge_details SET concepts=$1 WHERE localization_id=$2`,
       [JSON.stringify(input.tags), id],
     );
-    return {
-      localizationId: id,
-      ...(await finalize(
-        tx,
-        id,
-        input,
-        'knowledge',
-        options.actorId,
-        row.current_draft_version_id,
-        knowledgeVersionMetadata(input),
-      )),
-    };
+    const saved = await finalize(
+      tx,
+      id,
+      input,
+      'knowledge',
+      options.actorId,
+      row.current_draft_version_id,
+      knowledgeVersionMetadata(input),
+    );
+    await saveKnowledgeMediaUsages(tx, saved.versionId, input.document, input.hero);
+    return { localizationId: id, ...saved };
   });
 }
 
@@ -561,17 +605,15 @@ export async function getKnowledgePublishState(
 ): Promise<KnowledgePublishState | null> {
   const draft = await getKnowledgeDraft(pool, id);
   if (!draft) return null;
-  const published = (
-    await pool.query<{ id: string; version_number: number }>(
-      `SELECT cv.id,cv.version_number FROM content_localizations cl JOIN contents c ON c.id=cl.content_id AND c.kind='knowledge' LEFT JOIN content_versions cv ON cv.id=cl.current_published_version_id WHERE cl.id=$1`,
-      [id],
-    )
-  ).rows[0];
   return {
     draftVersionId: draft.versionId,
     draftVersionNumber: draft.versionNumber,
-    publishedVersionId: published?.id ?? null,
-    publishedVersionNumber: published ? Number(published.version_number) : null,
+    publishedVersionId: draft.publishedVersionId,
+    publishedVersionNumber: draft.publishedVersionNumber,
+    createdAt: draft.createdAt,
+    publishedAt: draft.publishedAt,
+    lastPublishedAt: draft.lastPublishedAt,
+    workflowStatus: draft.workflowStatus,
     readiness: validateKnowledgePublishReadiness(draft),
   };
 }
@@ -587,16 +629,21 @@ export async function publishKnowledgeDraft(
       await tx.query<{
         draft_version_id: string | null;
         published_version_id: string | null;
+        draft_status: string;
         title: string;
         slug: string;
         locale: Locale;
         summary: string;
         document: DechiveDocument;
-        metadata: {
-          knowledge?: { tags?: string[]; references?: KnowledgeReference[] };
-        };
+        metadata: { knowledge?: { tags?: string[]; references?: KnowledgeReference[] } };
       }>(
-        `SELECT cl.current_draft_version_id AS draft_version_id,cl.current_published_version_id AS published_version_id,cl.title,cl.slug,cl.locale,cl.summary,cv.canonical_document AS document,cv.migration_metadata AS metadata FROM content_localizations cl JOIN contents c ON c.id=cl.content_id AND c.kind='knowledge' JOIN content_versions cv ON cv.id=cl.current_draft_version_id WHERE cl.id=$1 FOR UPDATE`,
+        `SELECT cl.current_draft_version_id AS draft_version_id,cl.current_published_version_id AS published_version_id,
+                cv.status AS draft_status,cl.title,cl.slug,cl.locale,cl.summary,
+                cv.canonical_document AS document,cv.migration_metadata AS metadata
+         FROM content_localizations cl
+         JOIN contents c ON c.id=cl.content_id AND c.kind='knowledge'
+         JOIN content_versions cv ON cv.id=cl.current_draft_version_id
+         WHERE cl.id=$1 FOR UPDATE`,
         [id],
       )
     ).rows[0];
@@ -612,8 +659,20 @@ export async function publishKnowledgeDraft(
       references: row.metadata?.knowledge?.references ?? [],
     });
     if (!readiness.ready) throw new Error('publish_validation_failed');
+    if (row.draft_status !== 'published') {
+      await tx.query(
+        `UPDATE content_versions SET status='published',published_at=coalesce(published_at,now()) WHERE id=$1`,
+        [row.draft_version_id],
+      );
+    }
+    const media = await tx.query<{ count: string }>(
+      `SELECT count(*) FROM media_usages mu JOIN media_assets ma ON ma.id=mu.media_id
+       WHERE mu.content_version_id=$1 AND (ma.status <> 'approved' OR btrim(mu.alt)='')`,
+      [row.draft_version_id],
+    );
+    if (Number(media.rows[0]?.count ?? 0) > 0) throw new Error('media_publish_validation_failed');
     await tx.query(
-      `UPDATE content_localizations SET current_published_version_id=$1,updated_at=now() WHERE id=$2`,
+      `UPDATE content_localizations SET current_published_version_id=$1,workflow_status='published',updated_at=now() WHERE id=$2`,
       [row.draft_version_id, id],
     );
     if (options.failAfterPointer)
@@ -638,6 +697,101 @@ export async function publishKnowledgeDraft(
       warnings: readiness.warnings,
       alreadyPublished: row.published_version_id === row.draft_version_id,
     };
+  });
+}
+
+async function changeKnowledgeWorkflow(
+  pool: Pool,
+  id: string,
+  actorId: string,
+  workflowStatus: 'withdrawn' | 'archived',
+  eventType: 'unpublished' | 'archived',
+) {
+  return transaction(pool, async (tx) => {
+    await requireOwner(tx, actorId);
+    const row = (await tx.query<{
+      content_id: string;
+      current_published_version_id: string | null;
+      current_draft_version_id: string | null;
+      workflow_status: KnowledgeWorkflowStatus;
+    }>(
+      `SELECT cl.content_id,cl.current_published_version_id,cl.current_draft_version_id,cl.workflow_status
+       FROM content_localizations cl JOIN contents c ON c.id=cl.content_id AND c.kind='knowledge'
+       WHERE cl.id=$1 FOR UPDATE`,
+      [id],
+    )).rows[0];
+    if (!row) throw new Error('knowledge_not_found');
+    if (!row.current_published_version_id) throw new Error('knowledge_not_published');
+    await tx.query(
+      `UPDATE content_localizations SET current_published_version_id=NULL,workflow_status=$1,updated_at=now() WHERE id=$2`,
+      [workflowStatus, id],
+    );
+    await tx.query(
+      `INSERT INTO revision_events(content_version_id,event_type,actor_id,metadata) VALUES ($1,$2,$3,$4)`,
+      [row.current_published_version_id, eventType, actorId, { source: 'admin', kind: 'knowledge', previousWorkflowStatus: row.workflow_status }],
+    );
+    return { localizationId: id, workflowStatus };
+  });
+}
+
+export function withdrawKnowledge(pool: Pool, id: string, options: { actorId: string }) {
+  return changeKnowledgeWorkflow(pool, id, options.actorId, 'withdrawn', 'unpublished');
+}
+
+export function archiveKnowledge(pool: Pool, id: string, options: { actorId: string }) {
+  return changeKnowledgeWorkflow(pool, id, options.actorId, 'archived', 'archived');
+}
+
+export async function deleteKnowledgeDraft(pool: Pool, id: string, options: { actorId: string }) {
+  return transaction(pool, async (tx) => {
+    await requireOwner(tx, options.actorId);
+    const row = (await tx.query<{ content_id: string; current_published_version_id: string | null }>(
+      `SELECT cl.content_id,cl.current_published_version_id
+       FROM content_localizations cl JOIN contents c ON c.id=cl.content_id AND c.kind='knowledge'
+       WHERE cl.id=$1 FOR UPDATE`,
+      [id],
+    )).rows[0];
+    if (!row) throw new Error('knowledge_not_found');
+    if (row.current_published_version_id) throw new Error('knowledge_delete_published_forbidden');
+    const published = await tx.query(
+      `SELECT 1 FROM content_versions WHERE localization_id=$1 AND (status='published' OR published_at IS NOT NULL) LIMIT 1`,
+      [id],
+    );
+    if (published.rowCount) throw new Error('knowledge_delete_published_forbidden');
+    const legacy = await tx.query(
+      `SELECT 1 FROM legacy_identities WHERE content_id=$1 OR localization_id=$2 LIMIT 1`,
+      [row.content_id, id],
+    );
+    if (legacy.rowCount) throw new Error('knowledge_delete_legacy_blocked');
+    const incomingRelation = await tx.query(
+      `SELECT 1 FROM content_relations WHERE target_content_id=$1 LIMIT 1`,
+      [row.content_id],
+    );
+    if (incomingRelation.rowCount) throw new Error('knowledge_delete_relation_blocked');
+    const media = await tx.query<{ id: string }>(
+      `SELECT DISTINCT mu.media_id AS id
+       FROM media_usages mu JOIN content_versions cv ON cv.id=mu.content_version_id
+       WHERE cv.localization_id=$1`,
+      [id],
+    );
+    const versions = await tx.query<{ id: string }>(
+      `SELECT id FROM content_versions WHERE localization_id=$1`,
+      [id],
+    );
+    if (versions.rowCount) {
+      const versionIds = versions.rows.map((version) => version.id);
+      await tx.query(`DELETE FROM content_version_artifacts WHERE content_version_id=ANY($1::uuid[])`, [versionIds]);
+      await tx.query(`DELETE FROM revision_events WHERE content_version_id=ANY($1::uuid[])`, [versionIds]);
+    }
+    await tx.query(`DELETE FROM content_localizations WHERE id=$1`, [id]);
+    await tx.query(`DELETE FROM contents WHERE id=$1 AND NOT EXISTS (SELECT 1 FROM content_localizations WHERE content_id=$1)`, [row.content_id]);
+    if (media.rowCount) {
+      await tx.query(
+        `UPDATE media_assets SET status='pending' WHERE id=ANY($1::uuid[]) AND NOT EXISTS (SELECT 1 FROM media_usages WHERE media_id=media_assets.id)`,
+        [media.rows.map((item) => item.id)],
+      );
+    }
+    return { localizationId: id };
   });
 }
 export async function getLecturePublishState(
@@ -885,7 +1039,21 @@ export async function getKnowledgeDraft(
 ): Promise<KnowledgeDraft | null> {
   const row = (
     await pool.query(
-      `SELECT cl.id AS localization_id,cl.content_id,cl.locale,cl.title,cl.summary,cl.slug,cl.updated_at,cv.id AS version_id,cv.version_number,cv.status,cv.canonical_document,cv.migration_metadata,kd.concepts,kd.topic,kd.recommended_order,kd.verification_metadata,cr.route FROM content_localizations cl JOIN contents c ON c.id=cl.content_id AND c.kind='knowledge' JOIN knowledge_details kd ON kd.localization_id=cl.id JOIN content_versions cv ON cv.id=cl.current_draft_version_id JOIN content_routes cr ON cr.localization_id=cl.id AND cr.is_canonical AND cr.active_until IS NULL WHERE cl.id=$1`,
+      `SELECT cl.id AS localization_id,cl.content_id,cl.locale,cl.title,cl.summary,cl.slug,
+              cl.created_at AS localization_created_at,cl.updated_at,cl.workflow_status,
+              cl.current_published_version_id,
+              cv.id AS version_id,cv.version_number,cv.status,cv.canonical_document,cv.migration_metadata,
+              published_cv.version_number AS published_version_number,
+              published_cv.published_at AS last_published_at,
+              (SELECT min(history.published_at) FROM content_versions history WHERE history.localization_id=cl.id AND history.published_at IS NOT NULL) AS first_published_at,
+              kd.concepts,kd.topic,kd.recommended_order,kd.verification_metadata,cr.route
+       FROM content_localizations cl
+       JOIN contents c ON c.id=cl.content_id AND c.kind='knowledge'
+       JOIN knowledge_details kd ON kd.localization_id=cl.id
+       JOIN content_versions cv ON cv.id=cl.current_draft_version_id
+       LEFT JOIN content_versions published_cv ON published_cv.id=cl.current_published_version_id
+       JOIN content_routes cr ON cr.localization_id=cl.id AND cr.is_canonical AND cr.active_until IS NULL
+       WHERE cl.id=$1`,
       [id],
     )
   ).rows[0];
@@ -901,6 +1069,8 @@ export async function getKnowledgeDraft(
   const references = Array.isArray(versionKnowledge?.references)
     ? versionKnowledge.references
     : [];
+  const document = await resolveKnowledgeDocument(pool, String(row.version_id), row.canonical_document);
+  const hero = await getKnowledgeHero(pool, String(row.version_id));
   return {
     localizationId: row.localization_id,
     contentId: row.content_id,
@@ -924,9 +1094,17 @@ export async function getKnowledgeDraft(
         .map((r) => r.id),
       verificationMetadata: row.verification_metadata?.notes ?? '',
     },
-    document: row.canonical_document,
+    document,
+    hero: hero ? { mediaId: hero.mediaId, alt: hero.alt, caption: hero.caption } : null,
+    heroImageUrl: hero?.publicUrl ?? null,
     route: row.route,
     updatedAt: new Date(row.updated_at).toISOString(),
+    createdAt: new Date(row.localization_created_at).toISOString(),
+    publishedAt: row.first_published_at ? new Date(row.first_published_at).toISOString() : null,
+    lastPublishedAt: row.last_published_at ? new Date(row.last_published_at).toISOString() : null,
+    publishedVersionId: row.current_published_version_id ?? null,
+    publishedVersionNumber: row.published_version_number ? Number(row.published_version_number) : null,
+    workflowStatus: row.workflow_status as KnowledgeWorkflowStatus,
   };
 }
 export async function getLectureDraft(
@@ -989,10 +1167,60 @@ async function listDrafts(
     )
   ).rows;
 }
-export const listKnowledgeDrafts = (
+export async function listKnowledgeDrafts(
   pool: Pool,
-  filters?: { locale?: string; status?: string },
-) => listDrafts(pool, 'knowledge', filters);
+  filters: { locale?: string; status?: string } = {},
+): Promise<KnowledgeListItem[]> {
+  const values: string[] = [];
+  const clauses = [`c.kind='knowledge'`, `cl.current_draft_version_id IS NOT NULL`];
+  if (filters.locale && ['ko', 'en'].includes(filters.locale)) {
+    values.push(filters.locale);
+    clauses.push(`cl.locale=$${values.length}`);
+  }
+  if (filters.status && ['draft', 'published', 'withdrawn', 'archived'].includes(filters.status)) {
+    values.push(filters.status);
+    clauses.push(`cl.workflow_status=$${values.length}`);
+  }
+  const rows = (await pool.query<{
+    id: string;
+    title: string;
+    slug: string;
+    locale: Locale;
+    workflow_status: KnowledgeWorkflowStatus;
+    version_number: number;
+    published_version_number: number | null;
+    current_draft_version_id: string;
+    current_published_version_id: string | null;
+    created_at: Date;
+    updated_at: Date;
+    published_at: Date | null;
+  }>(
+    `SELECT cl.id,cl.title,cl.slug,cl.locale,cl.workflow_status,cv.version_number,
+            published_cv.version_number AS published_version_number,
+            cl.current_draft_version_id,cl.current_published_version_id,
+            c.created_at,cl.updated_at,published_cv.published_at
+     FROM content_localizations cl
+     JOIN contents c ON c.id=cl.content_id
+     JOIN content_versions cv ON cv.id=cl.current_draft_version_id
+     LEFT JOIN content_versions published_cv ON published_cv.id=cl.current_published_version_id
+     WHERE ${clauses.join(' AND ')}
+     ORDER BY cl.updated_at DESC,cl.id DESC LIMIT 100`,
+    values,
+  )).rows;
+  return rows.map((row) => ({
+    id: row.id,
+    slug: row.slug,
+    title: row.title,
+    locale: row.locale,
+    workflowStatus: row.workflow_status,
+    versionNumber: Number(row.version_number),
+    publishedVersionNumber: row.published_version_number === null ? null : Number(row.published_version_number),
+    hasUnpublishedChanges: Boolean(row.current_published_version_id && row.current_published_version_id !== row.current_draft_version_id),
+    createdAt: new Date(row.created_at).toISOString(),
+    updatedAt: new Date(row.updated_at).toISOString(),
+    publishedAt: row.published_at ? new Date(row.published_at).toISOString() : null,
+  }));
+}
 export const listLectureDrafts = (
   pool: Pool,
   filters?: { locale?: string; status?: string },

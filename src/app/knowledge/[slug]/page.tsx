@@ -1,7 +1,9 @@
+/* eslint-disable @next/next/no-img-element */
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { DechiveDocumentRenderer } from '@/features/admin/DechiveDocumentRenderer';
+import { KnowledgeShareButton } from '@/features/admin/KnowledgeShareButton';
 import {
   createPublishedKnowledgeDatabase,
   getPublishedKnowledge,
@@ -37,6 +39,14 @@ export async function generateMetadata({
         url,
         type: 'article',
         publishedTime: knowledge.publishedAt,
+        modifiedTime: knowledge.updatedAt,
+        images: knowledge.hero ? [{ url: knowledge.hero.publicUrl, width: knowledge.hero.width ?? undefined, height: knowledge.hero.height ?? undefined, alt: knowledge.hero.alt }] : undefined,
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: knowledge.title,
+        description: knowledge.summary,
+        images: [knowledge.hero?.publicUrl ?? `${BASE_URL}/images/thumb.webp`],
       },
     };
   } finally {
@@ -53,6 +63,18 @@ export default async function KnowledgeDetailPage({
   try {
     const knowledge = await getPublishedKnowledge(pool, slug);
     if (!knowledge) notFound();
+    const jsonLd = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: knowledge.title,
+      description: knowledge.summary,
+      image: [knowledge.hero?.publicUrl ?? `${BASE_URL}/images/thumb.webp`],
+      author: { '@type': 'Organization', name: 'Dechive', url: BASE_URL },
+      datePublished: knowledge.publishedAt,
+      dateModified: knowledge.updatedAt,
+      mainEntityOfPage: { '@type': 'WebPage', '@id': `${BASE_URL}/knowledge/${knowledge.slug}` },
+      publisher: { '@type': 'Organization', name: 'Dechive', url: BASE_URL },
+    }).replace(/[<>&\u2028\u2029]/g, (character) => ({ '<': '\\u003c', '>': '\\u003e', '&': '\\u0026', '\u2028': '\\u2028', '\u2029': '\\u2029' })[character] ?? character);
     return (
       <main id="main-content" className={`page-shell ${styles.detail}`}>
         <div className={styles.detailInner}>
@@ -66,74 +88,30 @@ export default async function KnowledgeDetailPage({
               <p className={styles.summary}>{knowledge.summary}</p>
               <div className={styles.detailMeta}>
                 <time dateTime={knowledge.publishedAt}>
-                  발행 version {knowledge.versionNumber} ·{' '}
-                  {date(knowledge.publishedAt)}
+                  발행일 · {date(knowledge.publishedAt)}
                 </time>
-                {knowledge.tags.length ? (
-                  <ul className={styles.tags} aria-label="태그">
-                    {knowledge.tags.map((tag) => (
-                      <li key={tag} className={styles.tag}>
-                        {tag}
-                      </li>
-                    ))}
-                  </ul>
-                ) : null}
               </div>
             </header>
+            {knowledge.hero ? (
+              <figure className={styles.heroMedia}>
+                <img src={knowledge.hero.publicUrl} alt={knowledge.hero.alt} width={knowledge.hero.width ?? undefined} height={knowledge.hero.height ?? undefined} loading="eager" decoding="async" fetchPriority="high" />
+                {knowledge.hero.caption ? <figcaption>{knowledge.hero.caption}</figcaption> : null}
+              </figure>
+            ) : null}
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
             <DechiveDocumentRenderer
               document={knowledge.document}
               className={styles.document}
             />
-            {knowledge.references.length ? (
-              <section
-                className={styles.references}
-                aria-labelledby="references-title"
-              >
-                <h2 id="references-title">참고문헌</h2>
-                <ol className={styles.referenceList}>
-                  {knowledge.references.map((reference, index) => (
-                    <li
-                      className={styles.reference}
-                      key={`${reference.type}-${index}`}
-                    >
-                      <span className={styles.referenceType}>
-                        {reference.type === 'external'
-                          ? '외부 자료'
-                          : '직접 검증'}
-                      </span>
-                      <strong className={styles.referenceTitle}>
-                        {reference.title}
-                      </strong>
-                      {reference.authorOrOrganization ? (
-                        <p className={styles.referenceMeta}>
-                          {reference.authorOrOrganization}
-                        </p>
-                      ) : null}
-                      {reference.url ? (
-                        <a
-                          className={styles.external}
-                          href={reference.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          외부 자료 열기 <span aria-hidden="true">↗</span>
-                          <span className="sr-only"> (새 창)</span>
-                        </a>
-                      ) : null}
-                      {reference.accessedAt ? (
-                        <p className={styles.referenceMeta}>
-                          {reference.type === 'external' ? '접근일' : '검증일'}:{' '}
-                          {reference.accessedAt}
-                        </p>
-                      ) : null}
-                      {reference.note ? (
-                        <p className={styles.referenceNote}>{reference.note}</p>
-                      ) : null}
-                    </li>
-                  ))}
-                </ol>
-              </section>
-            ) : null}
+            <footer className={styles.detailFooter}>
+              {knowledge.tags.length ? <ul className={styles.tags} aria-label="태그">{knowledge.tags.map((tag) => <li className={styles.tag} key={tag}>{tag}</li>)}</ul> : null}
+              <dl className={styles.publicDates}>
+                <div><dt>작성일</dt><dd><time dateTime={knowledge.createdAt}>{date(knowledge.createdAt)}</time></dd></div>
+                <div><dt>발행일</dt><dd><time dateTime={knowledge.publishedAt}>{date(knowledge.publishedAt)}</time></dd></div>
+                <div><dt>최종 수정일</dt><dd><time dateTime={knowledge.updatedAt}>{date(knowledge.updatedAt)}</time></dd></div>
+              </dl>
+              <KnowledgeShareButton url={`${BASE_URL}/knowledge/${knowledge.slug}`} />
+            </footer>
             <Link href="/knowledge" className={styles.returnLink}>
               ← 모든 지식 보기
             </Link>

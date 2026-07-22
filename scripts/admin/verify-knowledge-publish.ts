@@ -130,21 +130,19 @@ async function main() {
       1,
     );
 
-    const blocked = await createKnowledgeDraft(
+    const noReferences = await createKnowledgeDraft(
       pool,
       {
         ...input,
-        title: 'Stage 17 blocked',
-        slug: 'stage-17-blocked',
+        title: 'Stage 17 no references',
+        slug: 'stage-17-no-references',
         references: [],
         tags: [],
       },
       { actorId },
     );
-    await assert.rejects(
-      () => publishKnowledgeDraft(pool, blocked.localizationId, { actorId }),
-      /publish_validation_failed/,
-    );
+    await publishKnowledgeDraft(pool, noReferences.localizationId, { actorId });
+    assert.equal((await getPublishedKnowledge(pool, 'stage-17-no-references'))?.title, 'Stage 17 no references');
     await pool.query(
       `DELETE FROM actor_role_memberships WHERE actor_id=$1 AND role='owner'`,
       [actorId],

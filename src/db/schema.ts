@@ -44,6 +44,7 @@ export const contentLocalizations = pgTable('content_localizations', {
   slug: text('slug').notNull(),
   routeScope: text('route_scope').notNull(),
   seo: jsonb('seo').$type<Record<string, unknown>>().default({}).notNull(),
+  workflowStatus: text('workflow_status').notNull().default('draft'),
   currentDraftVersionId: uuid('current_draft_version_id'),
   currentPublishedVersionId: uuid('current_published_version_id'),
   ...audit,

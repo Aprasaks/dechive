@@ -19,7 +19,7 @@ function fail(message: string): never {
   process.exit(1);
 }
 
-if (!runDocker([...composeArgs, 'up', '-d', 'postgres'], 'inherit')) {
+if (!runDocker([...composeArgs, 'up', '-d', 'postgres', 'media-volume'], 'inherit')) {
   fail('Docker가 실행 중인지와 docker-compose.db.yml을 확인해 주세요.');
 }
 

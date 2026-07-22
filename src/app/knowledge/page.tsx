@@ -58,8 +58,10 @@ export default async function KnowledgeIndexPage() {
                     <p className={styles.itemSummary}>{item.summary}</p>
                     <div className={styles.meta}>
                       <time dateTime={item.publishedAt}>
-                        발행 version {item.versionNumber} ·{' '}
-                        {date(item.publishedAt)}
+                        발행일 · {date(item.publishedAt)}
+                      </time>
+                      <time dateTime={item.updatedAt}>
+                        최종 수정일 · {date(item.updatedAt)}
                       </time>
                       {item.tags.length ? (
                         <ul className={styles.tags} aria-label="태그">

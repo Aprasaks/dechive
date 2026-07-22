@@ -5,10 +5,14 @@ import type { DechiveDocument } from '@/features/editor-lab/document';
 import {
   createAdminDatabase,
   createKnowledgeDraft,
+  deleteKnowledgeDraft,
   publishKnowledgeDraft,
+  archiveKnowledge,
+  withdrawKnowledge,
   updateKnowledgeDraft,
   type KnowledgeReference,
 } from '@/services/knowledge-drafts';
+import type { KnowledgeHero } from '@/services/media-assets';
 export type KnowledgeSaveRequest = {
   mode: 'create' | 'edit';
   localizationId?: string;
@@ -17,7 +21,8 @@ export type KnowledgeSaveRequest = {
   locale: 'ko' | 'en';
   summary: string;
   tags: string[];
-  references: KnowledgeReference[];
+  references?: KnowledgeReference[];
+  hero?: KnowledgeHero | null;
   document: DechiveDocument;
 };
 export async function saveKnowledgeDraftAction(request: KnowledgeSaveRequest) {
@@ -86,4 +91,33 @@ export async function publishKnowledgeDraftAction(localizationId: string) {
   } finally {
     await pool.end();
   }
+}
+
+async function mutateKnowledgeAction(
+  localizationId: string,
+  mutation: (pool: ReturnType<typeof createAdminDatabase>['pool'], localizationId: string, actorId: string) => Promise<unknown>,
+) {
+  const actorId = await requireOwnerAction();
+  const { pool } = createAdminDatabase();
+  try {
+    await mutation(pool, localizationId, actorId);
+    for (const path of ['/admin/knowledge', `/admin/knowledge/${localizationId}/edit`, `/admin/knowledge/${localizationId}/preview`, '/knowledge']) revalidatePath(path);
+    return { ok: true as const };
+  } catch (error) {
+    return { ok: false as const, error: error instanceof Error ? error.message.split(':')[0] : 'knowledge_action_failed' };
+  } finally {
+    await pool.end();
+  }
+}
+
+export async function deleteKnowledgeDraftAction(localizationId: string) {
+  return mutateKnowledgeAction(localizationId, (pool, id, actorId) => deleteKnowledgeDraft(pool, id, { actorId }));
+}
+
+export async function withdrawKnowledgeAction(localizationId: string) {
+  return mutateKnowledgeAction(localizationId, (pool, id, actorId) => withdrawKnowledge(pool, id, { actorId }));
+}
+
+export async function archiveKnowledgeAction(localizationId: string) {
+  return mutateKnowledgeAction(localizationId, (pool, id, actorId) => archiveKnowledge(pool, id, { actorId }));
 }

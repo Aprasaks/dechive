@@ -2,7 +2,7 @@
 
 > **Stage 14 현재 기준:** 관리자 작성 흐름은 `/admin/knowledge/**`와 `/admin/lectures/**`다. Archive 작성 UI 및 Course/Module/Lesson builder 설명은 과거 단계 기록이며 [지식과 강의 콘텐츠 모델](14_KNOWLEDGE_AND_LECTURE_MODEL.md)을 우선한다.
 >
-> Stage 16부터 Knowledge 기본 editor는 title, slug, summary, body, tags, references만 노출한다. 상세 계약은 [Knowledge 공개 및 발행 계약](16_KNOWLEDGE_PUBLISH_CONTRACT.md)을 따른다.
+> Knowledge 기본 editor는 title, summary, tags, 대표/본문 이미지(media, alt, caption, AI 생성 여부)를 노출한다. slug는 고급 설정에 두며, 기존 references payload와 DB 데이터는 호환성을 위해 보존하지만 새 Knowledge UI에서는 입력·발행 조건·공개 출력으로 사용하지 않는다. 상세 계약은 [Knowledge 공개 및 발행 계약](16_KNOWLEDGE_PUBLISH_CONTRACT.md)을 따른다.
 
 - **Status:** TipTap selected; manual OS release gates pending
 - **Last Updated:** 2026-07-18

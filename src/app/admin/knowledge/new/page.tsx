@@ -1,3 +1,26 @@
-import type { Metadata } from 'next';import Link from 'next/link';import { KnowledgeEditor } from '@/features/admin/KnowledgeEditor';import { knowledgeAdminFixture as knowledgeFixture } from '@/features/admin/knowledge-fixture';import { createAdminDatabase,listKnowledgeOptions } from '@/services/knowledge-drafts';import styles from '@/features/admin/KnowledgeEditor.module.css';
-export const metadata:Metadata={title:'새 지식',robots:{index:false,follow:false,nocache:true}};
-export default async function Page(){const {pool}=createAdminDatabase();try{const options=await listKnowledgeOptions(pool);return <main className={styles.shell}><nav className={styles.nav}><Link href="/admin/knowledge">← 지식 목록</Link><span>Knowledge Draft</span></nav><h1 className={styles.title}>새 지식 작성</h1><KnowledgeEditor mode="create" knowledgeOptions={options} initial={{title:'새 지식 문서',slug:'new-knowledge-draft',locale:'ko',summary:'독립적으로 읽을 수 있는 원본 지식 문서입니다.',tags:[],references:[],document:knowledgeFixture}}/></main>}finally{await pool.end()}}
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { KnowledgeEditor } from '@/features/admin/KnowledgeEditor';
+import styles from '@/features/admin/KnowledgeEditor.module.css';
+
+export const metadata: Metadata = { title: '새 지식', robots: { index: false, follow: false, nocache: true } };
+
+const emptyDocument = {
+  type: 'doc' as const,
+  schemaVersion: 1 as const,
+  content: [{ type: 'paragraph' as const }],
+};
+
+export default async function Page() {
+  return (
+      <main className={styles.shell}>
+        <nav className={styles.nav}><Link href="/admin/knowledge">← 지식 목록</Link><span>새 지식</span></nav>
+        <h1 className={styles.title}>새 지식 작성</h1>
+        <KnowledgeEditor
+          mode="create"
+          knowledgeOptions={[]}
+          initial={{ title: '', slug: '', locale: 'ko', summary: '', tags: [], hero: null, heroImageUrl: null, document: emptyDocument }}
+        />
+      </main>
+  );
+}

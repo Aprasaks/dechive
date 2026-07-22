@@ -11,7 +11,7 @@ import {
   listKnowledgeOptions,
 } from '@/services/knowledge-drafts';
 export const metadata: Metadata = {
-  title: '지식 Draft 편집',
+  title: '지식 작성본 편집',
   robots: { index: false, follow: false, nocache: true },
 };
 export default async function Page({
@@ -34,28 +34,18 @@ export default async function Page({
           <Link href="/admin/knowledge">← 지식 목록</Link>
           <Link href={`/admin/knowledge/${id}/preview`}>미리보기</Link>
         </nav>
-        <p className={styles.eyebrow}>
-          Knowledge · Version {draft.versionNumber}
-        </p>
-        <h1 className={styles.title}>지식 Draft 편집</h1>
+        <p className={styles.eyebrow}>Knowledge · 버전 {draft.versionNumber} · {draft.workflowStatus === 'published' ? '발행됨' : draft.workflowStatus === 'archived' ? '보관됨' : draft.workflowStatus === 'withdrawn' ? '발행 취소됨' : '작성 중'}</p>
+        <h1 className={styles.title}>지식 작성본 편집</h1>
         {draft.legacyMetadata.topic ||
         draft.legacyMetadata.recommendedOrder !== null ||
         draft.legacyMetadata.prerequisiteKnowledgeIds.length ||
         draft.legacyMetadata.relatedKnowledgeIds.length ||
         draft.legacyMetadata.verificationMetadata ? (
           <p className={styles.notice}>
-            이 Draft의 기존 고급 metadata는 보존되며 기본 편집에서는 변경되지
+            이 작성본의 기존 고급 metadata는 보존되며 기본 편집에서는 변경되지
             않습니다.
           </p>
         ) : null}
-        <KnowledgePublishPanel
-          localizationId={id}
-          draftVersionNumber={publish.draftVersionNumber}
-          publishedVersionNumber={publish.publishedVersionNumber}
-          ready={publish.readiness.ready}
-          blockingErrors={publish.readiness.blockingErrors}
-          warnings={publish.readiness.warnings}
-        />
         <KnowledgeEditor
           mode="edit"
           localizationId={id}
@@ -67,9 +57,23 @@ export default async function Page({
             locale: draft.locale,
             summary: draft.summary,
             tags: draft.tags,
-            references: draft.references,
+            hero: draft.hero,
+            heroImageUrl: draft.heroImageUrl,
             document: draft.document,
           }}
+        />
+        <KnowledgePublishPanel
+          localizationId={id}
+          draftVersionNumber={publish.draftVersionNumber}
+          publishedVersionNumber={publish.publishedVersionNumber}
+          ready={publish.readiness.ready}
+          blockingErrors={publish.readiness.blockingErrors}
+          warnings={publish.readiness.warnings}
+          workflowStatus={publish.workflowStatus}
+          slug={draft.slug}
+          createdAt={publish.createdAt}
+          publishedAt={publish.publishedAt}
+          lastPublishedAt={publish.lastPublishedAt}
         />
       </main>
     );

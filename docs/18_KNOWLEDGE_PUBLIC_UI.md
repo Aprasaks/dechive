@@ -2,7 +2,7 @@
 
 `/knowledge`는 published Knowledge만 탐색하는 기록 인덱스다. 각 항목은 title, summary, tags, published version/date와 상세 링크를 보이며, 번호형 연재나 카드 갤러리로 취급하지 않는다.
 
-`/knowledge/{slug}`는 Knowledge 표시, title, summary, tags, 발행 정보, canonical document, 참고문헌, 목록 복귀 링크 순서의 읽기 화면이다. external 참고문헌은 제목·기관·새 창 외부 링크·접근일·note를, direct verification은 제목·검증 note·검증일을 표시하며 빈 값은 출력하지 않는다.
+`/knowledge/{slug}`는 Knowledge 표시, title, summary, 대표 이미지, canonical document, 태그, 작성·발행·최종 수정일, 공유, 목록 복귀 링크 순서의 읽기 화면이다. 태그는 본문 뒤에 일반 칩으로 표시하며 가짜 태그 링크를 만들지 않는다. 기존 참고문헌 payload는 보존하지만 현재 공개 화면에서는 자동 출력하지 않는다.
 
 UI는 light-only token(`--background`, `--surface`, `--foreground`, `--accent`)과 `--page-gutter`, `--reading-max`를 사용한다. 390px는 한 열과 내부 code scroll, 768px 이상은 여백 확대, 1280px도 reading width를 유지한다. heading 순서, skip link 대상, 의미 있는 링크 이름, tag의 비버튼 표현, 외부 링크 새 창 안내와 URL overflow를 포함한다.
 

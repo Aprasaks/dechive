@@ -1,5 +1,13 @@
 # Decisions
 
+## D-63 — Knowledge media storage는 local/R2 adapter로 분리한다
+
+Knowledge 이미지의 canonical metadata와 version usage는 PostgreSQL의 `media_assets`와 `media_usages`에 저장한다. 로컬 개발은 `LocalStorageAdapter`와 `MEDIA_LOCAL_ROOT`를 사용하고, 운영은 Cloudflare R2 S3-compatible API를 사용하는 `R2StorageAdapter`와 `MEDIA_PUBLIC_BASE_URL`을 사용한다. 비즈니스 로직은 `StorageAdapter`만 의존하며 운영에서 R2 설정이 누락되면 local로 fallback하지 않고 실패한다. Knowledge 대표 이미지는 `hero` usage 하나로 관리하고 같은 URL을 OG, Twitter Card, Article JSON-LD에 재사용한다. 원본 object는 `knowledge/{year}/{month}/{uuid}.{extension}` key로 immutable 저장한다.
+
+- **Status:** Accepted
+- **Last Updated:** 2026-07-21
+- **Authority:** Knowledge image implementation decision
+
 ## D-62 — Practice는 적용·관찰·검증 기록이다
 
 Practice는 Knowledge를 실제로 적용한 결과를 기록하며 성공만 요구하지 않는다. `verified`, `partially_verified`, `not_verified`, `failed`, `inconclusive` 결과를 모두 허용한다. Knowledge 연결은 선택적 하나이며 Lecture 직접 관계와 다대다 relation은 만들지 않는다. 과거 상태 복구는 독립 rollback API가 아니라 새 immutable revision 저장 후 재발행으로 수행한다.

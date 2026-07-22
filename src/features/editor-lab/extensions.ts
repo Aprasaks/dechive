@@ -56,9 +56,17 @@ export const Figure = Node.create({
   parseHTML() { return [{ tag: 'figure[data-dechive-figure]' }]; },
   renderHTML({ HTMLAttributes }) {
     const attrs = { ...HTMLAttributes };
-    const media = attrs.media as { displayUrl?: string } | null;
-    return ['figure', mergeAttributes(attrs, { 'data-dechive-figure': '' }),
-      ['img', { src: media?.displayUrl ?? attrs.src, alt: attrs.alt, width: `${attrs.width}%` }],
+    const media = attrs.media as { displayUrl?: string; width?: number | null; height?: number | null } | null;
+    const imageAttributes: Record<string, string | number> = {
+      src: media?.displayUrl ?? attrs.src,
+      alt: attrs.alt,
+      loading: 'lazy',
+      decoding: 'async',
+    };
+    if (typeof media?.width === 'number') imageAttributes.width = media.width;
+    if (typeof media?.height === 'number') imageAttributes.height = media.height;
+    return ['figure', mergeAttributes({ 'data-dechive-figure': '', 'data-media-id': attrs.mediaId ?? undefined }),
+      ['img', imageAttributes],
       ['div', { 'data-caption-slot': '' }, 0]];
   },
 });

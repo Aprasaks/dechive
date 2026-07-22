@@ -1,3 +1,36 @@
-import type { Metadata } from 'next';import Link from 'next/link';import { notFound } from 'next/navigation';import { DechiveDocumentRenderer } from '@/features/admin/DechiveDocumentRenderer';import styles from '@/features/admin/KnowledgeEditor.module.css';import { createAdminDatabase,getKnowledgeDraft } from '@/services/knowledge-drafts';
-export const metadata:Metadata={title:'지식 Draft 미리보기',robots:{index:false,follow:false,nocache:true}};
-export default async function Page({params}:{params:Promise<{id:string}>}){const {id}=await params;const {pool}=createAdminDatabase();try{const draft=await getKnowledgeDraft(pool,id);if(!draft)notFound();return <main className={styles.shell}><nav className={styles.nav}><Link href={`/admin/knowledge/${id}/edit`}>← 편집</Link><span>Draft version {draft.versionNumber}</span></nav><div className={styles.notice}>현재 Draft 미리보기이며 공개 콘텐츠가 아닙니다. `/knowledge/{draft.slug}` 공개 renderer와 연결되지 않습니다.</div><article className={styles.preview}><p className={styles.eyebrow}>지식</p><h1 className={styles.title}>{draft.title}</h1><p className={styles.lead}>{draft.summary}</p>{draft.tags.length?<p>태그: {draft.tags.join(', ')}</p>:null}<DechiveDocumentRenderer document={draft.document}/>{draft.references.length?<section><h2>참고문헌</h2><ol>{draft.references.map((reference,index)=><li key={`${reference.type}-${index}`}><strong>{reference.title}</strong>{reference.authorOrOrganization?` · ${reference.authorOrOrganization}`:''}{reference.url?<><br/><a href={reference.url} rel="noreferrer">{reference.url}</a></>:null}{reference.note?<p>{reference.note}</p>:null}</li>)}</ol></section>:null}</article></main>}finally{await pool.end()}}
+/* eslint-disable @next/next/no-img-element */
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import { DechiveDocumentRenderer } from '@/features/admin/DechiveDocumentRenderer';
+import { createAdminDatabase, getKnowledgeDraft } from '@/services/knowledge-drafts';
+import styles from '@/features/admin/KnowledgeEditor.module.css';
+
+export const metadata: Metadata = { title: '지식 작성본 미리보기', robots: { index: false, follow: false, nocache: true } };
+const date = (value: string) => new Intl.DateTimeFormat('ko-KR', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' }).format(new Date(value));
+
+export default async function Page({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const { pool } = createAdminDatabase();
+  try {
+    const draft = await getKnowledgeDraft(pool, id);
+    if (!draft) notFound();
+    return (
+      <main className={styles.shell}>
+        <nav className={styles.nav}><Link href={`/admin/knowledge/${id}/edit`}>← 편집</Link><span>작성본 미리보기 · 버전 {draft.versionNumber}</span></nav>
+        <div className={styles.notice}>현재 작성본 미리보기이며 공개 콘텐츠가 아닙니다.</div>
+        <article className={styles.preview}>
+          <p className={styles.eyebrow}>Knowledge</p>
+          <h1 className={styles.title}>{draft.title || '제목 없음'}</h1>
+          <p className={styles.lead}>{draft.summary}</p>
+          {draft.heroImageUrl && draft.hero ? <figure><img src={draft.heroImageUrl} alt={draft.hero.alt} />{draft.hero.caption ? <figcaption>{draft.hero.caption}</figcaption> : null}</figure> : null}
+          <DechiveDocumentRenderer document={draft.document} />
+          {draft.tags.length ? <ul className={styles.tags} aria-label="태그">{draft.tags.map((tag) => <li className={styles.tag} key={tag}>{tag}</li>)}</ul> : null}
+          <dl className={styles.dateList}><div><dt>작성일</dt><dd>{date(draft.createdAt)}</dd></div><div><dt>발행일</dt><dd>{draft.publishedAt ? date(draft.publishedAt) : '아직 발행되지 않음'}</dd></div><div><dt>최종 수정</dt><dd>{date(draft.updatedAt)}</dd></div></dl>
+        </article>
+      </main>
+    );
+  } finally {
+    await pool.end();
+  }
+}

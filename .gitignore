@@ -47,3 +47,4 @@ next-env.d.ts
 /public/images/posts/
 /fixtures/staging-import/output/*.dump
 /fixtures/staging-import/output/neon-portable-export.json
+/.data/media/

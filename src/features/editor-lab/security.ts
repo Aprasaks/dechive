@@ -56,8 +56,10 @@ export function validateDechiveDocument(document: JSONContent, phase: Validation
     }
     if (node.type === 'figure') {
       const src = node.attrs?.media?.displayUrl ?? node.attrs?.src;
-      if (typeof src !== 'string' || !safeMedia.test(src)) issue(issues, 'media.reference', path, /^https?:/i.test(String(src)) ? 'review' : 'error', 'Publishable media must use an internal /images path or fixture reference.');
-      if (!node.attrs?.alt) issue(issues, 'media.alt_missing', path, 'warning', 'Figure alt is missing.');
+      const mediaId = typeof node.attrs?.mediaId === 'string' ? node.attrs.mediaId.trim() : '';
+      if (!mediaId && (typeof src !== 'string' || !safeMedia.test(src))) issue(issues, 'media.reference', path, /^https?:/i.test(String(src)) ? 'review' : 'error', 'Publishable media must use an internal /images path or an approved media identity.');
+      if (mediaId && typeof src !== 'string') issue(issues, 'media.reference', path, 'error', 'Media identity requires a source URL.');
+      if (!node.attrs?.alt) issue(issues, 'media.alt_missing', path, 'error', 'Figure alt is required.');
     }
     if (node.type === 'unknownBlock') issue(issues, 'node.unknown_quarantined', path, phase === 'publish' ? 'error' : 'review', 'Unknown payload is preserved but cannot be published.');
     if (node.type === 'sourceReference' && typeof node.attrs?.sourceId !== 'string') issue(issues, 'source.id', path, 'error', 'sourceId is required.');

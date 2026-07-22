@@ -14,6 +14,11 @@ services:
       retries: 20
     volumes:
       - dechive_postgres_data:/var/lib/postgresql/data
+  media-volume:
+    image: alpine:3.22
+    command: ["sh", "-c", "mkdir -p /data/media && tail -f /dev/null"]
+    volumes:
+      - ${MEDIA_LOCAL_HOST_ROOT:-./.data/media}:/data/media
 
 volumes:
   dechive_postgres_data:

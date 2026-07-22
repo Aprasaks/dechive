@@ -12,7 +12,13 @@ const artifacts = [
 ];
 
 async function expectReject(run: () => Promise<unknown>, pattern?: RegExp) {
-  await assert.rejects(run, pattern);
+  try {
+    await run();
+  } catch (error) {
+    if (!pattern || pattern.test(String(error))) return;
+    throw error;
+  }
+  throw new Error('expected_rejection');
 }
 
 async function main() {
