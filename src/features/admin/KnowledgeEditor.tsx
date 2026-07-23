@@ -288,14 +288,14 @@ function ContentEditor(props: Props) {
     } finally { setUploading(false); }
   };
   const tools = [
-    ['굵게', () => editor?.chain().focus().toggleBold().run()],
-    ['기울임', () => editor?.chain().focus().toggleItalic().run()],
-    ['H2', () => editor?.chain().focus().toggleHeading({ level: 2 }).run()],
-    ['H3', () => editor?.chain().focus().toggleHeading({ level: 3 }).run()],
-    ['글머리', () => editor?.chain().focus().toggleBulletList().run()],
-    ['번호', () => editor?.chain().focus().toggleOrderedList().run()],
-    ['인용', () => editor?.chain().focus().toggleBlockquote().run()],
-    ['코드', () => editor?.chain().focus().toggleCodeBlock().run()],
+    ['굵게', () => editor?.chain().focus().toggleBold().run(), () => editor?.isActive('bold')],
+    ['기울임', () => editor?.chain().focus().toggleItalic().run(), () => editor?.isActive('italic')],
+    ['H2', () => editor?.chain().focus().toggleHeading({ level: 2 }).run(), () => editor?.isActive('heading', { level: 2 })],
+    ['H3', () => editor?.chain().focus().toggleHeading({ level: 3 }).run(), () => editor?.isActive('heading', { level: 3 })],
+    ['글머리', () => editor?.chain().focus().toggleBulletList().run(), () => editor?.isActive('bulletList')],
+    ['번호', () => editor?.chain().focus().toggleOrderedList().run(), () => editor?.isActive('orderedList')],
+    ['인용', () => editor?.chain().focus().toggleBlockquote().run(), () => editor?.isActive('blockquote')],
+    ['코드', () => editor?.chain().focus().toggleCodeBlock().run(), () => editor?.isActive('codeBlock')],
   ] as const;
   const knowledgeFields = fields as KnowledgeFields;
   const lectureFields = fields as LectureFields;
@@ -475,8 +475,8 @@ function ContentEditor(props: Props) {
           role="toolbar"
           aria-label="본문 편집 도구"
         >
-          {tools.map(([label, run]) => (
-            <button type="button" key={label} onClick={run}>
+          {tools.map(([label, run, active]) => (
+            <button type="button" key={label} onClick={run} aria-pressed={Boolean(active?.())}>
               {label}
             </button>
           ))}

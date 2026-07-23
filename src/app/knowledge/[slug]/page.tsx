@@ -73,7 +73,7 @@ export default async function KnowledgeDetailPage({
       <main id="main-content" className={`page-shell ${styles.detail}`}>
         <div className={styles.detailInner}>
           <Link href="/knowledge" className={styles.back}>
-            ← 지식 목록
+            지식 목록
           </Link>
           <article>
             <header className={styles.detailHeader}>
