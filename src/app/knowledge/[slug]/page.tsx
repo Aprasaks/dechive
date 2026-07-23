@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -85,26 +84,27 @@ export default async function KnowledgeDetailPage({
                 <time dateTime={knowledge.publishedAt}>
                   발행일 · {formatKnowledgeDateTime(knowledge.publishedAt)}
                 </time>
+                {knowledge.updatedAt !== knowledge.publishedAt ? (
+                  <time dateTime={knowledge.updatedAt}>
+                    최종 수정 · {formatKnowledgeDateTime(knowledge.updatedAt)}
+                  </time>
+                ) : null}
               </div>
+              {knowledge.tags.length ? (
+                <ul className={`${styles.tags} ${styles.detailTags}`} aria-label="태그">
+                  {knowledge.tags.map((tag) => <li className={styles.tag} key={tag}>{tag}</li>)}
+                </ul>
+              ) : null}
             </header>
-            {knowledge.hero ? (
-              <figure className={styles.heroMedia}>
-                <img src={knowledge.hero.publicUrl} alt={knowledge.hero.alt} width={knowledge.hero.width ?? undefined} height={knowledge.hero.height ?? undefined} loading="eager" decoding="async" fetchPriority="high" />
-                {knowledge.hero.caption ? <figcaption>{knowledge.hero.caption}</figcaption> : null}
-              </figure>
-            ) : null}
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
             <DechiveDocumentRenderer
               document={knowledge.document}
               className={styles.document}
             />
             <footer className={styles.detailFooter}>
-              {knowledge.tags.length ? <ul className={styles.tags} aria-label="태그">{knowledge.tags.map((tag) => <li className={styles.tag} key={tag}>{tag}</li>)}</ul> : null}
-              <dl className={styles.publicDates}>
-                <div><dt>작성일</dt><dd><time dateTime={knowledge.createdAt}>{formatKnowledgeDateTime(knowledge.createdAt)}</time></dd></div>
-                <div><dt>발행일</dt><dd><time dateTime={knowledge.publishedAt}>{formatKnowledgeDateTime(knowledge.publishedAt)}</time></dd></div>
-                <div><dt>최종 수정일</dt><dd><time dateTime={knowledge.updatedAt}>{formatKnowledgeDateTime(knowledge.updatedAt)}</time></dd></div>
-              </dl>
+              <p className={styles.createdDate}>
+                작성일 · <time dateTime={knowledge.createdAt}>{formatKnowledgeDateTime(knowledge.createdAt)}</time>
+              </p>
               <KnowledgeShareButton url={`${BASE_URL}/knowledge/${knowledge.slug}`} />
             </footer>
             <Link href="/knowledge" className={styles.returnLink}>

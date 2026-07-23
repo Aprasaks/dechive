@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
-import { formatKnowledgeDateTime } from '@/features/knowledge/date-format';
+import KnowledgeListClient from '@/features/knowledge/KnowledgeListClient';
+import { normalizeKnowledgeSearchQuery } from '@/features/knowledge/search';
 import {
+  countPublishedKnowledge,
   createPublishedKnowledgeDatabase,
-  listPublishedKnowledge,
+  searchPublishedKnowledge,
 } from '@/services/published-knowledge';
 import styles from './knowledge.module.css';
 
@@ -20,61 +21,36 @@ export const metadata: Metadata = {
   },
 };
 export const revalidate = 300;
-export default async function KnowledgeIndexPage() {
+
+export default async function KnowledgeIndexPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ q?: string }>;
+}) {
+  const params = await searchParams;
+  const query = normalizeKnowledgeSearchQuery(params.q);
   const { pool } = createPublishedKnowledgeDatabase();
   try {
-    const items = await listPublishedKnowledge(pool);
+    const [{ items, nextCursor }, count] = await Promise.all([
+      searchPublishedKnowledge(pool, { query, limit: 12 }),
+      countPublishedKnowledge(pool),
+    ]);
     return (
       <main id="main-content" className={`page-shell ${styles.index}`}>
         <div className={styles.indexInner}>
           <header className={styles.indexHeader}>
-            <p className={styles.eyebrow}>Dechive Knowledge</p>
-            <h1 className={styles.indexTitle}>지식</h1>
-            <p className={styles.indexLead}>
-              각 문서는 하나의 개념과 판단 기준을 독립적으로 다룹니다. 필요한
-              곳에서 바로 읽고, 다시 찾아볼 수 있도록 정리합니다.
-            </p>
+            <h1 className={styles.indexTitle}>
+              우리가 알고 있는, 하지만 제대로 알지 못하는 개념들을
+              <br className={styles.desktopBreak} />
+              {' '}하나씩 알아봅시다.
+            </h1>
+            <p className={styles.count}>지금까지 {count}개의 개념을 정리했어요.</p>
           </header>
-          {items.length ? (
-            <>
-              <p className={styles.count}>발행된 지식 {items.length}개</p>
-              <ul className={styles.list}>
-                {items.map((item) => (
-                  <li key={item.slug} className={styles.item}>
-                    <Link
-                      className={styles.itemLink}
-                      href={`/knowledge/${item.slug}`}
-                    >
-                      <span>{item.title}</span>
-                      <span className={styles.arrow} aria-hidden="true">
-                        →
-                      </span>
-                    </Link>
-                    <p className={styles.itemSummary}>{item.summary}</p>
-                    <div className={styles.meta}>
-                      <time dateTime={item.publishedAt}>
-                        발행일 · {formatKnowledgeDateTime(item.publishedAt)}
-                      </time>
-                      <time dateTime={item.updatedAt}>
-                        최종 수정일 · {formatKnowledgeDateTime(item.updatedAt)}
-                      </time>
-                      {item.tags.length ? (
-                        <ul className={styles.tags} aria-label="태그">
-                          {item.tags.map((tag) => (
-                            <li key={tag} className={styles.tag}>
-                              {tag}
-                            </li>
-                          ))}
-                        </ul>
-                      ) : null}
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </>
-          ) : (
-            <p className={styles.empty}>아직 발행된 지식이 없습니다.</p>
-          )}
+          <KnowledgeListClient
+            initialItems={items}
+            initialNextCursor={nextCursor}
+            initialQuery={query}
+          />
         </div>
       </main>
     );
