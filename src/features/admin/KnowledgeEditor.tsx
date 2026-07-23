@@ -3,14 +3,18 @@
 import { useEffect, useRef, useState } from 'react';
 import { EditorContent, useEditor } from '@tiptap/react';
 import type { JSONContent } from '@tiptap/core';
-import { Fragment } from '@tiptap/pm/model';
+import { DOMParser as ProseMirrorDOMParser, Fragment, Slice } from '@tiptap/pm/model';
 import { NodeSelection } from '@tiptap/pm/state';
+import type { EditorView } from '@tiptap/pm/view';
 import { editorExtensions } from '@/features/editor-lab/editor-extensions';
 import {
   fromTipTapJSON,
+  normalizeAnchors,
   toTipTapJSON,
   type DechiveDocument,
 } from '@/features/editor-lab/document';
+import { looksLikeMarkdown, markdownToDechiveDocument } from '@/features/editor-lab/markdown';
+import { sanitizeImportedHtml, validateDechiveDocument } from '@/features/editor-lab/security';
 import { saveKnowledgeDraftAction } from '@/app/admin/knowledge/actions';
 import { saveLectureDraftAction } from '@/app/admin/lectures/actions';
 import type {
@@ -77,6 +81,20 @@ const mediaMessages: Record<string, string> = {
 };
 const humanMediaMessage = (value: string) => mediaMessages[value] ?? '이미지를 업로드하지 못했습니다.';
 
+function sliceFromDocument(view: EditorView, document: DechiveDocument): Slice {
+  const nodes = document.content.map((node) => view.state.schema.nodeFromJSON(node));
+  return new Slice(Fragment.fromArray(nodes), 0, 0);
+}
+
+function insertPastedDocument(view: EditorView, document: DechiveDocument): boolean {
+  const validation = validateDechiveDocument(document, 'draft');
+  if (validation.status === 'rejected') return true;
+  const slice = sliceFromDocument(view, document);
+  if (!slice.content.size) return true;
+  view.dispatch(view.state.tr.replaceSelection(slice).scrollIntoView());
+  return true;
+}
+
 export function KnowledgeEditor(
   props: Omit<Extract<Props, { kind: 'knowledge' }>, 'kind'>,
 ) {
@@ -127,6 +145,26 @@ function ContentEditor(props: Props) {
         'aria-label': `${kind === 'knowledge' ? '지식' : '강의'} 본문 편집기`,
         lang: fields.locale,
       },
+      handlePaste: kind === 'knowledge' ? (view, event) => {
+        const clipboard = event.clipboardData;
+        if (!clipboard) return false;
+        const html = clipboard.getData('text/html');
+        if (html.trim()) {
+          const sanitized = sanitizeImportedHtml(html);
+          const container = window.document.createElement('div');
+          container.innerHTML = sanitized.html;
+          const slice = ProseMirrorDOMParser.fromSchema(view.state.schema).parseSlice(container, { preserveWhitespace: 'full' });
+          const document = normalizeAnchors({
+            type: 'doc',
+            schemaVersion: 1,
+            content: slice.content.toJSON(),
+          });
+          return insertPastedDocument(view, document);
+        }
+        const text = clipboard.getData('text/plain');
+        if (!text || !looksLikeMarkdown(text)) return false;
+        return insertPastedDocument(view, markdownToDechiveDocument(text));
+      } : undefined,
       handleDOMEvents: {
         compositionstart: () => {
           composing.current = true;

@@ -13,6 +13,7 @@
     "verify:editor-security": "tsx scripts/editor-runtime/security-verify.ts",
     "verify:media": "node --import tsx scripts/media/verify.ts",
     "verify:knowledge-cms": "node --import tsx scripts/admin/verify-knowledge-cms.ts",
+    "verify:knowledge-markdown-paste": "tsx scripts/admin/verify-knowledge-markdown-paste.ts",
     "media:cleanup": "node --import tsx scripts/media/cleanup.ts",
     "db:up": "tsx scripts/db/up.ts",
     "db:status": "docker compose -f docker-compose.db.yml ps",
