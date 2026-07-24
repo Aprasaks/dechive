@@ -31,9 +31,9 @@ export default function Header({ overlay = false }: { overlay?: boolean }) {
   return (
     <>
     <header
-      className={`z-50 text-foreground ${
+        className={`z-50 text-foreground ${
         overlay
-          ? 'absolute inset-x-0 top-0 border-b border-transparent bg-transparent backdrop-blur-[2px]'
+          ? 'relative border-b border-transparent bg-transparent backdrop-blur-[2px]'
           : 'sticky top-0 border-b border-border-subtle bg-background/95 backdrop-blur-md'
       }`}
     >

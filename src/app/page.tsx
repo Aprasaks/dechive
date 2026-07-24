@@ -54,7 +54,7 @@ async function getLatestRecord(): Promise<LatestRecord | null> {
 export default async function Home() {
   const latestRecord = await getLatestRecord();
   return (
-    <main id="main-content" className="min-h-screen bg-background text-foreground">
+    <main id="main-content" className="-mt-16 min-h-screen bg-background text-foreground">
       <HomeSections latestRecord={latestRecord} />
     </main>
   );

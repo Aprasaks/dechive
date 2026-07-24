@@ -121,6 +121,7 @@
 
   html {
     @apply bg-background font-sans;
+    scrollbar-gutter: stable;
     scroll-behavior: smooth;
   }
 
