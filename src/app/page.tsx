@@ -4,7 +4,6 @@ import { createDatabase } from '@/db/client';
 import { listPublishedKnowledge } from '@/services/published-knowledge';
 import { listPublishedLectures } from '@/services/published-lectures';
 import { listPublishedPractices } from '@/services/published-practices';
-import { listPublishedAiUpdates } from '@/services/published-ai-updates';
 import { getPublishedBooks } from '@/services/published-books';
 
 export const metadata: Metadata = {
@@ -24,11 +23,10 @@ export const revalidate = 300;
 async function getLatestRecord(): Promise<LatestRecord | null> {
   const { pool } = createDatabase();
   try {
-    const [knowledge, lectures, practices, aiUpdates, books] = await Promise.all([
+    const [knowledge, lectures, practices, books] = await Promise.all([
       listPublishedKnowledge(pool),
       listPublishedLectures(pool),
       listPublishedPractices(pool),
-      listPublishedAiUpdates(pool),
       getPublishedBooks(pool),
     ]);
     const candidates: LatestRecord[] = [];
@@ -40,9 +38,6 @@ async function getLatestRecord(): Promise<LatestRecord | null> {
     }
     if (practices[0]) {
       candidates.push({ category: 'Practice', title: practices[0].title, publishedAt: practices[0].publishedAt, href: `/practice/${practices[0].slug}`, indexHref: '/practice' });
-    }
-    if (aiUpdates[0]) {
-      candidates.push({ category: 'AI Update', title: aiUpdates[0].title, publishedAt: aiUpdates[0].publishedAt, href: `/ai-update/${aiUpdates[0].slug}`, indexHref: '/ai-update' });
     }
     if (books[0]) {
       candidates.push({ category: 'Books', title: books[0].title, publishedAt: books[0].publishedAt, href: '/books', indexHref: '/books' });

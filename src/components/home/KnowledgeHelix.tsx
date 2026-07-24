@@ -18,11 +18,6 @@ const KNOWLEDGE_MARKERS = [
     className: 'left-[10%] bottom-[25%]',
     delay: '8s',
   },
-  {
-    title: 'AI Update',
-    className: 'right-[9%] bottom-[18%]',
-    delay: '12s',
-  },
 ] as const;
 
 export default function KnowledgeHelix() {

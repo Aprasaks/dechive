@@ -31,7 +31,7 @@ export default function HomeNavLink({
       href={item.href ?? '/'}
       onClick={onClick}
       aria-current={active ? 'page' : undefined}
-      className={`inline-flex min-h-11 items-center border-b-2 px-2 text-sm font-medium transition-colors ${active ? 'border-accent text-accent' : 'text-secondary-foreground hover:text-accent border-transparent'}`}
+      className="inline-flex min-h-11 items-center border-b-2 border-transparent px-2 text-sm font-medium text-secondary-foreground transition-colors hover:text-accent"
     >
       {item.label}
     </Link>

@@ -73,7 +73,7 @@ export default function HomeMobileMenu({
                     href={item.href ?? '/'}
                     onClick={onClose}
                     aria-current={pathname === item.href || pathname.startsWith(`${item.href}/`) ? 'page' : undefined}
-                    className={`flex min-h-16 items-center justify-between text-base font-medium transition-colors hover:text-accent ${pathname === item.href || pathname.startsWith(`${item.href}/`) ? 'text-accent' : 'text-foreground'}`}
+                    className="flex min-h-16 items-center justify-between text-base font-medium text-foreground transition-colors hover:text-accent"
                   >
                     {item.label}
                     <ArrowRight size={17} aria-hidden="true" />

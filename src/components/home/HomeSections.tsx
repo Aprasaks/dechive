@@ -6,12 +6,11 @@ import {
   FileText,
   FlaskConical,
   GraduationCap,
-  LineChart,
   Tablet,
 } from 'lucide-react';
 
 export type LatestRecord = {
-  category: 'Knowledge' | 'Lecture' | 'Practice' | 'AI Update' | 'Books';
+  category: 'Knowledge' | 'Lecture' | 'Practice' | 'Books';
   title: string;
   publishedAt: string;
   href: string;
@@ -39,13 +38,6 @@ const publicAreas = [
     linkLabel: '실습 살펴보기',
     href: '/practice',
     icon: FlaskConical,
-  },
-  {
-    title: 'AI Update',
-    description: '변화하는 AI를 지속해서 확인합니다.',
-    linkLabel: 'AI 업데이트 보기',
-    href: '/ai-update',
-    icon: LineChart,
   },
   {
     title: 'Books',
@@ -139,7 +131,7 @@ export function HomeSections({ latestRecord }: { latestRecord: LatestRecord | nu
       </section>
 
       <section className="page-shell pb-16 sm:pb-20" aria-label="콘텐츠 영역 바로가기">
-        <ul className="grid gap-y-10 sm:grid-cols-2 sm:gap-x-10 lg:grid-cols-5 lg:gap-x-0 lg:divide-x lg:divide-border-subtle">
+        <ul className="grid gap-y-10 sm:grid-cols-2 sm:gap-x-10 lg:grid-cols-4 lg:gap-x-0 lg:divide-x lg:divide-border-subtle">
           {publicAreas.map(({ title, description, linkLabel, href, icon: Icon }) => (
             <li key={href} className="lg:px-8 lg:first:pl-0 lg:last:pr-0">
               <Icon className="text-accent" size={22} aria-hidden="true" strokeWidth={1.6} />

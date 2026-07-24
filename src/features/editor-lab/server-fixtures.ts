@@ -42,14 +42,6 @@ export async function loadEditorFixtures(): Promise<FixtureDocument[]> {
     const document = markdownToDechiveDocument(parsed.content);
     fixtures.push({ id, label, sourcePath, document, sourceMetrics: { characters: parsed.content.length, headings: count(document, 'heading'), codeBlocks: count(document, 'codeBlock'), tables: count(document, 'table'), figures: count(document, 'figure') }, warnings: Array.isArray(parsed.data.tags) && parsed.data.tags.some((tag) => tag === null) ? ['YAML null tag: needs_review'] : [] });
   }
-  fixtures.push({
-    id: 'ai-update-example', label: 'AI Update 변환 예시', sourcePath: 'src/data/aiUpdates.ts#2026-07-02',
-    document: normalizeAnchors({ type: 'doc', schemaVersion: 1, content: [
-      { type: 'heading', attrs: { level: 2, anchorId: 'ai-update-runtime-example' }, content: [{ type: 'text', text: 'AI Update runtime 변환 예시' }] },
-      { type: 'paragraph', content: [{ type: 'text', text: '실제 2026-07-02 Digest의 개별 변화 구조를 본문 node와 출처 node로 표현한다.' }] },
-      { type: 'sourceReference', attrs: { sourceId: 'fixture-source', locator: '2026-07-02', note: '원본 TypeScript 데이터의 source granularity는 별도 검토가 필요합니다.', label: 'Fixture 출처' } },
-    ] }), sourceMetrics: { characters: 0, headings: 1, codeBlocks: 0, tables: 0, figures: 0 }, warnings: ['Derivative fixture; original data not modified'],
-  });
   const migrated = await migrateV1ToV2(fixtures[0].document);
   fixtures.push({ id: 'migration-v2', label: 'Schema v2 migration fixture', sourcePath: 'generated from short-archive fixture', document: migrated.document, sourceMetrics: { characters: 0, headings: count(migrated.document, 'heading'), codeBlocks: 0, tables: 0, figures: count(migrated.document, 'figure') }, warnings: [`migration:${migrated.log.changes.join(',')}`] });
   fixtures.push({ id: 'mixed-table-export', label: 'GFM + HTML fallback table fixture', sourcePath: 'fixtures/editor-security/generated-table-cases', document: normalizeAnchors({ type: 'doc', schemaVersion: 2, content: [
