@@ -29,18 +29,15 @@ export function HomeSections({
 }) {
   return (
     <section className="page-shell py-5 sm:py-7 lg:py-5" aria-label="Dechive 소개와 공개 기록">
-      <div className="grid gap-10 md:grid-cols-12 md:gap-6 lg:gap-6">
-        <div className="hidden self-start lg:col-span-3 lg:block">
-          <Image
-            src="/images/home/intro.webp"
-            alt="Dechive 소개"
-            width={1200}
-            height={1800}
-            priority
-            decoding="async"
-            sizes="(max-width: 79.99rem) 42vw, 22vw"
-            className="block h-auto w-full object-contain"
-          />
+      <div className="grid gap-10 md:grid-cols-12 md:gap-6 lg:items-center lg:gap-6">
+        <div className="hidden lg:col-span-3 lg:flex lg:items-center lg:justify-center">
+          <h1 className="max-w-[18rem] font-serif text-[clamp(1.7rem,2.25vw,2.25rem)] font-medium leading-[1.5] tracking-[.01em] text-foreground">
+            배우고, 확인하고
+            <br />
+            다시 설명하는
+            <br />
+            AI 지식 플랫폼
+          </h1>
         </div>
 
         <div className="min-w-0 md:col-span-12 lg:col-span-9">
@@ -150,7 +147,7 @@ export function HomeSections({
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-5 pt-6 lg:grid-cols-[3.5rem_minmax(0,1fr)_3.5rem_minmax(0,1fr)] lg:gap-0 lg:pt-6">
+          <div className="grid grid-cols-1 gap-5 pt-6 sm:grid-cols-2 lg:grid-cols-[3.5rem_minmax(0,1fr)_3.5rem_minmax(0,1fr)] lg:gap-0 lg:pt-6">
             <div className="relative hidden justify-center lg:flex" aria-hidden="true">
               <span className="absolute inset-y-0 w-px bg-border-subtle" />
               <span className="relative z-10 bg-background px-1 font-serif text-sm text-secondary-foreground">04</span>
