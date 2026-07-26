@@ -31,12 +31,14 @@ export function HomeSections({
     <section className="page-shell py-5 sm:py-7 lg:py-5" aria-label="Dechive 소개와 공개 기록">
       <div className="grid gap-10 md:grid-cols-12 md:gap-6 lg:items-center lg:gap-6">
         <div className="hidden lg:col-span-3 lg:flex lg:items-center lg:justify-center">
-          <h1 className="max-w-[18rem] font-serif text-[clamp(1.7rem,2.25vw,2.25rem)] font-medium leading-[1.5] tracking-[.01em] text-foreground">
-            배우고, 확인하고
-            <br />
-            다시 설명하는
-            <br />
-            AI 지식 플랫폼
+          <h1 className="max-w-[20rem] font-sans font-bold leading-[1.18] tracking-[-.055em] text-foreground">
+            <span className="block whitespace-nowrap text-[clamp(1.2rem,1.65vw,1.75rem)]">
+              배우고, <span className="text-accent-warm">확인하고</span>
+            </span>
+            <span className="mt-5 block whitespace-nowrap text-[clamp(1.5rem,2.1vw,2.25rem)]">다시 설명하는</span>
+            <span className="mt-5 block whitespace-nowrap text-[clamp(1.85rem,2.65vw,2.75rem)]">
+              <span className="text-accent-warm">AI</span> 지식 플랫폼
+            </span>
           </h1>
         </div>
 
