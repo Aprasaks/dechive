@@ -23,7 +23,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
           <h1 className={styles.title}>{draft.title || '제목 없음'}</h1>
           <p className={styles.lead}>{draft.summary}</p>
           {draft.heroImageUrl && draft.hero ? <figure><img src={draft.heroImageUrl} alt={draft.hero.alt} />{draft.hero.caption ? <figcaption>{draft.hero.caption}</figcaption> : null}</figure> : null}
-          <DechiveDocumentRenderer document={draft.document} />
+          <DechiveDocumentRenderer document={draft.document} className={styles.previewDocument} />
           {draft.tags.length ? <ul className={styles.tags} aria-label="태그">{draft.tags.map((tag) => <li className={styles.tag} key={tag}>{tag}</li>)}</ul> : null}
           <dl className={styles.dateList}><div><dt>작성일</dt><dd>{formatKnowledgeDateTime(draft.createdAt)}</dd></div><div><dt>발행일</dt><dd>{draft.publishedAt ? formatKnowledgeDateTime(draft.publishedAt) : '아직 발행되지 않음'}</dd></div><div><dt>최종 수정</dt><dd>{formatKnowledgeDateTime(draft.updatedAt)}</dd></div></dl>
         </article>
