@@ -51,9 +51,82 @@ function hasMark(document: JSONContent, type: string): boolean {
   return found;
 }
 
+function isEmptyParagraph(node: JSONContent): boolean {
+  return node.type === 'paragraph' && !(node.content ?? []).some((child) => child.type !== 'text' || Boolean(child.text?.trim()));
+}
+
+function countEmptyParagraphs(document: JSONContent): number {
+  let count = 0;
+  const visit = (node: JSONContent) => {
+    if (isEmptyParagraph(node)) count += 1;
+    node.content?.forEach(visit);
+  };
+  visit(document);
+  return count;
+}
+
+function countEmptyListItems(document: JSONContent): number {
+  let count = 0;
+  const visit = (node: JSONContent) => {
+    if (node.type === 'listItem' && !(node.content ?? []).some((child) => !isEmptyParagraph(child))) count += 1;
+    node.content?.forEach(visit);
+  };
+  visit(document);
+  return count;
+}
+
+function countInvalidTextContainers(document: JSONContent): number {
+  let count = 0;
+  const visit = (node: JSONContent) => {
+    if (node.type === 'text' && node.content) count += 1;
+    node.content?.forEach(visit);
+  };
+  visit(document);
+  return count;
+}
+
+function textContent(node: JSONContent): string {
+  return node.type === 'text' ? node.text ?? '' : (node.content ?? []).map(textContent).join('');
+}
+
+function assertValid(document: JSONContent): void {
+  assert.notEqual(validateDechiveDocument(document, 'draft').status, 'rejected');
+  assert.equal(countInvalidTextContainers(document), 0);
+  assert.equal(countEmptyParagraphs(document), 0);
+  assert.equal(countEmptyListItems(document), 0);
+}
+
+const threeBullets = markdownToDechiveDocument(`- **하나**\n- 둘\n- 셋`);
+assertValid(threeBullets);
+assert.equal(countNodes(threeBullets, 'listItem'), 3);
+assert(hasMark(threeBullets, 'bold'));
+
+const threeOrdered = markdownToDechiveDocument(`1. 하나\n2. 둘\n3. 셋`);
+assertValid(threeOrdered);
+assert.equal(countNodes(threeOrdered, 'listItem'), 3);
+
+const oneQuote = markdownToDechiveDocument('> 한 줄짜리 인용문');
+assertValid(oneQuote);
+assert.equal(countNodes(oneQuote, 'blockquote'), 1);
+assert.equal(oneQuote.content[0]?.content?.length, 1);
+assert.equal(oneQuote.content[0]?.content?.[0]?.type, 'paragraph');
+
+const oneCode = markdownToDechiveDocument('```ts\nconst answer = 42;\n```');
+assertValid(oneCode);
+assert.equal(textContent(oneCode.content[0] ?? {}), 'const answer = 42;');
+assert(!textContent(oneCode.content[0] ?? {}).endsWith('\n'));
+
+const looseList = markdownToDechiveDocument('- 하나\n\n- 둘\n\n- 셋');
+assertValid(looseList);
+assert.equal(countNodes(looseList, 'listItem'), 3);
+
+const nestedList = markdownToDechiveDocument('- 바깥\n  - 안쪽 하나\n  - 안쪽 둘\n- 다음');
+assertValid(nestedList);
+assert.equal(countNodes(nestedList, 'bulletList'), 2);
+assert.equal(countNodes(nestedList, 'listItem'), 4);
+
 const document = markdownToDechiveDocument(markdown);
-const validation = validateDechiveDocument(document, 'draft');
-assert.notEqual(validation.status, 'rejected');
+assertValid(document);
 assert.equal(countNodes(document, 'heading'), 2);
 assert.equal(countNodes(document, 'blockquote'), 1);
 assert.equal(countNodes(document, 'codeBlock'), 1);

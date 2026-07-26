@@ -22,15 +22,22 @@ type MarkdownNode = {
 
 const parser = unified().use(remarkParse).use(remarkGfm);
 
-function markContent(content: JSONContent[] | undefined, type: string, attrs?: Record<string, unknown>): JSONContent {
+function markContent(content: JSONContent[], type: string, attrs?: Record<string, unknown>): JSONContent[] {
   const apply = (node: JSONContent): JSONContent => node.type === 'text'
     ? { ...node, marks: [...(node.marks ?? []), { type, ...(attrs ? { attrs } : {}) }] }
     : { ...node, content: node.content?.map(apply) };
-  return { type: 'text', text: '', content: content?.map(apply) };
+  return content.map(apply);
 }
 
-function convert(node: MarkdownNode): JSONContent {
-  const content = node.children?.map(convert);
+function convertChildren(children: MarkdownNode[] | undefined): JSONContent[] {
+  return (children ?? []).flatMap((child) => {
+    const converted = convert(child);
+    return Array.isArray(converted) ? converted : [converted];
+  });
+}
+
+function convert(node: MarkdownNode): JSONContent | JSONContent[] {
+  const content = convertChildren(node.children);
   const common = content ? { content } : {};
   switch (node.type) {
     case 'root': return { type: 'doc', ...common };
@@ -64,14 +71,29 @@ function convert(node: MarkdownNode): JSONContent {
   }
 }
 
-function flattenInvalidTextContainers(node: JSONContent): JSONContent[] {
-  if (node.type === 'text' && node.content) return node.content.flatMap(flattenInvalidTextContainers);
-  return [{ ...node, content: node.content?.flatMap(flattenInvalidTextContainers) }];
+function normalizeConvertedNodes(nodes: JSONContent[] | undefined, parentType?: string): JSONContent[] {
+  return (nodes ?? []).flatMap((node) => {
+    if (node.type === 'text' && node.content) return normalizeConvertedNodes(node.content, parentType);
+
+    const content = node.content ? normalizeConvertedNodes(node.content, node.type) : undefined;
+    const normalizedContent = node.type === 'codeBlock'
+      ? content?.map((child) => child.type === 'text'
+        ? { ...child, text: child.text?.replace(/\r?\n+$/g, '') }
+        : child).filter((child) => child.type !== 'text' || Boolean(child.text))
+      : content;
+
+    if (node.type === 'text' && !node.text) return [];
+    if (node.type === 'paragraph' && !normalizedContent?.length && parentType !== 'tableCell' && parentType !== 'tableHeader') return [];
+    if (node.type === 'listItem' && !normalizedContent?.length) return [];
+    if (['blockquote', 'bulletList', 'orderedList'].includes(node.type ?? '') && !normalizedContent?.length) return [];
+
+    return [{ ...node, ...(normalizedContent ? { content: normalizedContent } : {}) }];
+  });
 }
 
 export function markdownToDechiveDocument(markdown: string): DechiveDocument {
-  const converted = convert(parser.parse(markdown) as MarkdownNode);
-  const content = converted.content?.flatMap(flattenInvalidTextContainers) ?? [];
+  const converted = convert(parser.parse(markdown) as MarkdownNode) as JSONContent;
+  const content = normalizeConvertedNodes(converted.content);
   return normalizeAnchors({ ...converted, type: 'doc', schemaVersion: 1, content });
 }
 
