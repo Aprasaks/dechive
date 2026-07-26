@@ -30,7 +30,7 @@ export function HomeSections({
   return (
     <section className="page-shell py-5 sm:py-7 lg:py-5" aria-label="Dechive 소개와 공개 기록">
       <div className="grid gap-10 md:grid-cols-12 md:gap-6 lg:gap-6">
-        <div className="hidden self-start md:col-span-5 md:block lg:col-span-3">
+        <div className="hidden self-start lg:col-span-3 lg:block">
           <Image
             src="/images/home/intro.webp"
             alt="Dechive 소개"
@@ -43,7 +43,7 @@ export function HomeSections({
           />
         </div>
 
-        <div className="min-w-0 md:col-span-7 lg:col-span-9">
+        <div className="min-w-0 md:col-span-12 lg:col-span-9">
           <div className="grid grid-cols-1 lg:grid-cols-[3.5rem_minmax(0,1fr)]">
             <div className="relative hidden items-start justify-center lg:flex" aria-hidden="true">
               <span className="absolute inset-y-2 w-px bg-border-subtle" />
@@ -150,7 +150,7 @@ export function HomeSections({
             </div>
           </div>
 
-          <div className="grid gap-7 pt-6 sm:grid-cols-2 lg:grid-cols-[3.5rem_minmax(0,1fr)_3.5rem_minmax(0,1fr)] lg:gap-0 lg:pt-6">
+          <div className="grid grid-cols-2 gap-5 pt-6 lg:grid-cols-[3.5rem_minmax(0,1fr)_3.5rem_minmax(0,1fr)] lg:gap-0 lg:pt-6">
             <div className="relative hidden justify-center lg:flex" aria-hidden="true">
               <span className="absolute inset-y-0 w-px bg-border-subtle" />
               <span className="relative z-10 bg-background px-1 font-serif text-sm text-secondary-foreground">04</span>
@@ -168,7 +168,7 @@ export function HomeSections({
             </div>
             <Link
               href="/books"
-              className="group grid min-w-0 grid-cols-[minmax(0,1fr)_8rem] border-b border-border pb-7 transition-colors hover:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-4 lg:pl-8 lg:pb-0"
+              className="group grid min-w-0 grid-cols-[minmax(0,1fr)_5rem] border-b border-border pb-7 transition-colors hover:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-4 sm:grid-cols-[minmax(0,1fr)_8rem] lg:pl-8 lg:pb-0"
             >
               <div className="min-w-0">
                 <p className="text-accent-warm text-xs font-semibold tracking-[.18em] uppercase">Books</p>
@@ -179,7 +179,7 @@ export function HomeSections({
                   출간 <time dateTime="2025-05-26">2025.05.26</time> · 154쪽
                 </p>
               </div>
-              <div className="ml-5 flex min-h-[10rem] items-center justify-center overflow-hidden bg-[#e7e8e9]">
+              <div className="ml-3 flex min-h-[10rem] items-center justify-center overflow-hidden bg-[#e7e8e9] sm:ml-5">
                 <Image
                   src="/images/books/book-1.webp"
                   alt="만들기 전에 검증하라 책 표지"
