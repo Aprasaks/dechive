@@ -104,6 +104,11 @@ assert(hasMark(threeBullets, 'bold'));
 const threeOrdered = markdownToDechiveDocument(`1. 하나\n2. 둘\n3. 셋`);
 assertValid(threeOrdered);
 assert.equal(countNodes(threeOrdered, 'listItem'), 3);
+const tiptapOrdered = JSON.parse(JSON.stringify(threeOrdered)) as JSONContent;
+const tiptapOrderedList = tiptapOrdered.content?.find((node) => node.type === 'orderedList');
+if (!tiptapOrderedList) throw new Error('ordered_list_missing');
+tiptapOrderedList.attrs = { ...tiptapOrderedList.attrs, type: null };
+assert.notEqual(validateDechiveDocument(tiptapOrdered, 'publish').status, 'rejected');
 
 const oneQuote = markdownToDechiveDocument('> 한 줄짜리 인용문');
 assertValid(oneQuote);

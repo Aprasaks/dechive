@@ -9,7 +9,7 @@ export type ValidationResult = { status: ValidationStatus; issues: ValidationIss
 const nodes = new Set(['doc','paragraph','heading','text','blockquote','bulletList','orderedList','listItem','codeBlock','hardBreak','horizontalRule','table','tableRow','tableHeader','tableCell','figure','caption','callout','sourceReference','unknownBlock']);
 const marks = new Set(['bold','italic','strike','code','link']);
 const attributes: Record<string, Set<string>> = {
-  doc: new Set(['schemaVersion']), heading: new Set(['level','anchorId']), orderedList: new Set(['start']), listItem: new Set(['checked','ordered']),
+  doc: new Set(['schemaVersion']), heading: new Set(['level','anchorId']), orderedList: new Set(['start','type']), listItem: new Set(['checked','ordered']),
   codeBlock: new Set(['language','meta','filename','caption','highlightLines']), table: new Set(['style']), tableCell: new Set(['colspan','rowspan','colwidth','backgroundColor','align']), tableHeader: new Set(['colspan','rowspan','colwidth','backgroundColor','align']),
   figure: new Set(['mediaId','src','legacySrc','media','alt','caption','alignment','width','sourceReferenceId']), callout: new Set(['kind','tone','title']), sourceReference: new Set(['sourceId','locator','note','label']), unknownBlock: new Set(['originalType','payload','fallbackText']),
 };
