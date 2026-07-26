@@ -1,154 +1,199 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import {
-  ArrowRight,
-  BookOpen,
   FileText,
-  FlaskConical,
-  GraduationCap,
-  Tablet,
 } from 'lucide-react';
 
-export type LatestRecord = {
-  category: 'Knowledge' | 'Lecture' | 'Practice' | 'Books';
+export type FeaturedKnowledge = {
+  slug: string;
   title: string;
+  summary: string;
   publishedAt: string;
-  href: string;
-  indexHref: string;
+  hero: {
+    publicUrl: string;
+    alt: string;
+    width: number | null;
+    height: number | null;
+  } | null;
 };
-
-const publicAreas = [
-  {
-    title: 'Knowledge',
-    description: '이해한 내용을 지식으로 정리합니다.',
-    linkLabel: '지식 살펴보기',
-    href: '/knowledge',
-    icon: BookOpen,
-  },
-  {
-    title: 'Lecture',
-    description: '설명할 수 있는 구조로 다시 구성합니다.',
-    linkLabel: '강의 살펴보기',
-    href: '/lecture',
-    icon: GraduationCap,
-  },
-  {
-    title: 'Practice',
-    description: '직접 실행하고 결과를 기록합니다.',
-    linkLabel: '실습 살펴보기',
-    href: '/practice',
-    icon: FlaskConical,
-  },
-  {
-    title: 'Books',
-    description: '축적된 지식을 한 권으로 엮습니다.',
-    linkLabel: '전자책 살펴보기',
-    href: '/books',
-    icon: Tablet,
-  },
-] as const;
 
 const formatDate = (value: string) => {
   const parsed = new Date(value);
   return `${parsed.getFullYear()}.${String(parsed.getMonth() + 1).padStart(2, '0')}.${String(parsed.getDate()).padStart(2, '0')}`;
 };
 
-export function HomeSections({ latestRecord }: { latestRecord: LatestRecord | null }) {
+export function HomeSections({
+  featuredKnowledge,
+}: {
+  featuredKnowledge: FeaturedKnowledge | null;
+}) {
   return (
-    <>
-      <section
-        className="relative isolate min-h-[31rem] overflow-hidden bg-[#f5eee4] sm:min-h-[40rem] lg:min-h-[clamp(42rem,78svh,52rem)]"
-        aria-labelledby="home-title"
-      >
-        <div className="absolute inset-0">
+    <section className="page-shell py-5 sm:py-7 lg:py-5" aria-label="Dechive 소개와 공개 기록">
+      <div className="grid gap-10 md:grid-cols-12 md:gap-6 lg:gap-6">
+        <div className="hidden self-start md:col-span-5 md:block lg:col-span-3">
           <Image
-            src="/images/dechive-hero-workspace.webp"
-            alt="Dechive에서 지식을 정리하고 검증하는 작업 공간"
-            fill
+            src="/images/home/intro.webp"
+            alt="Dechive 소개"
+            width={1200}
+            height={1800}
             priority
-            sizes="100vw"
-            className="object-contain object-bottom md:object-contain md:object-bottom lg:object-cover lg:object-center"
+            decoding="async"
+            sizes="(max-width: 79.99rem) 42vw, 22vw"
+            className="block h-auto w-full object-contain"
           />
         </div>
-        <div
-          className="absolute inset-0 bg-gradient-to-b from-[#f8f2e9]/95 via-[#f8f2e9]/80 to-[#f8f2e9]/20 md:bg-gradient-to-r md:from-[#f8f2e9]/82 md:via-[#f8f2e9]/50 md:to-transparent lg:via-[#f8f2e9]/45"
-          aria-hidden="true"
-        />
-        <div className="page-shell relative z-10 flex min-h-[31rem] items-start pt-32 pb-14 sm:min-h-[40rem] sm:pt-36 sm:pb-16 lg:min-h-[clamp(42rem,78svh,52rem)] lg:items-center lg:pt-28 lg:pb-12">
-          <div className="max-w-[35rem]">
-            <p className="text-accent text-xs font-semibold tracking-[.18em] uppercase">
-              AI verification archive
-            </p>
-            <h1
-              id="home-title"
-              className="mt-5 font-serif text-[clamp(2.375rem,3.4vw,3.5rem)] leading-[1.2] font-medium tracking-[-.02em]"
-            >
-              AI creates answers.
-              <br />
-              Humans verify them.
-            </h1>
-            <p className="mt-6 max-w-[33rem] text-[0.9375rem] leading-7 text-foreground/80 sm:text-base sm:leading-8">
-              Dechive는 사람이 이해하고 검증한 내용을
-              <br className="hidden sm:block" /> 지식과 기록으로 다시 설명하는 아카이브입니다.
-            </p>
-          </div>
-        </div>
-      </section>
 
-      <section className="page-shell py-14 sm:py-16" aria-labelledby="latest-record-title">
-        <h2 id="latest-record-title" className="text-accent text-xs font-semibold tracking-[.18em] uppercase">
-          Latest record
-        </h2>
-        {latestRecord ? (
-          <article className="mt-4 flex flex-col gap-5 rounded-lg border border-border bg-surface-elevated px-6 py-5 sm:flex-row sm:items-center sm:gap-6">
-            <FileText className="text-accent-warm hidden shrink-0 sm:block" size={22} aria-hidden="true" />
-            <div className="min-w-0 flex-1">
-              <p className="text-accent-warm text-xs font-semibold tracking-[.04em]">{latestRecord.category}</p>
-              <div className="mt-1.5 flex flex-wrap items-baseline gap-x-4 gap-y-1">
-                <h3 className="text-base font-medium tracking-[-.015em] sm:text-lg">
-                  <Link href={latestRecord.href} className="hover:text-accent transition-colors">
-                    {latestRecord.title}
-                  </Link>
-                </h3>
-                <time className="text-sm tabular-nums text-muted-foreground" dateTime={latestRecord.publishedAt}>
-                  {formatDate(latestRecord.publishedAt)}
-                </time>
+        <div className="min-w-0 md:col-span-7 lg:col-span-9">
+          <div className="grid grid-cols-1 lg:grid-cols-[3.5rem_minmax(0,1fr)]">
+            <div className="relative hidden items-start justify-center lg:flex" aria-hidden="true">
+              <span className="absolute inset-y-2 w-px bg-border-subtle" />
+              <span className="relative z-10 bg-background px-1 font-serif text-sm text-secondary-foreground">01</span>
+            </div>
+            {featuredKnowledge ? (
+              <Link
+                href={`/knowledge/${featuredKnowledge.slug}`}
+                className="group block min-w-0 border-b border-border pb-7 transition-colors hover:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-4 lg:pb-8"
+              >
+                <article className="grid gap-7 lg:grid-cols-[minmax(0,1fr)_minmax(13rem,15rem)] lg:items-center lg:gap-8">
+                  <div className="flex min-w-0 flex-col justify-center">
+                    <p className="text-accent text-xs font-semibold tracking-[.18em] uppercase">Knowledge</p>
+                    <span className="mt-3 block h-px w-7 bg-accent" aria-hidden="true" />
+                    <h2 className="mt-8 font-serif text-3xl font-medium leading-[1.35] tracking-[-.04em] group-hover:text-accent sm:text-4xl lg:mt-7 lg:text-[2rem]">
+                      {featuredKnowledge.title}
+                    </h2>
+                    <p className="mt-6 max-w-[32rem] font-serif text-base leading-8 text-secondary-foreground sm:text-lg lg:mt-5 lg:text-sm lg:leading-7">
+                      {featuredKnowledge.summary}
+                    </p>
+                    <p className="mt-7 text-sm text-secondary-foreground lg:mt-8 lg:text-xs">
+                      <time dateTime={featuredKnowledge.publishedAt}>{formatDate(featuredKnowledge.publishedAt)}</time>
+                    </p>
+                  </div>
+                  <div className="aspect-[2/1] overflow-hidden bg-[#eee8de]">
+                    {featuredKnowledge.hero ? (
+                      <Image
+                        src={featuredKnowledge.hero.publicUrl}
+                        alt={featuredKnowledge.hero.alt}
+                        width={featuredKnowledge.hero.width ?? 800}
+                        height={featuredKnowledge.hero.height ?? 400}
+                        unoptimized
+                        priority
+                        loading="eager"
+                        decoding="async"
+                        sizes="(max-width: 48rem) 100vw, 15rem"
+                        className="block h-full w-full object-cover"
+                      />
+                    ) : (
+                      <Image
+                        src="/images/dechive-home-hero.webp"
+                        alt="Dechive의 지식 검증 작업 공간"
+                        width={1280}
+                        height={720}
+                        priority
+                        className="block h-full w-full object-cover"
+                      />
+                    )}
+                  </div>
+                </article>
+              </Link>
+            ) : (
+              <div className="grid gap-7 border-b border-border pb-7 lg:grid-cols-[minmax(0,1fr)_minmax(13rem,15rem)] lg:items-center lg:gap-8">
+                <div>
+                  <p className="text-accent text-xs font-semibold tracking-[.18em] uppercase">Knowledge</p>
+                  <span className="mt-3 block h-px w-7 bg-accent" aria-hidden="true" />
+                  <h2 className="mt-7 font-serif text-3xl font-medium tracking-[-.03em]">첫 번째 지식을 준비하고 있습니다.</h2>
+                  <p className="mt-4 font-serif text-base leading-8 text-secondary-foreground">이해하고 검증한 개념을 곧 공유할게요.</p>
+                </div>
+                <Image
+                  src="/images/dechive-home-hero.webp"
+                  alt="Dechive의 지식 검증 작업 공간"
+                  width={1280}
+                  height={720}
+                  priority
+                  className="block aspect-[2/1] h-full w-full object-cover"
+                />
+              </div>
+            )}
+          </div>
+
+          <div className="grid grid-cols-1 border-b border-border py-6 lg:grid-cols-[3.5rem_minmax(0,1fr)] lg:py-7">
+            <div className="relative hidden justify-center lg:flex" aria-hidden="true">
+              <span className="absolute inset-y-0 w-px bg-border-subtle" />
+              <span className="relative z-10 bg-background px-1 font-serif text-sm text-secondary-foreground">02</span>
+            </div>
+            <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)] lg:gap-8">
+              <div className="flex items-start gap-5">
+                <div className="hidden border-r border-border-subtle pr-5 lg:block">
+                  <p className="text-accent text-xs font-semibold tracking-[.18em] uppercase">Lecture</p>
+                  <span className="mt-3 block h-px w-6 bg-accent" aria-hidden="true" />
+                </div>
+                <div>
+                  <p className="text-accent text-xs font-semibold tracking-[.18em] uppercase lg:hidden">Lecture</p>
+                  <h2 id="lecture-block-title" className="mt-2 font-serif text-2xl font-medium tracking-[-.03em] sm:text-3xl lg:mt-0 lg:text-xl">
+                    강의 콘텐츠를 준비하고 있습니다.
+                  </h2>
+                  <p className="mt-3 text-sm leading-6 text-secondary-foreground">Knowledge를 설명과 학습의 순서로 다시 구성할 예정입니다.</p>
+                </div>
               </div>
             </div>
+          </div>
+
+          <div className="grid grid-cols-1 border-b border-border py-5 lg:grid-cols-[3.5rem_minmax(0,1fr)] lg:py-4">
+            <div className="relative hidden justify-center lg:flex" aria-hidden="true">
+              <span className="absolute inset-y-0 w-px bg-border-subtle" />
+              <span className="relative z-10 bg-background px-1 font-serif text-sm text-secondary-foreground">03</span>
+            </div>
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center lg:gap-8">
+              <p className="text-accent-warm shrink-0 text-xs font-semibold tracking-[.18em] uppercase">AI Update</p>
+              <span className="hidden h-8 w-px bg-border-subtle sm:block" aria-hidden="true" />
+              <h2 id="update-block-title" className="font-serif text-xl font-medium tracking-[-.025em] lg:text-lg">새로운 AI 변화를 정리하고 있습니다.</h2>
+              <FileText className="hidden text-secondary-foreground sm:ml-auto sm:block" size={25} strokeWidth={1.2} aria-hidden="true" />
+            </div>
+          </div>
+
+          <div className="grid gap-7 pt-6 sm:grid-cols-2 lg:grid-cols-[3.5rem_minmax(0,1fr)_3.5rem_minmax(0,1fr)] lg:gap-0 lg:pt-6">
+            <div className="relative hidden justify-center lg:flex" aria-hidden="true">
+              <span className="absolute inset-y-0 w-px bg-border-subtle" />
+              <span className="relative z-10 bg-background px-1 font-serif text-sm text-secondary-foreground">04</span>
+            </div>
+            <div className="border-b border-border pb-7 lg:pr-8 lg:pb-0">
+              <p className="text-accent text-xs font-semibold tracking-[.18em] uppercase">Practice</p>
+              <span className="mt-3 block h-px w-6 bg-accent" aria-hidden="true" />
+              <h2 id="practice-block-title" className="mt-5 font-serif text-xl font-medium leading-[1.4] tracking-[-.03em] lg:text-lg">직접 만들어보는 실습을 준비하고 있습니다.</h2>
+              <p className="mt-4 text-sm leading-6 text-secondary-foreground">배운 개념을 직접 실행하고 결과를 기록할 예정입니다.</p>
+            </div>
+
+            <div className="relative hidden justify-center lg:flex" aria-hidden="true">
+              <span className="absolute inset-y-0 w-px bg-border-subtle" />
+              <span className="relative z-10 bg-background px-1 font-serif text-sm text-secondary-foreground">05</span>
+            </div>
             <Link
-              href={latestRecord.indexHref}
-              className="text-accent group inline-flex shrink-0 items-center gap-1.5 text-sm font-medium hover:text-accent-hover"
+              href="/books"
+              className="group grid min-w-0 grid-cols-[minmax(0,1fr)_8rem] border-b border-border pb-7 transition-colors hover:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-4 lg:pl-8 lg:pb-0"
             >
-              모든 기록 보기
-              <ArrowRight className="transition-transform group-hover:translate-x-0.5" size={15} aria-hidden="true" />
+              <div className="min-w-0">
+                <p className="text-accent-warm text-xs font-semibold tracking-[.18em] uppercase">Books</p>
+                <span className="mt-3 block h-px w-6 bg-accent-warm" aria-hidden="true" />
+                <h2 className="mt-5 font-serif text-xl font-medium leading-[1.4] tracking-[-.03em] group-hover:text-accent lg:text-lg">만들기 전에 검증하라</h2>
+                <p className="mt-4 text-sm leading-6 text-secondary-foreground">바이브코딩, 1인창업, AI SaaS의 착각들</p>
+                <p className="mt-4 text-xs text-secondary-foreground">
+                  출간 <time dateTime="2025-05-26">2025.05.26</time> · 154쪽
+                </p>
+              </div>
+              <div className="ml-5 flex min-h-[10rem] items-center justify-center overflow-hidden bg-[#e7e8e9]">
+                <Image
+                  src="/images/books/book-1.webp"
+                  alt="만들기 전에 검증하라 책 표지"
+                  width={215}
+                  height={306}
+                  loading="lazy"
+                  decoding="async"
+                  className="block h-full w-full object-cover"
+                />
+              </div>
             </Link>
-          </article>
-        ) : (
-          <p className="mt-4 rounded-lg border border-border bg-surface-elevated px-6 py-5 text-sm leading-7 text-secondary-foreground">
-            아직 발행된 기록이 없습니다. 첫 기록을 준비하고 있습니다.
-          </p>
-        )}
-      </section>
-
-      <section className="page-shell pb-16 sm:pb-20" aria-label="콘텐츠 영역 바로가기">
-        <ul className="grid gap-y-10 sm:grid-cols-2 sm:gap-x-10 lg:grid-cols-4 lg:gap-x-0 lg:divide-x lg:divide-border-subtle">
-          {publicAreas.map(({ title, description, linkLabel, href, icon: Icon }) => (
-            <li key={href} className="lg:px-8 lg:first:pl-0 lg:last:pr-0">
-              <Icon className="text-accent" size={22} aria-hidden="true" strokeWidth={1.6} />
-              <h3 className="mt-4 font-semibold tracking-[-.01em]">{title}</h3>
-              <p className="mt-2 max-w-[11rem] text-sm leading-6 text-secondary-foreground">{description}</p>
-              <Link
-                href={href}
-                className="text-accent group mt-4 inline-flex items-center gap-1.5 text-sm font-medium hover:text-accent-hover"
-              >
-                {linkLabel}
-                <ArrowRight className="transition-transform group-hover:translate-x-0.5" size={15} aria-hidden="true" />
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-    </>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }

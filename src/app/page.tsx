@@ -1,10 +1,7 @@
 import type { Metadata } from 'next';
-import { HomeSections, type LatestRecord } from '@/components/home/HomeSections';
+import { HomeSections, type FeaturedKnowledge } from '@/components/home/HomeSections';
 import { createDatabase } from '@/db/client';
-import { listPublishedKnowledge } from '@/services/published-knowledge';
-import { listPublishedLectures } from '@/services/published-lectures';
-import { listPublishedPractices } from '@/services/published-practices';
-import { getPublishedBooks } from '@/services/published-books';
+import { searchPublishedKnowledge } from '@/services/published-knowledge';
 
 export const metadata: Metadata = {
   title: 'Dechive — 공부하고, 검증하고, 다시 설명하는 AI',
@@ -20,30 +17,26 @@ export const metadata: Metadata = {
 
 export const revalidate = 300;
 
-async function getLatestRecord(): Promise<LatestRecord | null> {
+async function getFeaturedKnowledge(): Promise<FeaturedKnowledge | null> {
   const { pool } = createDatabase();
   try {
-    const [knowledge, lectures, practices, books] = await Promise.all([
-      listPublishedKnowledge(pool),
-      listPublishedLectures(pool),
-      listPublishedPractices(pool),
-      getPublishedBooks(pool),
-    ]);
-    const candidates: LatestRecord[] = [];
-    if (knowledge[0]) {
-      candidates.push({ category: 'Knowledge', title: knowledge[0].title, publishedAt: knowledge[0].publishedAt, href: `/knowledge/${knowledge[0].slug}`, indexHref: '/knowledge' });
-    }
-    if (lectures[0]) {
-      candidates.push({ category: 'Lecture', title: lectures[0].title, publishedAt: lectures[0].publishedAt, href: `/lecture/${lectures[0].slug}`, indexHref: '/lecture' });
-    }
-    if (practices[0]) {
-      candidates.push({ category: 'Practice', title: practices[0].title, publishedAt: practices[0].publishedAt, href: `/practice/${practices[0].slug}`, indexHref: '/practice' });
-    }
-    if (books[0]) {
-      candidates.push({ category: 'Books', title: books[0].title, publishedAt: books[0].publishedAt, href: '/books', indexHref: '/books' });
-    }
-    if (!candidates.length) return null;
-    return candidates.reduce((latest, item) => (item.publishedAt > latest.publishedAt ? item : latest));
+    const { items } = await searchPublishedKnowledge(pool, { limit: 1 });
+    const item = items[0];
+    if (!item) return null;
+    return {
+      slug: item.slug,
+      title: item.title,
+      summary: item.summary,
+      publishedAt: item.publishedAt,
+      hero: item.hero
+        ? {
+            publicUrl: item.hero.publicUrl,
+            alt: item.hero.alt,
+            width: item.hero.width,
+            height: item.hero.height,
+          }
+        : null,
+    };
   } catch {
     return null;
   } finally {
@@ -52,10 +45,10 @@ async function getLatestRecord(): Promise<LatestRecord | null> {
 }
 
 export default async function Home() {
-  const latestRecord = await getLatestRecord();
+  const featuredKnowledge = await getFeaturedKnowledge();
   return (
-    <main id="main-content" className="-mt-16 min-h-screen bg-background text-foreground">
-      <HomeSections latestRecord={latestRecord} />
+    <main id="main-content" className="bg-background text-foreground">
+      <HomeSections featuredKnowledge={featuredKnowledge} />
     </main>
   );
 }
