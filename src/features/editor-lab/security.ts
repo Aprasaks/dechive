@@ -70,7 +70,6 @@ export function validateDechiveDocument(document: JSONContent, phase: Validation
   };
   document.content?.forEach((child, index) => visit(child, `$.content[${index}]`, 1));
   if (nodeCount > 20_000) issue(issues, 'document.node_count', '$', 'error', 'Maximum node count is 20,000.');
-  if (textLength > 2_000_000) issue(issues, 'document.text_length', '$', 'error', 'Maximum document text is 2M characters.');
   const severities = new Set(issues.map((entry) => entry.severity));
   const status: ValidationStatus = severities.has('error') ? 'rejected' : severities.has('review') ? 'needs_review' : severities.has('warning') ? 'valid_with_warnings' : 'valid';
   return { status, issues, stats: { nodes: nodeCount, depth: maxDepth, textLength } };
