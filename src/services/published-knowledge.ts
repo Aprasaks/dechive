@@ -205,7 +205,7 @@ export async function searchPublishedKnowledge(
   const category = normalizeKnowledgeCategory(options.category);
   const { where, values } = publishedSearchQuery(query, options.cursor ?? null, category);
   const limitValue = values.length + 1;
-  values.push(limitValue);
+  values.push(limit);
   const rows = (await pool.query<PublishedKnowledgeFeedRow>(
     `SELECT cl.id,cl.slug,cl.title,cl.summary,cv.id AS version_id,cv.version_number,
             c.created_at,cv.created_at AS sort_created_at,
