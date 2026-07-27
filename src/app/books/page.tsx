@@ -10,6 +10,7 @@ import {
 import styles from './books.module.css';
 
 const BASE_URL = 'https://dechive.dev';
+const BOOK_PURCHASE_URL = 'https://www.latpeed.com/products/ufElk';
 const PREVIEW_PAGE_PATHS = Array.from({ length: 8 }, (_, index) =>
   `/images/books/preview/book-1-page-${String(index + 4).padStart(3, '0')}.jpg`,
 );
@@ -39,7 +40,7 @@ const fallbackBook: BookShowcaseItem = {
   publishedOn: '2025-05-26',
   previewHtml: '<p>무엇을 만들지보다 먼저 물어야 할 질문이 있습니다.</p><p>이 문제가 정말 존재하는가? 누가 이 문제를 해결하고 싶은가? 지금 만들려는 것이 검증된 가설 위에 서 있는가?</p><h2>검증은 속도를 늦추는 일이 아닙니다</h2><p>검증은 만드는 속도를 줄이는 장치가 아니라, 잘못된 방향으로 달리는 시간을 줄이는 방법입니다.</p>',
   previewPages: PREVIEW_PAGE_PATHS,
-  purchaseHref: '/contact?subject=book-purchase',
+  purchaseHref: BOOK_PURCHASE_URL,
   purchaseLabel: '전자책 구매',
 };
 
@@ -64,10 +65,12 @@ function toShowcaseItem(book: PublishedBook): BookShowcaseItem {
     publishedOn: book.publishedOn,
     previewHtml: toPreviewHtml(book),
     previewPages: book.title === fallbackBook.title ? PREVIEW_PAGE_PATHS : [],
-    purchaseHref: isFree && book.freeDownloadUrl
+    purchaseHref: book.title === fallbackBook.title
+      ? BOOK_PURCHASE_URL
+      : isFree && book.freeDownloadUrl
       ? book.freeDownloadUrl
       : '/contact?subject=book-purchase',
-    purchaseLabel: isFree && book.freeDownloadUrl ? '전자책 받기' : '전자책 구매',
+    purchaseLabel: book.title === fallbackBook.title || !(isFree && book.freeDownloadUrl) ? '전자책 구매' : '전자책 받기',
   };
 }
 
