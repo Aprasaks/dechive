@@ -149,6 +149,10 @@ function ContentEditor(props: Props) {
         const clipboard = event.clipboardData;
         if (!clipboard) return false;
         const html = clipboard.getData('text/html');
+        const text = clipboard.getData('text/plain');
+        if (text && looksLikeMarkdown(text)) {
+          return insertPastedDocument(view, markdownToDechiveDocument(text));
+        }
         if (html.trim()) {
           const sanitized = sanitizeImportedHtml(html);
           const container = window.document.createElement('div');
@@ -161,9 +165,7 @@ function ContentEditor(props: Props) {
           });
           return insertPastedDocument(view, document);
         }
-        const text = clipboard.getData('text/plain');
-        if (!text || !looksLikeMarkdown(text)) return false;
-        return insertPastedDocument(view, markdownToDechiveDocument(text));
+        return false;
       } : undefined,
       handleDOMEvents: {
         compositionstart: () => {
