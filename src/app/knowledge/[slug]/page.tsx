@@ -102,10 +102,15 @@ export default async function KnowledgeDetailPage({
               className={styles.document}
             />
             <footer className={styles.detailFooter}>
-              <p className={styles.createdDate}>
-                작성일 · <time dateTime={knowledge.createdAt}>{formatKnowledgeDateTime(knowledge.createdAt)}</time>
-              </p>
-              <KnowledgeShareButton url={`${BASE_URL}/knowledge/${knowledge.slug}`} />
+              <div className={styles.detailFooterRow}>
+                <p className={styles.createdDate}>
+                  작성일 · <time dateTime={knowledge.createdAt}>{formatKnowledgeDateTime(knowledge.createdAt)}</time>
+                </p>
+                <KnowledgeShareButton
+                  className={styles.shareAction}
+                  url={`${BASE_URL}/knowledge/${knowledge.slug}`}
+                />
+              </div>
             </footer>
             <Link href="/knowledge" className={styles.returnLink}>
               ← 모든 지식 보기
