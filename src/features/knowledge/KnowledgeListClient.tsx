@@ -4,6 +4,11 @@
 
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import {
+  getKnowledgeCategoryLabel,
+  KNOWLEDGE_CATEGORIES,
+  type KnowledgeCategory,
+} from './categories';
 import { formatKnowledgeDate } from './date-format';
 import { mergeKnowledgeItems, normalizeKnowledgeSearchQuery } from './search';
 import type { PublishedKnowledgeFeedItem } from '@/services/published-knowledge';
@@ -13,19 +18,22 @@ type Props = {
   initialItems: PublishedKnowledgeFeedItem[];
   initialNextCursor: string | null;
   initialQuery: string;
+  initialCategory: KnowledgeCategory;
+  publishedCount: number;
 };
 
 type LoadStatus = 'idle' | 'loading' | 'error' | 'complete';
 
-function resultUrl(query: string, cursor?: string | null): string {
+function resultUrl(query: string, category: KnowledgeCategory, cursor?: string | null): string {
   const params = new URLSearchParams();
   if (query) params.set('q', query);
+  if (category !== 'all') params.set('category', category);
   if (cursor) params.set('cursor', cursor);
   const queryString = params.toString();
   return `/api/knowledge${queryString ? `?${queryString}` : ''}`;
 }
 
-export default function KnowledgeListClient({ initialItems, initialNextCursor, initialQuery }: Props) {
+export default function KnowledgeListClient({ initialItems, initialNextCursor, initialQuery, initialCategory, publishedCount }: Props) {
   const [items, setItems] = useState(initialItems);
   const [queryInput, setQueryInput] = useState(initialQuery);
   const [query, setQuery] = useState(initialQuery);
@@ -46,7 +54,7 @@ export default function KnowledgeListClient({ initialItems, initialNextCursor, i
     setStatus('loading');
     setErrorMessage('');
     try {
-      const response = await fetch(resultUrl(requestedQuery, cursor), {
+      const response = await fetch(resultUrl(requestedQuery, initialCategory, cursor), {
         signal: controller.signal,
         headers: { Accept: 'application/json' },
       });
@@ -73,7 +81,7 @@ export default function KnowledgeListClient({ initialItems, initialNextCursor, i
         requestRef.current = null;
       }
     }
-  }, []);
+  }, [initialCategory]);
 
   useEffect(() => {
     const normalized = normalizeKnowledgeSearchQuery(queryInput);
@@ -89,12 +97,14 @@ export default function KnowledgeListClient({ initialItems, initialNextCursor, i
       const url = new URL(window.location.href);
       if (normalized) url.searchParams.set('q', normalized);
       else url.searchParams.delete('q');
+      if (initialCategory !== 'all') url.searchParams.set('category', initialCategory);
+      else url.searchParams.delete('category');
       url.searchParams.delete('cursor');
       window.history.pushState({}, '', `${url.pathname}${url.search}${url.hash}`);
       void loadPage(normalized, null, true);
     }, 300);
     return () => window.clearTimeout(timer);
-  }, [loadPage, query, queryInput]);
+  }, [initialCategory, loadPage, query, queryInput]);
 
   useEffect(() => {
     const onPopState = () => {
@@ -127,6 +137,13 @@ export default function KnowledgeListClient({ initialItems, initialNextCursor, i
   const emptyMessage = query
     ? `‘${query}’에 해당하는 지식을 찾지 못했습니다.`
     : '아직 정리된 지식이 없습니다.';
+  const categoryHref = (category: KnowledgeCategory) => {
+    const params = new URLSearchParams();
+    if (queryInput) params.set('q', queryInput);
+    if (category !== 'all') params.set('category', category);
+    const search = params.toString();
+    return `/knowledge${search ? `?${search}` : ''}`;
+  };
 
   return (
     <section className={styles.listSection} aria-label="Knowledge 목록">
@@ -147,6 +164,7 @@ export default function KnowledgeListClient({ initialItems, initialNextCursor, i
           placeholder="제목과 요약, 태그에서 찾을 수 있어요."
           autoComplete="off"
         />
+        {initialCategory !== 'all' ? <input type="hidden" name="category" value={initialCategory} /> : null}
         {queryInput ? (
           <button
             className={styles.clearSearch}
@@ -159,11 +177,31 @@ export default function KnowledgeListClient({ initialItems, initialNextCursor, i
         ) : null}
       </form>
 
+      <div className={styles.listToolbar}>
+        <nav className={styles.categories} aria-label="Knowledge 분류">
+          {KNOWLEDGE_CATEGORIES.map((category) => (
+            <Link
+              key={category.value}
+              className={styles.categoryTab}
+              data-active={initialCategory === category.value ? 'true' : undefined}
+              href={categoryHref(category.value)}
+              aria-current={initialCategory === category.value ? 'page' : undefined}
+            >
+              {category.label}
+            </Link>
+          ))}
+        </nav>
+        <p className={styles.resultCount}>
+          총 {publishedCount}개의 개념 · 계속 확장 중
+        </p>
+      </div>
+
       {items.length ? (
-        <ul className={styles.list}>
-          {items.map((item) => (
+        <ol className={styles.list}>
+          {items.map((item, index) => (
             <li key={item.id} className={styles.item}>
               <Link className={styles.itemLink} href={`/knowledge/${item.slug}`}>
+                <span className={styles.itemIndex} aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
                 <span className={styles.itemMedia}>
                   {item.hero ? (
                     <img
@@ -180,6 +218,7 @@ export default function KnowledgeListClient({ initialItems, initialNextCursor, i
                   )}
                 </span>
                 <span className={styles.itemContent}>
+                  <span className={styles.itemCategory}>{getKnowledgeCategoryLabel(item.category)}</span>
                   <span className={styles.itemTitle}>{item.title}</span>
                   <span className={styles.itemSummary}>{item.summary}</span>
                   <span className={styles.meta}>
@@ -195,7 +234,7 @@ export default function KnowledgeListClient({ initialItems, initialNextCursor, i
               </Link>
             </li>
           ))}
-        </ul>
+        </ol>
       ) : status !== 'loading' && status !== 'error' ? (
         <p className={styles.empty}>{emptyMessage}</p>
       ) : null}

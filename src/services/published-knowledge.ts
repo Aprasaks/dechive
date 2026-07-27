@@ -1,6 +1,11 @@
 import type { Pool } from 'pg';
 import { createDatabase } from '@/db/client';
 import type { DechiveDocument } from '@/features/editor-lab/document';
+import {
+  classifyKnowledgeTags,
+  normalizeKnowledgeCategory,
+  type KnowledgeCategory,
+} from '@/features/knowledge/categories';
 import { normalizeKnowledgeSearchQuery } from '@/features/knowledge/search';
 import type { KnowledgeReference } from './knowledge-drafts';
 import { getKnowledgeHero, resolveKnowledgeDocument, type KnowledgeHero } from './media-assets';
@@ -26,6 +31,7 @@ export type PublishedKnowledgeListItem = {
   publishedAt: string;
   createdAt: string;
   updatedAt: string;
+  category: KnowledgeCategory;
 };
 
 export type PublishedKnowledgeHero = KnowledgeHero & {
@@ -100,7 +106,7 @@ type PublishedKnowledgeFeedRow = {
   metadata: unknown;
 };
 
-function publishedSearchQuery(query: string, cursor: string | null) {
+function publishedSearchQuery(query: string, cursor: string | null, category: KnowledgeCategory) {
   const clauses = [
     `cl.route_scope='knowledge'`,
     `cl.workflow_status='published'`,
@@ -129,6 +135,26 @@ function publishedSearchQuery(query: string, cursor: string | null) {
       )
     )`);
   }
+  if (category !== 'all') {
+    const categoryTags = {
+      foundations: ['인공지능', 'ai', '머신러닝', '딥러닝', '신경망', '알고리즘', '확률', '통계', '예측'],
+      'use-and-verify': ['프롬프트', '컨텍스트', '평가', '검증', '입력 설계', '대화 설계'],
+      systems: ['rag', '에이전트', '시스템', '파이프라인', '데이터', '검색'],
+      responsibility: ['안전', '보안', '윤리', '거버넌스', '운영', '책임'],
+    } satisfies Record<Exclude<KnowledgeCategory, 'all'>, string[]>;
+    const categoryValue = add(categoryTags[category].map((tag) => tag.toLowerCase()));
+    clauses.push(`EXISTS (
+      SELECT 1
+        FROM jsonb_array_elements_text(
+          CASE
+            WHEN jsonb_typeof(cv.migration_metadata #> '{knowledge,tags}') = 'array'
+            THEN cv.migration_metadata #> '{knowledge,tags}'
+            ELSE '[]'::jsonb
+          END
+        ) AS category_tag(value)
+       WHERE lower(category_tag.value) = ANY(${categoryValue}::text[])
+    )`);
+  }
   if (cursor) {
     const decoded = decodePublishedKnowledgeCursor(cursor);
     const createdAt = add(decoded.createdAt);
@@ -147,6 +173,7 @@ function feedItem(row: PublishedKnowledgeFeedRow, hero: PublishedKnowledgeHero |
     title: version.title ?? row.title,
     summary: version.summary ?? row.summary,
     tags: strings(version.tags),
+    category: classifyKnowledgeTags(strings(version.tags)),
     versionNumber: Number(row.version_number),
     publishedAt: (row.first_published_at ?? row.current_published_at ?? row.sort_created_at).toISOString(),
     createdAt: row.created_at.toISOString(),
@@ -155,24 +182,28 @@ function feedItem(row: PublishedKnowledgeFeedRow, hero: PublishedKnowledgeHero |
   };
 }
 
-export async function countPublishedKnowledge(pool: Pool): Promise<number> {
+export async function countPublishedKnowledge(pool: Pool, category?: string | null): Promise<number> {
+  const normalizedCategory = normalizeKnowledgeCategory(category);
+  const { where, values } = publishedSearchQuery('', null, normalizedCategory);
   const row = (await pool.query<{ count: string }>(
     `SELECT count(*)::text AS count
        FROM content_localizations cl
        JOIN contents c ON c.id=cl.content_id AND c.kind='knowledge'
        JOIN content_versions cv ON cv.id=cl.current_published_version_id
-      WHERE cl.route_scope='knowledge' AND cl.workflow_status='published'`,
+      WHERE ${where}`,
+    values,
   )).rows[0];
   return Number(row?.count ?? 0);
 }
 
 export async function searchPublishedKnowledge(
   pool: Pool,
-  options: { query?: string; cursor?: string | null; limit?: number } = {},
+  options: { query?: string; cursor?: string | null; limit?: number; category?: string | null } = {},
 ): Promise<{ items: PublishedKnowledgeFeedItem[]; nextCursor: string | null }> {
   const limit = Math.min(Math.max(options.limit ?? 12, 1), 24);
   const query = normalizeKnowledgeSearchQuery(options.query);
-  const { where, values } = publishedSearchQuery(query, options.cursor ?? null);
+  const category = normalizeKnowledgeCategory(options.category);
+  const { where, values } = publishedSearchQuery(query, options.cursor ?? null, category);
   const limitValue = values.length + 1;
   values.push(limitValue);
   const rows = (await pool.query<PublishedKnowledgeFeedRow>(
@@ -234,6 +265,7 @@ export async function listPublishedKnowledge(
       title: version.title ?? row.title,
       summary: version.summary ?? row.summary,
       tags: strings(version.tags),
+      category: classifyKnowledgeTags(strings(version.tags)),
       versionNumber: Number(row.version_number),
       publishedAt: (row.first_published_at ?? row.current_published_at ?? row.created_at).toISOString(),
       createdAt: row.created_at.toISOString(),
@@ -282,6 +314,7 @@ export async function getPublishedKnowledge(
     title: version.title ?? row.title,
     summary: version.summary ?? row.summary,
     tags: strings(version.tags),
+    category: classifyKnowledgeTags(strings(version.tags)),
     references: references(version.references),
     versionNumber: Number(row.version_number),
     publishedAt: (row.first_published_at ?? row.published_at ?? row.created_at).toISOString(),

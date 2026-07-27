@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { normalizeKnowledgeSearchQuery } from '@/features/knowledge/search';
+import { normalizeKnowledgeCategory } from '@/features/knowledge/categories';
 import {
   createPublishedKnowledgeDatabase,
   searchPublishedKnowledge,
@@ -10,10 +11,11 @@ export const runtime = 'nodejs';
 export async function GET(request: Request) {
   const url = new URL(request.url);
   const query = normalizeKnowledgeSearchQuery(url.searchParams.get('q'));
+  const category = normalizeKnowledgeCategory(url.searchParams.get('category'));
   const cursor = url.searchParams.get('cursor');
   const { pool } = createPublishedKnowledgeDatabase();
   try {
-    const result = await searchPublishedKnowledge(pool, { query, cursor });
+    const result = await searchPublishedKnowledge(pool, { query, category, cursor });
     return NextResponse.json(result, {
       headers: { 'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600' },
     });
