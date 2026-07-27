@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { generateHTML, generateJSON } from '@tiptap/html/server';
 import type { JSONContent } from '@tiptap/core';
 import { editorExtensions } from '../../src/features/editor-lab/editor-extensions';
-import { fromTipTapJSON, normalizeAnchors } from '../../src/features/editor-lab/document';
+import { fromTipTapJSON, normalizeAnchors, normalizeDocumentLinks, type DechiveDocument } from '../../src/features/editor-lab/document';
 import { markdownToDechiveDocument } from '../../src/features/editor-lab/markdown';
 import { assertSafeRenderedHtml, sanitizeImportedHtml, validateDechiveDocument } from '../../src/features/editor-lab/security';
 
@@ -89,6 +89,18 @@ function textContent(node: JSONContent): string {
   return node.type === 'text' ? node.text ?? '' : (node.content ?? []).map(textContent).join('');
 }
 
+function linkMark(document: JSONContent, text: string): NonNullable<JSONContent['marks']>[number] {
+  let found: NonNullable<JSONContent['marks']>[number] | undefined;
+  const visit = (node: JSONContent) => {
+    if (node.type === 'text' && node.text === text)
+      found = node.marks?.find((mark) => mark.type === 'link');
+    node.content?.forEach(visit);
+  };
+  visit(document);
+  if (!found) throw new Error(`link_mark_missing:${text}`);
+  return found;
+}
+
 function assertValid(document: JSONContent): void {
   assert.notEqual(validateDechiveDocument(document, 'draft').status, 'rejected');
   assert.equal(countInvalidTextContainers(document), 0);
@@ -144,6 +156,42 @@ assert(hasMark(document, 'bold'));
 assert(hasMark(document, 'italic'));
 assert(hasMark(document, 'code'));
 assert(hasMark(document, 'link'));
+
+const linkCases = markdownToDechiveDocument(
+  '[내부](/knowledge/foo) [외부](https://example.com/reference) [절대주소](https://dechive.dev/knowledge/foo?tab=1#section) [앵커](#section-name) [메일](mailto:test@example.com) [전화](tel:+821012345678) [www](https://www.dechive.dev/path) [미디어](https://media.dechive.dev/image.webp)',
+  { siteOrigins: ['https://dechive.dev'] },
+);
+assert.deepEqual(linkMark(linkCases, '내부').attrs, { href: '/knowledge/foo' });
+assert.deepEqual(linkMark(linkCases, '외부').attrs, { href: 'https://example.com/reference', target: '_blank', rel: 'noopener noreferrer' });
+assert.deepEqual(linkMark(linkCases, '절대주소').attrs, { href: '/knowledge/foo?tab=1#section' });
+assert.deepEqual(linkMark(linkCases, '앵커').attrs, { href: '#section-name' });
+assert.deepEqual(linkMark(linkCases, '메일').attrs, { href: 'mailto:test@example.com' });
+assert.deepEqual(linkMark(linkCases, '전화').attrs, { href: 'tel:+821012345678' });
+assert.deepEqual(linkMark(linkCases, 'www').attrs, { href: 'https://www.dechive.dev/path', target: '_blank', rel: 'noopener noreferrer' });
+assert.deepEqual(linkMark(linkCases, '미디어').attrs, { href: 'https://media.dechive.dev/image.webp', target: '_blank', rel: 'noopener noreferrer' });
+const normalizedLinkCases = normalizeDocumentLinks(linkCases, { siteOrigins: ['https://dechive.dev'] });
+assert.deepEqual(normalizedLinkCases, linkCases);
+const legacyLinkDocument: DechiveDocument = {
+  type: 'doc',
+  schemaVersion: 1,
+  content: [{
+    type: 'paragraph',
+    content: [{
+      type: 'text',
+      text: '기존 링크',
+      marks: [{ type: 'link', attrs: { href: 'https://dechive.dev/knowledge/foo', target: '_blank', rel: 'noopener noreferrer nofollow' } }],
+    }],
+  }],
+};
+const normalizedLegacyLinkDocument = normalizeDocumentLinks(legacyLinkDocument, { siteOrigins: ['https://dechive.dev'] });
+assert.deepEqual(normalizedLegacyLinkDocument.content[0]?.content?.[0]?.marks?.[0]?.attrs, { href: '/knowledge/foo' });
+const linkCasesHtml = generateHTML(linkCases, editorExtensions);
+assert(linkCasesHtml.includes('<a href="/knowledge/foo">내부</a>'));
+assert(linkCasesHtml.includes('<a target="_blank" rel="noopener noreferrer" href="https://example.com/reference">외부</a>'));
+assert(linkCasesHtml.includes('<a href="#section-name">앵커</a>'));
+assert(linkCasesHtml.includes('<a href="mailto:test@example.com">메일</a>'));
+assert(linkCasesHtml.includes('<a href="tel:+821012345678">전화</a>'));
+assert(!linkCasesHtml.includes('nofollow'));
 
 const rendered = generateHTML(document, editorExtensions);
 assert(rendered.includes('<blockquote>'));

@@ -2,7 +2,7 @@ import { unified } from 'unified';
 import remarkGfm from 'remark-gfm';
 import remarkParse from 'remark-parse';
 import type { JSONContent } from '@tiptap/core';
-import { normalizeAnchors, type DechiveDocument } from './document';
+import { normalizeAnchors, normalizeDocumentLinks, normalizeLinkAttributes, type DechiveDocument } from './document';
 
 type MarkdownNode = {
   type: string;
@@ -21,6 +21,10 @@ type MarkdownNode = {
 };
 
 const parser = unified().use(remarkParse).use(remarkGfm);
+
+type MarkdownConversionOptions = {
+  siteOrigins?: readonly string[];
+};
 
 function markContent(content: JSONContent[], type: string, attrs?: Record<string, unknown>): JSONContent[] {
   const apply = (node: JSONContent): JSONContent => node.type === 'text'
@@ -51,7 +55,7 @@ function convert(node: MarkdownNode): JSONContent | JSONContent[] {
     case 'emphasis': return markContent(content, 'italic');
     case 'delete': return markContent(content, 'strike');
     case 'inlineCode': return { type: 'text', text: node.value ?? '', marks: [{ type: 'code' }] };
-    case 'link': return markContent(content, 'link', { href: node.url ?? '', target: '_blank', rel: 'noopener noreferrer nofollow' });
+    case 'link': return markContent(content, 'link', normalizeLinkAttributes(node.url ?? ''));
     case 'image': {
       const legacySrc = node.url ?? '';
       const fileName = legacySrc.split('/').pop() ?? legacySrc;
@@ -91,10 +95,16 @@ function normalizeConvertedNodes(nodes: JSONContent[] | undefined, parentType?: 
   });
 }
 
-export function markdownToDechiveDocument(markdown: string): DechiveDocument {
+export function markdownToDechiveDocument(
+  markdown: string,
+  options: MarkdownConversionOptions = {},
+): DechiveDocument {
   const converted = convert(parser.parse(markdown) as MarkdownNode) as JSONContent;
   const content = normalizeConvertedNodes(converted.content);
-  return normalizeAnchors({ ...converted, type: 'doc', schemaVersion: 1, content });
+  return normalizeDocumentLinks(
+    normalizeAnchors({ ...converted, type: 'doc', schemaVersion: 1, content }),
+    options,
+  );
 }
 
 export function looksLikeMarkdown(value: string): boolean {

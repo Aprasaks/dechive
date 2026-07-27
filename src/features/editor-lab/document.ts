@@ -6,6 +6,103 @@ export type DechiveDocument = JSONContent & {
   content: JSONContent[];
 };
 
+export type LinkNormalizationOptions = {
+  siteOrigins?: readonly string[];
+};
+
+const linkProtocolsWithoutTarget = /^(?:mailto:|tel:)/i;
+
+function configuredSiteOrigins(): string[] {
+  const values = [
+    process.env.NEXT_PUBLIC_SITE_URL,
+    process.env.VERCEL_PROJECT_PRODUCTION_URL,
+    process.env.VERCEL_URL,
+  ];
+  if (typeof window !== 'undefined') values.push(window.location.origin);
+
+  return values.flatMap((value) => {
+    if (!value) return [];
+    try {
+      const url = new URL(value.includes('://') ? value : `https://${value}`);
+      return [url.origin];
+    } catch {
+      return [];
+    }
+  });
+}
+
+function linkHosts(origins: readonly string[]): Set<string> {
+  return new Set(origins.flatMap((origin) => {
+    try {
+      return [new URL(origin).hostname.toLowerCase()];
+    } catch {
+      return [];
+    }
+  }));
+}
+
+function sameOriginHref(href: string, origins: readonly string[]): string {
+  try {
+    const url = new URL(href);
+    if (!origins.includes(url.origin)) return href;
+    return `${url.pathname}${url.search}${url.hash}` || '/';
+  } catch {
+    return href;
+  }
+}
+
+export function normalizeLinkAttributes(
+  href: string,
+  options: LinkNormalizationOptions = {},
+): Record<string, string> {
+  const origins = options.siteOrigins ?? configuredSiteOrigins();
+  const hosts = linkHosts(origins);
+  let hostname: string | null = null;
+  try {
+    hostname = new URL(href).hostname.toLowerCase();
+  } catch {
+    // Relative, fragment, mailto, and tel links do not need URL parsing here.
+  }
+
+  const internal =
+    (href.startsWith('/') && !href.startsWith('//'))
+    || href.startsWith('#')
+    || linkProtocolsWithoutTarget.test(href)
+    || (hostname !== null && hosts.has(hostname));
+
+  if (internal) return { href: sameOriginHref(href, origins) };
+  return { href, target: '_blank', rel: 'noopener noreferrer' };
+}
+
+export function normalizeDocumentLinks(
+  document: DechiveDocument,
+  options: LinkNormalizationOptions = {},
+): DechiveDocument {
+  const visit = (node: JSONContent): JSONContent => {
+    const content = node.content?.map(visit);
+    const marks = node.marks?.map((mark) => {
+      if (mark.type !== 'link' || typeof mark.attrs?.href !== 'string') return mark;
+      const otherAttrs = { ...mark.attrs };
+      delete otherAttrs.target;
+      delete otherAttrs.rel;
+      return {
+        ...mark,
+        attrs: {
+          ...otherAttrs,
+          ...normalizeLinkAttributes(mark.attrs.href, options),
+        },
+      };
+    });
+    return {
+      ...node,
+      ...(content ? { content } : {}),
+      ...(marks ? { marks } : {}),
+    };
+  };
+
+  return { ...visit(document), type: 'doc', schemaVersion: document.schemaVersion } as DechiveDocument;
+}
+
 export type FixtureDocument = {
   id: string;
   label: string;

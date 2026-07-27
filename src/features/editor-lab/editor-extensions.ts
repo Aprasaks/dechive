@@ -4,7 +4,11 @@ import { Caption, Callout, DechiveDoc, Figure, PersistentHeading, SourceReferenc
 
 export const editorExtensions = [
   DechiveDoc,
-  StarterKit.configure({ document: false, heading: false }),
+  StarterKit.configure({
+    document: false,
+    heading: false,
+    link: { HTMLAttributes: { target: null, rel: null } },
+  }),
   PersistentHeading.configure({ levels: [1, 2, 3, 4, 5, 6] }),
   TableKit.configure({ table: { resizable: true } }),
   Caption,

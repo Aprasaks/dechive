@@ -4,6 +4,7 @@ import type { Pool, PoolClient } from 'pg';
 import { createDatabase, LOCAL_TEST_DATABASE_URL } from '@/db/client';
 import {
   normalizeAnchors,
+  normalizeDocumentLinks,
   plainText,
   type DechiveDocument,
 } from '@/features/editor-lab/document';
@@ -224,6 +225,7 @@ function normalizeKnowledge(input: KnowledgeDraftInput) {
     throw new Error('hero_media_alt_required');
   return {
     ...base,
+    document: normalizeDocumentLinks(base.document),
     tags: normalizeKnowledgeTags(input.tags),
     // Legacy reference payloads are retained on old immutable versions, but
     // the current Knowledge editor no longer accepts or validates references.
