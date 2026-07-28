@@ -15,6 +15,7 @@
     "verify:knowledge-cms": "node --import tsx scripts/admin/verify-knowledge-cms.ts",
     "verify:knowledge-markdown-paste": "tsx scripts/admin/verify-knowledge-markdown-paste.ts",
     "verify:analytics": "node --import tsx scripts/analytics/verify-event-schema.ts",
+    "analytics:prune": "node --import tsx scripts/analytics/prune.ts",
     "media:cleanup": "node --import tsx scripts/media/cleanup.ts",
     "db:up": "tsx scripts/db/up.ts",
     "db:status": "docker compose -f docker-compose.db.yml ps",

@@ -37,7 +37,7 @@ export default function PrivacyPolicyPage() {
 
         <div className="text-secondary-foreground mt-10 flex flex-col gap-10 leading-8">
           <section>
-            <p className="text-muted-foreground text-sm">최종 수정일: 2026년 5월 6일</p>
+            <p className="text-muted-foreground text-sm">최종 수정일: 2026년 7월 28일</p>
             <p className="mt-4">
               Dechive는 dechive.dev 웹사이트를 운영합니다. 이 개인정보처리방침은 사용자가 Dechive를 이용할 때 어떤 정보가 수집될 수 있는지, 그 정보가 어떻게 사용되는지, Google AdSense 및 Google Analytics 같은 제3자 서비스가 데이터를 어떻게 처리할 수 있는지를 설명합니다.
             </p>
@@ -46,11 +46,12 @@ export default function PrivacyPolicyPage() {
           <section>
             <h2 className="text-2xl font-semibold text-foreground">수집하는 정보</h2>
             <p className="mt-4">
-              Dechive는 이 웹사이트에서 사용하는 제3자 서비스를 통해 일부 정보를 자동으로 수집할 수 있습니다.
+              Dechive는 방문자의 동의를 받은 경우 자체 분석 시스템과 선택한 제3자 서비스를 통해 일부 정보를 자동으로 수집할 수 있습니다.
             </p>
             <ul className="mt-4 list-disc space-y-2 pl-6">
               <li>IP 주소, 브라우저 종류, 방문한 페이지, 이용 시간 등 로그 데이터</li>
               <li>Google AdSense 및 Google Analytics를 통해 수집되는 쿠키, 식별자, 사용 데이터</li>
+              <li>익명 브라우저 ID, 세션 ID, 페이지 방문 ID, 리퍼러·UTM, 콘텐츠 진행·검색·학습 이벤트</li>
             </ul>
           </section>
 
