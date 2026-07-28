@@ -163,6 +163,18 @@ assertValid(nestedList);
 assert.equal(countNodes(nestedList, 'bulletList'), 2);
 assert.equal(countNodes(nestedList, 'listItem'), 4);
 
+const blankCornerTable = markdownToDechiveDocument(`| | 판별 용도 | 생성 용도 |
+|---|---|---|
+| **판별 모델** | 분류 | 해당 없음 |
+| **생성 모델** | 감정 분류 | 이미지 생성 |`);
+assert.notEqual(validateDechiveDocument(blankCornerTable, 'draft').status, 'rejected');
+assert.equal(countInvalidTextContainers(blankCornerTable), 0);
+assert.equal(countEmptyListItems(blankCornerTable), 0);
+const blankCornerCell = blankCornerTable.content[0]?.content?.[0]?.content?.[0];
+assert.equal(blankCornerCell?.type, 'tableCell');
+assert.equal(blankCornerCell?.content?.[0]?.type, 'paragraph');
+assert(generateHTML(blankCornerTable, editorExtensions).includes('<table'));
+
 const document = markdownToDechiveDocument(markdown);
 assertValid(document);
 assert.equal(countNodes(document, 'heading'), 2);

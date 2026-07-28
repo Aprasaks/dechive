@@ -67,7 +67,12 @@ function convert(node: MarkdownNode): JSONContent | JSONContent[] {
     case 'listItem': return { type: 'listItem', attrs: { checked: node.checked ?? null }, ...common };
     case 'table': return { type: 'table', ...common };
     case 'tableRow': return { type: 'tableRow', ...common };
-    case 'tableCell': return { type: 'tableCell', ...common };
+    case 'tableCell':
+    case 'tableHeader':
+      return {
+        type: 'tableCell',
+        content: content?.length ? content : [{ type: 'paragraph' }],
+      };
     case 'thematicBreak': return { type: 'horizontalRule' };
     case 'break': return { type: 'hardBreak' };
     case 'html': return { type: 'unknownBlock', attrs: { originalType: 'rawHtml', payload: node.value ?? '', fallbackText: 'Raw HTML은 자동 실행하지 않습니다.' } };
