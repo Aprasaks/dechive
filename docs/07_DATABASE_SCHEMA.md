@@ -42,6 +42,13 @@ Stage 8의 새 `0001_legacy_import.sql`은 `import_batches`, `import_items`, `le
 - `update_digests/digest_items`: date editorial view와 ordered update membership.
 - `editorial_collections/collection_items`: legacy Issues 같은 projection.
 
+### 운영 관측
+
+- `analytics_sessions`: 익명 브라우저의 세션 경계와 최초 유입 정보를 저장한다.
+- `analytics_events`: Dechive의 콘텐츠 열람·학습·검색·구매·오류 이벤트 원본을 저장한다. `event_id`는 재시도 중복 방지용 unique 키다.
+
+방문자 분석은 `revision_events` 관리자 콘텐츠 변경 감사 로그와 분리한다. 외부 분석 도구는 자체 analytics 원본을 대체하지 않으며, 상세 계약은 [Analytics Observability](ANALYTICS_OBSERVABILITY.md)를 따른다.
+
 Body는 `content_versions`에 versioned neutral DechiveDocument JSON, `document_schema_version`, checksum을 두는 방향을 권고한다. normalized Markdown/HTML/plain text는 파생 artifact다. provider editor JSON만 canonical로 두지 않는다. 물리 column type/index/ORM migration은 미확정이며 [Document Format](DOCUMENT_FORMAT.md)의 adapter gate 뒤 정한다. Source/relation/media/order를 body JSON 안에만 묻지 않는다.
 
 ## 제약 후보

@@ -21,6 +21,8 @@ event 후보: `share_open`, `share_complete`, `copy_link`, channel/content id/ty
 
 현재 GA4와 GA Data API 관리 화면이 있다. GA4는 marketing ecosystem 필요성을 기준으로 유지 여부를 정하고, privacy/소유권이 우선이면 Umami/Plausible self-host/managed를 비교한다. 두 도구 중복 운영은 migration 측정 기간 외 피한다. consent/retention/opt-out 정책과 핵심 funnel(학습 시작→lesson→practice completion)을 먼저 정의한다.
 
+구현 이벤트 계약과 자체 원천 저장 구조는 [Analytics Observability](ANALYTICS_OBSERVABILITY.md)를 따른다. GA4와 외부 관측 도구는 자체 이벤트를 대체하지 않는 보조 어댑터로 취급한다.
+
 ## 구독
 
 double opt-in, consent evidence, unsubscribe, suppression/export/delete, bounce/abuse 처리가 가능한 provider/API를 선택한다. subscriber DB 소유권과 export를 보장하며 footer form만 먼저 만들어 주소를 임시 저장하지 않는다.

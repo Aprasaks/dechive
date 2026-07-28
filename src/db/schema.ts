@@ -156,3 +156,55 @@ export const contentRoutes = pgTable('content_routes', {
 export const revisionEvents = pgTable('revision_events', {
   id: uuid('id').primaryKey().defaultRandom(), contentVersionId: uuid('content_version_id').notNull().references(() => contentVersions.id, { onDelete: 'restrict' }), eventType: text('event_type').notNull(), actorId: uuid('actor_id').references(() => actors.id), metadata: jsonb('metadata').default({}).notNull(), createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
 });
+
+export const analyticsSessions = pgTable('analytics_sessions', {
+  sessionId: text('session_id').primaryKey(),
+  anonymousId: text('anonymous_id').notNull(),
+  startedAt: timestamp('started_at', { withTimezone: true }).notNull(),
+  lastActivityAt: timestamp('last_activity_at', { withTimezone: true }).notNull(),
+  landingRoute: text('landing_route').notNull(),
+  exitRoute: text('exit_route'),
+  referrerSource: text('referrer_source'),
+  referrerUrl: text('referrer_url'),
+  utmSource: text('utm_source'),
+  utmMedium: text('utm_medium'),
+  utmCampaign: text('utm_campaign'),
+  utmContent: text('utm_content'),
+  utmTerm: text('utm_term'),
+  deviceType: text('device_type'),
+  countryCode: text('country_code'),
+  consentState: text('consent_state').notNull(),
+  schemaVersion: integer('schema_version').notNull().default(1),
+}, (t) => [
+  index('analytics_sessions_anonymous_idx').on(t.anonymousId),
+  index('analytics_sessions_activity_idx').on(t.lastActivityAt),
+]);
+
+export const analyticsEvents = pgTable('analytics_events', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  eventId: text('event_id').notNull(),
+  eventName: text('event_name').notNull(),
+  occurredAt: timestamp('occurred_at', { withTimezone: true }).notNull(),
+  sessionId: text('session_id').notNull().references(() => analyticsSessions.sessionId, { onDelete: 'cascade' }),
+  anonymousId: text('anonymous_id').notNull(),
+  pageViewId: text('page_view_id'),
+  contentType: text('content_type'),
+  contentId: text('content_id'),
+  route: text('route').notNull(),
+  landingRoute: text('landing_route'),
+  referrerSource: text('referrer_source'),
+  referrerUrl: text('referrer_url'),
+  utmSource: text('utm_source'),
+  utmMedium: text('utm_medium'),
+  utmCampaign: text('utm_campaign'),
+  utmContent: text('utm_content'),
+  utmTerm: text('utm_term'),
+  metadata: jsonb('metadata').$type<Record<string, unknown>>().default({}).notNull(),
+  consentState: text('consent_state').notNull(),
+  schemaVersion: integer('schema_version').notNull().default(1),
+}, (t) => [
+  uniqueIndex('analytics_event_id_uq').on(t.eventId),
+  index('analytics_event_name_time_idx').on(t.eventName, t.occurredAt),
+  index('analytics_event_session_time_idx').on(t.sessionId, t.occurredAt),
+  index('analytics_event_content_time_idx').on(t.contentType, t.contentId, t.occurredAt),
+]);
