@@ -35,10 +35,9 @@ export function validateDechiveDocument(document: JSONContent, phase: Validation
   if (hasDangerousKey(document)) issue(issues, 'object.prototype_key', '$', 'error', 'Prototype-significant keys are forbidden.');
   const visit = (node: JSONContent, path: string, depth: number) => {
     nodeCount += 1; maxDepth = Math.max(maxDepth, depth);
-    if (nodeCount > 20_000) return;
     if (!node.type || !nodes.has(node.type)) issue(issues, 'node.unknown', path, phase === 'publish' ? 'error' : 'review', `Node ${node.type ?? '(missing)'} is not allowed.`);
     if (depth > 30) issue(issues, 'document.depth', path, 'error', 'Maximum nesting depth is 30.');
-    if (node.type === 'text') { textLength += node.text?.length ?? 0; if ((node.text?.length ?? 0) > 200_000) issue(issues, 'text.node_too_large', path, 'error', 'A text node exceeds 200k characters.'); }
+    if (node.type === 'text') textLength += node.text?.length ?? 0;
     for (const [key, value] of Object.entries(node.attrs ?? {})) {
       if (!attributes[node.type ?? '']?.has(key)) issue(issues, 'attribute.unknown', `${path}.attrs.${key}`, phase === 'publish' ? 'error' : 'review', 'Attribute is not allowlisted.');
       if (scalarSize(value) > 65_536) issue(issues, 'attribute.oversized', `${path}.attrs.${key}`, 'error', 'Attribute exceeds 64 KiB.');
@@ -69,7 +68,6 @@ export function validateDechiveDocument(document: JSONContent, phase: Validation
     node.content?.forEach((child, index) => visit(child, `${path}.content[${index}]`, depth + 1));
   };
   document.content?.forEach((child, index) => visit(child, `$.content[${index}]`, 1));
-  if (nodeCount > 20_000) issue(issues, 'document.node_count', '$', 'error', 'Maximum node count is 20,000.');
   const severities = new Set(issues.map((entry) => entry.severity));
   const status: ValidationStatus = severities.has('error') ? 'rejected' : severities.has('review') ? 'needs_review' : severities.has('warning') ? 'valid_with_warnings' : 'valid';
   return { status, issues, stats: { nodes: nodeCount, depth: maxDepth, textLength } };

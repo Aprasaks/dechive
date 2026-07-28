@@ -71,8 +71,6 @@ export function KnowledgePublishPanel({
     'table.row_child': '표 행의 셀을 확인해 주세요.',
     'table.cell_empty': '표의 빈 셀을 확인해 주세요.',
     'document.depth': '본문 구조가 너무 깊게 중첩되어 있어요.',
-    'document.node_count': '본문 블록 수가 너무 많아요.',
-    'text.node_too_large': '한 문단이 너무 길어요. 문단을 나누어 주세요.',
     tags_missing: '태그를 한 개 이상 입력해 주세요.',
   };
   const readable = (value: string) => labels[value] ?? '입력 내용을 확인해 주세요.';

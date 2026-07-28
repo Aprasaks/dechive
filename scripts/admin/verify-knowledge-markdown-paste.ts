@@ -113,6 +113,27 @@ assertValid(threeBullets);
 assert.equal(countNodes(threeBullets, 'listItem'), 3);
 assert(hasMark(threeBullets, 'bold'));
 
+const longKnowledgeDocument: DechiveDocument = {
+  type: 'doc',
+  schemaVersion: 1,
+  content: [{ type: 'paragraph', content: [{ type: 'text', text: '긴 지식 노드 '.repeat(20_001) }] }],
+};
+const longKnowledgeValidation = validateDechiveDocument(longKnowledgeDocument, 'draft');
+assert.notEqual(longKnowledgeValidation.status, 'rejected');
+assert.equal(longKnowledgeValidation.stats.textLength, '긴 지식 노드 '.repeat(20_001).length);
+
+const manyBlockDocument: DechiveDocument = {
+  type: 'doc',
+  schemaVersion: 1,
+  content: Array.from({ length: 20_001 }, (_, index) => ({
+    type: 'paragraph' as const,
+    content: [{ type: 'text' as const, text: `블록 ${index}` }],
+  })),
+};
+const manyBlockValidation = validateDechiveDocument(manyBlockDocument, 'draft');
+assert.notEqual(manyBlockValidation.status, 'rejected');
+assert.equal(manyBlockValidation.stats.nodes, 40_002);
+
 const threeOrdered = markdownToDechiveDocument(`1. 하나\n2. 둘\n3. 셋`);
 assertValid(threeOrdered);
 assert.equal(countNodes(threeOrdered, 'listItem'), 3);
