@@ -95,6 +95,7 @@ GA4, Clarity, PostHog, Search Console, Cloudflare는 `src/lib/analytics/integrat
 
 - 사이트 내부 검색어는 `metadata.query`에 저장되므로 보존 기간과 삭제/내보내기 절차를 정해야 한다.
 - 기본 보존 기간은 365일을 제안한다. `npm run analytics:prune`는 `ANALYTICS_PRUNE_CONFIRM=YES`를 명시한 수동 실행만 허용하며, analytics 테이블만 삭제한다. 자동 스케줄러는 운영 승인 전 추가하지 않는다.
+- 운영 schema 적용은 `DATABASE_DIRECT_URL`을 사용한다. `RUN_DB_MIGRATIONS=true`는 배포 1회에만 설정하는 명시적 gate이며, 적용 완료 후 즉시 제거한다. 일반 빌드에서는 마이그레이션을 실행하지 않는다.
 - 브라우저 분석 동의 철회 UI와 기존 GA 제외 키는 별도 호환 상태다. 운영 정책 확정 후 한 화면의 설정으로 통합한다.
 - `purchase_complete`는 결제 공급자의 서버 검증 또는 webhook 없이 발생시키지 않는다.
 - AI 서비스 내부 프롬프트와 외부 서비스의 개인별 검색어는 수집하지 않는다.

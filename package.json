@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "tsx scripts/sync-images.ts && next dev",
-    "build": "tsx scripts/check-content.ts && tsx scripts/sync-images.ts && next build",
+    "build": "tsx scripts/check-content.ts && tsx scripts/sync-images.ts && node --import tsx scripts/db/migrate-on-build.ts && next build",
     "start": "next start",
     "lint": "eslint",
     "check:content": "tsx scripts/check-content.ts",
