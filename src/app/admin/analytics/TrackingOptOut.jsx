@@ -18,13 +18,13 @@ export default function TrackingOptOut() {
   }
 
   return (
-    <div className="border border-white/10 bg-black/25 p-4">
+    <div className="border border-border bg-background p-3">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <p className="text-xs font-semibold tracking-[0.18em] text-zinc-400 uppercase">
+          <p className="text-xs font-semibold tracking-[0.18em] text-muted-foreground uppercase">
             내 브라우저 GA 제외
           </p>
-          <p className="mt-2 text-xs leading-5 text-zinc-500">
+          <p className="mt-2 text-xs leading-5 text-muted-foreground">
             켜두면 이 브라우저에서 일반 페이지를 봐도 GA 스크립트를 로드하지 않습니다.
           </p>
         </div>
@@ -33,8 +33,8 @@ export default function TrackingOptOut() {
           onClick={toggleOptOut}
           className={`border px-4 py-2 text-xs font-semibold tracking-[0.16em] uppercase transition-colors ${
             isOptedOut
-              ? 'border-amber-400/45 bg-amber-500/10 text-amber-100'
-              : 'border-white/10 text-zinc-500 hover:border-white/20 hover:text-zinc-200'
+              ? 'border-accent/45 bg-accent/10 text-accent'
+              : 'border-border text-muted-foreground hover:border-accent/20 hover:text-foreground'
           }`}
         >
           {isOptedOut ? '제외 중' : '제외하기'}

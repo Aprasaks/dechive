@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { generateHTML } from '@tiptap/html/server';
 import { editorExtensions } from '@/features/editor-lab/editor-extensions';
 import BooksShowcase, { type BookShowcaseItem } from '@/features/books/BooksShowcase';
+import AnalyticsContentTracker from '@/components/analytics/AnalyticsContentTracker';
 import {
   createPublishedBookDatabase,
   getPublishedBooks,
@@ -30,6 +31,7 @@ export const metadata: Metadata = {
 export const revalidate = 300;
 
 const fallbackBook: BookShowcaseItem = {
+  id: 'making-before-verification',
   slug: 'making-before-verification',
   title: '만들기 전에 검증하라',
   subtitle: '바이브코딩, 1인 창업, AI SaaS의 착각들',
@@ -55,6 +57,7 @@ function toPreviewHtml(book: PublishedBook): string {
 function toShowcaseItem(book: PublishedBook): BookShowcaseItem {
   const isFree = book.accessType === 'free';
   return {
+    id: book.localizationId,
     slug: book.slug,
     title: book.title,
     subtitle: book.subtitle,
@@ -100,6 +103,7 @@ export default async function BooksPage() {
       </section>
 
       <BooksShowcase book={featuredBook} />
+      <AnalyticsContentTracker contentType="book" contentId={featuredBook.id} route="/books" progress={false} />
 
       <section className={`page-shell ${styles.nextBook}`} aria-label="다음 책 안내">
         <p>다음 책도 준비하고 있습니다.</p>

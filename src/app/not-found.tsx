@@ -1,9 +1,12 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import AnalyticsErrorTracker from '@/components/analytics/AnalyticsErrorTracker';
 
 export default function NotFound() {
   return (
-    <main className="flex flex-1 flex-col items-center justify-center px-6 py-24 text-center min-h-[calc(100vh-64px-56px)]">
+    <>
+      <AnalyticsErrorTracker eventName="error_404" metadata={{ status: 404 }} />
+      <main className="flex flex-1 flex-col items-center justify-center px-6 py-24 text-center min-h-[calc(100vh-64px-56px)]">
       <div className="relative w-32 h-32 mb-8 opacity-60">
         <Image
           src="/images/archive.webp"
@@ -38,6 +41,7 @@ export default function NotFound() {
           Archive 보기
         </Link>
       </div>
-    </main>
+      </main>
+    </>
   );
 }

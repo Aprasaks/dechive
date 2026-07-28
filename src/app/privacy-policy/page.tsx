@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import AnalyticsConsentSettings from '@/components/analytics/AnalyticsConsentSettings';
 
 const ADS_SETTINGS_URL = 'https://www.google.com/settings/ads';
 const GOOGLE_PARTNER_DATA_URL = 'https://policies.google.com/technologies/partner-sites';
@@ -76,8 +77,9 @@ export default function PrivacyPolicyPage() {
           <section>
             <h2 className="text-2xl font-semibold text-foreground">Google Analytics</h2>
             <p className="mt-4">
-              Dechive는 방문자가 웹사이트를 어떻게 이용하는지 이해하기 위해 Google Analytics를 사용합니다. Google Analytics는 방문 페이지, 대략적인 위치, 기기 정보, 브라우저 정보, 상호작용 데이터를 수집할 수 있습니다.
+              Dechive는 방문자의 동의를 받은 경우에 한해 Google Analytics, 선택적으로 PostHog·Clarity와 익명 자체 분석을 사용합니다. 자체 분석은 익명 브라우저 ID, 30분 세션, 방문 경로, 콘텐츠 열기·진행·완료, 검색 및 학습 이벤트를 수집해 학습 흐름을 개선하는 데 사용합니다. 검색어와 이벤트는 운영 목적의 집계에 사용하며 AI 서비스 내부의 프롬프트는 수집하지 않습니다.
             </p>
+            <AnalyticsConsentSettings />
           </section>
 
           <section>

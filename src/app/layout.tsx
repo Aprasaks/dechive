@@ -3,6 +3,8 @@ import { Geist, Noto_Serif_KR } from 'next/font/google';
 import './globals.css';
 import 'highlight.js/styles/atom-one-dark.css';
 import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
+import AnalyticsProvider from '@/components/analytics/AnalyticsProvider';
+import Clarity from '@/components/analytics/Clarity';
 import SiteChrome from '@/components/layout/SiteChrome';
 
 const geistSans = Geist({
@@ -69,8 +71,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${headerSerif.variable} flex min-h-screen flex-col overflow-x-clip bg-background font-sans text-foreground antialiased`}
       >
-        <SiteChrome>{children}</SiteChrome>
-        <GoogleAnalytics />
+        <AnalyticsProvider>
+          <SiteChrome>{children}</SiteChrome>
+          <GoogleAnalytics />
+          <Clarity />
+        </AnalyticsProvider>
       </body>
     </html>
   );

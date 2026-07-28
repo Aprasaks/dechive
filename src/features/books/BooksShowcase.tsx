@@ -2,9 +2,11 @@
 
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
+import { useAnalytics } from '@/components/analytics/AnalyticsProvider';
 import styles from './BooksShowcase.module.css';
 
 export type BookShowcaseItem = {
+  id: string;
   slug: string;
   title: string;
   subtitle: string;
@@ -26,6 +28,8 @@ function formatPublishedOn(value: string): string {
 }
 
 export default function BooksShowcase({ book }: { book: BookShowcaseItem }) {
+  const { track } = useAnalytics();
+  const trackPurchase = (source: string) => track(book.purchaseLabel === '전자책 받기' ? 'file_download' : 'book_purchase_click', { contentType: 'book', contentId: book.id, route: '/books', metadata: { href: book.purchaseHref, label: book.purchaseLabel, source } });
   const [previewOpen, setPreviewOpen] = useState(false);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const lastFocusedRef = useRef<HTMLElement | null>(null);
@@ -82,6 +86,7 @@ export default function BooksShowcase({ book }: { book: BookShowcaseItem }) {
               href={book.purchaseHref}
               target={book.purchaseHref.startsWith('/') ? undefined : '_blank'}
               rel={book.purchaseHref.startsWith('/') ? undefined : 'noopener noreferrer'}
+              onClick={() => trackPurchase('featured_cta')}
             >
               {book.purchaseLabel}
             </a>
@@ -89,7 +94,7 @@ export default function BooksShowcase({ book }: { book: BookShowcaseItem }) {
 
           <div className={styles.previewPrompt}>
             <p>구매 전에 몇 페이지를 먼저 읽어보세요.</p>
-            <button type="button" onClick={() => setPreviewOpen(true)}>미리보기 열기 <span aria-hidden="true">→</span></button>
+            <button type="button" onClick={() => { setPreviewOpen(true); track('book_preview_open', { contentType: 'book', contentId: book.id, route: '/books', metadata: { pageCount: book.previewPages.length } }); }}>미리보기 열기 <span aria-hidden="true">→</span></button>
           </div>
           <p className={styles.publishedDate}>출간 {formatPublishedOn(book.publishedOn)}</p>
         </div>
@@ -132,7 +137,7 @@ export default function BooksShowcase({ book }: { book: BookShowcaseItem }) {
             )}
             <footer className={styles.modalFooter}>
               <span>미리보기 끝</span>
-              <a href={book.purchaseHref} onClick={() => setPreviewOpen(false)}>{book.purchaseLabel} →</a>
+              <a href={book.purchaseHref} onClick={() => { setPreviewOpen(false); trackPurchase('preview_modal'); }}>{book.purchaseLabel} →</a>
             </footer>
           </section>
         </div>

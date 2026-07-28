@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { DechiveDocumentRenderer } from '@/features/admin/DechiveDocumentRenderer';
+import AnalyticsContentTracker from '@/components/analytics/AnalyticsContentTracker';
 import {
   createPublishedLectureDatabase,
   getPublishedLecture,
@@ -79,6 +80,7 @@ export default async function LectureDetailPage({
                 {lecture.estimatedDurationMinutes ? <span>예상 시간: {lecture.estimatedDurationMinutes}분</span> : null}
               </div>
             </header>
+            <AnalyticsContentTracker contentType="lecture" contentId={lecture.id} route={`/lecture/${lecture.slug}`} startEvent="lecture_start" completeEvent="lecture_complete" />
             {lecture.learningObjectives.length ? <section className={styles.references} aria-labelledby="lecture-objectives"><h2 id="lecture-objectives">학습 목표</h2><ul className={styles.referenceList}>{lecture.learningObjectives.map((objective) => <li key={objective}>{objective}</li>)}</ul></section> : null}
             {lecture.primaryKnowledge ? <section className={styles.references} aria-labelledby="primary-knowledge"><h2 id="primary-knowledge">기반 지식</h2><Link className={styles.external} href={`/knowledge/${lecture.primaryKnowledge.slug}`}>{lecture.primaryKnowledge.title} <span aria-hidden="true">→</span></Link></section> : null}
             <DechiveDocumentRenderer document={lecture.document} className={styles.document} />

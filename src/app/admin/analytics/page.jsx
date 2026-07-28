@@ -2,363 +2,83 @@ import { redirect } from 'next/navigation';
 import { getAuthorizedOwnerActor } from '@/features/admin/owner-auth';
 import { createAdminDatabase } from '@/services/knowledge-drafts';
 import { resolveAnalyticsDateRange } from '@/lib/analyticsDateRange';
-import { getAnalytics } from '@/lib/ga4Client';
+import { getAnalyticsReport } from '@/services/analytics-report';
+import { getAnalyticsIntegrationStatus } from '@/lib/analytics/integrations';
 import DateRangeControls from './DateRangeControls';
 import LogoutButton from './LogoutButton';
 import TrackingOptOut from './TrackingOptOut';
 
-export const metadata = {
-  title: 'Dechive Analytics',
-  robots: { index: false, follow: false },
-};
-
+export const metadata = { title: 'Dechive Observatory', robots: { index: false, follow: false } };
 export const dynamic = 'force-dynamic';
 
-const SUMMARY_ITEMS = [
-  {
-    key: 'activeUsers',
-    label: '들어온 사람',
-    metric: 'activeUsers',
-    description: '선택한 기간에 들어온 고유 방문자에 가까운 값입니다.',
-    read: '몇 명이 왔나',
-  },
-  {
-    key: 'screenPageViews',
-    label: '읽힌 페이지',
-    metric: 'screenPageViews',
-    description: '방문자들이 연 페이지의 총합입니다. 한 사람이 여러 글을 보면 늘어납니다.',
-    read: '무엇을 봤나',
-  },
-  {
-    key: 'sessions',
-    label: '방문 흐름',
-    metric: 'sessions',
-    description: '한 번 들어와 둘러본 흐름을 한 묶음으로 본 값입니다.',
-    read: '몇 번 찾아왔나',
-  },
-  {
-    key: 'eventCount',
-    label: '전체 행동',
-    metric: 'eventCount',
-    description: '페이지 보기, 세션 시작, 스크롤, 다운로드 같은 GA4 이벤트의 합계입니다.',
-    read: '무엇을 했나',
-  },
+const TABS = [
+  ['overview', 'Overview', '오늘의 변화'],
+  ['acquisition', 'Acquisition', '유입과 랜딩'],
+  ['learning', 'Learning Journey', '학습 흐름'],
+  ['content', 'Content', '콘텐츠 성과'],
+  ['search', 'Search & SEO', '검색과 SEO'],
+  ['health', 'Health', '수집과 오류'],
 ];
 
-function formatNumber(value) {
-  return new Intl.NumberFormat('ko-KR').format(value ?? 0);
+function formatNumber(value) { return new Intl.NumberFormat('ko-KR').format(value ?? 0); }
+function formatSeconds(value) { return value ? `${Math.round(value / 60)}분 ${value % 60}초` : '—'; }
+function tabUrl(tab, range) {
+  const params = new URLSearchParams({ tab });
+  if (range.preset === 'custom') { params.set('startDate', range.startDate); params.set('endDate', range.endDate); }
+  else params.set('preset', range.preset);
+  return `/admin/analytics?${params.toString()}`;
 }
 
 function EmptyState({ children }) {
-  return (
-    <p className="border border-white/10 bg-black/20 px-4 py-6 text-sm text-zinc-500">
-      {children}
-    </p>
-  );
+  return <p className="border border-border bg-muted/25 px-4 py-6 text-sm text-muted-foreground">{children}</p>;
 }
 
 function Section({ title, eyebrow, children }) {
-  return (
-    <section className="border border-white/10 bg-black/25 p-5 sm:p-6">
-      {eyebrow ? (
-        <p className="text-[11px] font-semibold tracking-[0.22em] text-amber-200/45 uppercase">
-          {eyebrow}
-        </p>
-      ) : null}
-      <h2 className="mt-2 font-[family-name:var(--font-header-serif)] text-xl font-medium tracking-[0.04em] text-zinc-100">
-        {title}
-      </h2>
-      <div className="mt-5">{children}</div>
-    </section>
-  );
+  return <section className="border border-border bg-background p-5 sm:p-6"><p className="text-[11px] font-semibold tracking-[0.2em] text-accent uppercase">{eyebrow}</p><h2 className="mt-2 text-xl font-semibold tracking-tight text-foreground">{title}</h2><div className="mt-5">{children}</div></section>;
 }
 
-function maxDailyValue(daily) {
-  return Math.max(...daily.map((item) => item.screenPageViews), 1);
+function Stat({ label, value, note }) {
+  return <div className="border border-border bg-background p-4"><p className="text-xs font-semibold text-muted-foreground">{label}</p><p className="mt-3 text-3xl font-semibold text-foreground">{formatNumber(value)}</p>{note ? <p className="mt-2 text-xs leading-5 text-muted-foreground">{note}</p> : null}</div>;
 }
 
-function downloadInterpretation(downloadSummary) {
-  if (!downloadSummary.activeUsers) return '선택한 기간에는 PDF 다운로드가 아직 없습니다.';
-  if (downloadSummary.clicks > downloadSummary.activeUsers) {
-    return `다운로드한 사람은 ${formatNumber(downloadSummary.activeUsers)}명이고, 버튼 클릭은 ${formatNumber(downloadSummary.clicks)}회입니다. 같은 사람이 여러 번 누른 기록이 포함되어 있습니다.`;
-  }
-  return `다운로드한 사람은 ${formatNumber(downloadSummary.activeUsers)}명입니다. 반복 클릭은 거의 보이지 않습니다.`;
+function Overview({ report }) {
+  return <>
+    <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4"><Stat label="익명 방문 브라우저" value={report.overview.anonymousVisitors} note="사용자를 식별하지 않고 브라우저 단위로 집계" /><Stat label="세션" value={report.overview.sessions} note="30분 비활동 기준 세션" /><Stat label="콘텐츠 열기" value={report.overview.contentOpens} /><Stat label="완료 이벤트" value={report.overview.completions} note="Knowledge·Lecture·Practice 완료" /></div>
+    <div className="mt-6 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]"><Section title="오늘의 변화" eyebrow="Operating Signals"><ul className="space-y-3 text-sm leading-6 text-muted-foreground">{report.overview.insights.map((insight) => <li key={insight} className="border-l-2 border-accent/40 pl-3">{insight}</li>)}</ul></Section><Section title="다음 확인할 숫자" eyebrow="Decision Queue"><div className="grid gap-3 sm:grid-cols-2"><Stat label="학습 시작" value={report.overview.learningStarts} /><Stat label="학습 완료" value={report.overview.learningCompletions} /><Stat label="검색 0건" value={report.overview.zeroResultSearches} /><Stat label="오류 이벤트" value={report.overview.errors} /></div></Section></div>
+  </>;
+}
+
+function Acquisition({ report }) {
+  return <div className="grid gap-6 lg:grid-cols-2"><Section title="어디서 들어왔나" eyebrow="Referrers">{report.acquisition.sources.length ? <div className="divide-y divide-border">{report.acquisition.sources.map((item) => <div key={item.source} className="flex items-center justify-between gap-4 py-3 text-sm"><span className="truncate text-foreground">{item.source}</span><span className="shrink-0 text-muted-foreground">{formatNumber(item.sessions)}세션 · {formatNumber(item.visitors)}명</span></div>)}</div> : <EmptyState>수집된 유입 데이터가 없습니다.</EmptyState>}</Section><Section title="어떤 페이지로 들어왔나" eyebrow="Landing Routes">{report.acquisition.landingRoutes.length ? <div className="divide-y divide-border">{report.acquisition.landingRoutes.map((item) => <div key={item.route} className="flex items-center justify-between gap-4 py-3 text-sm"><span className="truncate text-foreground">{item.route}</span><span className="shrink-0 text-muted-foreground">{formatNumber(item.sessions)}세션</span></div>)}</div> : <EmptyState>랜딩 페이지 데이터가 없습니다.</EmptyState>}<div className="mt-6 border-t border-border pt-5"><p className="text-xs font-semibold text-accent">AI Referral</p>{report.acquisition.aiReferrals.length ? <div className="mt-2 divide-y divide-border">{report.acquisition.aiReferrals.map((item) => <div key={item.source} className="flex justify-between py-2 text-sm"><span>{item.source}</span><span className="text-muted-foreground">{formatNumber(item.sessions)}세션</span></div>)}</div> : <p className="mt-2 text-sm text-muted-foreground">확인된 AI 리퍼러가 아직 없습니다. AI 내부 프롬프트는 수집하지 않습니다.</p>}</div></Section></div>;
+}
+
+function Learning({ report }) {
+  return <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]"><Section title="학습 퍼널" eyebrow="Learning Funnel">{report.learning.funnel.length ? <div className="space-y-3">{report.learning.funnel.map((item) => <div key={item.eventName} className="flex items-center justify-between border-b border-border pb-3 text-sm"><span>{item.label}</span><span className="text-muted-foreground">{formatNumber(item.sessions)}세션 · {formatNumber(item.visitors)}명</span></div>)}</div> : <EmptyState>Lecture·Practice 이벤트가 아직 없습니다.</EmptyState>}</Section><Section title="다음 이동" eyebrow="Journey Transitions">{report.learning.transitions.length ? <div className="divide-y divide-border">{report.learning.transitions.map((item, index) => <div key={`${item.from}-${item.to}-${index}`} className="flex items-center justify-between gap-3 py-3 text-sm"><span className="text-foreground">{item.from} <span className="px-1 text-accent">→</span> {item.to}</span><span className="shrink-0 text-muted-foreground">{formatNumber(item.sessions)}세션</span></div>)}</div> : <EmptyState>연속 학습 이동 데이터가 아직 없습니다.</EmptyState>}</Section></div>;
+}
+
+function Content({ report }) {
+  return <Section title="읽히고 이어진 콘텐츠" eyebrow="Content Performance">{report.content.length ? <div className="overflow-x-auto"><table className="w-full min-w-[680px] text-left text-sm"><thead className="border-b border-border text-xs text-muted-foreground"><tr><th className="pb-3 pr-4">경로</th><th className="pb-3 pr-4">열기</th><th className="pb-3 pr-4">90%</th><th className="pb-3 pr-4">완료</th><th className="pb-3 pr-4">활성 시간</th><th className="pb-3">내부 클릭</th></tr></thead><tbody className="divide-y divide-border">{report.content.map((item) => <tr key={`${item.contentType}-${item.contentId}-${item.route}`}><td className="max-w-[360px] truncate py-3 pr-4 text-foreground">{item.route}</td><td className="py-3 pr-4">{formatNumber(item.opens)}</td><td className="py-3 pr-4">{formatNumber(item.progress90)}</td><td className="py-3 pr-4">{formatNumber(item.completions)}</td><td className="py-3 pr-4">{formatSeconds(item.activeSeconds)}</td><td className="py-3">{formatNumber(item.internalClicks)}</td></tr>)}</tbody></table></div> : <EmptyState>콘텐츠 이벤트가 아직 없습니다.</EmptyState>}</Section>;
+}
+
+function Search({ report, integrations }) {
+  return <div className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr]"><Section title="검색 상태" eyebrow="Search Intent"><div className="grid gap-3 sm:grid-cols-2"><Stat label="검색 제출" value={report.search.totalSearches} /><Stat label="결과 0건" value={report.search.zeroResultSearches} /></div><p className="mt-5 text-sm leading-6 text-muted-foreground">사이트 검색어는 운영 개선을 위해 집계합니다. Google·Naver의 개별 검색어와 외부 AI 프롬프트는 브라우저에서 직접 받을 수 없습니다.</p></Section><Section title="무엇을 찾지 못했나" eyebrow="Queries">{report.search.queries.length ? <div className="overflow-x-auto"><table className="w-full min-w-[500px] text-left text-sm"><thead className="border-b border-border text-xs text-muted-foreground"><tr><th className="pb-3">검색어</th><th className="pb-3">검색</th><th className="pb-3">0건</th><th className="pb-3">결과 클릭</th></tr></thead><tbody className="divide-y divide-border">{report.search.queries.map((item) => <tr key={item.query}><td className="max-w-[260px] truncate py-3">{item.query}</td><td className="py-3">{formatNumber(item.searches)}</td><td className="py-3">{formatNumber(item.zeroResults)}</td><td className="py-3">{formatNumber(item.resultClicks)}</td></tr>)}</tbody></table></div> : <EmptyState>검색 이벤트가 아직 없습니다.</EmptyState>}<div className="mt-5 border-t border-border pt-4 text-sm text-muted-foreground">Search Console: {integrations.searchConsole ? '연결됨' : '연결 설정 필요'}</div></Section></div>;
+}
+
+function Health({ report, integrations }) {
+  return <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]"><Section title="수집 시스템" eyebrow="Collection Health"><div className="flex items-center gap-2 text-sm"><span className={`h-2.5 w-2.5 rounded-full ${report.health.collectionStatus === 'receiving' ? 'bg-emerald-600' : 'bg-amber-500'}`} aria-hidden="true" />{report.health.collectionStatus === 'receiving' ? '이벤트를 받고 있습니다.' : '선택한 기간에 이벤트가 없습니다.'}</div><p className="mt-4 text-sm text-muted-foreground">이벤트 {formatNumber(report.health.events)}개 · 세션 {formatNumber(report.health.activeSessions)}개</p><div className="mt-5 divide-y divide-border">{Object.entries(integrations).map(([name, connected]) => <div key={name} className="flex justify-between py-2 text-sm"><span>{name}</span><span className={connected ? 'text-emerald-700' : 'text-muted-foreground'}>{connected ? '연결됨' : '미연결'}</span></div>)}</div></Section><Section title="오류가 난 곳" eyebrow="Errors">{report.health.errors.length ? <div className="divide-y divide-border">{report.health.errors.map((item) => <div key={`${item.eventName}-${item.route}`} className="py-3 text-sm"><div className="flex justify-between gap-3"><span className="text-foreground">{item.eventName}</span><span className="text-muted-foreground">{formatNumber(item.count)}회</span></div><p className="mt-1 truncate text-xs text-muted-foreground">{item.route}</p><p className="mt-1 text-xs text-muted-foreground">마지막: {new Date(item.lastSeen).toLocaleString('ko-KR')}</p></div>)}</div> : <EmptyState>선택한 기간의 오류 이벤트가 없습니다.</EmptyState>}</Section></div>;
 }
 
 export default async function AdminAnalyticsPage({ searchParams }) {
   const { pool } = createAdminDatabase();
-  try { if (!(await getAuthorizedOwnerActor(pool))) redirect('/admin/login'); } finally { await pool.end(); }
-
-  const params = await searchParams;
-  const dateRange = resolveAnalyticsDateRange(params);
-
-  let analytics;
-  let error = '';
-
   try {
-    analytics = await getAnalytics(dateRange);
-  } catch {
-    error = 'GA4 데이터를 불러오지 못했습니다. 환경변수와 서비스 계정 권한을 확인해 주세요.';
-    analytics = {
-      range: dateRange,
-      summary: { activeUsers: 0, sessions: 0, screenPageViews: 0, eventCount: 0 },
-      sources: [],
-      pages: [],
-      events: [],
-      daily: [],
-      downloads: [],
-      downloadLocations: [],
-      downloadSummary: { activeUsers: 0, clicks: 0 },
-      insight: `${dateRange.periodLabel}에는 아직 해석할 방문 데이터가 없습니다.`,
-    };
-  }
-
-  const largestDailyViews = maxDailyValue(analytics.daily);
-
-  return (
-    <main className="min-h-dvh bg-stone-950 text-zinc-100">
-      <div className="mx-auto w-full max-w-7xl px-5 py-10 sm:px-8 sm:py-14">
-        <header className="grid gap-6 border-b border-white/10 pb-8 lg:grid-cols-[1fr_420px] lg:items-start">
-          <div>
-            <p className="text-xs font-semibold tracking-[0.34em] text-amber-200/55 uppercase">
-              Private Observatory
-            </p>
-            <h1 className="mt-4 font-[family-name:var(--font-header-serif)] text-4xl font-medium tracking-[0.04em] text-zinc-100 sm:text-5xl">
-              Dechive Analytics
-            </h1>
-            <p className="mt-5 max-w-2xl text-sm leading-7 text-zinc-500">
-              GA4를 직접 열지 않고 선택한 기간에 누가 들어왔고, 무엇을 읽었고, 어떤 행동을
-              했는지 확인합니다. 반복 클릭은 사람 수와 분리해서 봅니다.
-            </p>
-            <p className="mt-4 text-sm text-amber-100/70">
-              현재 조회 기간: {analytics.range.periodLabel}
-            </p>
-          </div>
-          <div className="space-y-3">
-            <div className="flex justify-end">
-              <LogoutButton />
-            </div>
-            <TrackingOptOut />
-            <DateRangeControls
-              activePreset={dateRange.preset}
-              startDate={dateRange.startDate}
-              endDate={dateRange.endDate}
-            />
-          </div>
-        </header>
-
-        {error ? (
-          <div className="mt-8 border border-amber-500/20 bg-amber-950/10 px-5 py-4 text-sm text-amber-100/85">
-            {error}
-          </div>
-        ) : null}
-
-        <section className="mt-8 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
-          {SUMMARY_ITEMS.map((item) => (
-            <div key={item.key} className="border border-white/10 bg-black/30 p-5">
-              <div className="flex items-start justify-between gap-3">
-                <div>
-                  <p className="text-xs font-semibold tracking-[0.18em] text-zinc-500 uppercase">
-                    {item.label}
-                  </p>
-                  <p className="mt-1 text-[11px] tracking-[0.14em] text-amber-200/45 uppercase">
-                    {item.metric}
-                  </p>
-                </div>
-                <span className="border border-white/10 px-2 py-1 text-[11px] text-zinc-500">
-                  {item.read}
-                </span>
-              </div>
-              <p className="mt-5 text-4xl font-semibold text-zinc-100">
-                {formatNumber(analytics.summary[item.key])}
-              </p>
-              <p className="mt-4 min-h-12 text-xs leading-5 text-zinc-500">{item.description}</p>
-            </div>
-          ))}
-        </section>
-
-        <div className="mt-6 grid gap-6 xl:grid-cols-[0.9fr_1.1fr]">
-          <Section title="다운로드 행동" eyebrow="Downloads">
-            <div className="grid gap-3 sm:grid-cols-2">
-              <div className="border border-white/10 bg-black/30 p-5">
-                <p className="text-xs font-semibold tracking-[0.18em] text-zinc-500 uppercase">
-                  다운로드한 사람
-                </p>
-                <p className="mt-4 text-4xl font-semibold text-zinc-100">
-                  {formatNumber(analytics.downloadSummary.activeUsers)}
-                </p>
-                <p className="mt-4 text-xs leading-5 text-zinc-500">
-                  같은 사람이 여러 번 눌러도 사람 수는 중복을 줄여서 봅니다.
-                </p>
-              </div>
-              <div className="border border-white/10 bg-black/30 p-5">
-                <p className="text-xs font-semibold tracking-[0.18em] text-zinc-500 uppercase">
-                  다운로드 클릭
-                </p>
-                <p className="mt-4 text-4xl font-semibold text-zinc-100">
-                  {formatNumber(analytics.downloadSummary.clicks)}
-                </p>
-                <p className="mt-4 text-xs leading-5 text-zinc-500">
-                  버튼을 누른 총 횟수입니다. 실수로 여러 번 누르면 같이 올라갑니다.
-                </p>
-              </div>
-            </div>
-            <p className="mt-4 border-l border-amber-400/35 bg-amber-950/10 px-4 py-3 text-sm leading-7 text-amber-50/85">
-              {downloadInterpretation(analytics.downloadSummary)}
-            </p>
-            {analytics.downloads.length > 0 ? (
-              <div className="mt-5 divide-y divide-white/10">
-                {analytics.downloads.map((download) => (
-                  <div key={`${download.fileName}-${download.linkUrl}`} className="py-3">
-                    <div className="flex flex-wrap items-center justify-between gap-3">
-                      <p className="max-w-full truncate text-sm text-zinc-200">{download.fileName}</p>
-                      <p className="text-sm text-amber-100/70">
-                        {formatNumber(download.activeUsers)}명 · 클릭 {formatNumber(download.clicks)}회
-                      </p>
-                    </div>
-                    {download.linkUrl ? (
-                      <p className="mt-2 max-w-full truncate text-xs text-zinc-600">{download.linkUrl}</p>
-                    ) : null}
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <EmptyState>선택한 기간에 다운로드된 파일이 없습니다.</EmptyState>
-            )}
-          </Section>
-
-          <Section title="다운로드 지역" eyebrow="Location">
-            {analytics.downloadLocations.length > 0 ? (
-              <div className="divide-y divide-white/10">
-                {analytics.downloadLocations.map((location) => (
-                  <div
-                    key={`${location.country}-${location.region}-${location.city}`}
-                    className="grid gap-2 py-3 text-sm md:grid-cols-[1fr_auto] md:items-center"
-                  >
-                    <div>
-                      <p className="text-zinc-200">
-                        {location.country} / {location.region} / {location.city}
-                      </p>
-                      <p className="mt-1 text-xs text-zinc-500">
-                        위치는 IP 기반 추정값이라 실제 거주지와 다를 수 있습니다.
-                      </p>
-                    </div>
-                    <p className="text-amber-100/70">
-                      {formatNumber(location.activeUsers)}명 · 클릭 {formatNumber(location.clicks)}회
-                    </p>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <EmptyState>선택한 기간에 다운로드 위치 데이터가 없습니다.</EmptyState>
-            )}
-          </Section>
-        </div>
-
-        <div className="mt-8 grid gap-6 xl:grid-cols-[0.95fr_1.05fr]">
-          <Section title="기간별 흐름" eyebrow="Daily Trace">
-            {analytics.daily.length > 0 ? (
-              <div className="space-y-3">
-                {analytics.daily.map((day) => (
-                  <div key={day.date} className="grid gap-2 sm:grid-cols-[110px_1fr_220px] sm:items-center">
-                    <p className="text-sm text-zinc-400">{day.date}</p>
-                    <div className="h-2 bg-white/5">
-                      <div
-                        className="h-full bg-amber-400/55"
-                        style={{
-                          width: `${Math.max((day.screenPageViews / largestDailyViews) * 100, 3)}%`,
-                        }}
-                      />
-                    </div>
-                    <p className="text-xs text-zinc-500 sm:text-right">
-                      사람 {formatNumber(day.activeUsers)} · 페이지 {formatNumber(day.screenPageViews)} · 흐름{' '}
-                      {formatNumber(day.sessions)}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <EmptyState>선택한 기간의 날짜별 흐름이 아직 없습니다.</EmptyState>
-            )}
-          </Section>
-
-          <Section title="짧은 해석" eyebrow="Reading">
-            <p className="border-l border-amber-400/35 bg-amber-950/10 px-5 py-4 text-sm leading-7 text-amber-50/85">
-              {analytics.insight}
-            </p>
-            <div className="mt-5 grid gap-3 sm:grid-cols-2">
-              <p className="border border-white/10 bg-black/20 p-4 text-xs leading-6 text-zinc-500">
-                사람이 들어왔는데 스크롤이 없다면 페이지는 열렸지만 깊게 읽힌 신호는 약하게
-                봅니다.
-              </p>
-              <p className="border border-white/10 bg-black/20 p-4 text-xs leading-6 text-zinc-500">
-                referral 유입은 외부 플랫폼에서 Dechive로 넘어온 흔적입니다.
-              </p>
-            </div>
-          </Section>
-        </div>
-
-        <div className="mt-6 grid gap-6 xl:grid-cols-[0.9fr_1.1fr]">
-          <Section title="어디서 들어왔는지" eyebrow="Source / Medium">
-            {analytics.sources.length > 0 ? (
-              <div className="divide-y divide-white/10">
-                {analytics.sources.map((source) => (
-                  <div
-                    key={source.sourceMedium}
-                    className="grid grid-cols-[1fr_auto_auto] items-center gap-4 py-3 text-sm"
-                  >
-                    <span className="truncate text-zinc-200">{source.sourceMedium}</span>
-                    <span className="text-zinc-500">사람 {formatNumber(source.activeUsers)}명</span>
-                    <span className="text-amber-100/70">흐름 {formatNumber(source.sessions)}회</span>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <EmptyState>선택한 기간에 확인된 유입 경로가 없습니다.</EmptyState>
-            )}
-          </Section>
-
-          <Section title="어느 페이지를 읽었는지" eyebrow="Top Pages">
-            {analytics.pages.length > 0 ? (
-              <div className="divide-y divide-white/10">
-                {analytics.pages.map((page) => (
-                  <div key={`${page.pagePath}-${page.pageTitle}`} className="py-3">
-                    <div className="flex flex-wrap items-center justify-between gap-3">
-                      <p className="max-w-full truncate text-sm text-zinc-200">{page.pageTitle}</p>
-                      <p className="text-sm text-amber-100/70">{formatNumber(page.views)}회 읽힘</p>
-                    </div>
-                    <div className="mt-2 flex flex-wrap items-center gap-3 text-xs text-zinc-500">
-                      <span className="max-w-full truncate">{page.pagePath}</span>
-                      <span>사람 {formatNumber(page.activeUsers)}명</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <EmptyState>선택한 기간에 읽힌 페이지가 아직 없습니다.</EmptyState>
-            )}
-          </Section>
-        </div>
-
-        <Section title="무슨 이벤트가 있었는지" eyebrow="Events">
-          {analytics.events.length > 0 ? (
-            <div className="divide-y divide-white/10">
-              {analytics.events.map((event) => (
-                <div
-                  key={event.eventName}
-                  className="grid gap-2 py-3 text-sm md:grid-cols-[200px_1fr_auto] md:items-center"
-                >
-                  <code className="text-xs text-amber-100/75">{event.eventName}</code>
-                  <span className="text-zinc-400">{event.eventLabel}</span>
-                  <span className="text-zinc-200">{formatNumber(event.eventCount)}회</span>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <EmptyState>선택한 기간에 발생한 이벤트가 아직 없습니다.</EmptyState>
-          )}
-        </Section>
-      </div>
-    </main>
-  );
+    if (!(await getAuthorizedOwnerActor(pool))) redirect('/admin/login');
+    const params = await searchParams;
+    const range = resolveAnalyticsDateRange(params);
+    const tab = TABS.some(([key]) => key === params.tab) ? params.tab : 'overview';
+    let report;
+    let error = '';
+    try { report = await getAnalyticsReport(pool, range); } catch { error = '자체 분석 데이터를 불러오지 못했습니다. 데이터베이스와 analytics_events 테이블을 확인해 주세요.'; report = { range, overview: { sessions: 0, anonymousVisitors: 0, contentOpens: 0, completions: 0, learningStarts: 0, learningCompletions: 0, zeroResultSearches: 0, errors: 0, insights: ['아직 분석 이벤트가 없습니다.'] }, acquisition: { sources: [], landingRoutes: [], aiReferrals: [] }, learning: { funnel: [], transitions: [] }, content: [], search: { totalSearches: 0, zeroResultSearches: 0, queries: [] }, health: { events: 0, activeSessions: 0, errors: [], collectionStatus: 'empty' } }; }
+    const integrations = getAnalyticsIntegrationStatus();
+    return <main className="min-h-dvh bg-muted/30 text-foreground"><div className="mx-auto w-full max-w-7xl px-5 py-8 sm:px-8 sm:py-12"><header className="flex flex-col gap-6 border-b border-border pb-7 lg:flex-row lg:items-end lg:justify-between"><div><p className="text-xs font-semibold tracking-[0.25em] text-accent uppercase">Dechive Observatory</p><h1 className="mt-3 text-4xl font-semibold tracking-tight sm:text-5xl">관측</h1><p className="mt-4 max-w-2xl text-sm leading-6 text-muted-foreground">Dechive에서 유입, 탐색, 학습, 오류가 어떻게 발생하는지 관측합니다. 원본 데이터는 Dechive의 자체 이벤트 저장소를 기준으로 봅니다.</p><p className="mt-3 text-sm text-accent">조회 기간: {report.range.periodLabel}</p></div><div className="flex flex-col gap-3 lg:items-end"><div className="flex gap-2"><LogoutButton /><TrackingOptOut /></div><DateRangeControls activePreset={range.preset} startDate={range.startDate} endDate={range.endDate} /></div></header><nav className="mt-6 flex gap-2 overflow-x-auto border-b border-border pb-px" aria-label="관측 메뉴">{TABS.map(([key, label, description]) => <a key={key} href={tabUrl(key, range)} className={`shrink-0 border-b-2 px-3 py-3 text-sm font-semibold transition-colors ${tab === key ? 'border-accent text-accent' : 'border-transparent text-muted-foreground hover:text-foreground'}`} aria-current={tab === key ? 'page' : undefined}>{label}<span className="ml-2 hidden text-xs font-normal text-muted-foreground md:inline">{description}</span></a>)}</nav>{error ? <p className="mt-6 border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-900">{error}</p> : null}<div className="mt-6">{tab === 'overview' ? <Overview report={report} /> : null}{tab === 'acquisition' ? <Acquisition report={report} /> : null}{tab === 'learning' ? <Learning report={report} /> : null}{tab === 'content' ? <Content report={report} /> : null}{tab === 'search' ? <Search report={report} integrations={integrations} /> : null}{tab === 'health' ? <Health report={report} integrations={integrations} /> : null}</div></div></main>;
+  } finally { await pool.end(); }
 }

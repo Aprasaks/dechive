@@ -21,6 +21,7 @@ export type PublishedLecturePrimaryKnowledge = {
 };
 
 export type PublishedLectureListItem = {
+  id: string;
   slug: string;
   title: string;
   summary: string;
@@ -59,6 +60,7 @@ function references(value: unknown): KnowledgeReference[] {
 }
 
 type PublishedLectureRow = {
+  id: string;
   slug: string;
   title: string;
   summary: string;
@@ -75,6 +77,7 @@ type PublishedLectureRow = {
 function projectListItem(row: PublishedLectureRow): PublishedLectureListItem {
   const version = metadata(row.metadata);
   return {
+    id: row.id,
     slug: version.slug ?? row.slug,
     title: version.title ?? row.title,
     summary: version.summary ?? row.summary,
@@ -92,7 +95,7 @@ function projectListItem(row: PublishedLectureRow): PublishedLectureListItem {
 }
 
 const publishedLectureQuery = `
-  SELECT cl.slug,cl.title,cl.summary,cv.version_number,cv.created_at,
+  SELECT cl.id,cl.slug,cl.title,cl.summary,cv.version_number,cv.created_at,
          cv.canonical_document AS document,cv.migration_metadata AS metadata,
          ld.audience,ld.estimated_duration_minutes,ld.difficulty,
          ld.learning_objectives,ld.checkpoints,primary_route.route AS primary_route,

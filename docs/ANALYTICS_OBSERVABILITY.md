@@ -1,8 +1,8 @@
 # Dechive Analytics Observability
 
-- **Status:** Phase 1 implemented
+- **Status:** Collection, public instrumentation, and first-party observatory implemented
 - **Authority:** Dechive visitor measurement and learning-flow event contract
-- **Scope:** Public event collection only; admin reporting and external adapters follow later
+- **Scope:** Public event collection, public instrumentation, first-party admin observatory, and external integration boundaries
 
 ## 운영 원칙
 
@@ -74,11 +74,30 @@ metadata, consent_state, schema_version
 - 알려진 bot user-agent 무시
 - `consent_state=denied` 이벤트 저장 금지
 
-현재 수집 API는 준비됐지만 브라우저 계측은 별도 단계에서 consent·session 정책과 함께 연결한다. `unknown` 상태를 임시로 허용하는 것은 계약 호환성을 위한 것이며, 실제 공개 계측 전 정책을 확정한다.
+공개 페이지는 `AnalyticsProvider`가 동의·익명 ID·세션·페이지 방문 ID·UTM·리퍼러를 관리한다. 최초 상태는 `unknown`이며 방문자가 익명 분석을 허용한 뒤에만 이벤트를 전송한다. `/admin`과 `/dev`는 공개 방문자 계측 대상에서 제외한다.
+
+`/admin/analytics`는 다음 여섯 가지 운영 질문을 자체 Postgres 이벤트로 조회한다.
+
+- Overview: 오늘 중요한 변화가 무엇인가
+- Acquisition: 어디서 어떤 페이지로 들어왔는가
+- Learning Journey: 지식이 학습 행동으로 이어졌는가
+- Content: 무엇이 읽히고 다음 콘텐츠로 연결됐는가
+- Search & SEO: 무엇을 찾았고 무엇을 찾지 못했는가
+- Health: 수집과 오류가 정상인가
+
+GA4, Clarity, PostHog, Search Console, Cloudflare는 `src/lib/analytics/integrations.ts`에서 연결 상태를 판별한다. 자체 이벤트 저장소가 source of truth이며 외부 서비스가 없더라도 관측 화면은 동작해야 한다. 동의 후 `NEXT_PUBLIC_POSTHOG_KEY`가 설정된 경우에만 `src/lib/analytics/posthog.ts`가 동일 이벤트를 보조 도구로 전송한다. Search Console·Cloudflare의 원격 API 연동은 인증·보존·비용 결정을 별도로 승인한 뒤 추가한다.
 
 ## 완료 판정 초안
 
-`content_complete`는 단순한 최하단 도달과 동일하지 않다. 초기 계측 기준은 본문 90% 도달과 활성 체류 30초 이상이며, 이후 콘텐츠 길이·예상 읽기 시간에 따라 보정한다.
+`content_complete`는 단순한 최하단 도달과 동일하지 않다. 초기 계측 기준은 본문 90% 도달과 활성 체류 30초 이상이며, 이후 콘텐츠 길이·예상 읽기 시간에 따라 보정한다. Lecture와 Practice는 같은 조건에서 `lecture_complete`, `practice_complete`도 함께 기록한다.
+
+## 개인정보와 운영 보류 항목
+
+- 사이트 내부 검색어는 `metadata.query`에 저장되므로 보존 기간과 삭제/내보내기 절차를 정해야 한다.
+- 브라우저 분석 동의 철회 UI와 기존 GA 제외 키는 별도 호환 상태다. 운영 정책 확정 후 한 화면의 설정으로 통합한다.
+- `purchase_complete`는 결제 공급자의 서버 검증 또는 webhook 없이 발생시키지 않는다.
+- AI 서비스 내부 프롬프트와 외부 서비스의 개인별 검색어는 수집하지 않는다.
+- AI citation evidence는 방문 이벤트에 섞지 않고, 실제 외부 인용을 확인한 뒤 별도 데이터 모델로 추가한다.
 
 ## AI 유입 구분
 

@@ -23,6 +23,7 @@ type VersionKnowledgeMetadata = {
 };
 
 export type PublishedKnowledgeListItem = {
+  id: string;
   slug: string;
   title: string;
   summary: string;
@@ -239,6 +240,7 @@ export async function listPublishedKnowledge(
   pool: Pool,
 ): Promise<PublishedKnowledgeListItem[]> {
   const rows = await pool.query<{
+    id: string;
     slug: string;
     title: string;
     summary: string;
@@ -249,7 +251,7 @@ export async function listPublishedKnowledge(
     current_published_at: Date | null;
     metadata: unknown;
   }>(
-    `SELECT cl.slug,cl.title,cl.summary,cv.version_number,c.created_at,cl.updated_at,
+    `SELECT cl.id,cl.slug,cl.title,cl.summary,cv.version_number,c.created_at,cl.updated_at,
             (SELECT min(history.published_at) FROM content_versions history WHERE history.localization_id=cl.id AND history.published_at IS NOT NULL) AS first_published_at,
             cv.published_at AS current_published_at,cv.migration_metadata AS metadata
      FROM content_localizations cl
@@ -261,6 +263,7 @@ export async function listPublishedKnowledge(
   return rows.rows.map((row) => {
     const version = metadata(row.metadata);
     return {
+      id: row.id,
       slug: version.slug ?? row.slug,
       title: version.title ?? row.title,
       summary: version.summary ?? row.summary,
@@ -280,6 +283,7 @@ export async function getPublishedKnowledge(
 ): Promise<PublishedKnowledge | null> {
   const row = (
     await pool.query<{
+      id: string;
       slug: string;
       title: string;
       summary: string;
@@ -292,7 +296,7 @@ export async function getPublishedKnowledge(
       document: DechiveDocument;
       metadata: unknown;
     }>(
-      `SELECT cl.slug,cl.title,cl.summary,cv.id AS version_id,cv.version_number,c.created_at,cl.updated_at,
+      `SELECT cl.id,cl.slug,cl.title,cl.summary,cv.id AS version_id,cv.version_number,c.created_at,cl.updated_at,
               cv.published_at,
               (SELECT min(history.published_at) FROM content_versions history WHERE history.localization_id=cl.id AND history.published_at IS NOT NULL) AS first_published_at,
               cv.canonical_document AS document,cv.migration_metadata AS metadata
@@ -310,6 +314,7 @@ export async function getPublishedKnowledge(
   const document = await resolveKnowledgeDocument(pool, row.version_id, row.document);
   const hero = await getKnowledgeHero(pool, row.version_id);
   return {
+    id: row.id,
     slug: version.slug ?? row.slug,
     title: version.title ?? row.title,
     summary: version.summary ?? row.summary,

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { DechiveDocumentRenderer } from '@/features/admin/DechiveDocumentRenderer';
 import { KnowledgeShareButton } from '@/features/admin/KnowledgeShareButton';
+import AnalyticsContentTracker from '@/components/analytics/AnalyticsContentTracker';
 import { formatKnowledgeDateTime } from '@/features/knowledge/date-format';
 import {
   createPublishedKnowledgeDatabase,
@@ -97,6 +98,7 @@ export default async function KnowledgeDetailPage({
               ) : null}
             </header>
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
+            <AnalyticsContentTracker contentType="knowledge" contentId={knowledge.id} route={`/knowledge/${knowledge.slug}`} />
             <DechiveDocumentRenderer
               document={knowledge.document}
               className={styles.document}
@@ -109,6 +111,8 @@ export default async function KnowledgeDetailPage({
                 <KnowledgeShareButton
                   className={styles.shareAction}
                   url={`${BASE_URL}/knowledge/${knowledge.slug}`}
+                  contentId={knowledge.id}
+                  route={`/knowledge/${knowledge.slug}`}
                 />
               </div>
             </footer>

@@ -22,13 +22,11 @@ export default function DateRangeControls({ activePreset, startDate, endDate }) 
 
     if (!customStartDate || !customEndDate) return;
 
-    router.push(
-      `/admin/analytics?startDate=${encodeURIComponent(customStartDate)}&endDate=${encodeURIComponent(customEndDate)}`,
-    );
+    router.push(`/admin/analytics?startDate=${encodeURIComponent(customStartDate)}&endDate=${encodeURIComponent(customEndDate)}`);
   }
 
   return (
-    <div className="border border-white/10 bg-black/25 p-4">
+    <div className="border border-border bg-background p-3">
       <div className="flex flex-wrap gap-2">
         {DATE_PRESETS.map((preset) => (
           <button
@@ -37,8 +35,8 @@ export default function DateRangeControls({ activePreset, startDate, endDate }) 
             onClick={() => goToPreset(preset.key)}
             className={`border px-3 py-2 text-xs font-semibold tracking-[0.14em] uppercase transition-colors ${
               activePreset === preset.key
-                ? 'border-amber-400/45 bg-amber-500/10 text-amber-100'
-                : 'border-white/10 text-zinc-500 hover:border-white/20 hover:text-zinc-200'
+              ? 'border-accent/50 bg-accent/10 text-accent'
+                : 'border-border text-muted-foreground hover:border-accent/30 hover:text-foreground'
             }`}
           >
             {preset.label}
@@ -51,19 +49,19 @@ export default function DateRangeControls({ activePreset, startDate, endDate }) 
           type="date"
           value={customStartDate}
           onChange={(event) => setCustomStartDate(event.target.value)}
-          className="border border-white/10 bg-stone-950 px-3 py-2 text-sm text-zinc-200 outline-none focus:border-amber-500/40"
+          className="border border-border bg-background px-3 py-2 text-sm text-foreground outline-none focus:border-accent/40"
           aria-label="시작일"
         />
         <input
           type="date"
           value={customEndDate}
           onChange={(event) => setCustomEndDate(event.target.value)}
-          className="border border-white/10 bg-stone-950 px-3 py-2 text-sm text-zinc-200 outline-none focus:border-amber-500/40"
+          className="border border-border bg-background px-3 py-2 text-sm text-foreground outline-none focus:border-accent/40"
           aria-label="종료일"
         />
         <button
           type="submit"
-          className="border border-amber-500/30 bg-amber-500/10 px-4 py-2 text-xs font-semibold tracking-[0.16em] text-amber-100 uppercase transition-colors hover:border-amber-400/55"
+          className="border border-accent/30 bg-accent/10 px-4 py-2 text-xs font-semibold tracking-[0.16em] text-accent uppercase transition-colors hover:border-accent/55"
         >
           조회
         </button>

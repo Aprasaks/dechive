@@ -13,6 +13,7 @@ import { formatKnowledgeDate } from './date-format';
 import { mergeKnowledgeItems, normalizeKnowledgeSearchQuery } from './search';
 import type { PublishedKnowledgeFeedItem } from '@/services/published-knowledge';
 import styles from '@/app/knowledge/knowledge.module.css';
+import { useAnalytics } from '@/components/analytics/AnalyticsProvider';
 
 type Props = {
   initialItems: PublishedKnowledgeFeedItem[];
@@ -40,10 +41,19 @@ export default function KnowledgeListClient({ initialItems, initialNextCursor, i
   const [nextCursor, setNextCursor] = useState(initialNextCursor);
   const [status, setStatus] = useState<LoadStatus>(initialNextCursor ? 'idle' : 'complete');
   const [errorMessage, setErrorMessage] = useState('');
+  const { consent, track } = useAnalytics();
   const requestRef = useRef<AbortController | null>(null);
   const requestInFlight = useRef(false);
   const generationRef = useRef(0);
   const sentinelRef = useRef<HTMLDivElement | null>(null);
+  const initialSearchTrackedRef = useRef(false);
+
+  useEffect(() => {
+    if (!initialQuery || consent !== 'granted' || initialSearchTrackedRef.current) return;
+    initialSearchTrackedRef.current = true;
+    track('search_submit', { route: '/knowledge', metadata: { query: initialQuery, resultCount: initialItems.length, searchScope: 'knowledge' } });
+    if (!initialItems.length) track('search_zero_result', { route: '/knowledge', metadata: { query: initialQuery, resultCount: 0, searchScope: 'knowledge' } });
+  }, [consent, initialItems.length, initialQuery, track]);
 
   const loadPage = useCallback(async (requestedQuery: string, cursor: string | null, replace: boolean) => {
     if (requestInFlight.current) return;
@@ -69,9 +79,14 @@ export default function KnowledgeListClient({ initialItems, initialNextCursor, i
       setItems((current) => mergeKnowledgeItems(current, data.items ?? [], replace));
       setNextCursor(data.nextCursor ?? null);
       setStatus(data.nextCursor ? 'idle' : 'complete');
+      if (requestedQuery && cursor === null) {
+        track('search_submit', { route: '/knowledge', metadata: { query: requestedQuery, resultCount: data.items.length, searchScope: 'knowledge' } });
+        if (data.items.length === 0) track('search_zero_result', { route: '/knowledge', metadata: { query: requestedQuery, resultCount: 0, searchScope: 'knowledge' } });
+      }
     } catch (error) {
       if (controller.signal.aborted || generation !== generationRef.current) return;
       setStatus('error');
+      track('api_error', { route: '/knowledge', metadata: { code: 'knowledge_list_request_failed' } });
       setErrorMessage(error instanceof Error && error.message === 'knowledge_list_response_invalid'
         ? '지식 목록 응답을 확인하지 못했습니다.'
         : '지식 목록을 불러오지 못했습니다.');
@@ -81,7 +96,7 @@ export default function KnowledgeListClient({ initialItems, initialNextCursor, i
         requestRef.current = null;
       }
     }
-  }, [initialCategory]);
+  }, [initialCategory, track]);
 
   useEffect(() => {
     const normalized = normalizeKnowledgeSearchQuery(queryInput);
@@ -200,7 +215,7 @@ export default function KnowledgeListClient({ initialItems, initialNextCursor, i
         <ol className={styles.list}>
           {items.map((item, index) => (
             <li key={item.id} className={styles.item}>
-              <Link className={styles.itemLink} href={`/knowledge/${item.slug}`}>
+              <Link className={styles.itemLink} href={`/knowledge/${item.slug}`} onClick={() => track('search_result_click', { route: '/knowledge', contentType: 'knowledge', contentId: item.id, metadata: { query, targetRoute: `/knowledge/${item.slug}`, position: index + 1 } })}>
                 <span className={styles.itemIndex} aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
                 <span className={styles.itemMedia}>
                   {item.hero ? (

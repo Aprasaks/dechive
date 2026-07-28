@@ -1,10 +1,12 @@
 'use client';
 
 import { useState } from 'react';
+import { useAnalytics } from '@/components/analytics/AnalyticsProvider';
 import styles from './KnowledgeEditor.module.css';
 
-export function KnowledgeShareButton({ url, className }: { url: string; className?: string }) {
+export function KnowledgeShareButton({ url, className, contentId, route }: { url: string; className?: string; contentId?: string; route?: string }) {
   const [message, setMessage] = useState('');
+  const { track } = useAnalytics();
   const copyUrl = async () => {
     if (navigator.clipboard?.writeText) {
       await navigator.clipboard.writeText(url);
@@ -25,10 +27,12 @@ export function KnowledgeShareButton({ url, className }: { url: string; classNam
     try {
       if (navigator.share) {
         await navigator.share({ url });
+        track('share_complete', { contentType: 'knowledge', contentId, route, metadata: { channel: 'web_share' } });
         setMessage('공유 완료');
         return;
       }
       await copyUrl();
+      track('share_complete', { contentType: 'knowledge', contentId, route, metadata: { channel: 'clipboard' } });
       setMessage('링크를 복사했습니다.');
     } catch (error) {
       if (error instanceof DOMException && error.name === 'AbortError') return;
