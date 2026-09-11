@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { PublicContentSummary } from '@/lib/content/public';
 import { getContentSection } from '@/lib/content/catalog';
+import type { ContentType } from '@/lib/supabase/database.types';
 
 const DATE_FORMATTER = new Intl.DateTimeFormat('ko-KR', {
   year: 'numeric',
@@ -15,9 +16,11 @@ function detailHref(item: PublicContentSummary) {
 
 export function ContentList({
   items,
+  type,
   emptyMessage,
 }: {
   items: PublicContentSummary[];
+  type: ContentType;
   emptyMessage: string;
 }) {
   if (items.length === 0) {
@@ -25,12 +28,15 @@ export function ContentList({
   }
 
   return (
-    <ol className="content-list">
+    <ol className={`content-list content-list-${type}`}>
       {items.map((item, index) => (
         <li key={item.id}>
           <Link href={detailHref(item)}>
             <span className="content-number">
               {String(index + 1).padStart(2, '0')}
+            </span>
+            <span className="content-type-label">
+              {getContentSection(item.type).label}
             </span>
             <span className="content-copy">
               <strong>{item.title}</strong>
@@ -39,6 +45,7 @@ export function ContentList({
             <time dateTime={item.publishedAt}>
               {DATE_FORMATTER.format(new Date(item.publishedAt))}
             </time>
+            <b aria-hidden="true">↗</b>
           </Link>
         </li>
       ))}
