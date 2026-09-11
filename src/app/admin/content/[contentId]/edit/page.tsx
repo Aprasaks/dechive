@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { requireOwner } from '@/lib/auth/require-owner';
-import type { Json } from '@/lib/supabase/database.types';
 import { DraftEditor } from './DraftEditor';
 
 export const metadata: Metadata = {
@@ -9,21 +8,6 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 export const dynamic = 'force-dynamic';
-
-function getLearningObjectives(metadata: Json) {
-  if (
-    typeof metadata !== 'object' ||
-    metadata === null ||
-    Array.isArray(metadata) ||
-    !Array.isArray(metadata.learningObjectives)
-  ) {
-    return '';
-  }
-
-  return metadata.learningObjectives
-    .filter((item): item is string => typeof item === 'string')
-    .join('\n');
-}
 
 export default async function EditContentPage({
   params,
@@ -66,7 +50,7 @@ export default async function EditContentPage({
         title: draft.title,
         slug: content.slug,
         summary: draft.summary,
-        learningObjectivesText: getLearningObjectives(draft.metadata),
+        metadata: draft.metadata,
         bodyJson: draft.body_json,
       }}
       initialUpdatedAt={draft.updated_at}

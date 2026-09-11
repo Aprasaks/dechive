@@ -13,17 +13,20 @@ import {
 } from 'react';
 import type { ContentType, Json } from '@/lib/supabase/database.types';
 import { getContentSection } from '@/lib/content/catalog';
-import { saveDraft } from '../../actions';
+import { publishDraft, saveDraft } from '../../actions';
 
 type DraftSnapshot = {
   title: string;
   slug: string;
   summary: string;
-  learningObjectivesText: string;
+  metadata: Json;
   bodyJson: Json;
 };
 
+type JsonObject = { [key: string]: Json | undefined };
+
 type SaveStatus = 'saved' | 'unsaved' | 'saving' | 'error' | 'conflict';
+type PublishStatus = 'idle' | 'publishing' | 'published' | 'error';
 
 type DraftEditorProps = {
   contentId: string;
@@ -41,11 +44,63 @@ const STATUS_LABELS: Record<SaveStatus, string> = {
   conflict: '다른 수정본 확인 필요',
 };
 
-function toLearningObjectives(value: string) {
+function toLines(value: string) {
   return value
     .split('\n')
     .map((item) => item.trim())
     .filter(Boolean);
+}
+
+function metadataObject(value: Json): JsonObject {
+  return typeof value === 'object' && value !== null && !Array.isArray(value)
+    ? value
+    : {};
+}
+
+function metadataString(metadata: Json, key: string) {
+  const value = metadataObject(metadata)[key];
+  return typeof value === 'string' ? value : '';
+}
+
+function metadataLines(metadata: Json, key: string) {
+  const value = metadataObject(metadata)[key];
+  return Array.isArray(value)
+    ? value.filter((item): item is string => typeof item === 'string').join('\n')
+    : '';
+}
+
+function metadataPairs(
+  metadata: Json,
+  key: string,
+  firstKey: string,
+  secondKey: string,
+) {
+  const value = metadataObject(metadata)[key];
+  if (!Array.isArray(value)) return '';
+
+  return value
+    .flatMap((item) => {
+      if (typeof item !== 'object' || item === null || Array.isArray(item)) {
+        return [];
+      }
+      const first = item[firstKey];
+      const second = item[secondKey];
+      return typeof first === 'string' && typeof second === 'string'
+        ? [`${first} | ${second}`]
+        : [];
+    })
+    .join('\n');
+}
+
+function toPairs(value: string, firstKey: string, secondKey: string): Json[] {
+  return toLines(value).flatMap((line) => {
+    const [first, ...rest] = line.split('|');
+    const second = rest.join('|').trim();
+    const firstValue = first?.trim();
+    return firstValue && second
+      ? [{ [firstKey]: firstValue, [secondKey]: second }]
+      : [];
+  });
 }
 
 export function DraftEditor({
@@ -59,6 +114,8 @@ export function DraftEditor({
   const [draft, setDraft] = useState(initialDraft);
   const [saveStatus, setSaveStatus] = useState<SaveStatus>('saved');
   const [saveMessage, setSaveMessage] = useState<string | null>(null);
+  const [publishStatus, setPublishStatus] = useState<PublishStatus>('idle');
+  const [publishMessage, setPublishMessage] = useState<string | null>(null);
   const [updatedAt, setUpdatedAt] = useState(initialUpdatedAt);
   const [version, setVersion] = useState(initialVersion);
   const [saveRequest, setSaveRequest] = useState(0);
@@ -74,6 +131,8 @@ export function DraftEditor({
     setDraft(next);
     setSaveStatus('unsaved');
     setSaveMessage(null);
+    setPublishStatus('idle');
+    setPublishMessage(null);
   }, []);
 
   const runSave = useCallback(async () => {
@@ -96,9 +155,7 @@ export function DraftEditor({
       title: snapshot.title,
       summary: snapshot.summary,
       bodyJson: snapshot.bodyJson,
-      learningObjectives: toLearningObjectives(
-        snapshot.learningObjectivesText,
-      ),
+      metadata: snapshot.metadata,
     });
 
     if (result.ok) {
@@ -178,8 +235,41 @@ export function DraftEditor({
     markChanged({ ...draftRef.current, [key]: value });
   };
 
+  const updateMetadata = (key: string, value: Json) => {
+    updateField('metadata', {
+      ...metadataObject(draftRef.current.metadata),
+      [key]: value,
+    });
+  };
+
   const keepEditorFocus = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
+  };
+
+  const runPublish = async () => {
+    if (saveStatus !== 'saved' || publishStatus === 'publishing') return;
+
+    const confirmed = window.confirm(
+      '현재 저장된 내용을 공개 사이트에 발행할까요?\n발행본은 revision으로 영구 보존됩니다.',
+    );
+    if (!confirmed) return;
+
+    setPublishStatus('publishing');
+    setPublishMessage(null);
+    const result = await publishDraft({
+      contentId,
+      expectedVersion: versionRef.current,
+    });
+
+    if (result.ok) {
+      setPublishStatus('published');
+      setPublishMessage(`Revision ${result.revisionNumber} 발행 완료`);
+      return;
+    }
+
+    setPublishStatus('error');
+    setPublishMessage(result.error);
+    if (result.conflict) setSaveStatus('conflict');
   };
 
   return (
@@ -203,8 +293,21 @@ export function DraftEditor({
           >
             지금 저장
           </button>
-          <button disabled type="button" title="발행 기능은 다음 단계에서 연결합니다.">
-            발행 준비
+          <button
+            className="publish-button"
+            disabled={
+              saveStatus !== 'saved' ||
+              publishStatus === 'publishing' ||
+              publishStatus === 'published'
+            }
+            onClick={() => void runPublish()}
+            type="button"
+          >
+            {publishStatus === 'publishing'
+              ? '발행 중…'
+              : publishStatus === 'published'
+                ? '발행 완료'
+                : '공개 발행'}
           </button>
         </div>
       </header>
@@ -247,19 +350,156 @@ export function DraftEditor({
             </label>
           </div>
 
-          {contentType === 'knowledge' ? (
+          {contentType === 'knowledge' || contentType === 'lecture' ? (
             <label className="learning-objectives-field">
-              <span>이 글에서 알아야 할 것</span>
+              <span>
+                {contentType === 'knowledge'
+                  ? '이 글에서 알아야 할 것'
+                  : '이 강의에서 알아야 할 것'}
+              </span>
               <textarea
                 onChange={(event) =>
-                  updateField('learningObjectivesText', event.target.value)
+                  updateMetadata(
+                    'learningObjectives',
+                    toLines(event.target.value),
+                  )
                 }
                 placeholder={'한 줄에 하나씩 적어주세요\n예: 생성형 AI와 일반 AI의 차이'}
                 rows={4}
-                value={draft.learningObjectivesText}
+                value={metadataLines(draft.metadata, 'learningObjectives')}
               />
               <em>독자가 글을 읽고 분명히 알게 될 내용을 적습니다.</em>
             </label>
+          ) : null}
+
+          {contentType === 'lecture' ? (
+            <section className="content-specific-fields" aria-label="강의 정보">
+              <label>
+                <span>강의 전반 설명</span>
+                <textarea
+                  onChange={(event) => updateMetadata('introduction', event.target.value)}
+                  rows={5}
+                  value={metadataString(draft.metadata, 'introduction')}
+                />
+              </label>
+              <label>
+                <span>YouTube 주소</span>
+                <input
+                  onChange={(event) => updateMetadata('youtubeUrl', event.target.value)}
+                  placeholder="https://www.youtube.com/watch?v=..."
+                  type="url"
+                  value={metadataString(draft.metadata, 'youtubeUrl')}
+                />
+              </label>
+              <label>
+                <span>주요 주제와 타임스탬프</span>
+                <textarea
+                  onChange={(event) => updateMetadata('timestamps', toPairs(event.target.value, 'time', 'label'))}
+                  placeholder={'00:00 | 시작\n03:20 | 핵심 개념'}
+                  rows={4}
+                  value={metadataPairs(draft.metadata, 'timestamps', 'time', 'label')}
+                />
+              </label>
+              <label>
+                <span>강의자료</span>
+                <textarea
+                  onChange={(event) => updateMetadata('materials', toPairs(event.target.value, 'label', 'url'))}
+                  placeholder={'자료 이름 | https://...'}
+                  rows={4}
+                  value={metadataPairs(draft.metadata, 'materials', 'label', 'url')}
+                />
+              </label>
+            </section>
+          ) : null}
+
+          {contentType === 'practice' ? (
+            <section className="content-specific-fields" aria-label="실습 정보">
+              <label>
+                <span>완성 결과 설명</span>
+                <textarea
+                  onChange={(event) => updateMetadata('resultDescription', event.target.value)}
+                  rows={4}
+                  value={metadataString(draft.metadata, 'resultDescription')}
+                />
+              </label>
+              <label>
+                <span>완성 결과 주소</span>
+                <input
+                  onChange={(event) => updateMetadata('demoUrl', event.target.value)}
+                  placeholder="https://..."
+                  type="url"
+                  value={metadataString(draft.metadata, 'demoUrl')}
+                />
+              </label>
+              <label>
+                <span>필요한 것</span>
+                <textarea
+                  onChange={(event) => updateMetadata('requirements', event.target.value)}
+                  rows={3}
+                  value={metadataString(draft.metadata, 'requirements')}
+                />
+              </label>
+              <label>
+                <span>사용 도구</span>
+                <textarea
+                  onChange={(event) => updateMetadata('tools', toLines(event.target.value))}
+                  placeholder="한 줄에 하나씩 적어주세요"
+                  rows={3}
+                  value={metadataLines(draft.metadata, 'tools')}
+                />
+              </label>
+              <label>
+                <span>예상 비용</span>
+                <input
+                  onChange={(event) => updateMetadata('estimatedCost', event.target.value)}
+                  value={metadataString(draft.metadata, 'estimatedCost')}
+                />
+              </label>
+            </section>
+          ) : null}
+
+          {contentType === 'ai_update' ? (
+            <section className="content-specific-fields" aria-label="AI 업데이트 정보">
+              <label>
+                <span>변경 날짜</span>
+                <input
+                  onChange={(event) => updateMetadata('updateDate', event.target.value)}
+                  type="date"
+                  value={metadataString(draft.metadata, 'updateDate')}
+                />
+              </label>
+              <label>
+                <span>확인할 변화 요약</span>
+                <textarea
+                  onChange={(event) => updateMetadata('changeSummary', event.target.value)}
+                  rows={5}
+                  value={metadataString(draft.metadata, 'changeSummary')}
+                />
+              </label>
+            </section>
+          ) : null}
+
+          {contentType === 'book' ? (
+            <section className="content-specific-fields book-editor-fields" aria-label="전자책 정보">
+              <label><span>저자</span><input onChange={(event) => updateMetadata('author', event.target.value)} value={metadataString(draft.metadata, 'author')} /></label>
+              <label><span>출판사</span><input onChange={(event) => updateMetadata('publisher', event.target.value)} value={metadataString(draft.metadata, 'publisher')} /></label>
+              <label><span>출간일</span><input onChange={(event) => updateMetadata('publicationDate', event.target.value)} type="date" value={metadataString(draft.metadata, 'publicationDate')} /></label>
+              <label><span>ISBN</span><input onChange={(event) => updateMetadata('isbn', event.target.value)} value={metadataString(draft.metadata, 'isbn')} /></label>
+              <label><span>페이지 수</span><input min="1" onChange={(event) => updateMetadata('pageCount', Number(event.target.value) || null)} type="number" value={typeof metadataObject(draft.metadata).pageCount === 'number' ? String(metadataObject(draft.metadata).pageCount) : ''} /></label>
+              <label><span>형식</span><input onChange={(event) => updateMetadata('format', event.target.value)} placeholder="종이책, PDF, EPUB" value={metadataString(draft.metadata, 'format')} /></label>
+              <label>
+                <span>외부 판매처</span>
+                <textarea onChange={(event) => updateMetadata('purchaseLinks', toPairs(event.target.value, 'store', 'url'))} placeholder={'교보문고 | https://...\n알라딘 | https://...'} rows={4} value={metadataPairs(draft.metadata, 'purchaseLinks', 'store', 'url')} />
+              </label>
+              <label>
+                <span>목차</span>
+                <textarea onChange={(event) => updateMetadata('tableOfContents', toLines(event.target.value))} placeholder="한 줄에 하나씩 적어주세요" rows={5} value={metadataLines(draft.metadata, 'tableOfContents')} />
+              </label>
+              <label>
+                <span>미리보기</span>
+                <textarea onChange={(event) => updateMetadata('preview', event.target.value)} rows={5} value={metadataString(draft.metadata, 'preview')} />
+              </label>
+            </section>
           ) : null}
 
           <section className="body-editor" aria-label="본문 에디터">
@@ -377,6 +617,14 @@ export function DraftEditor({
             보이지 않습니다.
           </p>
           {saveMessage ? <p role="alert">{saveMessage}</p> : null}
+          {publishMessage ? (
+            <p
+              className={`publish-message is-${publishStatus}`}
+              role={publishStatus === 'error' ? 'alert' : 'status'}
+            >
+              {publishMessage}
+            </p>
+          ) : null}
         </aside>
       </div>
     </main>

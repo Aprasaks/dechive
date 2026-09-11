@@ -2499,6 +2499,60 @@ textarea {
   border-color: color-mix(in srgb, var(--line) 65%, transparent);
 }
 
+.content-specific-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.4rem 2rem;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--ink);
+}
+
+.content-specific-fields label {
+  min-width: 0;
+}
+
+.content-specific-fields label > span {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 750;
+  letter-spacing: 0.06em;
+}
+
+.content-specific-fields input,
+.content-specific-fields textarea {
+  width: 100%;
+  padding: 0.75rem 0;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--ink);
+  resize: vertical;
+}
+
+.content-specific-fields input:focus,
+.content-specific-fields textarea:focus {
+  border-color: var(--green);
+}
+
+.content-specific-fields label:has(textarea),
+.book-editor-fields label:nth-last-child(-n + 3) {
+  grid-column: 1 / -1;
+}
+
+.publish-message.is-published {
+  color: var(--green) !important;
+  font-weight: 750;
+}
+
+.publish-message.is-error {
+  color: #a53e36 !important;
+}
+
 .body-editor {
   margin-top: 3rem;
   border-top: 1px solid var(--ink);
@@ -2699,13 +2753,15 @@ textarea {
     justify-content: start;
   }
 
-  .editor-topbar-actions button:disabled {
-    display: none;
+  .editor-meta-fields,
+  .editor-side-panel,
+  .content-specific-fields {
+    grid-template-columns: 1fr;
   }
 
-  .editor-meta-fields,
-  .editor-side-panel {
-    grid-template-columns: 1fr;
+  .content-specific-fields label,
+  .book-editor-fields label:nth-last-child(-n + 3) {
+    grid-column: auto;
   }
 
   .content-type-options {

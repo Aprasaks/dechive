@@ -397,6 +397,21 @@ export type Database = {
           updated_at: string;
         }[];
       };
+      publish_content: {
+        Args: {
+          p_content_id: string;
+          p_expected_version: number;
+          p_body_checksum: string;
+          p_html: string;
+          p_plain_text: string;
+          p_markdown: string;
+        };
+        Returns: {
+          revision_id: string;
+          revision_number: number;
+          published_at: string;
+        }[];
+      };
     };
     Enums: {
       content_type: ContentType;
