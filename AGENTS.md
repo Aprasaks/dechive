@@ -1,59 +1,68 @@
-# AGENTS.md
+# DECHIVE 작업 기준
 
-## Dechive 정의
+이 저장소는 2026년 9월 전면 재구축 버전이다. 과거 코드·문서·슬러그·콘텐츠 모델은 새 구현의 근거로 사용하지 않는다. 제품 판단은 `docs/PROJECT_CONSTITUTION.md`를 최우선으로 따른다.
 
-Dechive는 **사람이 직접 공부하고 이해한 내용을 지식, 강의, 실습, AI 업데이트로 다시 구성하는 독립적인 학습 플랫폼**이다. 제품·정보 구조의 기준은 [프로젝트 비전](docs/00_PROJECT_VISION.md)과 [제품 구조](docs/02_PRODUCT_STRUCTURE.md)를 따른다.
+## 제품 정의
 
-## 절대 금지 사항
+Dechive는 AI를 이해하고 다루는 데 필요한 지식을 사람이 확인하고 자신의 언어로 다시 설명해 축적하는 공개 지식 저장소다.
 
-- 일반 블로그, Markdown 아카이브, AI SaaS·뉴스 수집·커뮤니티·영상 목록 사이트로 만들지 않는다.
-- Obsidian 또는 외부 문서 도구를 canonical source로 삼거나 새 연동을 추가하지 않는다.
-- 기존 콘텐츠·URL·slug를 승인 없이 삭제하거나 변경하지 않는다.
-- 조사·결정 없이 DB, Docker, 인증, 검색 엔진, AI 챗봇, 대규모 패키지를 도입하지 않는다.
-- 네온, 글래스모피즘, 홀로그램, AI 얼굴·로봇, 무의미한 애니메이션, SaaS 통계, 과장 문구를 사용하지 않는다.
+- 핵심 영역: `Knowledge`, `Lecture`, `Practice`, `AI Update`, `Books`
+- Knowledge는 독립된 개념 지식이다.
+- Lecture는 여러 Knowledge를 학습 순서로 묶고 영상과 자료로 설명한다.
+- Practice는 실제 결과물 하나와 그 제작 과정을 기록한다.
+- AI Update는 날짜별로 반드시 알아야 할 변화만 정리한다.
+- Books는 출판물을 소개하고 외부 판매처로 연결한다.
+- 공개 사이트에는 회원가입, 진도율, 수료, 평점 기능을 만들지 않는다.
+- Jarvis는 사이트 기능이 아니다. 이후 읽기 전용 API로 연결되는 별도 로컬 시스템이다.
 
-## 디자인 절대 규칙
+## 원본과 저장소
 
-- 라이트 모드만 제공한다. 다크모드, 테마 토글, 시스템 다크모드 대응을 구현하지 않는다.
-- 따뜻한 흰색·크림·옅은 회색 배경, 짙은 남색/차분한 청색 포인트, 높은 본문 가독성과 충분한 여백을 사용한다.
-- 모든 영역을 둥근 카드로 만들거나 과도한 그림자·그라데이션을 사용하지 않는다.
-- 이미지는 콘텐츠 데이터로 다루며 대표 이미지는 전체 구도가 보이게 한다. 세부 기준은 [디자인 시스템](docs/05_DESIGN_SYSTEM.md)과 [미디어 시스템](docs/09_MEDIA_SYSTEM.md)을 따른다.
+- Dechive 관리자 에디터가 콘텐츠의 canonical source다.
+- Supabase Postgres는 글·revision·출처·관계·검증 이력의 원본이다.
+- Supabase Storage는 이미지·PDF·강의자료의 원본이다.
+- TipTap JSON을 본문 원본으로 저장하고 HTML·plain text·Markdown은 파생 산출물로 만든다.
+- 자동 저장 초안과 immutable 발행 revision을 분리한다.
+- 임베딩은 검색용 파생 데이터이며 원본이 아니다.
+- Jarvis는 전용 변경분 API를 통해 읽기 전용 사본을 동기화한다.
 
-## 기술 선택과 데이터 보호
+## 디자인
 
-- 요구 해결성, 활동성, 라이선스, TypeScript/Next.js·Docker 호환성, 데이터 소유권·내보내기·교체 가능성, 운영·보안·백업·한국어·비용을 비교한 뒤 채택한다.
-- 기존 Markdown과 정적 데이터는 이전 대상 원본으로 보존한다. 새 시스템의 검증된 이전과 롤백이 끝나기 전 제거하지 않는다.
-- AI 산출물은 자동 발행하지 않으며 운영자 승인과 공급자 교체 경계를 둔다.
+- 라이트 테마만 제공한다.
+- 옅은 미네랄 그레이 배경, 딥그린 제목, 차콜 본문, 제한적인 구리색 포인트를 사용한다.
+- 편집 잡지처럼 정보가 풍부하지만 차분하고 읽기 쉬워야 한다.
+- 물리적인 서가를 모사하지 않는다.
+- 모든 영역을 둥근 카드로 만들지 않는다.
+- 네온, 글래스모피즘, 과한 그라데이션, SaaS 통계 화면을 사용하지 않는다.
+- 콘텐츠 이미지에 로봇·발광 소재가 등장하는 것은 금지하지 않는다.
+- 사용자가 명시적으로 요청하기 전에는 이미지를 생성하지 않는다.
 
-## 작업별 필수 참고 문서
+## 코드 원칙
 
-- 제품/IA: [02_PRODUCT_STRUCTURE](docs/02_PRODUCT_STRUCTURE.md), [03_INFORMATION_ARCHITECTURE](docs/03_INFORMATION_ARCHITECTURE.md)
-- 콘텐츠/DB/관리자: [04_CONTENT_SYSTEM](docs/04_CONTENT_SYSTEM.md), [07_DATABASE_SCHEMA](docs/07_DATABASE_SCHEMA.md), [08_EDITOR_AND_ADMIN](docs/08_EDITOR_AND_ADMIN.md)
-- UI/이미지: [05_DESIGN_SYSTEM](docs/05_DESIGN_SYSTEM.md), [09_MEDIA_SYSTEM](docs/09_MEDIA_SYSTEM.md)
-- 검색/AI/SEO: [10_SEARCH_AND_AI](docs/10_SEARCH_AND_AI.md), [11_ANALYTICS_SEO_AND_SHARING](docs/11_ANALYTICS_SEO_AND_SHARING.md)
-- 인프라/이전: [12_INFRASTRUCTURE_AND_OPERATIONS](docs/12_INFRASTRUCTURE_AND_OPERATIONS.md), [13_MIGRATION_PLAN](docs/13_MIGRATION_PLAN.md)
-- 구현 전: [DECISIONS](docs/DECISIONS.md), [IMPLEMENTATION_ROADMAP](docs/IMPLEMENTATION_ROADMAP.md)
+- Next.js App Router와 TypeScript strict를 사용한다.
+- 새 `any`를 사용하지 않는다.
+- Supabase 접근은 browser/server/admin 경계를 분리한다.
+- 서비스 역할 키와 DB 비밀번호를 클라이언트 코드·문서·로그에 노출하지 않는다.
+- 공개 조회는 발행된 public revision만 반환해야 한다.
+- 데이터 삭제는 soft delete와 change event를 남기는 것을 기본으로 한다.
+- 패키지는 실제 필요가 확인된 경우에만 추가한다.
+- 관련 없는 사용자 작업을 되돌리지 않는다.
 
-## 코드 규칙
+## 작업 순서
 
-- Next.js App Router와 기존 라우트를 보존하고 TypeScript strict를 유지한다. 새 `any`를 사용하지 않는다.
-- Tailwind CSS 중심으로 구현하고 새 패키지는 승인된 결정 기록 뒤에만 추가한다.
-- 비밀값을 코드·문서·로그에 노출하지 않는다. 관련 없는 사용자 변경을 되돌리지 않는다.
-- 콘텐츠 모델·이미지·URL 변경은 마이그레이션과 롤백을 함께 설계한다.
+1. `docs/PROJECT_CONSTITUTION.md`
+2. `docs/CONTENT_AND_PAGES.md`
+3. `docs/SYSTEM_ARCHITECTURE.md`
+4. `docs/IMPLEMENTATION_PLAN.md`
+5. 스키마와 RLS
+6. 관리자 에디터
+7. 공개 페이지
+8. 검색과 Jarvis API
 
-## 테스트 명령어
+## 검증
 
 ```bash
-npm run check:content
 npm run lint
 npm run build
 ```
 
-## 완료 보고 형식
-
-1. 변경 파일
-2. 주요 변경 내용
-3. 반응형 처리 방식(해당 시)
-4. 확인 결과와 실행 명령
-5. 데이터·URL 위험 및 롤백
-6. 남은 TODO와 사용자 결정 항목
+DB 변경은 새 Supabase 프로젝트용 SQL migration과 생성된 TypeScript 타입을 함께 검증한다.

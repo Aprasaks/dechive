@@ -1,54 +1,73 @@
-import type { Metadata } from 'next';
-import { HomeSections, type FeaturedKnowledge } from '@/components/home/HomeSections';
-import { createDatabase } from '@/db/client';
-import { searchPublishedKnowledge } from '@/services/published-knowledge';
+import Link from 'next/link';
+import { ContentList } from '@/components/content/ContentList';
+import { CONTENT_SECTIONS } from '@/lib/content/catalog';
+import {
+  getPublishedContent,
+  type PublicContentSummary,
+} from '@/lib/content/public';
 
-export const metadata: Metadata = {
-  title: 'Dechive — 공부하고, 검증하고, 다시 설명하는 AI',
-  description: 'Dechive는 사람이 이해하고 검증한 내용을 지식과 기록으로 다시 설명하는 아카이브입니다.',
-  alternates: { canonical: 'https://dechive.dev' },
-  openGraph: {
-    title: 'Dechive',
-    description: '공부하고, 검증하고, 다시 설명하는 AI',
-    url: 'https://dechive.dev',
-    type: 'website',
-  },
-};
+export const dynamic = 'force-dynamic';
 
-export const revalidate = 300;
+export default async function HomePage() {
+  let latest: PublicContentSummary[] = [];
 
-async function getFeaturedKnowledge(): Promise<FeaturedKnowledge | null> {
-  const { pool } = createDatabase();
   try {
-    const { items } = await searchPublishedKnowledge(pool, { limit: 1 });
-    const item = items[0];
-    if (!item) return null;
-    return {
-      slug: item.slug,
-      title: item.title,
-      summary: item.summary,
-      publishedAt: item.publishedAt,
-      hero: item.hero
-        ? {
-            publicUrl: item.hero.publicUrl,
-            alt: item.hero.alt,
-            width: item.hero.width,
-            height: item.hero.height,
-          }
-        : null,
-    };
+    latest = await getPublishedContent(undefined, 8);
   } catch {
-    return null;
-  } finally {
-    await pool.end();
+    latest = [];
   }
-}
 
-export default async function Home() {
-  const featuredKnowledge = await getFeaturedKnowledge();
   return (
-    <main id="main-content" className="bg-background text-foreground">
-      <HomeSections featuredKnowledge={featuredKnowledge} />
+    <main id="main-content">
+      <section className="site-shell home-intro">
+        <div className="intro-copy">
+          <p className="eyebrow">AI KNOWLEDGE ARCHIVE</p>
+          <h1>
+            지식의 원본을 찾고,
+            <br />
+            이해한 언어로 다시 남깁니다.
+          </h1>
+          <p className="intro-description">
+            AI를 다루는 데 필요한 개념을 배우고, 출처를 확인하고,
+            실제로 만들어 본 과정까지 하나의 지식으로 축적합니다.
+          </p>
+        </div>
+        <ol className="section-directory">
+          {CONTENT_SECTIONS.slice(0, 3).map((section) => (
+            <li key={section.type}>
+              <Link href={section.href}>
+                <span>{section.index}</span>
+                <strong>{section.label}</strong>
+                <small>{section.description}</small>
+                <b aria-hidden="true">↗</b>
+              </Link>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      {latest.length > 0 ? (
+        <section className="site-shell latest-section">
+          <div className="section-title">
+            <p>RECENTLY PUBLISHED</p>
+            <h2>최근 공개한 지식</h2>
+          </div>
+          <ContentList items={latest} emptyMessage="" />
+        </section>
+      ) : null}
+
+      <section className="site-shell secondary-directory">
+        {CONTENT_SECTIONS.slice(3).map((section) => (
+          <Link href={section.href} key={section.type}>
+            <span>{section.index}</span>
+            <div>
+              <strong>{section.label}</strong>
+              <p>{section.description}</p>
+            </div>
+            <b aria-hidden="true">→</b>
+          </Link>
+        ))}
+      </section>
     </main>
   );
 }

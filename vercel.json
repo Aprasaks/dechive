@@ -1,4 +1,4 @@
 {
   "regions": ["sin1"],
-  "buildCommand": "git config --global url.\"https://${GITHUB_TOKEN}@github.com/\".insteadOf \"https://github.com/\" && if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then git submodule update --init --recursive; fi && npm run build"
+  "framework": "nextjs"
 }
