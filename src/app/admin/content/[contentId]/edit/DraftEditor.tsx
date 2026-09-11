@@ -389,11 +389,12 @@ export function DraftEditor({
     setMediaPhase('checking-session');
     setMediaError(null);
 
-    const supabase = createBrowserClient();
+    let supabase: ReturnType<typeof createBrowserClient> | null = null;
     let uploadedObjectPath: string | null = null;
     let insertedAssetId: string | null = null;
 
     try {
+      supabase = createBrowserClient();
       const {
         data: { user },
       } = await withTimeout(
@@ -486,10 +487,10 @@ export function DraftEditor({
       resetMediaForm();
     } catch (error) {
       console.error('image upload failed', error);
-      if (insertedAssetId) {
+      if (supabase && insertedAssetId) {
         void supabase.from('assets').delete().eq('id', insertedAssetId);
       }
-      if (uploadedObjectPath) {
+      if (supabase && uploadedObjectPath) {
         void supabase.storage
           .from('dechive-public')
           .remove([uploadedObjectPath]);
