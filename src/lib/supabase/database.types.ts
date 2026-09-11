@@ -344,8 +344,25 @@ export type Database = {
           created_at: string;
           deleted_at: string | null;
         };
-        Insert: never;
-        Update: never;
+        Insert: {
+          id?: string;
+          bucket_id: string;
+          object_path: string;
+          original_filename: string;
+          mime_type: string;
+          byte_size: number;
+          width?: number | null;
+          height?: number | null;
+          alt_text?: string | null;
+          checksum: string;
+          uploaded_by: string;
+          created_at?: string;
+          deleted_at?: string | null;
+        };
+        Update: {
+          alt_text?: string | null;
+          deleted_at?: string | null;
+        };
         Relationships: [];
       };
       revision_assets: {

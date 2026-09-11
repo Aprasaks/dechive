@@ -16,9 +16,29 @@ function childrenOf(node: JsonRecord): Json[] {
   return Array.isArray(node.content) ? node.content : [];
 }
 
+function stringAttribute(node: JsonRecord, key: string): string {
+  if (!isRecord(node.attrs)) return '';
+  const value = node.attrs[key];
+  return typeof value === 'string' ? value : '';
+}
+
+function safeMediaUrl(value: string): string | null {
+  try {
+    const url = new URL(value);
+    return url.protocol === 'http:' || url.protocol === 'https:' ? value : null;
+  } catch {
+    return null;
+  }
+}
+
 function plainNode(value: Json): string {
   if (!isRecord(value)) return '';
   if (typeof value.text === 'string') return value.text;
+  if (value.type === 'image') {
+    const alt = stringAttribute(value, 'alt').trim();
+    const caption = stringAttribute(value, 'caption').trim();
+    return caption || (alt ? `[이미지: ${alt}]` : '');
+  }
 
   const separator =
     value.type === 'doc' ||
@@ -49,6 +69,16 @@ function headingLevel(node: JsonRecord) {
 function markdownNode(value: Json): string {
   if (!isRecord(value)) return '';
   if (typeof value.text === 'string') return value.text;
+
+  if (value.type === 'image') {
+    const src = safeMediaUrl(stringAttribute(value, 'src'));
+    if (!src) return '';
+    const alt = stringAttribute(value, 'alt')
+      .replaceAll('[', '\\[')
+      .replaceAll(']', '\\]');
+    const caption = stringAttribute(value, 'caption').trim();
+    return `![${alt}](${src})${caption ? `\n\n*${caption}*` : ''}`;
+  }
 
   const content = childrenOf(value).map(markdownNode).join('');
 
@@ -88,6 +118,14 @@ function markdownNode(value: Json): string {
 function htmlNode(value: Json): string {
   if (!isRecord(value)) return '';
   if (typeof value.text === 'string') return escapeHtml(value.text);
+
+  if (value.type === 'image') {
+    const src = safeMediaUrl(stringAttribute(value, 'src'));
+    if (!src) return '';
+    const alt = escapeHtml(stringAttribute(value, 'alt'));
+    const caption = stringAttribute(value, 'caption').trim();
+    return `<figure><img src="${escapeHtml(src)}" alt="${alt}" loading="lazy">${caption ? `<figcaption>${escapeHtml(caption)}</figcaption>` : ''}</figure>`;
+  }
 
   const content = childrenOf(value).map(htmlNode).join('');
 

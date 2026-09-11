@@ -1175,6 +1175,29 @@ textarea {
   border-top: 1px solid var(--line);
 }
 
+.article-inline-image {
+  margin: clamp(2rem, 5vw, 3.75rem) 0;
+}
+
+.article-inline-image img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  margin-inline: auto;
+  background: var(--paper-deep);
+}
+
+.article-inline-image figcaption {
+  max-width: 42rem;
+  margin: 0.85rem auto 0;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 0.85rem;
+  line-height: 1.65;
+  text-align: center;
+}
+
 .article-toc {
   align-self: start;
   position: sticky;
@@ -2603,6 +2626,112 @@ textarea {
   font-size: 0.76rem;
 }
 
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.media-insert-panel {
+  display: grid;
+  grid-template-columns: minmax(9rem, 15rem) minmax(0, 1fr);
+  gap: 1.25rem;
+  margin: 1.25rem 0 0;
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+
+.media-insert-panel > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-height: 14rem;
+  object-fit: contain;
+  background: var(--paper-deep);
+}
+
+.media-insert-panel > div,
+.media-insert-panel label {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.media-insert-panel > div {
+  align-content: start;
+  gap: 0.9rem;
+}
+
+.media-insert-panel strong {
+  overflow-wrap: anywhere;
+  color: var(--ink);
+  font-size: 0.9rem;
+}
+
+.media-insert-panel label span {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 750;
+}
+
+.media-insert-panel input {
+  width: 100%;
+  padding: 0.65rem 0;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  outline: 0;
+  background: transparent;
+  color: var(--ink);
+}
+
+.media-insert-panel input:focus {
+  border-color: var(--green);
+}
+
+.media-insert-panel p,
+.media-standalone-error {
+  margin: 0;
+  color: #a53e36;
+  font-size: 0.78rem;
+}
+
+.media-standalone-error {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.media-insert-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.media-insert-actions button {
+  min-height: 2.4rem;
+  padding: 0.45rem 0.85rem;
+  border: 1px solid var(--line);
+  background: var(--white);
+  color: var(--ink);
+  cursor: pointer;
+  font-weight: 750;
+}
+
+.media-insert-actions button:last-child {
+  border-color: var(--green);
+  background: var(--green);
+  color: var(--white);
+}
+
+.media-insert-actions button:disabled {
+  cursor: wait;
+  opacity: 0.55;
+}
+
 .tiptap-writing-surface {
   min-height: 38rem;
   padding: 2.25rem 0;
@@ -2697,6 +2826,43 @@ textarea {
   float: left;
   color: #89918c;
   pointer-events: none;
+}
+
+.editor-inline-image {
+  margin: 2.25rem 0;
+}
+
+.editor-inline-image img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  margin-inline: auto;
+  background: var(--paper-deep);
+}
+
+.editor-inline-image figcaption {
+  margin-top: 0.75rem;
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.editor-inline-image.ProseMirror-selectednode {
+  outline: 2px solid var(--green);
+  outline-offset: 0.45rem;
+}
+
+@media (max-width: 680px) {
+  .media-insert-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .media-insert-panel > img {
+    height: auto;
+    max-height: 18rem;
+  }
 }
 
 .editor-side-panel {

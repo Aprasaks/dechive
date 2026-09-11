@@ -101,6 +101,20 @@ function safeHref(value: Json | undefined): string | null {
   }
 }
 
+function stringAttribute(node: JsonRecord, key: string): string {
+  if (!isRecord(node.attrs)) return '';
+  const value = node.attrs[key];
+  return typeof value === 'string' ? value : '';
+}
+
+function numberAttribute(node: JsonRecord, key: string): number | undefined {
+  if (!isRecord(node.attrs)) return undefined;
+  const value = node.attrs[key];
+  return typeof value === 'number' && Number.isFinite(value)
+    ? Math.max(1, Math.round(value))
+    : undefined;
+}
+
 function renderText(node: JsonRecord, key: string): ReactNode {
   let rendered: ReactNode = typeof node.text === 'string' ? node.text : '';
   const marks = Array.isArray(node.marks) ? node.marks : [];
@@ -187,6 +201,27 @@ export function TiptapDocument({ bodyJson }: { bodyJson: Json }) {
         return <br key={key} />;
       case 'horizontalRule':
         return <hr key={key} />;
+      case 'image': {
+        const src = safeHref(stringAttribute(value, 'src'));
+        if (!src) return null;
+        const alt = stringAttribute(value, 'alt');
+        const caption = stringAttribute(value, 'caption');
+
+        return (
+          <figure className="article-inline-image" key={key}>
+            {/* The source is an owner-uploaded Supabase Storage URL. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              alt={alt}
+              height={numberAttribute(value, 'height')}
+              loading="lazy"
+              src={src}
+              width={numberAttribute(value, 'width')}
+            />
+            {caption ? <figcaption>{caption}</figcaption> : null}
+          </figure>
+        );
+      }
       default:
         return <Fragment key={key}>{children}</Fragment>;
     }

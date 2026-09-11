@@ -11,6 +11,8 @@ import {
   useState,
   type MouseEvent,
 } from 'react';
+import { DechiveImage } from '@/lib/editor/image-node';
+import { createClient as createBrowserClient } from '@/lib/supabase/client';
 import type { ContentType, Json } from '@/lib/supabase/database.types';
 import { getContentSection } from '@/lib/content/catalog';
 import { publishDraft, saveDraft } from '../../actions';
@@ -27,6 +29,7 @@ type JsonObject = { [key: string]: Json | undefined };
 
 type SaveStatus = 'saved' | 'unsaved' | 'saving' | 'error' | 'conflict';
 type PublishStatus = 'idle' | 'publishing' | 'published' | 'error';
+type MediaStatus = 'idle' | 'uploading' | 'error';
 
 type DraftEditorProps = {
   contentId: string;
@@ -43,6 +46,46 @@ const STATUS_LABELS: Record<SaveStatus, string> = {
   error: '저장 실패',
   conflict: '다른 수정본 확인 필요',
 };
+
+const ALLOWED_IMAGE_TYPES = new Set([
+  'image/jpeg',
+  'image/png',
+  'image/webp',
+  'image/gif',
+]);
+const MAX_IMAGE_BYTES = 20 * 1024 * 1024;
+
+function imageExtension(mimeType: string) {
+  if (mimeType === 'image/jpeg') return 'jpg';
+  if (mimeType === 'image/png') return 'png';
+  if (mimeType === 'image/webp') return 'webp';
+  return 'gif';
+}
+
+async function sha256(file: File) {
+  const digest = await crypto.subtle.digest('SHA-256', await file.arrayBuffer());
+  return Array.from(new Uint8Array(digest))
+    .map((byte) => byte.toString(16).padStart(2, '0'))
+    .join('');
+}
+
+async function imageDimensions(file: File) {
+  const objectUrl = URL.createObjectURL(file);
+
+  try {
+    return await new Promise<{ width: number; height: number }>(
+      (resolve, reject) => {
+        const image = new Image();
+        image.onload = () =>
+          resolve({ width: image.naturalWidth, height: image.naturalHeight });
+        image.onerror = () => reject(new Error('이미지를 읽을 수 없습니다.'));
+        image.src = objectUrl;
+      },
+    );
+  } finally {
+    URL.revokeObjectURL(objectUrl);
+  }
+}
 
 function toLines(value: string) {
   return value
@@ -116,6 +159,12 @@ export function DraftEditor({
   const [saveMessage, setSaveMessage] = useState<string | null>(null);
   const [publishStatus, setPublishStatus] = useState<PublishStatus>('idle');
   const [publishMessage, setPublishMessage] = useState<string | null>(null);
+  const [mediaFile, setMediaFile] = useState<File | null>(null);
+  const [mediaPreviewUrl, setMediaPreviewUrl] = useState<string | null>(null);
+  const [mediaAlt, setMediaAlt] = useState('');
+  const [mediaCaption, setMediaCaption] = useState('');
+  const [mediaStatus, setMediaStatus] = useState<MediaStatus>('idle');
+  const [mediaError, setMediaError] = useState<string | null>(null);
   const [updatedAt, setUpdatedAt] = useState(initialUpdatedAt);
   const [version, setVersion] = useState(initialVersion);
   const [saveRequest, setSaveRequest] = useState(0);
@@ -124,6 +173,7 @@ export function DraftEditor({
   const changeNumberRef = useRef(0);
   const saveInFlightRef = useRef(false);
   const queuedSaveRef = useRef(false);
+  const mediaInputRef = useRef<HTMLInputElement>(null);
 
   const markChanged = useCallback((next: DraftSnapshot) => {
     draftRef.current = next;
@@ -188,6 +238,7 @@ export function DraftEditor({
       StarterKit.configure({
         heading: { levels: [2, 3] },
       }),
+      DechiveImage,
     ],
     content: initialDraft.bodyJson as Content,
     immediatelyRender: false,
@@ -228,6 +279,12 @@ export function DraftEditor({
     return () => window.removeEventListener('beforeunload', warnBeforeLeaving);
   }, [saveStatus]);
 
+  useEffect(() => {
+    return () => {
+      if (mediaPreviewUrl) URL.revokeObjectURL(mediaPreviewUrl);
+    };
+  }, [mediaPreviewUrl]);
+
   const updateField = <Key extends keyof DraftSnapshot>(
     key: Key,
     value: DraftSnapshot[Key],
@@ -248,6 +305,132 @@ export function DraftEditor({
   ) => {
     event.preventDefault();
     command();
+  };
+
+  const resetMediaForm = () => {
+    if (mediaPreviewUrl) URL.revokeObjectURL(mediaPreviewUrl);
+    setMediaFile(null);
+    setMediaPreviewUrl(null);
+    setMediaAlt('');
+    setMediaCaption('');
+    setMediaStatus('idle');
+    setMediaError(null);
+  };
+
+  const selectMediaFile = (file: File | undefined) => {
+    if (!file) return;
+
+    if (!ALLOWED_IMAGE_TYPES.has(file.type)) {
+      setMediaError('JPG, PNG, WebP, GIF 파일만 올릴 수 있습니다.');
+      return;
+    }
+
+    if (file.size > MAX_IMAGE_BYTES) {
+      setMediaError('이미지는 한 장당 20MB 이하로 올려주세요.');
+      return;
+    }
+
+    if (mediaPreviewUrl) URL.revokeObjectURL(mediaPreviewUrl);
+    setMediaFile(file);
+    setMediaPreviewUrl(URL.createObjectURL(file));
+    setMediaAlt('');
+    setMediaCaption('');
+    setMediaStatus('idle');
+    setMediaError(null);
+  };
+
+  const uploadAndInsertMedia = async () => {
+    if (!mediaFile || !editor || mediaStatus === 'uploading') return;
+    if (!mediaAlt.trim()) {
+      setMediaError('이미지를 설명하는 대체 텍스트를 적어주세요.');
+      return;
+    }
+
+    setMediaStatus('uploading');
+    setMediaError(null);
+
+    const supabase = createBrowserClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (!user) {
+      setMediaStatus('error');
+      setMediaError('로그인 상태를 확인한 뒤 다시 시도해 주세요.');
+      return;
+    }
+
+    try {
+      const dimensions = await imageDimensions(mediaFile);
+      const checksum = await sha256(mediaFile);
+      const objectPath = `content/${contentId}/${crypto.randomUUID()}.${imageExtension(mediaFile.type)}`;
+      const { error: uploadError } = await supabase.storage
+        .from('dechive-public')
+        .upload(objectPath, mediaFile, {
+          cacheControl: '31536000',
+          contentType: mediaFile.type,
+          upsert: false,
+        });
+
+      if (uploadError) throw uploadError;
+
+      const { data: asset, error: assetError } = await supabase
+        .from('assets')
+        .insert({
+          bucket_id: 'dechive-public',
+          object_path: objectPath,
+          original_filename: mediaFile.name,
+          mime_type: mediaFile.type,
+          byte_size: mediaFile.size,
+          width: dimensions.width,
+          height: dimensions.height,
+          alt_text: mediaAlt.trim(),
+          checksum,
+          uploaded_by: user.id,
+        })
+        .select('id')
+        .single();
+
+      if (assetError || !asset) {
+        await supabase.storage.from('dechive-public').remove([objectPath]);
+        throw assetError ?? new Error('이미지 기록을 만들지 못했습니다.');
+      }
+
+      const publicUrl = supabase.storage
+        .from('dechive-public')
+        .getPublicUrl(objectPath).data.publicUrl;
+      const inserted = editor
+        .chain()
+        .focus()
+        .insertContent({
+          type: 'image',
+          attrs: {
+            assetId: asset.id,
+            src: publicUrl,
+            alt: mediaAlt.trim(),
+            caption: mediaCaption.trim(),
+            width: dimensions.width,
+            height: dimensions.height,
+          },
+        })
+        .run();
+
+      if (!inserted) {
+        await supabase.from('assets').delete().eq('id', asset.id);
+        await supabase.storage.from('dechive-public').remove([objectPath]);
+        throw new Error('본문에 이미지를 삽입하지 못했습니다.');
+      }
+
+      resetMediaForm();
+    } catch (error) {
+      console.error('image upload failed', error);
+      setMediaStatus('error');
+      setMediaError(
+        error instanceof Error
+          ? error.message
+          : '이미지를 올리지 못했습니다. 다시 시도해 주세요.',
+      );
+    }
   };
 
   const runPublish = async () => {
@@ -599,6 +782,29 @@ export function DraftEditor({
               >
                 인용
               </button>
+              <input
+                accept="image/jpeg,image/png,image/webp,image/gif"
+                aria-label="삽입할 이미지 또는 GIF 선택"
+                className="visually-hidden"
+                onChange={(event) => {
+                  selectMediaFile(event.target.files?.[0]);
+                  event.target.value = '';
+                }}
+                ref={mediaInputRef}
+                type="file"
+              />
+              <button
+                aria-pressed={Boolean(mediaFile)}
+                disabled={!editor || mediaStatus === 'uploading'}
+                onMouseDown={(event) => {
+                  event.preventDefault();
+                  mediaInputRef.current?.click();
+                }}
+                title="JPG, PNG, WebP, GIF 삽입"
+                type="button"
+              >
+                이미지·GIF
+              </button>
               <span />
               <button
                 disabled={!editor?.can().undo()}
@@ -628,6 +834,53 @@ export function DraftEditor({
             <p className="editor-toolbar-help">
               본문에 커서를 둔 뒤 문단 형식을 고르거나, 글자를 선택해 굵게·기울임을 적용하세요.
             </p>
+            {mediaFile && mediaPreviewUrl ? (
+              <section className="media-insert-panel" aria-label="이미지 삽입 정보">
+                {/* Local object URL used only before the upload is confirmed. */}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={mediaPreviewUrl} alt="삽입 전 미리보기" />
+                <div>
+                  <strong>{mediaFile.name}</strong>
+                  <label>
+                    <span>대체 텍스트</span>
+                    <input
+                      onChange={(event) => setMediaAlt(event.target.value)}
+                      placeholder="이미지에서 무엇을 볼 수 있는지 설명"
+                      value={mediaAlt}
+                    />
+                  </label>
+                  <label>
+                    <span>캡션</span>
+                    <input
+                      onChange={(event) => setMediaCaption(event.target.value)}
+                      placeholder="본문 아래에 표시할 설명—선택 사항"
+                      value={mediaCaption}
+                    />
+                  </label>
+                  {mediaError ? <p role="alert">{mediaError}</p> : null}
+                  <div className="media-insert-actions">
+                    <button
+                      disabled={mediaStatus === 'uploading'}
+                      onClick={resetMediaForm}
+                      type="button"
+                    >
+                      취소
+                    </button>
+                    <button
+                      disabled={mediaStatus === 'uploading'}
+                      onClick={() => void uploadAndInsertMedia()}
+                      type="button"
+                    >
+                      {mediaStatus === 'uploading' ? '업로드 중…' : '본문에 삽입'}
+                    </button>
+                  </div>
+                </div>
+              </section>
+            ) : mediaError ? (
+              <p className="media-standalone-error" role="alert">
+                {mediaError}
+              </p>
+            ) : null}
             <EditorContent editor={editor} />
           </section>
         </section>
