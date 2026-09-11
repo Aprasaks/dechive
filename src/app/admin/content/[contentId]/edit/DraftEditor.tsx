@@ -30,6 +30,13 @@ type JsonObject = { [key: string]: Json | undefined };
 type SaveStatus = 'saved' | 'unsaved' | 'saving' | 'error' | 'conflict';
 type PublishStatus = 'idle' | 'publishing' | 'published' | 'error';
 type MediaStatus = 'idle' | 'uploading' | 'error';
+type MediaPhase =
+  | 'idle'
+  | 'checking-session'
+  | 'reading-file'
+  | 'uploading-file'
+  | 'saving-record'
+  | 'inserting-body';
 
 type DraftEditorProps = {
   contentId: string;
@@ -54,6 +61,35 @@ const ALLOWED_IMAGE_TYPES = new Set([
   'image/gif',
 ]);
 const MAX_IMAGE_BYTES = 20 * 1024 * 1024;
+const MEDIA_PHASE_LABELS: Record<MediaPhase, string> = {
+  idle: '',
+  'checking-session': '로그인 상태를 확인하고 있습니다…',
+  'reading-file': '이미지 정보를 확인하고 있습니다…',
+  'uploading-file': '파일을 저장소에 올리고 있습니다…',
+  'saving-record': '이미지 정보를 기록하고 있습니다…',
+  'inserting-body': '본문에 이미지를 넣고 있습니다…',
+};
+
+function withTimeout<Result>(
+  promise: PromiseLike<Result>,
+  timeoutMs: number,
+  message: string,
+): Promise<Result> {
+  return new Promise((resolve, reject) => {
+    const timeout = window.setTimeout(() => reject(new Error(message)), timeoutMs);
+
+    Promise.resolve(promise).then(
+      (result) => {
+        window.clearTimeout(timeout);
+        resolve(result);
+      },
+      (error: unknown) => {
+        window.clearTimeout(timeout);
+        reject(error);
+      },
+    );
+  });
+}
 
 function imageExtension(mimeType: string) {
   if (mimeType === 'image/jpeg') return 'jpg';
@@ -164,6 +200,7 @@ export function DraftEditor({
   const [mediaAlt, setMediaAlt] = useState('');
   const [mediaCaption, setMediaCaption] = useState('');
   const [mediaStatus, setMediaStatus] = useState<MediaStatus>('idle');
+  const [mediaPhase, setMediaPhase] = useState<MediaPhase>('idle');
   const [mediaError, setMediaError] = useState<string | null>(null);
   const [updatedAt, setUpdatedAt] = useState(initialUpdatedAt);
   const [version, setVersion] = useState(initialVersion);
@@ -314,6 +351,7 @@ export function DraftEditor({
     setMediaAlt('');
     setMediaCaption('');
     setMediaStatus('idle');
+    setMediaPhase('idle');
     setMediaError(null);
   };
 
@@ -336,6 +374,7 @@ export function DraftEditor({
     setMediaAlt('');
     setMediaCaption('');
     setMediaStatus('idle');
+    setMediaPhase('idle');
     setMediaError(null);
   };
 
@@ -347,58 +386,81 @@ export function DraftEditor({
     }
 
     setMediaStatus('uploading');
+    setMediaPhase('checking-session');
     setMediaError(null);
 
     const supabase = createBrowserClient();
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-
-    if (!user) {
-      setMediaStatus('error');
-      setMediaError('로그인 상태를 확인한 뒤 다시 시도해 주세요.');
-      return;
-    }
+    let uploadedObjectPath: string | null = null;
+    let insertedAssetId: string | null = null;
 
     try {
-      const dimensions = await imageDimensions(mediaFile);
-      const checksum = await sha256(mediaFile);
+      const {
+        data: { user },
+      } = await withTimeout(
+        supabase.auth.getUser(),
+        15_000,
+        '로그인 확인이 지연되고 있습니다. 페이지를 새로고침한 뒤 다시 시도해 주세요.',
+      );
+
+      if (!user) {
+        throw new Error('로그인 상태를 확인한 뒤 다시 시도해 주세요.');
+      }
+
+      setMediaPhase('reading-file');
+      const [dimensions, checksum] = await withTimeout(
+        Promise.all([imageDimensions(mediaFile), sha256(mediaFile)]),
+        20_000,
+        '이미지 파일을 읽지 못했습니다. 다른 이미지로 다시 시도해 주세요.',
+      );
       const objectPath = `content/${contentId}/${crypto.randomUUID()}.${imageExtension(mediaFile.type)}`;
-      const { error: uploadError } = await supabase.storage
+      uploadedObjectPath = objectPath;
+      setMediaPhase('uploading-file');
+      const uploadRequest = supabase.storage
         .from('dechive-public')
         .upload(objectPath, mediaFile, {
           cacheControl: '31536000',
           contentType: mediaFile.type,
           upsert: false,
         });
+      const { error: uploadError } = await withTimeout(
+        uploadRequest,
+        60_000,
+        '파일 업로드가 1분 안에 끝나지 않았습니다. 네트워크와 Supabase Storage 설정을 확인해 주세요.',
+      );
 
       if (uploadError) throw uploadError;
 
-      const { data: asset, error: assetError } = await supabase
-        .from('assets')
-        .insert({
-          bucket_id: 'dechive-public',
-          object_path: objectPath,
-          original_filename: mediaFile.name,
-          mime_type: mediaFile.type,
-          byte_size: mediaFile.size,
-          width: dimensions.width,
-          height: dimensions.height,
-          alt_text: mediaAlt.trim(),
-          checksum,
-          uploaded_by: user.id,
-        })
-        .select('id')
-        .single();
+      setMediaPhase('saving-record');
+      const { data: asset, error: assetError } = await withTimeout(
+        supabase
+          .from('assets')
+          .insert({
+            bucket_id: 'dechive-public',
+            object_path: objectPath,
+            original_filename: mediaFile.name,
+            mime_type: mediaFile.type,
+            byte_size: mediaFile.size,
+            width: dimensions.width,
+            height: dimensions.height,
+            alt_text: mediaAlt.trim(),
+            checksum,
+            uploaded_by: user.id,
+          })
+          .select('id')
+          .single(),
+        20_000,
+        '이미지 정보 저장이 지연되고 있습니다. Supabase 권한 설정을 확인해 주세요.',
+      );
 
       if (assetError || !asset) {
-        await supabase.storage.from('dechive-public').remove([objectPath]);
         throw assetError ?? new Error('이미지 기록을 만들지 못했습니다.');
       }
+      insertedAssetId = asset.id;
 
       const publicUrl = supabase.storage
         .from('dechive-public')
         .getPublicUrl(objectPath).data.publicUrl;
+      setMediaPhase('inserting-body');
       const inserted = editor
         .chain()
         .focus()
@@ -416,15 +478,24 @@ export function DraftEditor({
         .run();
 
       if (!inserted) {
-        await supabase.from('assets').delete().eq('id', asset.id);
-        await supabase.storage.from('dechive-public').remove([objectPath]);
         throw new Error('본문에 이미지를 삽입하지 못했습니다.');
       }
 
+      insertedAssetId = null;
+      uploadedObjectPath = null;
       resetMediaForm();
     } catch (error) {
       console.error('image upload failed', error);
+      if (insertedAssetId) {
+        void supabase.from('assets').delete().eq('id', insertedAssetId);
+      }
+      if (uploadedObjectPath) {
+        void supabase.storage
+          .from('dechive-public')
+          .remove([uploadedObjectPath]);
+      }
       setMediaStatus('error');
+      setMediaPhase('idle');
       setMediaError(
         error instanceof Error
           ? error.message
@@ -858,6 +929,11 @@ export function DraftEditor({
                     />
                   </label>
                   {mediaError ? <p role="alert">{mediaError}</p> : null}
+                  {mediaStatus === 'uploading' ? (
+                    <p className="media-upload-progress" role="status">
+                      {MEDIA_PHASE_LABELS[mediaPhase]}
+                    </p>
+                  ) : null}
                   <div className="media-insert-actions">
                     <button
                       disabled={mediaStatus === 'uploading'}
@@ -871,7 +947,9 @@ export function DraftEditor({
                       onClick={() => void uploadAndInsertMedia()}
                       type="button"
                     >
-                      {mediaStatus === 'uploading' ? '업로드 중…' : '본문에 삽입'}
+                      {mediaStatus === 'uploading'
+                        ? '처리 중…'
+                        : '본문에 삽입'}
                     </button>
                   </div>
                 </div>
