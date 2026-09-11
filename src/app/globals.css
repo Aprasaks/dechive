@@ -2621,6 +2621,33 @@ textarea {
   margin: 1.15em 0;
 }
 
+.tiptap-writing-surface ul,
+.tiptap-writing-surface ol {
+  margin: 1.25rem 0;
+  padding-left: 1.75rem;
+}
+
+.tiptap-writing-surface ul {
+  list-style: disc;
+}
+
+.tiptap-writing-surface ol {
+  list-style: decimal;
+}
+
+.tiptap-writing-surface li {
+  margin: 0.4rem 0;
+  padding-left: 0.25rem;
+}
+
+.tiptap-writing-surface li::marker {
+  color: var(--copper);
+}
+
+.tiptap-writing-surface li > p {
+  margin: 0;
+}
+
 .tiptap-writing-surface h2,
 .tiptap-writing-surface h3 {
   color: var(--ink);
