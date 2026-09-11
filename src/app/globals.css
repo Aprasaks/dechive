@@ -1904,10 +1904,10 @@ textarea {
 .admin-login-page h1,
 .admin-heading h1 {
   margin: 0;
-  color: var(--green);
-  font-family: Georgia, 'Noto Serif KR', serif;
+  color: var(--ink);
+  font-family: inherit;
   font-size: clamp(2.4rem, 5vw, 4.5rem);
-  font-weight: 500;
+  font-weight: 750;
   letter-spacing: -0.045em;
   line-height: 1.1;
 }
@@ -2098,8 +2098,8 @@ textarea {
 
 .admin-recent h2 {
   margin: 0;
-  color: var(--green);
-  font-family: Georgia, 'Noto Serif KR', serif;
+  color: var(--ink);
+  font-family: inherit;
   font-size: 1.65rem;
   font-weight: 500;
 }
@@ -2154,8 +2154,8 @@ textarea {
 
 .admin-next h2 {
   margin: 0;
-  color: var(--green);
-  font-family: Georgia, 'Noto Serif KR', serif;
+  color: var(--ink);
+  font-family: inherit;
   font-size: 1.65rem;
   font-weight: 500;
 }
@@ -2169,7 +2169,7 @@ textarea {
 .admin-back-link {
   display: inline-block;
   margin-bottom: 3rem;
-  color: var(--green);
+  color: var(--ink);
   font-size: 0.86rem;
   font-weight: 700;
 }
@@ -2192,7 +2192,7 @@ textarea {
 .new-content-title > span {
   display: block;
   margin-bottom: 1rem;
-  color: var(--green);
+  color: var(--ink);
   font-size: 0.82rem;
   font-weight: 750;
   letter-spacing: 0.05em;
@@ -2236,7 +2236,7 @@ textarea {
 
 .content-type-options strong {
   margin-top: 1.3rem;
-  color: var(--green);
+  color: var(--ink);
   font-family: Georgia, 'Times New Roman', serif;
   font-size: 1.35rem;
   font-weight: 500;
@@ -2273,12 +2273,12 @@ textarea {
   width: 100%;
   padding: 1rem 0;
   border: 0;
-  border-bottom: 2px solid var(--green);
+  border-bottom: 2px solid var(--ink);
   border-radius: 0;
   outline: 0;
   background: transparent;
-  color: var(--green);
-  font-family: Georgia, 'Noto Serif KR', serif;
+  color: var(--ink);
+  font-family: inherit;
   font-size: clamp(1.5rem, 3vw, 2.6rem);
 }
 
@@ -2393,7 +2393,8 @@ textarea {
 
 .editor-topbar-actions button:first-child {
   background: transparent;
-  color: var(--green);
+  color: var(--ink);
+  border-color: var(--ink);
 }
 
 .editor-layout {
@@ -2434,7 +2435,7 @@ textarea {
   outline: 0;
   background: transparent;
   color: var(--ink);
-  font-family: Georgia, 'Noto Serif KR', serif;
+  font-family: inherit;
   font-size: clamp(2.3rem, 5vw, 4.6rem);
   font-weight: 500;
   letter-spacing: -0.045em;
@@ -2580,8 +2581,8 @@ textarea {
 }
 
 .editor-toolbar button[aria-pressed='true'] {
-  background: var(--green-soft);
-  color: var(--green);
+  background: var(--ink);
+  color: var(--white);
 }
 
 .editor-toolbar button:disabled {
@@ -2594,12 +2595,20 @@ textarea {
   min-width: 1rem;
 }
 
+.editor-toolbar-help {
+  margin: 0;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.76rem;
+}
+
 .tiptap-writing-surface {
   min-height: 38rem;
   padding: 2.25rem 0;
   outline: 0;
   color: var(--ink);
-  font-family: Georgia, 'Noto Serif KR', serif;
+  font-family: inherit;
   font-size: 1.08rem;
   line-height: 1.95;
 }
@@ -2614,7 +2623,8 @@ textarea {
 
 .tiptap-writing-surface h2,
 .tiptap-writing-surface h3 {
-  color: var(--green);
+  color: var(--ink);
+  font-weight: 750;
   line-height: 1.35;
 }
 
@@ -2689,7 +2699,7 @@ textarea {
 
 .editor-side-panel dd {
   margin: 0;
-  color: var(--green);
+  color: var(--ink);
   font-size: 0.78rem;
   font-weight: 700;
 }

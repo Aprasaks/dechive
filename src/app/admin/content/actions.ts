@@ -146,13 +146,23 @@ export async function saveDraft(
 
   if (error || !saved) {
     const conflict = error?.code === '40001';
+    const duplicateSlug = error?.code === '23505';
+
+    console.error('save_content_draft failed', {
+      code: error?.code,
+      message: error?.message,
+      details: error?.details,
+      hint: error?.hint,
+    });
 
     return {
       ok: false,
       conflict,
       error: conflict
         ? '다른 화면에서 이 초안이 변경됐습니다. 새로고침 후 다시 확인해 주세요.'
-        : '저장하지 못했습니다. 작성 내용은 화면에 남아 있습니다.',
+        : duplicateSlug
+          ? '이미 사용 중인 주소입니다. 주소를 바꾼 뒤 다시 저장해 주세요.'
+          : `저장하지 못했습니다. 작성 내용은 화면에 남아 있습니다. (${error?.code ?? '알 수 없는 오류'})`,
     };
   }
 

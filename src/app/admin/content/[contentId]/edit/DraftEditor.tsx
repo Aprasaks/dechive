@@ -242,8 +242,12 @@ export function DraftEditor({
     });
   };
 
-  const keepEditorFocus = (event: MouseEvent<HTMLButtonElement>) => {
+  const runEditorCommand = (
+    event: MouseEvent<HTMLButtonElement>,
+    command: () => void,
+  ) => {
     event.preventDefault();
+    command();
   };
 
   const runPublish = async () => {
@@ -507,8 +511,12 @@ export function DraftEditor({
               <button
                 aria-pressed={editor?.isActive('paragraph') ?? false}
                 disabled={!editor}
-                onClick={() => editor?.chain().focus().setParagraph().run()}
-                onMouseDown={keepEditorFocus}
+                onMouseDown={(event) =>
+                  runEditorCommand(event, () =>
+                    editor?.chain().focus().setParagraph().run(),
+                  )
+                }
+                title="현재 문단을 본문으로 바꾸기"
                 type="button"
               >
                 본문
@@ -516,8 +524,12 @@ export function DraftEditor({
               <button
                 aria-pressed={editor?.isActive('heading', { level: 2 }) ?? false}
                 disabled={!editor}
-                onClick={() => editor?.chain().focus().toggleHeading({ level: 2 }).run()}
-                onMouseDown={keepEditorFocus}
+                onMouseDown={(event) =>
+                  runEditorCommand(event, () =>
+                    editor?.chain().focus().toggleHeading({ level: 2 }).run(),
+                  )
+                }
+                title="현재 문단을 큰 소제목으로 바꾸기"
                 type="button"
               >
                 H2
@@ -525,8 +537,12 @@ export function DraftEditor({
               <button
                 aria-pressed={editor?.isActive('heading', { level: 3 }) ?? false}
                 disabled={!editor}
-                onClick={() => editor?.chain().focus().toggleHeading({ level: 3 }).run()}
-                onMouseDown={keepEditorFocus}
+                onMouseDown={(event) =>
+                  runEditorCommand(event, () =>
+                    editor?.chain().focus().toggleHeading({ level: 3 }).run(),
+                  )
+                }
+                title="현재 문단을 작은 소제목으로 바꾸기"
                 type="button"
               >
                 H3
@@ -534,8 +550,12 @@ export function DraftEditor({
               <button
                 aria-pressed={editor?.isActive('bold') ?? false}
                 disabled={!editor}
-                onClick={() => editor?.chain().focus().toggleBold().run()}
-                onMouseDown={keepEditorFocus}
+                onMouseDown={(event) =>
+                  runEditorCommand(event, () =>
+                    editor?.chain().focus().toggleBold().run(),
+                  )
+                }
+                title="선택한 글자를 굵게"
                 type="button"
               >
                 굵게
@@ -543,8 +563,12 @@ export function DraftEditor({
               <button
                 aria-pressed={editor?.isActive('italic') ?? false}
                 disabled={!editor}
-                onClick={() => editor?.chain().focus().toggleItalic().run()}
-                onMouseDown={keepEditorFocus}
+                onMouseDown={(event) =>
+                  runEditorCommand(event, () =>
+                    editor?.chain().focus().toggleItalic().run(),
+                  )
+                }
+                title="선택한 글자를 기울임꼴로"
                 type="button"
               >
                 기울임
@@ -552,8 +576,12 @@ export function DraftEditor({
               <button
                 aria-pressed={editor?.isActive('bulletList') ?? false}
                 disabled={!editor}
-                onClick={() => editor?.chain().focus().toggleBulletList().run()}
-                onMouseDown={keepEditorFocus}
+                onMouseDown={(event) =>
+                  runEditorCommand(event, () =>
+                    editor?.chain().focus().toggleBulletList().run(),
+                  )
+                }
+                title="현재 문단을 글머리표 목록으로"
                 type="button"
               >
                 목록
@@ -561,8 +589,12 @@ export function DraftEditor({
               <button
                 aria-pressed={editor?.isActive('blockquote') ?? false}
                 disabled={!editor}
-                onClick={() => editor?.chain().focus().toggleBlockquote().run()}
-                onMouseDown={keepEditorFocus}
+                onMouseDown={(event) =>
+                  runEditorCommand(event, () =>
+                    editor?.chain().focus().toggleBlockquote().run(),
+                  )
+                }
+                title="현재 문단을 인용문으로"
                 type="button"
               >
                 인용
@@ -570,21 +602,32 @@ export function DraftEditor({
               <span />
               <button
                 disabled={!editor?.can().undo()}
-                onClick={() => editor?.chain().focus().undo().run()}
-                onMouseDown={keepEditorFocus}
+                onMouseDown={(event) =>
+                  runEditorCommand(event, () =>
+                    editor?.chain().focus().undo().run(),
+                  )
+                }
+                title="마지막 본문 편집 취소"
                 type="button"
               >
                 실행 취소
               </button>
               <button
                 disabled={!editor?.can().redo()}
-                onClick={() => editor?.chain().focus().redo().run()}
-                onMouseDown={keepEditorFocus}
+                onMouseDown={(event) =>
+                  runEditorCommand(event, () =>
+                    editor?.chain().focus().redo().run(),
+                  )
+                }
+                title="취소한 본문 편집 다시 실행"
                 type="button"
               >
                 다시 실행
               </button>
             </div>
+            <p className="editor-toolbar-help">
+              본문에 커서를 둔 뒤 문단 형식을 고르거나, 글자를 선택해 굵게·기울임을 적용하세요.
+            </p>
             <EditorContent editor={editor} />
           </section>
         </section>
