@@ -20,7 +20,7 @@ export function ContentList({
   emptyMessage,
 }: {
   items: PublicContentSummary[];
-  type: ContentType;
+  type: ContentType | 'mixed';
   emptyMessage: string;
 }) {
   if (items.length === 0) {

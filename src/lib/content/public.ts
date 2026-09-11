@@ -413,6 +413,32 @@ export async function getPublishedContent(
   });
 }
 
+export async function searchPublishedContent(
+  query: string,
+  limit = 40,
+): Promise<PublicContentSummary[]> {
+  const terms = query
+    .trim()
+    .toLocaleLowerCase('ko-KR')
+    .split(/\s+/)
+    .filter(Boolean);
+
+  if (terms.length === 0) {
+    return [];
+  }
+
+  const candidates = await getPublishedContent(undefined, 500);
+
+  return candidates
+    .filter((item) => {
+      const searchable = `${item.title} ${item.summary}`.toLocaleLowerCase(
+        'ko-KR',
+      );
+      return terms.every((term) => searchable.includes(term));
+    })
+    .slice(0, limit);
+}
+
 export async function getPublishedKnowledgeDetail(
   slug: string,
 ): Promise<PublicKnowledgeDetail | null> {

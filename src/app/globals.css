@@ -1778,12 +1778,36 @@ textarea {
 
 .search-page {
   min-height: 70vh;
-  padding-block: clamp(5rem, 9vw, 9rem);
+  padding-block: clamp(4rem, 8vw, 8rem);
+}
+
+.search-heading {
+  display: grid;
+  grid-template-columns: minmax(10rem, 0.6fr) minmax(0, 2fr);
+  gap: 0 clamp(2rem, 6vw, 7rem);
+  padding-bottom: clamp(3rem, 6vw, 6rem);
+  border-bottom: 1px solid var(--ink);
+}
+
+.search-heading .eyebrow {
+  grid-row: 1 / span 2;
+}
+
+.search-heading h1 {
+  max-width: 13ch;
+  color: var(--ink);
+  font-size: clamp(3rem, 6vw, 6.2rem);
+  line-height: 1.08;
+}
+
+.search-heading > p:last-child {
+  margin: 1.5rem 0 0;
+  color: var(--muted);
 }
 
 .search-page form {
-  max-width: 56rem;
-  margin-top: 4rem;
+  max-width: 64rem;
+  margin: clamp(3rem, 6vw, 6rem) auto 0;
 }
 
 .search-page label {
@@ -1795,7 +1819,7 @@ textarea {
 .search-page form > div {
   display: grid;
   grid-template-columns: 1fr auto;
-  border-bottom: 2px solid var(--green);
+  border-bottom: 2px solid var(--ink);
 }
 
 .search-page input {
@@ -1804,8 +1828,9 @@ textarea {
   border: 0;
   outline: 0;
   background: transparent;
-  color: var(--green);
-  font-size: clamp(1.2rem, 3vw, 2rem);
+  color: var(--ink);
+  font-family: Georgia, 'Noto Serif KR', serif;
+  font-size: clamp(1.4rem, 3vw, 2.6rem);
 }
 
 .search-page button {
@@ -1814,6 +1839,40 @@ textarea {
   color: var(--green);
   cursor: pointer;
   font-weight: 700;
+}
+
+.search-results {
+  margin-top: clamp(5rem, 8vw, 8rem);
+  padding-top: 2rem;
+  border-top: 1px solid var(--ink);
+}
+
+.search-results-heading {
+  display: grid;
+  grid-template-columns: 7rem minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: baseline;
+  margin-bottom: 2rem;
+}
+
+.search-results-heading > span {
+  color: var(--green);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+.search-results-heading h2 {
+  margin: 0;
+  font-family: Georgia, 'Noto Serif KR', serif;
+  font-size: clamp(1.7rem, 3vw, 2.8rem);
+  font-weight: 500;
+}
+
+.search-results-heading p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.8rem;
 }
 
 .site-footer {
@@ -1837,10 +1896,9 @@ textarea {
 .admin-brand {
   display: inline-block;
   margin-bottom: 3rem;
-  color: var(--green);
-  font-family: Georgia, 'Times New Roman', serif;
-  font-weight: 700;
-  letter-spacing: 0.14em;
+  color: var(--ink);
+  font-weight: 850;
+  letter-spacing: 0.16em;
 }
 
 .admin-login-page h1,
@@ -1915,7 +1973,7 @@ textarea {
 
 .admin-page {
   min-height: 100vh;
-  background: #e8ebe6;
+  background: var(--paper);
 }
 
 .admin-topbar {
@@ -1925,6 +1983,7 @@ textarea {
   justify-content: space-between;
   padding-inline: var(--gutter);
   border-bottom: 1px solid var(--line);
+  background: var(--white);
 }
 
 .admin-topbar .admin-brand {
@@ -1953,7 +2012,7 @@ textarea {
 }
 
 .admin-shell {
-  width: min(100%, 92rem);
+  width: min(100%, 88rem);
   margin-inline: auto;
   padding: clamp(3rem, 7vw, 7rem) var(--gutter);
 }
@@ -1964,7 +2023,7 @@ textarea {
   justify-content: space-between;
   gap: 2rem;
   padding-bottom: 3rem;
-  border-bottom: 1px solid var(--green);
+  border-bottom: 1px solid var(--ink);
 }
 
 .admin-heading button {
@@ -1974,7 +2033,8 @@ textarea {
 .admin-content-types {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--ink);
+  background: var(--white);
 }
 
 .admin-content-types article {
@@ -1982,10 +2042,15 @@ textarea {
   min-height: 19rem;
   padding: 1.5rem;
   border-right: 1px solid var(--line);
+  transition: background 180ms ease;
 }
 
 .admin-content-types article:last-child {
   border-right: 0;
+}
+
+.admin-content-types article:hover {
+  background: var(--green-soft);
 }
 
 .admin-content-types article > span {
@@ -1996,7 +2061,7 @@ textarea {
 
 .admin-content-types h2 {
   margin: 2.5rem 0 0.75rem;
-  color: var(--green);
+  color: var(--ink);
   font-family: Georgia, 'Times New Roman', serif;
   font-size: 1.55rem;
   font-weight: 500;
@@ -2011,7 +2076,7 @@ textarea {
   position: absolute;
   left: 1.5rem;
   bottom: 2rem;
-  color: var(--green);
+  color: var(--ink);
   font-size: 2rem;
   font-weight: 500;
 }
@@ -2043,7 +2108,7 @@ textarea {
   margin: 0;
   padding: 0;
   list-style: none;
-  border-top: 1px solid var(--green);
+  border-top: 1px solid var(--ink);
 }
 
 .admin-recent li {
@@ -2066,7 +2131,7 @@ textarea {
 }
 
 .admin-recent li strong {
-  color: var(--green);
+  color: var(--ink);
   font-weight: 650;
 }
 
@@ -2259,7 +2324,7 @@ textarea {
 
 .admin-editor-page {
   min-height: 100vh;
-  background: #e8ebe6;
+  background: var(--paper);
 }
 
 .editor-topbar {
@@ -2270,7 +2335,7 @@ textarea {
   gap: 2rem;
   padding-inline: var(--gutter);
   border-bottom: 1px solid var(--line);
-  background: color-mix(in srgb, #e8ebe6 94%, transparent);
+  background: color-mix(in srgb, var(--white) 94%, transparent);
   position: sticky;
   top: 0;
   z-index: 30;
@@ -2332,7 +2397,7 @@ textarea {
 }
 
 .editor-layout {
-  width: min(100%, 96rem);
+  width: min(100%, 92rem);
   display: grid;
   grid-template-columns: minmax(0, 1fr) 18rem;
   gap: clamp(3rem, 6vw, 7rem);
@@ -2343,6 +2408,8 @@ textarea {
 .editor-document {
   min-width: 0;
   max-width: 58rem;
+  padding: clamp(2rem, 4vw, 4rem);
+  background: var(--white);
 }
 
 .editor-title-field > span,
@@ -2362,11 +2429,11 @@ textarea {
   overflow: hidden;
   padding: 0 0 1.3rem;
   border: 0;
-  border-bottom: 1px solid var(--green);
+  border-bottom: 1px solid var(--ink);
   border-radius: 0;
   outline: 0;
   background: transparent;
-  color: var(--green);
+  color: var(--ink);
   font-family: Georgia, 'Noto Serif KR', serif;
   font-size: clamp(2.3rem, 5vw, 4.6rem);
   font-weight: 500;
@@ -2434,7 +2501,7 @@ textarea {
 
 .body-editor {
   margin-top: 3rem;
-  border-top: 1px solid var(--green);
+  border-top: 1px solid var(--ink);
 }
 
 .editor-toolbar {
@@ -2546,7 +2613,7 @@ textarea {
   position: sticky;
   top: 7.5rem;
   padding-top: 1rem;
-  border-top: 1px solid var(--green);
+  border-top: 2px solid var(--green);
 }
 
 .editor-side-panel dl {
@@ -2868,6 +2935,27 @@ textarea {
   .article-relations > div {
     grid-template-columns: 1fr;
     gap: 2rem;
+  }
+
+  .search-heading {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .search-heading .eyebrow {
+    grid-row: auto;
+  }
+
+  .search-heading h1 {
+    font-size: clamp(2.65rem, 13vw, 4.2rem);
+  }
+
+  .search-results-heading {
+    grid-template-columns: 1fr auto;
+  }
+
+  .search-results-heading > span {
+    grid-column: 1 / -1;
   }
 
   .editorial-detail-header,
