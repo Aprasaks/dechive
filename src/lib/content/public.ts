@@ -58,6 +58,289 @@ function stringArray(value: Json | undefined): string[] {
   return value.filter((item): item is string => typeof item === 'string');
 }
 
+type JsonRecord = { [key: string]: Json | undefined };
+
+function isJsonRecord(value: Json | undefined): value is JsonRecord {
+  return Boolean(value) && typeof value === 'object' && !Array.isArray(value);
+}
+
+function labeledLinks(
+  value: Json | undefined,
+  labelKeys: string[],
+): { label: string; url: string }[] {
+  if (!Array.isArray(value)) {
+    return [];
+  }
+
+  return value.flatMap((item) => {
+    if (!isJsonRecord(item) || typeof item.url !== 'string') {
+      return [];
+    }
+
+    const label = labelKeys
+      .map((key) => item[key])
+      .find((candidate): candidate is string => typeof candidate === 'string');
+
+    return label ? [{ label, url: item.url }] : [];
+  });
+}
+
+function timestampItems(
+  value: Json | undefined,
+): { time: string; label: string }[] {
+  if (!Array.isArray(value)) {
+    return [];
+  }
+
+  return value.flatMap((item) => {
+    if (!isJsonRecord(item)) {
+      return [];
+    }
+
+    const time = typeof item.time === 'string' ? item.time : null;
+    const label = typeof item.label === 'string' ? item.label : null;
+    return time && label ? [{ time, label }] : [];
+  });
+}
+
+export type PublicBaseDetail = PublicContentSummary & {
+  revisionId: string;
+  revisionNumber: number;
+  bodyJson: Json;
+  cover: {
+    url: string;
+    alt: string;
+    caption: string | null;
+  } | null;
+};
+
+export type PublicLectureDetail = PublicBaseDetail & {
+  introduction: string;
+  learningObjectives: string[];
+  youtubeUrl: string | null;
+  timestamps: { time: string; label: string }[];
+  materials: { label: string; url: string }[];
+};
+
+export type PublicPracticeDetail = PublicBaseDetail & {
+  resultDescription: string;
+  demoUrl: string | null;
+  requirements: string;
+  tools: string[];
+  estimatedCost: string | null;
+};
+
+export type PublicAiUpdateDetail = PublicBaseDetail & {
+  updateDate: string;
+  changeSummary: string;
+};
+
+export type PublicBookDetail = PublicBaseDetail & {
+  author: string;
+  publisher: string | null;
+  publicationDate: string | null;
+  isbn: string | null;
+  pageCount: number | null;
+  format: string | null;
+  purchaseLinks: { label: string; url: string }[];
+  tableOfContents: string[];
+  preview: string | null;
+};
+
+async function getPublishedBaseDetail(
+  type: Exclude<ContentType, 'knowledge'>,
+  slug: string,
+): Promise<PublicBaseDetail | null> {
+  const supabase = await createClient();
+  const { data: content, error: contentError } = await supabase
+    .from('contents')
+    .select(
+      'id,type,slug,published_at,last_verified_at,current_revision_id',
+    )
+    .eq('type', type)
+    .eq('slug', slug)
+    .eq('status', 'published')
+    .eq('visibility', 'public')
+    .is('deleted_at', null)
+    .maybeSingle();
+
+  if (contentError) {
+    throw contentError;
+  }
+
+  if (!content?.current_revision_id || !content.published_at) {
+    return null;
+  }
+
+  const { data: revision, error: revisionError } = await supabase
+    .from('content_revisions')
+    .select(
+      'id,revision_number,title,summary,body_json,verified_at,published_at',
+    )
+    .eq('id', content.current_revision_id)
+    .maybeSingle();
+
+  if (revisionError) {
+    throw revisionError;
+  }
+
+  if (!revision) {
+    return null;
+  }
+
+  const { data: coverLink } = await supabase
+    .from('revision_assets')
+    .select('asset_id,caption')
+    .eq('revision_id', revision.id)
+    .eq('usage', 'cover')
+    .order('position')
+    .limit(1)
+    .maybeSingle();
+  const { data: coverAsset } = coverLink
+    ? await supabase
+        .from('assets')
+        .select('bucket_id,object_path,alt_text,original_filename')
+        .eq('id', coverLink.asset_id)
+        .maybeSingle()
+    : { data: null };
+  const cover = coverAsset
+    ? {
+        url: supabase.storage
+          .from(coverAsset.bucket_id)
+          .getPublicUrl(coverAsset.object_path).data.publicUrl,
+        alt: coverAsset.alt_text ?? coverAsset.original_filename,
+        caption: coverLink?.caption ?? null,
+      }
+    : null;
+
+  return {
+    id: content.id,
+    type: content.type,
+    slug: content.slug,
+    title: revision.title,
+    summary: revision.summary,
+    publishedAt: revision.published_at,
+    verifiedAt: revision.verified_at ?? content.last_verified_at,
+    revisionId: revision.id,
+    revisionNumber: revision.revision_number,
+    bodyJson: revision.body_json,
+    cover,
+  };
+}
+
+export async function getPublishedLectureDetail(
+  slug: string,
+): Promise<PublicLectureDetail | null> {
+  const base = await getPublishedBaseDetail('lecture', slug);
+  if (!base) return null;
+
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from('lecture_revision_details')
+    .select(
+      'introduction,learning_objectives,youtube_url,timestamps,materials',
+    )
+    .eq('revision_id', base.revisionId)
+    .maybeSingle();
+
+  if (error) throw error;
+
+  return {
+    ...base,
+    introduction: data?.introduction ?? '',
+    learningObjectives: stringArray(data?.learning_objectives),
+    youtubeUrl: data?.youtube_url ?? null,
+    timestamps: timestampItems(data?.timestamps),
+    materials: labeledLinks(data?.materials, ['label', 'title', 'name']),
+  };
+}
+
+export async function getPublishedPracticeDetail(
+  slug: string,
+): Promise<PublicPracticeDetail | null> {
+  const base = await getPublishedBaseDetail('practice', slug);
+  if (!base) return null;
+
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from('practice_revision_details')
+    .select(
+      'result_description,demo_url,requirements,tools,estimated_cost',
+    )
+    .eq('revision_id', base.revisionId)
+    .maybeSingle();
+
+  if (error) throw error;
+
+  return {
+    ...base,
+    resultDescription: data?.result_description ?? '',
+    demoUrl: data?.demo_url ?? null,
+    requirements: data?.requirements ?? '',
+    tools: stringArray(data?.tools),
+    estimatedCost: data?.estimated_cost ?? null,
+  };
+}
+
+export async function getPublishedAiUpdateDetail(
+  slug: string,
+): Promise<PublicAiUpdateDetail | null> {
+  const base = await getPublishedBaseDetail('ai_update', slug);
+  if (!base) return null;
+
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from('ai_update_revision_details')
+    .select('update_date,change_summary')
+    .eq('revision_id', base.revisionId)
+    .maybeSingle();
+
+  if (error) throw error;
+  if (!data) return null;
+
+  return {
+    ...base,
+    updateDate: data.update_date,
+    changeSummary: data.change_summary,
+  };
+}
+
+export async function getPublishedBookDetail(
+  slug: string,
+): Promise<PublicBookDetail | null> {
+  const base = await getPublishedBaseDetail('book', slug);
+  if (!base) return null;
+
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from('book_revision_details')
+    .select(
+      'author,publisher,publication_date,isbn,page_count,format,purchase_links,table_of_contents,preview',
+    )
+    .eq('revision_id', base.revisionId)
+    .maybeSingle();
+
+  if (error) throw error;
+  if (!data) return null;
+
+  return {
+    ...base,
+    author: data.author,
+    publisher: data.publisher,
+    publicationDate: data.publication_date,
+    isbn: data.isbn,
+    pageCount: data.page_count,
+    format: data.format,
+    purchaseLinks: labeledLinks(data.purchase_links, [
+      'store',
+      'label',
+      'name',
+    ]),
+    tableOfContents: stringArray(data.table_of_contents),
+    preview: data.preview,
+  };
+}
+
 export async function getPublishedContent(
   type?: ContentType,
   limit = 12,

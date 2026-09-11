@@ -1330,6 +1330,452 @@ textarea {
   list-style: none;
 }
 
+.editorial-detail {
+  background: var(--white);
+}
+
+.editorial-detail-header {
+  display: grid;
+  grid-template-columns: minmax(10rem, 0.6fr) minmax(0, 2fr);
+  gap: clamp(2rem, 6vw, 7rem);
+  padding-block: clamp(3rem, 7vw, 7rem);
+  border-bottom: 1px solid var(--ink);
+}
+
+.editorial-detail-header > div:nth-child(2) {
+  grid-column: 2;
+}
+
+.editorial-detail-header h1,
+.update-detail-header h1,
+.book-intro h1 {
+  max-width: 18ch;
+  margin: 0;
+  color: var(--ink);
+  font-family: Georgia, 'Noto Serif KR', serif;
+  font-size: clamp(3rem, 6vw, 6.3rem);
+  font-weight: 500;
+  letter-spacing: -0.06em;
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+.editorial-detail-header > div:nth-child(2) > p:last-child,
+.book-intro > p:not(.eyebrow) {
+  max-width: 46rem;
+  margin: 2rem 0 0;
+  color: var(--muted);
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  line-height: 1.85;
+}
+
+.editorial-detail-header > dl {
+  grid-column: 2;
+  display: flex;
+  gap: 3rem;
+  margin: 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+
+.editorial-detail-header dt,
+.book-intro dt {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 750;
+}
+
+.editorial-detail-header dd,
+.book-intro dd {
+  margin: 0.3rem 0 0;
+  color: var(--ink);
+  font-size: 0.85rem;
+  font-weight: 650;
+}
+
+.editorial-cover {
+  padding-block: clamp(2rem, 4vw, 4rem);
+}
+
+.editorial-cover img {
+  width: 100%;
+  max-height: 46rem;
+  display: block;
+  object-fit: contain;
+  background: var(--paper-deep);
+}
+
+.editorial-cover figcaption {
+  margin-top: 0.7rem;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.lecture-overview {
+  display: grid;
+  grid-template-columns: minmax(10rem, 0.6fr) minmax(0, 2fr);
+  gap: clamp(2rem, 6vw, 7rem);
+  padding-block: clamp(4rem, 7vw, 7rem);
+  border-bottom: 1px solid var(--ink);
+}
+
+.lecture-overview > span {
+  color: var(--green);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.lecture-overview > div > p {
+  max-width: 48rem;
+  margin: 0;
+  font-family: Georgia, 'Noto Serif KR', serif;
+  font-size: clamp(1.5rem, 2.8vw, 2.7rem);
+  letter-spacing: -0.025em;
+  line-height: 1.55;
+}
+
+.lecture-overview h2,
+.detail-downloads h2,
+.practice-result h2,
+.book-extras h2 {
+  margin: 3.5rem 0 1.5rem;
+  color: var(--ink);
+  font-family: Georgia, 'Noto Serif KR', serif;
+  font-size: clamp(1.8rem, 3vw, 3rem);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+}
+
+.lecture-overview ol {
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--ink);
+  list-style: none;
+}
+
+.lecture-overview li {
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 1rem;
+}
+
+.lecture-overview li span {
+  color: var(--green);
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.lecture-video {
+  padding-block: clamp(4rem, 8vw, 8rem);
+}
+
+.lecture-video > div {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: var(--ink);
+}
+
+.lecture-video iframe {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  border: 0;
+}
+
+.lecture-video > ol {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 1.5rem 0 0;
+  padding: 0;
+  border-top: 1px solid var(--ink);
+  list-style: none;
+}
+
+.lecture-video > ol li {
+  min-height: 7rem;
+  padding: 1rem;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.lecture-video > ol li:nth-child(3n) {
+  border-right: 0;
+}
+
+.lecture-video > ol span {
+  display: block;
+  margin-bottom: 0.7rem;
+  color: var(--green);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.lecture-video > ol strong {
+  font-size: 0.9rem;
+}
+
+.editorial-body-section {
+  display: grid;
+  grid-template-columns: minmax(0, 48rem);
+  justify-content: center;
+  padding-block: clamp(4rem, 8vw, 8rem);
+  border-top: 1px solid var(--line);
+}
+
+.detail-downloads {
+  display: grid;
+  grid-template-columns: minmax(12rem, 0.75fr) minmax(0, 2fr);
+  gap: clamp(2rem, 6vw, 7rem);
+  padding-block: clamp(4rem, 7vw, 7rem);
+  border-top: 1px solid var(--ink);
+}
+
+.detail-downloads h2 {
+  margin: 0;
+}
+
+.detail-downloads ul {
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--ink);
+  list-style: none;
+}
+
+.detail-downloads li {
+  border-bottom: 1px solid var(--line);
+}
+
+.detail-downloads a {
+  min-height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.detail-downloads b {
+  color: var(--green);
+  font-size: 0.8rem;
+  font-weight: 750;
+}
+
+.practice-result {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(18rem, 0.7fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  padding-block: clamp(3rem, 6vw, 6rem);
+  border-bottom: 1px solid var(--ink);
+}
+
+.practice-result-visual {
+  min-height: clamp(20rem, 45vw, 42rem);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: var(--green);
+  color: white;
+}
+
+.practice-result-visual img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+.practice-result-visual span {
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+
+.practice-result > div:last-child {
+  align-self: end;
+}
+
+.practice-result h2 {
+  margin-top: 0;
+}
+
+.practice-result > div:last-child > p:not(.eyebrow) {
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.practice-result a {
+  display: inline-block;
+  margin-top: 1.5rem;
+  color: var(--green);
+  font-size: 0.85rem;
+  font-weight: 750;
+}
+
+.practice-facts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding-block: 2rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.practice-facts > div {
+  min-height: 8rem;
+  padding: 1rem 2rem 1rem 0;
+  border-right: 1px solid var(--line);
+}
+
+.practice-facts > div + div {
+  padding-left: 2rem;
+}
+
+.practice-facts > div:last-child {
+  border-right: 0;
+}
+
+.practice-facts span {
+  color: var(--green);
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.practice-facts p {
+  margin: 1rem 0 0;
+}
+
+.update-detail-header {
+  padding-block: clamp(3rem, 7vw, 7rem);
+  border-bottom: 1px solid var(--ink);
+}
+
+.update-detail-header > time {
+  display: block;
+  margin: clamp(3rem, 6vw, 6rem) 0 1rem;
+  color: var(--copper);
+  font-size: clamp(1.2rem, 2vw, 1.7rem);
+  font-weight: 850;
+  letter-spacing: -0.02em;
+}
+
+.update-detail-header h1 {
+  max-width: 16ch;
+}
+
+.update-detail-header > p {
+  max-width: 52rem;
+  margin: 2.5rem 0 0;
+  padding-left: 1.5rem;
+  border-left: 4px solid var(--copper);
+  color: var(--ink);
+  font-family: Georgia, 'Noto Serif KR', serif;
+  font-size: clamp(1.2rem, 2vw, 1.7rem);
+  line-height: 1.7;
+}
+
+.book-hero {
+  display: grid;
+  grid-template-columns: minmax(18rem, 0.8fr) minmax(0, 1.5fr);
+  gap: clamp(3rem, 8vw, 9rem);
+  padding-block: clamp(4rem, 8vw, 8rem);
+  border-bottom: 1px solid var(--ink);
+}
+
+.book-cover-area {
+  align-self: start;
+}
+
+.book-cover-area > img,
+.book-cover-area > div {
+  width: 100%;
+  aspect-ratio: 0.72;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  object-fit: contain;
+  padding: 2rem;
+  background: var(--green);
+  color: white;
+}
+
+.book-cover-area span {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+}
+
+.book-cover-area strong {
+  font-family: Georgia, 'Noto Serif KR', serif;
+  font-size: clamp(2rem, 4vw, 4rem);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.book-intro {
+  align-self: center;
+}
+
+.book-intro > .eyebrow {
+  margin-top: 4rem;
+}
+
+.book-intro dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 2rem;
+  margin: 3rem 0 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.purchase-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.purchase-links a {
+  padding: 0.85rem 1rem;
+  background: var(--ink);
+  color: white;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.book-extras {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(3rem, 7vw, 8rem);
+  padding-block: clamp(4rem, 7vw, 7rem);
+  border-top: 1px solid var(--ink);
+}
+
+.book-extras h2 {
+  margin-top: 0;
+}
+
+.book-extras ol {
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--ink);
+  list-style: none;
+}
+
+.book-extras li {
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.book-extras p {
+  color: var(--muted);
+  font-family: Georgia, 'Noto Serif KR', serif;
+  font-size: 1.05rem;
+  line-height: 1.9;
+}
+
 .search-page {
   min-height: 70vh;
   padding-block: clamp(5rem, 9vw, 9rem);
@@ -2373,6 +2819,15 @@ textarea {
     order: -1;
   }
 
+  .practice-result,
+  .book-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .book-cover-area {
+    width: min(100%, 30rem);
+  }
+
   .home-intro {
     grid-template-columns: 1fr;
     align-items: start;
@@ -2413,6 +2868,64 @@ textarea {
   .article-relations > div {
     grid-template-columns: 1fr;
     gap: 2rem;
+  }
+
+  .editorial-detail-header,
+  .lecture-overview,
+  .detail-downloads {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .editorial-detail-header > div:nth-child(2),
+  .editorial-detail-header > dl {
+    grid-column: 1;
+  }
+
+  .editorial-detail-header h1,
+  .update-detail-header h1,
+  .book-intro h1 {
+    font-size: clamp(2.65rem, 13vw, 4.2rem);
+  }
+
+  .editorial-detail-header > dl {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .lecture-video > ol {
+    grid-template-columns: 1fr;
+  }
+
+  .lecture-video > ol li,
+  .lecture-video > ol li:nth-child(3n) {
+    min-height: auto;
+    border-right: 0;
+  }
+
+  .practice-result-visual {
+    min-height: 18rem;
+  }
+
+  .practice-facts,
+  .book-extras {
+    grid-template-columns: 1fr;
+  }
+
+  .practice-facts > div,
+  .practice-facts > div + div {
+    min-height: auto;
+    padding: 1.25rem 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .book-cover-area {
+    width: 100%;
+  }
+
+  .book-intro dl {
+    grid-template-columns: 1fr;
   }
 
   .article-heading h1 {

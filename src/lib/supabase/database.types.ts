@@ -155,6 +155,96 @@ export type Database = {
         };
         Relationships: [];
       };
+      lecture_revision_details: {
+        Row: {
+          revision_id: string;
+          introduction: string;
+          learning_objectives: Json;
+          youtube_url: string | null;
+          timestamps: Json;
+          materials: Json;
+        };
+        Insert: {
+          revision_id: string;
+          introduction?: string;
+          learning_objectives?: Json;
+          youtube_url?: string | null;
+          timestamps?: Json;
+          materials?: Json;
+        };
+        Update: Partial<
+          Database['public']['Tables']['lecture_revision_details']['Insert']
+        >;
+        Relationships: [];
+      };
+      practice_revision_details: {
+        Row: {
+          revision_id: string;
+          result_description: string;
+          demo_url: string | null;
+          requirements: string;
+          tools: Json;
+          estimated_cost: string | null;
+        };
+        Insert: {
+          revision_id: string;
+          result_description?: string;
+          demo_url?: string | null;
+          requirements?: string;
+          tools?: Json;
+          estimated_cost?: string | null;
+        };
+        Update: Partial<
+          Database['public']['Tables']['practice_revision_details']['Insert']
+        >;
+        Relationships: [];
+      };
+      ai_update_revision_details: {
+        Row: {
+          revision_id: string;
+          update_date: string;
+          change_summary: string;
+        };
+        Insert: {
+          revision_id: string;
+          update_date: string;
+          change_summary?: string;
+        };
+        Update: Partial<
+          Database['public']['Tables']['ai_update_revision_details']['Insert']
+        >;
+        Relationships: [];
+      };
+      book_revision_details: {
+        Row: {
+          revision_id: string;
+          author: string;
+          publisher: string | null;
+          publication_date: string | null;
+          isbn: string | null;
+          page_count: number | null;
+          format: string | null;
+          purchase_links: Json;
+          table_of_contents: Json;
+          preview: string | null;
+        };
+        Insert: {
+          revision_id: string;
+          author: string;
+          publisher?: string | null;
+          publication_date?: string | null;
+          isbn?: string | null;
+          page_count?: number | null;
+          format?: string | null;
+          purchase_links?: Json;
+          table_of_contents?: Json;
+          preview?: string | null;
+        };
+        Update: Partial<
+          Database['public']['Tables']['book_revision_details']['Insert']
+        >;
+        Relationships: [];
+      };
       sources: {
         Row: {
           id: string;
