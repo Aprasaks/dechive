@@ -3040,7 +3040,7 @@ textarea {
 
 .footer-inner {
   display: grid;
-  grid-template-columns: 1fr 2fr auto;
+  grid-template-columns: 1fr auto;
   gap: 2rem;
   align-items: end;
   padding-block: 3rem;
@@ -3057,14 +3057,6 @@ textarea {
   margin-bottom: 0.45rem;
   color: var(--ink);
   letter-spacing: 0.15em;
-}
-
-.footer-inner nav {
-  display: flex;
-  justify-content: center;
-  gap: clamp(1rem, 2.5vw, 2.5rem);
-  color: var(--ink);
-  font-weight: 700;
 }
 
 @media (max-width: 64rem) {
@@ -3529,11 +3521,6 @@ textarea {
   .footer-inner {
     grid-template-columns: 1fr;
     gap: 1.5rem;
-  }
-
-  .footer-inner nav {
-    justify-content: flex-start;
-    flex-wrap: wrap;
   }
 
   .admin-heading {
