@@ -7,12 +7,11 @@ export function SiteHeader() {
       <div className="site-shell header-inner">
         <Link className="wordmark" href="/" aria-label="Dechive 홈">
           <strong>DECHIVE</strong>
-          <span>THE INFINITE KNOWLEDGE INDEX</span>
         </Link>
         <nav aria-label="주요 메뉴" className="desktop-nav">
           {CONTENT_SECTIONS.map((section) => (
             <Link href={section.href} key={section.type}>
-              {section.label}
+              {section.navLabel}
             </Link>
           ))}
         </nav>
@@ -27,7 +26,7 @@ export function SiteHeader() {
       <nav aria-label="모바일 주요 메뉴" className="mobile-nav site-shell">
         {CONTENT_SECTIONS.map((section) => (
           <Link href={section.href} key={section.type}>
-            {section.label}
+            {section.navLabel}
           </Link>
         ))}
       </nav>

@@ -12,6 +12,12 @@ export type PublicContentSummary = {
   summary: string;
   publishedAt: string;
   verifiedAt: string | null;
+  image?: {
+    url: string;
+    alt: string;
+    width: number | null;
+    height: number | null;
+  } | null;
 };
 
 export type PublicKnowledgeDetail = PublicContentSummary & {
@@ -390,6 +396,58 @@ export async function getPublishedContent(
     (revisions ?? []).map((revision) => [revision.id, revision]),
   );
 
+  const { data: imageLinks, error: imageLinksError } = await supabase
+    .from('revision_assets')
+    .select('revision_id,asset_id,usage,position')
+    .in('revision_id', revisionIds)
+    .in('usage', ['cover', 'body'])
+    .order('position');
+
+  if (imageLinksError) {
+    throw imageLinksError;
+  }
+
+  const imageLinkByRevision = new Map<
+    string,
+    { assetId: string; usage: 'cover' | 'body' }
+  >();
+
+  for (const link of imageLinks ?? []) {
+    if (link.usage !== 'cover' && link.usage !== 'body') {
+      continue;
+    }
+
+    const current = imageLinkByRevision.get(link.revision_id);
+    if (!current || (link.usage === 'cover' && current.usage !== 'cover')) {
+      imageLinkByRevision.set(link.revision_id, {
+        assetId: link.asset_id,
+        usage: link.usage,
+      });
+    }
+  }
+
+  const imageAssetIds = Array.from(imageLinkByRevision.values()).map(
+    (link) => link.assetId,
+  );
+  const { data: imageAssets, error: imageAssetsError } =
+    imageAssetIds.length > 0
+      ? await supabase
+          .from('assets')
+          .select(
+            'id,bucket_id,object_path,alt_text,original_filename,width,height',
+          )
+          .in('id', imageAssetIds)
+          .is('deleted_at', null)
+      : { data: [], error: null };
+
+  if (imageAssetsError) {
+    throw imageAssetsError;
+  }
+
+  const imageAssetsById = new Map(
+    (imageAssets ?? []).map((asset) => [asset.id, asset]),
+  );
+
   return (contents ?? []).flatMap((content) => {
     const revision = content.current_revision_id
       ? revisionsById.get(content.current_revision_id)
@@ -398,6 +456,21 @@ export async function getPublishedContent(
     if (!revision || !content.published_at) {
       return [];
     }
+
+    const imageLink = imageLinkByRevision.get(revision.id);
+    const imageAsset = imageLink
+      ? imageAssetsById.get(imageLink.assetId)
+      : undefined;
+    const image = imageAsset
+      ? {
+          url: supabase.storage
+            .from(imageAsset.bucket_id)
+            .getPublicUrl(imageAsset.object_path).data.publicUrl,
+          alt: imageAsset.alt_text ?? imageAsset.original_filename,
+          width: imageAsset.width,
+          height: imageAsset.height,
+        }
+      : null;
 
     return [
       {
@@ -408,6 +481,7 @@ export async function getPublishedContent(
         summary: revision.summary,
         publishedAt: revision.published_at,
         verifiedAt: content.last_verified_at,
+        image,
       },
     ];
   });

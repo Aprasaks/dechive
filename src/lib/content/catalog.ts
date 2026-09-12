@@ -3,6 +3,7 @@ import type { ContentType } from '@/lib/supabase/database.types';
 export type ContentSection = {
   type: ContentType;
   label: string;
+  navLabel: string;
   href: string;
   index: string;
   description: string;
@@ -12,6 +13,7 @@ export const CONTENT_SECTIONS: readonly ContentSection[] = [
   {
     type: 'knowledge',
     label: 'Knowledge',
+    navLabel: '지식',
     href: '/knowledge',
     index: '01',
     description: 'AI를 이해하고 다루기 위한 독립된 개념 지식',
@@ -19,6 +21,7 @@ export const CONTENT_SECTIONS: readonly ContentSection[] = [
   {
     type: 'lecture',
     label: 'Lecture',
+    navLabel: '강의',
     href: '/lecture',
     index: '02',
     description: '필요한 지식을 학습 순서로 묶은 영상과 강의자료',
@@ -26,6 +29,7 @@ export const CONTENT_SECTIONS: readonly ContentSection[] = [
   {
     type: 'practice',
     label: 'Practice',
+    navLabel: '실습',
     href: '/practice',
     index: '03',
     description: '완성한 결과물과 처음부터 끝까지의 제작 과정',
@@ -33,6 +37,7 @@ export const CONTENT_SECTIONS: readonly ContentSection[] = [
   {
     type: 'ai_update',
     label: 'AI Update',
+    navLabel: 'AI Update',
     href: '/ai-updates',
     index: '04',
     description: '날짜별로 반드시 확인해야 할 AI의 변화',
@@ -40,6 +45,7 @@ export const CONTENT_SECTIONS: readonly ContentSection[] = [
   {
     type: 'book',
     label: 'Books',
+    navLabel: '전자책',
     href: '/books',
     index: '05',
     description: '글과 프롬프트를 정리한 출판물과 외부 판매처',

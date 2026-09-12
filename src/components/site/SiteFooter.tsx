@@ -12,7 +12,7 @@ export function SiteFooter() {
         <nav aria-label="하단 메뉴">
           {CONTENT_SECTIONS.map((section) => (
             <Link href={section.href} key={section.type}>
-              {section.label}
+              {section.navLabel}
             </Link>
           ))}
         </nav>
