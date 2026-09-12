@@ -400,35 +400,24 @@ export async function getPublishedContent(
     .from('revision_assets')
     .select('revision_id,asset_id,usage,position')
     .in('revision_id', revisionIds)
-    .in('usage', ['cover', 'body'])
+    .eq('usage', 'cover')
     .order('position');
 
   if (imageLinksError) {
     throw imageLinksError;
   }
 
-  const imageLinkByRevision = new Map<
-    string,
-    { assetId: string; usage: 'cover' | 'body' }
-  >();
+  const imageLinkByRevision = new Map<string, string>();
 
   for (const link of imageLinks ?? []) {
-    if (link.usage !== 'cover' && link.usage !== 'body') {
+    if (link.usage !== 'cover' || imageLinkByRevision.has(link.revision_id)) {
       continue;
     }
 
-    const current = imageLinkByRevision.get(link.revision_id);
-    if (!current || (link.usage === 'cover' && current.usage !== 'cover')) {
-      imageLinkByRevision.set(link.revision_id, {
-        assetId: link.asset_id,
-        usage: link.usage,
-      });
-    }
+    imageLinkByRevision.set(link.revision_id, link.asset_id);
   }
 
-  const imageAssetIds = Array.from(imageLinkByRevision.values()).map(
-    (link) => link.assetId,
-  );
+  const imageAssetIds = Array.from(imageLinkByRevision.values());
   const { data: imageAssets, error: imageAssetsError } =
     imageAssetIds.length > 0
       ? await supabase
@@ -457,9 +446,9 @@ export async function getPublishedContent(
       return [];
     }
 
-    const imageLink = imageLinkByRevision.get(revision.id);
-    const imageAsset = imageLink
-      ? imageAssetsById.get(imageLink.assetId)
+    const imageAssetId = imageLinkByRevision.get(revision.id);
+    const imageAsset = imageAssetId
+      ? imageAssetsById.get(imageAssetId)
       : undefined;
     const image = imageAsset
       ? {

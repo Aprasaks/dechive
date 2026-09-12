@@ -94,7 +94,9 @@ textarea {
 
 .wordmark {
   display: inline-flex;
+  width: fit-content;
   align-items: baseline;
+  justify-self: start;
   gap: 0.9rem;
   color: var(--ink);
 }
@@ -3720,10 +3722,11 @@ textarea {
   margin: 0;
   color: var(--ink);
   font-family: inherit;
-  font-size: clamp(2.55rem, 4.2vw, 4.6rem);
+  font-size: clamp(2.4rem, 3.4vw, 3.8rem);
   font-weight: 720;
   letter-spacing: -0.06em;
-  line-height: 1.14;
+  line-height: 1.18;
+  word-break: keep-all;
   text-wrap: balance;
 }
 
