@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { CONTENT_SECTIONS, getContentSection } from '@/lib/content/catalog';
+import { getContentSection } from '@/lib/content/catalog';
 import {
   getPublishedContent,
   getPublishedKnowledgeDetail,
@@ -28,6 +28,15 @@ function ContentDate({ item }: { item: PublicContentSummary }) {
   );
 }
 
+function EmptyImage({ label }: { label: string }) {
+  return (
+    <div className="home-image-fallback" aria-hidden="true">
+      <span>DECHIVE</span>
+      <strong>{label}</strong>
+    </div>
+  );
+}
+
 function ContentImage({
   item,
   priority = false,
@@ -36,12 +45,7 @@ function ContentImage({
   priority?: boolean;
 }) {
   if (!item.image) {
-    return (
-      <div className="home-image-fallback" aria-hidden="true">
-        <span>DECHIVE</span>
-        <strong>{getContentSection(item.type).label}</strong>
-      </div>
-    );
+    return <EmptyImage label={getContentSection(item.type).label} />;
   }
 
   return (
@@ -63,7 +67,7 @@ function LearningFeature({
   item,
   kind,
 }: {
-  item: PublicContentSummary;
+  item?: PublicContentSummary;
   kind: 'lecture' | 'practice';
 }) {
   const section = getContentSection(kind);
@@ -83,17 +87,30 @@ function LearningFeature({
           더보기 <span aria-hidden="true">→</span>
         </Link>
       </div>
-      <Link className="home-learning-entry" href={detailHref(item)}>
-        <div className="home-learning-image">
-          <ContentImage item={item} />
+      {item ? (
+        <Link className="home-learning-entry" href={detailHref(item)}>
+          <div className="home-learning-image">
+            <ContentImage item={item} />
+          </div>
+          <div className="home-learning-copy">
+            <span>{kind === 'lecture' ? '강의' : '실습'}</span>
+            <h3>{item.title}</h3>
+            {item.summary ? <p>{item.summary}</p> : null}
+            <ContentDate item={item} />
+          </div>
+        </Link>
+      ) : (
+        <div className="home-learning-entry home-section-empty">
+          <div className="home-learning-image">
+            <EmptyImage label={section.label} />
+          </div>
+          <div className="home-learning-copy">
+            <span>{kind === 'lecture' ? '강의' : '실습'}</span>
+            <h3>{section.description}</h3>
+            <p>콘텐츠가 발행되면 이 자리에 가장 최근 기록이 표시됩니다.</p>
+          </div>
         </div>
-        <div className="home-learning-copy">
-          <span>{kind === 'lecture' ? '강의' : '실습'}</span>
-          <h3>{item.title}</h3>
-          {item.summary ? <p>{item.summary}</p> : null}
-          <ContentDate item={item} />
-        </div>
-      </Link>
+      )}
     </article>
   );
 }
@@ -129,143 +146,184 @@ export default async function HomePage() {
 
   return (
     <main id="main-content" className="home-page home-editorial">
-      {featured ? (
-        <section
-          className={`site-shell home-lead-grid${
-            recentKnowledge.length === 0 ? ' without-ledger' : ''
-          }`}
-          aria-label="대표 콘텐츠와 최신 지식"
-        >
+      <section
+        className="site-shell home-lead-grid"
+        aria-label="대표 콘텐츠와 최신 지식"
+      >
+        {featured ? (
           <Link className="home-lead-image" href={detailHref(featured)}>
             <ContentImage item={featured} priority />
             <span>{getContentSection(featured.type).navLabel}</span>
           </Link>
+        ) : (
+          <div className="home-lead-image">
+            <EmptyImage label="Knowledge" />
+            <span>지식</span>
+          </div>
+        )}
 
-          <article className="home-lead-copy">
-            <p className="home-kicker">AI를 다루기 위해 알아야 할 지식</p>
-            <h1>
-              <Link href={detailHref(featured)}>{featured.title}</Link>
-            </h1>
-            {featured.summary ? (
-              <p className="home-lead-summary">{featured.summary}</p>
-            ) : null}
-            <ContentDate item={featured} />
+        <article className="home-lead-copy">
+          <p className="home-kicker">AI를 다루기 위해 알아야 할 지식</p>
+          {featured ? (
+            <>
+              <h1>
+                <Link href={detailHref(featured)}>{featured.title}</Link>
+              </h1>
+              {featured.summary ? (
+                <p className="home-lead-summary">{featured.summary}</p>
+              ) : null}
+              <ContentDate item={featured} />
+            </>
+          ) : (
+            <>
+              <h1>AI를 이해하고 다루는 모든 지식.</h1>
+              <p className="home-lead-summary">
+                원본을 찾고, 직접 확인하고, 이해한 언어로 다시 설명합니다.
+              </p>
+            </>
+          )}
 
+          <section
+            className="home-objectives"
+            aria-labelledby="home-objectives-title"
+          >
+            <h2 id="home-objectives-title">이번 글에서 알아야 할 것</h2>
             {learningObjectives.length > 0 ? (
-              <section
-                className="home-objectives"
-                aria-labelledby="home-objectives-title"
-              >
-                <h2 id="home-objectives-title">이번 글에서 알아야 할 것</h2>
-                <ol>
-                  {learningObjectives.slice(0, 3).map((objective, index) => (
-                    <li key={objective}>
-                      <span>{String(index + 1).padStart(2, '0')}</span>
-                      <p>{objective}</p>
-                    </li>
-                  ))}
-                </ol>
-              </section>
-            ) : null}
-          </article>
-
-          {recentKnowledge.length > 0 ? (
-            <aside className="home-recent" aria-labelledby="home-recent-title">
-              <div className="home-recent-heading">
-                <h2 id="home-recent-title">최신 지식</h2>
-                <Link href="/knowledge">
-                  더보기 <span aria-hidden="true">→</span>
-                </Link>
-              </div>
               <ol>
-                {recentKnowledge.map((item) => (
-                  <li key={item.id}>
-                    <Link href={detailHref(item)}>
-                      <div className="home-recent-image">
-                        <ContentImage item={item} />
-                      </div>
-                      <div>
-                        <h3>{item.title}</h3>
-                        {item.summary ? <p>{item.summary}</p> : null}
-                        <ContentDate item={item} />
-                      </div>
-                    </Link>
+                {learningObjectives.slice(0, 3).map((objective, index) => (
+                  <li key={objective}>
+                    <span>{String(index + 1).padStart(2, '0')}</span>
+                    <p>{objective}</p>
                   </li>
                 ))}
               </ol>
-            </aside>
-          ) : null}
-        </section>
-      ) : (
-        <section
-          className="site-shell home-empty"
-          aria-labelledby="home-empty-title"
-        >
-          <p>DECHIVE</p>
-          <h1 id="home-empty-title">AI를 이해하고 다루는 모든 지식.</h1>
-          <p>원본을 찾고, 직접 확인하고, 이해한 언어로 다시 설명합니다.</p>
-          <nav aria-label="콘텐츠 둘러보기">
-            {CONTENT_SECTIONS.map((section) => (
-              <Link href={section.href} key={section.type}>
-                {section.navLabel}
-                <span aria-hidden="true">→</span>
-              </Link>
-            ))}
-          </nav>
-        </section>
-      )}
+            ) : (
+              <p className="home-empty-note">
+                핵심 학습 목표가 등록되면 이곳에서 먼저 확인할 수 있습니다.
+              </p>
+            )}
+          </section>
+        </article>
 
-      {lecture || practice || update ? (
-        <section
-          className="site-shell home-content-grid"
-          aria-label="강의, 실습, AI Update"
-        >
-          {lecture ? <LearningFeature item={lecture} kind="lecture" /> : null}
-          {practice ? <LearningFeature item={practice} kind="practice" /> : null}
-          {update ? (
-            <article className="home-update-card">
-              <div className="home-section-heading">
-                <div>
-                  <h2>오늘의 AI 변화</h2>
-                  <p>
-                    <ContentDate item={update} />
-                  </p>
-                </div>
-                <Link href="/ai-updates">
-                  더보기 <span aria-hidden="true">→</span>
-                </Link>
+        <aside className="home-recent" aria-labelledby="home-recent-title">
+          <div className="home-recent-heading">
+            <h2 id="home-recent-title">최신 지식</h2>
+            <Link href="/knowledge">
+              더보기 <span aria-hidden="true">→</span>
+            </Link>
+          </div>
+          {recentKnowledge.length > 0 ? (
+            <ol>
+              {recentKnowledge.map((item) => (
+                <li key={item.id}>
+                  <Link href={detailHref(item)}>
+                    <div className="home-recent-image">
+                      <ContentImage item={item} />
+                    </div>
+                    <div>
+                      <h3>{item.title}</h3>
+                      {item.summary ? <p>{item.summary}</p> : null}
+                      <ContentDate item={item} />
+                    </div>
+                  </Link>
+                </li>
+              ))}
+            </ol>
+          ) : (
+            <p className="home-empty-note home-recent-empty">
+              새로운 지식이 발행되면 이곳에 차례대로 쌓입니다.
+            </p>
+          )}
+        </aside>
+      </section>
+
+      <section
+        className="site-shell home-content-grid"
+        aria-label="강의, 실습, AI Update"
+      >
+        <LearningFeature item={lecture} kind="lecture" />
+        <LearningFeature item={practice} kind="practice" />
+        {update ? (
+          <article className="home-update-card">
+            <div className="home-section-heading">
+              <div>
+                <h2>오늘의 AI 변화</h2>
+                <p>
+                  <ContentDate item={update} />
+                </p>
               </div>
-              <Link className="home-update-entry" href={detailHref(update)}>
-                <span aria-hidden="true" />
-                <h3>{update.title}</h3>
-                {update.summary ? <p>{update.summary}</p> : null}
-                <b aria-hidden="true">→</b>
+              <Link href="/ai-updates">
+                더보기 <span aria-hidden="true">→</span>
               </Link>
-            </article>
-          ) : null}
-        </section>
-      ) : null}
-
-      {book ? (
-        <section className="home-book">
-          <div className="site-shell home-book-inner">
-            <div className="home-book-copy">
-              <p>전자책</p>
-              <h2>왜 이 책을 읽어야 하는가</h2>
-              {book.summary ? <p>{book.summary}</p> : null}
             </div>
+            <Link className="home-update-entry" href={detailHref(update)}>
+              <span aria-hidden="true" />
+              <h3>{update.title}</h3>
+              {update.summary ? <p>{update.summary}</p> : null}
+              <b aria-hidden="true">→</b>
+            </Link>
+          </article>
+        ) : (
+          <article className="home-update-card">
+            <div className="home-section-heading">
+              <div>
+                <h2>오늘의 AI 변화</h2>
+                <p>날짜별 기록</p>
+              </div>
+              <Link href="/ai-updates">
+                더보기 <span aria-hidden="true">→</span>
+              </Link>
+            </div>
+            <div className="home-update-entry home-section-empty">
+              <span aria-hidden="true" />
+              <h3>새로운 변화가 기록되면 날짜와 함께 표시됩니다.</h3>
+              <b aria-hidden="true">→</b>
+            </div>
+          </article>
+        )}
+      </section>
+
+      <section className="home-book">
+        <div className="site-shell home-book-inner">
+          <div className="home-book-copy">
+            <p>전자책</p>
+            {book ? (
+              <>
+                <h2>왜 이 책을 읽어야 하는가</h2>
+                {book.summary ? <p>{book.summary}</p> : null}
+              </>
+            ) : (
+              <>
+                <h2>정리된 지식은 책으로 이어집니다.</h2>
+                <p>전자책이 발행되면 소개와 외부 판매처를 함께 안내합니다.</p>
+              </>
+            )}
+          </div>
+          {book ? (
             <Link className="home-book-cover" href={detailHref(book)}>
               <ContentImage item={book} />
             </Link>
-            <div className="home-book-action">
-              <h3>{book.title}</h3>
-              <Link href={detailHref(book)}>
-                책 자세히 보기 <span aria-hidden="true">→</span>
-              </Link>
+          ) : (
+            <div className="home-book-cover">
+              <EmptyImage label="Books" />
             </div>
+          )}
+          <div className="home-book-action">
+            {book ? (
+              <>
+                <h3>{book.title}</h3>
+                <Link href={detailHref(book)}>
+                  책 자세히 보기 <span aria-hidden="true">→</span>
+                </Link>
+              </>
+            ) : (
+              <Link href="/books">
+                전자책 둘러보기 <span aria-hidden="true">→</span>
+              </Link>
+            )}
           </div>
-        </section>
-      ) : null}
+        </div>
+      </section>
     </main>
   );
 }
