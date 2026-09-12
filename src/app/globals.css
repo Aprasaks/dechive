@@ -3791,6 +3791,13 @@ textarea {
   line-height: 1.65;
 }
 
+.home-empty-note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.7;
+}
+
 .home-recent {
   min-width: 0;
   padding-left: clamp(1.25rem, 2.3vw, 2.5rem);
@@ -3866,6 +3873,12 @@ textarea {
   line-height: 1.5;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+}
+
+.home-recent-empty {
+  min-height: 8rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--line);
 }
 
 .home-content-grid {
@@ -3948,6 +3961,23 @@ textarea {
 
 .home-learning-copy time {
   margin-top: auto;
+}
+
+.home-section-empty {
+  cursor: default;
+}
+
+.home-section-empty .home-image-fallback {
+  background: var(--green-soft);
+  color: var(--green);
+}
+
+.home-section-empty .home-image-fallback::after {
+  border-color: color-mix(in srgb, var(--green) 20%, transparent);
+}
+
+.home-section-empty .home-image-fallback strong {
+  font-size: clamp(1.3rem, 2.2vw, 2.1rem);
 }
 
 .home-update-entry {
