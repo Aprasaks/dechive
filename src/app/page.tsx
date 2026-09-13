@@ -230,9 +230,14 @@ export default async function HomePage() {
               ))}
             </ol>
           ) : (
-            <p className="home-empty-note home-recent-empty">
-              새로운 지식이 발행되면 이곳에 차례대로 쌓입니다.
-            </p>
+            <div className="home-empty-note home-recent-empty">
+              <p>새로운 지식이 발행되면 이곳에 차례대로 쌓입니다.</p>
+              <div className="home-empty-lines" aria-hidden="true">
+                <span />
+                <span />
+                <span />
+              </div>
+            </div>
           )}
         </aside>
       </section>
