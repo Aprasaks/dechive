@@ -3564,13 +3564,19 @@ textarea {
   background: color-mix(in srgb, var(--paper) 94%, transparent);
 }
 
+.site-header .site-shell,
+.home-editorial .site-shell,
+.site-footer .site-shell {
+  width: min(100%, 112rem);
+}
+
 .header-inner {
   min-height: 4.5rem;
 }
 
 .wordmark strong {
   font-family: Georgia, 'Times New Roman', serif;
-  font-size: clamp(1.5rem, 2vw, 2rem);
+  font-size: clamp(1.6rem, 2vw, 2.2rem);
   font-weight: 700;
   letter-spacing: -0.045em;
 }
@@ -3604,9 +3610,10 @@ textarea {
 
 .home-lead-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.32fr) minmax(18rem, 0.74fr) minmax(18rem, 0.9fr);
-  gap: clamp(1.5rem, 2.8vw, 3rem);
-  padding-block: clamp(1.5rem, 3vw, 2.75rem) clamp(2.5rem, 5vw, 4.5rem);
+  grid-template-columns: minmax(0, 1.38fr) minmax(18rem, 0.76fr) minmax(19rem, 0.9fr);
+  gap: clamp(1.5rem, 2.5vw, 2.75rem);
+  align-items: start;
+  padding-block: clamp(1.5rem, 2.6vw, 2.5rem) clamp(2.5rem, 4vw, 3.75rem);
   border-bottom: 1px solid var(--line);
 }
 
@@ -3625,7 +3632,8 @@ textarea {
 }
 
 .home-lead-image {
-  min-height: clamp(25rem, 42vw, 38rem);
+  min-height: 0;
+  aspect-ratio: 1.28 / 1;
 }
 
 .home-lead-image img,
@@ -3687,15 +3695,18 @@ textarea {
 }
 
 .home-image-fallback strong {
-  align-self: flex-end;
-  font-size: clamp(2rem, 5vw, 5rem);
+  max-width: 100%;
+  align-self: flex-start;
+  font-size: clamp(1.8rem, 4.25vw, 4.75rem);
   font-weight: 550;
   letter-spacing: -0.055em;
+  line-height: 0.95;
+  overflow-wrap: anywhere;
 }
 
 .home-lead-copy {
   min-width: 0;
-  padding-block: 0.75rem;
+  padding-block: 0.45rem;
 }
 
 .home-kicker {
@@ -3709,7 +3720,7 @@ textarea {
   margin: 0;
   color: var(--ink);
   font-family: inherit;
-  font-size: clamp(2.4rem, 3.4vw, 3.8rem);
+  font-size: clamp(2.35rem, 3.15vw, 3.55rem);
   font-weight: 720;
   letter-spacing: -0.06em;
   line-height: 1.18;
@@ -3718,10 +3729,10 @@ textarea {
 }
 
 .home-lead-summary {
-  margin: 1.4rem 0 0.9rem;
+  margin: 1.25rem 0 0.8rem;
   color: var(--muted);
   font-size: 1rem;
-  line-height: 1.78;
+  line-height: 1.7;
 }
 
 .home-lead-copy > time,
@@ -3732,8 +3743,8 @@ textarea {
 }
 
 .home-objectives {
-  margin-top: clamp(2rem, 3.5vw, 3.25rem);
-  padding-top: 1.5rem;
+  margin-top: clamp(1.6rem, 2.6vw, 2.5rem);
+  padding-top: 1.25rem;
   border-top: 1px solid var(--line);
 }
 
@@ -3863,20 +3874,37 @@ textarea {
 }
 
 .home-recent-empty {
-  min-height: 8rem;
-  padding-top: 1.2rem;
+  padding-top: 1rem;
   border-top: 1px solid var(--line);
+}
+
+.home-recent-empty > p {
+  margin: 0 0 1rem;
+}
+
+.home-empty-lines {
+  display: grid;
+}
+
+.home-empty-lines span {
+  min-height: 4.15rem;
+  border-top: 1px solid var(--line);
+}
+
+.home-empty-lines span:last-child {
+  border-bottom: 1px solid var(--line);
 }
 
 .home-content-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  padding-block: 1.75rem;
+  padding-block: 1.85rem 2.35rem;
   border-bottom: 1px solid var(--line);
 }
 
 .home-content-grid > article {
   min-width: 0;
+  min-height: 14rem;
   padding-inline: clamp(1rem, 2vw, 2rem);
   border-right: 1px solid var(--line);
 }
@@ -3914,7 +3942,8 @@ textarea {
 }
 
 .home-learning-image {
-  min-height: 10rem;
+  min-height: 0;
+  aspect-ratio: 1.08 / 1;
 }
 
 .home-learning-copy {
@@ -3964,7 +3993,8 @@ textarea {
 }
 
 .home-section-empty .home-image-fallback strong {
-  font-size: clamp(1.3rem, 2.2vw, 2.1rem);
+  font-size: clamp(1.2rem, 1.8vw, 1.8rem);
+  overflow-wrap: normal;
 }
 
 .home-update-entry {
@@ -4010,8 +4040,8 @@ textarea {
   grid-template-columns: minmax(0, 1.35fr) minmax(9rem, 0.34fr) minmax(14rem, 0.7fr);
   gap: clamp(2rem, 5vw, 5rem);
   align-items: center;
-  min-height: 18rem;
-  padding-block: 2.5rem;
+  min-height: 16.5rem;
+  padding-block: 2.25rem;
 }
 
 .home-book-copy > p:first-child {
@@ -4024,7 +4054,7 @@ textarea {
 .home-book-copy h2 {
   margin: 0;
   font-family: inherit;
-  font-size: clamp(2rem, 3.2vw, 3.5rem);
+  font-size: clamp(2rem, 2.8vw, 3.15rem);
   font-weight: 720;
   letter-spacing: -0.055em;
   line-height: 1.2;
@@ -4038,8 +4068,21 @@ textarea {
 }
 
 .home-book-cover {
-  min-height: 13rem;
+  min-height: 12.5rem;
   box-shadow: 0 1rem 2.5rem color-mix(in srgb, var(--ink) 13%, transparent);
+}
+
+.home-book-cover .home-image-fallback {
+  padding: 1.15rem;
+}
+
+.home-book-cover .home-image-fallback::after {
+  inset: 0.7rem;
+}
+
+.home-book-cover .home-image-fallback strong {
+  font-size: clamp(1.35rem, 2vw, 2rem);
+  overflow-wrap: normal;
 }
 
 .home-book-action h3 {
@@ -4098,10 +4141,12 @@ textarea {
 }
 
 .site-footer {
+  border-top: 1px solid var(--line);
   background: var(--paper);
 }
 
 .footer-inner {
+  padding-block: 2.25rem;
   font-size: 0.82rem;
 }
 
