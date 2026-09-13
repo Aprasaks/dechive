@@ -1913,6 +1913,17 @@ textarea {
   border-top: 1px solid var(--line);
 }
 
+.site-chrome {
+  display: flex;
+  min-height: 100vh;
+  min-height: 100svh;
+  flex-direction: column;
+}
+
+.site-content {
+  flex: 1 0 auto;
+}
+
 .admin-login-page {
   min-height: calc(100vh - 5rem);
   display: grid;
@@ -3039,8 +3050,8 @@ textarea {
 }
 
 .footer-inner {
-  display: grid;
-  grid-template-columns: 1fr auto;
+  display: flex;
+  justify-content: space-between;
   gap: 2rem;
   align-items: end;
   padding-block: 3rem;
@@ -3048,15 +3059,40 @@ textarea {
   font-size: 0.78rem;
 }
 
-.footer-inner p {
-  margin: 0;
+.footer-brand {
+  display: grid;
+  gap: 0.45rem;
 }
 
-.footer-inner > div strong {
-  display: block;
-  margin-bottom: 0.45rem;
+.footer-brand a {
   color: var(--ink);
+  font-weight: 700;
   letter-spacing: 0.15em;
+  text-decoration: none;
+}
+
+.footer-brand small {
+  color: var(--muted);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.65rem 1.5rem;
+}
+
+.footer-links a {
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: none;
+  text-underline-offset: 0.3em;
+}
+
+.footer-links a:hover,
+.footer-links a:focus-visible {
+  color: var(--green);
+  text-decoration: underline;
 }
 
 @media (max-width: 64rem) {
@@ -3519,8 +3555,13 @@ textarea {
   }
 
   .footer-inner {
-    grid-template-columns: 1fr;
+    align-items: start;
+    flex-direction: column;
     gap: 1.5rem;
+  }
+
+  .footer-links {
+    justify-content: flex-start;
   }
 
   .admin-heading {
@@ -4150,7 +4191,7 @@ textarea {
   font-size: 0.82rem;
 }
 
-.footer-inner > div strong {
+.footer-brand a {
   font-family: Georgia, 'Times New Roman', serif;
   font-size: 1rem;
   letter-spacing: 0.04em;

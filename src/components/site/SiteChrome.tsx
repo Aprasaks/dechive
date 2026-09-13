@@ -13,10 +13,10 @@ export function SiteChrome({ children }: { children: ReactNode }) {
   }
 
   return (
-    <>
+    <div className="site-chrome">
       <SiteHeader />
-      {children}
+      <div className="site-content">{children}</div>
       <SiteFooter />
-    </>
+    </div>
   );
 }
