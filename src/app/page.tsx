@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { FEATURED_BOOK } from '@/lib/content/book-catalog';
 import { getContentSection } from '@/lib/content/catalog';
 import {
   getPublishedContent,
@@ -299,8 +300,8 @@ export default async function HomePage() {
               </>
             ) : (
               <>
-                <h2>정리된 지식은 책으로 이어집니다.</h2>
-                <p>전자책이 발행되면 소개와 외부 판매처를 함께 안내합니다.</p>
+                <h2>왜 이 책을 읽어야 하는가</h2>
+                <p>{FEATURED_BOOK.reason}</p>
               </>
             )}
           </div>
@@ -310,7 +311,12 @@ export default async function HomePage() {
             </Link>
           ) : (
             <div className="home-book-cover">
-              <EmptyImage label="Books" />
+              <Image
+                alt={FEATURED_BOOK.coverAlt}
+                fill
+                sizes="(max-width: 768px) 8rem, 12rem"
+                src={FEATURED_BOOK.cover}
+              />
             </div>
           )}
           <div className="home-book-action">
@@ -322,9 +328,12 @@ export default async function HomePage() {
                 </Link>
               </>
             ) : (
-              <Link href="/books">
-                전자책 둘러보기 <span aria-hidden="true">→</span>
-              </Link>
+              <>
+                <h3>{FEATURED_BOOK.title}</h3>
+                <Link href="/books">
+                  책 자세히 보기 <span aria-hidden="true">→</span>
+                </Link>
+              </>
             )}
           </div>
         </div>

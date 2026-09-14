@@ -1,5 +1,10 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import {
+  resolveBookCover,
+  resolveBookPurchaseLinks,
+} from '@/lib/content/book-catalog';
 import {
   getPublishedAiUpdateDetail,
   getPublishedBookDetail,
@@ -290,15 +295,25 @@ export async function AiUpdateDetailPage({ slug }: { slug: string }) {
 export async function BookDetailPage({ slug }: { slug: string }) {
   const detail = await getPublishedBookDetail(slug);
   if (!detail) notFound();
+  const cover = resolveBookCover(detail.title, detail.cover);
+  const purchaseLinks = resolveBookPurchaseLinks(
+    detail.title,
+    detail.purchaseLinks,
+  );
 
   return (
     <main id="main-content" className="editorial-detail book-detail">
       <article>
         <section className="site-shell book-hero">
           <div className="book-cover-area">
-            {detail.cover ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={detail.cover.url} alt={detail.cover.alt} />
+            {cover ? (
+              <Image
+                alt={cover.alt}
+                fill
+                priority
+                sizes="(max-width: 900px) 86vw, 32rem"
+                src={cover.url}
+              />
             ) : (
               <div><span>DECHIVE BOOKS</span><strong>{detail.title}</strong></div>
             )}
@@ -309,22 +324,25 @@ export async function BookDetailPage({ slug }: { slug: string }) {
               <span aria-hidden="true">/</span>
               <span>{detail.author}</span>
             </div>
-            <p className="eyebrow">WHY THIS BOOK</p>
+            <p className="eyebrow">DECHIVE BOOKS</p>
             <h1>{detail.title}</h1>
             {detail.summary ? <p>{detail.summary}</p> : null}
             <dl>
               <div><dt>저자</dt><dd>{detail.author}</dd></div>
               {detail.publisher ? <div><dt>출판</dt><dd>{detail.publisher}</dd></div> : null}
+              {detail.publicationDate ? (
+                <div><dt>출간일</dt><dd>{DATE_FORMATTER.format(new Date(detail.publicationDate))}</dd></div>
+              ) : null}
               {detail.pageCount ? <div><dt>분량</dt><dd>{detail.pageCount}쪽</dd></div> : null}
               {detail.format ? <div><dt>형식</dt><dd>{detail.format}</dd></div> : null}
               {detail.isbn ? <div><dt>ISBN</dt><dd>{detail.isbn}</dd></div> : null}
             </dl>
-            {detail.purchaseLinks.length > 0 ? (
+            {purchaseLinks.length > 0 ? (
               <div className="purchase-links">
-                {detail.purchaseLinks.map((link) => {
+                {purchaseLinks.map((link) => {
                   const href = safeExternalUrl(link.url);
                   return href ? (
-                    <a key={`${link.label}-${link.url}`} href={href} target="_blank" rel="noreferrer">
+                    <a key={`${link.label}-${link.url}`} href={href} target="_blank" rel="noopener noreferrer">
                       {link.label}에서 보기 ↗
                     </a>
                   ) : null;
@@ -334,7 +352,13 @@ export async function BookDetailPage({ slug }: { slug: string }) {
           </div>
         </section>
 
-        <DetailBody detail={detail} label="책 소개" />
+        <section className="book-reason">
+          <div className="site-shell book-reason-heading">
+            <p>WHY THIS BOOK</p>
+            <h2>왜 이 책을 읽어야 하는가</h2>
+          </div>
+          <DetailBody detail={detail} label="책 소개" />
+        </section>
 
         {detail.tableOfContents.length > 0 || detail.preview ? (
           <section className="site-shell book-extras">
