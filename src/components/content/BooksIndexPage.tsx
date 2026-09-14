@@ -166,6 +166,89 @@ function CatalogBook() {
   );
 }
 
+function CatalogBookDetails() {
+  return (
+    <div className="site-shell books-detail-content">
+      <section className="books-problem" aria-labelledby="books-problem-title">
+        <div className="books-detail-label">
+          <span>01</span>
+          <p>THE PROBLEM</p>
+        </div>
+        <div>
+          <h2 id="books-problem-title">만드는 속도보다 먼저 확인할 것</h2>
+          <p>{FEATURED_BOOK.problem}</p>
+          <ol className="books-question-list">
+            {FEATURED_BOOK.questions.map((question, index) => (
+              <li key={question}>
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <p>{question}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <section className="books-reader-grid" aria-label="추천 독자와 읽고 얻을 것">
+        <div>
+          <div className="books-detail-label">
+            <span>02</span>
+            <p>FOR WHOM</p>
+          </div>
+          <h2>이런 분에게 필요합니다</h2>
+          <ul>
+            {FEATURED_BOOK.audiences.map((audience) => (
+              <li key={audience}>{audience}</li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <div className="books-detail-label">
+            <span>03</span>
+            <p>TAKEAWAYS</p>
+          </div>
+          <h2>읽고 나면 남는 기준</h2>
+          <ul>
+            {FEATURED_BOOK.takeaways.map((takeaway) => (
+              <li key={takeaway}>{takeaway}</li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="books-toc" aria-labelledby="books-toc-title">
+        <div className="books-toc-heading">
+          <div className="books-detail-label">
+            <span>04</span>
+            <p>CONTENTS</p>
+          </div>
+          <div>
+            <h2 id="books-toc-title">여섯 개의 질문 흐름</h2>
+            <p>45개의 짧은 장과 실제 제작 기록인 CASE NOTE로 이어집니다.</p>
+          </div>
+        </div>
+        <ol>
+          {FEATURED_BOOK.tableOfContents.map((item) => (
+            <li key={item.part}>
+              <span>{item.part}</span>
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section className="books-final-cta" aria-label="전자책 판매처">
+        <div>
+          <p>DECHIVE DEEPDIVE</p>
+          <h2>{FEATURED_BOOK.title}</h2>
+          <span>PDF · 약 {FEATURED_BOOK.pageCount}쪽 · ISBN {FEATURED_BOOK.isbn}</span>
+        </div>
+        <PurchaseLinks links={[...FEATURED_BOOK.purchaseLinks]} />
+      </section>
+    </div>
+  );
+}
+
 export async function BooksIndexPage() {
   let books: PublicContentSummary[] = [];
   let details: (PublicBookDetail | null)[] = [];
@@ -197,6 +280,8 @@ export async function BooksIndexPage() {
           )}
         </div>
       </section>
+
+      {books.length === 0 ? <CatalogBookDetails /> : null}
 
       {books.length > 1 ? (
         <section
