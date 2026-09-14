@@ -11,7 +11,7 @@
 
 :root {
   color-scheme: light;
-  --paper: #f7f6f1;
+  --paper: #f8f5ef;
   --paper-deep: #eeece5;
   --ink: #242421;
   --muted: #686862;
@@ -19,7 +19,7 @@
   --green-soft: #e7ede9;
   --copper: #a94434;
   --line: #d8d6cf;
-  --white: #fdfcf8;
+  --white: #f8f5ef;
   --page: 86rem;
   --gutter: clamp(1.25rem, 4vw, 4rem);
 }
